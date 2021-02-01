@@ -1,0 +1,155 @@
+/* Class = "UILabel"; text = "Distance\n(m)"; ObjectID = "4PI-jF-P5B"; */
+"4PI-jF-P5B.text" = "Pellter\n(m)";
+
+/* Class = "UILabel"; text = "0.0"; ObjectID = "67E-i0-9bl"; */
+"67E-i0-9bl.text" = "0.0";
+
+/* Class = "UILabel"; text = ":"; ObjectID = "8gR-jZ-Def"; */
+"8gR-jZ-Def.text" = ":";
+
+/* Class = "UILabel"; text = ":"; ObjectID = "AM3-qD-lTy"; */
+"AM3-qD-lTy.text" = ":";
+
+/* Class = "UILabel"; text = "Work"; ObjectID = "aZY-vK-cHZ"; */
+"aZY-vK-cHZ.text" = "Weithio";
+
+/* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "bHD-sh-clC"; */
+"bHD-sh-clC.normalTitle" = "Adfer prynu";
+
+/* Class = "UILabel"; text = "Pace / Speed"; ObjectID = "cgG-4U-pZ9"; */
+"cgG-4U-pZ9.text" = "Cyflymder";
+
+/* Class = "UISegmentedControl"; dhi-ac-byn.segmentTitles[0] = "Best for battery"; ObjectID = "dhi-ac-byn"; */
+"dhi-ac-byn.segmentTitles[0]" = "Gorau ar gyfer batri";
+
+/* Class = "UISegmentedControl"; dhi-ac-byn.segmentTitles[1] = "Balanced"; ObjectID = "dhi-ac-byn"; */
+"dhi-ac-byn.segmentTitles[1]" = "Cytbwys";
+
+/* Class = "UISegmentedControl"; dhi-ac-byn.segmentTitles[2] = "Best for accuracy"; ObjectID = "dhi-ac-byn"; */
+"dhi-ac-byn.segmentTitles[2]" = "Gorau am gywirdeb";
+
+/* Class = "UILabel"; text = "Summary"; ObjectID = "DHp-yq-SaD"; */
+"DHp-yq-SaD.text" = "Crynodeb";
+
+/* Class = "UIButton"; normalTitle = "Start"; ObjectID = "DkP-wb-VFi"; */
+"DkP-wb-VFi.normalTitle" = "Dechrau";
+
+/* Class = "UIButton"; normalTitle = "Routine"; ObjectID = "E8I-GK-mjL"; */
+"E8I-GK-mjL.normalTitle" = "Arferol";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "F0S-XU-BmR"; */
+"F0S-XU-BmR.text" = "00:00";
+
+/* Class = "UILabel"; text = "0.0"; ObjectID = "fj0-KM-m9I"; */
+"fj0-KM-m9I.text" = "0.0";
+
+/* Class = "UIViewController"; title = "Set Intervals"; ObjectID = "frC-6c-YjY"; */
+"frC-6c-YjY.title" = "Cyfnodau Gosod";
+
+/* Class = "UISegmentedControl"; g8U-8d-lqh.segmentTitles[0] = "On"; ObjectID = "g8U-8d-lqh"; */
+"g8U-8d-lqh.segmentTitles[0]" = "Ymlaen";
+
+/* Class = "UISegmentedControl"; g8U-8d-lqh.segmentTitles[1] = "Off"; ObjectID = "g8U-8d-lqh"; */
+"g8U-8d-lqh.segmentTitles[1]" = "I ffwrdd";
+
+/* Class = "UILabel"; text = "Sets"; ObjectID = "Gc8-bF-17h"; */
+"Gc8-bF-17h.text" = "Setiau";
+
+/* Class = "UILabel"; text = "0.0"; ObjectID = "gnN-GQ-cxN"; */
+"gnN-GQ-cxN.text" = "0.0";
+
+/* Class = "UIButton"; normalTitle = "Tabata"; ObjectID = "GYq-I3-h60"; */
+"GYq-I3-h60.normalTitle" = "Tabata";
+
+/* Class = "UIButton"; normalTitle = "Pyramid Sets"; ObjectID = "IJA-y3-LGF"; */
+"IJA-y3-LGF.normalTitle" = "Setiau Pyramid";
+
+/* Class = "UILabel"; text = "Vibration"; ObjectID = "jce-Tb-7pC"; */
+"jce-Tb-7pC.text" = "Dirgryniad";
+
+/* Class = "UIButton"; normalTitle = "Random"; ObjectID = "Jmr-rQ-Lxp"; */
+"Jmr-rQ-Lxp.normalTitle" = "Ar hap";
+
+/* Class = "UIButton"; normalTitle = "Auto Detect"; ObjectID = "k0e-af-gvr"; */
+"k0e-af-gvr.normalTitle" = "Canfod Auto";
+
+/* Class = "UINavigationItem"; title = "Heatmapper"; ObjectID = "Ke4-lG-29n"; */
+"Ke4-lG-29n.title" = "Heatmapper";
+
+/* Class = "UILabel"; text = "Pattern"; ObjectID = "Khj-VV-7D5"; */
+"Khj-VV-7D5.text" = "Patrwm";
+
+/* Class = "UISegmentedControl"; KZh-Fy-Ydb.segmentTitles[0] = "km/h"; ObjectID = "KZh-Fy-Ydb"; */
+"KZh-Fy-Ydb.segmentTitles[0]" = "km/h";
+
+/* Class = "UISegmentedControl"; KZh-Fy-Ydb.segmentTitles[1] = "mph"; ObjectID = "KZh-Fy-Ydb"; */
+"KZh-Fy-Ydb.segmentTitles[1]" = "mph";
+
+/* Class = "UISegmentedControl"; KZh-Fy-Ydb.segmentTitles[2] = "mins/km"; ObjectID = "KZh-Fy-Ydb"; */
+"KZh-Fy-Ydb.segmentTitles[2]" = "mins/km";
+
+/* Class = "UISegmentedControl"; KZh-Fy-Ydb.segmentTitles[3] = "mins/mi"; ObjectID = "KZh-Fy-Ydb"; */
+"KZh-Fy-Ydb.segmentTitles[3]" = "mins/mi";
+
+/* Class = "UIButton"; normalTitle = "Remove ads"; ObjectID = "la9-uc-8Li"; */
+"la9-uc-8Li.normalTitle" = "Tynnu hysbysebion";
+
+/* Class = "UIButton"; normalTitle = "Settings"; ObjectID = "LH3-ll-RZR"; */
+"LH3-ll-RZR.normalTitle" = "Gosodiadau";
+
+/* Class = "UIViewController"; title = "Settings"; ObjectID = "lih-U6-K2w"; */
+"lih-U6-K2w.title" = "Gosodiadau";
+
+/* Class = "UILabel"; text = "Sets"; ObjectID = "oeg-Ph-BrI"; */
+"oeg-Ph-BrI.text" = "Setiau";
+
+/* Class = "UILabel"; text = "Pace \n(km/h)"; ObjectID = "olw-Hm-FSo"; */
+"olw-Hm-FSo.text" = "Cyflymder \n(km/h)";
+
+/* Class = "UILabel"; text = "Duration\n(sec)"; ObjectID = "pHX-iO-KCJ"; */
+"pHX-iO-KCJ.text" = "Hyd\n(sec)";
+
+/* Class = "UILabel"; text = "ActivityType"; ObjectID = "piM-jX-fhv"; */
+"piM-jX-fhv.text" = "ActivityType";
+
+/* Class = "UINavigationItem"; title = "Workout"; ObjectID = "QQo-dr-l7r"; */
+"QQo-dr-l7r.title" = "Ymarfer corff";
+
+/* Class = "UILabel"; text = "Sets"; ObjectID = "ShM-Rj-bSX"; */
+"ShM-Rj-bSX.text" = "Setiau";
+
+/* Class = "UINavigationItem"; title = "Heatmapper"; ObjectID = "syx-rz-k50"; */
+"syx-rz-k50.title" = "Heatmapper";
+
+/* Class = "UILabel"; text = "Difficulty"; ObjectID = "uEZ-h9-Kw5"; */
+"uEZ-h9-Kw5.text" = "Anhawster";
+
+/* Class = "UILabel"; text = "Location accuracy"; ObjectID = "UKj-hg-nT8"; */
+"UKj-hg-nT8.text" = "Cywirdeb lleoliad";
+
+/* Class = "UILabel"; text = ":"; ObjectID = "Wbz-Le-fHR"; */
+"Wbz-Le-fHR.text" = ":";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "wkZ-fm-ijo"; */
+"wkZ-fm-ijo.title" = "Gosodiadau";
+
+/* Class = "UILabel"; text = "Warm up"; ObjectID = "wLA-TL-d2U"; */
+"wLA-TL-d2U.text" = "Cynhesu";
+
+/* Class = "UILabel"; text = ":"; ObjectID = "xeN-6e-CK8"; */
+"xeN-6e-CK8.text" = ":";
+
+/* Class = "UIButton"; normalTitle = "Flat Sets"; ObjectID = "YxN-xL-3iB"; */
+"YxN-xL-3iB.normalTitle" = "Setiau gwastad";
+
+/* Class = "UIButton"; normalTitle = "Custom"; ObjectID = "za3-ag-cd4"; */
+"za3-ag-cd4.normalTitle" = "Wedi'i addasu";
+
+/* Class = "UILabel"; text = "Rest"; ObjectID = "Zqg-ub-pW7"; */
+"Zqg-ub-pW7.text" = "Orffwys";
+
+/* Class = "UILabel"; text = "Cooldown"; ObjectID = "zst-1D-p8Q"; */
+"zst-1D-p8Q.text" = "Oeri";
+
+/* Class = "UILabel"; text = "1"; ObjectID = "zWl-Nq-DLb"; */
+"zWl-Nq-DLb.text" = "1";

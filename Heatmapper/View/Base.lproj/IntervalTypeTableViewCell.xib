@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IntervalTypeTableViewCell" rowHeight="70" id="KGk-i7-Jjw" customClass="IntervalTypeTableViewCell" customModule="FIT" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="370" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="370" height="70"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZuG-UU-bep">
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="55"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="imk-R0-AdW">
+                                <rect key="frame" x="0.0" y="0.0" width="69" height="55"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qys-Hd-cug">
+                                        <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="qys-Hd-cug" secondAttribute="height" multiplier="1:1" id="ogj-6b-3Fk"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="imk-R0-AdW" secondAttribute="height" multiplier="1.25:1" id="51k-0J-b9A"/>
+                                    <constraint firstItem="qys-Hd-cug" firstAttribute="leading" secondItem="imk-R0-AdW" secondAttribute="leading" id="okb-55-T1b"/>
+                                    <constraint firstItem="qys-Hd-cug" firstAttribute="top" secondItem="imk-R0-AdW" secondAttribute="top" id="tVG-zK-u5V"/>
+                                    <constraint firstAttribute="bottom" secondItem="qys-Hd-cug" secondAttribute="bottom" id="zAa-Cx-Eqp"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfF-wB-iwM" customClass="ThemeView" customModule="FIT" customModuleProvider="target">
+                                <rect key="frame" x="69" y="0.0" width="71" height="55"/>
+                                <subviews>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vf3-t4-kBd" userLabel="Duration Value View">
+                                        <rect key="frame" x="0.0" y="12.5" width="100" height="30"/>
+                                        <color key="backgroundColor" name="buttonPrimary"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="GQ3-26-BeO"/>
+                                            <constraint firstAttribute="width" constant="100" id="QCh-ux-LA5"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="9"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ld4-4f-eF7" userLabel="Total Label" customClass="ThemeColumnHeaderUILabel" customModule="FIT" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="71" height="55"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="Vf3-t4-kBd" firstAttribute="leading" secondItem="hfF-wB-iwM" secondAttribute="leading" id="4J6-x4-ctS"/>
+                                    <constraint firstItem="Vf3-t4-kBd" firstAttribute="centerY" secondItem="hfF-wB-iwM" secondAttribute="centerY" id="5qh-kx-Xnt"/>
+                                    <constraint firstItem="ld4-4f-eF7" firstAttribute="leading" secondItem="hfF-wB-iwM" secondAttribute="leading" id="QF8-F1-JQz"/>
+                                    <constraint firstAttribute="bottom" secondItem="ld4-4f-eF7" secondAttribute="bottom" id="a3T-ka-2Lt"/>
+                                    <constraint firstItem="ld4-4f-eF7" firstAttribute="top" secondItem="hfF-wB-iwM" secondAttribute="top" id="rTY-w3-zgI"/>
+                                    <constraint firstAttribute="trailing" secondItem="ld4-4f-eF7" secondAttribute="trailing" id="xi2-R6-U0x"/>
+                                </constraints>
+                            </view>
+                            <pickerView tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6We-fy-jEy" userLabel="Hour Picker View">
+                                <rect key="frame" x="140" y="0.0" width="55" height="55"/>
+                                <accessibility key="accessibilityConfiguration" identifier="minutePicker"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="eVY-Nf-aSC"/>
+                                </constraints>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="3" translatesAutoresizingMaskIntoConstraints="NO" id="Hvi-4G-y0o" userLabel="HH:MM colon" customClass="ThemeColumnHeaderUILabel" customModule="FIT" customModuleProvider="target">
+                                <rect key="frame" x="195" y="17.5" width="5" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="5" id="7dH-Dv-Xj8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZXR-cm-5Jr" userLabel="Large Minute Picker View">
+                                <rect key="frame" x="200" y="0.0" width="55" height="55"/>
+                                <accessibility key="accessibilityConfiguration" identifier="minutePicker"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="awi-X4-Yy4"/>
+                                </constraints>
+                            </pickerView>
+                            <pickerView tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9WB-uE-ovr" userLabel="Minute Picker View">
+                                <rect key="frame" x="255" y="0.0" width="55" height="55"/>
+                                <accessibility key="accessibilityConfiguration" identifier="minutePicker"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="j91-qE-36H"/>
+                                </constraints>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="3" translatesAutoresizingMaskIntoConstraints="NO" id="g29-ch-9in" userLabel="MM:SS colon" customClass="ThemeColumnHeaderUILabel" customModule="FIT" customModuleProvider="target">
+                                <rect key="frame" x="310" y="0.0" width="5" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="5" id="bwd-hy-PaR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2C-ZU-wvR" userLabel="Second Picker View">
+                                <rect key="frame" x="315" y="0.0" width="55" height="55"/>
+                                <accessibility key="accessibilityConfiguration" identifier="secondPicker"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="Q0r-ZB-399"/>
+                                </constraints>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="imk-R0-AdW" secondAttribute="bottom" id="2PS-EX-fjr"/>
+                            <constraint firstItem="g29-ch-9in" firstAttribute="top" secondItem="ZuG-UU-bep" secondAttribute="top" id="3cK-mw-cog"/>
+                            <constraint firstItem="6We-fy-jEy" firstAttribute="top" secondItem="ZuG-UU-bep" secondAttribute="top" id="3nj-hO-cZg"/>
+                            <constraint firstAttribute="bottom" secondItem="hfF-wB-iwM" secondAttribute="bottom" id="7Gq-sm-iga"/>
+                            <constraint firstItem="imk-R0-AdW" firstAttribute="top" secondItem="ZuG-UU-bep" secondAttribute="top" id="9J6-u6-14u"/>
+                            <constraint firstItem="imk-R0-AdW" firstAttribute="leading" secondItem="ZuG-UU-bep" secondAttribute="leading" id="Drf-20-R6w"/>
+                            <constraint firstAttribute="bottom" secondItem="g29-ch-9in" secondAttribute="bottom" id="JDv-p3-hZ5"/>
+                            <constraint firstAttribute="trailing" secondItem="H2C-ZU-wvR" secondAttribute="trailing" id="OTv-XL-p0x"/>
+                            <constraint firstAttribute="bottom" secondItem="9WB-uE-ovr" secondAttribute="bottom" id="QPg-eG-u9o"/>
+                            <constraint firstAttribute="bottom" secondItem="ZXR-cm-5Jr" secondAttribute="bottom" id="QTN-Mi-cpN"/>
+                            <constraint firstItem="H2C-ZU-wvR" firstAttribute="top" secondItem="ZuG-UU-bep" secondAttribute="top" id="RoJ-nN-bRd"/>
+                            <constraint firstItem="hfF-wB-iwM" firstAttribute="top" secondItem="ZuG-UU-bep" secondAttribute="top" id="UUz-4e-G3U"/>
+                            <constraint firstItem="ZXR-cm-5Jr" firstAttribute="top" secondItem="ZuG-UU-bep" secondAttribute="top" id="cAl-3W-Srp"/>
+                            <constraint firstAttribute="bottom" secondItem="6We-fy-jEy" secondAttribute="bottom" id="cj1-Wr-ql8"/>
+                            <constraint firstAttribute="bottom" secondItem="H2C-ZU-wvR" secondAttribute="bottom" id="moV-33-2kc"/>
+                            <constraint firstAttribute="height" constant="55" id="otC-5H-OAO"/>
+                            <constraint firstItem="9WB-uE-ovr" firstAttribute="top" secondItem="ZuG-UU-bep" secondAttribute="top" id="rWT-5C-Mvb"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ZuG-UU-bep" secondAttribute="trailing" id="5Mi-kF-jdO"/>
+                    <constraint firstAttribute="bottom" secondItem="ZuG-UU-bep" secondAttribute="bottom" id="8YX-Ek-I9o"/>
+                    <constraint firstItem="ZuG-UU-bep" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="aeq-Ju-4di"/>
+                    <constraint firstItem="ZuG-UU-bep" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="boc-UR-zGW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="durationContainerView" destination="hfF-wB-iwM" id="UbH-gu-fo3"/>
+                <outlet property="durationValueView" destination="Vf3-t4-kBd" id="unF-Kk-47a"/>
+                <outlet property="durationWidth" destination="QCh-ux-LA5" id="BBR-nL-62T"/>
+                <outlet property="hhMMColon" destination="Hvi-4G-y0o" id="jtb-uB-VKL"/>
+                <outlet property="hourPicker" destination="6We-fy-jEy" id="byY-X7-6rN"/>
+                <outlet property="intervalImageView" destination="qys-Hd-cug" id="Cxy-cY-OTZ"/>
+                <outlet property="largeMinutePicker" destination="ZXR-cm-5Jr" id="rj6-qK-4ay"/>
+                <outlet property="minutePicker" destination="9WB-uE-ovr" id="Mrw-NI-Xt9"/>
+                <outlet property="mmSSColon" destination="g29-ch-9in" id="q5S-h1-gae"/>
+                <outlet property="secondPicker" destination="H2C-ZU-wvR" id="Q67-DQ-LMC"/>
+                <outlet property="totalLabel" destination="ld4-4f-eF7" id="b2Z-h2-VbR"/>
+            </connections>
+            <point key="canvasLocation" x="-128.98550724637681" y="28.125"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="buttonPrimary">
+            <color red="0.12549019607843137" green="0.6705882352941176" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

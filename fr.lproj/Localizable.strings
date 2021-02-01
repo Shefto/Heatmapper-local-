@@ -1,0 +1,199 @@
+/* of */
+" of " = " de ";
+
+/* Localized raw value */
+"\(ActivityLevel.allCases[row].localizedDescription)" = "\(ActivityLevel.allCases[row].localizedDescription)";
+
+/* Localized raw value */
+"\(ActivityPattern.allCases[row].localizedDescription)" = "\(ActivityPattern.allCases[row].localizedDescription)";
+
+/* No comment provided by engineer. */
+"\(activityPhrase)" = "\(activityPhrase)";
+
+/* title */
+"\(activityType.rawValue)" = "\(activityType.rawValue)";
+
+/* \(activityTypeForDisplay) */
+"\(activityTypeForDisplay)" = "\(activityTypeForDisplay)";
+
+/* Localized version of starting phrase */
+"\(newIntervalPhrase)" = "\(newIntervalPhrase)";
+
+/* No comment provided by engineer. */
+"\(recordingPhrase)" = "\(recordingPhrase)";
+
+/* Set Intervals Activity */
+"Activity" = "Activite";
+
+/* Activity (Work + Rest) */
+"Activity (Work + Rest)" = "Activite (Entrainer + Reposer)";
+
+/* Begin activity */
+"Begin activity" = "Commencez l'activite";
+
+/* Cancel */
+"Cancel" = "Annulez";
+
+/* Cancelling workout */
+"Cancelling workout" = "Annule entraînement";
+
+"Cool down" = "Reposez";
+
+"cooldown" = "reposez";
+
+"cooldown now" = "Reposez maintenant";
+
+"Custom" = "Personnalisé";
+
+/* No comment provided by engineer. */
+"Distance\n(ft)" = "Distance\n(ft)";
+
+/* No comment provided by engineer. */
+"Distance\n(m)" = "Distance\n(m)";
+
+/* No comment provided by engineer. */
+"Distance\n(yds)" = "Distance\n(yds)";
+
+/* No comment provided by engineer. */
+"Fartlek Interval Trainer" = "Entraînement a l'intervalle Fartlek";
+
+/* No comment provided by engineer. */
+"Finishing workout" = "Fin de l'entraînement";
+
+/* No comment provided by engineer. */
+"Flat" = "Égaux";
+
+/* flatSetsStr */
+"Flat Sets" = "Intervalles  égaux";
+
+"Get ready to cooldown" = "Preparez-vous pour le decrassage";
+
+"Get ready to rest" = "Preparez-vous a reposer";
+
+"Get ready to warmup" = "Preparez-vous a s'échauffer";
+
+"Get ready to work" = "Preparez-vous a entraîner";
+
+/* No comment provided by engineer. */
+"Hard" = "Dur";
+
+/* No comment provided by engineer. */
+"Harder" = "Plus Dur";
+
+/* No comment provided by engineer. */
+"Hardest" = "Le Plus Dur";
+
+/* Let's go! */
+"Let's go!" = "Allez!";
+
+/* No comment provided by engineer. */
+"Light" = "Leger";
+
+/* No comment provided by engineer. */
+"Moderate" = "Modéré";
+
+/* Open Health app */
+"Open Health app" = "Ouvrez l'appli de sante";
+
+"Pace \n(km/h)" = "Vitesse \n(km/h)";
+
+/* No comment provided by engineer. */
+"Pace\n(km/h)" = "Vitesse\n(km/h)";
+
+/* No comment provided by engineer. */
+"Pace\n(mins/km)" = "Vitesse\n(mins/km)";
+
+/* No comment provided by engineer. */
+"Pace\n(mins/mi)" = "Vitesse\n(mins/mi)";
+
+/* No comment provided by engineer. */
+"Pace\n(mph)" = "Vitesse\n(mph)";
+
+/* Pausing workout */
+"Pausing workout" = "Pausez l'entraînement";
+
+/* No comment provided by engineer. */
+"Pyramid" = "Pyramide";
+
+"Pyramid Sets" = "Intervalles pyramides";
+
+"Random" = "Au hasard";
+
+"Recording Running interval" = "Enregistrement de l'intervalle courir";
+
+"Recording Stationary interval" = "Enregistrement de l'intervalle immobile";
+
+"Recording Walking interval" = "Enregistrement de l'intervalle a pied";
+
+/* Reset */
+"Reset" = "Reset";
+
+/* Reset Intervals */
+"Reset Intervals" = "Réinitialiser les intervalles";
+
+"rest" = "Se reposez";
+
+/* Rest */
+"Rest" = "Se reposez";
+
+/* Rest (max) */
+"Rest (max)" = "Reste (max)";
+
+"rest now" = "Reposez maintenant";
+
+/* Resuming workout */
+"Resuming workout" = "Reprenez l'entraînement";
+
+"Routine" = "Routine";
+
+/* No comment provided by engineer. */
+"Screen lock enabled" = "Verrouillage de l'écran activé";
+
+/* Set */
+"Set " = "Intervalle ";
+
+"Settings" = "Réglages";
+
+/* No comment provided by engineer. */
+"Starting workout now" = "Commencez l'entraînement maintenant";
+
+/* This will override any custom intervals you have created. Do you want to continue? */
+"This will override any custom intervals you have created. Do you want to continue?" = "Cela remplacera tous les intervalles personnalisés que vous avez créés. Voulez-vous continuer?";
+
+"Warm up" = "Échauffez";
+
+/* 
+  Localizable.strings (English)
+  FIT
+
+  Created by Richard English on 11/01/2021.
+  Copyright © 2021 Richard English. All rights reserved.
+*/
+"warmup" = "Échauffez";
+
+"warmup now" = "S'échauffez maintenant";
+
+"work" = "entraînez";
+
+/* Work */
+"Work" = "Entraînez";
+
+/* Work (max) */
+"Work (max)" = "Entraînez (max)";
+
+"work now" = "Entraînez maintenant";
+
+/* Workout complete. Well done */
+"Workout complete. Well done" = "L'entraînement fini. Bien fait!";
+
+/* No comment provided by engineer. */
+"Workout completed" = "L'entraînement fini";
+
+/* No comment provided by engineer. */
+"Workout paused" = "L'entraînement pausé";
+
+/* No comment provided by engineer. */
+"Your workout has been saved successfully" = "L'entraînement enregistré avec succès";
+
+/* Recording interval */
+"\(phrase)" = "";

@@ -1,0 +1,17 @@
+/*
+ InfoPlist.strings
+ FIT
+
+ Created by Richard English on 28/01/2021.
+ Copyright © 2021 Richard English. All rights reserved.
+ */
+
+NSLocationWhenInUseUsageDescription = "Heatmapper a besoin de votre position pour enregistrer les pistes d'exercice";
+
+NSLocationAlwaysUsageDescription = "Heatmapper a besoin de votre position pour enregistrer les itinéraires d'entraînement lorsque vous courez en arrière-plan (par exemple avec l'écran éteint)";
+
+NSMotionUsageDescription = "Heatmapper a besoin d'accéder à votre mouvement pour enregistrer les intervalles";
+
+NSHealthShareUsageDescription = "Heatmapper a besoin d'un accès pour lire vos données de santé afin de calculer les calories utilisées";
+
+NSHealthUpdateUsageDescription = "Heatmapper a besoin d'un accès pour écrire dans vos données de santé afin d'enregistrer vos entraînements";

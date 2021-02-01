@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>GADIsAdManagerApp</key>
+	<true/>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-2779736734695934~7029262453</string>
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>cstr6suwn9.skadnetwork</string>
+		</dict>
+	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Heatmapper needs your location to record workout routes</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Heatmapper needs your location to record workout routes when running in the background (e.g. with the screen off)</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Heatmapper needs access to your motion to record intervals</string>
+	<key>Privacy – Health Share Usage Description</key>
+	<string>Heatmapper needs access to read your Health data in order to calculate calories used</string>
+	<key>Privacy – Health Update Usage Description</key>
+	<string>Heatmapper needs access to write to your Health data in order to save workouts</string>
+</dict>
+</plist>

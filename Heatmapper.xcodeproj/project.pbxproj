@@ -1,0 +1,1227 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		15ED4E657B15BE7AEFBB57EB /* Pods_Heatmapper_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EAD462335AB8CC40517746 /* Pods_Heatmapper_WatchKit_Extension.framework */; };
+		2601503FDB427F5D40BD1185 /* Pods_Heatmapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2FD5C38F894191F54261F7 /* Pods_Heatmapper.framework */; };
+		3ABF5AF707DE45B41FF49619 /* Pods_Heatmapper_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D17A5498C39BC448F72B45 /* Pods_Heatmapper_WatchKit_App.framework */; };
+		7907E8C124E1468500F3DE0D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7907E8C024E1468500F3DE0D /* Extensions.swift */; };
+		791BD3C325A64E2600FD994A /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791BD3C225A64E2600FD994A /* WorkoutManager.swift */; };
+		79201489254343BD00212051 /* MyFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083BB25092EBB00274F79 /* MyFunc.swift */; };
+		7935622825AF53C5006BBC54 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7935622725AF53C5006BBC54 /* HelpViewController.swift */; };
+		7935625125B0BBBE006BBC54 /* UnitConverterPace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7935625025B0BBBC006BBC54 /* UnitConverterPace.swift */; };
+		7935625225B0BBC0006BBC54 /* UnitConverterPace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7935625025B0BBBC006BBC54 /* UnitConverterPace.swift */; };
+		7935629525B31431006BBC54 /* BartyCrouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7935629425B31431006BBC54 /* BartyCrouch.swift */; };
+		793D1AD424B854EB0039441B /* SessionDelegator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AD324B854EB0039441B /* SessionDelegator.swift */; };
+		793D1AD624B855540039441B /* CommandStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AD524B855540039441B /* CommandStatus.swift */; };
+		793D1AD724B855540039441B /* CommandStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AD524B855540039441B /* CommandStatus.swift */; };
+		793D1AD924B8650A0039441B /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AD824B8650A0039441B /* DataProvider.swift */; };
+		793D1ADA24B8650A0039441B /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AD824B8650A0039441B /* DataProvider.swift */; };
+		793D1ADC24B868840039441B /* SessionCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1ADB24B868840039441B /* SessionCommands.swift */; };
+		793D1ADD24B868840039441B /* SessionCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1ADB24B868840039441B /* SessionCommands.swift */; };
+		793D1AE624B86E6F0039441B /* CustomLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AE524B86E6F0039441B /* CustomLogger.swift */; };
+		793D1AE724B86E6F0039441B /* CustomLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AE524B86E6F0039441B /* CustomLogger.swift */; };
+		793D1AE824B876BC0039441B /* SessionDelegator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AD324B854EB0039441B /* SessionDelegator.swift */; };
+		793D1AEF24B87F110039441B /* SessionTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AEE24B87F110039441B /* SessionTransfer.swift */; };
+		793D1AF024B87F110039441B /* SessionTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AEE24B87F110039441B /* SessionTransfer.swift */; };
+		793D1AF224B87FAD0039441B /* FileTransferObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AF124B87FAD0039441B /* FileTransferObservers.swift */; };
+		793D1AF324B87FAD0039441B /* FileTransferObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AF124B87FAD0039441B /* FileTransferObservers.swift */; };
+		7940AB882535EBE900673035 /* FIT_minute_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7940AB862535EBE800673035 /* FIT_minute_beep.aif */; };
+		7940AB892535EBE900673035 /* FIT_minute_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7940AB862535EBE800673035 /* FIT_minute_beep.aif */; };
+		7940AB8A2535EBE900673035 /* FiT_second_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7940AB872535EBE900673035 /* FiT_second_beep.aif */; };
+		7940AB8B2535EBE900673035 /* FiT_second_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7940AB872535EBE900673035 /* FiT_second_beep.aif */; };
+		7944476F255A9B3B004708E3 /* DurationPickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7944476E255A9B3B004708E3 /* DurationPickerInterfaceController.swift */; };
+		79445D4F25A3292D001D3AC6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79445D4E25A3292C001D3AC6 /* StoreKit.framework */; };
+		7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */; };
+		7961D6BF25B74B4900204968 /* MyWKInterfaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */; };
+		797026C0252DB4A500A86A05 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
+		7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */; };
+		797BFD0525421E8700426185 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
+		797BFD0A2542B72800426185 /* MyFunc_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797BFD092542B72800426185 /* MyFunc_iOS.swift */; };
+		797E7C062575312500EAE473 /* IntervalTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */; };
+		7980929D252F386300DF1562 /* FartlekWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7980929C252F386300DF1562 /* FartlekWorkout.swift */; };
+		7981D39C24BDD62500E5D9E7 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFF824A7F1AF002A7870 /* Interval.swift */; };
+		7989157225605679004983BD /* WorkoutInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7989157125605679004983BD /* WorkoutInterfaceController.swift */; };
+		7991886B24B618AE008F0EA5 /* IntervalRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7991886A24B618AE008F0EA5 /* IntervalRowController.swift */; };
+		7994126F255AB9230062AC0D /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7994126E255AB9230062AC0D /* Objects.swift */; };
+		7996ADE925682D5D00C25196 /* CustomIntervalsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7996ADE825682D5D00C25196 /* CustomIntervalsInterfaceController.swift */; };
+		7996ADF7256860A200C25196 /* CustomRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7996ADF6256860A200C25196 /* CustomRowController.swift */; };
+		799BBD5D24E2CEC50009AE2D /* IntervalsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799BBD5C24E2CEC50009AE2D /* IntervalsInterfaceController.swift */; };
+		799EDEF5252B5FCD00579896 /* MainMenu InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799EDEF4252B5FCD00579896 /* MainMenu InterfaceController.swift */; };
+		799EDEFD252B86AE00579896 /* ActionsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799EDEFC252B86AE00579896 /* ActionsInterfaceController.swift */; };
+		79A4EFAD24A0AF45002A7870 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFAC24A0AF45002A7870 /* AppDelegate.swift */; };
+		79A4EFB424A0AF45002A7870 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFB224A0AF45002A7870 /* Main.storyboard */; };
+		79A4EFB624A0AF4A002A7870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFB524A0AF4A002A7870 /* Assets.xcassets */; };
+		79A4EFB924A0AF4A002A7870 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFB724A0AF4A002A7870 /* LaunchScreen.storyboard */; };
+		79A4EFBE24A0AF4A002A7870 /* Heatmapper.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 79A4EFBD24A0AF4A002A7870 /* Heatmapper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		79A4EFC424A0AF4A002A7870 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFC224A0AF4A002A7870 /* Interface.storyboard */; };
+		79A4EFC624A0AF4B002A7870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFC524A0AF4B002A7870 /* Assets.xcassets */; };
+		79A4EFCD24A0AF4B002A7870 /* Heatmapper WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 79A4EFCC24A0AF4B002A7870 /* Heatmapper WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		79A4EFD424A0AF4B002A7870 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFD324A0AF4B002A7870 /* ExtensionDelegate.swift */; };
+		79A4EFD624A0AF4C002A7870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFD524A0AF4C002A7870 /* Assets.xcassets */; };
+		79A4EFF624A7A109002A7870 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFF524A7A109002A7870 /* WorkoutViewController.swift */; };
+		79A4EFF924A7F1AF002A7870 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFF824A7F1AF002A7870 /* Interval.swift */; };
+		79A4EFFC24A88E0E002A7870 /* fartlekCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFFB24A88E0E002A7870 /* fartlekCell.xib */; };
+		79A4EFFE24A89063002A7870 /* FartlekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFFD24A89063002A7870 /* FartlekTableViewCell.swift */; };
+		79A7E14C25ACE48000D1A952 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15025ACE48000D1A952 /* Localizable.strings */; };
+		79A7E14D25ACE48000D1A952 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15025ACE48000D1A952 /* Localizable.strings */; };
+		79A7E14E25ACE48000D1A952 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15025ACE48000D1A952 /* Localizable.strings */; };
+		79A7E15825AD9F5000D1A952 /* IntervalTableViewFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15A25AD9F5000D1A952 /* IntervalTableViewFooter.xib */; };
+		79A7E16225AD9F8200D1A952 /* IntervalTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E16425AD9F8200D1A952 /* IntervalTypeTableViewCell.xib */; };
+		79B274C12558055600752071 /* Colours 1.1.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79B274C02558055600752071 /* Colours 1.1.xcassets */; };
+		79B3742C24B0C711000E4F7E /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B3742B24B0C710000E4F7E /* Stopwatch.swift */; };
+		79B3742D24B0C711000E4F7E /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B3742B24B0C710000E4F7E /* Stopwatch.swift */; };
+		79B6DC992598B13400F573BA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B6DC982598B13400F573BA /* SettingsViewController.swift */; };
+		79B80BD3253DDB8300BEA10F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B80BD2253DDB8300BEA10F /* SceneDelegate.swift */; };
+		79BB8FF02563DB4500019900 /* CountdownInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB8FEF2563DB4500019900 /* CountdownInterfaceController.swift */; };
+		79BED1AA256AAEED0052B160 /* SetIntervalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BED1A9256AAEED0052B160 /* SetIntervalsViewController.swift */; };
+		79C657792559A6B900E6DBCE /* SetIntervalsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C657782559A6B900E6DBCE /* SetIntervalsInterfaceController.swift */; };
+		79CA514B25C2DC9F00415F84 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79CA514D25C2DC9F00415F84 /* InfoPlist.strings */; };
+		79CA515D25C2DF4E00415F84 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79CA515F25C2DF4E00415F84 /* InfoPlist.strings */; };
+		79D083B42508EF6400274F79 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083B32508EF6400274F79 /* MainMenuViewController.swift */; };
+		79D083B6250924C500274F79 /* ThemeKit Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083B5250924C500274F79 /* ThemeKit Theme.swift */; };
+		79D083B82509255A00274F79 /* ThemeKit App Classes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083B72509255A00274F79 /* ThemeKit App Classes.swift */; };
+		79D083BA250925A800274F79 /* ThemeKit Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083B9250925A800274F79 /* ThemeKit Themes.swift */; };
+		79D083BE250A0C0900274F79 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083BD250A0C0900274F79 /* Extensions.swift */; };
+		79DC8A7B253981C6006965D5 /* MyFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083BB25092EBB00274F79 /* MyFunc.swift */; };
+		79F3480E25A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
+		79F3480F25A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
+		79F3481025A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
+		79FB27872561984000E1C9AD /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7994126E255AB9230062AC0D /* Objects.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		79A4EFBF24A0AF4A002A7870 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 79A4EFA124A0AF45002A7870 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 79A4EFBC24A0AF4A002A7870;
+			remoteInfo = "FIT WatchKit App";
+		};
+		79A4EFCE24A0AF4B002A7870 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 79A4EFA124A0AF45002A7870 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 79A4EFCB24A0AF4B002A7870;
+			remoteInfo = "FIT WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		79A4EFDD24A0AF4C002A7870 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				79A4EFCD24A0AF4B002A7870 /* Heatmapper WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79A4EFE124A0AF4C002A7870 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				79A4EFBE24A0AF4A002A7870 /* Heatmapper.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0AF35E1E8DF6D152A0C459BF /* Pods-Heatmapper WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit Extension/Pods-Heatmapper WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
+		1B27E8565B1E89C7FA5F3513 /* Pods-Heatmapper WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit App.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit App/Pods-Heatmapper WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
+		20D17A5498C39BC448F72B45 /* Pods_Heatmapper_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7907E8C024E1468500F3DE0D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		791BD3C225A64E2600FD994A /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
+		7935622725AF53C5006BBC54 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = SOURCE_ROOT; };
+		7935625025B0BBBC006BBC54 /* UnitConverterPace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterPace.swift; sourceTree = "<group>"; };
+		7935629425B31431006BBC54 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BartyCrouch.swift; path = /Users/richard/Desktop/FIT/FIT/Controller/BartyCrouch.swift; sourceTree = "<absolute>"; };
+		793D1AD324B854EB0039441B /* SessionDelegator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDelegator.swift; sourceTree = "<group>"; };
+		793D1AD524B855540039441B /* CommandStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandStatus.swift; sourceTree = "<group>"; };
+		793D1AD824B8650A0039441B /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		793D1ADB24B868840039441B /* SessionCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCommands.swift; sourceTree = "<group>"; };
+		793D1AE524B86E6F0039441B /* CustomLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogger.swift; sourceTree = "<group>"; };
+		793D1AEE24B87F110039441B /* SessionTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTransfer.swift; sourceTree = "<group>"; };
+		793D1AF124B87FAD0039441B /* FileTransferObservers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTransferObservers.swift; sourceTree = "<group>"; };
+		7940AB862535EBE800673035 /* FIT_minute_beep.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = FIT_minute_beep.aif; sourceTree = "<group>"; };
+		7940AB872535EBE900673035 /* FiT_second_beep.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = FiT_second_beep.aif; sourceTree = "<group>"; };
+		7944476E255A9B3B004708E3 /* DurationPickerInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerInterfaceController.swift; sourceTree = "<group>"; };
+		79445D4E25A3292C001D3AC6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
+		7953B57625BACC0D00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		7953B57725BACC0D00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
+		7953B57825BACC0E00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/IntervalTypeTableViewCell.strings"; sourceTree = "<group>"; };
+		7953B57925BACC0E00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/IntervalTableViewFooter.strings"; sourceTree = "<group>"; };
+		7953B57A25BACC0E00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Interface.strings"; sourceTree = "<group>"; };
+		7953B57B25BACC0F00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7953B57F25BAD5B500F35EBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		7953B58025BAD5B500F35EBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		7953B58125BAD5B500F35EBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/IntervalTypeTableViewCell.strings; sourceTree = "<group>"; };
+		7953B58225BAD5B600F35EBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/IntervalTableViewFooter.strings; sourceTree = "<group>"; };
+		7953B58325BAD5B600F35EBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Interface.strings; sourceTree = "<group>"; };
+		7953B58425BAD5B600F35EBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7953B58525BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		7953B58625BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Main.strings"; sourceTree = "<group>"; };
+		7953B58725BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/IntervalTypeTableViewCell.strings"; sourceTree = "<group>"; };
+		7953B58825BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/IntervalTableViewFooter.strings"; sourceTree = "<group>"; };
+		7953B58925BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Interface.strings"; sourceTree = "<group>"; };
+		7953B58A25BAD7D200F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWKInterfaceButton.swift; sourceTree = "<group>"; };
+		797026BF252DB4A500A86A05 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntervalTableViewFooter.swift; path = Heatmapper/View/IntervalTableViewFooter.swift; sourceTree = SOURCE_ROOT; };
+		797BFD092542B72800426185 /* MyFunc_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFunc_iOS.swift; sourceTree = "<group>"; };
+		797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTypeTableViewCell.swift; sourceTree = "<group>"; };
+		7980929C252F386300DF1562 /* FartlekWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FartlekWorkout.swift; sourceTree = "<group>"; };
+		7989157125605679004983BD /* WorkoutInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInterfaceController.swift; sourceTree = "<group>"; };
+		7991886A24B618AE008F0EA5 /* IntervalRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalRowController.swift; sourceTree = "<group>"; };
+		7994126E255AB9230062AC0D /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
+		7996ADE825682D5D00C25196 /* CustomIntervalsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIntervalsInterfaceController.swift; sourceTree = "<group>"; };
+		7996ADF6256860A200C25196 /* CustomRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRowController.swift; sourceTree = "<group>"; };
+		799BBD5C24E2CEC50009AE2D /* IntervalsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalsInterfaceController.swift; sourceTree = "<group>"; };
+		799EDEF4252B5FCD00579896 /* MainMenu InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenu InterfaceController.swift"; sourceTree = "<group>"; };
+		799EDEFC252B86AE00579896 /* ActionsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsInterfaceController.swift; sourceTree = "<group>"; };
+		79A4EFA924A0AF45002A7870 /* Heatmapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heatmapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		79A4EFAC24A0AF45002A7870 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		79A4EFB324A0AF45002A7870 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		79A4EFB524A0AF4A002A7870 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		79A4EFB824A0AF4A002A7870 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		79A4EFBA24A0AF4A002A7870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79A4EFBD24A0AF4A002A7870 /* Heatmapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heatmapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		79A4EFC324A0AF4A002A7870 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		79A4EFC524A0AF4B002A7870 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		79A4EFC724A0AF4B002A7870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79A4EFCC24A0AF4B002A7870 /* Heatmapper WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Heatmapper WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		79A4EFD324A0AF4B002A7870 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		79A4EFD524A0AF4C002A7870 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		79A4EFD724A0AF4C002A7870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79A4EFE524A0C2F1002A7870 /* Heatmapper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Heatmapper.entitlements; sourceTree = "<group>"; };
+		79A4EFE924A0C654002A7870 /* Heatmapper WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Heatmapper WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		79A4EFEC24A0C746002A7870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79A4EFF524A7A109002A7870 /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
+		79A4EFF724A7F1AD002A7870 /* Heatmapper WatchKit App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Heatmapper WatchKit App-Bridging-Header.h"; sourceTree = "<group>"; };
+		79A4EFF824A7F1AF002A7870 /* Interval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interval.swift; sourceTree = "<group>"; };
+		79A4EFFB24A88E0E002A7870 /* fartlekCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = fartlekCell.xib; sourceTree = "<group>"; };
+		79A4EFFD24A89063002A7870 /* FartlekTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FartlekTableViewCell.swift; sourceTree = "<group>"; };
+		79A79A5524B5DB3F005A4433 /* Heatmapper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Heatmapper.entitlements; sourceTree = "<group>"; };
+		79A7E14025ABA8AA00D1A952 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		79A7E14125ABA8AB00D1A952 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Interface.strings; sourceTree = "<group>"; };
+		79A7E14F25ACE48000D1A952 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		79A7E15425ACE48500D1A952 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		79A7E15925AD9F5000D1A952 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IntervalTableViewFooter.xib; sourceTree = "<group>"; };
+		79A7E15F25AD9F5F00D1A952 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/IntervalTableViewFooter.strings; sourceTree = "<group>"; };
+		79A7E16125AD9F6400D1A952 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/IntervalTableViewFooter.strings; sourceTree = "<group>"; };
+		79A7E16325AD9F8200D1A952 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IntervalTypeTableViewCell.xib; sourceTree = "<group>"; };
+		79A7E16925AD9F8A00D1A952 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/IntervalTypeTableViewCell.strings; sourceTree = "<group>"; };
+		79A7E16B25AD9F8F00D1A952 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/IntervalTypeTableViewCell.strings; sourceTree = "<group>"; };
+		79B274C02558055600752071 /* Colours 1.1.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Colours 1.1.xcassets"; sourceTree = "<group>"; };
+		79B3742B24B0C710000E4F7E /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
+		79B6DC982598B13400F573BA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		79B80BD2253DDB8300BEA10F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		79BB8FEF2563DB4500019900 /* CountdownInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownInterfaceController.swift; sourceTree = "<group>"; };
+		79BED1A9256AAEED0052B160 /* SetIntervalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetIntervalsViewController.swift; sourceTree = "<group>"; };
+		79C657782559A6B900E6DBCE /* SetIntervalsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetIntervalsInterfaceController.swift; sourceTree = "<group>"; usesTabs = 0; };
+		79CA514C25C2DC9F00415F84 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		79CA515125C2DCAB00415F84 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		79CA515225C2DCAC00415F84 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		79CA515325C2DCAD00415F84 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		79CA515425C2DCAE00415F84 /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		79CA515E25C2DF4E00415F84 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		79CA516325C2DF5400415F84 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		79CA516425C2DF5800415F84 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		79CA516525C2DF5900415F84 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		79CA516625C2DF5B00415F84 /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		79D083B32508EF6400274F79 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		79D083B5250924C500274F79 /* ThemeKit Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThemeKit Theme.swift"; sourceTree = "<group>"; };
+		79D083B72509255A00274F79 /* ThemeKit App Classes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThemeKit App Classes.swift"; sourceTree = "<group>"; };
+		79D083B9250925A800274F79 /* ThemeKit Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThemeKit Themes.swift"; sourceTree = "<group>"; };
+		79D083BB25092EBB00274F79 /* MyFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFunc.swift; path = Shared/MyFunc.swift; sourceTree = SOURCE_ROOT; };
+		79D083BD250A0C0900274F79 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		79F3480D25A3364100762724 /* Heatmapper.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Heatmapper.storekit; sourceTree = "<group>"; };
+		98D8FC69FF05283C26F8881B /* Pods-Heatmapper WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit Extension/Pods-Heatmapper WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
+		9C488EBAB113A338118EAD74 /* Pods-Heatmapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper/Pods-Heatmapper.debug.xcconfig"; sourceTree = "<group>"; };
+		9D2FD5C38F894191F54261F7 /* Pods_Heatmapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8EAD462335AB8CC40517746 /* Pods_Heatmapper_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7E800548A03D62E18EC89EB /* Pods-Heatmapper WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit App.release.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit App/Pods-Heatmapper WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
+		EE0657220DC77F51335FEE86 /* Pods-Heatmapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper.release.xcconfig"; path = "Target Support Files/Pods-Heatmapper/Pods-Heatmapper.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		288EB29836F1E9001E6E014C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3ABF5AF707DE45B41FF49619 /* Pods_Heatmapper_WatchKit_App.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79A4EFA624A0AF45002A7870 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79445D4F25A3292D001D3AC6 /* StoreKit.framework in Frameworks */,
+				2601503FDB427F5D40BD1185 /* Pods_Heatmapper.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79A4EFC924A0AF4B002A7870 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15ED4E657B15BE7AEFBB57EB /* Pods_Heatmapper_WatchKit_Extension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		074579CCD3A6BD9A5C2841B8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9C488EBAB113A338118EAD74 /* Pods-Heatmapper.debug.xcconfig */,
+				EE0657220DC77F51335FEE86 /* Pods-Heatmapper.release.xcconfig */,
+				1B27E8565B1E89C7FA5F3513 /* Pods-Heatmapper WatchKit App.debug.xcconfig */,
+				B7E800548A03D62E18EC89EB /* Pods-Heatmapper WatchKit App.release.xcconfig */,
+				98D8FC69FF05283C26F8881B /* Pods-Heatmapper WatchKit Extension.debug.xcconfig */,
+				0AF35E1E8DF6D152A0C459BF /* Pods-Heatmapper WatchKit Extension.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		793D1ADE24B86BC90039441B /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				7935625025B0BBBC006BBC54 /* UnitConverterPace.swift */,
+				79D083BB25092EBB00274F79 /* MyFunc.swift */,
+				7940AB862535EBE800673035 /* FIT_minute_beep.aif */,
+				7940AB872535EBE900673035 /* FiT_second_beep.aif */,
+				793D1AD524B855540039441B /* CommandStatus.swift */,
+				793D1ADB24B868840039441B /* SessionCommands.swift */,
+				793D1AD324B854EB0039441B /* SessionDelegator.swift */,
+				793D1AD824B8650A0039441B /* DataProvider.swift */,
+				793D1AE524B86E6F0039441B /* CustomLogger.swift */,
+				793D1AEE24B87F110039441B /* SessionTransfer.swift */,
+				793D1AF124B87FAD0039441B /* FileTransferObservers.swift */,
+				7994126E255AB9230062AC0D /* Objects.swift */,
+				79A4EFF824A7F1AF002A7870 /* Interval.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		793D1ADF24B86C020039441B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79A4EFB724A0AF4A002A7870 /* LaunchScreen.storyboard */,
+				79A4EFB224A0AF45002A7870 /* Main.storyboard */,
+				79A4EFFB24A88E0E002A7870 /* fartlekCell.xib */,
+				79A4EFFD24A89063002A7870 /* FartlekTableViewCell.swift */,
+				797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */,
+				79A7E16425AD9F8200D1A952 /* IntervalTypeTableViewCell.xib */,
+				79A7E15A25AD9F5000D1A952 /* IntervalTableViewFooter.xib */,
+				7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		793D1AE024B86C1B0039441B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */,
+				7935629425B31431006BBC54 /* BartyCrouch.swift */,
+				7935622725AF53C5006BBC54 /* HelpViewController.swift */,
+				79B6DC982598B13400F573BA /* SettingsViewController.swift */,
+				79BED1A9256AAEED0052B160 /* SetIntervalsViewController.swift */,
+				79D083BD250A0C0900274F79 /* Extensions.swift */,
+				79D083B72509255A00274F79 /* ThemeKit App Classes.swift */,
+				79D083B5250924C500274F79 /* ThemeKit Theme.swift */,
+				79D083B9250925A800274F79 /* ThemeKit Themes.swift */,
+				79D083B32508EF6400274F79 /* MainMenuViewController.swift */,
+				79A4EFF524A7A109002A7870 /* WorkoutViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		793D1AE124B86C310039441B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				797BFD092542B72800426185 /* MyFunc_iOS.swift */,
+				79B80BD2253DDB8300BEA10F /* SceneDelegate.swift */,
+				79A4EFAC24A0AF45002A7870 /* AppDelegate.swift */,
+				79B3742B24B0C710000E4F7E /* Stopwatch.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		79A4EFA024A0AF45002A7870 = {
+			isa = PBXGroup;
+			children = (
+				79A7E15025ACE48000D1A952 /* Localizable.strings */,
+				79F3480D25A3364100762724 /* Heatmapper.storekit */,
+				793D1ADE24B86BC90039441B /* Shared */,
+				79A4EFEC24A0C746002A7870 /* Info.plist */,
+				79CA514D25C2DC9F00415F84 /* InfoPlist.strings */,
+				79A4EFAB24A0AF45002A7870 /* Heatmapper */,
+				79A4EFC124A0AF4A002A7870 /* Heatmapper WatchKit App */,
+				79A4EFD024A0AF4B002A7870 /* Heatmapper WatchKit Extension */,
+				79A4EFAA24A0AF45002A7870 /* Products */,
+				79A4EFE624A0C2F1002A7870 /* Frameworks */,
+				79A4EFF724A7F1AD002A7870 /* Heatmapper WatchKit App-Bridging-Header.h */,
+				074579CCD3A6BD9A5C2841B8 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		79A4EFAA24A0AF45002A7870 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				79A4EFA924A0AF45002A7870 /* Heatmapper.app */,
+				79A4EFBD24A0AF4A002A7870 /* Heatmapper.app */,
+				79A4EFCC24A0AF4B002A7870 /* Heatmapper WatchKit Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		79A4EFAB24A0AF45002A7870 /* Heatmapper */ = {
+			isa = PBXGroup;
+			children = (
+				79A4EFE524A0C2F1002A7870 /* Heatmapper.entitlements */,
+				793D1AE124B86C310039441B /* Model */,
+				793D1ADF24B86C020039441B /* View */,
+				793D1AE024B86C1B0039441B /* Controller */,
+				79A4EFB524A0AF4A002A7870 /* Assets.xcassets */,
+				79B274C02558055600752071 /* Colours 1.1.xcassets */,
+				79A4EFBA24A0AF4A002A7870 /* Info.plist */,
+			);
+			path = Heatmapper;
+			sourceTree = "<group>";
+		};
+		79A4EFC124A0AF4A002A7870 /* Heatmapper WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				79A79A5524B5DB3F005A4433 /* Heatmapper.entitlements */,
+				79A4EFC224A0AF4A002A7870 /* Interface.storyboard */,
+				79A4EFC524A0AF4B002A7870 /* Assets.xcassets */,
+				79A4EFC724A0AF4B002A7870 /* Info.plist */,
+			);
+			path = "Heatmapper WatchKit App";
+			sourceTree = "<group>";
+		};
+		79A4EFD024A0AF4B002A7870 /* Heatmapper WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				79A4EFE924A0C654002A7870 /* Heatmapper WatchKit Extension.entitlements */,
+				7991886A24B618AE008F0EA5 /* IntervalRowController.swift */,
+				7996ADF6256860A200C25196 /* CustomRowController.swift */,
+				799EDEF4252B5FCD00579896 /* MainMenu InterfaceController.swift */,
+				7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */,
+				7980929C252F386300DF1562 /* FartlekWorkout.swift */,
+				799EDEFC252B86AE00579896 /* ActionsInterfaceController.swift */,
+				7996ADE825682D5D00C25196 /* CustomIntervalsInterfaceController.swift */,
+				799BBD5C24E2CEC50009AE2D /* IntervalsInterfaceController.swift */,
+				797026BF252DB4A500A86A05 /* Audio.swift */,
+				79BB8FEF2563DB4500019900 /* CountdownInterfaceController.swift */,
+				7989157125605679004983BD /* WorkoutInterfaceController.swift */,
+				791BD3C225A64E2600FD994A /* WorkoutManager.swift */,
+				7944476E255A9B3B004708E3 /* DurationPickerInterfaceController.swift */,
+				79C657782559A6B900E6DBCE /* SetIntervalsInterfaceController.swift */,
+				79A4EFD324A0AF4B002A7870 /* ExtensionDelegate.swift */,
+				7907E8C024E1468500F3DE0D /* Extensions.swift */,
+				79A4EFD524A0AF4C002A7870 /* Assets.xcassets */,
+				79A4EFD724A0AF4C002A7870 /* Info.plist */,
+				79CA515F25C2DF4E00415F84 /* InfoPlist.strings */,
+			);
+			path = "Heatmapper WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		79A4EFE624A0C2F1002A7870 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				79445D4E25A3292C001D3AC6 /* StoreKit.framework */,
+				9D2FD5C38F894191F54261F7 /* Pods_Heatmapper.framework */,
+				20D17A5498C39BC448F72B45 /* Pods_Heatmapper_WatchKit_App.framework */,
+				A8EAD462335AB8CC40517746 /* Pods_Heatmapper_WatchKit_Extension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		79A4EFA824A0AF45002A7870 /* Heatmapper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79A4EFE224A0AF4C002A7870 /* Build configuration list for PBXNativeTarget "Heatmapper" */;
+			buildPhases = (
+				C5D9AE715BEA18F127C75E6F /* [CP] Check Pods Manifest.lock */,
+				7935628D25B30CAC006BBC54 /* BartyCrouch */,
+				79A4EFA524A0AF45002A7870 /* Sources */,
+				79A4EFA624A0AF45002A7870 /* Frameworks */,
+				79A4EFA724A0AF45002A7870 /* Resources */,
+				79A4EFE124A0AF4C002A7870 /* Embed Watch Content */,
+				6FE5707BF0DBC875F3454C62 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				79A4EFC024A0AF4A002A7870 /* PBXTargetDependency */,
+			);
+			name = Heatmapper;
+			productName = FIT;
+			productReference = 79A4EFA924A0AF45002A7870 /* Heatmapper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		79A4EFBC24A0AF4A002A7870 /* Heatmapper WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79A4EFDE24A0AF4C002A7870 /* Build configuration list for PBXNativeTarget "Heatmapper WatchKit App" */;
+			buildPhases = (
+				3556B6B6488B87834AE85B5F /* [CP] Check Pods Manifest.lock */,
+				79A4EFBB24A0AF4A002A7870 /* Resources */,
+				79A4EFDD24A0AF4C002A7870 /* Embed App Extensions */,
+				288EB29836F1E9001E6E014C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				79A4EFCF24A0AF4B002A7870 /* PBXTargetDependency */,
+			);
+			name = "Heatmapper WatchKit App";
+			productName = "FIT WatchKit App";
+			productReference = 79A4EFBD24A0AF4A002A7870 /* Heatmapper.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		79A4EFCB24A0AF4B002A7870 /* Heatmapper WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79A4EFDA24A0AF4C002A7870 /* Build configuration list for PBXNativeTarget "Heatmapper WatchKit Extension" */;
+			buildPhases = (
+				C285806EEFE1D2CABC05CA25 /* [CP] Check Pods Manifest.lock */,
+				79A4EFC824A0AF4B002A7870 /* Sources */,
+				79A4EFC924A0AF4B002A7870 /* Frameworks */,
+				79A4EFCA24A0AF4B002A7870 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Heatmapper WatchKit Extension";
+			productName = "FIT WatchKit Extension";
+			productReference = 79A4EFCC24A0AF4B002A7870 /* Heatmapper WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		79A4EFA124A0AF45002A7870 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1150;
+				LastUpgradeCheck = 1200;
+				ORGANIZATIONNAME = "Richard English";
+				TargetAttributes = {
+					79A4EFA824A0AF45002A7870 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+					79A4EFBC24A0AF4A002A7870 = {
+						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1150;
+					};
+					79A4EFCB24A0AF4B002A7870 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+				};
+			};
+			buildConfigurationList = 79A4EFA424A0AF45002A7870 /* Build configuration list for PBXProject "Heatmapper" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				es,
+				"es-419",
+				fr,
+				"cy-GB",
+			);
+			mainGroup = 79A4EFA024A0AF45002A7870;
+			productRefGroup = 79A4EFAA24A0AF45002A7870 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				79A4EFA824A0AF45002A7870 /* Heatmapper */,
+				79A4EFBC24A0AF4A002A7870 /* Heatmapper WatchKit App */,
+				79A4EFCB24A0AF4B002A7870 /* Heatmapper WatchKit Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		79A4EFA724A0AF45002A7870 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79A4EFFC24A88E0E002A7870 /* fartlekCell.xib in Resources */,
+				79CA514B25C2DC9F00415F84 /* InfoPlist.strings in Resources */,
+				79A7E15825AD9F5000D1A952 /* IntervalTableViewFooter.xib in Resources */,
+				79A7E14C25ACE48000D1A952 /* Localizable.strings in Resources */,
+				79B274C12558055600752071 /* Colours 1.1.xcassets in Resources */,
+				79A4EFB924A0AF4A002A7870 /* LaunchScreen.storyboard in Resources */,
+				7940AB8A2535EBE900673035 /* FiT_second_beep.aif in Resources */,
+				79A4EFB624A0AF4A002A7870 /* Assets.xcassets in Resources */,
+				79A7E16225AD9F8200D1A952 /* IntervalTypeTableViewCell.xib in Resources */,
+				79F3480E25A3364100762724 /* Heatmapper.storekit in Resources */,
+				7940AB882535EBE900673035 /* FIT_minute_beep.aif in Resources */,
+				79A4EFB424A0AF45002A7870 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79A4EFBB24A0AF4A002A7870 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79F3480F25A3364100762724 /* Heatmapper.storekit in Resources */,
+				79A7E14D25ACE48000D1A952 /* Localizable.strings in Resources */,
+				79A4EFC624A0AF4B002A7870 /* Assets.xcassets in Resources */,
+				79A4EFC424A0AF4A002A7870 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79A4EFCA24A0AF4B002A7870 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79A7E14E25ACE48000D1A952 /* Localizable.strings in Resources */,
+				79CA515D25C2DF4E00415F84 /* InfoPlist.strings in Resources */,
+				7940AB892535EBE900673035 /* FIT_minute_beep.aif in Resources */,
+				79A4EFD624A0AF4C002A7870 /* Assets.xcassets in Resources */,
+				79F3481025A3364100762724 /* Heatmapper.storekit in Resources */,
+				7940AB8B2535EBE900673035 /* FiT_second_beep.aif in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3556B6B6488B87834AE85B5F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Heatmapper WatchKit App-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6FE5707BF0DBC875F3454C62 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Heatmapper/Pods-Heatmapper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Heatmapper/Pods-Heatmapper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Heatmapper/Pods-Heatmapper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7935628D25B30CAC006BBC54 /* BartyCrouch */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = BartyCrouch;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which bartycrouch > /dev/null; then\n    bartycrouch update -x\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
+		};
+		C285806EEFE1D2CABC05CA25 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Heatmapper WatchKit Extension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C5D9AE715BEA18F127C75E6F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Heatmapper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		79A4EFA524A0AF45002A7870 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				797E7C062575312500EAE473 /* IntervalTypeTableViewCell.swift in Sources */,
+				79D083BE250A0C0900274F79 /* Extensions.swift in Sources */,
+				7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */,
+				79A4EFFE24A89063002A7870 /* FartlekTableViewCell.swift in Sources */,
+				793D1AD624B855540039441B /* CommandStatus.swift in Sources */,
+				793D1AD424B854EB0039441B /* SessionDelegator.swift in Sources */,
+				797BFD0525421E8700426185 /* Audio.swift in Sources */,
+				7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */,
+				79A4EFF624A7A109002A7870 /* WorkoutViewController.swift in Sources */,
+				793D1ADC24B868840039441B /* SessionCommands.swift in Sources */,
+				797BFD0A2542B72800426185 /* MyFunc_iOS.swift in Sources */,
+				79D083B42508EF6400274F79 /* MainMenuViewController.swift in Sources */,
+				79B80BD3253DDB8300BEA10F /* SceneDelegate.swift in Sources */,
+				79FB27872561984000E1C9AD /* Objects.swift in Sources */,
+				7935622825AF53C5006BBC54 /* HelpViewController.swift in Sources */,
+				79D083B82509255A00274F79 /* ThemeKit App Classes.swift in Sources */,
+				79A4EFF924A7F1AF002A7870 /* Interval.swift in Sources */,
+				7935629525B31431006BBC54 /* BartyCrouch.swift in Sources */,
+				79D083BA250925A800274F79 /* ThemeKit Themes.swift in Sources */,
+				793D1AEF24B87F110039441B /* SessionTransfer.swift in Sources */,
+				79A4EFAD24A0AF45002A7870 /* AppDelegate.swift in Sources */,
+				793D1AF224B87FAD0039441B /* FileTransferObservers.swift in Sources */,
+				79D083B6250924C500274F79 /* ThemeKit Theme.swift in Sources */,
+				79201489254343BD00212051 /* MyFunc.swift in Sources */,
+				79BED1AA256AAEED0052B160 /* SetIntervalsViewController.swift in Sources */,
+				793D1AE624B86E6F0039441B /* CustomLogger.swift in Sources */,
+				79B3742C24B0C711000E4F7E /* Stopwatch.swift in Sources */,
+				793D1AD924B8650A0039441B /* DataProvider.swift in Sources */,
+				79B6DC992598B13400F573BA /* SettingsViewController.swift in Sources */,
+				7935625125B0BBBE006BBC54 /* UnitConverterPace.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79A4EFC824A0AF4B002A7870 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				793D1ADD24B868840039441B /* SessionCommands.swift in Sources */,
+				793D1AE824B876BC0039441B /* SessionDelegator.swift in Sources */,
+				79A4EFD424A0AF4B002A7870 /* ExtensionDelegate.swift in Sources */,
+				7996ADE925682D5D00C25196 /* CustomIntervalsInterfaceController.swift in Sources */,
+				793D1AF024B87F110039441B /* SessionTransfer.swift in Sources */,
+				799BBD5D24E2CEC50009AE2D /* IntervalsInterfaceController.swift in Sources */,
+				7981D39C24BDD62500E5D9E7 /* Interval.swift in Sources */,
+				7980929D252F386300DF1562 /* FartlekWorkout.swift in Sources */,
+				79C657792559A6B900E6DBCE /* SetIntervalsInterfaceController.swift in Sources */,
+				79DC8A7B253981C6006965D5 /* MyFunc.swift in Sources */,
+				799EDEF5252B5FCD00579896 /* MainMenu InterfaceController.swift in Sources */,
+				791BD3C325A64E2600FD994A /* WorkoutManager.swift in Sources */,
+				7944476F255A9B3B004708E3 /* DurationPickerInterfaceController.swift in Sources */,
+				7961D6BF25B74B4900204968 /* MyWKInterfaceButton.swift in Sources */,
+				799EDEFD252B86AE00579896 /* ActionsInterfaceController.swift in Sources */,
+				793D1ADA24B8650A0039441B /* DataProvider.swift in Sources */,
+				7989157225605679004983BD /* WorkoutInterfaceController.swift in Sources */,
+				79B3742D24B0C711000E4F7E /* Stopwatch.swift in Sources */,
+				7994126F255AB9230062AC0D /* Objects.swift in Sources */,
+				7991886B24B618AE008F0EA5 /* IntervalRowController.swift in Sources */,
+				793D1AF324B87FAD0039441B /* FileTransferObservers.swift in Sources */,
+				797026C0252DB4A500A86A05 /* Audio.swift in Sources */,
+				7935625225B0BBC0006BBC54 /* UnitConverterPace.swift in Sources */,
+				7996ADF7256860A200C25196 /* CustomRowController.swift in Sources */,
+				7907E8C124E1468500F3DE0D /* Extensions.swift in Sources */,
+				793D1AE724B86E6F0039441B /* CustomLogger.swift in Sources */,
+				793D1AD724B855540039441B /* CommandStatus.swift in Sources */,
+				79BB8FF02563DB4500019900 /* CountdownInterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		79A4EFC024A0AF4A002A7870 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 79A4EFBC24A0AF4A002A7870 /* Heatmapper WatchKit App */;
+			targetProxy = 79A4EFBF24A0AF4A002A7870 /* PBXContainerItemProxy */;
+		};
+		79A4EFCF24A0AF4B002A7870 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 79A4EFCB24A0AF4B002A7870 /* Heatmapper WatchKit Extension */;
+			targetProxy = 79A4EFCE24A0AF4B002A7870 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		79A4EFB224A0AF45002A7870 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				79A4EFB324A0AF45002A7870 /* Base */,
+				79A7E14025ABA8AA00D1A952 /* es */,
+				7953B57725BACC0D00F35EBD /* es-419 */,
+				7953B58025BAD5B500F35EBD /* fr */,
+				7953B58625BAD7D100F35EBD /* cy-GB */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		79A4EFB724A0AF4A002A7870 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				79A4EFB824A0AF4A002A7870 /* Base */,
+				7953B57625BACC0D00F35EBD /* es-419 */,
+				7953B57F25BAD5B500F35EBD /* fr */,
+				7953B58525BAD7D100F35EBD /* cy-GB */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		79A4EFC224A0AF4A002A7870 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				79A4EFC324A0AF4A002A7870 /* Base */,
+				79A7E14125ABA8AB00D1A952 /* es */,
+				7953B57A25BACC0E00F35EBD /* es-419 */,
+				7953B58325BAD5B600F35EBD /* fr */,
+				7953B58925BAD7D100F35EBD /* cy-GB */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+		79A7E15025ACE48000D1A952 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				79A7E14F25ACE48000D1A952 /* en */,
+				79A7E15425ACE48500D1A952 /* es */,
+				7953B57B25BACC0F00F35EBD /* es-419 */,
+				7953B58425BAD5B600F35EBD /* fr */,
+				7953B58A25BAD7D200F35EBD /* cy-GB */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		79A7E15A25AD9F5000D1A952 /* IntervalTableViewFooter.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				79A7E15925AD9F5000D1A952 /* Base */,
+				79A7E15F25AD9F5F00D1A952 /* en */,
+				79A7E16125AD9F6400D1A952 /* es */,
+				7953B57925BACC0E00F35EBD /* es-419 */,
+				7953B58225BAD5B600F35EBD /* fr */,
+				7953B58825BAD7D100F35EBD /* cy-GB */,
+			);
+			name = IntervalTableViewFooter.xib;
+			sourceTree = "<group>";
+		};
+		79A7E16425AD9F8200D1A952 /* IntervalTypeTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				79A7E16325AD9F8200D1A952 /* Base */,
+				79A7E16925AD9F8A00D1A952 /* es */,
+				79A7E16B25AD9F8F00D1A952 /* en */,
+				7953B57825BACC0E00F35EBD /* es-419 */,
+				7953B58125BAD5B500F35EBD /* fr */,
+				7953B58725BAD7D100F35EBD /* cy-GB */,
+			);
+			name = IntervalTypeTableViewCell.xib;
+			sourceTree = "<group>";
+		};
+		79CA514D25C2DC9F00415F84 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				79CA514C25C2DC9F00415F84 /* en */,
+				79CA515125C2DCAB00415F84 /* fr */,
+				79CA515225C2DCAC00415F84 /* es */,
+				79CA515325C2DCAD00415F84 /* es-419 */,
+				79CA515425C2DCAE00415F84 /* cy-GB */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		79CA515F25C2DF4E00415F84 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				79CA515E25C2DF4E00415F84 /* en */,
+				79CA516325C2DF5400415F84 /* fr */,
+				79CA516425C2DF5800415F84 /* es */,
+				79CA516525C2DF5900415F84 /* es-419 */,
+				79CA516625C2DF5B00415F84 /* cy-GB */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		79A4EFD824A0AF4C002A7870 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		79A4EFD924A0AF4C002A7870 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		79A4EFDB24A0AF4C002A7870 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98D8FC69FF05283C26F8881B /* Pods-Heatmapper WatchKit Extension.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Heatmapper WatchKit Extension/Heatmapper WatchKit Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U5G9P73NH5;
+				INFOPLIST_FILE = "$(SRCROOT)/Heatmapper WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = wimbledonappcompany.com.Heatmapper.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Debug;
+		};
+		79A4EFDC24A0AF4C002A7870 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AF35E1E8DF6D152A0C459BF /* Pods-Heatmapper WatchKit Extension.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Heatmapper WatchKit Extension/Heatmapper WatchKit Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U5G9P73NH5;
+				INFOPLIST_FILE = "$(SRCROOT)/Heatmapper WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = wimbledonappcompany.com.Heatmapper.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Release;
+		};
+		79A4EFDF24A0AF4C002A7870 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B27E8565B1E89C7FA5F3513 /* Pods-Heatmapper WatchKit App.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Heatmapper WatchKit App/Heatmapper.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U5G9P73NH5;
+				IBSC_MODULE = Heatmapper_WatchKit_Extension;
+				INFOPLIST_FILE = "$(SRCROOT)/Heatmapper WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = wimbledonappcompany.com.Heatmapper.watchkitapp;
+				PRODUCT_NAME = Heatmapper;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Heatmapper WatchKit App-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Debug;
+		};
+		79A4EFE024A0AF4C002A7870 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7E800548A03D62E18EC89EB /* Pods-Heatmapper WatchKit App.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Heatmapper WatchKit App/Heatmapper.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U5G9P73NH5;
+				IBSC_MODULE = Heatmapper_WatchKit_Extension;
+				INFOPLIST_FILE = "$(SRCROOT)/Heatmapper WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = wimbledonappcompany.com.Heatmapper.watchkitapp;
+				PRODUCT_NAME = Heatmapper;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Heatmapper WatchKit App-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Release;
+		};
+		79A4EFE324A0AF4C002A7870 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C488EBAB113A338118EAD74 /* Pods-Heatmapper.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Heatmapper/Heatmapper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U5G9P73NH5;
+				INFOPLIST_FILE = Heatmapper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = wimbledonappcompany.com.Heatmapper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Debug;
+		};
+		79A4EFE424A0AF4C002A7870 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE0657220DC77F51335FEE86 /* Pods-Heatmapper.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Heatmapper/Heatmapper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U5G9P73NH5;
+				INFOPLIST_FILE = Heatmapper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = wimbledonappcompany.com.Heatmapper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		79A4EFA424A0AF45002A7870 /* Build configuration list for PBXProject "Heatmapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79A4EFD824A0AF4C002A7870 /* Debug */,
+				79A4EFD924A0AF4C002A7870 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		79A4EFDA24A0AF4C002A7870 /* Build configuration list for PBXNativeTarget "Heatmapper WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79A4EFDB24A0AF4C002A7870 /* Debug */,
+				79A4EFDC24A0AF4C002A7870 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		79A4EFDE24A0AF4C002A7870 /* Build configuration list for PBXNativeTarget "Heatmapper WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79A4EFDF24A0AF4C002A7870 /* Debug */,
+				79A4EFE024A0AF4C002A7870 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		79A4EFE224A0AF4C002A7870 /* Build configuration list for PBXNativeTarget "Heatmapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79A4EFE324A0AF4C002A7870 /* Debug */,
+				79A4EFE424A0AF4C002A7870 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 79A4EFA124A0AF45002A7870 /* Project object */;
+}

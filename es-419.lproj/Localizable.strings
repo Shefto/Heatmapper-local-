@@ -1,0 +1,199 @@
+/* of */
+" of " = " de ";
+
+/* Localized raw value */
+"\(ActivityLevel.allCases[row].localizedDescription)" = "\(ActivityLevel.allCases[row].localizedDescription)";
+
+/* Localized raw value */
+"\(ActivityPattern.allCases[row].localizedDescription)" = "\(ActivityPattern.allCases[row].localizedDescription)";
+
+/* No comment provided by engineer. */
+"\(activityPhrase)" = "\(activityPhrase)";
+
+/* title */
+"\(activityType.rawValue)" = "\(activityType.rawValue)";
+
+/* \(activityTypeForDisplay) */
+"\(activityTypeForDisplay)" = "\(activityTypeForDisplay)";
+
+/* Localized version of starting phrase */
+"\(newIntervalPhrase)" = "\(newIntervalPhrase)";
+
+/* No comment provided by engineer. */
+"\(recordingPhrase)" = "\(recordingPhrase)";
+
+/* Set Intervals Activity */
+"Activity" = "Actividad";
+
+/* Activity (Work + Rest) */
+"Activity (Work + Rest)" = "Actividad (Trabajo + Descanso)";
+
+/* Begin activity */
+"Begin activity" = "Iniciar actividad";
+
+/* Cancel */
+"Cancel" = "Cancelar";
+
+/* Cancelling workout */
+"Cancelling workout" = "Cancelar entramiento";
+
+"Cool down" = "Enfriar";
+
+"cooldown" = "Enfriar";
+
+"cooldown now" = "Enfriar ahora";
+
+"Custom" = "Personalizada";
+
+/* No comment provided by engineer. */
+"Distance\n(ft)" = "Distancia\n(ft)";
+
+/* No comment provided by engineer. */
+"Distance\n(m)" = "Distancia\n(m)";
+
+/* No comment provided by engineer. */
+"Distance\n(yds)" = "Distancia\n(yds)";
+
+/* No comment provided by engineer. */
+"Fartlek Interval Trainer" = "Entrenador de Intervalos Fartlek";
+
+/* No comment provided by engineer. */
+"Finishing workout" = "Terminar el entramiento";
+
+/* No comment provided by engineer. */
+"Flat" = "Plano";
+
+/* flatSetsStr */
+"Flat Sets" = "Intervalos iguales";
+
+"Get ready to cooldown" = "Prepárate para enfriarse";
+
+"Get ready to rest" = "Prepárate para descansar";
+
+"Get ready to warmup" = "Prepárate para calentarse";
+
+"Get ready to work" = "Prepárate para trabajar";
+
+/* No comment provided by engineer. */
+"Hard" = "Mediano";
+
+/* No comment provided by engineer. */
+"Harder" = "Duro";
+
+/* No comment provided by engineer. */
+"Hardest" = "Más duro";
+
+/* Let's go! */
+"Let's go!" = "¡Vamos!";
+
+/* No comment provided by engineer. */
+"Light" = "Mas fácil";
+
+/* No comment provided by engineer. */
+"Moderate" = "Fácil";
+
+/* Open Health app */
+"Open Health app" = "Abra la aplicación Salud";
+
+"Pace \n(km/h)" = "Velocidad\n(km/h)";
+
+/* No comment provided by engineer. */
+"Pace\n(km/h)" = "Paso\n(km/h)";
+
+/* No comment provided by engineer. */
+"Pace\n(mins/km)" = "Paso\n(mins/km)";
+
+/* No comment provided by engineer. */
+"Pace\n(mins/mi)" = "Paso\n(mins/mi)";
+
+/* No comment provided by engineer. */
+"Pace\n(mph)" = "Velocidad\n(mph)";
+
+/* Pausing workout */
+"Pausing workout" = "Pausar el entrenamiento";
+
+/* No comment provided by engineer. */
+"Pyramid" = "Pirámide";
+
+"Pyramid Sets" = "Intervalos Pirámides";
+
+"Random" = "Aleatorio";
+
+"Recording Running interval" = "Grabando intervalo corriendo";
+
+"Recording Stationary interval" = "Grabando intervalo estacionario";
+
+"Recording Walking interval" = "Grabando intervalo caminando";
+
+/* Reset */
+"Reset" = "Reincializar";
+
+/* Reset Intervals */
+"Reset Intervals" = "Reinicializar Intervalos";
+
+"rest" = "Descanso";
+
+/* Rest */
+"Rest" = "Descanso";
+
+/* Rest (max) */
+"Rest (max)" = "Descanso (max)";
+
+"rest now" = "Descansa ahora";
+
+/* Resuming workout */
+"Resuming workout" = "Reanudar el entrenamiento";
+
+"Routine" = "Programa";
+
+/* No comment provided by engineer. */
+"Screen lock enabled" = "Bloqueo de pantalla habilitado";
+
+/* Set */
+"Set " = "Intervalo ";
+
+"Settings" = "Configuraciones";
+
+/* No comment provided by engineer. */
+"Starting workout now" = "Empezando a entrenar ahora";
+
+/* This will override any custom intervals you have created. Do you want to continue? */
+"This will override any custom intervals you have created. Do you want to continue?" = "Esto anulará cualquier intervalo personalizado que haya creado. ¿Quiere continuar?";
+
+"Warm up" = "Calentar";
+
+/*
+ Localizable.strings (Spanish)
+ FIT
+
+ Created by Richard English on 11/01/2021.
+ Copyright © 2021 Richard English. All rights reserved.
+ */
+"warmup" = "Calentar";
+
+"warmup now" = "Calentar ahora";
+
+"work" = "Trabajo";
+
+/* Work */
+"Work" = "Trabajo";
+
+/* Work (max) */
+"Work (max)" = "Trabajo (max)";
+
+"work now" = "Trabaja ahora";
+
+/* Workout complete. Well done */
+"Workout complete. Well done" = "Entrenamiento completo. Bien hecho";
+
+/* No comment provided by engineer. */
+"Workout completed" = "Entrenamiento completado";
+
+/* No comment provided by engineer. */
+"Workout paused" = "Entrenamiento en pausa";
+
+/* No comment provided by engineer. */
+"Your workout has been saved successfully" = "Su entrenamiento se ha guardado correctamente";
+
+/* Recording interval */
+"\(phrase)" = "";

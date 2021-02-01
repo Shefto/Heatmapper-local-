@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntervalTableViewFooter" customModule="FIT" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view opaque="NO" contentMode="scaleToFill" id="iN0-l3-epB" customClass="IntervalTableViewFooter" customModule="FIT" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="658" height="55"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="alE-Qw-6Ny">
+                    <rect key="frame" x="0.0" y="0.0" width="658" height="55"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arW-Vy-Qe8">
+                            <rect key="frame" x="0.0" y="7.5" width="50" height="40"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="arW-Vy-Qe8" secondAttribute="height" multiplier="1.25:1" id="0NV-tD-ROZ"/>
+                            </constraints>
+                        </view>
+                        <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thf-FG-9ZI" customClass="ThemeView" customModule="FIT" customModuleProvider="target">
+                            <rect key="frame" x="50" y="2.5" width="378" height="50"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXH-sF-X5D" userLabel="Total Label" customClass="ThemeColumnHeaderUILabel" customModule="FIT" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="378" height="50"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstItem="sXH-sF-X5D" firstAttribute="leading" secondItem="thf-FG-9ZI" secondAttribute="leading" id="UJH-n6-QMl"/>
+                                <constraint firstAttribute="bottom" secondItem="sXH-sF-X5D" secondAttribute="bottom" id="hCf-F7-u5G"/>
+                                <constraint firstItem="sXH-sF-X5D" firstAttribute="top" secondItem="thf-FG-9ZI" secondAttribute="top" id="kip-db-2Y3"/>
+                                <constraint firstAttribute="trailing" secondItem="sXH-sF-X5D" secondAttribute="trailing" id="oaN-Uc-CuA"/>
+                            </constraints>
+                        </view>
+                        <pickerView tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ob9-r1-V07" userLabel="Hour Picker View">
+                            <rect key="frame" x="428" y="0.0" width="55" height="55"/>
+                            <accessibility key="accessibilityConfiguration" identifier="minutePicker"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="55" id="TOr-bs-TqV"/>
+                            </constraints>
+                        </pickerView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="3" translatesAutoresizingMaskIntoConstraints="NO" id="lVV-Lr-swR" userLabel="HH:MM colon" customClass="ThemeColumnHeaderUILabel" customModule="FIT" customModuleProvider="target">
+                            <rect key="frame" x="483" y="17.5" width="5" height="20.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="5" id="Kfy-ac-EKb"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <pickerView tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3c-5S-W3Q" userLabel="Large Minute Picker View">
+                            <rect key="frame" x="488" y="0.0" width="55" height="55"/>
+                            <accessibility key="accessibilityConfiguration" identifier="minutePicker"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="55" id="QaO-ax-YTc"/>
+                            </constraints>
+                        </pickerView>
+                        <pickerView tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4k-GU-KFY" userLabel="Minute Picker View">
+                            <rect key="frame" x="543" y="0.0" width="55" height="55"/>
+                            <accessibility key="accessibilityConfiguration" identifier="minutePicker"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="55" id="H15-Y0-Lcq"/>
+                            </constraints>
+                        </pickerView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="3" translatesAutoresizingMaskIntoConstraints="NO" id="c79-qs-WTi" userLabel="MM:SS colon" customClass="ThemeColumnHeaderUILabel" customModule="FIT" customModuleProvider="target">
+                            <rect key="frame" x="598" y="17.5" width="5" height="20.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="5" id="71I-z6-D7F"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <pickerView tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hFr-k4-gwD" userLabel="Second Picker View">
+                            <rect key="frame" x="603" y="0.0" width="55" height="55"/>
+                            <accessibility key="accessibilityConfiguration" identifier="secondPicker"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="55" id="Gmg-iJ-DJB"/>
+                            </constraints>
+                        </pickerView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="K6E-eU-aZZ"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="alE-Qw-6Ny" secondAttribute="bottom" id="3Rf-0w-gUU"/>
+                <constraint firstItem="alE-Qw-6Ny" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Wmv-h4-Gqu"/>
+                <constraint firstItem="alE-Qw-6Ny" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fId-dv-aTs"/>
+                <constraint firstAttribute="trailing" secondItem="alE-Qw-6Ny" secondAttribute="trailing" id="x3G-vP-hQV"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="hhMMColon" destination="lVV-Lr-swR" id="umJ-aU-w6J"/>
+                <outlet property="hourPicker" destination="ob9-r1-V07" id="7zh-7q-LHY"/>
+                <outlet property="largeMinutePicker" destination="E3c-5S-W3Q" id="4zE-QQ-cWm"/>
+                <outlet property="minutePicker" destination="c4k-GU-KFY" id="ScO-lH-6UF"/>
+                <outlet property="mmSSColon" destination="c79-qs-WTi" id="qJG-Sy-jN4"/>
+                <outlet property="secondPicker" destination="hFr-k4-gwD" id="WKo-cG-2Sa"/>
+                <outlet property="totalLabel" destination="sXH-sF-X5D" id="q1K-zg-8tS"/>
+            </connections>
+            <point key="canvasLocation" x="382.60869565217394" y="217.96875"/>
+        </view>
+    </objects>
+</document>

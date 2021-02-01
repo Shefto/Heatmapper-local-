@@ -1,0 +1,199 @@
+/* of */
+" of " = " of ";
+
+/* Localized raw value */
+"\(ActivityLevel.allCases[row].localizedDescription)" = "\(ActivityLevel.allCases[row].localizedDescription)";
+
+/* Localized raw value */
+"\(ActivityPattern.allCases[row].localizedDescription)" = "\(ActivityPattern.allCases[row].localizedDescription)";
+
+/* No comment provided by engineer. */
+"\(activityPhrase)" = "\(activityPhrase)";
+
+/* title */
+"\(activityType.rawValue)" = "\(activityType.rawValue)";
+
+/* \(activityTypeForDisplay) */
+"\(activityTypeForDisplay)" = "\(activityTypeForDisplay)";
+
+/* Localized version of starting phrase */
+"\(newIntervalPhrase)" = "\(newIntervalPhrase)";
+
+/* No comment provided by engineer. */
+"\(recordingPhrase)" = "\(recordingPhrase)";
+
+/* Activity (Work + Rest) */
+"Activity (Work + Rest)" = "Activity (Work + Rest)";
+
+/* Begin activity */
+"Begin activity" = "Begin activity";
+
+/* Cancel */
+"Cancel" = "Cancel";
+
+/* Cancelling workout */
+"Cancelling workout" = "Cancelling workout";
+
+"Cool down" = "Cool down";
+
+"cooldown" = "cooldown";
+
+"cooldown now" = "cooldown now";
+
+"Custom" = "Custom";
+
+/* No comment provided by engineer. */
+"Distance\n(ft)" = "Distance\n(ft)";
+
+/* No comment provided by engineer. */
+"Distance\n(m)" = "Distance\n(m)";
+
+/* No comment provided by engineer. */
+"Distance\n(yds)" = "Distance\n(yds)";
+
+/* No comment provided by engineer. */
+"Fartlek Interval Trainer" = "Fartlek Interval Trainer";
+
+/* No comment provided by engineer. */
+"Finishing workout" = "Finishing workout";
+
+/* No comment provided by engineer. */
+"Flat" = "Flat";
+
+/* flatSetsStr */
+"Flat Sets" = "Flat Sets";
+
+"Get ready to cooldown" = "Get ready to cooldown";
+
+"Get ready to rest" = "Get ready to rest";
+
+"Get ready to warmup" = "Get ready to warm up";
+
+"Get ready to work" = "Get ready to work";
+
+/* No comment provided by engineer. */
+"Hard" = "Hard";
+
+/* No comment provided by engineer. */
+"Harder" = "Harder";
+
+/* No comment provided by engineer. */
+"Hardest" = "Hardest";
+
+/* Let's go! */
+"Let's go!" = "Let's go!";
+
+/* No comment provided by engineer. */
+"Light" = "Light";
+
+/* No comment provided by engineer. */
+"Moderate" = "Moderate";
+
+/* Open Health app */
+"Open Health app" = "Open Health app";
+
+"Pace \n(km/h)" = "Pace \n(km/h)";
+
+/* No comment provided by engineer. */
+"Pace\n(km/h)" = "Pace\n(km/h)";
+
+/* No comment provided by engineer. */
+"Pace\n(mins/km)" = "Pace\n(mins/km)";
+
+/* No comment provided by engineer. */
+"Pace\n(mins/mi)" = "Pace\n(mins/mi)";
+
+/* No comment provided by engineer. */
+"Pace\n(mph)" = "Pace\n(mph)";
+
+/* Pausing workout */
+"Pausing workout" = "Pausing workout";
+
+/* No comment provided by engineer. */
+"Pyramid" = "Pyramid";
+
+"Pyramid Sets" = "Pyramid Sets";
+
+"Random" = "Random";
+
+"Recording Running interval" = "Recording Running interval";
+
+"Recording Stationary interval" = "Recording Stationary interval";
+
+"Recording Walking interval" = "Recording Walking interval";
+
+/* Reset */
+"Reset" = "Reset";
+
+/* Reset Intervals */
+"Reset Intervals" = "Reset Intervals";
+
+"rest" = "rest";
+
+/* Rest */
+"Rest" = "Rest";
+
+/* Rest (max) */
+"Rest (max)" = "Rest (max)";
+
+"rest now" = "rest now";
+
+/* Resuming workout */
+"Resuming workout" = "Resuming workout";
+
+"Routine" = "Routine";
+
+/* No comment provided by engineer. */
+"Screen lock enabled" = "Screen lock enabled";
+
+/* Set */
+"Set " = "Set ";
+
+"Settings" = "Settings";
+
+/* No comment provided by engineer. */
+"Starting workout now" = "Starting workout now";
+
+/* This will override any custom intervals you have created. Do you want to continue? */
+"This will override any custom intervals you have created. Do you want to continue?" = "This will override any custom intervals you have created. Do you want to continue?";
+
+"Warm up" = "Warm up";
+
+/* 
+  Localizable.strings (English)
+  FIT
+
+  Created by Richard English on 11/01/2021.
+  Copyright © 2021 Richard English. All rights reserved.
+*/
+"warmup" = "warmup";
+
+"warmup now" = "warmup now";
+
+"work" = "work";
+
+/* Work */
+"Work" = "Work";
+
+/* Work (max) */
+"Work (max)" = "Work (max)";
+
+"work now" = "work now";
+
+/* Workout complete. Well done */
+"Workout complete. Well done" = "Workout complete. Well done";
+
+/* No comment provided by engineer. */
+"Workout completed" = "Workout completed";
+
+/* No comment provided by engineer. */
+"Workout paused" = "Workout paused";
+
+/* No comment provided by engineer. */
+"Your workout has been saved successfully" = "Your workout has been saved successfully";
+
+/* Recording interval */
+"\(phrase)" = "";
+
+/* Set Intervals Activity */
+"Activity" = "";

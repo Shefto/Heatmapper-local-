@@ -1,0 +1,34 @@
+{
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : true,
+      "internalID" : "817E9715",
+      "localizations" : [
+        {
+          "description" : "Removes all in-app advertising",
+          "displayName" : "Remove Ads",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Removes all in-app advertising",
+          "displayName" : "Remove Ads",
+          "locale" : "en_GB"
+        }
+      ],
+      "productID" : "wimbledonappcompany.com.FIT.RemoveAds2",
+      "referenceName" : "RemoveAds",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 0
+  }
+}

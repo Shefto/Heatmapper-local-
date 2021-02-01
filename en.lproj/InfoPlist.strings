@@ -1,0 +1,17 @@
+/* 
+  InfoPlist.strings
+  FIT
+
+  Created by Richard English on 28/01/2021.
+  Copyright © 2021 Richard English. All rights reserved.
+*/
+
+NSLocationWhenInUseUsageDescription = "FiT needs your location to record workout routes";
+
+NSLocationAlwaysUsageDescription = "FiT needs your location to record workout routes when running in the background (e.g. with the screen off)";
+
+NSMotionUsageDescription = "FiT needs access to your motion to record intervals";
+
+NSHealthShareUsageDescription = "FiT needs access to read your Health data in order to calculate calories used";
+
+NSHealthUpdateUsageDescription = "FiT needs access to write to your Health data in order to save workouts";

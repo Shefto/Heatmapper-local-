@@ -1,0 +1,192 @@
+/* of */
+" of " = " o ";
+
+/* Localized raw value */
+"\(ActivityLevel.allCases[row].localizedDescription)" = "\(ActivityLevel.allCases[row].localizedDescription)";
+
+/* Localized raw value */
+"\(ActivityPattern.allCases[row].localizedDescription)" = "\(ActivityPattern.allCases[row].localizedDescription)";
+
+/* No comment provided by engineer. */
+"\(activityPhrase)" = "\(activityPhrase)";
+
+/* title */
+"\(activityType.rawValue)" = "\(activityType.rawValue)";
+
+/* \(activityTypeForDisplay) */
+"\(activityTypeForDisplay)" = "\(activityTypeForDisplay)";
+
+/* Localized version of starting phrase */
+"\(newIntervalPhrase)" = "\(newIntervalPhrase)";
+
+/* No comment provided by engineer. */
+"\(recordingPhrase)" = "\(recordingPhrase)";
+
+/* Set Intervals Activity */
+"Activity" = "Gweithgaredd";
+
+/* Activity (Work + Rest) */
+"Activity (Work + Rest)" = "Gweithgared (Gwaith + Gorffwys)";
+
+/* Begin activity */
+"Begin activity" = "Dechrayooch wethgareth";
+
+/* Cancel */
+"Cancel" = "Canslo";
+
+/* Cancelling workout */
+"Cancelling workout" = "Cansloc oomarfair corff";
+
+"Cool down" = "Oeri";
+
+"cooldown" = "oeri";
+
+"cooldown now" = "Oiree-ee lowr nowr";
+
+"Custom" = "Wedi'i addasu";
+
+/* No comment provided by engineer. */
+"Distance\n(ft)" = "Pellter\n(ft)";
+
+/* No comment provided by engineer. */
+"Distance\n(m)" = "Pellter\n(m)";
+
+/* No comment provided by engineer. */
+"Distance\n(yds)" = "Pellter\n(yds)";
+
+/* No comment provided by engineer. */
+"Fartlek Interval Trainer" = "Hyfforddwr Cyfnod Fartlek";
+
+/* No comment provided by engineer. */
+"Finishing workout" = "Gorffen oomarffair corff";
+
+/* No comment provided by engineer. */
+"Flat" = "Gwastad";
+
+/* flatSetsStr */
+"Flat Sets" = "Setiau gwastad";
+
+"Get ready to cooldown" = "paratoke ee oy-ree";
+
+"Get ready to rest" = "paratoke ee orrfoos";
+
+"Get ready to warmup" = "paratoke ee gunhazer";
+
+"Get ready to work" = "paratoke ee why-thee-oc";
+
+/* No comment provided by engineer. */
+"Hard" = "Caled";
+
+/* No comment provided by engineer. */
+"Harder" = "Anos";
+
+/* No comment provided by engineer. */
+"Hardest" = "Anodd";
+
+/* Let's go! */
+"Let's go!" = "Awn ni!";
+
+/* No comment provided by engineer. */
+"Light" = "Ysgafn";
+
+/* No comment provided by engineer. */
+"Moderate" = "Cymedrol";
+
+/* Open Health app */
+"Open Health app" = "Ap Iechyd Agored";
+
+"Pace \n(km/h)" = "Cyflymder \n(km/h)";
+
+/* No comment provided by engineer. */
+"Pace\n(km/h)" = "Cyflymder\n(km/h)";
+
+/* No comment provided by engineer. */
+"Pace\n(mins/km)" = "Cyflymder\n(mins/km)";
+
+/* No comment provided by engineer. */
+"Pace\n(mins/mi)" = "Cyflymder\n(mins/mi)";
+
+/* No comment provided by engineer. */
+"Pace\n(mph)" = "Cyflymder\n(mph)";
+
+/* Pausing workout */
+"Pausing workout" = "Umarfair sighb";
+
+/* No comment provided by engineer. */
+"Pyramid" = "Pyramid";
+
+"Pyramid Sets" = "Setiau Pyramid";
+
+"Random" = "Ar hap";
+
+"Recording Running interval" = "Coffnodee kerfnod raygeth";
+
+"Recording Stationary interval" = "Coffnodee Ehgul Clurfrfah";
+
+"Recording Walking interval" = "Cofnodi kerfnod kehdeth";
+
+/* Reset */
+"Reset" = "Ail gychwyn";
+
+/* Reset Intervals */
+"Reset Intervals" = "Ailosod Cyfnodau";
+
+"rest" = "orffwys";
+
+/* Rest */
+"Rest" = "Gorffwys";
+
+/* Rest (max) */
+"Rest (max)" = "Gorffwys (mwyafswm)";
+
+"rest now" = "Gorfiss nowr";
+
+/* Resuming workout */
+"Resuming workout" = "I'll dechrah oomarfair corff";
+
+"Routine" = "Arferol";
+
+/* No comment provided by engineer. */
+"Screen lock enabled" = "Clow skrin weddy-ay athlowggee";
+
+/* Set */
+"Set " = "Gosod ";
+
+"Settings" = "Gosodiadau";
+
+/* No comment provided by engineer. */
+"Starting workout now" = "Dekkrow oomarfair nowr";
+
+/* This will override any custom intervals you have created. Do you want to continue? */
+"This will override any custom intervals you have created. Do you want to continue?" = "Bydd hyn yn diystyru unrhyw gyfnodau arfer rydych chi wedi'u creu. Ydych chi am barhau?";
+
+"Warm up" = "Cynhesu";
+
+"warmup" = "cynhesu";
+
+"warmup now" = "Kunhazer nawr";
+
+"work" = "gweithio";
+
+/* Work */
+"Work" = "Gwaith";
+
+/* Work (max) */
+"Work (max)" = "Gwaith (max)";
+
+"work now" = "Gooitheeok nowr";
+
+/* Workout complete. Well done */
+"Workout complete. Well done" = "Gwethgareth weddy-ay gooble-ha. Dahyown";
+
+/* No comment provided by engineer. */
+"Workout completed" = "Gweithgaredd wedi'i gwblhau";
+
+/* No comment provided by engineer. */
+"Workout paused" = "Sighb Gwethgareth";
+
+/* No comment provided by engineer. */
+"Your workout has been saved successfully" = "Mae eich sesiwn ymarfer corff wedi'i arbed yn llwyddiannus";
+
+/* Recording interval */
+"\(phrase)" = "";

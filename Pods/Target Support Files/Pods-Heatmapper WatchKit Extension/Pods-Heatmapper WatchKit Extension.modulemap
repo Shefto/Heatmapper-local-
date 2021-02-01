@@ -1,0 +1,6 @@
+framework module Pods_Heatmapper_WatchKit_Extension {
+  umbrella header "Pods-Heatmapper WatchKit Extension-umbrella.h"
+
+  export *
+  module * { export * }
+}
