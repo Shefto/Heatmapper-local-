@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17701" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="m1S-hZ-N2T" pageOrientation="vertical">
+    <device id="watch38"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17500"/>
@@ -9,7 +10,7 @@
         <!--Main Menu-->
         <scene sceneID="GNg-dV-zub">
             <objects>
-                <controller identifier="Main Menu Interface Controller" title="Heatmapper" id="m1S-hZ-N2T" userLabel="Main Menu" customClass="MainMenuInterfaceController" customModule="FIT_WatchKit_Extension">
+                <controller identifier="Main Menu Interface Controller" title="Heatmapper" id="m1S-hZ-N2T" userLabel="Main Menu" customClass="MainMenuInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
                         <group width="1" height="1" alignment="left" spacing="4" id="dvx-SD-1ZT">
                             <items>
@@ -165,7 +166,7 @@
         <!--Set Intervals-->
         <scene sceneID="TJu-NP-VV5">
             <objects>
-                <controller identifier="Set Intervals Interface Controller" title="Repeat" spacing="1" id="sJy-Y5-1px" userLabel="Set Intervals" customClass="SetIntervalsInterfaceController" customModule="FIT_WatchKit_Extension">
+                <controller identifier="Set Intervals Interface Controller" title="Repeat" spacing="1" id="sJy-Y5-1px" userLabel="Set Intervals" customClass="SetIntervalsInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
                         <group width="1" height="0.14999999999999999" alignment="left" id="heh-dh-8yb" userLabel="Warmup Group">
                             <items>
@@ -334,7 +335,7 @@
         <!--Duration Picker-->
         <scene sceneID="MDa-eY-b5i">
             <objects>
-                <controller identifier="DurationPickerInterfaceController" animationDuration="2" id="eDF-Mg-lqo" userLabel="Duration Picker" customClass="DurationPickerInterfaceController" customModule="FIT_WatchKit_Extension">
+                <controller identifier="DurationPickerInterfaceController" animationDuration="2" id="eDF-Mg-lqo" userLabel="Duration Picker" customClass="DurationPickerInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
                         <group width="1" height="0.14999999999999999" alignment="left" hidden="YES" layout="vertical" radius="6" id="yGu-MV-JE5">
                             <items>
@@ -377,7 +378,7 @@
         <!--Custom Intervals-->
         <scene sceneID="gRf-xp-61d">
             <objects>
-                <controller identifier="Custom Intervals Interface Controller" title="Custom" id="Wvd-rM-pfF" userLabel="Custom Intervals" customClass="CustomIntervalsInterfaceController" customModule="FIT_WatchKit_Extension">
+                <controller identifier="Custom Intervals Interface Controller" title="Custom" id="Wvd-rM-pfF" userLabel="Custom Intervals" customClass="CustomIntervalsInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
                         <table alignment="left" id="4fg-QT-HS1" userLabel="Custom Interval Table">
                             <items>
@@ -425,7 +426,7 @@
         <!--Countdown Interface Controller-->
         <scene sceneID="dcI-Q6-YSa">
             <objects>
-                <controller identifier="Countdown Interface Controller" fullScreen="YES" id="GYi-kF-hRv" customClass="CountdownInterfaceController" customModule="FIT_WatchKit_Extension">
+                <controller identifier="Countdown Interface Controller" fullScreen="YES" id="GYi-kF-hRv" customClass="CountdownInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
                         <label alignment="center" verticalAlignment="center" text="0:00.0" textAlignment="center" id="N6n-mH-eyk" userLabel="Current Duration">
                             <color key="textColor" name="navBarTitle"/>
@@ -442,7 +443,7 @@
         <!--Actions-->
         <scene sceneID="fRU-Jn-0wP">
             <objects>
-                <controller identifier="ActionsInterfaceController" title="Actions" spacing="0.0" id="lNe-R1-skF" customClass="ActionsInterfaceController" customModule="FIT_WatchKit_Extension">
+                <controller identifier="ActionsInterfaceController" title="Actions" spacing="0.0" id="lNe-R1-skF" customClass="ActionsInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="i2s-F1-0BP">
                             <items>
@@ -510,7 +511,7 @@
         <!--Intervals-->
         <scene sceneID="pw0-Vm-sDg">
             <objects>
-                <controller identifier="IntervalsTableController" title="Intervals" contentMode="center" id="rVq-WF-y7O" customClass="IntervalsInterfaceController" customModule="FIT_WatchKit_Extension">
+                <controller identifier="IntervalsTableController" title="Intervals" contentMode="center" id="rVq-WF-y7O" customClass="IntervalsInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
                         <table alignment="center" id="ckk-wr-veb">
                             <items>
@@ -651,7 +652,7 @@
         <!--Workout-->
         <scene sceneID="snv-p0-L5R">
             <objects>
-                <controller identifier="WorkoutInterfaceController" title="Heatmapper" spacing="0.0" id="D9c-Tu-1WM" userLabel="Workout" customClass="WorkoutInterfaceController" customModule="FIT_WatchKit_Extension">
+                <controller identifier="WorkoutInterfaceController" title="Heatmapper" spacing="0.0" id="D9c-Tu-1WM" userLabel="Workout" customClass="WorkoutInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
                         <group width="1" height="1" alignment="center" verticalAlignment="center" spacing="0.0" id="rEe-oT-nag" userLabel="Full Screen Group">
                             <items>
