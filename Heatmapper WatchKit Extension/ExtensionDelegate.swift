@@ -1,6 +1,6 @@
 //
 //  ExtensionDelegate.swift
-//  FIT WatchKit Extension
+//  Heatmapper WatchKit Extension
 //
 //  Created by Richard English on 22/06/2020.
 //  Copyright © 2020 Richard English. All rights reserved.

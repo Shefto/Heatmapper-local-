@@ -1,6 +1,6 @@
 //
 //  CountdownInterfaceController.swift
-//  FIT WatchKit Extension
+//  Heatmapper WatchKit Extension
 //
 //  Created by Richard English on 17/11/2020.
 //  Copyright © 2020 Richard English. All rights reserved.
@@ -12,7 +12,7 @@ import os
 
 class CountdownInterfaceController: WKInterfaceController {
 
-  let logger = Logger(subsystem: "wimbledonappcompany.com.FIT.watchkitapp.watchkitextension", category: "CountdownInterfaceController")
+  let logger = Logger(subsystem: "wimbledonappcompany.com.Heatmapper.watchkitapp.watchkitextension", category: "CountdownInterfaceController")
   var countdownTimeLeft: TimeInterval = 3.1
   var countdownEndTime: Date?
   var countdownTimer = Timer()
@@ -76,7 +76,7 @@ class CountdownInterfaceController: WKInterfaceController {
 
       if roundedTimeAsIntby10 == roundedTimeby10asInt {
         if roundedTimeby10asInt > 0 {
-          audio.playSound(filename: "Heatmapper_second_beep", fileExtension: "aif")
+          audio.playSound(filename: "FIT_second_beep", fileExtension: "aif")
         } else {
 
           audio.playSound(filename: "FIT_minute_beep", fileExtension: "aif")

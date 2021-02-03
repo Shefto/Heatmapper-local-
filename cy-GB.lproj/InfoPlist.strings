@@ -1,17 +1,17 @@
 /*
  InfoPlist.strings
- FIT
+ Heatmapper
 
  Created by Richard English on 28/01/2021.
  Copyright © 2021 Richard English. All rights reserved.
  */
 
-NSLocationWhenInUseUsageDescription = "Mae angen eich lleoliad ar FiT i recordio llwybrau ymarfer corff";
+NSLocationWhenInUseUsageDescription = "Mae angen eich lleoliad ar Heatmapper i recordio llwybrau ymarfer corff";
 
-NSLocationAlwaysUsageDescription = "Mae angen eich lleoliad ar FiT i recordio llwybrau ymarfer wrth redeg yn y cefndir (e.e. gyda'r sgrin i ffwrdd)";
+NSLocationAlwaysUsageDescription = "Mae angen eich lleoliad ar Heatmapper i recordio llwybrau ymarfer wrth redeg yn y cefndir (e.e. gyda'r sgrin i ffwrdd)";
 
-NSMotionUsageDescription = "Mae FiT angen mynediad i'ch cynnig i gofnodi ysbeidiau";
+NSMotionUsageDescription = "Mae Heatmapper angen mynediad i'ch cynnig i gofnodi ysbeidiau";
 
-NSHealthShareUsageDescription = "Mae angen mynediad at FiT i ddarllen eich data Iechyd er mwyn cyfrifo'r calorïau a ddefnyddir";
+NSHealthShareUsageDescription = "Mae angen mynediad at Heatmapper i ddarllen eich data Iechyd er mwyn cyfrifo'r calorïau a ddefnyddir";
 
-NSHealthUpdateUsageDescription = "Mae angen mynediad at FiT i ysgrifennu at eich data Iechyd er mwyn arbed sesiynau gweithio";
+NSHealthUpdateUsageDescription = "Mae angen mynediad at Heatmapper i ysgrifennu at eich data Iechyd er mwyn arbed sesiynau gweithio";

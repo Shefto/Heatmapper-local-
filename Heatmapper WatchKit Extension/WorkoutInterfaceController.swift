@@ -1,6 +1,6 @@
 //
 //  WorkoutInterfaceController.swift
-//  FIT WatchKit Extension
+//  Heatmapper WatchKit Extension
 //
 //  Created by Richard English on 08/07/2020.
 //  Copyright © 2020 Richard English. All rights reserved.
@@ -216,7 +216,10 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     // check if pedometer data is available, if so start updates
     if CMPedometer.isPedometerEventTrackingAvailable() {
       pedometer.startEventUpdates(handler: { [weak self] (_, error) in
-        
+        // line purely to silence warning below
+        let selfSilencer = self
+        MyFunc.logMessage(.info, String(describing: selfSilencer))
+
         if error != nil {
           MyFunc.logMessage(.error, "Error in FartlekInterfaceController startEventUpdates: \(String(describing: error))")
           

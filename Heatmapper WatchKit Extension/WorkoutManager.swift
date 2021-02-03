@@ -1,6 +1,6 @@
 //
 //  WorkoutManager.swift
-//  FIT WatchKit Extension
+//  Heatmapper WatchKit Extension
 //
 //  Created by Richard English on 06/01/2021.
 //  Copyright © 2021 Richard English. All rights reserved.
@@ -112,9 +112,9 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
       switch statistics.quantityType {
       case HKQuantityType.quantityType(forIdentifier: .heartRate):
         /// - Tag: SetLabel
-        let heartRateUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
-        let value = statistics.mostRecentQuantity()?.doubleValue(for: heartRateUnit)
-        let roundedValue = Double( round( 1 * value! ) / 1 )
+//        let heartRateUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
+//        let value = statistics.mostRecentQuantity()?.doubleValue(for: heartRateUnit)
+//        let roundedValue = Double( round( 1 * value! ) / 1 )
         let label = self.delegate?.labelForQuantityType(statistics.quantityType)
         self.delegate?.updateLabel(label, withStatistics: statistics)
 
@@ -122,16 +122,16 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
 
 
       case HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned):
-        let energyUnit = HKUnit.kilocalorie()
-        let value = statistics.sumQuantity()?.doubleValue(for: energyUnit)
+//        let energyUnit = HKUnit.kilocalorie()
+//        let value = statistics.sumQuantity()?.doubleValue(for: energyUnit)
         let label = self.delegate?.labelForQuantityType(statistics.quantityType)
         self.delegate?.updateLabel(label, withStatistics: statistics)
 
         return
       case HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning):
-        let meterUnit = HKUnit.meter()
-        let value = statistics.sumQuantity()?.doubleValue(for: meterUnit)
-        let roundedValue = Double( round( 1 * value! ) / 1 )
+//        let meterUnit = HKUnit.meter()
+//        let value = statistics.sumQuantity()?.doubleValue(for: meterUnit)
+//        let roundedValue = Double( round( 1 * value! ) / 1 )
         let label = self.delegate?.labelForQuantityType(statistics.quantityType)
         self.delegate?.updateLabel(label, withStatistics: statistics)
 

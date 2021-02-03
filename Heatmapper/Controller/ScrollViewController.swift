@@ -1,6 +1,6 @@
 //
 //  ScrollViewController.swift
-//  FIT
+//  Heatmapper
 //
 //  Created by Richard English on 21/01/2021.
 //  Copyright © 2021 Richard English. All rights reserved.

@@ -1,17 +1,17 @@
 /*
  InfoPlist.strings
- FIT
+ Heatmapper
 
  Created by Richard English on 28/01/2021.
  Copyright © 2021 Richard English. All rights reserved.
  */
 
-NSLocationWhenInUseUsageDescription = "FiT necesita tu ubicación para registrar las rutas de ejercicio";
+NSLocationWhenInUseUsageDescription = "Heatmapper necesita tu ubicación para registrar las rutas de ejercicio";
 
-NSLocationAlwaysUsageDescription = "FiT necesita su ubicación para registrar las rutas de entrenamiento cuando se ejecuta en segundo plano (por ejemplo, con la pantalla apagada)";
+NSLocationAlwaysUsageDescription = "Heatmapper necesita su ubicación para registrar las rutas de entrenamiento cuando se ejecuta en segundo plano (por ejemplo, con la pantalla apagada)";
 
-NSMotionUsageDescription = "FiT necesita acceso a tu movimiento para grabar intervalos";
+NSMotionUsageDescription = "Heatmapper necesita acceso a tu movimiento para grabar intervalos";
 
-NSHealthShareUsageDescription = "FiT necesita acceso para escribir sus datos de salud con el fin de guardar entrenamientos";
+NSHealthShareUsageDescription = "Heatmapper necesita acceso para escribir sus datos de salud con el fin de guardar entrenamientos";
 
-NSHealthUpdateUsageDescription = "FiT needs access to write to your Health data in order to save workouts";
+NSHealthUpdateUsageDescription = "Heatmapper needs access to write to your Health data in order to save workouts";

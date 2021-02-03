@@ -1,6 +1,6 @@
 //
 //  SetIntervalsInterfaceController.swift
-//  FIT WatchKit Extension
+//  Heatmapper WatchKit Extension
 //
 //  Created by Richard English on 09/11/2020.
 //  Copyright © 2020 Richard English. All rights reserved.
@@ -12,7 +12,7 @@ import os
 
 class SetIntervalsInterfaceController: WKInterfaceController, SessionCommands {
 
-  let logger = Logger(subsystem: "wimbledonappcompany.com.FIT.watchkitapp.watchkitextension", category: "SetIntervalsInterfaceController")
+  let logger = Logger(subsystem: "wimbledonappcompany.com.Heatmapper.watchkitapp.watchkitextension", category: "SetIntervalsInterfaceController")
 
   let defaults            = UserDefaults.standard
   var setItems: [WKPickerItem] = []
@@ -222,7 +222,7 @@ class SetIntervalsInterfaceController: WKInterfaceController, SessionCommands {
 
       if roundedTimeAsIntby10 == roundedTimeby10asInt {
         if roundedTimeby10asInt > 0 {
-          audio.playSound(filename: "Heatmapper_second_beep", fileExtension: "aif")
+          audio.playSound(filename: "FIT_second_beep", fileExtension: "aif")
         } else {
 
           audio.playSound(filename: "FIT_minute_beep", fileExtension: "aif")

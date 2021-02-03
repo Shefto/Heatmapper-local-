@@ -1,6 +1,6 @@
 //
 //  MainMenuViewController.swift
-//  FIT
+//  Heatmapper
 //
 //  Created by Richard English on 09/09/2020.
 //  Copyright © 2020 Richard English. All rights reserved.

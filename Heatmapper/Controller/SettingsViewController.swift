@@ -1,6 +1,6 @@
 //
 //  SettingsViewController.swift
-//  FIT
+//  Heatmapper
 //
 //  Created by Richard English on 27/12/2020.
 //  Copyright © 2020 Richard English. All rights reserved.
@@ -12,7 +12,7 @@ import AudioToolbox
 
 class SettingsViewController: UIViewController, SessionCommands, SKPaymentTransactionObserver {
 
-  let productID = "wimbledonappcompany.com.FIT.RemoveAds2"
+  let productID = "wimbledonappcompany.com.Heatmapper.RemoveAds2"
   let defaults    = UserDefaults.standard
   let helpImage   = UIImage(systemName: "questionmark.circle")
   let theme     = ColourTheme()

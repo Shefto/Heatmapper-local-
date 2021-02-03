@@ -1,6 +1,6 @@
 //
 //  MainMenuInterfaceController.swift
-//  FIT WatchKit Extension
+//  Heatmapper WatchKit Extension
 //
 //  Created by Richard English on 05/10/2020.
 //  Copyright © 2020 Richard English. All rights reserved.
@@ -13,7 +13,7 @@ import CoreLocation
 
 class MainMenuInterfaceController: WKInterfaceController, CLLocationManagerDelegate {
 
-  let logger = Logger(subsystem: "wimbledonappcompany.com.FIT.watchkitapp.watchkitextension", category: "MainMenuInterfaceController")
+  let logger = Logger(subsystem: "wimbledonappcompany.com.Heatmapper.watchkitapp.watchkitextension", category: "MainMenuInterfaceController")
   var countdownTimeLeft: TimeInterval = 3.1
   var countdownEndTime: Date?
   var countdownTimer = Timer()
