@@ -1,47 +1,8 @@
-/* Class = "WKInterfaceLabel"; accessibilityLabel = "rest"; ObjectID = "0JT-tK-bsi"; */
-"0JT-tK-bsi.accessibilityLabel" = "Descanso";
-
-/* Class = "WKInterfaceLabel"; text = "0:30"; ObjectID = "0JT-tK-bsi"; */
-"0JT-tK-bsi.text" = "0:30";
-
-/* Class = "WKInterfaceLabel"; text = "00:00"; ObjectID = "1Pe-Az-h2a"; */
-"1Pe-Az-h2a.text" = "00:00";
-
-/* Class = "WKInterfaceLabel"; text = "0:00.0"; ObjectID = "1Pg-Kd-UQO"; */
-"1Pg-Kd-UQO.text" = "0:00.0";
-
-/* Class = "WKInterfaceLabel"; text = "0 mins 00 secs"; ObjectID = "2ys-V8-zCX"; */
-"2ys-V8-zCX.text" = "0 mins 00 secs";
-
-/* Class = "WKInterfaceButton"; title = "Start"; ObjectID = "3jz-vg-4Q9"; */
-"3jz-vg-4Q9.title" = "Comienza";
-
-/* Class = "WKInterfaceButton"; title = "Tabata"; ObjectID = "5P0-Al-jL4"; */
-"5P0-Al-jL4.title" = "Tabata";
-
-/* Class = "WKInterfaceLabel"; text = "Cool down"; ObjectID = "8u7-eM-R7d"; */
-"8u7-eM-R7d.text" = "Enfriamiento";
-
-/* Class = "WKInterfaceLabel"; text = "Work"; ObjectID = "18I-ch-QKq"; */
-"18I-ch-QKq.text" = "Trabajo";
-
-/* Class = "WKInterfaceLabel"; text = "Type"; ObjectID = "a4W-5l-2lu"; */
-"a4W-5l-2lu.text" = "Tipo";
-
 /* Class = "WKInterfaceLabel"; text = "0"; ObjectID = "AAh-6d-Zvu"; */
 "AAh-6d-Zvu.text" = "0";
 
-/* Class = "WKInterfaceButton"; title = "Save"; ObjectID = "Bws-O5-zRL"; */
-"Bws-O5-zRL.title" = "Guardar";
-
-/* Class = "WKInterfaceLabel"; text = "00.0"; ObjectID = "c0c-nA-63P"; */
-"c0c-nA-63P.text" = "00.0";
-
 /* Class = "WKInterfaceLabel"; text = "km/h"; ObjectID = "C8l-vd-Q5H"; */
 "C8l-vd-Q5H.text" = "km/h";
-
-/* Class = "WKInterfaceLabel"; text = "Rest"; ObjectID = "cmY-eK-L2g"; */
-"cmY-eK-L2g.text" = "Descanso";
 
 /* Class = "WKInterfaceLabel"; text = "Lock"; ObjectID = "d7e-a5-Ehw"; */
 "d7e-a5-Ehw.text" = "Cerra";
@@ -49,44 +10,11 @@
 /* Class = "WKInterfaceController"; title = "Heatmapper"; ObjectID = "D9c-Tu-1WM"; */
 "D9c-Tu-1WM.title" = "Heatmapper";
 
-/* Class = "WKInterfaceLabel"; text = "bpm"; ObjectID = "D20-r8-jzW"; */
-"D20-r8-jzW.text" = "bpm";
-
-/* Class = "WKInterfaceLabel"; text = "0:00"; ObjectID = "dAy-8f-BEa"; */
-"dAy-8f-BEa.text" = "0:00";
-
-/* Class = "WKInterfaceLabel"; text = "Sets"; ObjectID = "DOl-w7-zz3"; */
-"DOl-w7-zz3.text" = "Colecciones";
-
-/* Class = "WKInterfaceLabel"; accessibilityLabel = "cooldown"; ObjectID = "ec0-WF-cEi"; */
-"ec0-WF-cEi.accessibilityLabel" = "enfriamiento";
-
-/* Class = "WKInterfaceLabel"; text = "0:30"; ObjectID = "ec0-WF-cEi"; */
-"ec0-WF-cEi.text" = "0:30";
-
-/* Class = "WKInterfaceLabel"; text = "walk"; ObjectID = "fEH-1P-c5L"; */
-"fEH-1P-c5L.text" = "camina";
-
-/* Class = "WKInterfaceLabel"; text = "00:00"; ObjectID = "fHg-q7-5BN"; */
-"fHg-q7-5BN.text" = "00:00";
-
 /* Class = "WKInterfaceLabel"; text = "kcal"; ObjectID = "g88-lt-83u"; */
 "g88-lt-83u.text" = "kcal";
 
 /* Class = "WKInterfaceLabel"; text = "0"; ObjectID = "GW3-IV-ZxQ"; */
 "GW3-IV-ZxQ.text" = "0";
-
-/* Class = "WKInterfaceLabel"; text = "00:00"; ObjectID = "h7b-HU-9yy"; */
-"h7b-HU-9yy.text" = "00:00";
-
-/* Class = "WKInterfaceLabel"; text = "walk"; ObjectID = "hf1-gk-FGS"; */
-"hf1-gk-FGS.text" = "camina";
-
-/* Class = "WKInterfaceLabel"; accessibilityLabel = "work"; ObjectID = "Jbe-1u-0Se"; */
-"Jbe-1u-0Se.accessibilityLabel" = "obra";
-
-/* Class = "WKInterfaceLabel"; text = "0:30"; ObjectID = "Jbe-1u-0Se"; */
-"Jbe-1u-0Se.text" = "0:30";
 
 /* Class = "WKInterfaceLabel"; text = "End"; ObjectID = "jqC-QP-JrC"; */
 "jqC-QP-JrC.text" = "Fin";
@@ -96,9 +24,6 @@
 
 /* Class = "WKInterfaceButton"; title = "Main Menu"; ObjectID = "KxN-K1-Tzz"; */
 "KxN-K1-Tzz.title" = "Menú Principal";
-
-/* Class = "WKInterfaceLabel"; text = "Rest"; ObjectID = "lio-E2-FtD"; */
-"lio-E2-FtD.text" = "Descanso";
 
 /* Class = "WKInterfaceController"; title = "Actions"; ObjectID = "lNe-R1-skF"; */
 "lNe-R1-skF.title" = "Acciónes";
@@ -115,86 +40,23 @@
 /* Class = "WKInterfaceLabel"; text = "Resume"; ObjectID = "NJY-vw-2Lk"; */
 "NJY-vw-2Lk.text" = "Reanuda";
 
-/* Class = "WKInterfaceLabel"; accessibilityLabel = "warmup"; ObjectID = "NMB-WJ-wQ9"; */
-"NMB-WJ-wQ9.accessibilityLabel" = "warmup";
-
-/* Class = "WKInterfaceLabel"; text = "0:30"; ObjectID = "NMB-WJ-wQ9"; */
-"NMB-WJ-wQ9.text" = "0:30";
-
-/* Class = "WKInterfaceLabel"; text = "mi"; ObjectID = "q5A-jv-xjt"; */
-"q5A-jv-xjt.text" = "mph";
-
 /* Class = "WKInterfaceLabel"; text = "Pause"; ObjectID = "QlM-yx-hEq"; */
 "QlM-yx-hEq.text" = "Pausa";
-
-/* Class = "WKInterfaceLabel"; text = "kcal"; ObjectID = "QT6-3i-NjG"; */
-"QT6-3i-NjG.text" = "kcal";
-
-/* Class = "WKInterfaceButton"; title = "Start"; ObjectID = "RdO-jD-BQ2"; */
-"RdO-jD-BQ2.title" = "Comienza";
 
 /* Class = "WKInterfaceLabel"; text = "m"; ObjectID = "REh-2f-xL5"; */
 "REh-2f-xL5.text" = "m";
 
-/* Class = "WKInterfaceLabel"; text = "888"; ObjectID = "Rpl-wd-5Fp"; */
-"Rpl-wd-5Fp.text" = "888";
-
 /* Class = "WKInterfaceLabel"; text = "0:00.0"; ObjectID = "Rqb-y0-lxW"; */
 "Rqb-y0-lxW.text" = "0:00.0";
-
-/* Class = "WKInterfaceLabel"; text = "Difficulty"; ObjectID = "rTW-tS-ScG"; */
-"rTW-tS-ScG.text" = "Dificultad";
 
 /* Class = "WKInterfaceController"; title = "Intervals"; ObjectID = "rVq-WF-y7O"; */
 "rVq-WF-y7O.title" = "Intervalos";
 
-/* Class = "WKInterfaceController"; title = "Repeat"; ObjectID = "sJy-Y5-1px"; */
-"sJy-Y5-1px.title" = "Repetir";
-
-/* Class = "WKInterfaceLabel"; text = "0"; ObjectID = "UcR-4t-GBA"; */
-"UcR-4t-GBA.text" = "0";
-
-/* Class = "WKInterfaceController"; title = "Custom"; ObjectID = "Wvd-rM-pfF"; */
-"Wvd-rM-pfF.title" = "Personalizada";
-
-/* Class = "WKInterfaceLabel"; text = "00:00"; ObjectID = "xJT-FH-pa1"; */
-"xJT-FH-pa1.text" = "00:00";
-
 /* Class = "WKInterfaceLabel"; text = "0"; ObjectID = "yDY-jz-bfN"; */
 "yDY-jz-bfN.text" = "0";
 
-/* Class = "WKInterfaceLabel"; text = "km/h"; ObjectID = "z85-BF-Vyi"; */
-"z85-BF-Vyi.text" = "km/h";
-
-/* Class = "WKInterfaceLabel"; text = "Warm up"; ObjectID = "ZB6-k3-yAg"; */
-"ZB6-k3-yAg.text" = "Calentamiento";
-
-/* Class = "WKInterfaceLabel"; text = "0"; ObjectID = "ZJT-Ed-LJM"; */
-"ZJT-Ed-LJM.text" = "0";
-
-/* Class = "WKInterfaceLabel"; text = "1"; ObjectID = "pqp-Eh-O1g"; */
-"pqp-Eh-O1g.text" = "";
-
-/* Class = "WKInterfaceLabel"; text = "of"; ObjectID = "3d6-rh-uen"; */
-"3d6-rh-uen.text" = "de";
-
-/* Class = "WKInterfaceLabel"; text = "3"; ObjectID = "aMt-79-k9c"; */
-"aMt-79-k9c.text" = "";
-
-/* Class = "WKInterfaceLabel"; text = "Set"; ObjectID = "pFi-ky-Lv2"; */
-"pFi-ky-Lv2.text" = "Intervalo";
-
-/* Class = "WKInterfaceLabel"; text = "Pyramids"; ObjectID = "Mwf-v2-72z"; */
-"Mwf-v2-72z.text" = "Intervalos Pirámides";
-
-/* Class = "WKInterfaceLabel"; text = "Random"; ObjectID = "346-km-c9I"; */
+/* Class = "WKInterfaceLabel"; text = "Set Pitch Boundaries"; ObjectID = "346-km-c9I"; */
 "346-km-c9I.text" = "Aleatorio";
 
-/* Class = "WKInterfaceLabel"; text = "Auto Detect"; ObjectID = "BuH-w6-PIL"; */
+/* Class = "WKInterfaceLabel"; text = "Start Match"; ObjectID = "BuH-w6-PIL"; */
 "BuH-w6-PIL.text" = "Detección auto";
-
-/* Class = "WKInterfaceLabel"; text = "Custom"; ObjectID = "K2q-si-Rh0"; */
-"K2q-si-Rh0.text" = "Personalizada";
-
-/* Class = "WKInterfaceLabel"; text = "Flat Sets"; ObjectID = "e6O-sz-Ld8"; */
-"e6O-sz-Ld8.text" = "Intervalos iguales";

@@ -7,421 +7,170 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
     </dependencies>
     <scenes>
+        <!--Pitch-->
+        <scene sceneID="7Ia-xV-nQi">
+            <objects>
+                <controller id="G9W-oD-vbU" userLabel="Pitch">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="vertical" id="uiA-Io-pNY">
+                            <items>
+                                <group width="1" height="0.20000000000000001" alignment="left" id="gEZ-XE-vWu">
+                                    <items>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="WKw-Wa-zEi" customClass="PitchInterfaceController" customModule="Heatmapper_WatchKit_Extension">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="yzY-Jl-BUq">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="ZBs-4c-uKs">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="d5J-E7-Dw1">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="Bep-bP-dQR">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" height="0.20000000000000001" alignment="left" id="N5w-zY-k3A">
+                                    <items>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="VQb-3J-QCc">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="GpO-4Y-m65">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="P8v-W0-KaN">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="gG2-8r-wEi">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="Vpt-Y2-sYb">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" height="0.20000000000000001" alignment="left" id="kU6-r8-ege">
+                                    <items>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="uC5-pH-h6F">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="dN3-NU-ua6">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="lhd-yc-c12">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="jjz-l2-8IP">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="KfG-Vi-Ztu">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" height="0.20000000000000001" alignment="left" id="heR-a3-z4c">
+                                    <items>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="6Xu-42-gLS">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="9t5-Gw-UZM">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="PhL-tr-Kzb">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="7ox-kP-swy">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="crl-mH-WpI">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" height="0.20000000000000001" alignment="left" id="7K8-WE-fRy">
+                                    <items>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="CyP-rd-2wq">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="iHA-J8-j1z">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="cTN-wg-yXA">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="pyU-yS-cfy">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                        <button width="0.20000000000000001" height="1" alignment="left" id="K8x-Hf-Cli">
+                                            <color key="backgroundColor" name="background"/>
+                                        </button>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="353" y="-126"/>
+        </scene>
         <!--Main Menu-->
         <scene sceneID="GNg-dV-zub">
             <objects>
                 <controller identifier="Main Menu Interface Controller" title="Heatmapper" id="m1S-hZ-N2T" userLabel="Main Menu" customClass="MainMenuInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
-                        <group width="1" height="1" alignment="left" spacing="4" id="dvx-SD-1ZT">
+                        <group width="1" height="1" alignment="left" layout="vertical" id="yWS-e6-NHC">
                             <items>
-                                <group width="0.5" alignment="left" layout="vertical" id="GRT-Bn-Xz7">
-                                    <items>
-                                        <button alignment="center" verticalAlignment="bottom" id="hB8-FI-5kq" userLabel="Flat Button">
-                                            <group key="contentGroup" width="1" height="0.33000000000000002" alignment="left" id="WhG-nU-zcN">
-                                                <items>
-                                                    <label alignment="center" verticalAlignment="center" text="Flat Sets" textAlignment="center" numberOfLines="0" minimumScaleFactor="0.5" id="e6O-sz-Ld8">
-                                                        <variation key="device=watch38mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
-                                                        </variation>
-                                                        <variation key="device=watch40mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                        </variation>
-                                                        <variation key="device=watch42mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                        </variation>
-                                                    </label>
-                                                </items>
-                                                <color key="backgroundColor" name="buttonPrimary"/>
-                                            </group>
-                                            <connections>
-                                                <action selector="btnRepeat" destination="m1S-hZ-N2T" id="TGT-i5-5va"/>
-                                            </connections>
-                                        </button>
-                                        <button alignment="center" verticalAlignment="bottom" id="OPD-U6-M2B" userLabel="Pyramid Button">
-                                            <group key="contentGroup" width="1" height="0.33000000000000002" alignment="left" id="Guv-F5-kn7">
-                                                <items>
-                                                    <label alignment="center" verticalAlignment="center" text="Pyramids" textAlignment="center" numberOfLines="0" minimumScaleFactor="0.59999999999999998" id="Mwf-v2-72z">
-                                                        <variation key="device=watch38mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
-                                                        </variation>
-                                                        <variation key="device=watch40mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                        </variation>
-                                                        <variation key="device=watch42mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                        </variation>
-                                                    </label>
-                                                </items>
-                                                <color key="backgroundColor" name="buttonPrimary"/>
-                                            </group>
-                                            <connections>
-                                                <action selector="btnPyramid" destination="m1S-hZ-N2T" id="PlV-6y-UGA"/>
-                                            </connections>
-                                        </button>
-                                        <button width="1" height="0.33000000000000002" alignment="center" verticalAlignment="bottom" title="Tabata" id="5P0-Al-jL4" userLabel="Tabata Button">
-                                            <color key="titleColor" name="navBarTitle"/>
-                                            <color key="backgroundColor" name="navBar"/>
-                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
-                                            <variation key="device=watch38mm">
-                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
-                                            </variation>
-                                            <variation key="device=watch40mm">
-                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                            </variation>
-                                            <connections>
-                                                <action selector="btnTabata" destination="m1S-hZ-N2T" id="oTA-P1-hUX"/>
-                                            </connections>
-                                        </button>
-                                    </items>
-                                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
-                                </group>
-                                <group width="0.5" alignment="left" layout="vertical" id="yWS-e6-NHC">
-                                    <items>
-                                        <button alignment="center" verticalAlignment="bottom" id="YHw-9C-bua" userLabel="Custom Button">
-                                            <group key="contentGroup" width="1" height="0.33000000000000002" alignment="left" id="2P0-uG-zlL">
-                                                <items>
-                                                    <label alignment="center" verticalAlignment="center" text="Custom" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="K2q-si-Rh0">
-                                                        <variation key="device=watch38mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
-                                                        </variation>
-                                                        <variation key="device=watch40mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                        </variation>
-                                                        <variation key="device=watch42mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                        </variation>
-                                                    </label>
-                                                </items>
-                                                <color key="backgroundColor" name="buttonPrimary"/>
-                                            </group>
-                                            <connections>
-                                                <action selector="btnCustom" destination="m1S-hZ-N2T" id="HEw-Uj-tnR"/>
-                                            </connections>
-                                        </button>
-                                        <button alignment="center" verticalAlignment="bottom" id="4Y5-k3-HLi" userLabel="Random Button">
-                                            <group key="contentGroup" width="1" height="0.33000000000000002" alignment="left" id="u0c-2h-IfS">
-                                                <items>
-                                                    <label alignment="center" verticalAlignment="center" text="Random" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="346-km-c9I">
-                                                        <variation key="device=watch38mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
-                                                        </variation>
-                                                        <variation key="device=watch40mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                        </variation>
-                                                        <variation key="device=watch42mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                        </variation>
-                                                    </label>
-                                                </items>
-                                                <color key="backgroundColor" name="buttonPrimary"/>
-                                            </group>
-                                            <connections>
-                                                <action selector="btnRandom" destination="m1S-hZ-N2T" id="pqB-dx-e9C"/>
-                                            </connections>
-                                        </button>
-                                        <button alignment="center" verticalAlignment="bottom" id="Vxa-ST-xpC" userLabel="Auto Detect Button" customClass="MyWKInterfaceButton" customModule="FIT_WatchKit_Extension">
-                                            <group key="contentGroup" width="1" height="0.33000000000000002" alignment="left" id="oBa-yR-o15">
-                                                <items>
-                                                    <label width="1" alignment="center" verticalAlignment="center" text="Auto Detect" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.10000000000000001" id="BuH-w6-PIL">
-                                                        <variation key="device=watch38mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
-                                                        </variation>
-                                                        <variation key="device=watch40mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                        </variation>
-                                                        <variation key="device=watch42mm">
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                        </variation>
-                                                    </label>
-                                                </items>
-                                                <color key="backgroundColor" name="autoDetect"/>
-                                            </group>
-                                            <connections>
-                                                <action selector="btnAutomatic" destination="m1S-hZ-N2T" id="mmB-pJ-okO"/>
-                                            </connections>
-                                        </button>
-                                    </items>
-                                </group>
-                            </items>
-                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
-                        </group>
-                        <label alignment="center" verticalAlignment="center" hidden="YES" text="00:00" id="fHg-q7-5BN">
-                            <fontDescription key="font" style="UICTFontTextStyleTitle2"/>
-                        </label>
-                    </items>
-                    <connections>
-                        <outlet property="automaticButton" destination="Vxa-ST-xpC" id="MOe-EN-ZYW"/>
-                        <outlet property="countdownTimerLabel" destination="fHg-q7-5BN" id="K50-xF-tUc"/>
-                        <outlet property="customButton" destination="YHw-9C-bua" id="0jj-GN-QBR"/>
-                        <outlet property="flatSetsButtonLabel" destination="e6O-sz-Ld8" id="sc5-7n-oZU"/>
-                        <outlet property="pyramidButton" destination="OPD-U6-M2B" id="y9c-pJ-JHI"/>
-                        <outlet property="randomButton" destination="4Y5-k3-HLi" id="1WG-0I-899"/>
-                        <outlet property="repeatSetButton" destination="hB8-FI-5kq" id="FHQ-6N-bdO"/>
-                        <outlet property="tabataButton" destination="5P0-Al-jL4" id="thP-eA-5GP"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="-145.23456790123456" y="68.604060913705581"/>
-        </scene>
-        <!--Set Intervals-->
-        <scene sceneID="TJu-NP-VV5">
-            <objects>
-                <controller identifier="Set Intervals Interface Controller" title="Repeat" spacing="1" id="sJy-Y5-1px" userLabel="Set Intervals" customClass="SetIntervalsInterfaceController" customModule="Heatmapper_WatchKit_Extension">
-                    <items>
-                        <group width="1" height="0.14999999999999999" alignment="left" id="heh-dh-8yb" userLabel="Warmup Group">
-                            <items>
-                                <label width="0.69999999999999996" height="25" alignment="left" text="Warm up" textAlignment="left" minimumScaleFactor="0.75" id="ZB6-k3-yAg">
-                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                    <variation key="device=watch38mm">
-                                        <fontDescription key="font" type="system" pointSize="17"/>
-                                    </variation>
-                                </label>
-                                <label width="0.29999999999999999" height="25" alignment="left" accessibilityLabel="warmup" text="0:30" textAlignment="right" id="NMB-WJ-wQ9">
-                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                    <variation key="device=watch38mm">
-                                        <fontDescription key="font" type="system" pointSize="17"/>
-                                    </variation>
-                                </label>
-                            </items>
-                            <gestureRecognizers>
-                                <tapGestureRecognizer id="NQG-N1-aY5">
-                                    <connections>
-                                        <action selector="warmupGroupTap:" destination="sJy-Y5-1px" id="akD-rd-gwD"/>
-                                    </connections>
-                                </tapGestureRecognizer>
-                            </gestureRecognizers>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </group>
-                        <group width="1" height="0.14999999999999999" alignment="left" id="g0a-f1-fQ8" userLabel="Work Group">
-                            <items>
-                                <label width="0.69999999999999996" height="25" alignment="left" text="Work" textAlignment="left" minimumScaleFactor="0.75" id="18I-ch-QKq">
-                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                    <variation key="device=watch38mm">
-                                        <fontDescription key="font" type="system" pointSize="17"/>
-                                    </variation>
-                                </label>
-                                <label width="0.29999999999999999" height="25" alignment="left" accessibilityLabel="work" text="0:30" textAlignment="right" id="Jbe-1u-0Se">
-                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                    <variation key="device=watch38mm">
-                                        <fontDescription key="font" type="system" pointSize="17"/>
-                                    </variation>
-                                </label>
-                            </items>
-                            <gestureRecognizers>
-                                <tapGestureRecognizer id="h0s-91-gSK">
-                                    <connections>
-                                        <action selector="workGroupTap:" destination="sJy-Y5-1px" id="GsI-AD-AXs"/>
-                                    </connections>
-                                </tapGestureRecognizer>
-                            </gestureRecognizers>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </group>
-                        <group width="1" height="0.14999999999999999" alignment="left" id="jRj-PF-4bG" userLabel="Rest Group">
-                            <items>
-                                <label width="0.69999999999999996" height="25" alignment="left" text="Rest" textAlignment="left" minimumScaleFactor="0.75" id="cmY-eK-L2g">
-                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                    <variation key="device=watch38mm">
-                                        <fontDescription key="font" type="system" pointSize="17"/>
-                                    </variation>
-                                </label>
-                                <label width="0.29999999999999999" height="25" alignment="left" accessibilityLabel="rest" text="0:30" textAlignment="right" id="0JT-tK-bsi">
-                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                    <variation key="device=watch38mm">
-                                        <fontDescription key="font" type="system" pointSize="17"/>
-                                    </variation>
-                                </label>
-                            </items>
-                            <gestureRecognizers>
-                                <tapGestureRecognizer id="mSv-1A-bgN">
-                                    <connections>
-                                        <action selector="restGroupTap:" destination="sJy-Y5-1px" id="BWX-HA-oDN"/>
-                                    </connections>
-                                </tapGestureRecognizer>
-                            </gestureRecognizers>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </group>
-                        <group width="1" height="0.14999999999999999" alignment="left" spacing="0.0" id="GQz-Oq-dFJ" userLabel="Cooldown Group">
-                            <items>
-                                <label width="0.69999999999999996" height="25" alignment="left" text="Cool down" textAlignment="left" minimumScaleFactor="0.75" id="8u7-eM-R7d">
-                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                    <variation key="device=watch38mm">
-                                        <fontDescription key="font" type="system" pointSize="17"/>
-                                    </variation>
-                                </label>
-                                <label width="0.29999999999999999" height="25" alignment="left" accessibilityLabel="cooldown" text="0:30" textAlignment="right" id="ec0-WF-cEi">
-                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                    <variation key="device=watch38mm">
-                                        <fontDescription key="font" type="system" pointSize="17"/>
-                                    </variation>
-                                </label>
-                            </items>
-                            <gestureRecognizers>
-                                <tapGestureRecognizer id="j9z-sO-abZ">
-                                    <connections>
-                                        <action selector="cooldownGroupTap:" destination="sJy-Y5-1px" id="0KD-9k-b3S"/>
-                                    </connections>
-                                </tapGestureRecognizer>
-                            </gestureRecognizers>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </group>
-                        <group width="1" height="0.14999999999999999" alignment="left" id="QZM-BY-vAR" userLabel="Sets Group">
-                            <items>
-                                <label width="0.59999999999999998" height="25" alignment="left" text="Sets" textAlignment="left" minimumScaleFactor="0.75" id="DOl-w7-zz3">
-                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                    <variation key="device=watch38mm">
-                                        <fontDescription key="font" type="system" pointSize="17"/>
-                                    </variation>
-                                </label>
-                                <picker width="0.40000000000000002" height="1" alignment="right" focusStyle="stack" id="uI3-Ko-mQu">
-                                    <connections>
-                                        <action selector="setPicker:" destination="sJy-Y5-1px" id="tP0-Lr-aZ9"/>
-                                    </connections>
-                                </picker>
-                            </items>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </group>
-                        <group width="1" height="0.14999999999999999" alignment="left" id="FTV-qn-hf7" userLabel="Level Group">
-                            <items>
-                                <label width="0.59999999999999998" height="25" alignment="left" verticalAlignment="center" text="Difficulty" textAlignment="left" minimumScaleFactor="0.75" id="rTW-tS-ScG">
-                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                    <variation key="device=watch38mm">
-                                        <fontDescription key="font" type="system" pointSize="17"/>
-                                    </variation>
-                                </label>
-                                <picker width="0.40000000000000002" height="1" alignment="right" focusStyle="stack" id="f24-74-5E3" userLabel="Level Picker">
-                                    <accessibilityTraits key="accessibilityTraits" image="YES" updatesFrequently="YES" adjustable="YES"/>
-                                    <connections>
-                                        <action selector="levelPicker:" destination="sJy-Y5-1px" id="eaj-zL-3bN"/>
-                                    </connections>
-                                </picker>
-                            </items>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </group>
-                        <label height="0.050000000000000003" alignment="left" minimumScaleFactor="0.75" id="v75-cY-Maf" userLabel="Separator Label"/>
-                        <button width="1" height="0.14999999999999999" alignment="center" verticalAlignment="bottom" title="Start" id="RdO-jD-BQ2" userLabel="Start Button">
-                            <color key="titleColor" name="navBarTitle"/>
-                            <color key="backgroundColor" name="navBar"/>
-                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                            <connections>
-                                <action selector="btnStart" destination="sJy-Y5-1px" id="zpM-bw-cHa"/>
-                            </connections>
-                        </button>
-                        <label alignment="center" verticalAlignment="center" hidden="YES" text="00:00" id="1Pe-Az-h2a" userLabel="Countdown Timer Label">
-                            <fontDescription key="font" style="UICTFontTextStyleTitle2"/>
-                        </label>
-                    </items>
-                    <connections>
-                        <outlet property="cooldownGroup" destination="GQz-Oq-dFJ" id="aLM-ik-A4Q"/>
-                        <outlet property="cooldownLabel" destination="ec0-WF-cEi" id="UgS-xp-hsj"/>
-                        <outlet property="countdownTimerLabel" destination="1Pe-Az-h2a" id="dq3-ua-Uf2"/>
-                        <outlet property="levelGroup" destination="FTV-qn-hf7" id="hsX-Nl-Day"/>
-                        <outlet property="levelPickerOutlet" destination="f24-74-5E3" id="VAn-So-n2X"/>
-                        <outlet property="restGroup" destination="jRj-PF-4bG" id="YGO-Kt-3k9"/>
-                        <outlet property="restLabel" destination="0JT-tK-bsi" id="GLZ-CT-TDw"/>
-                        <outlet property="setPickerOutlet" destination="uI3-Ko-mQu" id="kIK-hl-MtA"/>
-                        <outlet property="setsGroup" destination="QZM-BY-vAR" id="cQe-VU-y0V"/>
-                        <outlet property="setsLabel" destination="DOl-w7-zz3" id="bOR-VZ-cut"/>
-                        <outlet property="startButton" destination="RdO-jD-BQ2" id="JSf-Gn-6TL"/>
-                        <outlet property="warmupGroup" destination="heh-dh-8yb" id="I6d-S3-HxV"/>
-                        <outlet property="warmupLabel" destination="NMB-WJ-wQ9" id="vLi-JA-5AB"/>
-                        <outlet property="work" destination="18I-ch-QKq" id="8vc-TT-IYs"/>
-                        <outlet property="workGroup" destination="g0a-f1-fQ8" id="76J-SD-p51"/>
-                        <outlet property="workLabel" destination="Jbe-1u-0Se" id="hXJ-sD-mcN"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="109.84615384615385" y="67.564102564102569"/>
-        </scene>
-        <!--Duration Picker-->
-        <scene sceneID="MDa-eY-b5i">
-            <objects>
-                <controller identifier="DurationPickerInterfaceController" animationDuration="2" id="eDF-Mg-lqo" userLabel="Duration Picker" customClass="DurationPickerInterfaceController" customModule="Heatmapper_WatchKit_Extension">
-                    <items>
-                        <group width="1" height="0.14999999999999999" alignment="left" hidden="YES" layout="vertical" radius="6" id="yGu-MV-JE5">
-                            <items>
-                                <label width="1" alignment="left" verticalAlignment="center" hidden="YES" text="Rest" textAlignment="center" id="lio-E2-FtD" userLabel="Duration Label"/>
-                                <label width="1" height="1" alignment="left" text="0 mins 00 secs" textAlignment="center" id="2ys-V8-zCX" userLabel="Duration Label"/>
-                            </items>
-                            <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </group>
-                        <group width="1" height="1" alignment="left" spacing="0.0" id="ScD-h4-3b1">
-                            <items>
-                                <picker width="0.5" height="1" alignment="left" focusStyle="sequence" id="jWy-WV-car">
-                                    <connections>
-                                        <action selector="minuteChanged:" destination="eDF-Mg-lqo" id="YJE-FD-Jxl"/>
-                                    </connections>
-                                </picker>
-                                <picker width="0.5" height="1" alignment="right" focusStyle="sequence" id="krh-EC-4fg">
-                                    <connections>
-                                        <action selector="secondChanged:" destination="eDF-Mg-lqo" id="QU3-4V-qUj"/>
-                                    </connections>
-                                </picker>
-                            </items>
-                        </group>
-                        <button width="1" height="0.20000000000000001" alignment="left" hidden="YES" title="Save" id="Bws-O5-zRL">
-                            <color key="backgroundColor" name="buttonPrimary"/>
-                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                            <connections>
-                                <action selector="saveButton" destination="eDF-Mg-lqo" id="aRP-1Q-qcP"/>
-                            </connections>
-                        </button>
-                    </items>
-                    <connections>
-                        <outlet property="durationLabel" destination="2ys-V8-zCX" id="Wg2-nQ-ctp"/>
-                        <outlet property="minutePicker" destination="jWy-WV-car" id="9qn-eL-JyE"/>
-                        <outlet property="secondPicker" destination="krh-EC-4fg" id="dlL-Kz-XfA"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="354" y="69"/>
-        </scene>
-        <!--Custom Intervals-->
-        <scene sceneID="gRf-xp-61d">
-            <objects>
-                <controller identifier="Custom Intervals Interface Controller" title="Custom" id="Wvd-rM-pfF" userLabel="Custom Intervals" customClass="CustomIntervalsInterfaceController" customModule="Heatmapper_WatchKit_Extension">
-                    <items>
-                        <table alignment="left" id="4fg-QT-HS1" userLabel="Custom Interval Table">
-                            <items>
-                                <tableRow identifier="CustomRowController" selectable="NO" id="l0h-B9-t2G" userLabel="CustomRowController" customClass="CustomRowController" customModule="FIT_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="30" alignment="left" spacing="0.0" id="Atf-yn-a2W">
+                                <button alignment="center" verticalAlignment="bottom" id="4Y5-k3-HLi" userLabel="Pitch Button">
+                                    <group key="contentGroup" width="1" height="0.5" alignment="left" id="u0c-2h-IfS">
                                         <items>
-                                            <label height="21" alignment="left" verticalAlignment="center" text="Type" textAlignment="left" id="a4W-5l-2lu"/>
-                                            <label alignment="right" verticalAlignment="center" text="0:00" textAlignment="left" id="dAy-8f-BEa"/>
+                                            <label alignment="center" verticalAlignment="center" text="Set Pitch Boundaries" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="346-km-c9I">
+                                                <variation key="device=watch38mm">
+                                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                                </variation>
+                                                <variation key="device=watch40mm">
+                                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                </variation>
+                                                <variation key="device=watch42mm">
+                                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                </variation>
+                                            </label>
                                         </items>
+                                        <color key="backgroundColor" name="buttonPrimary"/>
                                     </group>
                                     <connections>
-                                        <outlet property="durationLabel" destination="dAy-8f-BEa" id="kzE-Ai-bHC"/>
-                                        <outlet property="intervalTypeLabel" destination="a4W-5l-2lu" id="uNQ-uv-TAB"/>
+                                        <segue destination="G9W-oD-vbU" kind="push" id="doM-eC-WiQ"/>
                                     </connections>
-                                </tableRow>
-                            </items>
-                            <gestureRecognizers>
-                                <longPressGestureRecognizer id="XzT-6x-iGD">
+                                </button>
+                                <button alignment="center" verticalAlignment="bottom" id="Vxa-ST-xpC" userLabel="Start Button" customClass="MyWKInterfaceButton" customModule="FIT_WatchKit_Extension">
+                                    <group key="contentGroup" width="1" height="0.5" alignment="left" id="oBa-yR-o15">
+                                        <items>
+                                            <label width="1" alignment="center" verticalAlignment="center" text="Start Match" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.10000000000000001" id="BuH-w6-PIL">
+                                                <variation key="device=watch38mm">
+                                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                                </variation>
+                                                <variation key="device=watch40mm">
+                                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                </variation>
+                                                <variation key="device=watch42mm">
+                                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                </variation>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" name="autoDetect"/>
+                                    </group>
                                     <connections>
-                                        <action selector="tableLongPress:" destination="Wvd-rM-pfF" id="jPy-mN-boO"/>
+                                        <action selector="btnStart" destination="m1S-hZ-N2T" id="Uai-41-nJv"/>
                                     </connections>
-                                </longPressGestureRecognizer>
-                            </gestureRecognizers>
-                        </table>
-                        <button width="1" height="0.20000000000000001" alignment="center" verticalAlignment="bottom" title="Start" id="3jz-vg-4Q9" userLabel="Start Button">
-                            <color key="titleColor" name="navBarTitle"/>
-                            <color key="backgroundColor" name="navBar"/>
-                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                            <connections>
-                                <action selector="btnStart" destination="Wvd-rM-pfF" id="6cg-7W-aQJ"/>
-                            </connections>
-                        </button>
-                        <label alignment="center" verticalAlignment="center" hidden="YES" text="00:00" id="xJT-FH-pa1" userLabel="Countdown Timer Label">
-                            <fontDescription key="font" style="UICTFontTextStyleTitle2"/>
-                        </label>
+                                </button>
+                            </items>
+                        </group>
                     </items>
-                    <connections>
-                        <outlet property="customTable" destination="4fg-QT-HS1" id="AnI-J9-BgX"/>
-                        <outlet property="tableLongPress" destination="XzT-6x-iGD" id="8jk-2s-cJa"/>
-                    </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="539" y="-348"/>
+            <point key="canvasLocation" x="-146" y="30"/>
         </scene>
         <!--Countdown Interface Controller-->
         <scene sceneID="dcI-Q6-YSa">
@@ -438,7 +187,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="13" y="367"/>
+            <point key="canvasLocation" x="-93" y="587"/>
         </scene>
         <!--Actions-->
         <scene sceneID="fRU-Jn-0wP">
@@ -506,131 +255,13 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-220" y="-346"/>
+            <point key="canvasLocation" x="-411" y="-345"/>
         </scene>
         <!--Intervals-->
         <scene sceneID="pw0-Vm-sDg">
             <objects>
                 <controller identifier="IntervalsTableController" title="Intervals" contentMode="center" id="rVq-WF-y7O" customClass="IntervalsInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
-                        <table alignment="center" id="ckk-wr-veb">
-                            <items>
-                                <tableRow identifier="IntervalRowController" id="gB0-fX-abG" userLabel="IntervalRowController" customClass="IntervalRowController" customModule="FIT_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" spacing="0.0" id="fEz-XB-SUV">
-                                        <items>
-                                            <group width="1" height="0.33000000000000002" alignment="center" hidden="YES" spacing="0.0" id="W8D-5y-0TC" userLabel="Top Group">
-                                                <items>
-                                                    <group width="0.5" height="1" alignment="left" spacing="0.0" id="zSj-GE-qpd" userLabel="Heart Rate Group Group">
-                                                        <items>
-                                                            <imageView alignment="left" verticalAlignment="center" hidden="YES" image="heart.fill" catalog="system" contentMode="center" id="PdT-RM-mUo">
-                                                                <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </imageView>
-                                                            <label alignment="left" verticalAlignment="bottom" text="0" textAlignment="left" baselineAdjustment="alignCenters" id="ZJT-Ed-LJM" userLabel="Heart Rate">
-                                                                <color key="textColor" name="navBarTitle"/>
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                                <variation key="device=watch38mm">
-                                                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                                                </variation>
-                                                            </label>
-                                                            <label alignment="left" text="bpm" minimumScaleFactor="0.80000000000000004" id="D20-r8-jzW">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                                <variation key="device=watch38mm">
-                                                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                                                </variation>
-                                                            </label>
-                                                        </items>
-                                                    </group>
-                                                    <group width="0.5" alignment="right" verticalAlignment="bottom" spacing="0.0" id="Szs-X8-L53" userLabel="Calories Group">
-                                                        <items>
-                                                            <label alignment="right" verticalAlignment="bottom" text="0" textAlignment="left" baselineAdjustment="alignCenters" id="UcR-4t-GBA" userLabel="Active Energy">
-                                                                <color key="textColor" name="navBarTitle"/>
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                                <variation key="device=watch38mm">
-                                                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                                                </variation>
-                                                            </label>
-                                                            <label alignment="right" text="kcal" minimumScaleFactor="0.80000000000000004" id="QT6-3i-NjG">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                                <variation key="device=watch38mm">
-                                                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                                                </variation>
-                                                            </label>
-                                                            <imageView alignment="right" verticalAlignment="center" hidden="YES" image="flame.fill" catalog="system" contentMode="center" id="yUN-ZR-YxL">
-                                                                <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </imageView>
-                                                        </items>
-                                                    </group>
-                                                </items>
-                                            </group>
-                                            <group width="1" alignment="left" verticalAlignment="center" radius="6" spacing="0.0" id="4CZ-nL-cNu" userLabel="Middle Group">
-                                                <items>
-                                                    <label alignment="left" verticalAlignment="center" text="00:00" minimumScaleFactor="0.80000000000000004" id="h7b-HU-9yy" userLabel="Duration">
-                                                        <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                                    </label>
-                                                    <label alignment="right" verticalAlignment="center" text="walk" minimumScaleFactor="0.80000000000000004" id="hf1-gk-FGS" userLabel="Activity Type">
-                                                        <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                                    </label>
-                                                </items>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </group>
-                                            <group width="1" height="0.33000000000000002" alignment="center" verticalAlignment="bottom" spacing="0.0" id="AgY-Z1-yhe" userLabel="Bottom Group">
-                                                <items>
-                                                    <group width="0.5" alignment="right" spacing="0.0" id="URt-Dc-gBS" userLabel="Distance Group">
-                                                        <items>
-                                                            <label alignment="right" text="888" textAlignment="right" id="Rpl-wd-5Fp" userLabel="Distance">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                                <variation key="device=watch38mm">
-                                                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                                                </variation>
-                                                            </label>
-                                                            <label alignment="right" verticalAlignment="bottom" text="mi" minimumScaleFactor="0.80000000000000004" id="q5A-jv-xjt" userLabel="Distance Label">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                                <variation key="device=watch38mm">
-                                                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                                                </variation>
-                                                            </label>
-                                                            <imageView alignment="right" verticalAlignment="center" hidden="YES" image="map.fill" catalog="system" id="OOI-HY-x9Z">
-                                                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </imageView>
-                                                        </items>
-                                                    </group>
-                                                    <group width="0.5" height="1" alignment="left" verticalAlignment="bottom" spacing="0.0" id="I3d-D0-8Tz" userLabel="Pace Group">
-                                                        <items>
-                                                            <imageView alignment="left" verticalAlignment="center" hidden="YES" image="speedometer" catalog="system" id="IvO-2t-SJp"/>
-                                                            <label alignment="left" text="00.0" id="c0c-nA-63P" userLabel="Pace Label">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                                <variation key="device=watch38mm">
-                                                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                                                </variation>
-                                                            </label>
-                                                            <label alignment="left" verticalAlignment="bottom" text="km/h" minimumScaleFactor="0.80000000000000004" id="z85-BF-Vyi">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                                <variation key="device=watch38mm">
-                                                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                                                </variation>
-                                                            </label>
-                                                        </items>
-                                                    </group>
-                                                </items>
-                                            </group>
-                                        </items>
-                                        <color key="backgroundColor" name="buttonPrimary"/>
-                                    </group>
-                                    <connections>
-                                        <outlet property="activityTypeLabel" destination="hf1-gk-FGS" id="5hX-b7-g9A"/>
-                                        <outlet property="caloriesLabel" destination="UcR-4t-GBA" id="HBl-yW-pzT"/>
-                                        <outlet property="distanceLabel" destination="Rpl-wd-5Fp" id="Rn1-kr-AEi"/>
-                                        <outlet property="distanceUnits" destination="q5A-jv-xjt" id="wGR-jI-d24"/>
-                                        <outlet property="durationLabel" destination="h7b-HU-9yy" id="Nkl-BD-EBd"/>
-                                        <outlet property="group" destination="fEz-XB-SUV" id="fCn-rM-TYt"/>
-                                        <outlet property="heartRateLabel" destination="ZJT-Ed-LJM" id="SqH-C0-noe"/>
-                                        <outlet property="middleGroup" destination="4CZ-nL-cNu" id="OnS-Af-XKo"/>
-                                        <outlet property="paceLabel" destination="c0c-nA-63P" id="Ggy-7x-vCF"/>
-                                        <outlet property="paceUnits" destination="z85-BF-Vyi" id="r87-H9-Ueu"/>
-                                    </connections>
-                                </tableRow>
-                            </items>
-                        </table>
                         <button width="1" height="0.20000000000000001" alignment="center" verticalAlignment="bottom" title="Main Menu" id="KxN-K1-Tzz">
                             <color key="titleColor" name="navBarTitle"/>
                             <color key="backgroundColor" name="navBar"/>
@@ -642,12 +273,11 @@
                         </button>
                     </items>
                     <connections>
-                        <outlet property="intervalTable" destination="ckk-wr-veb" id="WK0-qH-M0p"/>
                         <outlet property="mainMenuButton" destination="KxN-K1-Tzz" id="37j-ZR-RK7"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="301" y="-348"/>
+            <point key="canvasLocation" x="-146" y="-345"/>
         </scene>
         <!--Workout-->
         <scene sceneID="snv-p0-L5R">
@@ -739,70 +369,6 @@
                                         </group>
                                         <group width="1" alignment="center" verticalAlignment="center" layout="vertical" radius="6" spacing="0.0" id="Y0W-Ml-Usi" userLabel="Middle Group">
                                             <items>
-                                                <group width="1" alignment="left" id="qtq-ps-TTu" userLabel="Set Label Group">
-                                                    <items>
-                                                        <label alignment="center" verticalAlignment="center" text="Set" textAlignment="center" baselineAdjustment="alignCenters" minimumScaleFactor="0.59999999999999998" id="pFi-ky-Lv2" userLabel="Set Label">
-                                                            <color key="textColor" name="navBarTitle"/>
-                                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                                            <variation key="device=watch38mm">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                            </variation>
-                                                            <variation key="device=watch40mm">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                            </variation>
-                                                        </label>
-                                                        <label alignment="center" verticalAlignment="center" text="1" textAlignment="center" baselineAdjustment="alignCenters" minimumScaleFactor="0.59999999999999998" id="pqp-Eh-O1g" userLabel="Current Set Label">
-                                                            <color key="textColor" name="navBarTitle"/>
-                                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                                            <variation key="device=watch38mm">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                            </variation>
-                                                            <variation key="device=watch40mm">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                            </variation>
-                                                        </label>
-                                                        <label alignment="center" verticalAlignment="center" text="of" textAlignment="center" baselineAdjustment="alignCenters" minimumScaleFactor="0.59999999999999998" id="3d6-rh-uen" userLabel="Of Label">
-                                                            <color key="textColor" name="navBarTitle"/>
-                                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                                            <variation key="device=watch38mm">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                            </variation>
-                                                            <variation key="device=watch40mm">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                            </variation>
-                                                        </label>
-                                                        <label alignment="center" verticalAlignment="center" text="3" textAlignment="center" baselineAdjustment="alignCenters" minimumScaleFactor="0.59999999999999998" id="aMt-79-k9c" userLabel="Total Sets Label">
-                                                            <color key="textColor" name="navBarTitle"/>
-                                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                                            <variation key="device=watch38mm">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                            </variation>
-                                                            <variation key="device=watch40mm">
-                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                            </variation>
-                                                        </label>
-                                                    </items>
-                                                </group>
-                                                <label alignment="center" verticalAlignment="center" text="walk" textAlignment="center" baselineAdjustment="alignCenters" minimumScaleFactor="0.59999999999999998" id="fEH-1P-c5L" userLabel="Activity Type">
-                                                    <color key="textColor" name="navBarTitle"/>
-                                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                                    <variation key="device=watch38mm">
-                                                        <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                    </variation>
-                                                    <variation key="device=watch40mm">
-                                                        <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                    </variation>
-                                                </label>
-                                                <label alignment="center" verticalAlignment="center" text="0:00.0" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="1Pg-Kd-UQO" userLabel="Current Duration">
-                                                    <color key="textColor" name="navBarTitle"/>
-                                                    <fontDescription key="font" type="system" pointSize="24"/>
-                                                    <variation key="device=watch38mm">
-                                                        <fontDescription key="font" type="system" pointSize="18"/>
-                                                    </variation>
-                                                    <variation key="device=watch40mm">
-                                                        <fontDescription key="font" type="system" pointSize="20"/>
-                                                    </variation>
-                                                </label>
                                                 <label alignment="center" verticalAlignment="center" text="0:00.0" baselineAdjustment="alignCenters" id="Rqb-y0-lxW" userLabel="Overall Duration">
                                                     <color key="textColor" name="navBarTint"/>
                                                     <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
@@ -822,22 +388,17 @@
                     </items>
                     <connections>
                         <outlet property="activeCaloriesLabel" destination="GW3-IV-ZxQ" id="RWv-OB-luX"/>
-                        <outlet property="activityTypeLabel" destination="fEH-1P-c5L" id="EEc-X1-vnY"/>
                         <outlet property="centreGroup" destination="Y0W-Ml-Usi" id="oSa-Sl-pT6"/>
                         <outlet property="currentDistance" destination="JsW-vp-zCs" id="PPg-e6-W91"/>
                         <outlet property="currentPace" destination="yDY-jz-bfN" id="1Mq-Td-rhl"/>
-                        <outlet property="currentSetLabel" destination="pqp-Eh-O1g" id="KfW-uj-cOb"/>
-                        <outlet property="currentStopwatch" destination="1Pg-Kd-UQO" id="vrp-7t-FLo"/>
                         <outlet property="distanceLabel" destination="REh-2f-xL5" id="Scr-IO-hnH"/>
                         <outlet property="heartRateLabel" destination="AAh-6d-Zvu" id="A8C-q4-Lqr"/>
                         <outlet property="paceLabel" destination="C8l-vd-Q5H" id="J8b-Yh-R0P"/>
-                        <outlet property="setLabelGroup" destination="qtq-ps-TTu" id="NSR-0k-tfQ"/>
-                        <outlet property="totalSetsLabel" destination="aMt-79-k9c" id="Cqu-ez-vwK"/>
                         <outlet property="workoutDurationLabel" destination="Rqb-y0-lxW" id="slN-5O-BO8"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="44" y="-346"/>
+            <point key="canvasLocation" x="113" y="-345"/>
         </scene>
     </scenes>
     <resources>
@@ -851,6 +412,9 @@
         <image name="stop.circle" catalog="system" width="128" height="121"/>
         <namedColor name="autoDetect">
             <color red="0.93333333333333335" green="0.43529411764705883" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="background">
+            <color red="0.96470588235294119" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="buttonPrimary">
             <color red="0.12549019607843137" green="0.6705882352941176" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -27,17 +27,17 @@ class CountdownInterfaceController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
 
-
-      guard let contextReceived = context as? String
-      else {
-        MyFunc.logMessage(.error, "Invalid context received by CountdownInterfaceController : \(String(describing: context))")
-        return
-      }
-
-      let activityTypeFromContext = MyFunc.getContext(contextReceived).activityType
-      let intervalTypeFromContext = MyFunc.getContext(contextReceived).intervalType
-      activityType = activityTypeFromContext
-      intervalType = intervalTypeFromContext
+//
+//      guard let contextReceived = context as? String
+//      else {
+//        MyFunc.logMessage(.error, "Invalid context received by CountdownInterfaceController : \(String(describing: context))")
+//        return
+//      }
+//
+//      let activityTypeFromContext = MyFunc.getContext(contextReceived).activityType
+//      let intervalTypeFromContext = MyFunc.getContext(contextReceived).intervalType
+//      activityType = activityTypeFromContext
+//      intervalType = intervalTypeFromContext
 
     }
 
@@ -76,7 +76,7 @@ class CountdownInterfaceController: WKInterfaceController {
 
       if roundedTimeAsIntby10 == roundedTimeby10asInt {
         if roundedTimeby10asInt > 0 {
-          audio.playSound(filename: "FIT_second_beep", fileExtension: "aif")
+          audio.playSound(filename: "FiT_second_beep", fileExtension: "aif")
         } else {
 
           audio.playSound(filename: "FIT_minute_beep", fileExtension: "aif")
@@ -100,14 +100,11 @@ class CountdownInterfaceController: WKInterfaceController {
     var screenArray   = [String]()
     var contextArray  = [Any]()
 
-    if activityType == .auto {
-      screenArray = ["ActionsInterfaceController", "WorkoutInterfaceController", "IntervalsTableController"]
-      contextArray = ["", activityType, ""]
-    } else {
+
       screenArray = ["ActionsInterfaceController", "WorkoutInterfaceController"]
       contextArray = ["", activityType]
-    }
-    // set up page-based navigation for main 3 screens but with initial focus on middle
+
+    // set up page-based navigation for 2 screens but with initial focus on second
     WKInterfaceController.reloadRootPageControllers(withNames:
                                                     screenArray,
                                                     contexts: contextArray,

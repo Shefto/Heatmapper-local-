@@ -13,11 +13,14 @@ import os
 class Audio {
 
   let synthesizer        = AVSpeechSynthesizer()
-  var audioPlayer: AVAudioPlayer!
+  var audioPlayer        = AVAudioPlayer()
   let logger              = Logger()
 
   func playSound(filename: String, fileExtension: String) {
+
+//    let soundURL = Bundle.main.path(forResource: filename, ofType: fileExtension)
     let soundURL = Bundle.main.url(forResource: filename, withExtension: fileExtension)
+    MyFunc.logMessage(.debug, "soundURL: \(String(describing: soundURL))")
     do {
       audioPlayer = try AVAudioPlayer(contentsOf: soundURL!)
       audioPlayer.prepareToPlay()
@@ -30,11 +33,11 @@ class Audio {
 
   func stopPlayer() {
 
-    guard let player = audioPlayer else {
-      logger.error("Audio: No audioPlayer exists")
-      return
-    }
-    player.stop()
+//    guard let player = audioPlayer else {
+//      logger.error("Audio: No audioPlayer exists")
+//      return
+//    }
+    audioPlayer.stop()
 
   }
 
@@ -45,7 +48,7 @@ class Audio {
     if languageCode == "en-GB" {
       utterance.rate = AVSpeechUtteranceMaximumSpeechRate * 0.55
     }
-    self.synthesizer.speak(utterance)
+   synthesizer.speak(utterance)
   }
 
   func stopSpeaking() {

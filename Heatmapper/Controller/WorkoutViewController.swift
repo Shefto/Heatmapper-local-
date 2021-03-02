@@ -375,7 +375,7 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
         workoutEventArray.append(workoutResumedEvent)
 
         fartlekTimer.start()
-        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(WorkoutViewController.updateFartlekTimeLabel(_:)), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(WorkoutViewController.updateWorkoutDurationLabel(_:)), userInfo: nil, repeats: true)
         runAutoWorkout()
       } else {
 
@@ -890,7 +890,7 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
                   // set the interval start date from the point motion changed
                   self.fartlekStartDate = motionChangedDate
                   self.fartlekTimer.start()
-                  Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(WorkoutViewController.updateFartlekTimeLabel(_:)), userInfo: nil, repeats: true)
+                  Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(WorkoutViewController.updateWorkoutDurationLabel(_:)), userInfo: nil, repeats: true)
                 } else {
                   MyFunc.logMessage(.debug, "motionChangedDate before WorkoutStartDate")
                   MyFunc.logMessage(.debug, "motionChangedDate: \(String(describing: motionChangedDate))")
@@ -919,7 +919,7 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
 
                 // restart the timer for the next Interval
                 self.fartlekTimer.start()
-                Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(WorkoutViewController.updateFartlekTimeLabel(_:)), userInfo: nil, repeats: true)
+                Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(WorkoutViewController.updateWorkoutDurationLabel(_:)), userInfo: nil, repeats: true)
 
               } // else (self.previousMotionType != ""...)
 
@@ -1008,14 +1008,14 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
 
   } // func addInterval
 
-  @objc func updateFartlekTimeLabel(_ timer: Timer) {
+  @objc func updateWorkoutDurationLabel(_ timer: Timer) {
     // this function updates the duration, distance and pace for the current Interval
     if fartlekTimer.isRunning {
       let currentElapsedTime = fartlekTimer.elapsedTime.toReadableString()
       fartlekTimerLabel.text = currentElapsedTime
 
       guard let startDate = fartlekStartDate else {
-        MyFunc.logMessage(.error, "updateFartlekTimeLabel : fartlekStartDate null")
+        MyFunc.logMessage(.error, "updateWorkoutDurationLabel : fartlekStartDate null")
         return
       }
       getIntervalFromDate(startDate: startDate)
@@ -1326,8 +1326,9 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
 
       if roundedTimeAsIntby10 == roundedTimeby10asInt {
         if roundedTimeby10asInt > 0 {
-          audio.playSound(filename: "Heatmapper_second_beep", fileExtension: "aif")
+          audio.playSound(filename: "FiT_second_beep", fileExtension: "aif")
         } else {
+
           audio.playSound(filename: "FIT_minute_beep", fileExtension: "aif")
         }
       }
@@ -1366,7 +1367,7 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
         case .auto:
           Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(WorkoutViewController.speakStartingWorkout(_:)), userInfo: nil, repeats: false)
 
-          intervalTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(WorkoutViewController.updateFartlekTimeLabel(_:)), userInfo: nil, repeats: true)
+          intervalTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(WorkoutViewController.updateWorkoutDurationLabel(_:)), userInfo: nil, repeats: true)
           runAutoWorkout()
 
         case .repeat, .tabata:

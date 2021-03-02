@@ -46,12 +46,12 @@ class IntervalsInterfaceController: WKInterfaceController {
 
   override func willActivate() {
     super.willActivate()
-    loadTable()
+//    loadTable()
   }
 
   func loadTable() {
 
-    let count = FartlekWorkout.intervalArray.count
+    let count = HeatmapperWorkout.intervalArray.count
     intervalTable.setNumberOfRows(count, withRowType: "IntervalRowController")
 
     for count in 0..<count {
@@ -59,7 +59,7 @@ class IntervalsInterfaceController: WKInterfaceController {
         as! IntervalRowController
 
       // format distance including metric / imperial conversion as required
-      let distance = FartlekWorkout.intervalArray[count].distance
+      let distance = HeatmapperWorkout.intervalArray[count].distance
       MyFunc.logMessage(.debug, "intervalArray distance: \(distance)")
       let distanceAsDouble = Double(truncating: distance)
       let distanceString = MyFunc.getUnitLengthAsString(value: distanceAsDouble, unitLength: unitLength, formatter: measurementFormatter)
@@ -67,7 +67,7 @@ class IntervalsInterfaceController: WKInterfaceController {
       MyFunc.logMessage(.debug, "distanceString: \(distanceString)")
       row.distanceUnits.setText(unitLength.symbol)
 
-      let pace = FartlekWorkout.intervalArray[count].pace
+      let pace = HeatmapperWorkout.intervalArray[count].pace
       MyFunc.logMessage(.debug, "intervalArray pace: \(pace) seconds per meter")
       let paceAsDouble = Double(truncating: pace)
       let paceString = MyFunc.getUnitSpeedAsString(value: paceAsDouble, unitSpeed: unitSpeed, formatter: measurementFormatter)
@@ -77,12 +77,12 @@ class IntervalsInterfaceController: WKInterfaceController {
 
       // set the unit labels for pace and distance
 
-      let duration = FartlekWorkout.intervalArray[count].duration?.duration
+      let duration = HeatmapperWorkout.intervalArray[count].duration?.duration
       // have to use extension on TimeInterval as DateComponentsFormatter does not support sub-second precision
       let durationStr = duration?.toReadableString()
       row.durationLabel.setText(durationStr)
 
-      switch FartlekWorkout.intervalArray[count].activity {
+      switch HeatmapperWorkout.intervalArray[count].activity {
       case "Walking":
         row.group.setBackgroundColor(.orange)
         row.activityTypeLabel.setText("walk")

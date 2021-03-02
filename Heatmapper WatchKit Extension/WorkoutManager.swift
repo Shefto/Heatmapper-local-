@@ -222,7 +222,7 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
         MyFunc.logMessage(.default, workoutStr)
 
         // save the Workout Route
-        self.routeBuilder.finishRoute(with: savedWorkout!, metadata: ["Activity Type": "Fartleks"]) {(workoutRoute, error) in
+        self.routeBuilder.finishRoute(with: savedWorkout!, metadata: ["Activity Type": "Heatmap"]) {(workoutRoute, error) in
           guard workoutRoute != nil else {
             MyFunc.logMessage(.error, "Failed to save Workout Route with error : \(String(describing: error))")
             return
@@ -235,15 +235,13 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
           MyFunc.logMessage(.default, "Saved Events: \(savedEventsStr)")
 
           // add each Sample Array to the Workout
-          self.addSamplesToWorkout(sampleArray: FartlekWorkout.sampleArray)
+          self.addSamplesToWorkout(sampleArray: HeatmapperWorkout.sampleArray)
 
         } // self.routeBuilder
 
         session.end()
     
       } // self.builder.finishWorkout
-
-      
 
     }) // self.builder.endCollection
 

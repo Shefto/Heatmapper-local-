@@ -10,6 +10,10 @@
 		15ED4E657B15BE7AEFBB57EB /* Pods_Heatmapper_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EAD462335AB8CC40517746 /* Pods_Heatmapper_WatchKit_Extension.framework */; };
 		2601503FDB427F5D40BD1185 /* Pods_Heatmapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2FD5C38F894191F54261F7 /* Pods_Heatmapper.framework */; };
 		3ABF5AF707DE45B41FF49619 /* Pods_Heatmapper_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D17A5498C39BC448F72B45 /* Pods_Heatmapper_WatchKit_App.framework */; };
+		7905990025ED876200316CEF /* FIT_minute_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 790598FE25ED876100316CEF /* FIT_minute_beep.aif */; };
+		7905990125ED876200316CEF /* FIT_minute_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 790598FE25ED876100316CEF /* FIT_minute_beep.aif */; };
+		7905990225ED876200316CEF /* FiT_second_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 790598FF25ED876200316CEF /* FiT_second_beep.aif */; };
+		7905990325ED876200316CEF /* FiT_second_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 790598FF25ED876200316CEF /* FiT_second_beep.aif */; };
 		7907E8C124E1468500F3DE0D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7907E8C024E1468500F3DE0D /* Extensions.swift */; };
 		791BD3C325A64E2600FD994A /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791BD3C225A64E2600FD994A /* WorkoutManager.swift */; };
 		79201489254343BD00212051 /* MyFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083BB25092EBB00274F79 /* MyFunc.swift */; };
@@ -31,10 +35,6 @@
 		793D1AF024B87F110039441B /* SessionTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AEE24B87F110039441B /* SessionTransfer.swift */; };
 		793D1AF224B87FAD0039441B /* FileTransferObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AF124B87FAD0039441B /* FileTransferObservers.swift */; };
 		793D1AF324B87FAD0039441B /* FileTransferObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AF124B87FAD0039441B /* FileTransferObservers.swift */; };
-		7940AB882535EBE900673035 /* FIT_minute_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7940AB862535EBE800673035 /* FIT_minute_beep.aif */; };
-		7940AB892535EBE900673035 /* FIT_minute_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7940AB862535EBE800673035 /* FIT_minute_beep.aif */; };
-		7940AB8A2535EBE900673035 /* FiT_second_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7940AB872535EBE900673035 /* FiT_second_beep.aif */; };
-		7940AB8B2535EBE900673035 /* FiT_second_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 7940AB872535EBE900673035 /* FiT_second_beep.aif */; };
 		7944476F255A9B3B004708E3 /* DurationPickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7944476E255A9B3B004708E3 /* DurationPickerInterfaceController.swift */; };
 		79445D4F25A3292D001D3AC6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79445D4E25A3292C001D3AC6 /* StoreKit.framework */; };
 		7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */; };
@@ -44,7 +44,7 @@
 		797BFD0525421E8700426185 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
 		797BFD0A2542B72800426185 /* MyFunc_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797BFD092542B72800426185 /* MyFunc_iOS.swift */; };
 		797E7C062575312500EAE473 /* IntervalTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */; };
-		7980929D252F386300DF1562 /* FartlekWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7980929C252F386300DF1562 /* FartlekWorkout.swift */; };
+		7980929D252F386300DF1562 /* HeatmapperWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7980929C252F386300DF1562 /* HeatmapperWorkout.swift */; };
 		7981D39C24BDD62500E5D9E7 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFF824A7F1AF002A7870 /* Interval.swift */; };
 		7989157225605679004983BD /* WorkoutInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7989157125605679004983BD /* WorkoutInterfaceController.swift */; };
 		7991886B24B618AE008F0EA5 /* IntervalRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7991886A24B618AE008F0EA5 /* IntervalRowController.swift */; };
@@ -54,6 +54,7 @@
 		799BBD5D24E2CEC50009AE2D /* IntervalsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799BBD5C24E2CEC50009AE2D /* IntervalsInterfaceController.swift */; };
 		799EDEF5252B5FCD00579896 /* MainMenu InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799EDEF4252B5FCD00579896 /* MainMenu InterfaceController.swift */; };
 		799EDEFD252B86AE00579896 /* ActionsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799EDEFC252B86AE00579896 /* ActionsInterfaceController.swift */; };
+		79A3517425D5BE97001840D5 /* PitchInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A3517325D5BE97001840D5 /* PitchInterfaceController.swift */; };
 		79A4EFAD24A0AF45002A7870 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFAC24A0AF45002A7870 /* AppDelegate.swift */; };
 		79A4EFB424A0AF45002A7870 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFB224A0AF45002A7870 /* Main.storyboard */; };
 		79A4EFB624A0AF4A002A7870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFB524A0AF4A002A7870 /* Assets.xcassets */; };
@@ -141,6 +142,8 @@
 		0AF35E1E8DF6D152A0C459BF /* Pods-Heatmapper WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit Extension/Pods-Heatmapper WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 		1B27E8565B1E89C7FA5F3513 /* Pods-Heatmapper WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit App.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit App/Pods-Heatmapper WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
 		20D17A5498C39BC448F72B45 /* Pods_Heatmapper_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		790598FE25ED876100316CEF /* FIT_minute_beep.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = FIT_minute_beep.aif; sourceTree = "<group>"; };
+		790598FF25ED876200316CEF /* FiT_second_beep.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = FiT_second_beep.aif; sourceTree = "<group>"; };
 		7907E8C024E1468500F3DE0D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		791BD3C225A64E2600FD994A /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
 		7935622725AF53C5006BBC54 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -153,8 +156,6 @@
 		793D1AE524B86E6F0039441B /* CustomLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogger.swift; sourceTree = "<group>"; };
 		793D1AEE24B87F110039441B /* SessionTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTransfer.swift; sourceTree = "<group>"; };
 		793D1AF124B87FAD0039441B /* FileTransferObservers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTransferObservers.swift; sourceTree = "<group>"; };
-		7940AB862535EBE800673035 /* FIT_minute_beep.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = FIT_minute_beep.aif; sourceTree = "<group>"; };
-		7940AB872535EBE900673035 /* FiT_second_beep.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = FiT_second_beep.aif; sourceTree = "<group>"; };
 		7944476E255A9B3B004708E3 /* DurationPickerInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerInterfaceController.swift; sourceTree = "<group>"; };
 		79445D4E25A3292C001D3AC6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
@@ -181,7 +182,7 @@
 		7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntervalTableViewFooter.swift; path = Heatmapper/View/IntervalTableViewFooter.swift; sourceTree = SOURCE_ROOT; };
 		797BFD092542B72800426185 /* MyFunc_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFunc_iOS.swift; sourceTree = "<group>"; };
 		797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTypeTableViewCell.swift; sourceTree = "<group>"; };
-		7980929C252F386300DF1562 /* FartlekWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FartlekWorkout.swift; sourceTree = "<group>"; };
+		7980929C252F386300DF1562 /* HeatmapperWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapperWorkout.swift; sourceTree = "<group>"; };
 		7989157125605679004983BD /* WorkoutInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInterfaceController.swift; sourceTree = "<group>"; };
 		7991886A24B618AE008F0EA5 /* IntervalRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalRowController.swift; sourceTree = "<group>"; };
 		7994126E255AB9230062AC0D /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
@@ -190,6 +191,7 @@
 		799BBD5C24E2CEC50009AE2D /* IntervalsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalsInterfaceController.swift; sourceTree = "<group>"; };
 		799EDEF4252B5FCD00579896 /* MainMenu InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenu InterfaceController.swift"; sourceTree = "<group>"; };
 		799EDEFC252B86AE00579896 /* ActionsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsInterfaceController.swift; sourceTree = "<group>"; };
+		79A3517325D5BE97001840D5 /* PitchInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchInterfaceController.swift; sourceTree = "<group>"; };
 		79A4EFA924A0AF45002A7870 /* Heatmapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heatmapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79A4EFAC24A0AF45002A7870 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79A4EFB324A0AF45002A7870 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -300,10 +302,10 @@
 		793D1ADE24B86BC90039441B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				790598FE25ED876100316CEF /* FIT_minute_beep.aif */,
+				790598FF25ED876200316CEF /* FiT_second_beep.aif */,
 				7935625025B0BBBC006BBC54 /* UnitConverterPace.swift */,
 				79D083BB25092EBB00274F79 /* MyFunc.swift */,
-				7940AB862535EBE800673035 /* FIT_minute_beep.aif */,
-				7940AB872535EBE900673035 /* FiT_second_beep.aif */,
 				793D1AD524B855540039441B /* CommandStatus.swift */,
 				793D1ADB24B868840039441B /* SessionCommands.swift */,
 				793D1AD324B854EB0039441B /* SessionDelegator.swift */,
@@ -422,9 +424,10 @@
 				7996ADF6256860A200C25196 /* CustomRowController.swift */,
 				799EDEF4252B5FCD00579896 /* MainMenu InterfaceController.swift */,
 				7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */,
-				7980929C252F386300DF1562 /* FartlekWorkout.swift */,
+				7980929C252F386300DF1562 /* HeatmapperWorkout.swift */,
 				799EDEFC252B86AE00579896 /* ActionsInterfaceController.swift */,
 				7996ADE825682D5D00C25196 /* CustomIntervalsInterfaceController.swift */,
+				79A3517325D5BE97001840D5 /* PitchInterfaceController.swift */,
 				799BBD5C24E2CEC50009AE2D /* IntervalsInterfaceController.swift */,
 				797026BF252DB4A500A86A05 /* Audio.swift */,
 				79BB8FEF2563DB4500019900 /* CountdownInterfaceController.swift */,
@@ -565,17 +568,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7905990025ED876200316CEF /* FIT_minute_beep.aif in Resources */,
 				79A4EFFC24A88E0E002A7870 /* fartlekCell.xib in Resources */,
+				7905990225ED876200316CEF /* FiT_second_beep.aif in Resources */,
 				79CA514B25C2DC9F00415F84 /* InfoPlist.strings in Resources */,
 				79A7E15825AD9F5000D1A952 /* IntervalTableViewFooter.xib in Resources */,
 				79A7E14C25ACE48000D1A952 /* Localizable.strings in Resources */,
 				79B274C12558055600752071 /* Colours 1.1.xcassets in Resources */,
 				79A4EFB924A0AF4A002A7870 /* LaunchScreen.storyboard in Resources */,
-				7940AB8A2535EBE900673035 /* FiT_second_beep.aif in Resources */,
 				79A4EFB624A0AF4A002A7870 /* Assets.xcassets in Resources */,
 				79A7E16225AD9F8200D1A952 /* IntervalTypeTableViewCell.xib in Resources */,
 				79F3480E25A3364100762724 /* Heatmapper.storekit in Resources */,
-				7940AB882535EBE900673035 /* FIT_minute_beep.aif in Resources */,
 				79A4EFB424A0AF45002A7870 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,10 +600,10 @@
 			files = (
 				79A7E14E25ACE48000D1A952 /* Localizable.strings in Resources */,
 				79CA515D25C2DF4E00415F84 /* InfoPlist.strings in Resources */,
-				7940AB892535EBE900673035 /* FIT_minute_beep.aif in Resources */,
+				7905990325ED876200316CEF /* FiT_second_beep.aif in Resources */,
 				79A4EFD624A0AF4C002A7870 /* Assets.xcassets in Resources */,
+				7905990125ED876200316CEF /* FIT_minute_beep.aif in Resources */,
 				79F3481025A3364100762724 /* Heatmapper.storekit in Resources */,
-				7940AB8B2535EBE900673035 /* FiT_second_beep.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,7 +762,7 @@
 				793D1AF024B87F110039441B /* SessionTransfer.swift in Sources */,
 				799BBD5D24E2CEC50009AE2D /* IntervalsInterfaceController.swift in Sources */,
 				7981D39C24BDD62500E5D9E7 /* Interval.swift in Sources */,
-				7980929D252F386300DF1562 /* FartlekWorkout.swift in Sources */,
+				7980929D252F386300DF1562 /* HeatmapperWorkout.swift in Sources */,
 				79C657792559A6B900E6DBCE /* SetIntervalsInterfaceController.swift in Sources */,
 				79DC8A7B253981C6006965D5 /* MyFunc.swift in Sources */,
 				799EDEF5252B5FCD00579896 /* MainMenu InterfaceController.swift in Sources */,
@@ -778,6 +781,7 @@
 				7996ADF7256860A200C25196 /* CustomRowController.swift in Sources */,
 				7907E8C124E1468500F3DE0D /* Extensions.swift in Sources */,
 				793D1AE724B86E6F0039441B /* CustomLogger.swift in Sources */,
+				79A3517425D5BE97001840D5 /* PitchInterfaceController.swift in Sources */,
 				793D1AD724B855540039441B /* CommandStatus.swift in Sources */,
 				79BB8FF02563DB4500019900 /* CountdownInterfaceController.swift in Sources */,
 			);

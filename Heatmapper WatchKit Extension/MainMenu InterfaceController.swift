@@ -22,62 +22,36 @@ class MainMenuInterfaceController: WKInterfaceController, CLLocationManagerDeleg
 
   // HealthKit variables
   private let healthStore                 = HKHealthStore()
-
   // Core Location variables
+
   let locationManager             = CLLocationManager()
 
-  @IBOutlet weak var flatSetsButtonLabel: WKInterfaceLabel!
-  @IBOutlet weak var automaticButton: MyWKInterfaceButton!
-  @IBOutlet weak var tabataButton: WKInterfaceButton!
-  @IBOutlet weak var customButton: WKInterfaceButton!
-  @IBOutlet weak var randomButton: WKInterfaceButton!
-  @IBOutlet weak var repeatSetButton: WKInterfaceButton!
-  @IBOutlet weak var countdownTimerLabel: WKInterfaceLabel!
-  @IBOutlet weak var pyramidButton: WKInterfaceButton!
 
   override func awake(withContext context: Any?) {
 
-
   }
 
-  @IBAction func btnPyramid() {
-    let contextToSend =  MyFunc.setContext(.pyramid, .none)
-    pushController(withName: "Set Intervals Interface Controller", context: contextToSend)
-  }
+  
+  @IBAction func btnStart() {
 
-  // IBActions
 
-  @IBAction func btnAutomatic() {
-    preventMultiplePresses()
+    pushController(withName: "Countdown Interface Controller", context: nil)
 
-    let contextToSend =  MyFunc.setContext(.auto, .none)
-    pushController(withName: "Countdown Interface Controller", context: contextToSend)
-  }
-
-  @IBAction func btnTabata() {
-    preventMultiplePresses()
-    let contextToSend =  MyFunc.setContext(.tabata, .none)
-    pushController(withName: "Set Intervals Interface Controller", context: contextToSend)
-  }
-
-  @IBAction func btnRandom() {
-    preventMultiplePresses()
-    let contextToSend =  MyFunc.setContext(.random, .none)
-    pushController(withName: "Set Intervals Interface Controller", context: contextToSend)
-  }
-
-  @IBAction func btnRepeat() {
-    preventMultiplePresses()
-    let contextToSend =  MyFunc.setContext(.repeat, .none)
-    pushController(withName: "Set Intervals Interface Controller", context: contextToSend)
-  }
-
-  @IBAction func btnCustom() {
-    preventMultiplePresses()
-    let contextToSend =  MyFunc.setContext(.custom, .none)
-    pushController(withName: "Custom Intervals Interface Controller", context: contextToSend)
+//    var screenArray   = [String]()
+//    var contextArray  = [Any]()
+//
+//    screenArray = ["ActionsInterfaceController", "WorkoutInterfaceController", "IntervalsTableController"]
+//    contextArray = ["", "", ""]
+//
+//    // set up page-based navigation for main 3 screens but with initial focus on middle
+//    WKInterfaceController.reloadRootPageControllers(withNames:
+//                                                      screenArray,
+//                                                    contexts: contextArray,
+//                                                    orientation: WKPageOrientation.horizontal,
+//                                                    pageIndex: 1)
 
   }
+//
 
   override func didAppear() {
 
@@ -88,7 +62,6 @@ class MainMenuInterfaceController: WKInterfaceController, CLLocationManagerDeleg
     locationManager.delegate = self
     locationManager.startUpdatingLocation()
 
-    automaticButton.setHidden(false)
   }
 
   func authorizeHealth() {
@@ -106,6 +79,7 @@ class MainMenuInterfaceController: WKInterfaceController, CLLocationManagerDeleg
       HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
       HKQuantityType.quantityType(forIdentifier: .heartRate)!
     ]
+
     // ask for authorization to read / write from Health Store
     healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead, completion: {(_, _) in })
 
@@ -148,6 +122,8 @@ class MainMenuInterfaceController: WKInterfaceController, CLLocationManagerDeleg
       self.buttonJustPressed = false
     }
   }
+
+
 
 
 }

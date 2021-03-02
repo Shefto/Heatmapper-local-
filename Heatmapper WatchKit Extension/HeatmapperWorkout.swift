@@ -9,7 +9,7 @@
 import Foundation
 import HealthKit
 
-class FartlekWorkout {
+class HeatmapperWorkout {
 
   static var intervalArray: [Interval] = {
     var array = [Interval]()
@@ -27,7 +27,7 @@ class FartlekWorkout {
       var durationTotal: Double = 0
 
       // to get the workout duration, get the full TimeInterval since the workout started
-      totalIntervalTime =  FartlekWorkout.intervalArray.map({$0.duration!.duration})
+      totalIntervalTime =  HeatmapperWorkout.intervalArray.map({$0.duration!.duration})
 
       // sum the total
       durationTotal = totalIntervalTime.reduce(0, {$0 + $1})
@@ -43,7 +43,6 @@ class FartlekWorkout {
   }()
 
   static var lastIntervalEndDate: Date =  {
-
     var intervalEndDate = Date()
     return intervalEndDate
   }()

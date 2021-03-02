@@ -21,17 +21,17 @@ protocol WorkoutManagerDelegate {
 
 class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCommands, CLLocationManagerDelegate, WorkoutManagerDelegate {
 
-  let audio         = Audio()
+  let audio                 = Audio()
   
   // WatchConnectivity variables
   private var command: Command!
   private let fileTransferObservers = FileTransferObservers()
   
   // Units default - these will be retrieved during initialisation
-  var units: String = ""
-  var unitLength: UnitLength = .meters
-  var unitSpeed: UnitSpeed  = .metersPerSecond
-  var measurementFormatter  = MeasurementFormatter()
+  var units                 : String      = ""
+  var unitLength            : UnitLength  = .meters
+  var unitSpeed             : UnitSpeed   = .metersPerSecond
+  var measurementFormatter                = MeasurementFormatter()
 
   var vibrateWatch : String = ""
 
@@ -39,84 +39,70 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   let workoutManager = WorkoutManager()
   var routeBuilder: HKWorkoutRouteBuilder!
   
-  // Interval variables
-  private var fartlekStartDate: Date?
-  private var fartlekEndDate: Date?
-  private var currentFartlekDistance: Double = 0.0
-  private var currentFartlekTime: TimeInterval = 0.0
-  
-  private var manualStartDate: Date?
-  private var manualEndDate: Date?
-  private var currentManualDistance: Double = 0.0
-  private var currentManualTime: TimeInterval = 0.0
-  
-  private var nextPedometerQueryStartDate: Date?
-  
+
   // timer variables
-  let fartlekTimer                = Stopwatch()
+  let workoutTimer                = Stopwatch()
   var isRunning                   = true
-  
   var intervalTimer               = Timer()
-  var manualIntervalTimeLeft: TimeInterval = 0.0
-  var manualIntervalEndTime: Date?
-  var intervalTemplateArray: [IntervalTemplate] = []
-  var intervalCount: Int = 0
-  var getNextInterval: Bool = false
-  
+
+//  var intervalTemplateArray : [IntervalTemplate] = []
+//  var intervalCount: Int = 0
+//  var getNextInterval: Bool = false
+
+  // Workout variables
   var workoutStartDate: Date?
   var workoutEndDate: Date?
-  var workoutDurationDateInterval: DateInterval?
-  var workoutEventArray: [HKWorkoutEvent] = []
-  
   var workoutPausedDate: Date?
-  var workoutTotalTime: Double = 0
+  var workoutDurationTimeInterval: TimeInterval = 0
+  var workoutEventArray: [HKWorkoutEvent] = []
+
+  // Interval variables
+  private var intervalStartDate : Date?
+  private var intervalEndDate : Date?
+  var intervalDurationDateInterval : DateInterval?
+  var intervalDurationTimeInterval : TimeInterval = 0
+
+
+
+//  var workoutTotalTime: Double = 0
   
-  var activityType                 = ActivityType()
+  //  var activityType                 = ActivityType()
   
   // Core Location variables
   let locationManager             = CLLocationManager()
   
   // Core Motion variables
-  var currentMotionType: String = ""
-  var previousMotionType: String = ""
-  var previousMotionTypeForUpdate: String = ""
-  var currentManualMotionType: String = ""
-  var previousManualMotionType: String = ""
-  var confidenceThreshold: Int = 1
-  var currentConfidence: Int = 0
-  var previousConfidence: Int = 0
+  //  var currentMotionType: String = ""
+  //  var previousMotionType: String = ""
+  //  var previousMotionTypeForUpdate: String = ""
+  //  var currentManualMotionType: String = ""
+  //  var previousManualMotionType: String = ""
+  //  var confidenceThreshold: Int = 1
+  //  var currentConfidence: Int = 0
+  //  var previousConfidence: Int = 0
   let pedometer                   = CMPedometer()
-  let motionActivityManager       = CMMotionActivityManager()
+//  let motionActivityManager       = CMMotionActivityManager()
 
-  var previousStationary: Bool = false
-  var previousWalking: Bool = false
-  var previousRunning: Bool = false
-  
+  //  var previousStationary: Bool = false
+  //  var previousWalking: Bool = false
+  //  var previousRunning: Bool = false
+  //
+
   // log variables
   var log: String = ""
   let fileDateFormatter           = DateFormatter()
   let numberFormatter             = NumberFormatter()
-  
-  @IBOutlet weak var runLabel: WKInterfaceButton!
-  @IBOutlet weak var walkLabel: WKInterfaceButton!
-  @IBOutlet weak var stationaryLabel: WKInterfaceButton!
-  
+
   @IBOutlet weak var distanceLabel: WKInterfaceLabel!
   @IBOutlet weak var paceLabel: WKInterfaceLabel!
   @IBOutlet weak var currentPace: WKInterfaceLabel!
   @IBOutlet weak var currentDistance: WKInterfaceLabel!
   
   @IBOutlet weak var workoutDurationLabel: WKInterfaceLabel!
-  @IBOutlet weak var currentStopwatch: WKInterfaceLabel!
   @IBOutlet weak var heartRateLabel: WKInterfaceLabel!
   @IBOutlet weak var activeCaloriesLabel: WKInterfaceLabel!
-  @IBOutlet weak var activityTypeLabel: WKInterfaceLabel!
+
   @IBOutlet weak var centreGroup: WKInterfaceGroup!
-  @IBOutlet weak var setLabelGroup: WKInterfaceGroup!
-
-  @IBOutlet weak var currentSetLabel: WKInterfaceLabel!
-  @IBOutlet weak var totalSetsLabel: WKInterfaceLabel!
-
 
   override init() {
     
@@ -143,7 +129,8 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
       unitLength = MyFunc.getDefaultsUnitLength()
     }
 
-     vibrateWatch = defaults.object(forKey: "Vibration") as? String ?? ""
+    vibrateWatch = defaults.object(forKey: "Vibration") as? String ?? ""
+
     // get the locale for displaying metrics in km or mi
     measurementFormatter.locale = locale
     measurementFormatter.unitOptions = .naturalScale
@@ -153,44 +140,27 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     measurementFormatter.numberFormatter.maximumFractionDigits = 2
     
     // ensure the timers are set to zero
-    fartlekTimer.stop()
+    workoutTimer.stop()
     
   }
   
   override func awake(withContext context: Any?) {
-    super.awake(withContext: context)
-    
-    guard let contextReceived = context as? ActivityType else {
-      MyFunc.logMessage(.error, "Invalid context received by WorkoutInterfaceController : \(String(describing: context))")
-      return
-    }
-    activityType = contextReceived
-    
-    if activityType == .auto {
-      activityTypeLabel.setHidden(true)
-      setLabelGroup.setHidden(true)
-      workoutDurationLabel.setHidden(false)
-    } else {
-      activityTypeLabel.setHidden(false)
-      setLabelGroup.setHidden(false)
-      workoutDurationLabel.setHidden(true)
-    }
-    let timerFont = UIFont.monospacedDigitSystemFont(ofSize: 36, weight: .regular)
-    let timerText = NSAttributedString(string: "00:00", attributes: [NSAttributedString.Key.font: timerFont])
-    currentStopwatch.setAttributedText(timerText)
+    super.awake(withContext: nil)
+
     let durationFont = UIFont.monospacedSystemFont(ofSize: 16, weight: .regular)
     let durationText = NSAttributedString(string: "0.0", attributes: [NSAttributedString.Key.font: durationFont])
     workoutDurationLabel.setAttributedText(durationText)
     
     addNotificationObservers()
-    
-    // start workout for all ActivityTypes
-    startWorkout()
-    
+
     // set VC as CLLocationManager delegate
     locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
     workoutManager.delegate = self
+
+    // start workout
+    startWorkout()
+    
   }
   
   override func willActivate() {
@@ -210,13 +180,15 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   }
   
   func startWorkout() {
-    
+
+    // start workout for Workout Manager
     workoutManager.startWorkout()
     
     // check if pedometer data is available, if so start updates
     if CMPedometer.isPedometerEventTrackingAvailable() {
       pedometer.startEventUpdates(handler: { [weak self] (_, error) in
-        // line purely to silence warning below
+        // line below purely to silence warning when weak self used
+        // weak self required to prevent strong relationship to pedometer object
         let selfSilencer = self
         MyFunc.logMessage(.info, String(describing: selfSilencer))
 
@@ -227,92 +199,24 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
         
       })
     }
-    
-    // set all variables ready for new Workout
-    FartlekWorkout.intervalArray.removeAll()
-    FartlekWorkout.startDate = Date()
-    FartlekWorkout.lastIntervalEndDate = Date()
-    
-    fartlekEndDate  = nil
-    previousMotionType = ""
-    previousMotionTypeForUpdate = ""
-    currentMotionType = ""
-    
-    workoutTotalTime = 0
-    getNextInterval = true
-    
+
+
+
     MyFunc.logMessage(.debug, "startWorkout : fartlekTimer.start()")
-    // fartlekTimer is for auto tracking only
-    fartlekTimer.start()
-    fartlekStartDate = Date()
-    workoutStartDate = fartlekStartDate
+    workoutTimer.start()
+
+    workoutStartDate = Date()
+    intervalStartDate = workoutStartDate
+    intervalEndDate  = nil
+
     // intervalTimer controls the displayed Time
-    
-    // start the workout for the respective activityType
-    switch activityType {
-    case .auto:
-      intervalTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(WorkoutInterfaceController.updateFartlekTimeLabel(_:)), userInfo: nil, repeats: true)
-      runAutoWorkout()
-      
-    case .repeat, .tabata:
-      // get the Repeat defaults
-      let activityTemplate = MyFunc.getActivityDefaults(activityType)
-      
-      // decompose ActivityTemplate into flattened array
-      intervalTemplateArray.removeAll()
-      intervalTemplateArray = MyFunc.createRepeatIntervalSet(activityTemplate)
+    intervalTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(WorkoutInterfaceController.updateWorkoutDurationLabel(_:)), userInfo: nil, repeats: true)
 
-      workoutStartDate = Date()
-      let totalSetsStr = String(intervalTemplateArray.count)
-      totalSetsLabel.setText(totalSetsStr)
-      runManualWorkout()
 
-    case .pyramid:
-      // get the Repeat defaults
-      let activityTemplate = MyFunc.getActivityDefaults(activityType)
-      
-      // decompose ActivityTemplate into flattened array
-      intervalTemplateArray.removeAll()
-      intervalTemplateArray = MyFunc.createCustomIntervalSet(activityTemplate)
-      
-      workoutStartDate = Date()
-      let totalSetsStr = String(intervalTemplateArray.count)
-      totalSetsLabel.setText(totalSetsStr)
-      runManualWorkout()
-
-    case .custom:
-      // get the Repeat defaults
-      let activityTemplate = MyFunc.getActivityDefaults(activityType)
-      
-      // decompose ActivityTemplate into flattened array
-      intervalTemplateArray.removeAll()
-      intervalTemplateArray = activityTemplate.intervals
-      
-      // set start time for workout and go
-      workoutStartDate = Date()
-      let totalSetsStr = String(intervalTemplateArray.count)
-      totalSetsLabel.setText(totalSetsStr)
-      runManualWorkout()
-      
-    case .random:
-      // get the Repeat defaults
-      let activityTemplate = MyFunc.getActivityDefaults(activityType)
-      
-      // decompose ActivityTemplate into flattened array
-      intervalTemplateArray.removeAll()
-      intervalTemplateArray = MyFunc.createRandomIntervalSet(activityTemplate)
-      
-      workoutStartDate = Date()
-      let totalSetsStr = String(intervalTemplateArray.count)
-      totalSetsLabel.setText(totalSetsStr)
-      runManualWorkout()
-      
-    default:
-      MyFunc.logMessage(.error, "Unknown activityType \(activityType) received")
-    }
-    
   } // func startWorkout
-  
+
+
+
   func addNotificationObservers() {
     
     // Actions observers
@@ -327,248 +231,119 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     NotificationCenter.default.addObserver(self, selector: #selector(type(of: self).dataDidFlow(_:)), name: .dataDidFlow, object: nil)
     
   }
-  
-  // main function for tracking running / walking / stationary activity
-  func runManualWorkout() {
+  //
+  //  // main function for tracking running / walking / stationary activity
+  //  func runManualWorkout() {
+  //
+  //
+  //    // next process each interval in turn
+  //    if getNextInterval == true {
+  //      getNextInterval = false
+  //
+  //      let intervalNumber = intervalCount + 1
+  //      let intervalNumberStr = String(intervalNumber)
+  //      currentSetLabel.setText(intervalNumberStr)
+  //      // set UI for current activity Type
+  //      activityTypeLabel.setText(intervalTemplateArray[intervalCount].intervalType.rawValue)
+  //      updateUIForIntervalType(intervalTemplateArray[intervalCount].intervalType)
+  //
+  //      let newIntervalPhrase = "\(intervalTemplateArray[intervalCount].intervalType) now"
+  //      let newIntervalPhraseLocalized = NSLocalizedString("\(newIntervalPhrase)", comment: "")
+  //      audio.speak(phrase: newIntervalPhraseLocalized)
+  //
+  //      if vibrateWatch == "On" {
+  //        let device = WKInterfaceDevice()
+  //        device.play(.retry)
+  //      }
+  //      intervalTimer = Timer()
+  //      manualIntervalTimeLeft = intervalTemplateArray[intervalCount].duration
+  //      manualIntervalEndTime = Date().addingTimeInterval(manualIntervalTimeLeft)
+  //      intervalTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateIntervalTime), userInfo: nil, repeats: true)
+  //
+  //    }
+  //
+  //  } // func runManualWorkout
+  //
+  //  func updateUIForIntervalType(_ intervalType: IntervalType ) {
+  //
+  //    var activityBackground = UIColor.clear
+  //    switch intervalType {
+  //    case .warmup, .cooldown:
+  //      activityBackground = .clear
+  //    case .work:
+  //      activityBackground = .red
+  //    case .rest:
+  //      activityBackground = .orange
+  //    default:
+  //      activityBackground = .clear
+  //    }
+  //
+  //    centreGroup.setBackgroundColor(activityBackground)
+  //  }
+  //
+  //  @objc func updateIntervalTime() {
+  //    if manualIntervalTimeLeft > 0 {
+  //
+  //      manualIntervalTimeLeft = manualIntervalEndTime?.timeIntervalSinceNow ?? 0
+  //
+  ////      currentStopwatch.setText(manualIntervalTimeLeft.time)
+  //
+  //      let timeby10 = manualIntervalTimeLeft * 10
+  //      let roundedTimeby10 = round(timeby10)
+  //      let roundedTimeby10asInt = Int(roundedTimeby10)
+  //
+  //      let roundedTimeLeft = round(manualIntervalTimeLeft)
+  //      let roundedTimeAsInt = Int(roundedTimeLeft)
+  //      // round by 10 as time is tracked in deciseconds and want to process logic at full seconds
+  //      let roundedTimeAsIntby10 = roundedTimeAsInt * 10
+  //
+  //      if roundedTimeAsIntby10 == roundedTimeby10asInt {
+  //
+  //        // 3 second warning that next interval is about to start
+  //        if roundedTimeby10asInt == 30 {
+  //          if intervalCount + 1 < intervalTemplateArray.count {
+  //            // get next Interval
+  //            let nextInterval = intervalTemplateArray[intervalCount+1].intervalType
+  //            let activityPhrase = "Get ready to \(nextInterval)"
+  //            let activityPhraseLocalized = NSLocalizedString("\(activityPhrase)", comment: "")
+  //            audio.speak(phrase: activityPhraseLocalized)
+  //          } else {
+  //            let workoutCompletePhraseLocalized = NSLocalizedString("Workout complete. Well done", comment: "Workout complete. Well done")
+  //            audio.speak(phrase: workoutCompletePhraseLocalized)
+  //          }
+  //          // check next Interval activity
+  //
+  //        }
+  //
+  //      }
+  //
+  //    } else {
+  //
+  //      // interval time has reached zero - reset stopwatch and increment interval count
+  ////      currentStopwatch.setText("00:00")
+  //      intervalTimer.invalidate()
+  //
+  //      intervalCount += 1
+  //      intervalEndDate = Date()
+  //      // add interval to FartlekWorkout array
+  //      addInterval(startDate: self.intervalStartDate!, endDate: self.intervalEndDate!,  finalInterval: false)
+  //      intervalStartDate = intervalEndDate
+  //
+  //      if intervalCount == intervalTemplateArray.count {
+  //        // if last interval reached, end the workout
+  //        endWorkout()
+  //      } else {
+  //        getNextInterval = true
+  //
+  ////        runManualWorkout()
+  //      }
+  //    }
+  //
+  //  }
 
-
-    // next process each interval in turn
-    if getNextInterval == true {
-      getNextInterval = false
-
-      let intervalNumber = intervalCount + 1
-      let intervalNumberStr = String(intervalNumber)
-      currentSetLabel.setText(intervalNumberStr)
-      // set UI for current activity Type
-      activityTypeLabel.setText(intervalTemplateArray[intervalCount].intervalType.rawValue)
-      updateUIForIntervalType(intervalTemplateArray[intervalCount].intervalType)
-      
-      let newIntervalPhrase = "\(intervalTemplateArray[intervalCount].intervalType) now"
-      let newIntervalPhraseLocalized = NSLocalizedString("\(newIntervalPhrase)", comment: "")
-      audio.speak(phrase: newIntervalPhraseLocalized)
-
-      if vibrateWatch == "On" {
-        let device = WKInterfaceDevice()
-        device.play(.retry)
-      }
-      intervalTimer = Timer()
-      manualIntervalTimeLeft = intervalTemplateArray[intervalCount].duration
-      manualIntervalEndTime = Date().addingTimeInterval(manualIntervalTimeLeft)
-      intervalTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateIntervalTime), userInfo: nil, repeats: true)
-      
-    }
-    
-  } // func runManualWorkout
-  
-  func updateUIForIntervalType(_ intervalType: IntervalType ) {
-    
-    var activityBackground = UIColor.clear
-    switch intervalType {
-    case .warmup, .cooldown:
-      activityBackground = .clear
-    case .work:
-      activityBackground = .red
-    case .rest:
-      activityBackground = .orange
-    default:
-      activityBackground = .clear
-    }
-    
-    centreGroup.setBackgroundColor(activityBackground)
-  }
-  
-  @objc func updateIntervalTime() {
-    if manualIntervalTimeLeft > 0 {
-      
-      manualIntervalTimeLeft = manualIntervalEndTime?.timeIntervalSinceNow ?? 0
-      
-      currentStopwatch.setText(manualIntervalTimeLeft.time)
-      
-      let timeby10 = manualIntervalTimeLeft * 10
-      let roundedTimeby10 = round(timeby10)
-      let roundedTimeby10asInt = Int(roundedTimeby10)
-      
-      let roundedTimeLeft = round(manualIntervalTimeLeft)
-      let roundedTimeAsInt = Int(roundedTimeLeft)
-      // round by 10 as time is tracked in deciseconds and want to process logic at full seconds
-      let roundedTimeAsIntby10 = roundedTimeAsInt * 10
-      
-      if roundedTimeAsIntby10 == roundedTimeby10asInt {
-        
-        // 3 second warning that next interval is about to start
-        if roundedTimeby10asInt == 30 {
-          if intervalCount + 1 < intervalTemplateArray.count {
-            // get next Interval
-            let nextInterval = intervalTemplateArray[intervalCount+1].intervalType
-            let activityPhrase = "Get ready to \(nextInterval)"
-            let activityPhraseLocalized = NSLocalizedString("\(activityPhrase)", comment: "")
-            audio.speak(phrase: activityPhraseLocalized)
-          } else {
-            let workoutCompletePhraseLocalized = NSLocalizedString("Workout complete. Well done", comment: "Workout complete. Well done")
-            audio.speak(phrase: workoutCompletePhraseLocalized)
-          }
-          // check next Interval activity
-          
-        }
-        
-      }
-      
-    } else {
-      
-      // interval time has reached zero - reset stopwatch and increment interval count
-      currentStopwatch.setText("00:00")
-      intervalTimer.invalidate()
-      
-      intervalCount += 1
-      fartlekEndDate = Date()
-      // add interval to FartlekWorkout array
-      addInterval(startDate: self.fartlekStartDate!, endDate: self.fartlekEndDate!, motionType: self.previousMotionType, finalInterval: false)
-      fartlekStartDate = fartlekEndDate
-
-      if intervalCount == intervalTemplateArray.count {
-        // if last interval reached, end the workout
-        endWorkout()
-      } else {
-        getNextInterval = true
-
-        runManualWorkout()
-      }
-    }
-    
-  }
-  
-  // main function for tracking running / walking / stationary activity
-  func runAutoWorkout() {
-    
-    if CMMotionActivityManager.isActivityAvailable() {
-      
-      motionActivityManager.startActivityUpdates(to: .main, withHandler: { [self](motion) in
-        
-        let motionStr = String(describing: motion)
-        MyFunc.logMessage(.debug, "motion: \(motionStr)")
-        
-        // Log CMMotionActivityManager changes
-        let motionChangedDate = motion?.startDate ?? nil
-        
-        if (motion?.stationary) == true {
-          if self.previousStationary == false {
-            MyFunc.logMessage(.debug, "Stationary changed to True on \(String(describing: motionChangedDate))")
-          }
-          self.previousStationary = true
-          
-        } else {
-          if self.previousStationary == true {
-            MyFunc.logMessage(.debug, "Stationary changed to False on \(String(describing: motionChangedDate))")
-          }
-          self.previousStationary = false
-          
-        }
-        
-        if (motion?.walking) == true {
-          if self.previousWalking == false {
-            MyFunc.logMessage(.debug, "Walking changed to True on \(String(describing: motionChangedDate))")
-          }
-          self.previousWalking = true
-          
-        } else {
-          if self.previousWalking == true {
-            MyFunc.logMessage(.debug, "Walking changed to False on \(String(describing: motionChangedDate))")
-          }
-          self.previousWalking = false
-          
-        }
-        
-        if (motion?.running) == true {
-          
-          if self.previousRunning == false {
-            MyFunc.logMessage(.debug, "Running changed to True on \(String(describing: motionChangedDate))")
-          }
-          self.previousRunning = true
-          
-        } else {
-          if self.previousRunning == true {
-            MyFunc.logMessage(.debug, "Running changed to False on \(String(describing: motionChangedDate))")
-          }
-          self.previousRunning = false
-          
-        }
-        
-        // Running overrides Walking which in turn overrides Stationary
-        // logic to handle transition between walking and running
-        if motion?.running == true {
-          self.currentMotionType = "Running"
-        } else {
-          if motion?.walking == true {
-            self.currentMotionType = "Walking"
-          } else {
-            self.currentMotionType = "Stationary"
-          }
-        }
-        
-        // if the Motion Type has changed, record a new interval
-        if self.currentMotionType != self.previousMotionType {
-          
-          if (motion?.confidence.rawValue)! >= self.confidenceThreshold {
-            
-            if self.previousMotionType == "" {
-              
-              // If there is no previousMotionType, capture the current motion as the first type of Interval.
-              // When the next motionType change is detected, or the workout is ended manually, the Interval will be recorded.
-              // Until a motionType change is detected, the Workout will not start
-              if motionChangedDate! > workoutStartDate! {
-                
-                self.fartlekStartDate = motionChangedDate
-                // set this as the start of the Workout also
-                workoutStartDate = motionChangedDate
-                
-                MyFunc.logMessage(.debug, "motionChangedDate after Workout Start Date")
-                MyFunc.logMessage(.debug, "motionChangedDate: \(String(describing: motionChangedDate))")
-                MyFunc.logMessage(.debug, "workoutStartDate: \(String(describing: workoutStartDate))")
-                
-                self.fartlekTimer.start()
-                intervalTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateFartlekTimeLabel(_:)), userInfo: nil, repeats: true)
-                MyFunc.logMessage(.debug, "runAutoWorkout : previousMotionType == ''")
-                
-              } else {
-                
-                MyFunc.logMessage(.debug, "motionChangedDate before WorkoutStartDate")
-                MyFunc.logMessage(.debug, "motionChangedDate: \(String(describing: motionChangedDate))")
-                MyFunc.logMessage(.debug, "workoutStartDate: \(String(describing: workoutStartDate))")
-              }
-              
-            } else {
-              // Previous Motion Type exists so record interval just completed
-              // write this to additional variable to avoid update of previousMotionType in any asynchronous thread
-              
-              let phrase = "Recording " + self.previousMotionType + " interval"
-              let phraseLocalized = NSLocalizedString("\(phrase)", comment: "Recording interval")
-              self.audio.speak(phrase: phraseLocalized)
-              
-              // KIV - variable is at class level in phone app
-              // check to see if this affects data returned
-              self.fartlekEndDate = motionChangedDate
-              
-              addInterval(startDate: self.fartlekStartDate!, endDate: self.fartlekEndDate!, motionType: self.previousMotionType, finalInterval: false)
-              //reset timer
-              fartlekTimer.stop()
-              fartlekTimer.start()
-              
-            } // else (self.previousMotionType != ""...)
-            
-            self.previousMotionType = self.currentMotionType
-            
-          } // if (motion?.confidence.rawValue)! >= self.confidenceThreshold
-          
-        } // if self.currentMotionType != self.previousMotionType {
-        
-      }) // motionActivityManager...
-      
-    } // if CMMotionActivityManager...
-    
-  } // func runAutoWorkout
   
   @objc func speakStartingWorkout(_ timer: Timer) {
-    if fartlekTimer.isRunning == true {
+    if workoutTimer.isRunning == true {
       let startPhraseLocalized = NSLocalizedString("Starting workout now", comment: "")
       audio.speak(phrase: startPhraseLocalized)
     }
@@ -581,42 +356,55 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
       self.becomeCurrentPage()
     }
     
-    fartlekTimer.stop()
+    workoutTimer.stop()
     intervalTimer.invalidate()
-    
-    
+
     // if moving from paused to stopped state, mark the workout as having finished from the last pause
     if workoutManager.session.state == .paused {
-      //    if session.state == .paused {
-      workoutEndDate = workoutPausedDate
+
+      intervalEndDate = workoutPausedDate
     } else {
-      workoutEndDate = Date()
+      intervalEndDate = Date()
     }
-    
+
+    workoutEndDate = intervalEndDate
+    if workoutTimer.isRunning {
+      workoutTimer.stop()
+      workoutPausedDate = Date()
+      intervalEndDate = workoutPausedDate
+      // calculate the total time for this interval
+      intervalDurationDateInterval = DateInterval(start: intervalStartDate!, end: intervalEndDate!)
+      intervalDurationTimeInterval = intervalDurationDateInterval!.duration
+
+      // add this to the overall workout duration
+      workoutDurationTimeInterval +=  intervalDurationTimeInterval
+    }
+
+
     // record the final interval and stop location and motion updates
-    addInterval(startDate: fartlekStartDate!, endDate: workoutEndDate!, motionType: self.previousMotionType, finalInterval: true)
+    addInterval(startDate: intervalStartDate!, endDate: workoutEndDate!, duration: workoutDurationTimeInterval, finalInterval: true)
     locationManager.stopUpdatingLocation()
-    motionActivityManager.stopActivityUpdates()
     pedometer.stopUpdates()
     locationManager.stopUpdatingHeading()
     
-    // removal of pauses should be an ongoing check
-    workoutDurationDateInterval = DateInterval(start: workoutStartDate!, end: workoutEndDate!)
+    // add code to include final Interval
+//    workoutDuration = DateInterval(start: workoutStartDate!, end: workoutEndDate!)
     
     // create Workout Events for each Interval
-    for fartlek in 0..<FartlekWorkout.intervalArray.count {
-      let fartlekInterval = FartlekWorkout.intervalArray[fartlek]
-      // note : Event metadata does not appear to be visible through Health app; adding for completeness
-      let fartlekEvent = HKWorkoutEvent(type: HKWorkoutEventType.segment, dateInterval: fartlekInterval.duration!, metadata: ["Type": fartlekInterval.activity])
-      workoutEventArray.append(fartlekEvent)
-    }
+    //    for fartlek in 0..<FartlekWorkout.intervalArray.count {
+    //      let fartlekInterval = FartlekWorkout.intervalArray[fartlek]
+    //      // note : Event metadata does not appear to be visible through Health app; adding for completeness
+    //      let fartlekEvent = HKWorkoutEvent(type: HKWorkoutEventType.segment, dateInterval: fartlekInterval.duration!, metadata: ["Type": fartlekInterval.activity])
+    //      workoutEventArray.append(fartlekEvent)
+    //    }
     
-    workoutManager.addWorkoutEvents(eventArray: workoutEventArray)
+    //    workoutManager.addWorkoutEvents(eventArray: workoutEventArray)
     
     self.exportLog()
     
     DispatchQueue.main.async {
       self.displayAlert(title: "Workout saved", message: "")
+
       WKInterfaceController.reloadRootPageControllers(withNames: ["IntervalsTableController"], contexts: ["workoutEnded"], orientation: WKPageOrientation.horizontal, pageIndex: 0)
       
     }
@@ -637,19 +425,19 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     let pausePhrase = NSLocalizedString("Workout paused", comment: "")
     audio.speak(phrase: pausePhrase)
     intervalTimer.invalidate()
-    
-    if activityType == .auto {
-      if fartlekTimer.isRunning {
-        fartlekTimer.stop()
-        
-        workoutPausedDate = Date()
-//        let workoutPausedDateInterval = DateInterval(start: workoutPausedDate!, end: workoutPausedDate!)
-//        let workoutPausedEvent = HKWorkoutEvent(type: .pause, dateInterval: workoutPausedDateInterval, metadata: ["Type": "Pause"])
-//        workoutEventArray.append(workoutPausedEvent)
-        
-      }
+
+    if workoutTimer.isRunning {
+      workoutTimer.stop()
+      workoutPausedDate = Date()
+      intervalEndDate = workoutPausedDate
+      // calculate the total time for this interval
+      intervalDurationDateInterval = DateInterval(start: intervalStartDate!, end: intervalEndDate!)
+      intervalDurationTimeInterval = intervalDurationDateInterval!.duration
+
+      // add this to the overall workout duration
+      workoutDurationTimeInterval +=  intervalDurationTimeInterval
     }
-    
+
   }
   
   @objc func resumeWorkout() {
@@ -663,24 +451,14 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     audio.speak(phrase: resumePhraseLocalized)
     
     workoutManager.resumeWorkout()
-    //    session.resume()
-    
-    if activityType == .auto {
-      let workoutResumedDate = Date()
-//      let workoutResumedDateInterval = DateInterval(start: workoutResumedDate, end: workoutResumedDate)
-//      let workoutResumedEvent = HKWorkoutEvent(type: .resume, dateInterval: workoutResumedDateInterval, metadata: ["Type": "Resume"])
-//      workoutEventArray.append(workoutResumedEvent)
-//
-      runAutoWorkout()
-      
-      self.fartlekStartDate = workoutResumedDate
-      fartlekTimer.startFromDate(date: self.fartlekStartDate!)
-      intervalTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateFartlekTimeLabel(_:)), userInfo: nil, repeats: true)
-    } else {
-      intervalTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateIntervalTime), userInfo: nil, repeats: true)
-      runManualWorkout()
-    }
-    
+
+    let workoutResumedDate = Date()
+    intervalStartDate = workoutResumedDate
+
+    workoutTimer.startFromDate(date: workoutResumedDate)
+
+    intervalTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateWorkoutDurationLabel(_:)), userInfo: nil, repeats: true)
+
   } // @objc func resumeWorkout
   
   @objc func lockScreen() {
@@ -720,9 +498,9 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   
   func displayAlert (title: String, message: String) {
     var nextController = "MainMenuInterfaceController"
-    if activityType == .auto {
-      nextController = "IntervalsTableController"
-    }
+    //    if activityType == .auto {
+    nextController = "IntervalsTableController"
+    //    }
     
     //Alert user that Save has worked
     let okAction = WKAlertAction(title: "OK", style: WKAlertActionStyle.default, handler: {
@@ -733,45 +511,41 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
       }
       
     })
-    MyFunc.logMessage(.default, "displayAlert called")
-    WKExtension.shared().visibleInterfaceController?.presentAlert(withTitle: title, message: message, preferredStyle: WKAlertControllerStyle.alert, actions: [okAction])
-    
+    MyFunc.logMessage(.debug, "displayAlert called")
     DispatchQueue.main.async {
+      WKExtension.shared().visibleInterfaceController?.presentAlert(withTitle: title, message: message, preferredStyle: WKAlertControllerStyle.alert, actions: [okAction])
+  
       self.pushController(withName: nextController, context: nil)
     }
   }
   
-  func addInterval(startDate: Date, endDate: Date, motionType: String, finalInterval: Bool) {
+  func addInterval(startDate: Date, endDate: Date!, duration: TimeInterval, finalInterval: Bool) {
     
-    var newFartlekInterval  = Interval()
-    let intervalStartDate   = startDate
-    let intervalEndDate     = endDate
-    let intervalMotionType  = motionType
+    var newInterval         = Interval()
+    //    let intervalMotionType  = motionType
     
-    if intervalStartDate < intervalEndDate {
-      newFartlekInterval.duration    = DateInterval(start: intervalStartDate, end: intervalEndDate)
-    } else {
-      MyFunc.logMessage(.error, "Error setting newFartlekInterval.duration: sd: \(String(describing: intervalStartDate)), ed: \(String(describing: intervalEndDate))")
-    }
+
+//      newInterval.duration    = DateInterval(start: startDate, end: endDate)
+    newInterval.duration  = DateInterval(start: startDate, duration: duration)
+
+    newInterval.startDate   = intervalStartDate
+    newInterval.endDate     = intervalEndDate
     
-    newFartlekInterval.activity    = intervalMotionType
-    newFartlekInterval.startDate   = intervalStartDate
-    newFartlekInterval.endDate     = intervalEndDate
-    
-    pedometer.queryPedometerData(from: intervalStartDate, to: intervalEndDate) {
+    pedometer.queryPedometerData(from: startDate, to: endDate) {
       
       (pedometerData: CMPedometerData!, error) -> Void in
       
       if error == nil {
         
-        newFartlekInterval.distance    = pedometerData.distance ?? 0
-        newFartlekInterval.pace        = pedometerData.averageActivePace ?? 0
-        newFartlekInterval.steps       = pedometerData.numberOfSteps
-        newFartlekInterval.cadence     = pedometerData.currentCadence ?? 0
+        newInterval.distance    = pedometerData.distance ?? 0
+        newInterval.pace        = pedometerData.averageActivePace ?? 0
+        newInterval.steps       = pedometerData.numberOfSteps
+        newInterval.cadence     = pedometerData.currentCadence ?? 0
         
-        FartlekWorkout.intervalArray.append(newFartlekInterval)
-        FartlekWorkout.lastIntervalEndDate = intervalEndDate
-        self.fartlekStartDate = intervalEndDate
+        HeatmapperWorkout.intervalArray.append(newInterval)
+        MyFunc.logMessage(.debug, "HeatmapperWorkout: \(String(describing: HeatmapperWorkout.self))")
+        HeatmapperWorkout.lastIntervalEndDate = self.intervalEndDate!
+        self.intervalStartDate = self.intervalEndDate
         
         // code below creates Samples : commented out while identifying interval tracking issues
         guard let distanceType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning),
@@ -783,45 +557,44 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
         // create Distance Sample
         let distanceDouble: Double = pedometerData.distance?.doubleValue ?? 0.0
         let distanceQuantity = HKQuantity(unit: HKUnit.meter(), doubleValue: distanceDouble)
-        let distanceSample = HKQuantitySample(type: distanceType, quantity: distanceQuantity, start: intervalStartDate, end: intervalEndDate, device: .local(), metadata: ["Activity Type": self.previousMotionTypeForUpdate])
-        FartlekWorkout.sampleArray.append(distanceSample)
+
+        let distanceSample = HKQuantitySample(type: distanceType, quantity: distanceQuantity, start: self.intervalStartDate!, end: self.intervalEndDate!, device: .local(), metadata: ["Activity Type": "N/A"])
+
+        HeatmapperWorkout.sampleArray.append(distanceSample)
         
         // create Active Energy Sample
-        let activeEnergySample = self.workoutManager.getSampleForType(startDate: intervalStartDate, endDate: intervalEndDate, quantityType: activeEnergyType, option: .cumulativeSum)
-        FartlekWorkout.sampleArray.append(activeEnergySample)
+        let activeEnergySample = self.workoutManager.getSampleForType(startDate: self.intervalStartDate!, endDate: self.intervalEndDate!, quantityType: activeEnergyType, option: .cumulativeSum)
+        HeatmapperWorkout.sampleArray.append(activeEnergySample)
         
         // create Basal Energy Sample
-        let basalEnergySample = self.workoutManager.getSampleForType(startDate: intervalStartDate, endDate: intervalEndDate, quantityType: basalEnergyType, option: .cumulativeSum)
-        FartlekWorkout.sampleArray.append(basalEnergySample)
+        let basalEnergySample = self.workoutManager.getSampleForType(startDate: self.intervalStartDate!, endDate: self.intervalEndDate!, quantityType: basalEnergyType, option: .cumulativeSum)
+        HeatmapperWorkout.sampleArray.append(basalEnergySample)
         
         // create Heart Rate Sample
-        let heartRateSample = self.workoutManager.getHeartRateSample(startDate: intervalStartDate, endDate: intervalEndDate, quantityType: heartRateType, option: .discreteAverage)
-        FartlekWorkout.sampleArray.append(heartRateSample)
+        let heartRateSample = self.workoutManager.getHeartRateSample(startDate: self.intervalStartDate!, endDate: self.intervalEndDate!, quantityType: heartRateType, option: .discreteAverage)
+        HeatmapperWorkout.sampleArray.append(heartRateSample)
         
       }
       
     } // self.pedometer.queryPedometerData
-    
-    //    // Previous Motion Type exists so record interval just completed
-    self.previousMotionTypeForUpdate = self.previousMotionType
-    
-  } // func addInterval
+
+  }
   
   
   // this function updates the timer labels for the current interval and overall workout
-  @objc func updateFartlekTimeLabel(_ timer: Timer) {
+  @objc func updateWorkoutDurationLabel(_ timer: Timer) {
     
-    if fartlekTimer.isRunning {
+    if workoutTimer.isRunning {
       
       // update main timer
-      let timerFont = UIFont.monospacedDigitSystemFont(ofSize: 36, weight: .regular)
-      let timerText = NSAttributedString(string: fartlekTimer.elapsedTimeAsString, attributes: [NSAttributedString.Key.font: timerFont])
-      currentStopwatch.setAttributedText(timerText)
+      //      let timerFont = UIFont.monospacedDigitSystemFont(ofSize: 36, weight: .regular)
+      //      let timerText = NSAttributedString(string: fartlekTimer.elapsedTimeAsString, attributes: [NSAttributedString.Key.font: timerFont])
+      //      currentStopwatch.setAttributedText(timerText)
       
-      // update overall duration timer
+      // update overall workout timer
       var workoutTotalTimeInterval: Double = 0
-      workoutTotalTimeInterval = FartlekWorkout.totalDuration
-      workoutTotalTimeInterval += fartlekTimer.elapsedTime
+      workoutTotalTimeInterval = workoutDurationTimeInterval
+      workoutTotalTimeInterval += workoutTimer.elapsedTime
       let durationFont = UIFont.monospacedSystemFont(ofSize: 16, weight: .light)
       let durationText = NSAttributedString(string: workoutTotalTimeInterval.toReadableString(), attributes: [NSAttributedString.Key.font: durationFont])
       workoutDurationLabel.setAttributedText(durationText)
@@ -830,22 +603,7 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
       timer.invalidate()
     }
   }
-  
-//  // MARK: - HKLiveWorkoutBuilderDelegate
-//  func workoutBuilder(_ workoutBuilder: HKLiveWorkoutBuilder, didCollectDataOf collectedTypes: Set<HKSampleType>) {
-//
-//    // update UI with latest stats
-//    for type in collectedTypes {
-//      guard let quantityType = type as? HKQuantityType else {
-//        return
-//      }
-//
-//      let statistics = workoutBuilder.statistics(for: quantityType)
-//      let label = labelForQuantityType(quantityType)
-//      updateLabel(label, withStatistics: statistics)
-//    }
-//
-//  } // didCollectDataOf
+
   
   // MARK: - Update the interface
   
@@ -902,12 +660,11 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
         distanceLabel.setText(unitLength.symbol)
         
         // for distance, update pace also based upon distance / time
-        let elapsedTime = self.fartlekTimer.elapsedTime
+        let elapsedTime = self.workoutTimer.elapsedTime
         let pace = distance / elapsedTime
         let paceString = MyFunc.getUnitSpeedAsString(value: pace, unitSpeed: unitSpeed, formatter: measurementFormatter)
         
         self.currentPace.setText(paceString)
-        self.currentFartlekDistance = distance
         paceLabel.setText(unitSpeed.symbol)
         
         return
