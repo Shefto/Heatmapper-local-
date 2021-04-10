@@ -60,3 +60,6 @@
 
 /* Class = "WKInterfaceLabel"; text = "Start Match"; ObjectID = "BuH-w6-PIL"; */
 "BuH-w6-PIL.text" = "Detección automática";
+
+/* Class = "WKInterfaceLabel"; text = "location"; ObjectID = "Kv1-9H-zBN"; */
+"Kv1-9H-zBN.text" = "";

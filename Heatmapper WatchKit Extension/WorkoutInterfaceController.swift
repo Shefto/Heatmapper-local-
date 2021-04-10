@@ -21,7 +21,7 @@ protocol WorkoutManagerDelegate {
 
 class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCommands, CLLocationManagerDelegate, WorkoutManagerDelegate {
 
-  let audio                 = Audio()
+//  let audio                 = Audio()
   
   // WatchConnectivity variables
   private var command: Command!
@@ -54,7 +54,7 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   var workoutEndDate: Date?
   var workoutPausedDate: Date?
   var workoutDurationTimeInterval: TimeInterval = 0
-  var workoutEventArray: [HKWorkoutEvent] = []
+//  var workoutEventArray: [HKWorkoutEvent] = []
 
   // Interval variables
   private var intervalStartDate : Date?
@@ -70,6 +70,7 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   
   // Core Location variables
   let locationManager             = CLLocationManager()
+  var locationArray               : [CLLocationCoordinate2D] = []
   
   // Core Motion variables
   //  var currentMotionType: String = ""
@@ -97,7 +98,8 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   @IBOutlet weak var paceLabel: WKInterfaceLabel!
   @IBOutlet weak var currentPace: WKInterfaceLabel!
   @IBOutlet weak var currentDistance: WKInterfaceLabel!
-  
+  @IBOutlet weak var locationLabel: WKInterfaceLabel!
+
   @IBOutlet weak var workoutDurationLabel: WKInterfaceLabel!
   @IBOutlet weak var heartRateLabel: WKInterfaceLabel!
   @IBOutlet weak var activeCaloriesLabel: WKInterfaceLabel!
@@ -183,6 +185,7 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
 
     // start workout for Workout Manager
     workoutManager.startWorkout()
+    locationManager.startUpdatingLocation()
     
     // check if pedometer data is available, if so start updates
     if CMPedometer.isPedometerEventTrackingAvailable() {
@@ -345,7 +348,7 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   @objc func speakStartingWorkout(_ timer: Timer) {
     if workoutTimer.isRunning == true {
       let startPhraseLocalized = NSLocalizedString("Starting workout now", comment: "")
-      audio.speak(phrase: startPhraseLocalized)
+//      audio.speak(phrase: startPhraseLocalized)
     }
   }
   
@@ -421,9 +424,9 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     
     workoutManager.pauseWorkout()
     //    session.pause()
-    audio.stopSpeaking()
+//    audio.stopSpeaking()
     let pausePhrase = NSLocalizedString("Workout paused", comment: "")
-    audio.speak(phrase: pausePhrase)
+//    audio.speak(phrase: pausePhrase)
     intervalTimer.invalidate()
 
     if workoutTimer.isRunning {
@@ -446,9 +449,9 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     DispatchQueue.main.async {
       self.becomeCurrentPage()
     }
-    audio.stopSpeaking()
+//    audio.stopSpeaking()
     let resumePhraseLocalized = NSLocalizedString("Resuming workout", comment: "Resuming workout")
-    audio.speak(phrase: resumePhraseLocalized)
+//    audio.speak(phrase: resumePhraseLocalized)
     
     workoutManager.resumeWorkout()
 
@@ -475,21 +478,33 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     
     let currentLocation = locations[locations.count - 1]
-    MyFunc.logMessage(.info, "Current Location Found: \(currentLocation)")
-    
+    let locationStr = String(describing: currentLocation)
+    locationLabel.setText(locationStr)
+    MyFunc.logMessage(.debug, "Current Location Found: \(currentLocation)")
+
+
+    if currentLocation.horizontalAccuracy <= 50.0 {
+      locationArray.append(currentLocation.coordinate)
+      MyFunc.logMessage(.debug, "Appended currentLocation \(currentLocation) to locationArray")
+      MyFunc.logMessage(.debug, "locationArray:")
+      MyFunc.logMessage(.debug, String(describing: locationArray))
+    }
+
     // Filter the raw data.
     let filteredLocations = locations.filter { (location: CLLocation) -> Bool in
       location.horizontalAccuracy <= 50.0
     }
     
     guard !filteredLocations.isEmpty else { return }
-    
-    // Add the filtered data to the route.
-    routeBuilder.insertRouteData(filteredLocations) { (success, error) in
-      if !success {
-        MyFunc.logMessage(.error, "Error inserting Route data: \(String(describing: error))")
-      }
-    }
+
+    MyFunc.logMessage(.debug, "Locations:")
+    MyFunc.logMessage(.debug, String(describing: filteredLocations))
+//    // Add the filtered data to the route.
+//    routeBuilder.insertRouteData(filteredLocations) { (success, error) in
+//      if !success {
+//        MyFunc.logMessage(.error, "Error inserting Route data: \(String(describing: error))")
+//      }
+//    }
   }
   
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

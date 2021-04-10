@@ -17,7 +17,7 @@ class MainMenuInterfaceController: WKInterfaceController, CLLocationManagerDeleg
   var countdownTimeLeft: TimeInterval = 3.1
   var countdownEndTime: Date?
   var countdownTimer = Timer()
-  let audio = Audio()
+//  let audio = Audio()
   var buttonJustPressed : Bool = false
 
   // HealthKit variables
@@ -95,16 +95,20 @@ class MainMenuInterfaceController: WKInterfaceController, CLLocationManagerDeleg
       MyFunc.logMessage(.default, "Location authorizationStatus = authorizedWhenInUse")
     case .denied:
       MyFunc.logMessage(.default, "Location authorizationStatus = denied")
-      locationManager.requestAlwaysAuthorization()
+//      locationManager.requestAlwaysAuthorization()
+      locationManager.requestWhenInUseAuthorization()
     case .notDetermined:
       MyFunc.logMessage(.default, "Location authorizationStatus = notDetermined")
-      locationManager.requestAlwaysAuthorization()
+//      locationManager.requestAlwaysAuthorization()
+      locationManager.requestWhenInUseAuthorization()
     case .restricted:
       MyFunc.logMessage(.default, "Location authorizationStatus = restricted")
-      locationManager.requestAlwaysAuthorization()
+//      locationManager.requestAlwaysAuthorization()
+      locationManager.requestWhenInUseAuthorization()
     default:
       MyFunc.logMessage(.default, "Location authorizationStatus not recognized")
-      locationManager.requestAlwaysAuthorization()
+//      locationManager.requestAlwaysAuthorization()
+      locationManager.requestWhenInUseAuthorization()
     }
 
     locationManager.allowsBackgroundLocationUpdates = true

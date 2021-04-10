@@ -9,6 +9,7 @@
 import Foundation
 import HealthKit
 
+// this class stores the workout data
 class HeatmapperWorkout {
 
   static var intervalArray: [Interval] = {

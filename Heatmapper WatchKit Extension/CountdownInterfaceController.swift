@@ -16,7 +16,7 @@ class CountdownInterfaceController: WKInterfaceController {
   var countdownTimeLeft: TimeInterval = 3.1
   var countdownEndTime: Date?
   var countdownTimer = Timer()
-  let audio = Audio()
+//  let audio = Audio()
 
   var activityTemplate    = ActivityTemplate()
   var activityType        = ActivityType()
@@ -76,17 +76,17 @@ class CountdownInterfaceController: WKInterfaceController {
 
       if roundedTimeAsIntby10 == roundedTimeby10asInt {
         if roundedTimeby10asInt > 0 {
-          audio.playSound(filename: "FiT_second_beep", fileExtension: "aif")
+//          audio.playSound(filename: "FiT_second_beep", fileExtension: "aif")
         } else {
 
-          audio.playSound(filename: "FIT_minute_beep", fileExtension: "aif")
+//          audio.playSound(filename: "FIT_minute_beep", fileExtension: "aif")
 
         }
       }
 
     } else {
       let beginPhraseLocalized = NSLocalizedString("Begin activity", comment: "")
-      audio.speak(phrase: beginPhraseLocalized)
+//      audio.speak(phrase: beginPhraseLocalized)
       countdownTimerLabel.setText("00:00")
       countdownTimer.invalidate()
 

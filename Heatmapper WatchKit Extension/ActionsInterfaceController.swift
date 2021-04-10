@@ -7,10 +7,14 @@
 //
 
 import WatchKit
+import AVFoundation
 
 class ActionsInterfaceController: WKInterfaceController {
 
-  let audio = Audio()
+//  let audio = Audio()
+
+  static let synthesizer        = AVSpeechSynthesizer()
+  var audioPlayer               = AVAudioPlayer()
 
   var buttonJustPressed : Bool = false
 
@@ -20,9 +24,9 @@ class ActionsInterfaceController: WKInterfaceController {
 
   @IBAction func btnLock() {
 
-    audio.stopSpeaking()
+    stopSpeaking()
     let lockPhraseLocalized = NSLocalizedString("Screen lock enabled", comment: "")
-    audio.speak(phrase: lockPhraseLocalized)
+    speak(phrase: lockPhraseLocalized)
 
     DispatchQueue.main.async {
       NotificationCenter.default.post(name: Notification.Name("Lock"), object: self)
@@ -34,9 +38,9 @@ class ActionsInterfaceController: WKInterfaceController {
     pauseButton.setEnabled(false)
     resumeButton.setEnabled(false)
     endButton.setEnabled(false)
-    audio.stopSpeaking()
+    stopSpeaking()
     let finishPhraseLocalized = NSLocalizedString("Finishing workout", comment: "")
-    audio.speak(phrase: finishPhraseLocalized)
+    speak(phrase: finishPhraseLocalized)
 
     // return to FartlekInterfaceController to finish processing workout
     DispatchQueue.main.async {
@@ -51,7 +55,7 @@ class ActionsInterfaceController: WKInterfaceController {
     pauseButton.setEnabled(true)
     resumeButton.setEnabled(false)
 
-    audio.stopSpeaking()
+    stopSpeaking()
 
     DispatchQueue.main.async {
       NotificationCenter.default.post(name: Notification.Name("Resume"), object: self)
@@ -64,7 +68,7 @@ class ActionsInterfaceController: WKInterfaceController {
     pauseButton.setEnabled(false)
     resumeButton.setEnabled(true)
 
-    audio.stopSpeaking()
+    stopSpeaking()
 
     DispatchQueue.main.async {
       NotificationCenter.default.post(name: Notification.Name("Pause"), object: self)
@@ -90,5 +94,36 @@ class ActionsInterfaceController: WKInterfaceController {
       self.buttonJustPressed = false
     }
   }
+
+  func playSound(filename: String, fileExtension: String) {
+
+    //    let soundURL = Bundle.main.path(forResource: filename, ofType: fileExtension)
+    let soundURL = Bundle.main.url(forResource: filename, withExtension: fileExtension)
+    MyFunc.logMessage(.debug, "soundURL: \(String(describing: soundURL))")
+    do {
+      audioPlayer = try AVAudioPlayer(contentsOf: soundURL!)
+      audioPlayer.prepareToPlay()
+      audioPlayer.play()
+    } catch let error as NSError {
+      MyFunc.logMessage(.error,"Audio: Error playing sound file \(String(describing: soundURL)) \(error)")
+    }
+
+  }
+
+
+  func speak(phrase: String) {
+    let utterance = AVSpeechUtterance(string: phrase)
+    let languageCode = AVSpeechSynthesisVoice.currentLanguageCode()
+    utterance.voice = AVSpeechSynthesisVoice(language: languageCode)
+    if languageCode == "en-GB" {
+      utterance.rate = AVSpeechUtteranceMaximumSpeechRate * 0.55
+    }
+    ActionsInterfaceController.synthesizer.speak(utterance)
+  }
+
+  func stopSpeaking() {
+    ActionsInterfaceController.synthesizer.stopSpeaking(at: .immediate)
+  }
+
 
 }

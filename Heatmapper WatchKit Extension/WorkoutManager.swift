@@ -12,11 +12,11 @@ import Combine
 
 class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
 
-  let healthStore = HKHealthStore()
-  var session: HKWorkoutSession!
-  var builder: HKLiveWorkoutBuilder!
-  var routeBuilder: HKWorkoutRouteBuilder!
-  var delegate : WorkoutManagerDelegate!
+  let healthStore   = HKHealthStore()
+  var session       : HKWorkoutSession!
+  var builder       : HKLiveWorkoutBuilder!
+  var routeBuilder  : HKWorkoutRouteBuilder!
+  var delegate      : WorkoutManagerDelegate!
 
 //  var cancellable: Cancellable?
 //  var accumulatedTime: Int = 0
