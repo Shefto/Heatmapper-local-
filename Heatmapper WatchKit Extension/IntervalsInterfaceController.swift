@@ -97,7 +97,7 @@ class IntervalsInterfaceController: WKInterfaceController {
         row.activityTypeLabel.setText("stationary")
       }
     }
-
+ 
   } // func loadTable
 
 }
