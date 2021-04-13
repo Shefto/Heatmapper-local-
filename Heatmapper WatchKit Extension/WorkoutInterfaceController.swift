@@ -158,6 +158,10 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     // set VC as CLLocationManager delegate
     locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+    locationManager.activityType = .fitness
+    locationManager.distanceFilter = kCLDistanceFilterNone
+    locationManager.allowsBackgroundLocationUpdates = true
+
     workoutManager.delegate = self
 
     // start workout
@@ -483,22 +487,22 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     MyFunc.logMessage(.debug, "Current Location Found: \(currentLocation)")
 
 
-    if currentLocation.horizontalAccuracy <= 50.0 {
+//    if currentLocation.horizontalAccuracy <= 50.0 {
       locationArray.append(currentLocation.coordinate)
       MyFunc.logMessage(.debug, "Appended currentLocation \(currentLocation) to locationArray")
       MyFunc.logMessage(.debug, "locationArray:")
       MyFunc.logMessage(.debug, String(describing: locationArray))
-    }
+//    }
 
-    // Filter the raw data.
-    let filteredLocations = locations.filter { (location: CLLocation) -> Bool in
-      location.horizontalAccuracy <= 50.0
-    }
-    
-    guard !filteredLocations.isEmpty else { return }
-
-    MyFunc.logMessage(.debug, "Locations:")
-    MyFunc.logMessage(.debug, String(describing: filteredLocations))
+//    // Filter the raw data.
+//    let filteredLocations = locations.filter { (location: CLLocation) -> Bool in
+//      location.horizontalAccuracy <= 50.0
+//    }
+//    
+//    guard !filteredLocations.isEmpty else { return }
+//
+//    MyFunc.logMessage(.debug, "Locations:")
+//    MyFunc.logMessage(.debug, String(describing: filteredLocations))
 //    // Add the filtered data to the route.
 //    routeBuilder.insertRouteData(filteredLocations) { (success, error) in
 //      if !success {

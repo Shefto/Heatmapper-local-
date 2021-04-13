@@ -59,7 +59,12 @@ class MainMenuInterfaceController: WKInterfaceController, CLLocationManagerDeleg
     authorizeLocation()
 
     // set VC as CLLocationManager delegate
+
     locationManager.delegate = self
+    locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+    locationManager.activityType = .fitness
+    locationManager.distanceFilter = 5
+    locationManager.allowsBackgroundLocationUpdates = true
     locationManager.startUpdatingLocation()
 
   }
