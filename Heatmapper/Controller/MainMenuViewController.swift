@@ -36,11 +36,15 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
   @IBOutlet weak var tabataButton: ThemeButton!
   @IBOutlet weak var customButton: ThemeButton!
   @IBOutlet weak var randomButton: ThemeButton!
+  @IBOutlet weak var matchButton: ThemeButton!
 
   var bannerView: GADBannerView!
 
   var activityType = ActivityType()
 
+  @IBAction func btnMatch(_ sender: Any) {
+  }
+  
   @IBAction func settingsButton() {
     self.performSegue(withIdentifier: "startToSettings", sender: .none)
   }

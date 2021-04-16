@@ -142,6 +142,9 @@
 /* Class = "UISegmentedControl"; dhi-ac-byn.segmentTitles[2] = "Best for accuracy"; ObjectID = "dhi-ac-byn"; */
 "dhi-ac-byn.segmentTitles[2]" = "";
 
+/* Class = "UIButton"; normalTitle = "Start match"; ObjectID = "HkC-uM-bXg"; */
+"HkC-uM-bXg.normalTitle" = "";
+
 /* Class = "UISegmentedControl"; KZh-Fy-Ydb.segmentTitles[2] = "mins/km"; ObjectID = "KZh-Fy-Ydb"; */
 "KZh-Fy-Ydb.segmentTitles[2]" = "";
 

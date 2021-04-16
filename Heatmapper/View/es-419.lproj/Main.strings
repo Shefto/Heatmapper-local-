@@ -151,5 +151,8 @@
 /* Class = "UILabel"; text = "1"; ObjectID = "zWl-Nq-DLb"; */
 "zWl-Nq-DLb.text" = "1";
 
+/* Class = "UIButton"; normalTitle = "Start match"; ObjectID = "HkC-uM-bXg"; */
+"HkC-uM-bXg.normalTitle" = "";
+
 /* Class = "UILabel"; text = "Sets"; ObjectID = "oeg-Ph-BrI"; */
 "oeg-Ph-BrI.text" = "";

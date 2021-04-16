@@ -74,6 +74,9 @@
 		79A7E14E25ACE48000D1A952 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15025ACE48000D1A952 /* Localizable.strings */; };
 		79A7E15825AD9F5000D1A952 /* IntervalTableViewFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15A25AD9F5000D1A952 /* IntervalTableViewFooter.xib */; };
 		79A7E16225AD9F8200D1A952 /* IntervalTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E16425AD9F8200D1A952 /* IntervalTypeTableViewCell.xib */; };
+		79ADB48926264078007BF946 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79ADB48826264078007BF946 /* MapKit.framework */; };
+		79ADB48B262640E3007BF946 /* HeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB48A262640E3007BF946 /* HeatmapViewController.swift */; };
+		79ADB49026264153007BF946 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB48F26264153007BF946 /* UserAnnotation.swift */; };
 		79B274C12558055600752071 /* Colours 1.1.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79B274C02558055600752071 /* Colours 1.1.xcassets */; };
 		79B3742C24B0C711000E4F7E /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B3742B24B0C710000E4F7E /* Stopwatch.swift */; };
 		79B3742D24B0C711000E4F7E /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B3742B24B0C710000E4F7E /* Stopwatch.swift */; };
@@ -89,6 +92,7 @@
 		79D083B82509255A00274F79 /* ThemeKit App Classes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083B72509255A00274F79 /* ThemeKit App Classes.swift */; };
 		79D083BA250925A800274F79 /* ThemeKit Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083B9250925A800274F79 /* ThemeKit Themes.swift */; };
 		79D083BE250A0C0900274F79 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083BD250A0C0900274F79 /* Extensions.swift */; };
+		79DC34162625D2FC0053733C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC34152625D2FC0053733C /* LocationManager.swift */; };
 		79DC8A7B253981C6006965D5 /* MyFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083BB25092EBB00274F79 /* MyFunc.swift */; };
 		79F3480E25A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
 		79F3480F25A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
@@ -225,6 +229,9 @@
 		79A7E16325AD9F8200D1A952 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IntervalTypeTableViewCell.xib; sourceTree = "<group>"; };
 		79A7E16925AD9F8A00D1A952 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/IntervalTypeTableViewCell.strings; sourceTree = "<group>"; };
 		79A7E16B25AD9F8F00D1A952 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/IntervalTypeTableViewCell.strings; sourceTree = "<group>"; };
+		79ADB48826264078007BF946 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		79ADB48A262640E3007BF946 /* HeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapViewController.swift; sourceTree = "<group>"; };
+		79ADB48F26264153007BF946 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
 		79B274C02558055600752071 /* Colours 1.1.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Colours 1.1.xcassets"; sourceTree = "<group>"; };
 		79B3742B24B0C710000E4F7E /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		79B6DC982598B13400F573BA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -248,6 +255,7 @@
 		79D083B9250925A800274F79 /* ThemeKit Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThemeKit Themes.swift"; sourceTree = "<group>"; };
 		79D083BB25092EBB00274F79 /* MyFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFunc.swift; path = Shared/MyFunc.swift; sourceTree = SOURCE_ROOT; };
 		79D083BD250A0C0900274F79 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		79DC34152625D2FC0053733C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		79F3480D25A3364100762724 /* Heatmapper.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Heatmapper.storekit; sourceTree = "<group>"; };
 		98D8FC69FF05283C26F8881B /* Pods-Heatmapper WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit Extension/Pods-Heatmapper WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		9C488EBAB113A338118EAD74 /* Pods-Heatmapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper/Pods-Heatmapper.debug.xcconfig"; sourceTree = "<group>"; };
@@ -271,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79445D4F25A3292D001D3AC6 /* StoreKit.framework in Frameworks */,
+				79ADB48926264078007BF946 /* MapKit.framework in Frameworks */,
 				2601503FDB427F5D40BD1185 /* Pods_Heatmapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,6 +311,7 @@
 		793D1ADE24B86BC90039441B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				79DC34152625D2FC0053733C /* LocationManager.swift */,
 				790598FE25ED876100316CEF /* FIT_minute_beep.aif */,
 				790598FF25ED876200316CEF /* FiT_second_beep.aif */,
 				7935625025B0BBBC006BBC54 /* UnitConverterPace.swift */,
@@ -324,6 +334,8 @@
 			children = (
 				79A4EFB724A0AF4A002A7870 /* LaunchScreen.storyboard */,
 				79A4EFB224A0AF45002A7870 /* Main.storyboard */,
+				79ADB48A262640E3007BF946 /* HeatmapViewController.swift */,
+				79ADB48F26264153007BF946 /* UserAnnotation.swift */,
 				79A4EFFB24A88E0E002A7870 /* fartlekCell.xib */,
 				79A4EFFD24A89063002A7870 /* FartlekTableViewCell.swift */,
 				797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */,
@@ -447,6 +459,7 @@
 		79A4EFE624A0C2F1002A7870 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79ADB48826264078007BF946 /* MapKit.framework */,
 				79445D4E25A3292C001D3AC6 /* StoreKit.framework */,
 				9D2FD5C38F894191F54261F7 /* Pods_Heatmapper.framework */,
 				20D17A5498C39BC448F72B45 /* Pods_Heatmapper_WatchKit_App.framework */,
@@ -724,7 +737,9 @@
 				79A4EFFE24A89063002A7870 /* FartlekTableViewCell.swift in Sources */,
 				793D1AD624B855540039441B /* CommandStatus.swift in Sources */,
 				793D1AD424B854EB0039441B /* SessionDelegator.swift in Sources */,
+				79ADB49026264153007BF946 /* UserAnnotation.swift in Sources */,
 				797BFD0525421E8700426185 /* Audio.swift in Sources */,
+				79DC34162625D2FC0053733C /* LocationManager.swift in Sources */,
 				7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */,
 				79A4EFF624A7A109002A7870 /* WorkoutViewController.swift in Sources */,
 				793D1ADC24B868840039441B /* SessionCommands.swift in Sources */,
@@ -738,6 +753,7 @@
 				7935629525B31431006BBC54 /* BartyCrouch.swift in Sources */,
 				79D083BA250925A800274F79 /* ThemeKit Themes.swift in Sources */,
 				793D1AEF24B87F110039441B /* SessionTransfer.swift in Sources */,
+				79ADB48B262640E3007BF946 /* HeatmapViewController.swift in Sources */,
 				79A4EFAD24A0AF45002A7870 /* AppDelegate.swift in Sources */,
 				793D1AF224B87FAD0039441B /* FileTransferObservers.swift in Sources */,
 				79D083B6250924C500274F79 /* ThemeKit Theme.swift in Sources */,

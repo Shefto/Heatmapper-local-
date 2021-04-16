@@ -50,6 +50,7 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
 
   // Core Location variables
   let locationManager             = CLLocationManager()
+  var locationArray               : [CLLocationCoordinate2D] = []
 
   // Core Motion variables
   var currentMotionType: String = ""
@@ -1146,8 +1147,46 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
     return basalEnergyBurned
   }
 
+//  // Core Location code to get the current location
+//  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//
+//    let currentLocation = locations[locations.count - 1]
+//    let locationStr = String(describing: currentLocation)
+//    locationLabel.setText(locationStr)
+//    MyFunc.logMessage(.debug, "Current Location Found: \(currentLocation)")
+
+//
+//    //    if currentLocation.horizontalAccuracy <= 50.0 {
+//    locationArray.append(currentLocation.coordinate)
+//    MyFunc.logMessage(.debug, "Appended currentLocation \(currentLocation) to locationArray")
+//    MyFunc.logMessage(.debug, "locationArray:")
+//    MyFunc.logMessage(.debug, String(describing: locationArray))
+//    //    }
+
+    //    // Filter the raw data.
+    //    let filteredLocations = locations.filter { (location: CLLocation) -> Bool in
+    //      location.horizontalAccuracy <= 50.0
+    //    }
+    //
+    //    guard !filteredLocations.isEmpty else { return }
+    //
+    //    MyFunc.logMessage(.debug, "Locations:")
+    //    MyFunc.logMessage(.debug, String(describing: filteredLocations))
+    //    // Add the filtered data to the route.
+    //    routeBuilder.insertRouteData(filteredLocations) { (success, error) in
+    //      if !success {
+    //        MyFunc.logMessage(.error, "Error inserting Route data: \(String(describing: error))")
+    //      }
+    //    }
+//  }
+
+
   // Core Location code to get the current location
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+    let currentLocation = locations[locations.count - 1]
+    let locationStr = String(describing: currentLocation)
+    MyFunc.logMessage(.debug, "Current Location Found: \(currentLocation)")
 
     // Filter the raw data.
     let filteredLocations = locations.filter { (location: CLLocation) -> Bool in
@@ -1155,6 +1194,11 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
     }
 
     guard !filteredLocations.isEmpty else { return }
+
+    locationArray.append(currentLocation.coordinate)
+    MyFunc.logMessage(.debug, "Appended currentLocation \(currentLocation) to locationArray")
+    MyFunc.logMessage(.debug, "locationArray:")
+    MyFunc.logMessage(.debug, String(describing: locationArray))
 
     // Add the filtered data to the route.
     routeBuilder.insertRouteData(filteredLocations) { (success, error) in
