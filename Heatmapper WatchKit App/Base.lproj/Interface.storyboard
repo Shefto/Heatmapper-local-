@@ -123,8 +123,29 @@
                     <items>
                         <group width="1" height="1" alignment="left" layout="vertical" id="yWS-e6-NHC">
                             <items>
+                                <button alignment="center" verticalAlignment="bottom" id="S1g-jb-1Nv" userLabel="Start Match Button" customClass="MyWKInterfaceButton" customModule="FIT_WatchKit_Extension">
+                                    <group key="contentGroup" width="1" height="0.32000000000000001" alignment="left" id="M22-Ye-n7w">
+                                        <items>
+                                            <label width="1" alignment="center" verticalAlignment="center" text="Start Match" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.10000000000000001" id="r0f-cO-MJr">
+                                                <variation key="device=watch38mm">
+                                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                                </variation>
+                                                <variation key="device=watch40mm">
+                                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                </variation>
+                                                <variation key="device=watch42mm">
+                                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                </variation>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" name="autoDetect"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="btnStart" destination="m1S-hZ-N2T" id="2yb-Jt-JUF"/>
+                                    </connections>
+                                </button>
                                 <button alignment="center" verticalAlignment="bottom" id="4Y5-k3-HLi" userLabel="Pitch Button">
-                                    <group key="contentGroup" width="1" height="0.5" alignment="left" id="u0c-2h-IfS">
+                                    <group key="contentGroup" width="1" height="0.32000000000000001" alignment="left" id="u0c-2h-IfS">
                                         <items>
                                             <label alignment="center" verticalAlignment="center" text="Set Pitch Boundaries" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="346-km-c9I">
                                                 <variation key="device=watch38mm">
@@ -144,10 +165,10 @@
                                         <segue destination="G9W-oD-vbU" kind="push" id="doM-eC-WiQ"/>
                                     </connections>
                                 </button>
-                                <button alignment="center" verticalAlignment="bottom" id="Vxa-ST-xpC" userLabel="Start Button" customClass="MyWKInterfaceButton" customModule="FIT_WatchKit_Extension">
-                                    <group key="contentGroup" width="1" height="0.5" alignment="left" id="oBa-yR-o15">
+                                <button alignment="center" verticalAlignment="bottom" id="Vxa-ST-xpC" userLabel="Map Button" customClass="MyWKInterfaceButton" customModule="FIT_WatchKit_Extension">
+                                    <group key="contentGroup" width="1" height="0.32000000000000001" alignment="left" id="oBa-yR-o15">
                                         <items>
-                                            <label width="1" alignment="center" verticalAlignment="center" text="Start Match" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.10000000000000001" id="BuH-w6-PIL">
+                                            <label width="1" alignment="center" verticalAlignment="center" text="Start Map" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.10000000000000001" id="BuH-w6-PIL">
                                                 <variation key="device=watch38mm">
                                                     <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                                 </variation>
@@ -159,10 +180,10 @@
                                                 </variation>
                                             </label>
                                         </items>
-                                        <color key="backgroundColor" name="autoDetect"/>
+                                        <color key="backgroundColor" red="0.015686274510000001" green="0.87058823529999996" blue="0.050980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </group>
                                     <connections>
-                                        <action selector="btnStart" destination="m1S-hZ-N2T" id="Uai-41-nJv"/>
+                                        <segue destination="ugg-Fy-lPq" kind="push" id="Pqb-Xk-sdZ"/>
                                     </connections>
                                 </button>
                             </items>
@@ -172,10 +193,24 @@
             </objects>
             <point key="canvasLocation" x="-146" y="30"/>
         </scene>
-        <!--Countdown Interface Controller-->
+        <!--Heatmap-->
+        <scene sceneID="adw-Yp-rfP">
+            <objects>
+                <controller id="ugg-Fy-lPq" userLabel="Heatmap">
+                    <items>
+                        <map alignment="left" id="bXj-e7-XFN"/>
+                    </items>
+                    <connections>
+                        <outlet property="mapView" destination="bXj-e7-XFN" id="l2R-GY-jVA"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="353" y="258"/>
+        </scene>
+        <!--Countdown-->
         <scene sceneID="dcI-Q6-YSa">
             <objects>
-                <controller identifier="Countdown Interface Controller" fullScreen="YES" id="GYi-kF-hRv" customClass="CountdownInterfaceController" customModule="Heatmapper_WatchKit_Extension">
+                <controller identifier="Countdown" fullScreen="YES" id="GYi-kF-hRv" customClass="CountdownInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
                         <label alignment="center" verticalAlignment="center" text="0:00.0" textAlignment="center" id="N6n-mH-eyk" userLabel="Current Duration">
                             <color key="textColor" name="navBarTitle"/>

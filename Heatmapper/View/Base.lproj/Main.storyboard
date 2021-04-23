@@ -18,14 +18,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lep-Yn-iYr">
-                                <rect key="frame" x="5" y="757" width="404" height="100"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lep-Yn-iYr">
+                                <rect key="frame" x="5" y="727" width="404" height="130"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hA5-ad-xJt" userLabel="Left Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="198" height="100"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-uM-bXg" userLabel="Start Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="61"/>
+                                        <color key="backgroundColor" name="buttonPrimary"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                        <state key="normal" title="Start Tracking"/>
+                                        <connections>
+                                            <action selector="btnMatch:" destination="hJk-zi-pgB" eventType="touchUpInside" id="YdV-R2-M2g"/>
+                                            <segue destination="cbs-Dv-Qaf" kind="show" identifier="mainMenuToMatch" id="rT7-Ok-iqp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="uxy-2h-68R" userLabel="Heatmap Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="69" width="404" height="61"/>
+                                        <color key="backgroundColor" name="buttonPrimary"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                        <state key="normal" title="Heatmap"/>
+                                        <connections>
+                                            <action selector="btnMatch:" destination="hJk-zi-pgB" eventType="touchUpInside" id="ZUX-OH-FRP"/>
+                                            <segue destination="YiQ-y2-7yO" kind="show" id="HKw-rE-IHq"/>
+                                        </connections>
+                                    </button>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hA5-ad-xJt" userLabel="Left Stack View">
+                                        <rect key="frame" x="0.0" y="130" width="404" height="0.0"/>
                                         <subviews>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="YxN-xL-3iB" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="198" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="192" height="0.0"/>
                                                 <color key="backgroundColor" name="buttonPrimary"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -36,7 +60,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="IJA-y3-LGF" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="198" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="192" height="0.0"/>
                                                 <color key="backgroundColor" name="buttonPrimary"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -46,20 +70,8 @@
                                                     <action selector="btnPyramid:" destination="hJk-zi-pgB" eventType="touchUpInside" id="jIW-wr-Ibc"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-uM-bXg" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="198" height="100"/>
-                                                <color key="backgroundColor" name="buttonPrimary"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
-                                                <state key="normal" title="Start match"/>
-                                                <connections>
-                                                    <action selector="btnMatch:" destination="hJk-zi-pgB" eventType="touchUpInside" id="YdV-R2-M2g"/>
-                                                    <segue destination="cbs-Dv-Qaf" kind="show" identifier="mainMenuToMatch" id="rT7-Ok-iqp"/>
-                                                </connections>
-                                            </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="GYq-I3-h60" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="198" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="192" height="0.0"/>
                                                 <color key="backgroundColor" name="buttonPrimary"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -71,11 +83,11 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IXf-4o-Sgd" userLabel="Right Stack View">
-                                        <rect key="frame" x="206" y="0.0" width="198" height="100"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IXf-4o-Sgd" userLabel="Right Stack View">
+                                        <rect key="frame" x="0.0" y="130" width="404" height="0.0"/>
                                         <subviews>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="za3-ag-cd4" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="198" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="404" height="0.0"/>
                                                 <color key="backgroundColor" name="buttonPrimary"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -86,7 +98,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Jmr-rQ-Lxp" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="198" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="404" height="0.0"/>
                                                 <color key="backgroundColor" name="buttonPrimary"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -96,8 +108,8 @@
                                                     <action selector="btnRandom:" destination="hJk-zi-pgB" eventType="touchUpInside" id="7sY-vG-Kah"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="k0e-af-gvr" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="198" height="100"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="k0e-af-gvr" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="404" height="0.0"/>
                                                 <color key="backgroundColor" name="buttonPrimary"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -111,7 +123,7 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="a8S-c8-xdU"/>
+                                    <constraint firstAttribute="height" constant="130" id="a8S-c8-xdU"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -141,10 +153,10 @@
             </objects>
             <point key="canvasLocation" x="305" y="116"/>
         </scene>
-        <!--Heatmap View Controller-->
+        <!--Tracker-->
         <scene sceneID="mno-dC-kcX">
             <objects>
-                <viewController id="cbs-Dv-Qaf" customClass="HeatmapViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Tracker" id="cbs-Dv-Qaf" userLabel="Tracker" customClass="TrackerViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qRr-WK-kdi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -169,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZ5-bu-aeX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-487" y="843"/>
+            <point key="canvasLocation" x="-233" y="790"/>
         </scene>
         <!--Set Intervals-->
         <scene sceneID="TO0-5W-qsT">
@@ -1504,7 +1516,37 @@ DQoNCg
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="De6-Pl-zD2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-417" y="98"/>
+            <point key="canvasLocation" x="-1164" y="95"/>
+        </scene>
+        <!--Heatmap-->
+        <scene sceneID="QjG-zy-Dks">
+            <objects>
+                <viewController title="Heatmap" id="YiQ-y2-7yO" userLabel="Heatmap" customClass="TrackerViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2y8-Jq-4cf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tyk-T0-jgG">
+                                <rect key="frame" x="0.0" y="88" width="414" height="674"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="B86-Yb-ipi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="B86-Yb-ipi" firstAttribute="trailing" secondItem="tyk-T0-jgG" secondAttribute="trailing" id="Woo-ds-YUG"/>
+                            <constraint firstItem="tyk-T0-jgG" firstAttribute="top" secondItem="B86-Yb-ipi" secondAttribute="top" id="aI5-3P-VrP"/>
+                            <constraint firstItem="tyk-T0-jgG" firstAttribute="leading" secondItem="B86-Yb-ipi" secondAttribute="leading" id="hXy-gs-vDW"/>
+                            <constraint firstItem="B86-Yb-ipi" firstAttribute="bottom" secondItem="tyk-T0-jgG" secondAttribute="bottom" constant="100" id="qNM-OI-AXm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="3tg-7C-k34"/>
+                    <connections>
+                        <outlet property="mapView" destination="tyk-T0-jgG" id="pGg-wg-9zT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jp8-LE-TUl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1010" y="790"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

@@ -38,6 +38,7 @@
 		7944476F255A9B3B004708E3 /* DurationPickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7944476E255A9B3B004708E3 /* DurationPickerInterfaceController.swift */; };
 		79445D4F25A3292D001D3AC6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79445D4E25A3292C001D3AC6 /* StoreKit.framework */; };
 		7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */; };
+		795B8FB626320E7000E5DD8C /* HeatmapInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795B8FB526320E7000E5DD8C /* HeatmapInterfaceController.swift */; };
 		7961D6BF25B74B4900204968 /* MyWKInterfaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */; };
 		797026C0252DB4A500A86A05 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
 		7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */; };
@@ -75,7 +76,7 @@
 		79A7E15825AD9F5000D1A952 /* IntervalTableViewFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15A25AD9F5000D1A952 /* IntervalTableViewFooter.xib */; };
 		79A7E16225AD9F8200D1A952 /* IntervalTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E16425AD9F8200D1A952 /* IntervalTypeTableViewCell.xib */; };
 		79ADB48926264078007BF946 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79ADB48826264078007BF946 /* MapKit.framework */; };
-		79ADB48B262640E3007BF946 /* HeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB48A262640E3007BF946 /* HeatmapViewController.swift */; };
+		79ADB48B262640E3007BF946 /* TrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB48A262640E3007BF946 /* TrackerViewController.swift */; };
 		79ADB49026264153007BF946 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB48F26264153007BF946 /* UserAnnotation.swift */; };
 		79B274C12558055600752071 /* Colours 1.1.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79B274C02558055600752071 /* Colours 1.1.xcassets */; };
 		79B3742C24B0C711000E4F7E /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B3742B24B0C710000E4F7E /* Stopwatch.swift */; };
@@ -181,6 +182,7 @@
 		7953B58825BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/IntervalTableViewFooter.strings"; sourceTree = "<group>"; };
 		7953B58925BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Interface.strings"; sourceTree = "<group>"; };
 		7953B58A25BAD7D200F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		795B8FB526320E7000E5DD8C /* HeatmapInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapInterfaceController.swift; sourceTree = "<group>"; };
 		7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWKInterfaceButton.swift; sourceTree = "<group>"; };
 		797026BF252DB4A500A86A05 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntervalTableViewFooter.swift; path = Heatmapper/View/IntervalTableViewFooter.swift; sourceTree = SOURCE_ROOT; };
@@ -230,7 +232,7 @@
 		79A7E16925AD9F8A00D1A952 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/IntervalTypeTableViewCell.strings; sourceTree = "<group>"; };
 		79A7E16B25AD9F8F00D1A952 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/IntervalTypeTableViewCell.strings; sourceTree = "<group>"; };
 		79ADB48826264078007BF946 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		79ADB48A262640E3007BF946 /* HeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapViewController.swift; sourceTree = "<group>"; };
+		79ADB48A262640E3007BF946 /* TrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewController.swift; sourceTree = "<group>"; };
 		79ADB48F26264153007BF946 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
 		79B274C02558055600752071 /* Colours 1.1.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Colours 1.1.xcassets"; sourceTree = "<group>"; };
 		79B3742B24B0C710000E4F7E /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
@@ -334,7 +336,6 @@
 			children = (
 				79A4EFB724A0AF4A002A7870 /* LaunchScreen.storyboard */,
 				79A4EFB224A0AF45002A7870 /* Main.storyboard */,
-				79ADB48A262640E3007BF946 /* HeatmapViewController.swift */,
 				79ADB48F26264153007BF946 /* UserAnnotation.swift */,
 				79A4EFFB24A88E0E002A7870 /* fartlekCell.xib */,
 				79A4EFFD24A89063002A7870 /* FartlekTableViewCell.swift */,
@@ -349,6 +350,7 @@
 		793D1AE024B86C1B0039441B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				79ADB48A262640E3007BF946 /* TrackerViewController.swift */,
 				7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */,
 				7935629425B31431006BBC54 /* BartyCrouch.swift */,
 				7935622725AF53C5006BBC54 /* HelpViewController.swift */,
@@ -431,6 +433,7 @@
 		79A4EFD024A0AF4B002A7870 /* Heatmapper WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				795B8FB526320E7000E5DD8C /* HeatmapInterfaceController.swift */,
 				79A4EFE924A0C654002A7870 /* Heatmapper WatchKit Extension.entitlements */,
 				7991886A24B618AE008F0EA5 /* IntervalRowController.swift */,
 				7996ADF6256860A200C25196 /* CustomRowController.swift */,
@@ -753,7 +756,7 @@
 				7935629525B31431006BBC54 /* BartyCrouch.swift in Sources */,
 				79D083BA250925A800274F79 /* ThemeKit Themes.swift in Sources */,
 				793D1AEF24B87F110039441B /* SessionTransfer.swift in Sources */,
-				79ADB48B262640E3007BF946 /* HeatmapViewController.swift in Sources */,
+				79ADB48B262640E3007BF946 /* TrackerViewController.swift in Sources */,
 				79A4EFAD24A0AF45002A7870 /* AppDelegate.swift in Sources */,
 				793D1AF224B87FAD0039441B /* FileTransferObservers.swift in Sources */,
 				79D083B6250924C500274F79 /* ThemeKit Theme.swift in Sources */,
@@ -797,6 +800,7 @@
 				7996ADF7256860A200C25196 /* CustomRowController.swift in Sources */,
 				7907E8C124E1468500F3DE0D /* Extensions.swift in Sources */,
 				793D1AE724B86E6F0039441B /* CustomLogger.swift in Sources */,
+				795B8FB626320E7000E5DD8C /* HeatmapInterfaceController.swift in Sources */,
 				79A3517425D5BE97001840D5 /* PitchInterfaceController.swift in Sources */,
 				793D1AD724B855540039441B /* CommandStatus.swift in Sources */,
 				79BB8FF02563DB4500019900 /* CountdownInterfaceController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  HeatmapViewController.swift
+//  TrackerViewController.swift
 //  Heatmapper
 //
 //  Created by Richard English on 13/04/2021.
@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class HeatmapViewController: UIViewController, MKMapViewDelegate {
+class TrackerViewController: UIViewController, MKMapViewDelegate {
 
   @IBOutlet var mapView: MKMapView!
   var userAnnotationImage: UIImage?

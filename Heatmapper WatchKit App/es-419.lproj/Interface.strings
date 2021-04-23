@@ -58,8 +58,11 @@
 /* Class = "WKInterfaceLabel"; text = "Set Pitch Boundaries"; ObjectID = "346-km-c9I"; */
 "346-km-c9I.text" = "Aleatorio";
 
-/* Class = "WKInterfaceLabel"; text = "Start Match"; ObjectID = "BuH-w6-PIL"; */
+/* Class = "WKInterfaceLabel"; text = "Start Map"; ObjectID = "BuH-w6-PIL"; */
 "BuH-w6-PIL.text" = "Detección auto";
 
 /* Class = "WKInterfaceLabel"; text = "location"; ObjectID = "Kv1-9H-zBN"; */
 "Kv1-9H-zBN.text" = "";
+
+/* Class = "WKInterfaceLabel"; text = "Start Match"; ObjectID = "r0f-cO-MJr"; */
+"r0f-cO-MJr.text" = "";

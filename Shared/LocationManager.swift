@@ -15,7 +15,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
 
   public static var sharedInstance = LocationManager()
   let locationManager: CLLocationManager
-  var locationDataArray: [CLLocation]
+  public var locationDataArray: [CLLocation]
   var useFilter: Bool
 
 
@@ -23,7 +23,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     locationManager = CLLocationManager()
 
     locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-    locationManager.distanceFilter = 5
+    locationManager.distanceFilter = 1
 
     locationManager.requestWhenInUseAuthorization()
     locationManager.allowsBackgroundLocationUpdates = true
@@ -57,9 +57,9 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
       print("(\(newLocation.coordinate.latitude), \(newLocation.coordinate.latitude))")
 
       var locationAdded: Bool
-      if useFilter{
+      if useFilter {
         locationAdded = filterAndAddLocation(newLocation)
-      }else{
+      } else {
         locationDataArray.append(newLocation)
         locationAdded = true
       }
