@@ -164,13 +164,25 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oLg-e7-Xd0">
                                 <rect key="frame" x="0.0" y="88" width="414" height="674"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKy-uJ-mHc" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                <rect key="frame" x="10" y="772" width="394" height="80"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <state key="normal" title="Stop Tracking"/>
+                                <connections>
+                                    <action selector="btnStop:" destination="cbs-Dv-Qaf" eventType="touchUpInside" id="6Ec-aX-87H"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Yvo-ci-KWq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Yvo-ci-KWq" firstAttribute="trailing" secondItem="hKy-uJ-mHc" secondAttribute="trailing" constant="10" id="2R3-ZD-tJ2"/>
                             <constraint firstItem="Yvo-ci-KWq" firstAttribute="trailing" secondItem="oLg-e7-Xd0" secondAttribute="trailing" id="9Qm-ih-U6s"/>
+                            <constraint firstItem="hKy-uJ-mHc" firstAttribute="leading" secondItem="Yvo-ci-KWq" secondAttribute="leading" constant="10" id="BfL-EJ-aGg"/>
                             <constraint firstItem="Yvo-ci-KWq" firstAttribute="bottom" secondItem="oLg-e7-Xd0" secondAttribute="bottom" constant="100" id="Ief-3S-waE"/>
+                            <constraint firstItem="Yvo-ci-KWq" firstAttribute="bottom" secondItem="hKy-uJ-mHc" secondAttribute="bottom" constant="10" id="OjN-hC-kum"/>
                             <constraint firstItem="oLg-e7-Xd0" firstAttribute="top" secondItem="Yvo-ci-KWq" secondAttribute="top" id="Q5P-Y9-y35"/>
+                            <constraint firstItem="hKy-uJ-mHc" firstAttribute="top" secondItem="oLg-e7-Xd0" secondAttribute="bottom" constant="10" id="V2f-WY-uHG"/>
                             <constraint firstItem="oLg-e7-Xd0" firstAttribute="leading" secondItem="Yvo-ci-KWq" secondAttribute="leading" id="qdH-2D-27L"/>
                         </constraints>
                     </view>
@@ -1550,7 +1562,7 @@ DQoNCg
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Q0p-vW-Fa8"/>
+        <segue reference="2KX-NX-yjK"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Cool down" width="662" height="643"/>

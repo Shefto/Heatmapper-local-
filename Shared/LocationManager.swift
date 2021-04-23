@@ -49,6 +49,12 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
   }
 
 
+  func stopUpdatingLocation(){
+    if CLLocationManager.locationServicesEnabled(){
+      locationManager.stopUpdatingLocation()
+    } 
+  }
+
   //MARK: CLLocationManagerDelegate protocol methods
   public func locationManager(_ manager: CLLocationManager,
                               didUpdateLocations locations: [CLLocation]){

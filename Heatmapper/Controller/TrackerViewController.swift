@@ -187,5 +187,9 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
     }
   }
 
+  @IBAction func btnStop(_ sender: Any) {
+
+    LocationManager.sharedInstance.stopUpdatingLocation()
+  }
 
 }

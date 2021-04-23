@@ -154,8 +154,17 @@
 /* Class = "UILabel"; text = "1"; ObjectID = "zWl-Nq-DLb"; */
 "zWl-Nq-DLb.text" = "1";
 
+/* Class = "UIViewController"; title = "Tracker"; ObjectID = "cbs-Dv-Qaf"; */
+"cbs-Dv-Qaf.title" = "";
+
 /* Class = "UIButton"; normalTitle = "Start Tracking"; ObjectID = "HkC-uM-bXg"; */
 "HkC-uM-bXg.normalTitle" = "";
 
+/* Class = "UIButton"; normalTitle = "Stop Tracking"; ObjectID = "hKy-uJ-mHc"; */
+"hKy-uJ-mHc.normalTitle" = "";
+
 /* Class = "UIButton"; normalTitle = "Heatmap"; ObjectID = "uxy-2h-68R"; */
 "uxy-2h-68R.normalTitle" = "";
+
+/* Class = "UIViewController"; title = "Heatmap"; ObjectID = "YiQ-y2-7yO"; */
+"YiQ-y2-7yO.title" = "";
