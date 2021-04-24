@@ -48,6 +48,13 @@
 		7980929D252F386300DF1562 /* HeatmapperWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7980929C252F386300DF1562 /* HeatmapperWorkout.swift */; };
 		7981D39C24BDD62500E5D9E7 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFF824A7F1AF002A7870 /* Interval.swift */; };
 		7989157225605679004983BD /* WorkoutInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7989157125605679004983BD /* WorkoutInterfaceController.swift */; };
+		799131242634126800811731 /* HeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799131232634126800811731 /* HeatmapViewController.swift */; };
+		799131292634145F00811731 /* JDRealHeatmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799131282634145F00811731 /* JDRealHeatmap.swift */; };
+		7991312E2634148E00811731 /* JDHeatmapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7991312D2634148E00811731 /* JDHeatmapManager.swift */; };
+		79913133263414B600811731 /* JDColorMixer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79913132263414B600811731 /* JDColorMixer.swift */; };
+		79913138263414CA00811731 /* JDOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79913137263414CA00811731 /* JDOverlay.swift */; };
+		7991313D263414E800811731 /* JDHeatmapOverlayRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7991313C263414E800811731 /* JDHeatmapOverlayRenderer.swift */; };
+		799131422634151700811731 /* JDHeatmapPointCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799131412634151700811731 /* JDHeatmapPointCreator.swift */; };
 		7991886B24B618AE008F0EA5 /* IntervalRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7991886A24B618AE008F0EA5 /* IntervalRowController.swift */; };
 		7994126F255AB9230062AC0D /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7994126E255AB9230062AC0D /* Objects.swift */; };
 		7996ADE925682D5D00C25196 /* CustomIntervalsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7996ADE825682D5D00C25196 /* CustomIntervalsInterfaceController.swift */; };
@@ -190,6 +197,13 @@
 		797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTypeTableViewCell.swift; sourceTree = "<group>"; };
 		7980929C252F386300DF1562 /* HeatmapperWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapperWorkout.swift; sourceTree = "<group>"; };
 		7989157125605679004983BD /* WorkoutInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInterfaceController.swift; sourceTree = "<group>"; };
+		799131232634126800811731 /* HeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapViewController.swift; sourceTree = "<group>"; };
+		799131282634145F00811731 /* JDRealHeatmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDRealHeatmap.swift; sourceTree = "<group>"; };
+		7991312D2634148E00811731 /* JDHeatmapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapManager.swift; sourceTree = "<group>"; };
+		79913132263414B600811731 /* JDColorMixer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDColorMixer.swift; sourceTree = "<group>"; };
+		79913137263414CA00811731 /* JDOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDOverlay.swift; sourceTree = "<group>"; };
+		7991313C263414E800811731 /* JDHeatmapOverlayRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapOverlayRenderer.swift; sourceTree = "<group>"; };
+		799131412634151700811731 /* JDHeatmapPointCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapPointCreator.swift; sourceTree = "<group>"; };
 		7991886A24B618AE008F0EA5 /* IntervalRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalRowController.swift; sourceTree = "<group>"; };
 		7994126E255AB9230062AC0D /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		7996ADE825682D5D00C25196 /* CustomIntervalsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIntervalsInterfaceController.swift; sourceTree = "<group>"; };
@@ -350,6 +364,7 @@
 		793D1AE024B86C1B0039441B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				799131232634126800811731 /* HeatmapViewController.swift */,
 				79ADB48A262640E3007BF946 /* TrackerViewController.swift */,
 				7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */,
 				7935629425B31431006BBC54 /* BartyCrouch.swift */,
@@ -369,6 +384,12 @@
 		793D1AE124B86C310039441B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				799131282634145F00811731 /* JDRealHeatmap.swift */,
+				7991312D2634148E00811731 /* JDHeatmapManager.swift */,
+				79913132263414B600811731 /* JDColorMixer.swift */,
+				79913137263414CA00811731 /* JDOverlay.swift */,
+				7991313C263414E800811731 /* JDHeatmapOverlayRenderer.swift */,
+				799131412634151700811731 /* JDHeatmapPointCreator.swift */,
 				797BFD092542B72800426185 /* MyFunc_iOS.swift */,
 				79B80BD2253DDB8300BEA10F /* SceneDelegate.swift */,
 				79A4EFAC24A0AF45002A7870 /* AppDelegate.swift */,
@@ -737,6 +758,7 @@
 				797E7C062575312500EAE473 /* IntervalTypeTableViewCell.swift in Sources */,
 				79D083BE250A0C0900274F79 /* Extensions.swift in Sources */,
 				7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */,
+				799131292634145F00811731 /* JDRealHeatmap.swift in Sources */,
 				79A4EFFE24A89063002A7870 /* FartlekTableViewCell.swift in Sources */,
 				793D1AD624B855540039441B /* CommandStatus.swift in Sources */,
 				793D1AD424B854EB0039441B /* SessionDelegator.swift in Sources */,
@@ -747,19 +769,25 @@
 				79A4EFF624A7A109002A7870 /* WorkoutViewController.swift in Sources */,
 				793D1ADC24B868840039441B /* SessionCommands.swift in Sources */,
 				797BFD0A2542B72800426185 /* MyFunc_iOS.swift in Sources */,
+				799131422634151700811731 /* JDHeatmapPointCreator.swift in Sources */,
 				79D083B42508EF6400274F79 /* MainMenuViewController.swift in Sources */,
 				79B80BD3253DDB8300BEA10F /* SceneDelegate.swift in Sources */,
 				79FB27872561984000E1C9AD /* Objects.swift in Sources */,
+				79913133263414B600811731 /* JDColorMixer.swift in Sources */,
 				7935622825AF53C5006BBC54 /* HelpViewController.swift in Sources */,
+				799131242634126800811731 /* HeatmapViewController.swift in Sources */,
 				79D083B82509255A00274F79 /* ThemeKit App Classes.swift in Sources */,
+				7991313D263414E800811731 /* JDHeatmapOverlayRenderer.swift in Sources */,
 				79A4EFF924A7F1AF002A7870 /* Interval.swift in Sources */,
 				7935629525B31431006BBC54 /* BartyCrouch.swift in Sources */,
 				79D083BA250925A800274F79 /* ThemeKit Themes.swift in Sources */,
 				793D1AEF24B87F110039441B /* SessionTransfer.swift in Sources */,
 				79ADB48B262640E3007BF946 /* TrackerViewController.swift in Sources */,
 				79A4EFAD24A0AF45002A7870 /* AppDelegate.swift in Sources */,
+				7991312E2634148E00811731 /* JDHeatmapManager.swift in Sources */,
 				793D1AF224B87FAD0039441B /* FileTransferObservers.swift in Sources */,
 				79D083B6250924C500274F79 /* ThemeKit Theme.swift in Sources */,
+				79913138263414CA00811731 /* JDOverlay.swift in Sources */,
 				79201489254343BD00212051 /* MyFunc.swift in Sources */,
 				79BED1AA256AAEED0052B160 /* SetIntervalsViewController.swift in Sources */,
 				793D1AE624B86E6F0039441B /* CustomLogger.swift in Sources */,

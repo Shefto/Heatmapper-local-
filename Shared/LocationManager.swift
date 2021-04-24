@@ -16,6 +16,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
   public static var sharedInstance = LocationManager()
   let locationManager: CLLocationManager
   public var locationDataArray: [CLLocation]
+  public var locationDataAsCoordinates: [CLLocationCoordinate2D]
   var useFilter: Bool
 
 
@@ -29,6 +30,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     locationManager.allowsBackgroundLocationUpdates = true
     locationManager.pausesLocationUpdatesAutomatically = false
     locationDataArray = [CLLocation]()
+    locationDataAsCoordinates = [CLLocationCoordinate2D]()
 
     useFilter = true
 
@@ -52,7 +54,11 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
   func stopUpdatingLocation(){
     if CLLocationManager.locationServicesEnabled(){
       locationManager.stopUpdatingLocation()
-    } 
+    }
+    MyFunc.logMessage(.debug, "locations captured:")
+    MyFunc.logMessage(.debug, String(describing: locationDataArray))
+    locationDataAsCoordinates = locationDataArray.map {$0.coordinate}
+    MyFunc.logMessage(.debug, String(describing: locationDataAsCoordinates))
   }
 
   //MARK: CLLocationManagerDelegate protocol methods
