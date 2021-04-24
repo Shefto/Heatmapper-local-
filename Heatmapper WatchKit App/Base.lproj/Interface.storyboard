@@ -207,10 +207,10 @@
             </objects>
             <point key="canvasLocation" x="353" y="258"/>
         </scene>
-        <!--Countdown-->
+        <!--Countdown Interface Controller-->
         <scene sceneID="dcI-Q6-YSa">
             <objects>
-                <controller identifier="Countdown" fullScreen="YES" id="GYi-kF-hRv" customClass="CountdownInterfaceController" customModule="Heatmapper_WatchKit_Extension">
+                <controller identifier="Countdown Interface Controller" fullScreen="YES" id="GYi-kF-hRv" customClass="CountdownInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
                         <label alignment="center" verticalAlignment="center" text="0:00.0" textAlignment="center" id="N6n-mH-eyk" userLabel="Current Duration">
                             <color key="textColor" name="navBarTitle"/>
@@ -224,10 +224,10 @@
             </objects>
             <point key="canvasLocation" x="-93" y="587"/>
         </scene>
-        <!--Actions-->
+        <!--Actions Interface Controller-->
         <scene sceneID="fRU-Jn-0wP">
             <objects>
-                <controller identifier="ActionsInterfaceController" title="Actions" spacing="0.0" id="lNe-R1-skF" customClass="ActionsInterfaceController" customModule="Heatmapper_WatchKit_Extension">
+                <controller identifier="ActionsInterfaceController" title="Actions Interface Controller" spacing="0.0" id="lNe-R1-skF" customClass="ActionsInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
                         <group width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="i2s-F1-0BP">
                             <items>
@@ -292,10 +292,10 @@
             </objects>
             <point key="canvasLocation" x="-411" y="-345"/>
         </scene>
-        <!--Intervals-->
+        <!--Intervals Interface Controller-->
         <scene sceneID="pw0-Vm-sDg">
             <objects>
-                <controller identifier="IntervalsTableController" title="Intervals" contentMode="center" id="rVq-WF-y7O" customClass="IntervalsInterfaceController" customModule="Heatmapper_WatchKit_Extension">
+                <controller identifier="IntervalsTableController" title="Intervals Interface Controller" contentMode="center" id="rVq-WF-y7O" customClass="IntervalsInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
                         <button width="1" height="0.20000000000000001" alignment="center" verticalAlignment="bottom" title="Main Menu" id="KxN-K1-Tzz">
                             <color key="titleColor" name="navBarTitle"/>
@@ -317,7 +317,7 @@
         <!--Workout-->
         <scene sceneID="snv-p0-L5R">
             <objects>
-                <controller identifier="WorkoutInterfaceController" title="Heatmapper" spacing="0.0" id="D9c-Tu-1WM" userLabel="Workout" customClass="WorkoutInterfaceController" customModule="Heatmapper_WatchKit_Extension">
+                <controller identifier="WorkoutInterfaceController" title="Workout Interface Controller" spacing="0.0" id="D9c-Tu-1WM" userLabel="Workout" customClass="WorkoutInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
                         <group width="1" height="1" alignment="center" verticalAlignment="center" spacing="0.0" id="rEe-oT-nag" userLabel="Full Screen Group">
                             <items>

@@ -4,7 +4,7 @@
 /* Class = "WKInterfaceLabel"; text = "km/h"; ObjectID = "C8l-vd-Q5H"; */
 "C8l-vd-Q5H.text" = "km/h";
 
-/* Class = "WKInterfaceController"; title = "Heatmapper"; ObjectID = "D9c-Tu-1WM"; */
+/* Class = "WKInterfaceController"; title = "Workout Interface Controller"; ObjectID = "D9c-Tu-1WM"; */
 "D9c-Tu-1WM.title" = "Heatmapper";
 
 /* Class = "WKInterfaceLabel"; text = "0"; ObjectID = "GW3-IV-ZxQ"; */
@@ -40,7 +40,7 @@
 /* Class = "WKInterfaceLabel"; text = "End"; ObjectID = "jqC-QP-JrC"; */
 "jqC-QP-JrC.text" = "Fin";
 
-/* Class = "WKInterfaceController"; title = "Actions"; ObjectID = "lNe-R1-skF"; */
+/* Class = "WKInterfaceController"; title = "Actions Interface Controller"; ObjectID = "lNe-R1-skF"; */
 "lNe-R1-skF.title" = "Actions";
 
 /* Class = "WKInterfaceLabel"; text = "bpm"; ObjectID = "lQf-3x-diN"; */
@@ -49,7 +49,7 @@
 /* Class = "WKInterfaceController"; title = "Heatmapper"; ObjectID = "m1S-hZ-N2T"; */
 "m1S-hZ-N2T.title" = "Heatmapper";
 
-/* Class = "WKInterfaceController"; title = "Intervals"; ObjectID = "rVq-WF-y7O"; */
+/* Class = "WKInterfaceController"; title = "Intervals Interface Controller"; ObjectID = "rVq-WF-y7O"; */
 "rVq-WF-y7O.title" = "Intervalles";
 
 /* Class = "WKInterfaceLabel"; text = "0"; ObjectID = "yDY-jz-bfN"; */

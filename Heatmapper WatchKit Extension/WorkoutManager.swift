@@ -150,7 +150,7 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
     // Wait for the session to transition states before ending the builder.
     /// - Tag: SaveWorkout
     if toState == .ended {
-      print("The workout has now ended.")
+      MyFunc.logMessage(.debug, "The workout has now ended.")
       builder.endCollection(withEnd: Date()) { (success, error) in
         self.builder.finishWorkout { (workout, error) in
           // Optionally display a workout summary to the user.

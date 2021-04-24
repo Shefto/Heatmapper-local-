@@ -19,7 +19,7 @@ protocol WorkoutManagerDelegate {
   func labelForQuantityType(_ type: HKQuantityType) -> WKInterfaceLabel?
 }
 
-class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCommands, CLLocationManagerDelegate, WorkoutManagerDelegate {
+class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCommands, /*CLLocationManagerDelegate,*/ WorkoutManagerDelegate {
 
 //  let audio                 = Audio()
   
@@ -69,25 +69,10 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   //  var activityType                 = ActivityType()
   
   // Core Location variables
-  let locationManager             = CLLocationManager()
-  var locationArray               : [CLLocationCoordinate2D] = []
-  
-  // Core Motion variables
-  //  var currentMotionType: String = ""
-  //  var previousMotionType: String = ""
-  //  var previousMotionTypeForUpdate: String = ""
-  //  var currentManualMotionType: String = ""
-  //  var previousManualMotionType: String = ""
-  //  var confidenceThreshold: Int = 1
-  //  var currentConfidence: Int = 0
-  //  var previousConfidence: Int = 0
-  let pedometer                   = CMPedometer()
-//  let motionActivityManager       = CMMotionActivityManager()
+//  let locationManager             = LocationManager()
+//  var locationArray               : [CLLocationCoordinate2D] = []
 
-  //  var previousStationary: Bool = false
-  //  var previousWalking: Bool = false
-  //  var previousRunning: Bool = false
-  //
+  let pedometer                   = CMPedometer()
 
   // log variables
   var log: String = ""
@@ -155,12 +140,12 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     
     addNotificationObservers()
 
-    // set VC as CLLocationManager delegate
-    locationManager.delegate = self
-    locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-    locationManager.activityType = .fitness
-    locationManager.distanceFilter = kCLDistanceFilterNone
-    locationManager.allowsBackgroundLocationUpdates = true
+//    // set VC as CLLocationManager delegate
+//    locationManager.delegate = self
+//    locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+//    locationManager.activityType = .fitness
+//    locationManager.distanceFilter = kCLDistanceFilterNone
+//    locationManager.allowsBackgroundLocationUpdates = true
 
     workoutManager.delegate = self
 
@@ -189,7 +174,7 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
 
     // start workout for Workout Manager
     workoutManager.startWorkout()
-    locationManager.startUpdatingLocation()
+    LocationManager.sharedInstance.startUpdatingLocation()
     
     // check if pedometer data is available, if so start updates
     if CMPedometer.isPedometerEventTrackingAvailable() {
@@ -206,8 +191,6 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
         
       })
     }
-
-
 
     MyFunc.logMessage(.debug, "startWorkout : fartlekTimer.start()")
     workoutTimer.start()
@@ -241,7 +224,7 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
  
   @objc func speakStartingWorkout(_ timer: Timer) {
     if workoutTimer.isRunning == true {
-      let startPhraseLocalized = NSLocalizedString("Starting workout now", comment: "")
+//      let startPhraseLocalized = NSLocalizedString("Starting workout now", comment: "")
 //      audio.speak(phrase: startPhraseLocalized)
     }
   }
@@ -265,6 +248,7 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     }
 
     workoutEndDate = intervalEndDate
+
     if workoutTimer.isRunning {
       workoutTimer.stop()
       workoutPausedDate = Date()
@@ -280,30 +264,17 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
 
     // record the final interval and stop location and motion updates
     addInterval(startDate: intervalStartDate!, endDate: workoutEndDate!, duration: workoutDurationTimeInterval, finalInterval: true)
-    locationManager.stopUpdatingLocation()
+    workoutManager.endDataCollection(date: Date())
+//    workoutManager.endWorkout()
+    LocationManager.sharedInstance.stopUpdatingLocation()
+
     pedometer.stopUpdates()
-    locationManager.stopUpdatingHeading()
-    
-    // add code to include final Interval
-//    workoutDuration = DateInterval(start: workoutStartDate!, end: workoutEndDate!)
-    
-    // create Workout Events for each Interval
-    //    for fartlek in 0..<FartlekWorkout.intervalArray.count {
-    //      let fartlekInterval = FartlekWorkout.intervalArray[fartlek]
-    //      // note : Event metadata does not appear to be visible through Health app; adding for completeness
-    //      let fartlekEvent = HKWorkoutEvent(type: HKWorkoutEventType.segment, dateInterval: fartlekInterval.duration!, metadata: ["Type": fartlekInterval.activity])
-    //      workoutEventArray.append(fartlekEvent)
-    //    }
-    
-    //    workoutManager.addWorkoutEvents(eventArray: workoutEventArray)
-    
+
     self.exportLog()
     
     DispatchQueue.main.async {
       self.displayAlert(title: "Workout saved", message: "")
-
-      WKInterfaceController.reloadRootPageControllers(withNames: ["IntervalsTableController"], contexts: ["workoutEnded"], orientation: WKPageOrientation.horizontal, pageIndex: 0)
-      
+//      WKInterfaceController.reloadRootPageControllers(withNames: ["IntervalsTableController"], contexts: ["workoutEnded"], orientation: WKPageOrientation.horizontal, pageIndex: 0)
     }
     
     
@@ -319,7 +290,7 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     workoutManager.pauseWorkout()
     //    session.pause()
 //    audio.stopSpeaking()
-    let pausePhrase = NSLocalizedString("Workout paused", comment: "")
+//    let pausePhrase = NSLocalizedString("Workout paused", comment: "")
 //    audio.speak(phrase: pausePhrase)
     intervalTimer.invalidate()
 
@@ -369,19 +340,21 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   }
   
   // Core Location code to get the current location
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    
-    let currentLocation = locations[locations.count - 1]
-    let locationStr = String(describing: currentLocation)
-    locationLabel.setText(locationStr)
-    MyFunc.logMessage(.debug, "Current Location Found: \(currentLocation)")
-
-
+//  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//
+//    let currentLocation = locations[locations.count - 1]
+//    let locationStr = String(describing: currentLocation)
+//    locationLabel.setText(locationStr)
+//    MyFunc.logMessage(.debug, "Current Location Found: \(currentLocation)")
+//
+//
 //    if currentLocation.horizontalAccuracy <= 50.0 {
-      locationArray.append(currentLocation.coordinate)
-      MyFunc.logMessage(.debug, "Appended currentLocation \(currentLocation) to locationArray")
-      MyFunc.logMessage(.debug, "locationArray:")
-      MyFunc.logMessage(.debug, String(describing: locationArray))
+//    LocationManager.sharedInstance.locationDataAsCoordinates.append(currentLocation.coordinate)
+//    LocationManager.sharedInstance.locationDataArray.append(currentLocation)
+//      locationArray.append(currentLocation.coordinate)
+//      MyFunc.logMessage(.debug, "Appended currentLocation \(currentLocation) to locationArray")
+//      MyFunc.logMessage(.debug, "locationArray:")
+//      MyFunc.logMessage(.debug, String(describing: LocationManager.sharedInstance.locationDataArray))
 //    }
 
 //    // Filter the raw data.
@@ -399,12 +372,12 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
 //        MyFunc.logMessage(.error, "Error inserting Route data: \(String(describing: error))")
 //      }
 //    }
-  }
-  
-  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    MyFunc.logMessage(.error, "Error attempting to get Location: \(error)")
-  }
-  
+//  }
+//
+//  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//    MyFunc.logMessage(.error, "Error attempting to get Location: \(error)")
+//  }
+//
   func displayAlert (title: String, message: String) {
     var nextController = "MainMenuInterfaceController"
     //    if activityType == .auto {

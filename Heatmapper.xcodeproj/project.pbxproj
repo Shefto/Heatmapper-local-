@@ -55,6 +55,7 @@
 		79913138263414CA00811731 /* JDOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79913137263414CA00811731 /* JDOverlay.swift */; };
 		7991313D263414E800811731 /* JDHeatmapOverlayRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7991313C263414E800811731 /* JDHeatmapOverlayRenderer.swift */; };
 		799131422634151700811731 /* JDHeatmapPointCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799131412634151700811731 /* JDHeatmapPointCreator.swift */; };
+		79913152263428B900811731 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC34152625D2FC0053733C /* LocationManager.swift */; };
 		7991886B24B618AE008F0EA5 /* IntervalRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7991886A24B618AE008F0EA5 /* IntervalRowController.swift */; };
 		7994126F255AB9230062AC0D /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7994126E255AB9230062AC0D /* Objects.swift */; };
 		7996ADE925682D5D00C25196 /* CustomIntervalsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7996ADE825682D5D00C25196 /* CustomIntervalsInterfaceController.swift */; };
@@ -809,6 +810,7 @@
 				793D1AF024B87F110039441B /* SessionTransfer.swift in Sources */,
 				799BBD5D24E2CEC50009AE2D /* IntervalsInterfaceController.swift in Sources */,
 				7981D39C24BDD62500E5D9E7 /* Interval.swift in Sources */,
+				79913152263428B900811731 /* LocationManager.swift in Sources */,
 				7980929D252F386300DF1562 /* HeatmapperWorkout.swift in Sources */,
 				79C657792559A6B900E6DBCE /* SetIntervalsInterfaceController.swift in Sources */,
 				79DC8A7B253981C6006965D5 /* MyFunc.swift in Sources */,

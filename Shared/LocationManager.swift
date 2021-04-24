@@ -8,7 +8,7 @@
 //  This class manages the CLLocationManager
 
 
-import UIKit
+import Foundation
 import CoreLocation
 
 public class LocationManager: NSObject, CLLocationManagerDelegate {
@@ -28,7 +28,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
 
     locationManager.requestWhenInUseAuthorization()
     locationManager.allowsBackgroundLocationUpdates = true
-    locationManager.pausesLocationUpdatesAutomatically = false
+//    locationManager.pausesLocationUpdatesAutomatically = false
     locationDataArray = [CLLocation]()
     locationDataAsCoordinates = [CLLocationCoordinate2D]()
 
