@@ -133,6 +133,12 @@
 /* Class = "UILabel"; text = "1"; ObjectID = "zWl-Nq-DLb"; */
 "zWl-Nq-DLb.text" = "1";
 
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "2qh-aF-wqP"; */
+"2qh-aF-wqP.text" = "";
+
+/* Class = "UIButton"; normalTitle = "Workout History"; ObjectID = "ape-0k-33h"; */
+"ape-0k-33h.normalTitle" = "";
+
 /* Class = "UIViewController"; title = "Tracker"; ObjectID = "cbs-Dv-Qaf"; */
 "cbs-Dv-Qaf.title" = "";
 
@@ -157,6 +163,9 @@
 /* Class = "UISegmentedControl"; KZh-Fy-Ydb.segmentTitles[3] = "mins/mi"; ObjectID = "KZh-Fy-Ydb"; */
 "KZh-Fy-Ydb.segmentTitles[3]" = "";
 
+/* Class = "UIViewController"; title = "Workout History"; ObjectID = "nCc-eF-wC1"; */
+"nCc-eF-wC1.title" = "";
+
 /* Class = "UILabel"; text = "Sets"; ObjectID = "oeg-Ph-BrI"; */
 "oeg-Ph-BrI.text" = "";
 
@@ -177,3 +186,6 @@
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "YiQ-y2-7yO"; */
 "YiQ-y2-7yO.title" = "";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "ZI9-5f-WrO"; */
+"ZI9-5f-WrO.text" = "";

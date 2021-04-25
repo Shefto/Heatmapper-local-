@@ -19,10 +19,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lep-Yn-iYr">
-                                <rect key="frame" x="5" y="727" width="404" height="130"/>
+                                <rect key="frame" x="5" y="677" width="404" height="180"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ape-0k-33h" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="54.5"/>
+                                        <color key="backgroundColor" name="buttonPrimary"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                        <state key="normal" title="Workout History"/>
+                                        <connections>
+                                            <action selector="btnHistory:" destination="hJk-zi-pgB" eventType="touchUpInside" id="kdG-mH-Xe2"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-uM-bXg" userLabel="Start Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="61"/>
+                                        <rect key="frame" x="0.0" y="62.5" width="404" height="55"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -34,7 +45,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="uxy-2h-68R" userLabel="Heatmap Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="69" width="404" height="61"/>
+                                        <rect key="frame" x="0.0" y="125.5" width="404" height="54.5"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -46,7 +57,7 @@
                                         </connections>
                                     </button>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hA5-ad-xJt" userLabel="Left Stack View">
-                                        <rect key="frame" x="0.0" y="130" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="180" width="404" height="0.0"/>
                                         <subviews>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="YxN-xL-3iB" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="192" height="0.0"/>
@@ -84,7 +95,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IXf-4o-Sgd" userLabel="Right Stack View">
-                                        <rect key="frame" x="0.0" y="130" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="180" width="404" height="0.0"/>
                                         <subviews>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="za3-ag-cd4" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="404" height="0.0"/>
@@ -123,7 +134,7 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="a8S-c8-xdU"/>
+                                    <constraint firstAttribute="height" constant="180" id="a8S-c8-xdU"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -147,6 +158,7 @@
                         <segue destination="frC-6c-YjY" kind="show" identifier="mainMenuToSetIntervals" id="2SS-Uv-abN"/>
                         <segue destination="zdE-91-MXU" kind="show" identifier="mainMenuToWorkout" id="Q0p-vW-Fa8"/>
                         <segue destination="lih-U6-K2w" kind="show" identifier="startToSettings" id="0Zd-nq-pHV"/>
+                        <segue destination="nCc-eF-wC1" kind="show" identifier="mainMenuToHistory" id="jsl-Go-fze"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pbN-s5-nYY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1277,6 +1289,68 @@
             </objects>
             <point key="canvasLocation" x="1430" y="883"/>
         </scene>
+        <!--Workout History-->
+        <scene sceneID="QA9-GD-v8L">
+            <objects>
+                <viewController title="Workout History" id="nCc-eF-wC1" customClass="WorkoutHistoryViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jzf-ZE-0cG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lyd-aS-nH0">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aWN-Ek-5D4" userLabel="Workout Table View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <prototypes>
+                                            <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="workoutCell" textLabel="ZI9-5f-WrO" detailTextLabel="2qh-aF-wqP" style="IBUITableViewCellStyleSubtitle" id="j1U-7R-s18">
+                                                <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j1U-7R-s18" id="jWW-7l-zu1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZI9-5f-WrO">
+                                                            <rect key="frame" x="20" y="10" width="33" height="20.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2qh-aF-wqP">
+                                                            <rect key="frame" x="20" y="31.5" width="44" height="14.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WH7-4d-ehI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lyd-aS-nH0" firstAttribute="leading" secondItem="WH7-4d-ehI" secondAttribute="leading" id="1r2-E6-NTT"/>
+                            <constraint firstItem="WH7-4d-ehI" firstAttribute="trailing" secondItem="lyd-aS-nH0" secondAttribute="trailing" id="PPW-7N-BTj"/>
+                            <constraint firstItem="WH7-4d-ehI" firstAttribute="bottom" secondItem="lyd-aS-nH0" secondAttribute="bottom" id="WNO-S0-PfF"/>
+                            <constraint firstItem="lyd-aS-nH0" firstAttribute="top" secondItem="WH7-4d-ehI" secondAttribute="top" id="mpM-ss-lwh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="gOK-0r-wdZ"/>
+                    <connections>
+                        <outlet property="workoutTableView" destination="aWN-Ek-5D4" id="umP-Hq-edH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UC3-lr-6fG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2300" y="820"/>
+        </scene>
         <!--Help-->
         <scene sceneID="DQ6-Bi-w9U">
             <objects>
@@ -1592,7 +1666,7 @@ DQoNCg
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2KX-NX-yjK"/>
+        <segue reference="Q0p-vW-Fa8"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Cool down" width="662" height="643"/>

@@ -56,6 +56,7 @@
 		7991313D263414E800811731 /* JDHeatmapOverlayRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7991313C263414E800811731 /* JDHeatmapOverlayRenderer.swift */; };
 		799131422634151700811731 /* JDHeatmapPointCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799131412634151700811731 /* JDHeatmapPointCreator.swift */; };
 		79913152263428B900811731 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC34152625D2FC0053733C /* LocationManager.swift */; };
+		79913163263490D900811731 /* WorkoutHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79913162263490D900811731 /* WorkoutHistoryViewController.swift */; };
 		7991886B24B618AE008F0EA5 /* IntervalRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7991886A24B618AE008F0EA5 /* IntervalRowController.swift */; };
 		7994126F255AB9230062AC0D /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7994126E255AB9230062AC0D /* Objects.swift */; };
 		7996ADE925682D5D00C25196 /* CustomIntervalsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7996ADE825682D5D00C25196 /* CustomIntervalsInterfaceController.swift */; };
@@ -205,6 +206,7 @@
 		79913137263414CA00811731 /* JDOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDOverlay.swift; sourceTree = "<group>"; };
 		7991313C263414E800811731 /* JDHeatmapOverlayRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapOverlayRenderer.swift; sourceTree = "<group>"; };
 		799131412634151700811731 /* JDHeatmapPointCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapPointCreator.swift; sourceTree = "<group>"; };
+		79913162263490D900811731 /* WorkoutHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryViewController.swift; sourceTree = "<group>"; };
 		7991886A24B618AE008F0EA5 /* IntervalRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalRowController.swift; sourceTree = "<group>"; };
 		7994126E255AB9230062AC0D /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		7996ADE825682D5D00C25196 /* CustomIntervalsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIntervalsInterfaceController.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 		793D1AE024B86C1B0039441B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				79913162263490D900811731 /* WorkoutHistoryViewController.swift */,
 				799131232634126800811731 /* HeatmapViewController.swift */,
 				79ADB48A262640E3007BF946 /* TrackerViewController.swift */,
 				7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */,
@@ -771,6 +774,7 @@
 				793D1ADC24B868840039441B /* SessionCommands.swift in Sources */,
 				797BFD0A2542B72800426185 /* MyFunc_iOS.swift in Sources */,
 				799131422634151700811731 /* JDHeatmapPointCreator.swift in Sources */,
+				79913163263490D900811731 /* WorkoutHistoryViewController.swift in Sources */,
 				79D083B42508EF6400274F79 /* MainMenuViewController.swift in Sources */,
 				79B80BD3253DDB8300BEA10F /* SceneDelegate.swift in Sources */,
 				79FB27872561984000E1C9AD /* Objects.swift in Sources */,

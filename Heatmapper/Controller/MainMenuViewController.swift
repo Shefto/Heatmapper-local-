@@ -42,6 +42,10 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
 
   var activityType = ActivityType()
 
+  @IBAction func btnHistory(_ sender: Any) {
+    performSegue(withIdentifier: "mainMenuToHistory", sender: nil)
+  }
+  
   @IBAction func btnMatch(_ sender: Any) {
   }
   
