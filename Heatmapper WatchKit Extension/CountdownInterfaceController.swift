@@ -85,7 +85,7 @@ class CountdownInterfaceController: WKInterfaceController {
       }
 
     } else {
-      let beginPhraseLocalized = NSLocalizedString("Begin activity", comment: "")
+//      let beginPhraseLocalized = NSLocalizedString("Begin activity", comment: "")
 //      audio.speak(phrase: beginPhraseLocalized)
       countdownTimerLabel.setText("00:00")
       countdownTimer.invalidate()

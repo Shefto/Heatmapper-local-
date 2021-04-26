@@ -315,7 +315,7 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
       self.becomeCurrentPage()
     }
 //    audio.stopSpeaking()
-    let resumePhraseLocalized = NSLocalizedString("Resuming workout", comment: "Resuming workout")
+//    let resumePhraseLocalized = NSLocalizedString("Resuming workout", comment: "Resuming workout")
 //    audio.speak(phrase: resumePhraseLocalized)
     
     workoutManager.resumeWorkout()

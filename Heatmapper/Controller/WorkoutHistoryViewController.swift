@@ -29,7 +29,7 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     workoutTableView.delegate = self
     loadWorkouts { (workouts, error) in
       self.workouts = workouts
-      //      self.tableView.reloadData()
+      self.workoutTableView.reloadData()
     }
     MyFunc.logMessage(.debug, "Workouts:")
     MyFunc.logMessage(.debug, String(describing: workouts))
@@ -77,24 +77,24 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
   func loadWorkouts(completion:
                       @escaping ([HKWorkout]?, Error?) -> Void) {
     //1. Get all workouts with the "Other" activity type.
-    let workoutPredicate = HKQuery.predicateForWorkouts(with: .running)
+//    let workoutPredicate = HKQuery.predicateForWorkouts(with: .running)
 
     //2. Get all workouts that only came from this app.
     let sourcePredicate = HKQuery.predicateForObjects(from: .default())
 
     //3. Combine the predicates into a single predicate.
-    let compound = NSCompoundPredicate(andPredicateWithSubpredicates:
-                                        [workoutPredicate, sourcePredicate])
+//    let compound = NSCompoundPredicate(andPredicateWithSubpredicates:
+//                                        [workoutPredicate, sourcePredicate])
 
     let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate,
-                                          ascending: true)
+                                          ascending: false)
 
     let query = HKSampleQuery(
       sampleType: .workoutType(),
       predicate: sourcePredicate,
       limit: 0,
       sortDescriptors: [sortDescriptor]) { (query, samples, error) in
-//      DispatchQueue.main.async {
+      DispatchQueue.main.async {
         //4. Cast the samples as HKWorkout
         guard
           let samples = samples as? [HKWorkout],
@@ -105,7 +105,7 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
         }
 
         completion(samples, nil)
-//      }
+      }
     }
 
     HKHealthStore().execute(query)

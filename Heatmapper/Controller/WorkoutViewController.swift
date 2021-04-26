@@ -1153,7 +1153,7 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
     let currentLocation = locations[locations.count - 1]
-    let locationStr = String(describing: currentLocation)
+//    let locationStr = String(describing: currentLocation)
     MyFunc.logMessage(.debug, "Current Location Found: \(currentLocation)")
 
     // Filter the raw data.
