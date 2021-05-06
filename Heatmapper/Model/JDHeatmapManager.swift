@@ -129,7 +129,8 @@ class JDHeatMapManager: NSObject
     } // func refresh
 
     if (maxHeatLevelInMap == 0) {
-      fatalError("Max Heat level should not be 0")
+//      fatalError("Max Heat level should not be 0")
+      print("Max Heat level should not be 0")
     }
 
     // this function reduces the overlay size to fit just the points

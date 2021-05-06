@@ -172,13 +172,16 @@
 /* Class = "UIViewController"; title = "Workout History"; ObjectID = "nCc-eF-wC1"; */
 "nCc-eF-wC1.title" = "";
 
-/* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "onG-Ft-Fwy"; */
+/* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "onG-Ft-Fwy"; */
 "onG-Ft-Fwy.normalTitle" = "";
+
+/* Class = "UIButton"; normalTitle = "Query"; ObjectID = "otY-60-lHh"; */
+"otY-60-lHh.normalTitle" = "";
 
 /* Class = "UIButton"; normalTitle = "Heatmap"; ObjectID = "uxy-2h-68R"; */
 "uxy-2h-68R.normalTitle" = "";
 
-/* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "vYH-Sc-0gd"; */
+/* Class = "UIButton"; normalTitle = "Radius Blurry"; ObjectID = "vYH-Sc-0gd"; */
 "vYH-Sc-0gd.normalTitle" = "";
 
 /* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "xKN-Nz-x6z"; */

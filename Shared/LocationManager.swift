@@ -104,6 +104,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
 
     print("Location quality is good enough.")
     locationDataArray.append(location)
+//    locationDataAsCoordinates.append(location.coordinate)
 
     return true
 

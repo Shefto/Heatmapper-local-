@@ -46,6 +46,12 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
     performSegue(withIdentifier: "mainMenuToHistory", sender: nil)
   }
   
+  @IBAction func btnQuery(_ sender: Any) {
+
+    executeQuery()
+  }
+
+
   @IBAction func btnMatch(_ sender: Any) {
   }
   
@@ -373,6 +379,72 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
       updateApplicationContextForUserDefault(["Location": location])
     }
 
+  }
+
+
+  func executeQuery() {
+
+    let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate,
+                                          ascending: false)
+    let calendar = Calendar.current
+    let startDateComponents = DateComponents(calendar: calendar, year: 2021, month: 04, day: 24)
+    let endDateComponents = DateComponents(calendar: calendar, year: 2021, month: 04, day: 29)
+    let startDate = calendar.date(from: startDateComponents)
+    let endDate = calendar.date(from: endDateComponents)
+
+    let mostRecentPredicate = HKQuery.predicateForSamples(withStart: startDate , end: endDate, options: [] )
+    let myAppPredicate = HKQuery.predicateForObjects(from: HKSource.default()) // This would retrieve only my app's data
+    let notMyAppPredicate = NSCompoundPredicate(notPredicateWithSubpredicate: myAppPredicate) // This will retrieve everything but my app's data
+    let queryPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [mostRecentPredicate, notMyAppPredicate])
+    //
+    //    let sampleQuery = HKSampleQuery(sampleType: .workoutType(), predicate: queryPredicate, limit: 0, sortDescriptors: [sortDescriptor]) {
+    //
+    //      (query, samples, error) in
+    //      DispatchQueue.main.async {
+    //        //4. Cast the samples as HKWorkout
+    //        //        var sampleArray = [HKWorkout]()
+    //        guard
+    //          let samples = samples as? [HKWorkout],
+    //          error == nil
+    //
+    //
+    //        else {
+    //
+    //          return
+    //        }
+    //        MyFunc.logMessage(.debug, "samples")
+    //        MyFunc.logMessage(.debug, String(describing: samples))
+    //
+    //      }
+    //      // Process results here...
+
+    //    }
+
+    let query = HKSampleQuery(
+      sampleType: .workoutType(),
+      predicate: nil,
+      limit: 0,
+      sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+      DispatchQueue.main.async {
+        //4. Cast the samples as HKWorkout
+        //        var sampleArray = [HKWorkout]()
+        guard
+          let samples = samples as? [HKWorkout],
+          error == nil
+
+
+        else {
+
+          return
+        }
+        MyFunc.logMessage(.debug, "samples")
+        MyFunc.logMessage(.debug, String(describing: samples))
+
+      }
+    }
+
+    healthStore.execute(query)
+    
   }
 
 

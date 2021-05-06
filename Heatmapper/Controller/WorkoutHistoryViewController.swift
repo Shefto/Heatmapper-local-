@@ -11,14 +11,17 @@ import HealthKit
 
 class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-  private var workouts: [HKWorkout]?
+  private var workoutArray: [HKWorkout]?
   private let workoutCellId = "workoutCell"
+  var workoutId : UUID?
+
+  let healthstore = HKHealthStore()
   lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.timeStyle = .short
     formatter.dateStyle = .medium
     return formatter
-  }()
+  } ()
 
 
   @IBOutlet weak var workoutTableView: UITableView!
@@ -27,22 +30,36 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     super.viewDidLoad()
     workoutTableView.dataSource = self
     workoutTableView.delegate = self
+
+//    testSourceQuery()
+
     loadWorkouts { (workouts, error) in
-      self.workouts = workouts
+      self.workoutArray = workouts
+      MyFunc.logMessage(.debug, "workouts:")
+      MyFunc.logMessage(.debug, String(describing: self.workoutArray))
       self.workoutTableView.reloadData()
     }
     MyFunc.logMessage(.debug, "Workouts:")
-    MyFunc.logMessage(.debug, String(describing: workouts))
+    MyFunc.logMessage(.debug, String(describing: workoutArray))
 
   }
-  var workoutArray = [HKWorkout]()
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return workouts?.count ?? 0
+    return workoutArray?.count ?? 0
   }
 
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: false)
+    workoutId = workoutArray?[indexPath.row].uuid
+    MyFunc.logMessage(.debug, "workoutId: \(String(describing: workoutId))")
+
+    self.performSegue(withIdentifier: "historyToHeatmap", sender: workoutId)
+  }
+
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let workouts = workouts else {
+    guard let workouts = workoutArray else {
       fatalError("""
                CellForRowAtIndexPath should \
                not get called if there are no workouts
@@ -76,22 +93,13 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
 
   func loadWorkouts(completion:
                       @escaping ([HKWorkout]?, Error?) -> Void) {
-    //1. Get all workouts with the "Other" activity type.
-//    let workoutPredicate = HKQuery.predicateForWorkouts(with: .running)
-
-    //2. Get all workouts that only came from this app.
-    let sourcePredicate = HKQuery.predicateForObjects(from: .default())
-
-    //3. Combine the predicates into a single predicate.
-//    let compound = NSCompoundPredicate(andPredicateWithSubpredicates:
-//                                        [workoutPredicate, sourcePredicate])
 
     let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate,
                                           ascending: false)
 
     let query = HKSampleQuery(
       sampleType: .workoutType(),
-      predicate: sourcePredicate,
+      predicate: nil,
       limit: 0,
       sortDescriptors: [sortDescriptor]) { (query, samples, error) in
       DispatchQueue.main.async {
@@ -108,9 +116,23 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
       }
     }
 
-    HKHealthStore().execute(query)
+    healthstore.execute(query)
 
   }
+
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    let segueToUse = segue.identifier
+
+    if segueToUse == "historyToHeatmap" {
+      let destinationVC = segue.destination as! HeatmapViewController
+      destinationVC.heatmapWorkoutId = (sender as! UUID)
+    }
+
+    navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+  }
+
 
 
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="POp-b4-bg1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="POp-b4-bg1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lep-Yn-iYr">
-                                <rect key="frame" x="5" y="677" width="404" height="180"/>
+                                <rect key="frame" x="5" y="617" width="404" height="240"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ape-0k-33h" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="54.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="54"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -33,7 +33,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-uM-bXg" userLabel="Start Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="62.5" width="404" height="55"/>
+                                        <rect key="frame" x="0.0" y="62" width="404" height="54"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -45,7 +45,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="uxy-2h-68R" userLabel="Heatmap Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="125.5" width="404" height="54.5"/>
+                                        <rect key="frame" x="0.0" y="124" width="404" height="54"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -56,11 +56,22 @@
                                             <segue destination="YiQ-y2-7yO" kind="show" id="HKw-rE-IHq"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="otY-60-lHh" userLabel="Run Query" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="186" width="404" height="54"/>
+                                        <color key="backgroundColor" name="buttonPrimary"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                        <state key="normal" title="Query"/>
+                                        <connections>
+                                            <action selector="btnQuery:" destination="hJk-zi-pgB" eventType="touchUpInside" id="0sw-L3-wzq"/>
+                                        </connections>
+                                    </button>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hA5-ad-xJt" userLabel="Left Stack View">
-                                        <rect key="frame" x="0.0" y="180" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="240" width="404" height="0.0"/>
                                         <subviews>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="YxN-xL-3iB" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="192" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="176" height="0.0"/>
                                                 <color key="backgroundColor" name="buttonPrimary"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -71,7 +82,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="IJA-y3-LGF" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="192" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="176" height="0.0"/>
                                                 <color key="backgroundColor" name="buttonPrimary"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -82,7 +93,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="GYq-I3-h60" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="192" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="176" height="0.0"/>
                                                 <color key="backgroundColor" name="buttonPrimary"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -95,7 +106,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IXf-4o-Sgd" userLabel="Right Stack View">
-                                        <rect key="frame" x="0.0" y="180" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="240" width="404" height="0.0"/>
                                         <subviews>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="za3-ag-cd4" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="404" height="0.0"/>
@@ -134,7 +145,7 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="a8S-c8-xdU"/>
+                                    <constraint firstAttribute="height" constant="240" id="a8S-c8-xdU"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -224,7 +235,7 @@
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IntervalTypeTableViewCell" id="tEh-te-IXQ" customClass="IntervalTypeTableViewCell" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="404" height="44"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="404" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tEh-te-IXQ" id="gxO-q8-EbI">
                                             <rect key="frame" x="0.0" y="0.0" width="404" height="44"/>
@@ -310,16 +321,16 @@
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="BJp-pd-9C7">
-                                                        <rect key="frame" x="60" y="2" width="246" height="66"/>
+                                                        <rect key="frame" x="60" y="4" width="246" height="62.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warm up" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="wLA-TL-d2U" userLabel="Warm up Label" customClass="ThemeSmallTextUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="246" height="18"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="246" height="14.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="l23-pj-rnk" userLabel="Warm up Container View" customClass="ThemeView" customModule="Heatmapper" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="20" width="246" height="46"/>
+                                                                <rect key="frame" x="0.0" y="16.5" width="246" height="46"/>
                                                                 <subviews>
                                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8PW-4R-ULB" userLabel="Warmup Duration View">
                                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="22"/>
@@ -400,16 +411,16 @@
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="iFr-h3-ym1">
-                                                        <rect key="frame" x="60" y="2" width="246" height="66"/>
+                                                        <rect key="frame" x="60" y="4" width="246" height="62.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work" textAlignment="natural" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.65000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="aZY-vK-cHZ" userLabel="Work Label" customClass="ThemeSmallTextUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="246" height="18"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="246" height="14.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AoI-Pm-SF9" userLabel="Work Container View" customClass="ThemeView" customModule="Heatmapper" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="20" width="246" height="46"/>
+                                                                <rect key="frame" x="0.0" y="16.5" width="246" height="46"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J0v-ni-yIO" userLabel="Work Duration View">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="22"/>
@@ -485,16 +496,16 @@
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="YYa-0Q-VRI">
-                                                        <rect key="frame" x="60" y="2" width="246" height="66"/>
+                                                        <rect key="frame" x="60" y="4" width="246" height="62.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rest" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="Zqg-ub-pW7" userLabel="Rest Label" customClass="ThemeSmallTextUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="246" height="18"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="246" height="14.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AY8-Xe-rtW" userLabel="Rest Container View" customClass="ThemeView" customModule="Heatmapper" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="20" width="246" height="46"/>
+                                                                <rect key="frame" x="0.0" y="16.5" width="246" height="46"/>
                                                                 <subviews>
                                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="USc-Pk-NvM" userLabel="Rest Duration View">
                                                                         <rect key="frame" x="0.0" y="0.0" width="70" height="22"/>
@@ -570,16 +581,16 @@
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="tcV-yq-8F8">
-                                                        <rect key="frame" x="60" y="2" width="246" height="66"/>
+                                                        <rect key="frame" x="60" y="4" width="246" height="62.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cooldown" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="zst-1D-p8Q" userLabel="Cool down Label" customClass="ThemeSmallTextUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="246" height="18"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="246" height="14.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="biV-vw-L1L" userLabel="Cooldown Container View" customClass="ThemeView" customModule="Heatmapper" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="20" width="246" height="46"/>
+                                                                <rect key="frame" x="0.0" y="16.5" width="246" height="46"/>
                                                                 <subviews>
                                                                     <view clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4g9-Yg-vkU" userLabel="Cooldown Duration View">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="22"/>
@@ -953,7 +964,7 @@
                                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FartlekTableViewCell" rowHeight="50" id="wea-o7-2je">
-                                                <rect key="frame" x="0.0" y="28" width="404" height="50"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="404" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wea-o7-2je" id="8cT-uX-rQr">
                                                     <rect key="frame" x="0.0" y="0.0" width="404" height="50"/>
@@ -966,7 +977,7 @@
                                         <rect key="frame" x="0.0" y="150" width="414" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Summary" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DHp-yq-SaD" customClass="ThemeColumnHeaderUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="23.5" width="414" height="26.5"/>
+                                                <rect key="frame" x="0.0" y="27" width="414" height="23"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                                 </accessibility>
@@ -1128,7 +1139,7 @@
                                                 <rect key="frame" x="0.0" y="104" width="410" height="150"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Sets" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeg-Ph-BrI" userLabel="Sets" customClass="ThemeVeryLargeFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                        <rect key="frame" x="172.5" y="0.0" width="65.5" height="50"/>
+                                                        <rect key="frame" x="175" y="0.0" width="60" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="nGt-va-dPh"/>
                                                         </constraints>
@@ -1305,7 +1316,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="workoutCell" textLabel="ZI9-5f-WrO" detailTextLabel="2qh-aF-wqP" style="IBUITableViewCellStyleSubtitle" id="j1U-7R-s18">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="414" height="55.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j1U-7R-s18" id="jWW-7l-zu1">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
@@ -1345,6 +1356,7 @@
                     <navigationItem key="navigationItem" id="gOK-0r-wdZ"/>
                     <connections>
                         <outlet property="workoutTableView" destination="aWN-Ek-5D4" id="umP-Hq-edH"/>
+                        <segue destination="YiQ-y2-7yO" kind="show" identifier="historyToHeatmap" id="UHU-qN-G4m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UC3-lr-6fG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1624,14 +1636,14 @@ DQoNCg
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYH-Sc-0gd" userLabel="Radius Blurry">
                                         <rect key="frame" x="139.5" y="0.0" width="135" height="30"/>
-                                        <state key="normal" title="Radius Distinct"/>
+                                        <state key="normal" title="Radius Blurry"/>
                                         <connections>
                                             <action selector="ChangeToRadiusBlurry:" destination="YiQ-y2-7yO" eventType="touchUpInside" id="FFb-K2-uFj"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onG-Ft-Fwy" userLabel="Flat Distinct">
                                         <rect key="frame" x="279.5" y="0.0" width="134.5" height="30"/>
-                                        <state key="normal" title="Radius Distinct"/>
+                                        <state key="normal" title="Flat Distinct"/>
                                         <connections>
                                             <action selector="ChangeToFlatDistinct:" destination="YiQ-y2-7yO" eventType="touchUpInside" id="P5k-6A-4oa"/>
                                         </connections>
@@ -1666,6 +1678,7 @@ DQoNCg
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="HKw-rE-IHq"/>
         <segue reference="Q0p-vW-Fa8"/>
     </inferredMetricsTieBreakers>
     <resources>

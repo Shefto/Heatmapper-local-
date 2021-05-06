@@ -313,6 +313,4 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
     return quantitySample
   }
 
-
-
 }

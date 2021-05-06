@@ -8,8 +8,26 @@
 
 import UIKit
 import MapKit
+import HealthKit
 
 class HeatmapViewController: UIViewController {
+
+  let healthstore = HKHealthStore()
+  // JDHeatmapView is our custom heatmap MapView class
+  var heatMap:  JDHeatMapView?
+
+  // this variable sets up an array of coordinates and populates with defaults
+  var testCoordinatesArray = [
+    CLLocationCoordinate2D(latitude: 27, longitude: 120),
+    CLLocationCoordinate2D(latitude: 25.3, longitude: 121),
+    CLLocationCoordinate2D(latitude: 27, longitude: 122),
+    CLLocationCoordinate2D(latitude: 28, longitude: 119)
+  ]
+
+  //  var heatmapperCoordinatesArray = LocationManager.sharedInstance.locationDataAsCoordinates
+  var heatmapperCoordinatesArray = [CLLocationCoordinate2D]()
+  var heatmapWorkoutId : UUID?
+
 
   // the view which renders the heatmap over the map
   @IBOutlet weak var mapsView: UIView!
@@ -27,34 +45,35 @@ class HeatmapViewController: UIViewController {
     heatMap?.setType(type: .FlatDistinct)
   }
 
-  // JDHeatmapView is our custom heatmap MapView class
-  var heatMap:  JDHeatMapView?
-
-  // this variable sets up an array of coordinates and populates with defaults
-  var testCoordinatesArray = [
-    CLLocationCoordinate2D(latitude: 27, longitude: 120),
-    CLLocationCoordinate2D(latitude: 25.3, longitude: 121),
-    CLLocationCoordinate2D(latitude: 27, longitude: 122),
-    CLLocationCoordinate2D(latitude: 28, longitude: 119)
-  ]
-
-  var heatmapperCoordinatesArray = LocationManager.sharedInstance.locationDataAsCoordinates
-    //    [
-    //    CLLocationCoordinate2D(latitude: 51.41449267515113, longitude: -0.19706784747559303),
-    //    CLLocationCoordinate2D(latitude: 51.41439037402292, longitude: -0.1968835294248507),
-    //    CLLocationCoordinate2D(latitude: 51.41439037402325, longitude: -0.19688352942485077)
-    //  ]
-
-    // Collingwood rec
-    //  [CLLocationCoordinate2D(latitude: 51.369115553082786, longitude: -0.2035283603596845), CLLocationCoordinate2D(latitude: 51.369115553082786, longitude: -0.2035283603596845), CLLocationCoordinate2D(latitude: 51.3694253852119, longitude: -0.20259317592378315), CLLocationCoordinate2D(latitude: 51.367907859432854, longitude: -0.20479847677071095), CLLocationCoordinate2D(latitude: 51.368035222451546, longitude: -0.20441433414835894), CLLocationCoordinate2D(latitude: 51.368345017592766, longitude: -0.20350003615040657), CLLocationCoordinate2D(latitude: 51.36847418272064, longitude: -0.20328143611569263)]
-
-    //Apple test data
-//    [CLLocationCoordinate2D(latitude: 37.33178632, longitude: -122.0306262), CLLocationCoordinate2D(latitude: 37.33178632, longitude: -122.0306262), CLLocationCoordinate2D(latitude: 37.33176143, longitude: -122.03066394), CLLocationCoordinate2D(latitude: 37.33172861, longitude: -122.03068446), CLLocationCoordinate2D(latitude: 37.33169352, longitude: -122.03069244), CLLocationCoordinate2D(latitude: 37.33165776, longitude: -122.03069996), CLLocationCoordinate2D(latitude: 37.33162007, longitude: -122.03070577), CLLocationCoordinate2D(latitude: 37.33158231, longitude: -122.03070604), CLLocationCoordinate2D(latitude: 37.33154229, longitude: -122.03071488), CLLocationCoordinate2D(latitude: 37.33150351, longitude: -122.03071596), CLLocationCoordinate2D(latitude: 37.3314643, longitude: -122.03072069), CLLocationCoordinate2D(latitude: 37.33142585, longitude: -122.03072774), CLLocationCoordinate2D(latitude: 37.33138836, longitude: -122.03072798), CLLocationCoordinate2D(latitude: 37.33135095, longitude: -122.03073463), CLLocationCoordinate2D(latitude: 37.33131509, longitude: -122.03073779), CLLocationCoordinate2D(latitude: 37.33128013, longitude: -122.03073774), CLLocationCoordinate2D(latitude: 37.33124551, longitude: -122.03073664), CLLocationCoordinate2D(latitude: 37.33121136, longitude: -122.03073097), CLLocationCoordinate2D(latitude: 37.33117775, longitude: -122.03072292), CLLocationCoordinate2D(latitude: 37.33114614, longitude: -122.03071071), CLLocationCoordinate2D(latitude: 37.3311133, longitude: -122.03069859), CLLocationCoordinate2D(latitude: 37.33108059, longitude: -122.03068245), CLLocationCoordinate2D(latitude: 37.33104629, longitude: -122.03067027), CLLocationCoordinate2D(latitude: 37.33101308, longitude: -122.03065487), CLLocationCoordinate2D(latitude: 37.33097983, longitude: -122.03063943), CLLocationCoordinate2D(latitude: 37.33094637, longitude: -122.0306305), CLLocationCoordinate2D(latitude: 37.33091383, longitude: -122.03061321), CLLocationCoordinate2D(latitude: 37.33087803, longitude: -122.0305999)]
-
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    //    addRandomData()
+
+    MyFunc.logMessage(.debug, "workoutId: \(String(describing: heatmapWorkoutId))")
+    // get the route data for the heatmap
+
+    guard let workoutId = heatmapWorkoutId else {
+      MyFunc.logMessage(.error, "heatmapWorkoutId is invalid: \(String(describing: heatmapWorkoutId))")
+      return
+    }
+
+    var workout : HKWorkout?
+    getWorkout(workoutId: workoutId) { (workouts, error) in
+      let workoutReturned = workouts?.first
+      MyFunc.logMessage(.debug, "workoutReturned:")
+      MyFunc.logMessage(.debug, String(describing: workoutReturned))
+      workout = workoutReturned
+    }
+    MyFunc.logMessage(.debug, "Workouts:")
+
+    MyFunc.logMessage(.debug, String(describing: workout))
+
+
+
+
+
+
+//        addRandomData()
 
     // sets the heatmap frame to the size of the view and specifies the map type
     heatMap = JDHeatMapView(frame: mapsView.frame, delegate: self, mapType: .FlatDistinct)
@@ -122,4 +141,39 @@ extension HeatmapViewController: JDHeatMapDelegate
   {
     return heatmapperCoordinatesArray[index]
   }
+
+
+
+  func getWorkout(workoutId: UUID, completion:
+                      @escaping ([HKWorkout]?, Error?) -> Void) {
+
+    let predicate = HKQuery.predicateForObject(with: workoutId)
+//    let explicitUUID = NSPredicate(format: "%K == %@", HKPredicateKeyPathUUID, uuid)
+
+    let query = HKSampleQuery(
+      sampleType: .workoutType(),
+      predicate: predicate,
+      limit: 0,
+      sortDescriptors: nil
+    )
+    { (query, results, error) in
+      DispatchQueue.main.async {
+        //4. Cast the samples as HKWorkout
+        guard
+          let samples = results as? [HKWorkout],
+          error == nil
+        else {
+          completion(nil, error)
+          return
+        }
+
+        completion(samples, nil)
+      }
+    }
+
+    healthstore.execute(query)
+
+  }
+
+  
 }
