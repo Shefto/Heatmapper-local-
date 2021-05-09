@@ -242,33 +242,21 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     // if moving from paused to stopped state, mark the workout as having finished from the last pause
     if workoutManager.session.state == .paused {
 
-      intervalEndDate = workoutPausedDate
+      workoutEndDate = workoutPausedDate
     } else {
-      intervalEndDate = Date()
-    }
-
-    workoutEndDate = intervalEndDate
-
-    if workoutTimer.isRunning {
-      workoutTimer.stop()
-      workoutPausedDate = Date()
-      intervalEndDate = workoutPausedDate
-      // calculate the total time for this interval
-      intervalDurationDateInterval = DateInterval(start: intervalStartDate!, end: intervalEndDate!)
-      intervalDurationTimeInterval = intervalDurationDateInterval!.duration
-
-      // add this to the overall workout duration
-      workoutDurationTimeInterval +=  intervalDurationTimeInterval
+      workoutEndDate = Date()
     }
 
 
     // record the final interval and stop location and motion updates
     addInterval(startDate: intervalStartDate!, endDate: workoutEndDate!, duration: workoutDurationTimeInterval, finalInterval: true)
-    workoutManager.endDataCollection(date: Date())
-//    workoutManager.endWorkout()
-    LocationManager.sharedInstance.stopUpdatingLocation()
-
     pedometer.stopUpdates()
+
+    LocationManager.sharedInstance.stopUpdatingLocation()
+    workoutManager.endDataCollection(date: Date())
+
+
+
 
     self.exportLog()
     

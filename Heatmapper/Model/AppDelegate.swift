@@ -93,7 +93,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                    distanceWalkingRunning,
                                                    HKObjectType.activitySummaryType(),
                                                    HKObjectType.workoutType(),
-                                                   HKSeriesType.workoutRoute()
+                                                    HKObjectType.workoutType(),
+                                                    HKSeriesType.workoutRoute()
     ]
 
     let activeEnergyAuthStatus = healthStore.authorizationStatus(for: activeEnergy)

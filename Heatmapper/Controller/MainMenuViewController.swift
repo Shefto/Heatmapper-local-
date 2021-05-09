@@ -190,7 +190,9 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
                                                    basalEnergy,
                                                    stepCount,
                                                    distanceWalkingRunning,
-                                                   HKObjectType.activitySummaryType()
+                                                   HKObjectType.activitySummaryType(),
+                                                   HKObjectType.workoutType(),
+                                                   HKSeriesType.workoutRoute()
     ]
 
     let activeEnergyAuthStatus = healthStore.authorizationStatus(for: activeEnergy)
@@ -220,11 +222,11 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
 
     if typeAuthStatus != .sharingAuthorized {
       healthKitTypesToWrite.insert(HKObjectType.workoutType())
-      healthKitTypesToWrite.insert(HKSeriesType.workoutRoute())
+//      healthKitTypesToWrite.insert(HKSeriesType.workoutRoute())
     }
 
     if routeAuthStatus != .sharingAuthorized {
-      healthKitTypesToWrite.insert(HKObjectType.workoutType())
+//      healthKitTypesToWrite.insert(HKObjectType.workoutType())
       healthKitTypesToWrite.insert(HKSeriesType.workoutRoute())
 
     }

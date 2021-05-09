@@ -17,7 +17,6 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
   let locationManager: CLLocationManager
   public var locationDataArray: [CLLocation]
   public var locationDataAsCoordinates: [CLLocationCoordinate2D]
-  var useFilter: Bool
 
 
   override init() {
@@ -32,7 +31,6 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     locationDataArray = [CLLocation]()
     locationDataAsCoordinates = [CLLocationCoordinate2D]()
 
-    useFilter = true
 
     super.init()
 
@@ -69,13 +67,8 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
       print("(\(newLocation.coordinate.latitude), \(newLocation.coordinate.latitude))")
 
       var locationAdded: Bool
-      if useFilter {
-        locationAdded = filterAndAddLocation(newLocation)
-      } else {
-        locationDataArray.append(newLocation)
-        locationAdded = true
-      }
 
+      locationAdded = filterAndAddLocation(newLocation)
 
       if locationAdded{
         notifiyDidUpdateLocation(newLocation: newLocation)
@@ -88,7 +81,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     let age = -location.timestamp.timeIntervalSinceNow
 
     if age > 10{
-      print("Locaiton is old.")
+      print("Location is old.")
       return false
     }
 
@@ -107,9 +100,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
 //    locationDataAsCoordinates.append(location.coordinate)
 
     return true
-
   }
-
 
   public func locationManager(_ manager: CLLocationManager,
                               didFailWithError error: Error){

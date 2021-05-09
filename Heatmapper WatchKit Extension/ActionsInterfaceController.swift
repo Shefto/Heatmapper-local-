@@ -42,7 +42,7 @@ class ActionsInterfaceController: WKInterfaceController {
     let finishPhraseLocalized = NSLocalizedString("Finishing workout", comment: "")
     speak(phrase: finishPhraseLocalized)
 
-    // return to FartlekInterfaceController to finish processing workout
+    // return to WorkoutInterfaceController to finish processing workout
     DispatchQueue.main.async {
       NotificationCenter.default.post(name: Notification.Name("End"), object: self)
     }

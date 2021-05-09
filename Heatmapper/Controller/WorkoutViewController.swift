@@ -622,6 +622,13 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
             MyFunc.logMessage(.info, "Workout saved successfully:")
             MyFunc.logMessage(.info, String(describing: savedWorkout))
 
+            // insert the route data from the Location array
+            routeBuilder.insertRouteData(LocationManager.sharedInstance.locationDataArray) { (success, error) in
+              if !success {
+                MyFunc.logMessage(.error, "Error inserting Route data: \(String(describing: error))")
+              }
+            }
+            
             // save the Workout Route
             routeBuilder.finishRoute(with: savedWorkout!, metadata: ["Activity Type": "Fartleks"]) {(workoutRoute, error) in
               guard workoutRoute != nil else {

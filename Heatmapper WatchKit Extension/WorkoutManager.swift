@@ -34,7 +34,8 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
     let typesToRead: Set = [
       HKQuantityType.quantityType(forIdentifier: .heartRate)!,
       HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
-      HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!
+      HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+      HKQuantityType.workoutType()
     ]
 
     // Request authorization for those quantity types.
@@ -221,18 +222,35 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
         MyFunc.logMessage(.default, "Workout saved successfully:")
         MyFunc.logMessage(.default, workoutStr)
 
+
+        // insert the route data from the Location array
+        let locationArray : [CLLocation] = LocationManager.sharedInstance.locationDataArray
+//        MyFunc.logMessage(.debug, "LocationManager.sharedInstance.locationDataArray")
+//        MyFunc.logMessage(.debug, String(describing: LocationManager.sharedInstance.locationDataArray))
+        MyFunc.logMessage(.debug, "locationArray")
+        MyFunc.logMessage(.debug, String(describing: locationArray))
+
+
+        routeBuilder.insertRouteData(locationArray) { (success, error) in
+          if !success {
+            MyFunc.logMessage(.error, "Error inserting Route data: \(String(describing: error))")
+          }
+        }
+
+
+
         // save the Workout Route
-        self.routeBuilder.finishRoute(with: savedWorkout!, metadata: ["Activity Type": "Heatmap"]) {(workoutRoute, error) in
+        self.routeBuilder.finishRoute(with: savedWorkout!, metadata: ["Activity Type": "Heatmapper"]) {(workoutRoute, error) in
           guard workoutRoute != nil else {
             MyFunc.logMessage(.error, "Failed to save Workout Route with error : \(String(describing: error))")
             return
           }
           let routeStr = String(describing: workoutRoute)
-          MyFunc.logMessage(.default, "Workout Route saved successfully:")
-          MyFunc.logMessage(.default, routeStr)
+          MyFunc.logMessage(.debug, "Workout Route saved successfully:")
+          MyFunc.logMessage(.debug, routeStr)
 
           let savedEventsStr = String(describing: savedWorkout?.workoutEvents)
-          MyFunc.logMessage(.default, "Saved Events: \(savedEventsStr)")
+          MyFunc.logMessage(.debug, "Saved Events: \(savedEventsStr)")
 
           // add each Sample Array to the Workout
           self.addSamplesToWorkout(sampleArray: HeatmapperWorkout.sampleArray)

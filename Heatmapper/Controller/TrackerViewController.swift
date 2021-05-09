@@ -206,18 +206,16 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
       })
     }
   }
-
-  @IBAction func filterSwitchAction(_ sender: UISwitch) {
-    if sender.isOn{
-      LocationManager.sharedInstance.useFilter = true
-    }else{
-      LocationManager.sharedInstance.useFilter = false
-    }
-  }
+//
+//  @IBAction func filterSwitchAction(_ sender: UISwitch) {
+//    if sender.isOn{
+//      LocationManager.sharedInstance.useFilter = true
+//    }else{
+//      LocationManager.sharedInstance.useFilter = false
+//    }
+//  }
 
   @IBAction func btnStop(_ sender: Any) {
-
-
     endWorkout()
 
   }
@@ -228,59 +226,6 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
     MyFunc.logMessage(.debug, "btnStop pressed")
     self.navigationItem.hidesBackButton = false
     LocationManager.sharedInstance.stopUpdatingLocation()
-
-    // if workout was running or is paused, stop and then save workout
-    // (otherwise workout will be cancelled)
-    //    if fartlekTimer.isRunning  || workoutStatus == .paused {
-
-    // if auto-detection is on, record the final interval
-    //      workoutEndDate = Date()
-    //      workoutStatus = .stopped
-    //      fartlekTimer.stop()
-    //      intervalTimer.invalidate()
-    //      let finishPhraseLocalized = NSLocalizedString("Finishing workout", comment: "")
-    //      audio.speak(phrase: finishPhraseLocalized)
-
-    // remove any pauses from the workout total
-    //      let pausedTotal = self.workoutPausedTotal ?? 0
-    //
-    //      let workoutEndMinusPauses = Date(timeInterval: -(pausedTotal), since: workoutEndDate!)
-    //      workoutDurationDateInterval = DateInterval(start: workoutStartDate!, end: workoutEndMinusPauses)
-
-
-    // get average pace and distance for entire Workout
-    // code below from FIT deleted
-
-    // get the full workout Duration
-    //      if workoutStartDate! >= workoutEndMinusPauses {
-    //        MyFunc.logMessage(.critical, "Error setting workoutDurationDateInterval: wsd: \(self.workoutStartDate! as NSObject), wed: \(self.workoutEndDate! as NSObject)")
-    //      }
-    //      let workoutDurationTimeInterval = workoutDurationDateInterval?.duration
-    //      let workoutDurationStr = workoutDurationTimeInterval!.toReadableString()
-
-
-    // add each Sample Array to the Workout
-    //      addSamplesToWorkout(sampleArray: activeEnergySampleArray)
-    //      addSamplesToWorkout(sampleArray: distanceSampleArray)
-    //      addSamplesToWorkout(sampleArray: basalEnergySampleArray)
-
-    // create Workout Events for each Interval
-    //      for fartlek in 0..<fartlekArray.count {
-    //        let fartlekInterval = fartlekArray[fartlek]
-    //
-    //        let workoutEvent = HKWorkoutEvent(type: HKWorkoutEventType.segment, dateInterval: fartlekInterval.duration!, metadata: ["Type": fartlekInterval.activity])
-    //        workoutEventArray.append(workoutEvent)
-    //      }
-
-    // add the Workout Events to the Workout
-    //    self.builder.addWorkoutEvents(self.workoutEventArray, completion: {(success, error) in
-    //
-    //      guard success == true else {
-    //        MyFunc.logMessage(.debug, "Error appending workout event to array: \(String(describing: error))")
-    //        return
-    //      }
-    //      MyFunc.logMessage(.debug, "Events added to Workout:")
-    //      MyFunc.logMessage(.debug, String(describing: self.workoutEventArray))
 
     // end Workout Builder data collection
     self.builder.endCollection(withEnd: Date(), completion: { (success, error) in
@@ -297,8 +242,15 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
           return
         }
 
-        MyFunc.logMessage(.debug, "Workout saved successfully:")
-        MyFunc.logMessage(.debug, String(describing: savedWorkout))
+        MyFunc.logMessage(.info, "Workout saved successfully:")
+        MyFunc.logMessage(.info, String(describing: savedWorkout))
+
+        // insert the route data from the Location array
+        routeBuilder.insertRouteData(LocationManager.sharedInstance.locationDataArray) { (success, error) in
+          if !success {
+            MyFunc.logMessage(.error, "Error inserting Route data: \(String(describing: error))")
+          }
+        }
 
         // save the Workout Route
         routeBuilder.finishRoute(with: savedWorkout!, metadata: ["Activity Type": "Fartleks"]) {(workoutRoute, error) in
@@ -318,7 +270,7 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
 
     }) // self.builder.endCollection
 
-    //    }) // self.builder.addWorkoutEvents
+
     let completedTitle = NSLocalizedString("Workout completed", comment: "")
     let completedMessage = NSLocalizedString("Your workout has been saved successfully", comment: "")
     displayAlert(title: completedTitle, message: completedMessage)
