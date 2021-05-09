@@ -30,63 +30,24 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
   let locationManager             = CLLocationManager()
   let settingsImage                = UIImage(systemName: "gearshape")
 
-  @IBOutlet weak var autoDetectButton: ThemeButton!
-  @IBOutlet weak var flatSetsButton: ThemeButton!
-  @IBOutlet weak var pyramidSetsButton: ThemeButton!
-  @IBOutlet weak var tabataButton: ThemeButton!
-  @IBOutlet weak var customButton: ThemeButton!
-  @IBOutlet weak var randomButton: ThemeButton!
-  @IBOutlet weak var matchButton: ThemeButton!
 
   var bannerView: GADBannerView!
 
-  var activityType = ActivityType()
 
   @IBAction func btnHistory(_ sender: Any) {
-    performSegue(withIdentifier: "mainMenuToHistory", sender: nil)
+    performSegue(withIdentifier: "mainMenuToHistory", sender: .none)
   }
-  
-  @IBAction func btnQuery(_ sender: Any) {
-
-    executeQuery()
-  }
-
 
   @IBAction func btnMatch(_ sender: Any) {
+    performSegue(withIdentifier: "mainMenuToTracker", sender: .none)
   }
   
-  @IBAction func settingsButton() {
-    self.performSegue(withIdentifier: "startToSettings", sender: .none)
+  @IBAction func btnSettings() {
+    performSegue(withIdentifier: "mainMenuToSettings", sender: .none)
   }
 
-  @IBAction func btnTabata(_ sender: Any) {
-    activityType = ActivityType.tabata
-    performSegue(withIdentifier: "mainMenuToSetIntervals", sender: activityType)
-  }
-
-  @IBAction func btnRepeat(_ sender: Any) {
-    activityType = ActivityType.repeat
-    performSegue(withIdentifier: "mainMenuToSetIntervals", sender: activityType)
-  }
-
-  @IBAction func btnPyramid(_ sender: Any) {
-    activityType = ActivityType.pyramid
-    performSegue(withIdentifier: "mainMenuToSetIntervals", sender: activityType)
-  }
-
-  @IBAction func btnCustom(_ sender: Any) {
-    activityType = ActivityType.custom
-    performSegue(withIdentifier: "mainMenuToSetIntervals", sender: activityType)
-  }
-
-  @IBAction func btnRandom(_ sender: Any) {
-    activityType = ActivityType.random
-    performSegue(withIdentifier: "mainMenuToSetIntervals", sender: activityType)
-  }
-
-  @IBAction func btnAuto(_ sender: Any) {
-    activityType = ActivityType.auto
-    performSegue(withIdentifier: "mainMenuToWorkout", sender: activityType)
+  @IBAction func btnHeatmap(_ sender: Any) {
+    performSegue(withIdentifier: "mainMenuToHeatmap", sender: .none)
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -113,50 +74,17 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    loadUI()
-    // set VC as CLLocationManager delegate
     locationManager.delegate = self
+
+    loadUI()
     authorizeLocation()
     authorizeHealthKit()
-
-    // set up defaults
 
   }
 
   func loadUI() {
 
-    autoDetectButton.backgroundColor = UIColor(named: "autoDetect")!
-    autoDetectButton.titleLabel?.textAlignment = .center
-    autoDetectButton.titleLabel?.adjustsFontSizeToFitWidth = true
-    autoDetectButton.titleLabel?.numberOfLines = 2
-    autoDetectButton.titleLabel?.minimumScaleFactor = 0.5
-
-    flatSetsButton.titleLabel?.textAlignment = .center
-    flatSetsButton.titleLabel?.adjustsFontSizeToFitWidth = true
-    flatSetsButton.titleLabel?.minimumScaleFactor = 0.5
-    flatSetsButton.titleLabel?.numberOfLines = 2
-
-    tabataButton.titleLabel?.textAlignment = .center
-    tabataButton.titleLabel?.adjustsFontSizeToFitWidth = true
-    tabataButton.titleLabel?.numberOfLines = 1
-    tabataButton.titleLabel?.minimumScaleFactor = 0.5
-
-    customButton.titleLabel?.textAlignment = .center
-    customButton.titleLabel?.adjustsFontSizeToFitWidth = true
-    customButton.titleLabel?.numberOfLines = 1
-    customButton.titleLabel?.minimumScaleFactor = 0.5
-
-    randomButton.titleLabel?.textAlignment = .center
-    randomButton.titleLabel?.adjustsFontSizeToFitWidth = true
-    randomButton.titleLabel?.numberOfLines = 1
-    randomButton.titleLabel?.minimumScaleFactor = 0.5
-
-    pyramidSetsButton.titleLabel?.textAlignment = .center
-    pyramidSetsButton.titleLabel?.adjustsFontSizeToFitWidth = true
-    //    pyramidSetsButton.titleLabel?.numberOfLines = 1
-    pyramidSetsButton.titleLabel?.minimumScaleFactor = 0.5
-
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: #selector(self.settingsButton))
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: #selector(self.btnSettings))
 
   }
 
@@ -220,13 +148,17 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
       healthKitTypesToWrite.insert(distanceWalkingRunning)
     }
 
-    if typeAuthStatus != .sharingAuthorized {
+    if typeAuthStatus != .sharingAuthorized  {
+      MyFunc.logMessage(.debug, "typeAuthStatus:\(typeAuthStatus.rawValue)")
       healthKitTypesToWrite.insert(HKObjectType.workoutType())
-//      healthKitTypesToWrite.insert(HKSeriesType.workoutRoute())
+      healthKitTypesToWrite.insert(HKSeriesType.workoutType())
+      healthKitTypesToWrite.insert(HKSeriesType.workoutRoute())
     }
 
     if routeAuthStatus != .sharingAuthorized {
-//      healthKitTypesToWrite.insert(HKObjectType.workoutType())
+      MyFunc.logMessage(.debug, "routeAuthStatus:\(routeAuthStatus.rawValue)")
+      healthKitTypesToWrite.insert(HKObjectType.workoutType())
+      healthKitTypesToWrite.insert(HKSeriesType.workoutType())
       healthKitTypesToWrite.insert(HKSeriesType.workoutRoute())
 
     }
@@ -238,8 +170,7 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
         self.logger.error("Error in HealthKitSetupAssistant requesting HealthKit Authorization: \(String(describing: error))")
         return
       }
-      self.logger.info("Successful Authorization of HealthKit")
-
+      MyFunc.logMessage(.debug, "MainMenuViewController requestAuthorization success: \(success)")
     }
 
   }
@@ -250,17 +181,22 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
 
     switch locationStatus {
     case .authorizedAlways, .authorizedWhenInUse:
-      logger.debug("location use authorized : Status = \(String(describing: locationStatus.rawValue))")
+      logger.debug("Location use authorized : Status = \(String(describing: locationStatus.rawValue))")
     case .denied, .notDetermined, .restricted:
-      logger.debug("location use not authorized : Status = \(String(describing: locationStatus.rawValue))")
+      logger.debug("Location use not authorized : Status = \(String(describing: locationStatus.rawValue))")
       locationManager.requestAlwaysAuthorization()
     default:
-      logger.debug("location use status not known : \(String(describing: locationStatus.rawValue))")
+      logger.debug("Location use status not known : \(String(describing: locationStatus.rawValue))")
     }
-
     locationManager.allowsBackgroundLocationUpdates = true
   }
 
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+  }
+
+
+  //MARK: Google AdMob functions
   func addBannerViewToView(_ bannerView: GADBannerView) {
     bannerView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(bannerView)
@@ -309,145 +245,9 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
     print("adViewDidDismissScreen")
   }
 
-  /// Tells the delegate that a user click will open another app (such as
-  /// the App Store), backgrounding the current app.
+  /// Tells the delegate that a user click will open another app (such asthe App Store), backgrounding the current app.
   func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
     print("adViewWillLeaveApplication")
   }
-
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-    let segueToUse = segue.identifier
-
-    if segueToUse == "mainMenuToSetIntervals" {
-      let destinationVC = segue.destination as! SetIntervalsViewController
-      destinationVC.activityType = activityType
-    }
-
-    if segueToUse == "mainMenuToWorkout" {
-      let destinationVC = segue.destination as! WorkoutViewController
-      destinationVC.activityType = activityType
-    }
-
-    navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
-  }
-
-
-  func setDefaultUnits () {
-
-    let unitDefault = defaults.object(forKey: "Units") as? String
-    if unitDefault  == "" {
-      //if not, set the default now
-      var units = ""
-      if locale.usesMetricSystem == true {
-        units = "km/h"
-      } else {
-        units = "mph"
-      }
-      defaults.set(units, forKey: "Units")
-      updateApplicationContextForUserDefault(["Units": units])
-    }
-
-  }
-
-  func setDefaultVibration () {
-
-    let vibrationDefault = defaults.object(forKey: "Vibration") as? String
-    if vibrationDefault  == "" {
-      //if not, set the default now
-
-      let vibration = "On"
-      defaults.set(vibration, forKey: "Vibration")
-      updateApplicationContextForUserDefault(["Vibration": vibration])
-    }
-
-  }
-
-  func setDefaultLocation () {
-    let locationDefault = defaults.object(forKey: "Location") as? String
-
-    switch locationDefault {
-    case "Balanced":
-      locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-    case "Accuracy":
-      locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-    case "Battery":
-      locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-    default:
-      locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-      let location = "Balanced"
-      defaults.set(location, forKey: "Location")
-      updateApplicationContextForUserDefault(["Location": location])
-    }
-
-  }
-
-
-  func executeQuery() {
-
-    let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate,
-                                          ascending: false)
-    let calendar = Calendar.current
-    let startDateComponents = DateComponents(calendar: calendar, year: 2021, month: 04, day: 24)
-    let endDateComponents = DateComponents(calendar: calendar, year: 2021, month: 04, day: 29)
-    let startDate = calendar.date(from: startDateComponents)
-    let endDate = calendar.date(from: endDateComponents)
-
-    let mostRecentPredicate = HKQuery.predicateForSamples(withStart: startDate , end: endDate, options: [] )
-    let myAppPredicate = HKQuery.predicateForObjects(from: HKSource.default()) // This would retrieve only my app's data
-    let notMyAppPredicate = NSCompoundPredicate(notPredicateWithSubpredicate: myAppPredicate) // This will retrieve everything but my app's data
-    let queryPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [mostRecentPredicate, notMyAppPredicate])
-    //
-    //    let sampleQuery = HKSampleQuery(sampleType: .workoutType(), predicate: queryPredicate, limit: 0, sortDescriptors: [sortDescriptor]) {
-    //
-    //      (query, samples, error) in
-    //      DispatchQueue.main.async {
-    //        //4. Cast the samples as HKWorkout
-    //        //        var sampleArray = [HKWorkout]()
-    //        guard
-    //          let samples = samples as? [HKWorkout],
-    //          error == nil
-    //
-    //
-    //        else {
-    //
-    //          return
-    //        }
-    //        MyFunc.logMessage(.debug, "samples")
-    //        MyFunc.logMessage(.debug, String(describing: samples))
-    //
-    //      }
-    //      // Process results here...
-
-    //    }
-
-    let query = HKSampleQuery(
-      sampleType: .workoutType(),
-      predicate: nil,
-      limit: 0,
-      sortDescriptors: [sortDescriptor]) { (query, samples, error) in
-      DispatchQueue.main.async {
-        //4. Cast the samples as HKWorkout
-        //        var sampleArray = [HKWorkout]()
-        guard
-          let samples = samples as? [HKWorkout],
-          error == nil
-
-
-        else {
-
-          return
-        }
-        MyFunc.logMessage(.debug, "samples")
-        MyFunc.logMessage(.debug, String(describing: samples))
-
-      }
-    }
-
-    healthStore.execute(query)
-    
-  }
-
 
 }

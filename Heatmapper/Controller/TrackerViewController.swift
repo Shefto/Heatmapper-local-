@@ -28,18 +28,22 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
   // HealthKit variables
   private let healthStore         = HKHealthStore()
   let workoutConfiguration        = HKWorkoutConfiguration()
-  var builder: HKWorkoutBuilder!
-  var routeBuilder: HKWorkoutRouteBuilder!
-  var workoutEventArray: [HKWorkoutEvent] = []
+  var builder                     : HKWorkoutBuilder!
+  var routeBuilder                : HKWorkoutRouteBuilder!
+  var workoutEventArray           : [HKWorkoutEvent] = []
 
-  var distanceSampleArray: [HKSample] = []
-  var activeEnergySampleArray: [HKSample] = []
-  var basalEnergySampleArray: [HKSample] = []
-  var sampleArray: [HKSample] = []
-
+  var distanceSampleArray         : [HKSample] = []
+  var activeEnergySampleArray     : [HKSample] = []
+  var basalEnergySampleArray      : [HKSample] = []
+  var sampleArray                 : [HKSample] = []
 
   let logger = Logger(subsystem: "com.wimbledonappcompany.Heatmapper", category: "TrackerViewController")
 
+
+  @IBAction func btnStop(_ sender: Any) {
+    endWorkout()
+    navigationItem.hidesBackButton = false
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -50,25 +54,147 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
 
     builder = HKWorkoutBuilder(healthStore: healthStore, configuration: workoutConfiguration, device: .local())
     routeBuilder = HKWorkoutRouteBuilder(healthStore: healthStore, device: nil)
+
     // call function to start collecting workout data
     beginCollection()
 
-    // set up map view UI elements
-    self.mapView.delegate = self
-    self.mapView.showsUserLocation = false
-    self.userAnnotationImage = UIImage(named: "user_position_ball")!
-    self.accuracyRangeCircle = MKCircle(center: CLLocationCoordinate2D.init(latitude: 41.887, longitude: -87.622), radius: 50)
-    self.mapView.addOverlay(self.accuracyRangeCircle!)
-    self.didInitialZoom = false
+    loadMapUI()
 
     NotificationCenter.default.addObserver(self, selector: #selector(updateMap(notification:)), name: Notification.Name(rawValue:"didUpdateLocation"), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(showTurnOnLocationServiceAlert(notification:)), name: Notification.Name(rawValue:"showTurnOnLocationServiceAlert"), object: nil)
   }
 
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+
+  func beginCollection() {
+    // begin collecting Workout data
+    builder.beginCollection(withStart: Date(), completion: { (success, error) in
+      guard success else {
+        MyFunc.logMessage(.error, "Error beginning data collection in Workout Builder: \(String(describing: error))")
+        return
+      }
+      MyFunc.logMessage(.debug, "TrackerViewController.builder.beginCollection success: \(success)")
+    })
   }
+
+  func loadMapUI() {
+    mapView.delegate = self
+    mapView.showsUserLocation = false
+    userAnnotationImage = UIImage(named: "user_position_ball")!
+    accuracyRangeCircle = MKCircle(center: CLLocationCoordinate2D.init(latitude: 41.887, longitude: -87.622), radius: 50)
+    mapView.addOverlay(self.accuracyRangeCircle!)
+    didInitialZoom = false
+  }
+
+  func endWorkout() {
+
+    LocationManager.sharedInstance.stopUpdatingLocation()
+
+    // end Workout Builder data collection
+    self.builder.endCollection(withEnd: Date(), completion: { (success, error) in
+      guard success else {
+        MyFunc.logMessage(.error, "TrackerViewController.builder.endCollection error: \(String(describing: error))")
+        return
+      }
+
+      // save the Workout
+      self.builder.finishWorkout { [self] (savedWorkout, error) in
+
+        guard savedWorkout != nil else {
+          MyFunc.logMessage(.error, "TrackerViewController.builder.finishWorkout error: \(String(describing: error))")
+          return
+        }
+
+        MyFunc.logMessage(.info, "Workout saved successfully:")
+        MyFunc.logMessage(.info, String(describing: savedWorkout))
+
+        // insert the route data from the Location array
+        routeBuilder.insertRouteData(LocationManager.sharedInstance.locationDataArray) { (success, error) in
+          if !success {
+            MyFunc.logMessage(.error, "TrackerViewController.insertRouteData.finishWorkout error: \(String(describing: error))")
+          }
+
+          MyFunc.logMessage(.debug, "TrackerViewController.insertRouteData.finishWorkout success: \(String(describing: success))")
+
+          // save the Workout Route
+          routeBuilder.finishRoute(with: savedWorkout!, metadata: ["Activity Type": "Heatmapper"]) {(workoutRoute, error) in
+            guard workoutRoute != nil else {
+              MyFunc.logMessage(.error, "Failed to save Workout Route with error : \(String(describing: error))")
+              return
+            }
+
+            MyFunc.logMessage(.info, "Workout Route saved successfully:")
+            MyFunc.logMessage(.info, String(describing: workoutRoute))
+            MyFunc.logMessage(.info, "Saved Events: \(String(describing: savedWorkout?.workoutEvents))")
+            exportLog()
+
+          } // finishRoute
+
+        } // insertRouteData
+
+      } // finishWorkout
+
+    }) // endCollection
+
+
+    let completedTitle = NSLocalizedString("Workout completed", comment: "")
+    let completedMessage = NSLocalizedString("Your workout has been saved successfully", comment: "")
+    displayAlert(title: completedTitle, message: completedMessage)
+
+    self.navigationItem.hidesBackButton = false
+  } // endWorkout
+
+
+  func exportLog() {
+
+    let fileDateFormatter = DateFormatter()
+    var log : String = ""
+
+    // generate filename including timestamp
+    let currDate = fileDateFormatter.string(from: Date())
+    let fileName = "FiT_Log_" + currDate + ".txt"
+
+    guard let path = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(fileName) as NSURL else {
+      return }
+
+    do {
+      try log.write(to: path as URL, atomically: true, encoding: String.Encoding.utf8)
+      MyFunc.logMessage(.info, "Log data written to \(path)")
+    } catch {
+      MyFunc.logMessage(.error, "Failed to create file with error \(String(describing: error))")
+    } // catch
+
+  }
+
+
+  func displayAlert (title: String, message: String) {
+
+    //Alert user that Save has worked
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+      //      if MyFunc.removeAdsPurchased() == false {
+      //        if self.interstitial.isReady {
+      //          self.interstitial.present(fromRootViewController: self)
+      //
+      //        } else {
+      //          MyFunc.logMessage(.debug, "Ad wasn't ready")
+      //        }
+      //      }
+    })
+    let healthActionTitle = NSLocalizedString("Open Health app", comment: "Open Health app")
+    let healthAction = UIAlertAction(title: healthActionTitle,
+                                     style: UIAlertAction.Style.default,
+                                     handler: {(_: UIAlertAction!) in
+                                      // open HealthKit app - note current URL only opens the app at root or where previous session was
+                                      MyFunciOS.openUrl(urlString: "x-apple-health:root&path=BROWSE")
+                                     })
+    alert.addAction(okAction)
+    //    if workoutStatus != .cancelled {
+    //      alert.addAction(healthAction)
+    //    }
+    present(alert, animated: true, completion: nil)
+
+  }
+
 
   @objc func showTurnOnLocationServiceAlert(notification: NSNotification){
     let alert = UIAlertController(title: "Turn on Location Service", message: "To use location tracking feature of the app, please turn on the location service from the Settings app.", preferredStyle: .alert)
@@ -83,25 +209,10 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
     let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
     alert.addAction(settingsAction)
     alert.addAction(cancelAction)
-
-
     present(alert, animated: true, completion: nil)
-
   }
 
-  @objc func updateMap(notification: NSNotification){
-    if let userInfo = notification.userInfo{
-
-      updatePolylines()
-
-      if let newLocation = userInfo["location"] as? CLLocation{
-        zoomTo(location: newLocation)
-      }
-
-    }
-  }
-
-
+  //MARK: Map functions
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
 
     if overlay === self.accuracyRangeCircle{
@@ -126,7 +237,6 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
     }
 
     self.clearPolyline()
-
     self.polyline = MKPolyline(coordinates: coordinateArray, count: coordinateArray.count)
     self.mapView.addOverlay(polyline!)
 
@@ -206,141 +316,14 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
       })
     }
   }
-//
-//  @IBAction func filterSwitchAction(_ sender: UISwitch) {
-//    if sender.isOn{
-//      LocationManager.sharedInstance.useFilter = true
-//    }else{
-//      LocationManager.sharedInstance.useFilter = false
-//    }
-//  }
 
-  @IBAction func btnStop(_ sender: Any) {
-    endWorkout()
-
-  }
-
-
-  func endWorkout() {
-
-    MyFunc.logMessage(.debug, "btnStop pressed")
-    self.navigationItem.hidesBackButton = false
-    LocationManager.sharedInstance.stopUpdatingLocation()
-
-    // end Workout Builder data collection
-    self.builder.endCollection(withEnd: Date(), completion: { (success, error) in
-      guard success else {
-        MyFunc.logMessage(.error, "Error ending Workout Builder data collection: \(String(describing: error))")
-        return
+  @objc func updateMap(notification: NSNotification){
+    if let userInfo = notification.userInfo{
+      updatePolylines()
+      if let newLocation = userInfo["location"] as? CLLocation{
+        zoomTo(location: newLocation)
       }
-
-      // save the Workout
-      self.builder.finishWorkout { [self] (savedWorkout, error) in
-
-        guard savedWorkout != nil else {
-          MyFunc.logMessage(.error, "Failed to save Workout with error : \(String(describing: error))")
-          return
-        }
-
-        MyFunc.logMessage(.info, "Workout saved successfully:")
-        MyFunc.logMessage(.info, String(describing: savedWorkout))
-
-        // insert the route data from the Location array
-        routeBuilder.insertRouteData(LocationManager.sharedInstance.locationDataArray) { (success, error) in
-          if !success {
-            MyFunc.logMessage(.error, "Error inserting Route data: \(String(describing: error))")
-          }
-        }
-
-        // save the Workout Route
-        routeBuilder.finishRoute(with: savedWorkout!, metadata: ["Activity Type": "Fartleks"]) {(workoutRoute, error) in
-          guard workoutRoute != nil else {
-            MyFunc.logMessage(.error, "Failed to save Workout Route with error : \(String(describing: error))")
-            return
-          }
-
-          MyFunc.logMessage(.info, "Workout Route saved successfully:")
-          MyFunc.logMessage(.info, String(describing: workoutRoute))
-          MyFunc.logMessage(.info, "Saved Events: \(String(describing: savedWorkout?.workoutEvents))")
-          exportLog()
-
-        } // self.routeBuilder
-
-      } // self.builder.finishWorkout
-
-    }) // self.builder.endCollection
-
-
-    let completedTitle = NSLocalizedString("Workout completed", comment: "")
-    let completedMessage = NSLocalizedString("Your workout has been saved successfully", comment: "")
-    displayAlert(title: completedTitle, message: completedMessage)
-
-    self.navigationItem.hidesBackButton = false
-  } // endWorkout
-
-
-  func exportLog() {
-
-    let fileDateFormatter = DateFormatter()
-    var log: String = ""
-
-    // generate filename including timestamp
-    let currDate = fileDateFormatter.string(from: Date())
-    let fileName = "FiT_Log_" + currDate + ".txt"
-
-    guard let path = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(fileName) as NSURL else {
-      return }
-
-    do {
-      try log.write(to: path as URL, atomically: true, encoding: String.Encoding.utf8)
-      MyFunc.logMessage(.info, "Log data written to \(path)")
-    } catch {
-      MyFunc.logMessage(.error, "Failed to create file with error \(String(describing: error))")
-    } // catch
-
-  }
-
-
-  func displayAlert (title: String, message: String) {
-
-    //Alert user that Save has worked
-    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
-      //      if MyFunc.removeAdsPurchased() == false {
-      //        if self.interstitial.isReady {
-      //          self.interstitial.present(fromRootViewController: self)
-      //
-      //        } else {
-      //          MyFunc.logMessage(.debug, "Ad wasn't ready")
-      //        }
-      //      }
-    })
-    let healthActionTitle = NSLocalizedString("Open Health app", comment: "Open Health app")
-    let healthAction = UIAlertAction(title: healthActionTitle,
-                                     style: UIAlertAction.Style.default,
-                                     handler: {(_: UIAlertAction!) in
-                                      // open HealthKit app - note current URL only opens the app at root or where previous session was
-                                      MyFunciOS.openUrl(urlString: "x-apple-health:root&path=BROWSE")
-                                     })
-    alert.addAction(okAction)
-    //    if workoutStatus != .cancelled {
-    //      alert.addAction(healthAction)
-    //    }
-    present(alert, animated: true, completion: nil)
-
-  }
-
-
-  func beginCollection() {
-    // begin collecting Workout data
-    self.builder.beginCollection(withStart: Date(), completion: { (success, error) in
-      guard success else {
-        MyFunc.logMessage(.error, "Error beginning data collection in Workout Builder: \(String(describing: error))")
-        return
-      }
-
-    })
-
+    }
   }
 
 }
