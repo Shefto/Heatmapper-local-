@@ -636,9 +636,9 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
                 return
               }
 
-              MyFunc.logMessage(.info, "Workout Route saved successfully:")
-              MyFunc.logMessage(.info, String(describing: workoutRoute))
-              MyFunc.logMessage(.info, "Saved Events: \(String(describing: savedWorkout?.workoutEvents))")
+              MyFunc.logMessage(.debug, "Workout Route saved successfully:")
+              MyFunc.logMessage(.debug, String(describing: workoutRoute))
+              MyFunc.logMessage(.debug, "Saved Events: \(String(describing: savedWorkout?.workoutEvents))")
               exportLog()
 
             } // self.routeBuilder

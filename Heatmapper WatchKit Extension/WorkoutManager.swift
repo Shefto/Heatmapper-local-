@@ -18,8 +18,8 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
   var routeBuilder  : HKWorkoutRouteBuilder!
   var delegate      : WorkoutManagerDelegate!
 
-//  var cancellable: Cancellable?
-//  var accumulatedTime: Int = 0
+  //  var cancellable: Cancellable?
+  //  var accumulatedTime: Int = 0
 
   // Request authorization to access HealthKit.
   func requestAuthorization() {
@@ -48,7 +48,7 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
   func workoutConfiguration() -> HKWorkoutConfiguration {
     /// - Tag: WorkoutConfiguration
     let configuration = HKWorkoutConfiguration()
-    configuration.activityType = .running
+    configuration.activityType = .soccer
     configuration.locationType = .outdoor
 
     return configuration
@@ -100,7 +100,7 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
   func endWorkout() {
     // End the workout session.
     session.end()
-//    cancellable?.cancel()
+    //    cancellable?.cancel()
   }
 
 
@@ -113,9 +113,9 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
       switch statistics.quantityType {
       case HKQuantityType.quantityType(forIdentifier: .heartRate):
         /// - Tag: SetLabel
-//        let heartRateUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
-//        let value = statistics.mostRecentQuantity()?.doubleValue(for: heartRateUnit)
-//        let roundedValue = Double( round( 1 * value! ) / 1 )
+        //        let heartRateUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
+        //        let value = statistics.mostRecentQuantity()?.doubleValue(for: heartRateUnit)
+        //        let roundedValue = Double( round( 1 * value! ) / 1 )
         let label = self.delegate?.labelForQuantityType(statistics.quantityType)
         self.delegate?.updateLabel(label, withStatistics: statistics)
 
@@ -123,16 +123,16 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
 
 
       case HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned):
-//        let energyUnit = HKUnit.kilocalorie()
-//        let value = statistics.sumQuantity()?.doubleValue(for: energyUnit)
+        //        let energyUnit = HKUnit.kilocalorie()
+        //        let value = statistics.sumQuantity()?.doubleValue(for: energyUnit)
         let label = self.delegate?.labelForQuantityType(statistics.quantityType)
         self.delegate?.updateLabel(label, withStatistics: statistics)
 
         return
       case HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning):
-//        let meterUnit = HKUnit.meter()
-//        let value = statistics.sumQuantity()?.doubleValue(for: meterUnit)
-//        let roundedValue = Double( round( 1 * value! ) / 1 )
+        //        let meterUnit = HKUnit.meter()
+        //        let value = statistics.sumQuantity()?.doubleValue(for: meterUnit)
+        //        let roundedValue = Double( round( 1 * value! ) / 1 )
         let label = self.delegate?.labelForQuantityType(statistics.quantityType)
         self.delegate?.updateLabel(label, withStatistics: statistics)
 
@@ -181,7 +181,7 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
       let statistics = workoutBuilder.statistics(for: quantityType)
 
       // Update the published values.
-        updateForStatistics(statistics)
+      updateForStatistics(statistics)
     }
   }
 
@@ -206,7 +206,7 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
     // end Workout Builder data collection
     builder.endCollection(withEnd: date, completion: { (success, error) in
       guard success else {
-        MyFunc.logMessage(.error, "Error ending Workout Builder data collection: \(String(describing: error))")
+        MyFunc.logMessage(.error, "workoutManager.endDataCollection: builder.endCollection error: \(String(describing: error))")
         return
       }
 
@@ -219,53 +219,48 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
         }
 
         let workoutStr = String(describing: savedWorkout)
-        MyFunc.logMessage(.default, "Workout saved successfully:")
-        MyFunc.logMessage(.default, workoutStr)
-
+        MyFunc.logMessage(.debug, "Workout saved successfully:")
+        MyFunc.logMessage(.debug, workoutStr)
 
         // insert the route data from the Location array
         let locationArray : [CLLocation] = LocationManager.sharedInstance.locationDataArray
-//        MyFunc.logMessage(.debug, "LocationManager.sharedInstance.locationDataArray")
-//        MyFunc.logMessage(.debug, String(describing: LocationManager.sharedInstance.locationDataArray))
         MyFunc.logMessage(.debug, "locationArray")
         MyFunc.logMessage(.debug, String(describing: locationArray))
-
 
         routeBuilder.insertRouteData(locationArray) { (success, error) in
           if !success {
             MyFunc.logMessage(.error, "Error inserting Route data: \(String(describing: error))")
           }
-        }
+          MyFunc.logMessage(.debug, "Success inserting Route data: \(String(describing: success))")
 
 
+          // save the Workout Route
+          self.routeBuilder.finishRoute(with: savedWorkout!, metadata: ["Activity Type": "Heatmapper"]) {(workoutRoute, error) in
+            guard workoutRoute != nil else {
+              MyFunc.logMessage(.error, "Failed to save Workout Route with error : \(String(describing: error))")
+              return
+            }
+            let routeStr = String(describing: workoutRoute)
+            MyFunc.logMessage(.debug, "Workout Route saved successfully:")
+            MyFunc.logMessage(.debug, routeStr)
 
-        // save the Workout Route
-        self.routeBuilder.finishRoute(with: savedWorkout!, metadata: ["Activity Type": "Heatmapper"]) {(workoutRoute, error) in
-          guard workoutRoute != nil else {
-            MyFunc.logMessage(.error, "Failed to save Workout Route with error : \(String(describing: error))")
-            return
-          }
-          let routeStr = String(describing: workoutRoute)
-          MyFunc.logMessage(.debug, "Workout Route saved successfully:")
-          MyFunc.logMessage(.debug, routeStr)
+            let savedEventsStr = String(describing: savedWorkout?.workoutEvents)
+            MyFunc.logMessage(.debug, "Saved Events: \(savedEventsStr)")
 
-          let savedEventsStr = String(describing: savedWorkout?.workoutEvents)
-          MyFunc.logMessage(.debug, "Saved Events: \(savedEventsStr)")
+            // add each Sample Array to the Workout
+            self.addSamplesToWorkout(sampleArray: HeatmapperWorkout.sampleArray)
 
-          // add each Sample Array to the Workout
-          self.addSamplesToWorkout(sampleArray: HeatmapperWorkout.sampleArray)
+          } // self.routeBuilder.insertRouteDate
 
-        } // self.routeBuilder
+        } // self.routeBuilder.finishRoute
 
         session.end()
-    
+
       } // self.builder.finishWorkout
 
     }) // self.builder.endCollection
 
-
   }
-
 
   func addSamplesToWorkout(sampleArray: [HKSample]) {
 

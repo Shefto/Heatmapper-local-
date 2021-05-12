@@ -21,8 +21,6 @@ protocol WorkoutManagerDelegate {
 
 class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCommands, /*CLLocationManagerDelegate,*/ WorkoutManagerDelegate {
 
-//  let audio                 = Audio()
-  
   // WatchConnectivity variables
   private var command: Command!
   private let fileTransferObservers = FileTransferObservers()
@@ -139,18 +137,11 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     workoutDurationLabel.setAttributedText(durationText)
     
     addNotificationObservers()
-
-//    // set VC as CLLocationManager delegate
-//    locationManager.delegate = self
-//    locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-//    locationManager.activityType = .fitness
-//    locationManager.distanceFilter = kCLDistanceFilterNone
-//    locationManager.allowsBackgroundLocationUpdates = true
-
+    startWorkout()
+    
     workoutManager.delegate = self
 
-    // start workout
-    startWorkout()
+
     
   }
   
@@ -249,13 +240,11 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
 
 
     // record the final interval and stop location and motion updates
-    addInterval(startDate: intervalStartDate!, endDate: workoutEndDate!, duration: workoutDurationTimeInterval, finalInterval: true)
+//    addInterval(startDate: intervalStartDate!, endDate: workoutEndDate!, duration: workoutDurationTimeInterval, finalInterval: true)
     pedometer.stopUpdates()
 
     LocationManager.sharedInstance.stopUpdatingLocation()
     workoutManager.endDataCollection(date: Date())
-
-
 
 
     self.exportLog()

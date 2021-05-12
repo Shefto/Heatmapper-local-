@@ -28,11 +28,9 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
 
   // Core Location variables
   let locationManager             = CLLocationManager()
-  let settingsImage                = UIImage(systemName: "gearshape")
-
+  let settingsImage               = UIImage(systemName: "gearshape")
 
   var bannerView: GADBannerView!
-
 
   @IBAction func btnHistory(_ sender: Any) {
     performSegue(withIdentifier: "mainMenuToHistory", sender: .none)

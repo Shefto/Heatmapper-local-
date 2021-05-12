@@ -38,7 +38,6 @@
 		7944476F255A9B3B004708E3 /* DurationPickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7944476E255A9B3B004708E3 /* DurationPickerInterfaceController.swift */; };
 		79445D4F25A3292D001D3AC6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79445D4E25A3292C001D3AC6 /* StoreKit.framework */; };
 		7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */; };
-		795B8FB626320E7000E5DD8C /* HeatmapInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795B8FB526320E7000E5DD8C /* HeatmapInterfaceController.swift */; };
 		7961D6BF25B74B4900204968 /* MyWKInterfaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */; };
 		797026C0252DB4A500A86A05 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
 		7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */; };
@@ -191,7 +190,6 @@
 		7953B58825BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/IntervalTableViewFooter.strings"; sourceTree = "<group>"; };
 		7953B58925BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Interface.strings"; sourceTree = "<group>"; };
 		7953B58A25BAD7D200F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		795B8FB526320E7000E5DD8C /* HeatmapInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapInterfaceController.swift; sourceTree = "<group>"; };
 		7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWKInterfaceButton.swift; sourceTree = "<group>"; };
 		797026BF252DB4A500A86A05 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntervalTableViewFooter.swift; path = Heatmapper/View/IntervalTableViewFooter.swift; sourceTree = SOURCE_ROOT; };
@@ -458,27 +456,26 @@
 		79A4EFD024A0AF4B002A7870 /* Heatmapper WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				795B8FB526320E7000E5DD8C /* HeatmapInterfaceController.swift */,
 				79A4EFE924A0C654002A7870 /* Heatmapper WatchKit Extension.entitlements */,
-				7991886A24B618AE008F0EA5 /* IntervalRowController.swift */,
-				7996ADF6256860A200C25196 /* CustomRowController.swift */,
-				799EDEF4252B5FCD00579896 /* MainMenu InterfaceController.swift */,
-				7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */,
-				7980929C252F386300DF1562 /* HeatmapperWorkout.swift */,
+				79A4EFD724A0AF4C002A7870 /* Info.plist */,
 				799EDEFC252B86AE00579896 /* ActionsInterfaceController.swift */,
-				7996ADE825682D5D00C25196 /* CustomIntervalsInterfaceController.swift */,
-				79A3517325D5BE97001840D5 /* PitchInterfaceController.swift */,
-				799BBD5C24E2CEC50009AE2D /* IntervalsInterfaceController.swift */,
 				797026BF252DB4A500A86A05 /* Audio.swift */,
 				79BB8FEF2563DB4500019900 /* CountdownInterfaceController.swift */,
-				7989157125605679004983BD /* WorkoutInterfaceController.swift */,
-				791BD3C225A64E2600FD994A /* WorkoutManager.swift */,
+				7996ADE825682D5D00C25196 /* CustomIntervalsInterfaceController.swift */,
+				7996ADF6256860A200C25196 /* CustomRowController.swift */,
 				7944476E255A9B3B004708E3 /* DurationPickerInterfaceController.swift */,
-				79C657782559A6B900E6DBCE /* SetIntervalsInterfaceController.swift */,
 				79A4EFD324A0AF4B002A7870 /* ExtensionDelegate.swift */,
 				7907E8C024E1468500F3DE0D /* Extensions.swift */,
+				7980929C252F386300DF1562 /* HeatmapperWorkout.swift */,
+				7991886A24B618AE008F0EA5 /* IntervalRowController.swift */,
+				799BBD5C24E2CEC50009AE2D /* IntervalsInterfaceController.swift */,
+				799EDEF4252B5FCD00579896 /* MainMenu InterfaceController.swift */,
+				7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */,
+				79A3517325D5BE97001840D5 /* PitchInterfaceController.swift */,
+				79C657782559A6B900E6DBCE /* SetIntervalsInterfaceController.swift */,
+				7989157125605679004983BD /* WorkoutInterfaceController.swift */,
+				791BD3C225A64E2600FD994A /* WorkoutManager.swift */,
 				79A4EFD524A0AF4C002A7870 /* Assets.xcassets */,
-				79A4EFD724A0AF4C002A7870 /* Info.plist */,
 				79CA515F25C2DF4E00415F84 /* InfoPlist.strings */,
 			);
 			path = "Heatmapper WatchKit Extension";
@@ -834,7 +831,6 @@
 				7996ADF7256860A200C25196 /* CustomRowController.swift in Sources */,
 				7907E8C124E1468500F3DE0D /* Extensions.swift in Sources */,
 				793D1AE724B86E6F0039441B /* CustomLogger.swift in Sources */,
-				795B8FB626320E7000E5DD8C /* HeatmapInterfaceController.swift in Sources */,
 				79A3517425D5BE97001840D5 /* PitchInterfaceController.swift in Sources */,
 				793D1AD724B855540039441B /* CommandStatus.swift in Sources */,
 				79BB8FF02563DB4500019900 /* CountdownInterfaceController.swift in Sources */,

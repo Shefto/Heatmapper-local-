@@ -21,37 +21,20 @@ class MainMenuInterfaceController: WKInterfaceController, CLLocationManagerDeleg
   var buttonJustPressed : Bool = false
 
   // HealthKit variables
-  private let healthStore                 = HKHealthStore()
+  private let healthStore      = HKHealthStore()
   // Core Location variables
 
-  let locationManager             = CLLocationManager()
-
+  let locationManager          = CLLocationManager()
 
   override func awake(withContext context: Any?) {
-
+    super.awake(withContext: context)
   }
 
-  
   @IBAction func btnStart() {
-
 
     pushController(withName: "Countdown Interface Controller", context: nil)
 
-//    var screenArray   = [String]()
-//    var contextArray  = [Any]()
-//
-//    screenArray = ["ActionsInterfaceController", "WorkoutInterfaceController", "IntervalsTableController"]
-//    contextArray = ["", "", ""]
-//
-//    // set up page-based navigation for main 3 screens but with initial focus on middle
-//    WKInterfaceController.reloadRootPageControllers(withNames:
-//                                                      screenArray,
-//                                                    contexts: contextArray,
-//                                                    orientation: WKPageOrientation.horizontal,
-//                                                    pageIndex: 1)
-
   }
-//
 
   override func didAppear() {
 
@@ -100,19 +83,15 @@ class MainMenuInterfaceController: WKInterfaceController, CLLocationManagerDeleg
       MyFunc.logMessage(.default, "Location authorizationStatus = authorizedWhenInUse")
     case .denied:
       MyFunc.logMessage(.default, "Location authorizationStatus = denied")
-//      locationManager.requestAlwaysAuthorization()
       locationManager.requestWhenInUseAuthorization()
     case .notDetermined:
       MyFunc.logMessage(.default, "Location authorizationStatus = notDetermined")
-//      locationManager.requestAlwaysAuthorization()
       locationManager.requestWhenInUseAuthorization()
     case .restricted:
       MyFunc.logMessage(.default, "Location authorizationStatus = restricted")
-//      locationManager.requestAlwaysAuthorization()
       locationManager.requestWhenInUseAuthorization()
     default:
       MyFunc.logMessage(.default, "Location authorizationStatus not recognized")
-//      locationManager.requestAlwaysAuthorization()
       locationManager.requestWhenInUseAuthorization()
     }
 
@@ -131,8 +110,5 @@ class MainMenuInterfaceController: WKInterfaceController, CLLocationManagerDeleg
       self.buttonJustPressed = false
     }
   }
-
-
-
 
 }
