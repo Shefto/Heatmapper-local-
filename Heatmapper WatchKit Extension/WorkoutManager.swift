@@ -169,7 +169,7 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
   //// MARK: - HKLiveWorkoutBuilderDelegate
   //extension WorkoutManager: HKLiveWorkoutBuilderDelegate {
   func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) {
-
+    MyFunc.logMessage(.debug, "WorkoutManager.workoutBuilderDidCollectEvent called")
   }
 
   func workoutBuilder(_ workoutBuilder: HKLiveWorkoutBuilder, didCollectDataOf collectedTypes: Set<HKSampleType>) {
@@ -179,7 +179,7 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
       }
       /// - Tag: GetStatistics
       let statistics = workoutBuilder.statistics(for: quantityType)
-
+      MyFunc.logMessage(.debug, "WorkoutManager.workoutBuilder.didCollectDataOf called")
       // Update the published values.
       updateForStatistics(statistics)
     }

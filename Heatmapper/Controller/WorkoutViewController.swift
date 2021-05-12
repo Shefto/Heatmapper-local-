@@ -239,14 +239,14 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
   fileprivate func createAndLoadInterstitial() {
     interstitial = GADInterstitial(adUnitID: "ca-app-pub-2779736734695934/7555499739")
     let request = GADRequest()
-//    // Request test ads on devices you specify. Your test device ID is printed to the console when
-//    // an ad request is made.
-//    request.testDevices = [kGADSimulatorID as! String, "2077ef9a63d2b398840261c8221a0c9a"]
+    //    // Request test ads on devices you specify. Your test device ID is printed to the console when
+    //    // an ad request is made.
+    //    request.testDevices = [kGADSimulatorID as! String, "2077ef9a63d2b398840261c8221a0c9a"]
     interstitial.load(request)
   }
 
   func loadUI() {
-   
+
 
     let unitLengthDefault = defaults.object(forKey: "Units") as? String ?? ""
 
@@ -567,19 +567,19 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
       let workoutDurationTimeInterval = workoutDurationDateInterval?.duration
       let workoutDurationStr = workoutDurationTimeInterval!.toReadableString()
 
-    if activityType == .auto {
-      fartlekTimerLabel.text = workoutDurationStr
-       fartlekTimerLabel.font = fartlekTimerLabel.font.bold()
-      fartlekPaceLabel.font = fartlekPaceLabel.font.bold()
-      fartlekDistLabel.font = fartlekDistLabel.font.bold()
-      tableHeaderStackView.isHidden = false
-      fartlekCurrentStackView.isHidden = false
-      workoutTotalView.isHidden = false
+      if activityType == .auto {
+        fartlekTimerLabel.text = workoutDurationStr
+        fartlekTimerLabel.font = fartlekTimerLabel.font.bold()
+        fartlekPaceLabel.font = fartlekPaceLabel.font.bold()
+        fartlekDistLabel.font = fartlekDistLabel.font.bold()
+        tableHeaderStackView.isHidden = false
+        fartlekCurrentStackView.isHidden = false
+        workoutTotalView.isHidden = false
 
-      self.fartlekTableView.reloadData()
-      self.view.layoutIfNeeded()
-      self.scrollToBottom(animated: false)
-    }
+        self.fartlekTableView.reloadData()
+        self.view.layoutIfNeeded()
+        self.scrollToBottom(animated: false)
+      }
 
       // add each Sample Array to the Workout
       addSamplesToWorkout(sampleArray: activeEnergySampleArray)
@@ -1160,7 +1160,7 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
     let currentLocation = locations[locations.count - 1]
-//    let locationStr = String(describing: currentLocation)
+    //    let locationStr = String(describing: currentLocation)
     MyFunc.logMessage(.debug, "Current Location Found: \(currentLocation)")
 
     // Filter the raw data.
@@ -1363,8 +1363,8 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
 
         if activityType == .auto {
           fartlekCurrentStackView.isHidden  = false
-        tableHeaderStackView.isHidden = false
-        fartlekTableView.isHidden = false
+          tableHeaderStackView.isHidden = false
+          fartlekTableView.isHidden = false
         }
         self.fartlekTimer.start()
         self.workoutStartDate = Date()
@@ -1381,11 +1381,9 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
         })
 
         // execute main event tracking process
-
         switch activityType {
         case .auto:
           Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(WorkoutViewController.speakStartingWorkout(_:)), userInfo: nil, repeats: false)
-
           intervalTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(WorkoutViewController.updateWorkoutDurationLabel(_:)), userInfo: nil, repeats: true)
           runAutoWorkout()
 
@@ -1396,7 +1394,7 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
           intervalTemplateArray.removeAll()
           intervalTemplateArray = MyFunc.createRepeatIntervalSet(activityTemplate)
           totalSetStr = String(intervalTemplateArray.count)
-//          totalSetLabel.text = totalSetsStr
+          //          totalSetLabel.text = totalSetsStr
           getNextInterval = true
           runManualWorkout()
 
@@ -1414,7 +1412,6 @@ class WorkoutViewController: UIViewController, UITableViewDataSource, UITableVie
           runManualWorkout()
 
         case .random:
-
           displayManualActivityTracker()
           // for manual activity types, get the defaults
           activityTemplate = MyFunc.getActivityDefaults(activityType)

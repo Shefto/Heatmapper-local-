@@ -36,39 +36,23 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   // HealthKit variables
   let workoutManager = WorkoutManager()
   var routeBuilder: HKWorkoutRouteBuilder!
-  
 
   // timer variables
   let workoutTimer                = Stopwatch()
   var isRunning                   = true
   var intervalTimer               = Timer()
 
-//  var intervalTemplateArray : [IntervalTemplate] = []
-//  var intervalCount: Int = 0
-//  var getNextInterval: Bool = false
-
   // Workout variables
   var workoutStartDate: Date?
   var workoutEndDate: Date?
   var workoutPausedDate: Date?
   var workoutDurationTimeInterval: TimeInterval = 0
-//  var workoutEventArray: [HKWorkoutEvent] = []
 
   // Interval variables
   private var intervalStartDate : Date?
   private var intervalEndDate : Date?
   var intervalDurationDateInterval : DateInterval?
   var intervalDurationTimeInterval : TimeInterval = 0
-
-
-
-//  var workoutTotalTime: Double = 0
-  
-  //  var activityType                 = ActivityType()
-  
-  // Core Location variables
-//  let locationManager             = LocationManager()
-//  var locationArray               : [CLLocationCoordinate2D] = []
 
   let pedometer                   = CMPedometer()
 
@@ -132,17 +116,11 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   override func awake(withContext context: Any?) {
     super.awake(withContext: nil)
 
-    let durationFont = UIFont.monospacedSystemFont(ofSize: 16, weight: .regular)
-    let durationText = NSAttributedString(string: "0.0", attributes: [NSAttributedString.Key.font: durationFont])
-    workoutDurationLabel.setAttributedText(durationText)
-    
+    workoutManager.delegate = self
+    loadUI()
     addNotificationObservers()
     startWorkout()
-    
-    workoutManager.delegate = self
 
-
-    
   }
   
   override func willActivate() {
@@ -183,7 +161,7 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
       })
     }
 
-    MyFunc.logMessage(.debug, "startWorkout : fartlekTimer.start()")
+    MyFunc.logMessage(.debug, "WorkoutInterfaceController.startWorkout : workoutTimer.start()")
     workoutTimer.start()
 
     workoutStartDate = Date()
@@ -193,10 +171,13 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     // intervalTimer controls the displayed Time
     intervalTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(WorkoutInterfaceController.updateWorkoutDurationLabel(_:)), userInfo: nil, repeats: true)
 
-
   } // func startWorkout
 
-
+  func loadUI() {
+    let durationFont = UIFont.monospacedSystemFont(ofSize: 16, weight: .regular)
+    let durationText = NSAttributedString(string: "0.0", attributes: [NSAttributedString.Key.font: durationFont])
+    workoutDurationLabel.setAttributedText(durationText)
+  }
 
   func addNotificationObservers() {
     
@@ -212,11 +193,11 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     NotificationCenter.default.addObserver(self, selector: #selector(type(of: self).dataDidFlow(_:)), name: .dataDidFlow, object: nil)
     
   }
- 
+
   @objc func speakStartingWorkout(_ timer: Timer) {
     if workoutTimer.isRunning == true {
-//      let startPhraseLocalized = NSLocalizedString("Starting workout now", comment: "")
-//      audio.speak(phrase: startPhraseLocalized)
+      //      let startPhraseLocalized = NSLocalizedString("Starting workout now", comment: "")
+      //      audio.speak(phrase: startPhraseLocalized)
     }
   }
   
@@ -240,7 +221,8 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
 
 
     // record the final interval and stop location and motion updates
-//    addInterval(startDate: intervalStartDate!, endDate: workoutEndDate!, duration: workoutDurationTimeInterval, finalInterval: true)
+    // for Heatmapper, this is the only function which adds samples
+    addInterval(startDate: intervalStartDate!, endDate: workoutEndDate!, duration: workoutDurationTimeInterval)
     pedometer.stopUpdates()
 
     LocationManager.sharedInstance.stopUpdatingLocation()
@@ -251,7 +233,7 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     
     DispatchQueue.main.async {
       self.displayAlert(title: "Workout saved", message: "")
-//      WKInterfaceController.reloadRootPageControllers(withNames: ["IntervalsTableController"], contexts: ["workoutEnded"], orientation: WKPageOrientation.horizontal, pageIndex: 0)
+      //      WKInterfaceController.reloadRootPageControllers(withNames: ["IntervalsTableController"], contexts: ["workoutEnded"], orientation: WKPageOrientation.horizontal, pageIndex: 0)
     }
     
     
@@ -266,9 +248,9 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     
     workoutManager.pauseWorkout()
     //    session.pause()
-//    audio.stopSpeaking()
-//    let pausePhrase = NSLocalizedString("Workout paused", comment: "")
-//    audio.speak(phrase: pausePhrase)
+    //    audio.stopSpeaking()
+    //    let pausePhrase = NSLocalizedString("Workout paused", comment: "")
+    //    audio.speak(phrase: pausePhrase)
     intervalTimer.invalidate()
 
     if workoutTimer.isRunning {
@@ -291,9 +273,9 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     DispatchQueue.main.async {
       self.becomeCurrentPage()
     }
-//    audio.stopSpeaking()
-//    let resumePhraseLocalized = NSLocalizedString("Resuming workout", comment: "Resuming workout")
-//    audio.speak(phrase: resumePhraseLocalized)
+    //    audio.stopSpeaking()
+    //    let resumePhraseLocalized = NSLocalizedString("Resuming workout", comment: "Resuming workout")
+    //    audio.speak(phrase: resumePhraseLocalized)
     
     workoutManager.resumeWorkout()
 
@@ -307,54 +289,16 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   } // @objc func resumeWorkout
   
   @objc func lockScreen() {
-    
+
+    // lock screen
     WKInterfaceDevice.current().enableWaterLock()
-    // set as current page
+    // and immediately return to display the Workout Interface
     DispatchQueue.main.async {
       self.becomeCurrentPage()
     }
     
   }
-  
-  // Core Location code to get the current location
-//  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//
-//    let currentLocation = locations[locations.count - 1]
-//    let locationStr = String(describing: currentLocation)
-//    locationLabel.setText(locationStr)
-//    MyFunc.logMessage(.debug, "Current Location Found: \(currentLocation)")
-//
-//
-//    if currentLocation.horizontalAccuracy <= 50.0 {
-//    LocationManager.sharedInstance.locationDataAsCoordinates.append(currentLocation.coordinate)
-//    LocationManager.sharedInstance.locationDataArray.append(currentLocation)
-//      locationArray.append(currentLocation.coordinate)
-//      MyFunc.logMessage(.debug, "Appended currentLocation \(currentLocation) to locationArray")
-//      MyFunc.logMessage(.debug, "locationArray:")
-//      MyFunc.logMessage(.debug, String(describing: LocationManager.sharedInstance.locationDataArray))
-//    }
 
-//    // Filter the raw data.
-//    let filteredLocations = locations.filter { (location: CLLocation) -> Bool in
-//      location.horizontalAccuracy <= 50.0
-//    }
-//    
-//    guard !filteredLocations.isEmpty else { return }
-//
-//    MyFunc.logMessage(.debug, "Locations:")
-//    MyFunc.logMessage(.debug, String(describing: filteredLocations))
-//    // Add the filtered data to the route.
-//    routeBuilder.insertRouteData(filteredLocations) { (success, error) in
-//      if !success {
-//        MyFunc.logMessage(.error, "Error inserting Route data: \(String(describing: error))")
-//      }
-//    }
-//  }
-//
-//  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//    MyFunc.logMessage(.error, "Error attempting to get Location: \(error)")
-//  }
-//
   func displayAlert (title: String, message: String) {
     var nextController = "MainMenuInterfaceController"
     //    if activityType == .auto {
@@ -363,39 +307,29 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
     
     //Alert user that Save has worked
     let okAction = WKAlertAction(title: "OK", style: WKAlertActionStyle.default, handler: {
-      
-      MyFunc.logMessage(.default, "okAction handler called")
       DispatchQueue.main.async {
         self.pushController(withName: nextController, context: nil)
       }
-      
     })
-    MyFunc.logMessage(.debug, "displayAlert called")
+
     DispatchQueue.main.async {
       WKExtension.shared().visibleInterfaceController?.presentAlert(withTitle: title, message: message, preferredStyle: WKAlertControllerStyle.alert, actions: [okAction])
-  
       self.pushController(withName: nextController, context: nil)
     }
   }
   
-  func addInterval(startDate: Date, endDate: Date!, duration: TimeInterval, finalInterval: Bool) {
+  func addInterval(startDate: Date, endDate: Date!, duration: TimeInterval) {
     
     var newInterval         = Interval()
-    //    let intervalMotionType  = motionType
-    
+    newInterval.duration    = DateInterval(start: startDate, duration: duration)
+    newInterval.startDate   = startDate
+    newInterval.endDate     = endDate
 
-//      newInterval.duration    = DateInterval(start: startDate, end: endDate)
-    newInterval.duration  = DateInterval(start: startDate, duration: duration)
-
-    newInterval.startDate   = intervalStartDate
-    newInterval.endDate     = intervalEndDate
-    
+    // get interval pace, steps and distance
     pedometer.queryPedometerData(from: startDate, to: endDate) {
-      
       (pedometerData: CMPedometerData!, error) -> Void in
-      
+
       if error == nil {
-        
         newInterval.distance    = pedometerData.distance ?? 0
         newInterval.pace        = pedometerData.averageActivePace ?? 0
         newInterval.steps       = pedometerData.numberOfSteps
@@ -403,10 +337,8 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
         
         HeatmapperWorkout.intervalArray.append(newInterval)
         MyFunc.logMessage(.debug, "HeatmapperWorkout: \(String(describing: HeatmapperWorkout.self))")
-        HeatmapperWorkout.lastIntervalEndDate = self.intervalEndDate!
-        self.intervalStartDate = self.intervalEndDate
-        
-        // code below creates Samples : commented out while identifying interval tracking issues
+//        HeatmapperWorkout.lastIntervalEndDate = self.intervalEndDate!
+
         guard let distanceType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning),
               let activeEnergyType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned),
               let heartRateType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate),
@@ -416,28 +348,27 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
         // create Distance Sample
         let distanceDouble: Double = pedometerData.distance?.doubleValue ?? 0.0
         let distanceQuantity = HKQuantity(unit: HKUnit.meter(), doubleValue: distanceDouble)
-
-        let distanceSample = HKQuantitySample(type: distanceType, quantity: distanceQuantity, start: self.intervalStartDate!, end: self.intervalEndDate!, device: .local(), metadata: ["Activity Type": "N/A"])
+        let distanceSample = HKQuantitySample(type: distanceType, quantity: distanceQuantity, start: startDate, end: endDate, device: .local(), metadata: ["Activity Type": "N/A"])
 
         HeatmapperWorkout.sampleArray.append(distanceSample)
         
         // create Active Energy Sample
-        let activeEnergySample = self.workoutManager.getSampleForType(startDate: self.intervalStartDate!, endDate: self.intervalEndDate!, quantityType: activeEnergyType, option: .cumulativeSum)
+        let activeEnergySample = self.workoutManager.getSampleForType(startDate: startDate, endDate: endDate, quantityType: activeEnergyType, option: .cumulativeSum)
         HeatmapperWorkout.sampleArray.append(activeEnergySample)
         
         // create Basal Energy Sample
-        let basalEnergySample = self.workoutManager.getSampleForType(startDate: self.intervalStartDate!, endDate: self.intervalEndDate!, quantityType: basalEnergyType, option: .cumulativeSum)
+        let basalEnergySample = self.workoutManager.getSampleForType(startDate: startDate, endDate: endDate, quantityType: basalEnergyType, option: .cumulativeSum)
         HeatmapperWorkout.sampleArray.append(basalEnergySample)
         
         // create Heart Rate Sample
-        let heartRateSample = self.workoutManager.getHeartRateSample(startDate: self.intervalStartDate!, endDate: self.intervalEndDate!, quantityType: heartRateType, option: .discreteAverage)
+        let heartRateSample = self.workoutManager.getHeartRateSample(startDate: startDate, endDate: endDate, quantityType: heartRateType, option: .discreteAverage)
         HeatmapperWorkout.sampleArray.append(heartRateSample)
         
-      }
+      } // if error == nil
       
-    } // self.pedometer.queryPedometerData
+    } // pedometer.queryPedometerData
 
-  }
+  } // func addInterval
   
   
   // this function updates the timer labels for the current interval and overall workout
@@ -486,8 +417,9 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   
   // Update the WKInterfaceLabels with new data.
   func updateLabel(_ label: WKInterfaceLabel?, withStatistics statistics: HKStatistics?) {
-    // Make sure we got non `nil` parameters.
+    // check to ensure there are statistics to update the UI with
     guard let label = label, let statistics = statistics else {
+      // if no statistics exit the function
       return
     }
     
@@ -525,30 +457,33 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
         
         self.currentPace.setText(paceString)
         paceLabel.setText(unitSpeed.symbol)
-        
         return
+
       default:
+        // catch for other statistic types
         return
       }
     }
   }
-  
-  func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) {
-    // retrieve the workout event.
-    guard let workoutEventType = workoutBuilder.workoutEvents.last?.type else { return }
-    
-    // Update the timer based on the event received.
-    switch workoutEventType {
-    case .pause: // The user paused the workout.
-      MyFunc.logMessage(.default, "Workout Paused")
-      
-    case .resume: // The user resumed the workout.
-      MyFunc.logMessage(.default, "Workout Resumed")
-      
-    default:
-      return
-    }
-  }
+//  
+//  func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) {
+//
+//    MyFunc.logMessage(.debug, "WorkoutInterfaceController.workoutBuilderDidCollectEvent called")
+//    // retrieve the workout event.
+//    guard let workoutEventType = workoutBuilder.workoutEvents.last?.type else { return }
+//    
+//    // Update the timer based on the event received.
+//    switch workoutEventType {
+//    case .pause: // The user paused the workout.
+//      MyFunc.logMessage(.default, "Workout Paused")
+//      
+//    case .resume: // The user resumed the workout.
+//      MyFunc.logMessage(.default, "Workout Resumed")
+//      
+//    default:
+//      return
+//    }
+//  }
   
   func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
     MyFunc.logMessage(.default, "workoutSession.didChangeTo state: \(toState) from \(fromState)")
