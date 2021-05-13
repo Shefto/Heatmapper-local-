@@ -300,10 +300,8 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
   }
 
   func displayAlert (title: String, message: String) {
-    var nextController = "MainMenuInterfaceController"
-    //    if activityType == .auto {
-    nextController = "IntervalsTableController"
-    //    }
+    let nextController = "MainMenuInterfaceController"
+
     
     //Alert user that Save has worked
     let okAction = WKAlertAction(title: "OK", style: WKAlertActionStyle.default, handler: {

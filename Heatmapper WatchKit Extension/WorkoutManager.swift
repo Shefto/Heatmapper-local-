@@ -18,19 +18,13 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
   var routeBuilder  : HKWorkoutRouteBuilder!
   var delegate      : WorkoutManagerDelegate!
 
-  //  var cancellable: Cancellable?
-  //  var accumulatedTime: Int = 0
-
   // Request authorization to access HealthKit.
   func requestAuthorization() {
-    // Requesting authorization.
-    /// - Tag: RequestAuthorization
-    // The quantity type to write to the health store.
+
     let typesToShare: Set = [
       HKQuantityType.workoutType()
     ]
 
-    // The quantity types to read from the health store.
     let typesToRead: Set = [
       HKQuantityType.quantityType(forIdentifier: .heartRate)!,
       HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
@@ -38,7 +32,6 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
       HKQuantityType.workoutType()
     ]
 
-    // Request authorization for those quantity types.
     healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
       // Handle error.
     }
@@ -76,9 +69,7 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
     // set the builder's data source as the live workout
     builder.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore, workoutConfiguration: workoutConfiguration())
 
-
     // Start the workout session and begin data collection.
-    /// - Tag: StartSession
     session.startActivity(with: Date())
     builder.beginCollection(withStart: Date()) { (success, error) in
       // The workout has started.
@@ -87,20 +78,15 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
 
 
   func pauseWorkout() {
-    // Pause the workout.
     session.pause()
   }
 
   func resumeWorkout() {
-    // Resume the workout.
     session.resume()
-
   }
 
   func endWorkout() {
-    // End the workout session.
     session.end()
-    //    cancellable?.cancel()
   }
 
 
@@ -154,8 +140,7 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
       MyFunc.logMessage(.debug, "The workout has now ended.")
       builder.endCollection(withEnd: Date()) { (success, error) in
         self.builder.finishWorkout { (workout, error) in
-          // Optionally display a workout summary to the user.
-          //          self.resetWorkout()
+
         }
       }
     }
