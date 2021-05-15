@@ -102,7 +102,7 @@ public class JDHeatMapView : MKMapView
 
   func initialiseProgressWheel()
   {
-    inProgressWheel = UIActivityIndicatorView(style: .whiteLarge)
+    inProgressWheel = UIActivityIndicatorView(style: .large)
     inProgressWheel?.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(inProgressWheel!)
     let sizeWidth = NSLayoutConstraint(item: inProgressWheel!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 60)

@@ -355,7 +355,7 @@ extension JDHeatMapManager
                 }
                 /*
                  Recalculate new Size new Data to draw a new cgimage
-                 (Probably user zoom in.
+                 (Probably user zoom in)
                  */
                 heatmapRenderer.reduceSize(scales: scaleUIView_MapRect) //Recaculate new FitnessSize
                 heatmapRenderer.createHeatmapPoint()

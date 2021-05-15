@@ -31,6 +31,11 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     workoutTableView.dataSource = self
     workoutTableView.delegate = self
 
+    workoutTableView.register(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutTableViewCell")
+    workoutTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: workoutTableView.frame.size.width, height: 1))
+    workoutTableView.tableHeaderView?.backgroundColor = UIColor.clear
+  
+
 //    testSourceQuery()
 
     loadWorkouts { (workouts, error) in
@@ -68,23 +73,24 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
 
     //1. Get a cell to display the workout in
     let cell = tableView.dequeueReusableCell(withIdentifier:
-                                              workoutCellId, for: indexPath)
+                                              "WorkoutTableViewCell", for: indexPath) as! WorkoutTableViewCell
 
     //2. Get the workout corresponding to this row
     let workout = workouts[indexPath.row]
 
     //3. Show the workout's start date in the label
-    cell.textLabel?.text = dateFormatter.string(from: workout.startDate)
+//    cell.textLabel?.text = dateFormatter.string(from: workout.startDate)
+    cell.activityDate.text = dateFormatter.string(from: workout.startDate)
 
     //4. Show the Calorie burn in the lower label
     if let caloriesBurned =
         workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) {
-      let formattedCalories = String(format: "CaloriesBurned: %.2f",
+      let formattedCalories = String(format: "%.2f kcal",
                                      caloriesBurned)
 
-      cell.detailTextLabel?.text = formattedCalories
+      cell.caloriesLabel.text = formattedCalories
     } else {
-      cell.detailTextLabel?.text = nil
+      cell.caloriesLabel.text = nil
     }
 
     return cell
