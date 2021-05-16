@@ -3,7 +3,6 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,10 +13,10 @@
             <rect key="frame" x="0.0" y="0.0" width="764" height="94"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="boy-Gn-HqB">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="boy-Gn-HqB" userLabel="Workout Cell Stack View">
                     <rect key="frame" x="0.0" y="0.0" width="764" height="94"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Zxj-rA-b58">
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Zxj-rA-b58" userLabel="Activity Type and Date Stack View">
                             <rect key="frame" x="0.0" y="0.0" width="764" height="30"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRp-Ii-MLI">
@@ -44,7 +43,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                             <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="Xg3-eX-Gme" secondAttribute="height" id="FxD-W0-tDz"/>
+                                                <constraint firstAttribute="height" constant="30" id="9t2-kH-cxM"/>
+                                                <constraint firstAttribute="width" constant="30" id="QZc-mK-ztI"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Heart Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxG-Ae-P8F">
@@ -77,9 +77,8 @@
                                 </stackView>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" id="wkr-Kn-jSa" userLabel="Speed and Distance Stack View">
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wkr-Kn-jSa" userLabel="Speed and Distance Stack View">
                             <rect key="frame" x="0.0" y="64" width="764" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="51e-jb-Upw" userLabel="Heart Rate Stack View">
                                     <rect key="frame" x="0.0" y="0.0" width="377" height="30"/>
@@ -88,8 +87,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                             <color key="tintColor" systemColor="systemBlueColor"/>
                                             <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="67x-7L-9tr"/>
                                                 <constraint firstAttribute="width" constant="30" id="AC1-4l-FXg"/>
-                                                <constraint firstAttribute="width" secondItem="Ett-eS-YOG" secondAttribute="height" id="DEd-0L-cKG"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkS-PU-cVA">
@@ -115,23 +114,33 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="aBj-v2-hpJ"/>
                                                 <constraint firstAttribute="width" constant="30" id="i9r-8T-ItV"/>
-                                                <constraint firstAttribute="width" secondItem="xeR-et-omh" secondAttribute="height" multiplier="1:1" id="lKC-IT-fEe"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                 </stackView>
                             </subviews>
-                            <viewLayoutGuide key="safeArea" id="X39-pb-GQr"/>
+                            <constraints>
+                                <constraint firstItem="hm5-qV-B6p" firstAttribute="top" secondItem="wkr-Kn-jSa" secondAttribute="top" id="Fat-EI-CQH"/>
+                                <constraint firstAttribute="bottom" secondItem="hm5-qV-B6p" secondAttribute="bottom" id="PdE-gL-Gwh"/>
+                                <constraint firstAttribute="trailing" secondItem="hm5-qV-B6p" secondAttribute="trailing" id="yyx-GU-Seu"/>
+                            </constraints>
                         </stackView>
                     </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Zxj-rA-b58" secondAttribute="trailing" id="8xu-P1-Q7n"/>
+                        <constraint firstItem="Zxj-rA-b58" firstAttribute="leading" secondItem="boy-Gn-HqB" secondAttribute="leading" id="Ha9-Er-nB1"/>
+                        <constraint firstAttribute="trailing" secondItem="GNh-00-oCb" secondAttribute="trailing" id="NDi-8Y-Uys"/>
+                        <constraint firstAttribute="trailing" secondItem="wkr-Kn-jSa" secondAttribute="trailing" id="YYR-V4-7hN"/>
+                        <constraint firstItem="GNh-00-oCb" firstAttribute="leading" secondItem="boy-Gn-HqB" secondAttribute="leading" id="beG-ft-Qjc"/>
+                        <constraint firstItem="wkr-Kn-jSa" firstAttribute="leading" secondItem="boy-Gn-HqB" secondAttribute="leading" id="nSG-C4-DtN"/>
+                    </constraints>
                 </stackView>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="boy-Gn-HqB" secondAttribute="trailing" id="62x-FB-Ru7"/>
-                <constraint firstAttribute="bottom" secondItem="boy-Gn-HqB" secondAttribute="bottom" id="6Ld-hS-cdo"/>
-                <constraint firstItem="boy-Gn-HqB" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="XCh-Z7-X2R"/>
-                <constraint firstItem="boy-Gn-HqB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ycC-ga-lkn"/>
+                <constraint firstItem="boy-Gn-HqB" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="7Kf-l6-aA4"/>
+                <constraint firstItem="boy-Gn-HqB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="9Ge-EK-Q0C"/>
+                <constraint firstItem="boy-Gn-HqB" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="MdL-qk-DqA"/>
+                <constraint firstItem="boy-Gn-HqB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="T1z-HD-ht0"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

@@ -34,9 +34,7 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     workoutTableView.register(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutTableViewCell")
     workoutTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: workoutTableView.frame.size.width, height: 1))
     workoutTableView.tableHeaderView?.backgroundColor = UIColor.clear
-  
 
-//    testSourceQuery()
 
     loadWorkouts { (workouts, error) in
       self.workoutArray = workouts
@@ -44,8 +42,8 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
       MyFunc.logMessage(.debug, String(describing: self.workoutArray))
       self.workoutTableView.reloadData()
     }
-    MyFunc.logMessage(.debug, "Workouts:")
-    MyFunc.logMessage(.debug, String(describing: workoutArray))
+//    MyFunc.logMessage(.debug, "Workouts:")
+//    MyFunc.logMessage(.debug, String(describing: workoutArray))
 
   }
 
@@ -71,18 +69,23 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
                """)
     }
 
-    //1. Get a cell to display the workout in
+    // use custom WorkoutCell xib
     let cell = tableView.dequeueReusableCell(withIdentifier:
                                               "WorkoutTableViewCell", for: indexPath) as! WorkoutTableViewCell
 
-    //2. Get the workout corresponding to this row
+    // get workout for the row
     let workout = workouts[indexPath.row]
+    MyFunc.logMessage(.debug, "workout for row \(String(describing: indexPath.row))")
+    MyFunc.logMessage(.debug, String(describing: workout))
 
-    //3. Show the workout's start date in the label
-//    cell.textLabel?.text = dateFormatter.string(from: workout.startDate)
+
+    // load activity date
     cell.activityDate.text = dateFormatter.string(from: workout.startDate)
 
-    //4. Show the Calorie burn in the lower label
+    cell.activityType.text = workout.workoutActivityType.name
+
+    // load workout metric fields
+    // load energy used
     if let caloriesBurned =
         workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) {
       let formattedCalories = String(format: "%.2f kcal",
@@ -92,6 +95,19 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     } else {
       cell.caloriesLabel.text = nil
     }
+
+    // load average BPM
+
+    // load distance
+    if let workoutDistance = workout.totalDistance?.doubleValue(for: .meter()) {
+      let formattedDistance = String(format: "%.2f m", workoutDistance)
+      cell.distanceLabel.text = formattedDistance
+    } else {
+      cell.distanceLabel.text = nil
+    }
+
+    // load average speed
+
 
     return cell
   }

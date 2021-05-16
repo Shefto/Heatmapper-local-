@@ -52,9 +52,6 @@
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "wkZ-fm-ijo"; */
 "wkZ-fm-ijo.title" = "Réglages";
 
-/* Class = "UILabel"; text = "Subtitle"; ObjectID = "2qh-aF-wqP"; */
-"2qh-aF-wqP.text" = "";
-
 /* Class = "UIButton"; normalTitle = "Workout History"; ObjectID = "ape-0k-33h"; */
 "ape-0k-33h.normalTitle" = "";
 
@@ -84,6 +81,3 @@
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "YiQ-y2-7yO"; */
 "YiQ-y2-7yO.title" = "";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "ZI9-5f-WrO"; */
-"ZI9-5f-WrO.text" = "";
