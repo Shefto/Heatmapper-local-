@@ -11,6 +11,8 @@ import HealthKit
 
 class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+  let theme = ColourTheme()
+
   private var workoutArray: [HKWorkout]?
   private let workoutCellId = "workoutCell"
   var workoutId : UUID?
@@ -24,7 +26,7 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
   } ()
 
 
-  @IBOutlet weak var workoutTableView: UITableView!
+  @IBOutlet weak var workoutTableView: ThemeTableViewNoBackground!
   
   override func viewDidLoad() {
     super.viewDidLoad()
