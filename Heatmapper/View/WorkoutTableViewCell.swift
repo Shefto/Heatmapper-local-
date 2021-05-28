@@ -18,4 +18,16 @@ class WorkoutTableViewCell: ThemeTableViewCellNoBackground {
   
   @IBOutlet weak var speedLabel: UILabel!
   @IBOutlet weak var distanceLabel: UILabel!
+
+  @IBOutlet weak var heartImageView: UIImageView!
+  @IBOutlet weak var caloriesImageView: UIImageView!
+  @IBOutlet weak var speedometerImageView: UIImageView!
+  @IBOutlet weak var distanceImageView: UIImageView!
+  
+//  override func awakeFromNib() {
+//    super.awakeFromNib()
+//
+//    heartImage.tintColor = UIColor.red
+//  }
+
 }

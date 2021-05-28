@@ -110,6 +110,18 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
 
     // load average speed
 
+    // configure cellUI
+    cell.heartImageView.image = cell.heartImageView.image?.withRenderingMode(.alwaysTemplate)
+    cell.heartImageView.tintColor = UIColor.systemRed
+
+    cell.caloriesImageView.image = cell.caloriesImageView.image?.withRenderingMode(.alwaysTemplate)
+    cell.caloriesImageView.tintColor = UIColor.systemOrange
+
+    cell.speedometerImageView.image = cell.speedometerImageView.image?.withRenderingMode(.alwaysTemplate)
+    cell.speedometerImageView.tintColor = UIColor.systemBlue
+
+    cell.distanceImageView.image = cell.distanceImageView.image?.withRenderingMode(.alwaysTemplate)
+    cell.distanceImageView.tintColor = UIColor.systemGreen
 
     return cell
   }

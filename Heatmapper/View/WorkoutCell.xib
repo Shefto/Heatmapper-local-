@@ -25,6 +25,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRp-Ii-MLI">
                                             <rect key="frame" x="0.0" y="0.0" width="380" height="22"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -36,6 +37,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GNh-00-oCb" userLabel="Heart Rate and Calories Stack View">
                                     <rect key="frame" x="0.0" y="24" width="806" height="22"/>
@@ -58,6 +60,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="p7F-he-md6" userLabel="Calories Stack View">
                                             <rect key="frame" x="408" y="0.0" width="398" height="22"/>
@@ -124,12 +127,15 @@
                                     </subviews>
                                 </stackView>
                             </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="70" id="Vbx-Ja-l8b"/>
                             </constraints>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="boy-Gn-HqB" firstAttribute="top" secondItem="uR8-aH-hbB" secondAttribute="top" id="1yF-NB-c3S"/>
                         <constraint firstAttribute="trailing" secondItem="boy-Gn-HqB" secondAttribute="trailing" id="DKD-iv-DWb"/>
@@ -139,6 +145,8 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="sRd-tr-jp8"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="uR8-aH-hbB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2Qq-WT-AAq"/>
                 <constraint firstItem="uR8-aH-hbB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="adU-wC-KjK"/>
@@ -150,10 +158,14 @@
             <connections>
                 <outlet property="activityDate" destination="x9N-bl-zp9" id="DCu-Gc-8IP"/>
                 <outlet property="activityType" destination="kRp-Ii-MLI" id="dcP-60-EGg"/>
+                <outlet property="caloriesImageView" destination="Y7D-pQ-YoY" id="ChI-T3-G1j"/>
                 <outlet property="caloriesLabel" destination="Sxr-tH-qwN" id="zyk-Fe-agF"/>
+                <outlet property="distanceImageView" destination="xeR-et-omh" id="OIO-n2-VKd"/>
                 <outlet property="distanceLabel" destination="Xfo-do-Ad5" id="Omp-TN-VdL"/>
+                <outlet property="heartImageView" destination="Xg3-eX-Gme" id="RzF-qI-Czf"/>
                 <outlet property="heartRateLabel" destination="kxG-Ae-P8F" id="U4Q-mJ-lxh"/>
                 <outlet property="speedLabel" destination="RkS-PU-cVA" id="5c4-rL-jBb"/>
+                <outlet property="speedometerImageView" destination="Ett-eS-YOG" id="Ea2-O7-Z73"/>
             </connections>
             <point key="canvasLocation" x="86" y="-148"/>
         </view>
@@ -163,9 +175,6 @@
         <image name="heart.fill" width="34" height="31"/>
         <image name="map.fill" width="41" height="41"/>
         <image name="speedometer" width="41" height="41"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
