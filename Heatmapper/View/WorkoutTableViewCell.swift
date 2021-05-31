@@ -23,11 +23,12 @@ class WorkoutTableViewCell: ThemeTableViewCellNoBackground {
   @IBOutlet weak var caloriesImageView: UIImageView!
   @IBOutlet weak var speedometerImageView: UIImageView!
   @IBOutlet weak var distanceImageView: UIImageView!
-  
-//  override func awakeFromNib() {
-//    super.awakeFromNib()
-//
-//    heartImage.tintColor = UIColor.red
-//  }
+
+  // this adds spacing between the cells
+  override func layoutSubviews() {
+    super.layoutSubviews()
+
+    contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
+  }
 
 }

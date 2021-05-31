@@ -360,9 +360,9 @@
 				79A4EFFB24A88E0E002A7870 /* fartlekCell.xib */,
 				7982B0C0264FEF64001335F3 /* WorkoutCell.xib */,
 				7982B0C226506C07001335F3 /* WorkoutTableViewCell.swift */,
+				79A7E16425AD9F8200D1A952 /* IntervalTypeTableViewCell.xib */,
 				79A4EFFD24A89063002A7870 /* FartlekTableViewCell.swift */,
 				797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */,
-				79A7E16425AD9F8200D1A952 /* IntervalTypeTableViewCell.xib */,
 				79A7E15A25AD9F5000D1A952 /* IntervalTableViewFooter.xib */,
 				7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */,
 			);

@@ -3,6 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,39 +12,39 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WorkoutTableViewCell" customModule="Heatmapper" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="806" height="70"/>
+            <rect key="frame" x="0.0" y="0.0" width="806" height="86"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uR8-aH-hbB" userLabel="Content View">
-                    <rect key="frame" x="0.0" y="0.0" width="806" height="70"/>
+                    <rect key="frame" x="0.0" y="0.0" width="806" height="86"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="boy-Gn-HqB" userLabel="Workout Cell Stack View">
-                            <rect key="frame" x="0.0" y="0.0" width="806" height="70"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="boy-Gn-HqB" userLabel="Workout Cell Stack View">
+                            <rect key="frame" x="5" y="5" width="796" height="76"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Zxj-rA-b58" userLabel="Activity Type and Date Stack View">
-                                    <rect key="frame" x="0.0" y="0.0" width="806" height="22"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="796" height="22"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRp-Ii-MLI">
-                                            <rect key="frame" x="0.0" y="0.0" width="380" height="22"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRp-Ii-MLI" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="391.5" height="22"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" name="textPrimary"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time and Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9N-bl-zp9">
-                                            <rect key="frame" x="380" y="0.0" width="426" height="22"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time and Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9N-bl-zp9" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                            <rect key="frame" x="391.5" y="0.0" width="404.5" height="22"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" name="navBarTint"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GNh-00-oCb" userLabel="Heart Rate and Calories Stack View">
-                                    <rect key="frame" x="0.0" y="24" width="806" height="22"/>
+                                    <rect key="frame" x="0.0" y="27" width="796" height="22"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wY5-19-AZt" userLabel="Heart Rate Stack View">
-                                            <rect key="frame" x="0.0" y="0.0" width="398" height="22"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="22"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.fill" translatesAutoresizingMaskIntoConstraints="NO" id="Xg3-eX-Gme">
                                                     <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -54,25 +55,25 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Heart Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxG-Ae-P8F">
-                                                    <rect key="frame" x="27" y="0.0" width="371" height="22"/>
+                                                    <rect key="frame" x="27" y="0.0" width="366" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="textAlternate"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="p7F-he-md6" userLabel="Calories Stack View">
-                                            <rect key="frame" x="408" y="0.0" width="398" height="22"/>
+                                            <rect key="frame" x="403" y="0.0" width="393" height="22"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cals" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sxr-tH-qwN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="371" height="22"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="textAlternate"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flame.fill" translatesAutoresizingMaskIntoConstraints="NO" id="Y7D-pQ-YoY">
-                                                    <rect key="frame" x="376" y="0.0" width="22" height="22"/>
+                                                    <rect key="frame" x="371" y="0.0" width="22" height="22"/>
                                                     <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="22" id="AGK-vE-GrW"/>
@@ -84,10 +85,10 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wkr-Kn-jSa" userLabel="Speed and Distance Stack View">
-                                    <rect key="frame" x="0.0" y="48" width="806" height="22"/>
+                                    <rect key="frame" x="0.0" y="54" width="796" height="22"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="51e-jb-Upw" userLabel="Speed Stack View">
-                                            <rect key="frame" x="0.0" y="0.0" width="398" height="22"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="22"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="249" image="speedometer" translatesAutoresizingMaskIntoConstraints="NO" id="Ett-eS-YOG">
                                                     <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -98,24 +99,24 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkS-PU-cVA">
-                                                    <rect key="frame" x="27" y="0.0" width="371" height="22"/>
+                                                    <rect key="frame" x="27" y="0.0" width="366" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="textAlternate"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hm5-qV-B6p" userLabel="Distance Stack View">
-                                            <rect key="frame" x="408" y="0.0" width="398" height="22"/>
+                                            <rect key="frame" x="403" y="0.0" width="393" height="22"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfo-do-Ad5">
-                                                    <rect key="frame" x="0.0" y="0.0" width="371" height="22"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="textAlternate"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map.fill" translatesAutoresizingMaskIntoConstraints="NO" id="xeR-et-omh">
-                                                    <rect key="frame" x="376" y="0.0" width="22" height="22"/>
+                                                    <rect key="frame" x="371" y="0.0" width="22" height="22"/>
                                                     <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="DJh-ac-roN"/>
@@ -130,17 +131,17 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="70" id="Vbx-Ja-l8b"/>
+                                <constraint firstAttribute="height" constant="76" id="Vbx-Ja-l8b"/>
                             </constraints>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="buttonPrimary"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="boy-Gn-HqB" firstAttribute="top" secondItem="uR8-aH-hbB" secondAttribute="top" id="1yF-NB-c3S"/>
-                        <constraint firstAttribute="trailing" secondItem="boy-Gn-HqB" secondAttribute="trailing" id="DKD-iv-DWb"/>
-                        <constraint firstAttribute="bottom" secondItem="boy-Gn-HqB" secondAttribute="bottom" id="FfS-HN-6y0"/>
-                        <constraint firstItem="boy-Gn-HqB" firstAttribute="leading" secondItem="uR8-aH-hbB" secondAttribute="leading" id="xeJ-ey-eER"/>
+                        <constraint firstItem="boy-Gn-HqB" firstAttribute="top" secondItem="uR8-aH-hbB" secondAttribute="top" constant="5" id="1yF-NB-c3S"/>
+                        <constraint firstAttribute="trailing" secondItem="boy-Gn-HqB" secondAttribute="trailing" constant="5" id="DKD-iv-DWb"/>
+                        <constraint firstAttribute="bottom" secondItem="boy-Gn-HqB" secondAttribute="bottom" constant="5" id="FfS-HN-6y0"/>
+                        <constraint firstItem="boy-Gn-HqB" firstAttribute="leading" secondItem="uR8-aH-hbB" secondAttribute="leading" constant="5" id="xeJ-ey-eER"/>
                     </constraints>
                 </view>
             </subviews>
@@ -150,6 +151,7 @@
             <constraints>
                 <constraint firstItem="uR8-aH-hbB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2Qq-WT-AAq"/>
                 <constraint firstItem="uR8-aH-hbB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="adU-wC-KjK"/>
+                <constraint firstItem="uR8-aH-hbB" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="ttM-rh-mxR"/>
                 <constraint firstItem="uR8-aH-hbB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="uFc-Pj-Yzl"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
@@ -167,7 +169,7 @@
                 <outlet property="speedLabel" destination="RkS-PU-cVA" id="5c4-rL-jBb"/>
                 <outlet property="speedometerImageView" destination="Ett-eS-YOG" id="Ea2-O7-Z73"/>
             </connections>
-            <point key="canvasLocation" x="86" y="-148"/>
+            <point key="canvasLocation" x="84.799999999999997" y="-141.22938530734635"/>
         </view>
     </objects>
     <resources>
@@ -175,6 +177,18 @@
         <image name="heart.fill" width="34" height="31"/>
         <image name="map.fill" width="41" height="41"/>
         <image name="speedometer" width="41" height="41"/>
+        <namedColor name="buttonPrimary">
+            <color red="0.12549019607843137" green="0.6705882352941176" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navBarTint">
+            <color red="1" green="0.77647058823529413" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="textAlternate">
+            <color red="0.0039215686274509803" green="0.27843137254901962" blue="0.47843137254901963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="textPrimary">
+            <color red="0.93333333333333335" green="0.43529411764705883" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

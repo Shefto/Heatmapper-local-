@@ -88,8 +88,7 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
 
     // load workout metric fields
     // load energy used
-    if let caloriesBurned =
-        workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) {
+    if let caloriesBurned = workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) {
       let formattedCalories = String(format: "%.2f kcal",
                                      caloriesBurned)
 
@@ -99,7 +98,16 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     // load average BPM
+    let heartRateSet = getHeartRateSampleForWorkout(workout: workout)
+    MyFunc.logMessage(.debug, "heartRateSet: ")
+    MyFunc.logMessage(.debug, String(describing: heartRateSet))
 
+//    totalDistance?.doubleValue(for: .meter()) {
+//      let formattedDistance = String(format: "%.2f m", averageBPM)
+//      cell.distanceLabel.text = formattedDistance
+//    } else {
+//      cell.distanceLabel.text = nil
+//    }
     // load distance
     if let workoutDistance = workout.totalDistance?.doubleValue(for: .meter()) {
       let formattedDistance = String(format: "%.2f m", workoutDistance)
@@ -123,6 +131,8 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     cell.distanceImageView.image = cell.distanceImageView.image?.withRenderingMode(.alwaysTemplate)
     cell.distanceImageView.tintColor = UIColor.systemGreen
 
+
+
     return cell
   }
 
@@ -132,10 +142,11 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
 
     let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate,
                                           ascending: false)
+    let sourcePredicate = HKQuery.predicateForObjects(from: .default())
 
     let query = HKSampleQuery(
       sampleType: .workoutType(),
-      predicate: nil,
+      predicate: sourcePredicate,
       limit: 0,
       sortDescriptors: [sortDescriptor]) { (query, samples, error) in
       DispatchQueue.main.async {
@@ -169,7 +180,33 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
 
+  func getHeartRateSampleForWorkout(workout: HKWorkout) -> [HKQuantitySample] {
+    guard let heartRateType =
+            HKObjectType.quantityType(forIdentifier:
+                                        HKQuantityTypeIdentifier.heartRate) else {
+      fatalError("*** Unable to create a distance type ***")
+    }
 
+    var samplesToReturnSet = [HKQuantitySample]()
+    let workoutPredicate = HKQuery.predicateForObjects(from: workout)
+
+    let startDateSort = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
+
+    let query = HKSampleQuery(sampleType: heartRateType,
+                              predicate: workoutPredicate,
+                              limit: 0,
+                              sortDescriptors: [startDateSort]) { (sampleQuery, results, error) -> Void in
+      guard let heartRateSamples = results as? [HKQuantitySample] else {
+        // Perform proper error handling here.
+        return
+      }
+      samplesToReturnSet = heartRateSamples
+      // Use the workout's heartrate samples here.
+    }
+
+    healthstore.execute(query)
+    return samplesToReturnSet
+  }
 
 }
 
