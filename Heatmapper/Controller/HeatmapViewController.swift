@@ -121,7 +121,9 @@ extension HeatmapViewController: JDHeatMapDelegate
 {
   func heatmap(HeatPointCount heatmap:JDHeatMapView) -> Int
   {
+    MyFunc.logMessage(.debug, "Number of coordinates: \(heatmapperCoordinatesArray.count)")
     return heatmapperCoordinatesArray.count
+
   }
 
   func heatmap(HeatLevelFor index:Int) -> Int
@@ -224,13 +226,17 @@ extension HeatmapViewController: JDHeatMapDelegate
 
   func getRouteLocationData(route: HKWorkoutRoute) {
 
+    let samplesCount = route.count
+    MyFunc.logMessage(.debug, "Number of samples: \(samplesCount)")
+
     // Create the route query.
-    let query = HKWorkoutRouteQuery(route: route) { [self] (query, locationsOrNil, done, errorOrNil) in
+    let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNil, done, errorOrNil) in
 
       // This block may be called multiple times.
 
       if errorOrNil != nil {
         // Handle any errors here.
+        MyFunc.logMessage(.debug, "Error retrieving workout locations")
         return
       }
 
@@ -238,22 +244,34 @@ extension HeatmapViewController: JDHeatMapDelegate
         fatalError("*** Invalid State: This can only fail if there was an error. ***")
       }
 
+      MyFunc.logMessage(.debug, "Workout Location Data: \(String(describing: locations))")
+      let locationsAsCoordinates = locations.map {$0.coordinate}
+      MyFunc.logMessage(.debug, "Locations retrieved: \(locationsAsCoordinates)")
+
+      self.heatmapperCoordinatesArray.append(contentsOf: locationsAsCoordinates)
+      let coordinatesTotal = self.heatmapperCoordinatesArray.count
+      MyFunc.logMessage(.debug, "Heatmapper Array count: \(coordinatesTotal)")
+
       // Do something with this batch of location data.
       if done {
-        MyFunc.logMessage(.debug, "Workout Location Data: \(String(describing: locations))")
-        let locationsAsCoordinates = locations.map {$0.coordinate}
-        MyFunc.logMessage(.debug, "locationsAsCoordinates: \(String(describing: locationsAsCoordinates))")
-        heatmapperCoordinatesArray = locationsAsCoordinates
-        MyFunc.logMessage(.debug, "heatmapperCoordinatesArray: \(String(describing: heatmapperCoordinatesArray))")
+//        MyFunc.logMessage(.debug, "Workout Location Data: \(String(describing: locations))")
+//        let locationCount = locationsOrNil!.count
+//        MyFunc.logMessage(.debug, "Locations retrieved: \(locationCount)")
+//        let locationsAsCoordinates = locations.map {$0.coordinate}
+//        let coordinatesCount = locationsAsCoordinates.count
+//        MyFunc.logMessage(.debug, "Coordinates retrieved: \(coordinatesCount)")
+//        MyFunc.logMessage(.debug, "locationsAsCoordinates: \(String(describing: locationsAsCoordinates))")
+//        self.heatmapperCoordinatesArray = locationsAsCoordinates
+        MyFunc.logMessage(.debug, "heatmapperCoordinatesArray: \(String(describing: self.heatmapperCoordinatesArray))")
 
         DispatchQueue.main.async {
         // sets the heatmap frame to the size of the view and specifies the map type
-        heatMap = JDHeatMapView(frame: mapsView.frame, delegate: self, mapType: .FlatDistinct)
+          self.heatMap = JDHeatMapView(frame: self.mapsView.frame, delegate: self, mapType: .FlatDistinct)
 
         // set this VC as the delegate of the JDSwiftHeatMapView
-        heatMap?.delegate = self
+          self.heatMap?.delegate = self
         // add the JDSwiftHeatMapView to the UI
-        mapsView.addSubview(heatMap!)
+          self.mapsView.addSubview(self.heatMap!)
         }
 
       }

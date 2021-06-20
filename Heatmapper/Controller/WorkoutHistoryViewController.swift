@@ -8,6 +8,7 @@
 
 import UIKit
 import HealthKit
+import CoreLocation
 
 class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -17,6 +18,7 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
   private let workoutCellId = "workoutCell"
   var workoutId : UUID?
 
+  let locationManager          = CLLocationManager()
   let healthstore = HKHealthStore()
   lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
@@ -30,6 +32,8 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    // added this to ensure Location tracking turned off (it should be by the time this screen is displayed though)
+    locationManager.stopUpdatingLocation()
     workoutTableView.dataSource = self
     workoutTableView.delegate = self
 
@@ -146,7 +150,8 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
 
     let query = HKSampleQuery(
       sampleType: .workoutType(),
-      predicate: sourcePredicate,
+//      predicate: sourcePredicate,
+      predicate: nil,
       limit: 0,
       sortDescriptors: [sortDescriptor]) { (query, samples, error) in
       DispatchQueue.main.async {

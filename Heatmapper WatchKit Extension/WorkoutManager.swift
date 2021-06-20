@@ -41,7 +41,7 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
   func workoutConfiguration() -> HKWorkoutConfiguration {
     /// - Tag: WorkoutConfiguration
     let configuration = HKWorkoutConfiguration()
-    configuration.activityType = .soccer
+    configuration.activityType = .running
     configuration.locationType = .outdoor
 
     return configuration

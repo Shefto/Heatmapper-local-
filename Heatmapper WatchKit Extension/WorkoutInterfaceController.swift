@@ -230,10 +230,14 @@ class WorkoutInterfaceController: WKInterfaceController, DataProvider, SessionCo
 
 
     self.exportLog()
-    
+
+    let coordinateCount = LocationManager.sharedInstance.locationDataAsCoordinates.count
+    let arrayCount = LocationManager.sharedInstance.locationDataArray.count
+
+    let messageString = "Coordinates: \(coordinateCount) \n Array count: \(arrayCount)"
     DispatchQueue.main.async {
-      self.displayAlert(title: "Workout saved", message: "")
-      //      WKInterfaceController.reloadRootPageControllers(withNames: ["IntervalsTableController"], contexts: ["workoutEnded"], orientation: WKPageOrientation.horizontal, pageIndex: 0)
+      self.displayAlert(title: "Workout saved", message: messageString)
+            WKInterfaceController.reloadRootPageControllers(withNames: ["Main Menu Interface Controller"], contexts: [""], orientation: WKPageOrientation.horizontal, pageIndex: 0)
     }
     
     

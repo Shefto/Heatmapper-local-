@@ -42,6 +42,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
   func startUpdatingLocation(){
     if CLLocationManager.locationServicesEnabled(){
       locationManager.startUpdatingLocation()
+      MyFunc.logMessage(.debug, "startUpdatingLocation called")
     } else {
       //tell view controllers to show an alert
       showTurnOnLocationServiceAlert()
@@ -52,6 +53,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
   func stopUpdatingLocation(){
     if CLLocationManager.locationServicesEnabled(){
       locationManager.stopUpdatingLocation()
+      MyFunc.logMessage(.debug, "stopUpdatingLocation called")
     }
     MyFunc.logMessage(.debug, "locations captured:")
     MyFunc.logMessage(.debug, String(describing: locationDataArray))
@@ -64,7 +66,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
                               didUpdateLocations locations: [CLLocation]){
 
     if let newLocation = locations.last{
-      print("(\(newLocation.coordinate.latitude), \(newLocation.coordinate.latitude))")
+      print("(\(newLocation.coordinate.latitude), \(newLocation.coordinate.longitude))")
 
       var locationAdded: Bool
 
