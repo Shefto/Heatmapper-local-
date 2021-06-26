@@ -15,7 +15,7 @@ class HeatmapViewController: UIViewController {
 
   let healthstore = HKHealthStore()
   // JDHeatmapView is our custom heatmap MapView class
-  var heatMap:  JDHeatMapView?
+  var jdHeatMapView:  JDHeatMapView?
 
   // this variable sets up an array of coordinates and populates with defaults
   var testCoordinatesArray = [
@@ -35,15 +35,15 @@ class HeatmapViewController: UIViewController {
 
   // Action buttons
   @IBAction func changeToRadiusDistinct(_ sender: Any) {
-    heatMap?.setType(type: .RadiusDistinct)
+    jdHeatMapView?.setType(type: .RadiusDistinct)
   }
 
   @IBAction func ChangeToRadiusBlurry(_ sender: Any) {
-    heatMap?.setType(type: .RadiusBlurry)
+    jdHeatMapView?.setType(type: .RadiusBlurry)
   }
 
   @IBAction func ChangeToFlatDistinct(_ sender: Any) {
-    heatMap?.setType(type: .FlatDistinct)
+    jdHeatMapView?.setType(type: .FlatDistinct)
   }
 
 
@@ -77,23 +77,20 @@ class HeatmapViewController: UIViewController {
     }
 
 
-//        addRandomData()
-
-
   }
 
-  // this function simply creates random test data
-  func addRandomData()
-  {
-    for _ in 0..<20
-    {
-      // generate random longitude and latitude
-      let longitude     : Double = Double(119) + Double(Float(arc4random()) / Float(UINT32_MAX))
-      let latitude      : Double = Double(25 + arc4random_uniform(4)) + 2 * Double(Float(arc4random()) / Float(UINT32_MAX))
-      testCoordinatesArray.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-    }
-    print("test data: \(testCoordinatesArray)")
-  }
+//  // this function simply creates random test data
+//  func addRandomData()
+//  {
+//    for _ in 0..<20
+//    {
+//      // generate random longitude and latitude
+//      let longitude     : Double = Double(119) + Double(Float(arc4random()) / Float(UINT32_MAX))
+//      let latitude      : Double = Double(25 + arc4random_uniform(4)) + 2 * Double(Float(arc4random()) / Float(UINT32_MAX))
+//      testCoordinatesArray.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+//    }
+//    print("test data: \(testCoordinatesArray)")
+//  }
 }
 
 // these functions included as delegate of MKMapView
@@ -101,7 +98,7 @@ extension HeatmapViewController: MKMapViewDelegate
 {
   // returns the renderer from the MKMapView and overlay passed in
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    if let heatmapOverlay = heatMap?.heatmapView(mapView, rendererFor: overlay)
+    if let heatmapOverlay = jdHeatMapView?.getMKOverlayRenderer(mapView, rendererFor: overlay)
     {
       return heatmapOverlay
     }
@@ -112,7 +109,7 @@ extension HeatmapViewController: MKMapViewDelegate
   }
 
   func mapViewWillStartRenderingMap(_ mapView: MKMapView) {
-    heatMap?.heatmapViewWillStartRenderingMap(mapView)
+    jdHeatMapView?.heatmapViewWillStartRenderingMap(mapView)
   }
 }
 
@@ -266,12 +263,13 @@ extension HeatmapViewController: JDHeatMapDelegate
 
         DispatchQueue.main.async {
         // sets the heatmap frame to the size of the view and specifies the map type
-          self.heatMap = JDHeatMapView(frame: self.mapsView.frame, delegate: self, mapType: .FlatDistinct)
+          self.jdHeatMapView = JDHeatMapView(frame: self.mapsView.frame, delegate: self, mapType: .FlatDistinct)
 
         // set this VC as the delegate of the JDSwiftHeatMapView
-          self.heatMap?.delegate = self
+          self.jdHeatMapView?.delegate = self
         // add the JDSwiftHeatMapView to the UI
-          self.mapsView.addSubview(self.heatMap!)
+          self.mapsView.addSubview(self.jdHeatMapView!)
+          self.screenshot1()
         }
 
       }
@@ -283,5 +281,36 @@ extension HeatmapViewController: JDHeatMapDelegate
     healthstore.execute(query)
   }
 
-  
+//  func screenshot1(_ sender: UIBarButtonItem) {
+  func screenshot1() {
+    //Create the UIImage
+
+    
+    UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0)
+
+    guard let context = UIGraphicsGetCurrentContext()
+      else {
+        return
+    }
+    view.layer.render(in: context)
+    guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return }
+    UIGraphicsEndImageContext()
+
+    //Save it to the camera roll
+
+    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+  }
+
+
+  func screenshot2(_ sender: UIBarButtonItem) {
+    //Create the UIImage
+    let renderer = UIGraphicsImageRenderer(size: view.frame.size)
+    let image = renderer.image(actions: { context in
+      view.layer.render(in: context.cgContext)
+    })
+
+    //Save it to the camera roll
+    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+  }
+
 }

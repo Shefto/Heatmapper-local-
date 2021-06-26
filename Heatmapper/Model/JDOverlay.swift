@@ -5,7 +5,7 @@
 //  Created by Richard English on 24/04/2021.
 //  Copyright © 2021 Richard English. All rights reserved.
 //
-
+//  Sub-class of MKOverlay
 
 
 import UIKit

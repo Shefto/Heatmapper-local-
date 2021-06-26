@@ -128,15 +128,7 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
             MyFunc.logMessage(.info, String(describing: workoutRoute))
             MyFunc.logMessage(.info, "Saved Events: \(String(describing: savedWorkout?.workoutEvents))")
 
-
-
             self.getRouteSampleObject(workout: savedWorkout!)
-
-
-
-
-
-
 
 
             exportLog()

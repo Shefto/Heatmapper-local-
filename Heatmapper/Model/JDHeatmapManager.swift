@@ -76,7 +76,6 @@ class JDHeatMapManager: NSObject
         // Flat point heatmaps  (i.e with a coloured background)  only require a single overlay
         // for some reason declaring this function then calling it immediately afterwards affects the functionality
         // need to understand why
-
         func collectToOneOverlay()
         {
           if(jdHeatMapView.overlays.count == 1)
@@ -87,7 +86,7 @@ class JDHeatMapManager: NSObject
             }
             return
           }
-          else if(jdHeatMapView.overlays.count == 0) ///First Overlay
+          else if(jdHeatMapView.overlays.count == 0) //First Overlay
           {
             let bigOverlay = JDHeatmapOverlay(first: newHeatPoint)
             jdHeatMapView.addOverlay(bigOverlay, level: MKOverlayLevel.aboveLabels)
@@ -191,7 +190,6 @@ class JDHeatMapManager: NSObject
   func calculateHeatmapPointObjects()
   {
     print(#function)
-
     lastVisibleMapRect = jdHeatMapView.visibleMapRect
 
     // this calls the compute function below and the startCalculating - these are not called anywhere else in the app
@@ -200,7 +198,6 @@ class JDHeatMapManager: NSObject
       callRenderers()
       self.startCalculating()
     })
-
 
     func callRenderers()
     {

@@ -119,7 +119,7 @@ public class JDHeatMapView : MKMapView
 extension JDHeatMapView: MKMapViewDelegate
 {
 
-  public func heatmapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer?
+  public func getMKOverlayRenderer(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer?
   {
     if let flatOverlay = overlay as? JDHeatmapOverlay
     {
@@ -141,7 +141,7 @@ extension JDHeatMapView: MKMapViewDelegate
 
   public func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer
   {
-    if let heatmapRenderer = self.heatmapView(mapView, rendererFor: overlay)
+    if let heatmapRenderer = self.getMKOverlayRenderer(mapView, rendererFor: overlay)
     {
       return heatmapRenderer
     }
