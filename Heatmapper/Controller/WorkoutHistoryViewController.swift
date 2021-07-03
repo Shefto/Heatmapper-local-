@@ -63,7 +63,7 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     workoutId = workoutArray?[indexPath.row].uuid
     MyFunc.logMessage(.debug, "workoutId: \(String(describing: workoutId))")
 
-    self.performSegue(withIdentifier: "historyToHeatmap", sender: workoutId)
+    self.performSegue(withIdentifier: "historyToREHeatmap", sender: workoutId)
   }
 
 
@@ -179,6 +179,11 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
 
     if segueToUse == "historyToHeatmap" {
       let destinationVC = segue.destination as! HeatmapViewController
+      destinationVC.heatmapWorkoutId = (sender as! UUID)
+    }
+
+    if segueToUse == "historyToREHeatmap" {
+      let destinationVC = segue.destination as! REHeatmapViewController
       destinationVC.heatmapWorkoutId = (sender as! UUID)
     }
 

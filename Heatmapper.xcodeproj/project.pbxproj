@@ -109,6 +109,7 @@
 		79F3480E25A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
 		79F3480F25A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
 		79F3481025A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
+		79F3A2A7269078F900667B1B /* REHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */; };
 		79FB27872561984000E1C9AD /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7994126E255AB9230062AC0D /* Objects.swift */; };
 /* End PBXBuildFile section */
 
@@ -279,6 +280,7 @@
 		79D083BD250A0C0900274F79 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		79DC34152625D2FC0053733C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		79F3480D25A3364100762724 /* Heatmapper.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Heatmapper.storekit; sourceTree = "<group>"; };
+		79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REHeatmapViewController.swift; sourceTree = "<group>"; };
 		98D8FC69FF05283C26F8881B /* Pods-Heatmapper WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit Extension/Pods-Heatmapper WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		9C488EBAB113A338118EAD74 /* Pods-Heatmapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper/Pods-Heatmapper.debug.xcconfig"; sourceTree = "<group>"; };
 		9D2FD5C38F894191F54261F7 /* Pods_Heatmapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -375,6 +377,7 @@
 				7935629425B31431006BBC54 /* BartyCrouch.swift */,
 				79D083BD250A0C0900274F79 /* Extensions.swift */,
 				799131232634126800811731 /* HeatmapViewController.swift */,
+				79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */,
 				7935622725AF53C5006BBC54 /* HelpViewController.swift */,
 				79D083B32508EF6400274F79 /* MainMenuViewController.swift */,
 				7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */,
@@ -779,6 +782,7 @@
 				79A4EFF624A7A109002A7870 /* WorkoutViewController.swift in Sources */,
 				793D1ADC24B868840039441B /* SessionCommands.swift in Sources */,
 				797BFD0A2542B72800426185 /* MyFunc_iOS.swift in Sources */,
+				79F3A2A7269078F900667B1B /* REHeatmapViewController.swift in Sources */,
 				799131422634151700811731 /* JDHeatmapPointCreator.swift in Sources */,
 				79913163263490D900811731 /* WorkoutHistoryViewController.swift in Sources */,
 				79D083B42508EF6400274F79 /* MainMenuViewController.swift in Sources */,
