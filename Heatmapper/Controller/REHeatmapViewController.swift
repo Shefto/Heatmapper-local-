@@ -17,31 +17,35 @@ import DTMHeatmap
 class REHeatmapViewController: UIViewController, MKMapViewDelegate {
 
   @IBOutlet weak var mapView: MKMapView!
-
-  let healthstore = HKHealthStore()
-
-
   var dtmHeatmap = DTMHeatmap()
-
   //  var heatmapperCoordinatesArray = LocationManager.sharedInstance.locationDataAsCoordinates
   var heatmapperCoordinatesArray = [CLLocationCoordinate2D]()
   var heatmapWorkoutId : UUID?
 
+  let healthstore = HKHealthStore()
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-
-
     self.mapView.delegate = self
 
     getWorkoutData()
-    let currentLocationCoordinate = LocationManager.sharedInstance.currentLocation.coordinate
-//    let center = CLLocationCoordinate2D(latitude: 51.41420597006313, longitude: 0.19732266849347277)
-    let region = MKCoordinateRegion(center: currentLocationCoordinate, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
-    self.mapView.setRegion(region, animated: true)
+
+    setMapViewCentre()
+
+//    setMapViewZoom()
 
   }
+
+  func setMapViewZoom() {
+    let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//    let insets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
+    let heatmapRect = dtmHeatmap.boundingMapRect()
+
+    mapView.setVisibleMapRect(heatmapRect, edgePadding: insets, animated: true)
+
+  }
+
 
   func createHeatmap() {
 
@@ -55,8 +59,18 @@ class REHeatmapViewController: UIViewController, MKMapViewDelegate {
 
     self.dtmHeatmap.setData(heatmapdata as [NSObject : AnyObject])
     self.mapView.addOverlay(self.dtmHeatmap)
+    self.setMapViewZoom()
 
   }
+
+
+  func setMapViewCentre() {
+    let currentLocationCoordinate = LocationManager.sharedInstance.currentLocation.coordinate
+    let region = MKCoordinateRegion(center: currentLocationCoordinate, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
+    self.mapView.setRegion(region, animated: true)
+
+  }
+
 
   func getWorkoutData() {
     MyFunc.logMessage(.debug, "workoutId: \(String(describing: heatmapWorkoutId))")
@@ -196,7 +210,6 @@ class REHeatmapViewController: UIViewController, MKMapViewDelegate {
 
         DispatchQueue.main.async {
           self.createHeatmap()
-
           // sets the heatmap frame to the size of the view and specifies the map
         }
 
@@ -209,37 +222,37 @@ class REHeatmapViewController: UIViewController, MKMapViewDelegate {
     healthstore.execute(query)
   }
 
-  //  func screenshot1(_ sender: UIBarButtonItem) {
-  func screenshot1() {
-    //Create the UIImage
-
-
-    UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0)
-
-    guard let context = UIGraphicsGetCurrentContext()
-    else {
-      return
-    }
-    view.layer.render(in: context)
-    guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return }
-    UIGraphicsEndImageContext()
-
-    //Save it to the camera roll
-
-    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-  }
-
-
-  func screenshot2(_ sender: UIBarButtonItem) {
-    //Create the UIImage
-    let renderer = UIGraphicsImageRenderer(size: view.frame.size)
-    let image = renderer.image(actions: { context in
-      view.layer.render(in: context.cgContext)
-    })
-
-    //Save it to the camera roll
-    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-  }
+//  //  func screenshot1(_ sender: UIBarButtonItem) {
+//  func screenshot1() {
+//    //Create the UIImage
+//
+//
+//    UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0)
+//
+//    guard let context = UIGraphicsGetCurrentContext()
+//    else {
+//      return
+//    }
+//    view.layer.render(in: context)
+//    guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return }
+//    UIGraphicsEndImageContext()
+//
+//    //Save it to the camera roll
+//
+//    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+//  }
+//
+//
+//  func screenshot2(_ sender: UIBarButtonItem) {
+//    //Create the UIImage
+//    let renderer = UIGraphicsImageRenderer(size: view.frame.size)
+//    let image = renderer.image(actions: { context in
+//      view.layer.render(in: context.cgContext)
+//    })
+//
+//    //Save it to the camera roll
+//    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+//  }
 
 
   func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {

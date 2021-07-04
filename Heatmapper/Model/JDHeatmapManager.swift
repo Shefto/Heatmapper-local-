@@ -230,16 +230,20 @@ class JDHeatMapManager: NSObject
       }
     }
 
+    // this function actually renders the map overlay
     func renderOverlay(heatmapOverlay: JDHeatmapOverlay)
     {
+      // first check the overlay passed in is of the correct type
       if let rendererForHeatmapOverlay = rendererFor(overlay: heatmapOverlay)
       {
-        
+        // now calculate the heatmap data based upon the points and the maximum heat level (calculated elsewhere in this class)
         if let calculatedHeatmapData = rendererForHeatmapOverlay.calcHeatmapPointsAndRect(maxHeat: maxHeatLevelInMap)
         {
+
           var heatmapPointCreator : HeatmapPointCreator!
           let overlayCGRect = calculatedHeatmapData.rect
           let localFormData = calculatedHeatmapData.data
+          // depending upon the type of Heatmap passed in (i.e. flat or radius) call the relevant creator function
           if (dataPointType == .RadiusPoint)
           {
             heatmapPointCreator  = HeatmapRadiusPointCreator(size: (overlayCGRect.size), heatmapPointArray: localFormData)
@@ -250,10 +254,15 @@ class JDHeatMapManager: NSObject
           }
           rendererPointCreatorPair[rendererForHeatmapOverlay] = heatmapPointCreator
 
+          // set the visible area to the biggest map region
           let visibleMapRect = biggestMapRegion
 
+          // set the map rectangle scale to the map view's display size divided by the visible rectangle
           let scaleUIView_MapRect : Double = Double(mapWidthInUIView) / visibleMapRect.size.width
+
+          // now reduce the size of the map based upon this scale
           heatmapPointCreator?.reduceSize(scales: scaleUIView_MapRect)
+
           return
         }
       }
@@ -314,7 +323,7 @@ extension JDHeatMapManager
   func mapViewWillStartRenderingMap()
   {
     // check if a rendering is in progress
-    if(calculationInProgress)
+    if (calculationInProgress)
     {
       // if one is, return so that can finish
       return
