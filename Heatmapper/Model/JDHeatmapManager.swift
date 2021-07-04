@@ -234,6 +234,7 @@ class JDHeatMapManager: NSObject
     {
       if let rendererForHeatmapOverlay = rendererFor(overlay: heatmapOverlay)
       {
+        
         if let calculatedHeatmapData = rendererForHeatmapOverlay.calcHeatmapPointsAndRect(maxHeat: maxHeatLevelInMap)
         {
           var heatmapPointCreator : HeatmapPointCreator!
@@ -309,41 +310,70 @@ class JDHeatMapManager: NSObject
 
 extension JDHeatMapManager
 {
+  // this functiona called at the start of the map view rendering process
   func mapViewWillStartRenderingMap()
   {
-    if(calculationInProgress) {return} //If last time rendering not finished yet...
+    // check if a rendering is in progress
+    if(calculationInProgress)
+    {
+      // if one is, return so that can finish
+      return
+    }
+
+    // set the visible map area up
     let visibleHeatmapRect = jdHeatMapView.visibleMapRect
+
+    // if the visible area is the same as the biggest map region then we're done
     if (visibleHeatmapRect.size.width == biggestMapRegion.size.width &&
           visibleHeatmapRect.origin.x == biggestMapRegion.origin.x &&
-          visibleHeatmapRect.origin.y == biggestMapRegion.origin.y) {return}
+          visibleHeatmapRect.origin.y == biggestMapRegion.origin.y) {
+      return
+    }
+
+    // set a variable up to check how big the zoom change is from the last visible area calculated
     let rerenderReqdCheck = lastVisibleMapRect.size.width / visibleHeatmapRect.size.width
 
-    //The map zoom doesn't change significant
-    if(rerenderReqdCheck > 0.7 && rerenderReqdCheck < 1.66 ) {return}
+    // if the zoome change is within an acceptable scale then we're done
+    if (rerenderReqdCheck > 0.7 && rerenderReqdCheck < 1.66 )
+    {
+      return
+    }
+
     print(#function)
+
+    // note that we are about to start calculating
     self.calculationInProgress = true
     lastVisibleMapRect = visibleHeatmapRect
+
+    // display the progress wheel to let the user know we're doing stuff
     if(jdHeatMapView.showIndicator)
     {
       jdHeatMapView.inProgressWheel?.startAnimating()
     }
-    //
+
+    // this function calculates the map size
     func computing()
     {
+      // loop through all the overlays in the MapView
       for overlay in jdHeatMapView.overlays
       {
+        // if the overlay is a JDHeatmapOverlay
         if let heatmapOverlay = overlay as? JDHeatmapOverlay
         {
+          // then recalculate the renderer to use
+          // again JD has declared a function immediately before calling it - why?
           func recalculateOverlayRenderer()
           {
+            // if the renderer for the heatmap is actually a heatmap overlay renderer
+            // (i.e. the overlay is using the correct type of renderer)
             if let rendererForHeatmapOverlay = rendererFor(overlay: heatmapOverlay)
             {
+
               let scaleUIView_MapRect:  Double = Double(mapWidthInUIView) / visibleHeatmapRect.size.width
               if let heatmapRenderer = rendererPointCreatorPair[rendererForHeatmapOverlay]
               {
-                /*
-                 Exam the cgimage which draw in last time have more pixel?
-                 */
+
+
                 let newWidth = Int(heatmapRenderer.originalCGSize.width * CGFloat(scaleUIView_MapRect) * 1.5)
                 if let lastimage = rendererForHeatmapOverlay.lastImage
                 {
@@ -368,7 +398,8 @@ extension JDHeatMapManager
         }
       }
     }
-    //
+
+
     missionThread.async(execute: {
       computing()
       DispatchQueue.main.sync(execute: {

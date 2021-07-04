@@ -17,7 +17,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
   let locationManager: CLLocationManager
   public var locationDataArray: [CLLocation]
   public var locationDataAsCoordinates: [CLLocationCoordinate2D]
-
+  public var currentLocation: CLLocation
 
   override init() {
     locationManager = CLLocationManager()
@@ -30,6 +30,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
 //    locationManager.pausesLocationUpdatesAutomatically = false
     locationDataArray = [CLLocation]()
     locationDataAsCoordinates = [CLLocationCoordinate2D]()
+    currentLocation = CLLocation()
 
 
     super.init()
@@ -62,12 +63,11 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
   }
 
   //MARK: CLLocationManagerDelegate protocol methods
-  public func locationManager(_ manager: CLLocationManager,
-                              didUpdateLocations locations: [CLLocation]){
+  public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
 
     if let newLocation = locations.last{
       print("(\(newLocation.coordinate.latitude), \(newLocation.coordinate.longitude))")
-
+      currentLocation = newLocation
       var locationAdded: Bool
 
       locationAdded = filterAndAddLocation(newLocation)

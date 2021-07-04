@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol IntervalTypeTableViewCellDelegate: class {
+protocol IntervalTypeTableViewCellDelegate: AnyObject {
   func durationUpdated(newTimeInterval: TimeInterval, indexPath: IndexPath)
 
 }

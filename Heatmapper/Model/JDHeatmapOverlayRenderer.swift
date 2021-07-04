@@ -137,6 +137,7 @@ class JDHeatmapOverlayRenderer :  MKOverlayRenderer
 // subclass of the custom class based on MKOverlayRenderer
 class JDRadiusPointHeatmapOverlayRenderer : JDHeatmapOverlayRenderer
 {
+  // this function returns the array of heatmap points and the rectangle denoting the size of the heatmap
   override func calcHeatmapPointsAndRect(maxHeat level : Int)->(data : [HeatmapPointCG], rect:CGRect)?
   {
     guard let heatmapOverlay = overlay as? JDHeatmapOverlay else {

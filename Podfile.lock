@@ -1,4 +1,5 @@
 PODS:
+  - DTMHeatmap (1.0)
   - Google-Mobile-Ads-SDK (7.69.0):
     - GoogleAppMeasurement (~> 7.0)
     - GoogleUserMessagingPlatform (~> 1.1)
@@ -34,10 +35,12 @@ PODS:
   - PromisesObjC (1.2.12)
 
 DEPENDENCIES:
+  - DTMHeatmap
   - Google-Mobile-Ads-SDK
 
 SPEC REPOS:
   trunk:
+    - DTMHeatmap
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleUserMessagingPlatform
@@ -46,6 +49,7 @@ SPEC REPOS:
     - PromisesObjC
 
 SPEC CHECKSUMS:
+  DTMHeatmap: f5588af0730fbfe78c75d6d013f1932d7d327ab2
   Google-Mobile-Ads-SDK: 2f288748a42920d1c744946a460896a95b0e9110
   GoogleAppMeasurement: 65a1071e5f52f63ab03d0a4d814a54fd762d885a
   GoogleUserMessagingPlatform: b168e8c46cd8f92aa3e34b584c4ca78a411ce367
@@ -53,6 +57,6 @@ SPEC CHECKSUMS:
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
 
-PODFILE CHECKSUM: 1dac2600c00ab2cbb2fee54f6fb2abb2eca2269a
+PODFILE CHECKSUM: 9c73805770c178d0a2a73ce1d1b413242a5012ad
 
 COCOAPODS: 1.10.1

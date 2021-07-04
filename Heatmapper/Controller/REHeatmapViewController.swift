@@ -5,51 +5,60 @@
 //  Created by Richard English on 03/07/2021.
 //  Copyright © 2021 Richard English. All rights reserved.
 //
+//  Heatmap view controller using DTMHeatmap
+//
 
 import UIKit
 import MapKit
 import HealthKit
 import CoreLocation
+import DTMHeatmap
 
-class REHeatmapViewController: UIViewController {
+class REHeatmapViewController: UIViewController, MKMapViewDelegate {
+
+  @IBOutlet weak var mapView: MKMapView!
 
   let healthstore = HKHealthStore()
-  // JDHeatmapView is our custom heatmap MapView class
-  var jdHeatMapView:  JDHeatMapView?
 
-  // this variable sets up an array of coordinates and populates with defaults
-  var testCoordinatesArray = [
-    CLLocationCoordinate2D(latitude: 27, longitude: 120),
-    CLLocationCoordinate2D(latitude: 25.3, longitude: 121),
-    CLLocationCoordinate2D(latitude: 27, longitude: 122),
-    CLLocationCoordinate2D(latitude: 28, longitude: 119)
-  ]
+
+  var dtmHeatmap = DTMHeatmap()
 
   //  var heatmapperCoordinatesArray = LocationManager.sharedInstance.locationDataAsCoordinates
   var heatmapperCoordinatesArray = [CLLocationCoordinate2D]()
   var heatmapWorkoutId : UUID?
 
 
-  // the view which renders the heatmap over the map
-  @IBOutlet weak var mapsView: UIView!
-
-  // Action buttons
-  @IBAction func changeToRadiusDistinct(_ sender: Any) {
-    jdHeatMapView?.setType(type: .RadiusDistinct)
-  }
-
-  @IBAction func ChangeToRadiusBlurry(_ sender: Any) {
-    jdHeatMapView?.setType(type: .RadiusBlurry)
-  }
-
-  @IBAction func ChangeToFlatDistinct(_ sender: Any) {
-    jdHeatMapView?.setType(type: .FlatDistinct)
-  }
-
-
   override func viewDidLoad() {
     super.viewDidLoad()
 
+
+
+    self.mapView.delegate = self
+
+    getWorkoutData()
+    let currentLocationCoordinate = LocationManager.sharedInstance.currentLocation.coordinate
+//    let center = CLLocationCoordinate2D(latitude: 51.41420597006313, longitude: 0.19732266849347277)
+    let region = MKCoordinateRegion(center: currentLocationCoordinate, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
+    self.mapView.setRegion(region, animated: true)
+
+  }
+
+  func createHeatmap() {
+
+    var heatmapdata:[NSObject: Double] = [:]
+    for coordinate in heatmapperCoordinatesArray {
+      var point = MKMapPoint.init(coordinate)
+      let type = "{MKMapPoint=dd}"
+      let value = NSValue(bytes: &point, objCType: type)
+      heatmapdata[value] = 1.0
+    }
+
+    self.dtmHeatmap.setData(heatmapdata as [NSObject : AnyObject])
+    self.mapView.addOverlay(self.dtmHeatmap)
+
+  }
+
+  func getWorkoutData() {
     MyFunc.logMessage(.debug, "workoutId: \(String(describing: heatmapWorkoutId))")
     // get the route data for the heatmap
 
@@ -70,76 +79,9 @@ class REHeatmapViewController: UIViewController {
       }
 
       self.getRouteSampleObject(workout: workout)
-
-
-
-
     }
 
-
   }
-
-  //  // this function simply creates random test data
-  //  func addRandomData()
-  //  {
-  //    for _ in 0..<20
-  //    {
-  //      // generate random longitude and latitude
-  //      let longitude     : Double = Double(119) + Double(Float(arc4random()) / Float(UINT32_MAX))
-  //      let latitude      : Double = Double(25 + arc4random_uniform(4)) + 2 * Double(Float(arc4random()) / Float(UINT32_MAX))
-  //      testCoordinatesArray.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-  //    }
-  //    print("test data: \(testCoordinatesArray)")
-  //  }
-}
-
-// these functions included as delegate of MKMapView
-extension REHeatmapViewController: MKMapViewDelegate
-{
-  // returns the renderer from the MKMapView and overlay passed in
-  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    if let heatmapOverlay = jdHeatMapView?.getMKOverlayRenderer(mapView, rendererFor: overlay)
-    {
-      return heatmapOverlay
-    }
-    else
-    {
-      return MKOverlayRenderer()
-    }
-  }
-
-  func mapViewWillStartRenderingMap(_ mapView: MKMapView) {
-    jdHeatMapView?.heatmapViewWillStartRenderingMap(mapView)
-  }
-}
-
-// these functions required as delegate of JDHeatMap
-extension REHeatmapViewController: JDHeatMapDelegate
-{
-  func heatmap(HeatPointCount heatmap:JDHeatMapView) -> Int
-  {
-    MyFunc.logMessage(.debug, "Number of coordinates: \(heatmapperCoordinatesArray.count)")
-    return heatmapperCoordinatesArray.count
-
-  }
-
-  func heatmap(HeatLevelFor index:Int) -> Int
-  {
-    return 1 + index
-  }
-
-  // this sets the radius - key to sizing the heatmap
-  func heatmap(RadiusInKMFor: Int) -> Double {
-    return 0.001
-    //    return Double(1 + RadiusInKMFor * 2)
-  }
-
-  func heatmap(CoordinateFor index:Int) -> CLLocationCoordinate2D
-  {
-    return heatmapperCoordinatesArray[index]
-  }
-
-
 
   func getWorkout(workoutId: UUID, completion:
                     @escaping ([HKWorkout]?, Error?) -> Void) {
@@ -251,25 +193,11 @@ extension REHeatmapViewController: JDHeatMapDelegate
 
       // Do something with this batch of location data.
       if done {
-        //        MyFunc.logMessage(.debug, "Workout Location Data: \(String(describing: locations))")
-        //        let locationCount = locationsOrNil!.count
-        //        MyFunc.logMessage(.debug, "Locations retrieved: \(locationCount)")
-        //        let locationsAsCoordinates = locations.map {$0.coordinate}
-        //        let coordinatesCount = locationsAsCoordinates.count
-        //        MyFunc.logMessage(.debug, "Coordinates retrieved: \(coordinatesCount)")
-        //        MyFunc.logMessage(.debug, "locationsAsCoordinates: \(String(describing: locationsAsCoordinates))")
-        //        self.heatmapperCoordinatesArray = locationsAsCoordinates
-        MyFunc.logMessage(.debug, "heatmapperCoordinatesArray: \(String(describing: self.heatmapperCoordinatesArray))")
 
         DispatchQueue.main.async {
-          // sets the heatmap frame to the size of the view and specifies the map type
-          self.jdHeatMapView = JDHeatMapView(frame: self.mapsView.frame, delegate: self, mapType: .FlatDistinct)
+          self.createHeatmap()
 
-          // set this VC as the delegate of the JDSwiftHeatMapView
-          self.jdHeatMapView?.delegate = self
-          // add the JDSwiftHeatMapView to the UI
-          self.mapsView.addSubview(self.jdHeatMapView!)
-          self.screenshot1()
+          // sets the heatmap frame to the size of the view and specifies the map
         }
 
       }
@@ -311,6 +239,14 @@ extension REHeatmapViewController: JDHeatMapDelegate
 
     //Save it to the camera roll
     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+  }
+
+
+  func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
+  }
+
+  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    return DTMHeatmapRenderer.init(overlay: overlay)
   }
 
 }

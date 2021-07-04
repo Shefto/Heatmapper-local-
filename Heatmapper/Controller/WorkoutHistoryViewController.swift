@@ -150,8 +150,8 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
 
     let query = HKSampleQuery(
       sampleType: .workoutType(),
-//      predicate: sourcePredicate,
-      predicate: nil,
+      predicate: sourcePredicate,
+//      predicate: nil,
       limit: 0,
       sortDescriptors: [sortDescriptor]) { (query, samples, error) in
       DispatchQueue.main.async {

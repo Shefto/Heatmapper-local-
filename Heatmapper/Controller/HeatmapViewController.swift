@@ -79,18 +79,7 @@ class HeatmapViewController: UIViewController {
 
   }
 
-//  // this function simply creates random test data
-//  func addRandomData()
-//  {
-//    for _ in 0..<20
-//    {
-//      // generate random longitude and latitude
-//      let longitude     : Double = Double(119) + Double(Float(arc4random()) / Float(UINT32_MAX))
-//      let latitude      : Double = Double(25 + arc4random_uniform(4)) + 2 * Double(Float(arc4random()) / Float(UINT32_MAX))
-//      testCoordinatesArray.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-//    }
-//    print("test data: \(testCoordinatesArray)")
-//  }
+
 }
 
 // these functions included as delegate of MKMapView
