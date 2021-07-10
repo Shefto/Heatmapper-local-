@@ -29,6 +29,7 @@ class REHeatmapViewController: UIViewController, MKMapViewDelegate {
 
     self.mapView.delegate = self
 
+    // start getting workout data before anything else - this will take time
     getWorkoutData()
 
     setMapViewCentre()
@@ -47,7 +48,7 @@ class REHeatmapViewController: UIViewController, MKMapViewDelegate {
   }
 
 
-  func createHeatmap() {
+  func createDTMHeatmap() {
 
     var heatmapdata:[NSObject: Double] = [:]
     for coordinate in heatmapperCoordinatesArray {
@@ -72,16 +73,17 @@ class REHeatmapViewController: UIViewController, MKMapViewDelegate {
   }
 
 
+  //MARK: call to get workout data
   func getWorkoutData() {
     MyFunc.logMessage(.debug, "workoutId: \(String(describing: heatmapWorkoutId))")
-    // get the route data for the heatmap
 
+    // check Workout Id passed in is valid
     guard let workoutId = heatmapWorkoutId else {
       MyFunc.logMessage(.error, "heatmapWorkoutId is invalid: \(String(describing: heatmapWorkoutId))")
       return
     }
 
-
+    // get the workout
     getWorkout(workoutId: workoutId) { [self] (workouts, error) in
       let workoutReturned = workouts?.first
       MyFunc.logMessage(.debug, "workoutReturned:")
@@ -205,11 +207,13 @@ class REHeatmapViewController: UIViewController, MKMapViewDelegate {
       let coordinatesTotal = self.heatmapperCoordinatesArray.count
       MyFunc.logMessage(.debug, "Heatmapper Array count: \(coordinatesTotal)")
 
-      // Do something with this batch of location data.
+      // if done = all data retrieved
+      // only at this point can we start to build a heatmap overlay
       if done {
 
+        // dispatch to the main queue as we are making UI updates
         DispatchQueue.main.async {
-          self.createHeatmap()
+          self.createDTMHeatmap()
           // sets the heatmap frame to the size of the view and specifies the map
         }
 
