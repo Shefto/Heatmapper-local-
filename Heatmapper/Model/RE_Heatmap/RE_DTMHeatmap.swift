@@ -1,172 +1,213 @@
-////
-////  RE_DTMHeatmap.swift
-////  Heatmapper
-////
-////  Created by Richard English on 08/07/2021.
-////  Copyright © 2021 Richard English. All rights reserved.
-////
 //
-//import UIKit
-//import MapKit
+//  RE_DTMHeatmap.swift
+//  Heatmapper
 //
-//private let kSBMapRectPadding: CGFloat = 100000
-//private let kSBZoomZeroDimension = 256
-//private let kSBMapKitPoints = 536870912
-//private let kSBZoomLevels = 20
+//  Created by Richard English on 08/07/2021.
+//  Copyright © 2021 Richard English. All rights reserved.
 //
-//// Alterable constant to change look of heat map
-//private let kSBScalePower = 4
-//
-//// Alterable constant to trade off accuracy with performance
-//// Increase for big data sets which draw slowly
-//private let kSBScreenPointsPerBucket = 10
-//
-//class DTMHeatmap: NSObject, MKOverlay {
-//  private(set) var coordinate: CLLocationCoordinate2D?
-//  var colorProvider: DTMColorProvider?
-//
-//
-//  private var maxValue = 0.0
-//  private var zoomedOutMax = 0.0
-//  private var pointsWithHeat: [AnyHashable : Any]?
-//  private var center: CLLocationCoordinate2D?
-//  private var boundingRect: MKMapRect!
-//
-//  init() {
-//    super.init()
-//    colorProvider = DTMColorProvider()
-//  }
-//
-//  func coordinate() -> CLLocationCoordinate2D {
-//    return center
-//  }
-//
-//  var boundingMapRect: MKMapRect {
-//    return boundingRect
-//  }
-//
-//  func setData(_ newHeatMapData: [AnyHashable : Any]?) {
-//    var upperLeftPoint: MKMapPoint
-//    var lowerRightPoint: MKMapPoint
-//    newHeatMapData?.keys.last?.getValue(&upperLeftPoint)
-//    lowerRightPoint = upperLeftPoint
-//
+
+import UIKit
+import MapKit
+
+private let kSBMapRectPadding: Double = 100000.0
+private let kSBZoomZeroDimension = 256
+private let kSBMapKitPoints = 536870912
+private let kSBZoomLevels = 20
+
+// Alterable constant to change look of heat map
+private let kSBScalePower = 4
+
+// Alterable constant to trade off accuracy with performance
+// Increase for big data sets which draw slowly
+private let kSBScreenPointsPerBucket = 10
+
+class RE_Heatmap:  NSObject, MKOverlay {
+
+  var colorProvider: RE_ColorProvider?
+
+  private var maxValue : Double = 0.0
+  private var zoomedOutMax = 0.0
+  private var pointsWithHeat: [AnyHashable : MKMapPoint]?
+  private var pointsToReturn: [AnyHashable : MKMapPoint]?
+  private var center: CLLocationCoordinate2D?
+  private var boundingRect: MKMapRect!
+
+  override init() {
+    super.init()
+    colorProvider = RE_ColorProvider()
+  }
+
+  // required by MKOverlay protocol
+  var coordinate : CLLocationCoordinate2D
+  {
+    let midMKPoint = MKMapPoint(x: boundingMapRect.midX, y: boundingMapRect.midY)
+    return midMKPoint.coordinate
+  }
+
+  // required by MKOverlay protocol
+  var boundingMapRect: MKMapRect {
+    return boundingRect
+  }
+
+  // this function sets the size of the map rectangle
+  func setData(_ newHeatMapData: [AnyHashable : MKMapPoint]?) {
+
+
+    // these map points mark out the two opposite points of the rectangle
+    var upperLeftPoint: MKMapPoint
+    var lowerRightPoint: MKMapPoint
+
+    guard let firstValue = (newHeatMapData?.first?.value) as? MKMapPoint else
+    {
+      MyFunc.logMessage(.error, "newHeatMapData cannot be converted to MKMapPoint")
+      return
+    }
+    upperLeftPoint = firstValue
+    // start with them identical
+    lowerRightPoint = upperLeftPoint
+
+    // buckets appears to be a set of floats
+    var buckets = [Float]()
 //    let buckets = calloc(kSBZoomZeroDimension * kSBZoomZeroDimension, MemoryLayout<Float>.size)
-//
-//    for mapPointValue in newHeatMapData ?? [:] {
-//      guard let mapPointValue = mapPointValue as? NSValue else {
+
+    // loop through each map point in the heatmap point array
+    for (index, value) in newHeatMapData ?? [:] {
+
+      // type check for mapPointValue - bring back
+      guard let mapPointValue = value as? NSValue else {
+        continue
+      }
+
+      guard let mapPoint = mapPointValue as? MKMapPoint else {
+        MyFunc.logMessage(.debug, "value in newHeatMapData does not conform to type MKMapPoint")
+        return
+      }
+
+
+      // if the point being checked is further left than the current furthest left point, update that
+      if mapPoint.x < upperLeftPoint.x {
+        upperLeftPoint.x = mapPoint.x
+      }
+      // if the point being checked is further up than the current furthest up point, update that
+      if mapPoint.y < upperLeftPoint.y {
+        upperLeftPoint.y = mapPoint.y
+      }
+      // if the point being checked is further right than the current furthest right point, update that
+      if mapPoint.x > lowerRightPoint.x {
+        lowerRightPoint.x = mapPoint.x
+      }
+      // if the point being checked is further down than the current furthest down point, update that
+      if mapPoint.y > lowerRightPoint.y {
+        lowerRightPoint.y = mapPoint.y
+      }
+
+      // get absolute for value being looped through
+
+      guard let valueDouble = Double(value as! Substring) else
+      {
+        return
+      }
+
+      let valueDoubleAbsolute = abs(valueDouble)
+
+      if valueDoubleAbsolute > maxValue {
+        maxValue = valueDoubleAbsolute
+      }
+
+      let kSBPointsDividedByZoom = Double(kSBMapKitPoints / kSBZoomZeroDimension)
+      let col = Int(mapPoint.x / kSBPointsDividedByZoom)
+      let row = Int(mapPoint.y / kSBPointsDividedByZoom)
+
+      let offset = kSBZoomZeroDimension * row + col
+
+      buckets[offset] = buckets[offset] + Float(valueDouble)
+    }
+
+    let kSBZoomZeroDimensionSquared = kSBZoomZeroDimension * kSBZoomZeroDimension
+
+    for count in 0..<kSBZoomZeroDimensionSquared {
+
+      let abs = Double(abs(buckets[count]))
+      if abs > self.zoomedOutMax {
+        self.zoomedOutMax = abs
+      }
+
+    }
+
+    let width = lowerRightPoint.x - upperLeftPoint.x + kSBMapRectPadding
+    //      double width = lowerRightPoint.x - upperLeftPoint.x + kSBMapRectPadding;
+
+    let height = lowerRightPoint.y - upperLeftPoint.y + kSBMapRectPadding
+    //    double height = lowerRightPoint.y - upperLeftPoint.y + kSBMapRectPadding;
+
+    self.boundingRect = MKMapRect(x: upperLeftPoint.x - kSBMapRectPadding / 2,
+                                  y: upperLeftPoint.y - kSBMapRectPadding / 2, width: width, height: height)
+    self.center = MKMapPoint(x: upperLeftPoint.x + width / 2, y: upperLeftPoint.y + height / 2).coordinate
+    self.pointsWithHeat = newHeatMapData
+
+  }
+
+  func mapPointsWithHeatInMapRect(rect: MKMapRect, scale: MKZoomScale) -> [AnyHashable : Any]? {
+    //      NSMutableDictionary *toReturn = [[NSMutableDictionary alloc] init];
+
+
+    var bucketDelta : Int = kSBScreenPointsPerBucket / Int(scale)
+    //      int bucketDelta = kSBScreenPointsPerBucket / scale;
+
+    var zoomScale : Double = Double(log2(1 / scale))
+    //      double zoomScale = log2(1/scale);
+
+    var slope : Double = (self.zoomedOutMax - self.maxValue) / Double((kSBZoomLevels - 1))
+    //    double x = pow(zoomScale, kSBScalePower) / pow(kSBZoomLevels, kSBScalePower - 1);
+
+    let zoomScalePower : Double = pow(zoomScale, Double(kSBScalePower))
+    let zoomLevelsPower : Double = pow(Double(kSBZoomLevels), Double(kSBScalePower - 1))
+
+    let x: Double = zoomScalePower / zoomLevelsPower
+
+    var scaleFactor = Double(x - 1) * slope + self.maxValue
+
+
+    if (scaleFactor < self.maxValue) {
+      scaleFactor = self.maxValue
+    }
+
+    // clear the dictionary to remove all points
+    pointsToReturn?.removeAll()
+    // loop through each map point in the heatmap point array
+    for (index, heatPoint) in pointsWithHeat ?? [:] {
+
+//      // type check for mapPointValue - bring back
+//      guard let mapPointValue = value as? NSValue else {
 //        continue
 //      }
-//      
-//      var point: MKMapPoint
 //
-//      mapPointValue.getValue(&point)
-//      let value = (newHeatMapData?[mapPointValue] as? NSNumber)?.doubleValue ?? 0.0
-//
-//      if point.x < upperLeftPoint.x {
-//        upperLeftPoint.x = point.x
+//      guard let mapPoint = mapPointValue as? MKMapPoint else {
+//        MyFunc.logMessage(.debug, "value in newHeatMapData does not conform to type MKMapPoint")
+//        return
 //      }
-//      if point.y < upperLeftPoint.y {
-//        upperLeftPoint.y = point.y
-//      }
-//      if point.x > lowerRightPoint.x {
-//        lowerRightPoint.x = point.x
-//      }
-//      if point.y > lowerRightPoint.y {
-//        lowerRightPoint.y = point.y
-//      }
-//
-//      let abs = Double(abs(value))
-//      if abs > maxValue {
-//        maxValue = abs
-//      }
-//
-//      //bucket the map point:
-//      let col = Int(point.x / (kSBMapKitPoints / kSBZoomZeroDimension))
-//      let row = Int(point.y / (kSBMapKitPoints / kSBZoomZeroDimension))
-//
-//      let offset = kSBZoomZeroDimension * row + col
-//
-//      buckets[offset] += value
-//    }
-//
-//    let kSBZoomZeroDimensionSquared = kSBZoomZeroDimension * kSBZoomZeroDimension
-//
-//    for count in 0..<kSBZoomZeroDimensionSquared {
-//
-//      let abs = Double(abs(buckets[count]))
-//      if abs > self.zoomedOutMax {
-//        self.zoomedOutMax
-//      }
-//
-//    }
-//
-//    let width = lowerRightPoint.x - upperLeftPoint.x + kSBMapRectPadding
-//    //      double width = lowerRightPoint.x - upperLeftPoint.x + kSBMapRectPadding;
-//
-//    let height = lowerRightPoint.y - upperLeftPoint.y + kSBMapRectPadding
-//    //    double height = lowerRightPoint.y - upperLeftPoint.y + kSBMapRectPadding;
-//
-//    self.boundingRect = MKMapRect(upperLeftPoint.x - kSBMapRectPadding / 2,
-//                                  upperLeftPoint.y - kSBMapRectPadding / 2, width, height)
-//    self.center = MKCoordinateForMapPoint(MKMapPointMake(upperLeftPoint.x + width / 2, upperLeftPoint.y + height / 2))
-//    self.pointsWithHeat = newHeatMapData
-//
-//  }
-//
-//  func mapPointsWithHeatInMapRect(rect: MKMapRect, scale: MKZoomScale) {
-//    //      NSMutableDictionary *toReturn = [[NSMutableDictionary alloc] init];
-//
-//
-//    var bucketDelta: Int = kSBScreenPointsPerBucket / scale
-//    //      int bucketDelta = kSBScreenPointsPerBucket / scale;
-//
-//    var zoomScale : Double = log2(1 / scale)
-//    //      double zoomScale = log2(1/scale);
-//
-//    var slope : Double = (self.zoomedOutMax - self.maxValue) / (kSBZoomLevels - 1)
-//    //    double x = pow(zoomScale, kSBScalePower) / pow(kSBZoomLevels, kSBScalePower - 1);
-//
-//    var x = pow(zoomScale, kSBScalePower) / pow(kSBZoomLevels, kSBScalePower - 1)
-//    //      double x = pow(zoomScale, kSBScalePower) / pow(kSBZoomLevels, kSBScalePower - 1);
-//
-//    var scaleFactor : Double = (x - 1) * slope + self.maxValue
-//    //      double scaleFactor = (x - 1) * slope + self.maxValue;
-//
-//    if (scaleFactor < self.maxValue) {
-//      scaleFactor = self.maxValue
-//    }
-//
-//    for key in pointsWithHeat {
-//      var point: MKMapPoint
-//      key.getValue(&point)
-//
-//      if !rect.contains(point) {
-//        continue
-//      }
-//
-//      // Scale the value down by the max and add it to the return dictionary
-//      let value = pointsWithHeat[key] as? NSNumber
-//      let unscaled = value?.doubleValue ?? 0.0
-//      var scaled = unscaled / scaleFactor
-//
-//      var bucketPoint: MKMapPoint
-//      let originalX = Int(point.x)
-//      let originalY = Int(point.y)
-//      bucketPoint.x = Double(originalX - originalX % bucketDelta + bucketDelta / 2)
-//      bucketPoint.y = Double(originalY - originalY % bucketDelta + bucketDelta / 2)
-//      let bucketKey = NSValue(&bucketPoint, withObjCType: "MKMapPoint")
-//
-//      let existingValue = toReturn[bucketKey]
-//      if let existingValue = existingValue {
-//        scaled += existingValue.doubleValue
-//      }
-//
-//      toReturn[bucketKey] = NSNumber(value: scaled)
-//    }
-//
-//    return toReturn
-//
-//  }
-//
-//}
+
+      if !rect.contains(heatPoint) {
+        continue
+      }
+
+      // Scale the value down by the max and add it to the return dictionary
+      let heatPointValue = pointsWithHeat?[index] as? NSNumber
+      let unscaled = heatPointValue?.doubleValue ?? 0.0
+      var scaled = unscaled / scaleFactor
+
+      let originalX = Int(heatPoint.x)
+      let originalY = Int(heatPoint.y)
+      let pointToReturnX = Double(originalX - originalX % bucketDelta + bucketDelta / 2)
+      let pointToReturnY = Double(originalY - originalY % bucketDelta + bucketDelta / 2)
+
+      let mapPointToReturn = MKMapPoint(x: pointToReturnX, y: pointToReturnY)
+      let pointsToReturnCount = pointsToReturn?.count
+      pointsToReturn?.updateValue(mapPointToReturn, forKey: pointsToReturnCount)
+    }
+
+    return pointsToReturn
+
+  }
+
+}

@@ -7,27 +7,29 @@
 ////
 ////  Converted to Swift 5.4 by Swiftify v5.4.29596 - https://swiftify.com/i//  Converted to Swift 5.4 by Swiftify v5.4.29596 - https://swiftify.com/
 //
+//import UIKit
+//import MapKit
 //
-//class DTMDiffHeatmap {
+//class RE_DiffHeatmap : RE_Heatmap {
 //  private var maxValue = 0.0
 //  private var zoomedOutMax = 0.0
 //  private var pointsWithHeat: [AnyHashable : Any]?
 //  private var center: CLLocationCoordinate2D?
 //  private var boundingRect: MKMapRect!
 //
-//  init() {
+//  override init() {
 //    super.init()
-//    colorProvider = DTMDiffColorProvider()
+//    colorProvider = RE_DiffColorProvider()
 //  }
 //
-//  func setBeforeData(
-//    _ before: [AnyHashable : Any]?,
-//    afterData after: [AnyHashable : Any]?
-//  ) {
+//  func setBeforeData(_ before: [AnyHashable : Any]?, afterData after: [AnyHashable : Any]?) {
+//
 //    maxValue = 0
 //
 //    var newHeatMapData: [AnyHashable : Any] = [:]
+//
 //    for mapPointValue in before?.keys ?? [] {
+//
 //      guard let mapPointValue = mapPointValue as? NSValue else {
 //        continue
 //      }
@@ -38,6 +40,7 @@
 //      guard let mapPointValue = mapPointValue as? NSValue else {
 //        continue
 //      }
+//
 //      if newHeatMapData[mapPointValue] != nil {
 //        let beforeValue = (newHeatMapData[mapPointValue] as? NSNumber).doubleValue
 //        let afterValue = (after?[mapPointValue] as? NSNumber)?.doubleValue ?? 0.0

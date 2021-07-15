@@ -1,18 +1,18 @@
 ////
-////  RE_DTMDiffHeatmapRenderer.swift
+////  RE_DTMDiffColorProvider.swift
 ////  Heatmapper
 ////
 ////  Created by Richard English on 08/07/2021.
 ////  Copyright © 2021 Richard English. All rights reserved.
 ////
 //
-//import Foundation
-//class DTMDiffColorProvider: DTMColorProvider {
-//}
+////  Converted to Swift 5.4 by Swiftify v5.4.29596 - https://swiftify.com/
 //
-//class DTMDiffColorProvider {
-//  static let colorMaxVal = 255
-//  
+//import UIKit
+//
+//class RE_DiffColorProvider : RE_ColorProvider {
+////  static let colorMaxVal = 255
+//
 //  func color(
 //    forValue value: Double,
 //    red: UnsafeMutablePointer<CGFloat>?,
@@ -37,54 +37,54 @@
 //    } else {
 //      alpha = UnsafeMutablePointer<CGFloat>(mutating: kSBAlphaPivotY + ((kSBMaxAlpha - kSBAlphaPivotY) / (1 - kSBAlphaPivotX)) * (value - kSBAlphaPivotX))
 //    }
-//    //  Converted to Swift 5.4 by Swiftify v5.4.29596 - https://swiftify.com/
+//
 //    if isNegative {
-//      red = 0
+//      red = nil
 //      if value <= 0 {
-//        alpha = 0
+//        alpha = nil
 //        blue = alpha
 //        green = blue
 //      } else if value < 0.125 {
-//        green = 0
-//        blue = 2 * (value + 0.125)
+//        green = nil
+//        blue = UnsafeMutablePointer<CGFloat>(mutating: 2 * (value + 0.125))
 //      } else if value < 0.375 {
-//        blue = 2 * (value + 0.125)
-//        green = 4 * (value - 0.125)
+//        blue = UnsafeMutablePointer<CGFloat>(mutating: 2 * (value + 0.125))
+//        green = UnsafeMutablePointer<CGFloat>(mutating: 4 * (value - 0.125))
 //      } else if value < 0.625 {
-//        blue = 4 * (value - 0.375)
-//        green = 1
+//        blue = UnsafeMutablePointer<CGFloat>(mutating: 4 * (value - 0.375))
+//        green = UnsafeMutablePointer<CGFloat>(mutating: 1)
 //      } else if value < 0.875 {
-//        blue = 1
-//        green = 1 - 4 * (value - 0.625)
+//        blue = UnsafeMutablePointer<CGFloat>(mutating: 1)
+//        green = UnsafeMutablePointer<CGFloat>(mutating: 1 - 4 * (value - 0.625))
 //      } else {
 //        blue = max(1 - 4 * (value - 0.875), 0.5)
-//        green = 0
+//        green = nil
 //      }
 //    } else {
-//      blue = 0
+//      blue = nil
 //      if value <= 0 {
-//        alpha = 0
+//        alpha = nil
 //        green = alpha
 //        red = green
 //      } else if value < 0.125 {
-//        green = value
-//        red = value
+//        green = UnsafeMutablePointer<CGFloat>(mutating: &value)
+//        red = UnsafeMutablePointer<CGFloat>(mutating: &value)
 //      } else if value < 0.375 {
-//        red = (value + 0.125)
-//        green = value
+//        red = UnsafeMutablePointer<CGFloat>(mutating: (value + 0.125))
+//        green = UnsafeMutablePointer<CGFloat>(mutating: &value)
 //      } else if value < 0.625 {
-//        red = (value + 0.125)
-//        green = value
+//        red = UnsafeMutablePointer<CGFloat>(mutating: (value + 0.125))
+//        green = UnsafeMutablePointer<CGFloat>(mutating: &value)
 //      } else if value < 0.875 {
-//        red = (value + 0.125)
-//        green = 1 - 4 * (value - 0.625)
+//        red = UnsafeMutablePointer<CGFloat>(mutating: (value + 0.125))
+//        green = UnsafeMutablePointer<CGFloat>(mutating: 1 - 4 * (value - 0.625))
 //      } else {
-//        green = 0
+//        green = nil
 //        red = max(1 - 4 * (value - 0.875), 0.5)
 //      }
 //    }
 //
-//    alpha *= maxVal
+//    alpha *= RE_DiffColorProvider.colorMaxVal
 //    blue *= alpha
 //    green *= alpha
 //    red *= alpha

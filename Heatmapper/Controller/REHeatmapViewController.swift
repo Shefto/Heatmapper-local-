@@ -263,7 +263,7 @@ class REHeatmapViewController: UIViewController, MKMapViewDelegate {
   }
 
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    return DTMHeatmapRenderer.init(overlay: overlay)
+    return RE_HeatmapRenderer.init(overlay: overlay)
   }
 
 }
