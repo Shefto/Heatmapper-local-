@@ -50,7 +50,7 @@
 		7982B0C326506C07001335F3 /* WorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982B0C226506C07001335F3 /* WorkoutTableViewCell.swift */; };
 		7989157225605679004983BD /* WorkoutInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7989157125605679004983BD /* WorkoutInterfaceController.swift */; };
 		799131242634126800811731 /* HeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799131232634126800811731 /* HeatmapViewController.swift */; };
-		799131292634145F00811731 /* JDRealHeatmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799131282634145F00811731 /* JDRealHeatmap.swift */; };
+		799131292634145F00811731 /* JDHeatMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799131282634145F00811731 /* JDHeatMapView.swift */; };
 		7991312E2634148E00811731 /* JDHeatmapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7991312D2634148E00811731 /* JDHeatmapManager.swift */; };
 		79913133263414B600811731 /* JDColorMixer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79913132263414B600811731 /* JDColorMixer.swift */; };
 		79913138263414CA00811731 /* JDOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79913137263414CA00811731 /* JDOverlay.swift */; };
@@ -110,10 +110,10 @@
 		79F3480F25A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
 		79F3481025A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
 		79F3A2A7269078F900667B1B /* REHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */; };
-		79F3A2AC269795FA00667B1B /* RE_DTMHeatmapRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2AB269795F900667B1B /* RE_DTMHeatmapRenderer.swift */; };
-		79F3A2AE2697968A00667B1B /* RE_DTMColorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2AD2697968A00667B1B /* RE_DTMColorProvider.swift */; };
+		79F3A2AC269795FA00667B1B /* REHeatmapRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2AB269795F900667B1B /* REHeatmapRenderer.swift */; };
+		79F3A2AE2697968A00667B1B /* REColourProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2AD2697968A00667B1B /* REColourProvider.swift */; };
 		79F3A2B0269796C100667B1B /* RE_DTMDiffColorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2AF269796C100667B1B /* RE_DTMDiffColorProvider.swift */; };
-		79F3A2B2269796FA00667B1B /* RE_DTMHeatmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2B1269796FA00667B1B /* RE_DTMHeatmap.swift */; };
+		79F3A2B2269796FA00667B1B /* REHeatmapOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2B1269796FA00667B1B /* REHeatmapOverlay.swift */; };
 		79F3A2B42697970700667B1B /* RE_DTMDiffHeatmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2B32697970700667B1B /* RE_DTMDiffHeatmap.swift */; };
 		79FB27872561984000E1C9AD /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7994126E255AB9230062AC0D /* Objects.swift */; };
 /* End PBXBuildFile section */
@@ -212,7 +212,7 @@
 		7982B0C226506C07001335F3 /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		7989157125605679004983BD /* WorkoutInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInterfaceController.swift; sourceTree = "<group>"; };
 		799131232634126800811731 /* HeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapViewController.swift; sourceTree = "<group>"; };
-		799131282634145F00811731 /* JDRealHeatmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDRealHeatmap.swift; sourceTree = "<group>"; };
+		799131282634145F00811731 /* JDHeatMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatMapView.swift; sourceTree = "<group>"; };
 		7991312D2634148E00811731 /* JDHeatmapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapManager.swift; sourceTree = "<group>"; };
 		79913132263414B600811731 /* JDColorMixer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDColorMixer.swift; sourceTree = "<group>"; };
 		79913137263414CA00811731 /* JDOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDOverlay.swift; sourceTree = "<group>"; };
@@ -289,10 +289,10 @@
 		79DC34152625D2FC0053733C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		79F3480D25A3364100762724 /* Heatmapper.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Heatmapper.storekit; sourceTree = "<group>"; };
 		79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REHeatmapViewController.swift; sourceTree = "<group>"; };
-		79F3A2AB269795F900667B1B /* RE_DTMHeatmapRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RE_DTMHeatmapRenderer.swift; sourceTree = "<group>"; };
-		79F3A2AD2697968A00667B1B /* RE_DTMColorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RE_DTMColorProvider.swift; sourceTree = "<group>"; };
+		79F3A2AB269795F900667B1B /* REHeatmapRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REHeatmapRenderer.swift; sourceTree = "<group>"; };
+		79F3A2AD2697968A00667B1B /* REColourProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REColourProvider.swift; sourceTree = "<group>"; };
 		79F3A2AF269796C100667B1B /* RE_DTMDiffColorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RE_DTMDiffColorProvider.swift; sourceTree = "<group>"; };
-		79F3A2B1269796FA00667B1B /* RE_DTMHeatmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RE_DTMHeatmap.swift; sourceTree = "<group>"; };
+		79F3A2B1269796FA00667B1B /* REHeatmapOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REHeatmapOverlay.swift; sourceTree = "<group>"; };
 		79F3A2B32697970700667B1B /* RE_DTMDiffHeatmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RE_DTMDiffHeatmap.swift; sourceTree = "<group>"; };
 		920A94AF6B617F92142C48C0 /* Pods_Heatmapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC7DC701BFDD5D70172EB017 /* Pods-Heatmapper WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit Extension/Pods-Heatmapper WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
@@ -407,7 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				79F3A2AA269795D600667B1B /* RE_Heatmap */,
-				799131282634145F00811731 /* JDRealHeatmap.swift */,
+				799131282634145F00811731 /* JDHeatMapView.swift */,
 				7991312D2634148E00811731 /* JDHeatmapManager.swift */,
 				79913132263414B600811731 /* JDColorMixer.swift */,
 				79913137263414CA00811731 /* JDOverlay.swift */,
@@ -517,10 +517,10 @@
 		79F3A2AA269795D600667B1B /* RE_Heatmap */ = {
 			isa = PBXGroup;
 			children = (
-				79F3A2AB269795F900667B1B /* RE_DTMHeatmapRenderer.swift */,
+				79F3A2B1269796FA00667B1B /* REHeatmapOverlay.swift */,
+				79F3A2AB269795F900667B1B /* REHeatmapRenderer.swift */,
+				79F3A2AD2697968A00667B1B /* REColourProvider.swift */,
 				79F3A2AF269796C100667B1B /* RE_DTMDiffColorProvider.swift */,
-				79F3A2AD2697968A00667B1B /* RE_DTMColorProvider.swift */,
-				79F3A2B1269796FA00667B1B /* RE_DTMHeatmap.swift */,
 				79F3A2B32697970700667B1B /* RE_DTMDiffHeatmap.swift */,
 			);
 			path = RE_Heatmap;
@@ -794,7 +794,7 @@
 				797E7C062575312500EAE473 /* IntervalTypeTableViewCell.swift in Sources */,
 				79D083BE250A0C0900274F79 /* Extensions.swift in Sources */,
 				7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */,
-				799131292634145F00811731 /* JDRealHeatmap.swift in Sources */,
+				799131292634145F00811731 /* JDHeatMapView.swift in Sources */,
 				79A4EFFE24A89063002A7870 /* FartlekTableViewCell.swift in Sources */,
 				793D1AD624B855540039441B /* CommandStatus.swift in Sources */,
 				79F3A2B42697970700667B1B /* RE_DTMDiffHeatmap.swift in Sources */,
@@ -802,11 +802,11 @@
 				79ADB49026264153007BF946 /* UserAnnotation.swift in Sources */,
 				797BFD0525421E8700426185 /* Audio.swift in Sources */,
 				79DC34162625D2FC0053733C /* LocationManager.swift in Sources */,
-				79F3A2AE2697968A00667B1B /* RE_DTMColorProvider.swift in Sources */,
+				79F3A2AE2697968A00667B1B /* REColourProvider.swift in Sources */,
 				7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */,
 				79A4EFF624A7A109002A7870 /* WorkoutViewController.swift in Sources */,
-				79F3A2B2269796FA00667B1B /* RE_DTMHeatmap.swift in Sources */,
-				79F3A2AC269795FA00667B1B /* RE_DTMHeatmapRenderer.swift in Sources */,
+				79F3A2B2269796FA00667B1B /* REHeatmapOverlay.swift in Sources */,
+				79F3A2AC269795FA00667B1B /* REHeatmapRenderer.swift in Sources */,
 				793D1ADC24B868840039441B /* SessionCommands.swift in Sources */,
 				797BFD0A2542B72800426185 /* MyFunc_iOS.swift in Sources */,
 				79F3A2A7269078F900667B1B /* REHeatmapViewController.swift in Sources */,

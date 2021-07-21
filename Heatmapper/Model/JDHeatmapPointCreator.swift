@@ -30,7 +30,7 @@ struct IntSize {
 // this class is subclassed depending upon the point type
 // results in duplication which could be removed
 // essentially it creates the heatmap shape from an array of heatmap points
-class HeatmapPointCreator: NSObject
+class JDHeatmapPointCreator: NSObject
 {
   /*
    These two variables should not be modified after
@@ -90,7 +90,7 @@ class HeatmapPointCreator: NSObject
   }
 }
 
-class HeatmapRadiusPointCreator: HeatmapPointCreator
+class HeatmapRadiusPointCreator: JDHeatmapPointCreator
 {
 
   // this function creates the heatmap point including calculating the colour required depending upon the point's proximity to other heatmap points
@@ -103,7 +103,7 @@ class HeatmapRadiusPointCreator: HeatmapPointCreator
     {
       for width in 0..<self.fitnessIntSize.width
       {
-        // "destiny" appears to be the ultimate required colour of the point as part of a heatmap area
+        // "destiny" (or "target" as renamed) appears to be the ultimate required colour of the point as part of a heatmap area
         var target : Float = 0
         for heatmapPoint in self.heatmapPointArray
         {
@@ -119,7 +119,7 @@ class HeatmapRadiusPointCreator: HeatmapPointCreator
         {
           target = 1
         }
-        let rgb = HeatmapPointCreator.theColorMixer.getTargetColourRGB(inDestiny: target)
+        let rgb = JDHeatmapPointCreator.theColorMixer.getTargetColourRGB(inDestiny: target)
 
         let redRow    : UTF8Char = rgb.redRow
         let greenRow  : UTF8Char = rgb.greenRow
@@ -136,7 +136,7 @@ class HeatmapRadiusPointCreator: HeatmapPointCreator
   }
 }
 
-class HeatmapFlatPointCreator: HeatmapPointCreator
+class HeatmapFlatPointCreator: JDHeatmapPointCreator
 {
 
   // this function creates the heatmap point including calculating the colour required depending upon the point's proximity to other heatmap points
@@ -170,7 +170,7 @@ class HeatmapFlatPointCreator: HeatmapPointCreator
           target = 1
         }
 
-        let rgb = HeatmapPointCreator.theColorMixer.getTargetColourRGB(inDestiny: target)
+        let rgb = JDHeatmapPointCreator.theColorMixer.getTargetColourRGB(inDestiny: target)
 
         let redRow    : UTF8Char = rgb.redRow
         let greenRow  : UTF8Char = rgb.greenRow

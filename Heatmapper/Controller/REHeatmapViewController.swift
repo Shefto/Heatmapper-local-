@@ -17,8 +17,9 @@ import DTMHeatmap
 class REHeatmapViewController: UIViewController, MKMapViewDelegate {
 
   @IBOutlet weak var mapView: MKMapView!
+
+  var reHeatmapOverlay = REHeatmapOverlay()
   var dtmHeatmap = DTMHeatmap()
-  //  var heatmapperCoordinatesArray = LocationManager.sharedInstance.locationDataAsCoordinates
   var heatmapperCoordinatesArray = [CLLocationCoordinate2D]()
   var heatmapWorkoutId : UUID?
 
@@ -50,6 +51,10 @@ class REHeatmapViewController: UIViewController, MKMapViewDelegate {
 
   func createDTMHeatmap() {
 
+    // this code takes coordinates then uses obj-C functions to convert each one into an NSObject
+    // which is then passed to the setData function as an [NSObject : AnyObject] dictionary
+    // together with a value which is always set to 1
+    // why?! there has to be a better way...
     var heatmapdata:[NSObject: Double] = [:]
     for coordinate in heatmapperCoordinatesArray {
       var point = MKMapPoint.init(coordinate)
@@ -63,6 +68,17 @@ class REHeatmapViewController: UIViewController, MKMapViewDelegate {
     self.setMapViewZoom()
 
   }
+
+  func createREHeatmap() {
+
+    // get the array of heatmap cells based upon the co-ordinates passed in
+    let heatmapCellArray = reHeatmapOverlay.setData(coordinateArray: heatmapperCoordinatesArray)
+
+    self.mapView.addOverlay(self.dtmHeatmap)
+    self.setMapViewZoom()
+
+  }
+
 
 
   func setMapViewCentre() {
@@ -263,7 +279,7 @@ class REHeatmapViewController: UIViewController, MKMapViewDelegate {
   }
 
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    return RE_HeatmapRenderer.init(overlay: overlay)
+    return REHeatmapRenderer.init(overlay: overlay)
   }
 
 }

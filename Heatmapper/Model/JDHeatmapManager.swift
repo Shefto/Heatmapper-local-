@@ -17,7 +17,7 @@ class JDHeatMapManager: NSObject
   // Declare Variables
 
   // this creates an alias for the key-value pair below
-  typealias pointCreator = [JDHeatmapOverlayRenderer : HeatmapPointCreator]
+  typealias pointCreator = [JDHeatmapOverlayRenderer : JDHeatmapPointCreator]
 
   // creates a variable of the key-value pair declared above
   var rendererPointCreatorPair  : pointCreator = [:]
@@ -39,7 +39,7 @@ class JDHeatMapManager: NSObject
     jdHeatMapView     = JDSwiftHeatMapView
     dataPointType     = datapointType
     mapWidthInUIView  = JDSwiftHeatMapView.frame.width
-    HeatmapPointCreator.theColorMixer.mixerMode = mode
+    JDHeatmapPointCreator.theColorMixer.mixerMode = mode
   }
 
   // main function called when the heatmap needs to be updated to reflect the new data
@@ -240,7 +240,7 @@ class JDHeatMapManager: NSObject
         if let calculatedHeatmapData = rendererForHeatmapOverlay.calcHeatmapPointsAndRect(maxHeat: maxHeatLevelInMap)
         {
 
-          var heatmapPointCreator : HeatmapPointCreator!
+          var heatmapPointCreator : JDHeatmapPointCreator!
           let overlayCGRect = calculatedHeatmapData.rect
           let localFormData = calculatedHeatmapData.data
           // depending upon the type of Heatmap passed in (i.e. flat or radius) call the relevant creator function

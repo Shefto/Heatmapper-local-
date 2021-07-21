@@ -12,10 +12,11 @@ import DTMHeatmap
 
 private let kSBHeatRadiusInPoints = 48
 
-class RE_HeatmapRenderer : MKOverlayRenderer {
+class REHeatmapRenderer : MKOverlayRenderer {
   
   private var scaleMatrix: UnsafeMutablePointer<Float>?
-  
+
+  // standard protocol method to initialise the overlay
   override init(overlay: MKOverlay) {
     super.init(overlay: overlay)
     populateScaleMatrix()
@@ -75,27 +76,31 @@ class RE_HeatmapRenderer : MKOverlayRenderer {
     let paddedMapRect = mapRect(for: paddedRect)
     
     
-    // Get the dictionary of values out of the model for this mapRect and zoomScale.
-    let heatmapOverlay = overlay as? RE_Heatmap
-    let mapPointsWithHeat = heatmapOverlay?.mapPointsWithHeatInMapRect(rect: paddedMapRect, scale: zoomScale)
+    // Get the dictionary of heat points out of the model for this mapRect and zoomScale.
+    let reHeatmapOverlay = overlay as? REHeatmapOverlay
+    guard let heatmapOverlay = reHeatmapOverlay else {
+      return
+    }
+//    let heatmapCellArray = heatmapOverlay.setData(coordinateArray: <#T##[CLLocationCoordinate2D]#>)
+    let mapPointsWithHeat = heatmapOverlay.mapPointsWithHeatInMapRect(rect: paddedMapRect, scale: zoomScale)
     //    let mapPointsWithHeatKVO = heatmapOverlay?.mapPointsWithHeat(in: paddedMapRect, atScale: zoomScale)
     
     
-    for (index, value) in mapPointsWithHeat ?? [:] {
+    for mapPoint in mapPointsWithHeat {
 
-      // type check for mapPointValue - bring back
-      guard let mapPointWithHeat = index as? MKMapPoint else {
-        MyFunc.logMessage(.debug, "mapPointValue in newHeatMapData does not conform to type MKMapPoint")
-        return
-      }
-
-      guard let valueDouble = value as? Double else {
-        MyFunc.logMessage(.debug, "value in newHeatMapData does not conform to type Double")
-        return
-      }
+//      // type check for mapPointValue - bring back
+//      guard let mapPointWithHeat = index as? MKMapPoint else {
+//        MyFunc.logMessage(.debug, "mapPointValue in newHeatMapData does not conform to type MKMapPoint")
+//        return
+//      }
+//
+//      guard let valueDouble = value as? Double else {
+//        MyFunc.logMessage(.debug, "value in newHeatMapData does not conform to type Double")
+//        return
+//      }
 
       // figure out the corresponding array index
-      let userPoint = point(for: mapPointWithHeat)
+      let userPoint = point(for: mapPoint)
       
       let matrixCoord = CGPoint(x: (userPoint.x - userRect.origin.x) * zoomScale,
                                 y: (userPoint.y - userRect.origin.y) * zoomScale)

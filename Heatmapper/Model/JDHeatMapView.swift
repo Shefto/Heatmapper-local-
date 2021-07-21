@@ -39,7 +39,7 @@ public class JDHeatMapView : MKMapView
   }
 
   // initialiser called with BasicColors and divideLevel populated within the initialiser
-  //  public init (frame: CGRect, delegate: JDHeatMapDelegate, mapType: JDMapType, BasicColors array: [UIColor] = [UIColor.blue, UIColor.green, UIColor.red], divideLevel: Int = 2)
+
   public init (frame: CGRect, delegate: JDHeatMapDelegate, mapType: JDMapType, BasicColors array: [UIColor] = [UIColor.systemGreen, UIColor.systemOrange, UIColor.systemRed], divideLevel: Int = 2)
   {
     super.init(frame: frame)
@@ -50,7 +50,7 @@ public class JDHeatMapView : MKMapView
 
     // this class declared elsewhere
     // this declares the colour mixer as using the 3 primary colours and a divide level of 2
-    HeatmapPointCreator.theColorMixer = JDHeatMapColorMixer(array: array, level: divideLevel)
+    JDHeatmapPointCreator.theColorMixer = JDHeatMapColorMixer(array: array, level: divideLevel)
 
     if (mapType == .RadiusBlurry)
     {
@@ -216,6 +216,8 @@ struct heatmapPoint2D
 
   func distanceTo(another point : heatmapPoint2D) -> CGFloat
   {
+    // effectively this uses Pythagorean calculation to get the hypotenuse distance
+
     let latidiff = (point.coordinate.latitude - self.coordinate.latitude)
     let longdiff = (point.coordinate.longitude - self.coordinate.longitude)
     let squareRoots = sqrt((latidiff * latidiff) + (longdiff * longdiff))

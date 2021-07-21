@@ -23,7 +23,7 @@ private let kSBAlphaPivotY: Double = 0.5
 // This number should be between 0 and 1
 private let kSBMaxAlpha: Double = 0.85
 
-class RE_ColorProvider: NSObject {
+class REColourProvider: NSObject {
 
 //class DTMColorProvider {
   static let colorMaxVal = 255
