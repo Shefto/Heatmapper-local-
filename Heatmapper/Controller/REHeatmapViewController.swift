@@ -51,25 +51,33 @@ class REHeatmapViewController: UIViewController, MKMapViewDelegate {
 
   func createDTMHeatmap() {
 
-    // this code takes coordinates then uses obj-C functions to convert each one into an NSObject
-    // which is then passed to the setData function as an [NSObject : AnyObject] dictionary
-    // together with a value which is always set to 1
-    // why?! there has to be a better way...
-    var heatmapdata:[NSObject: Double] = [:]
-    for coordinate in heatmapperCoordinatesArray {
-      var point = MKMapPoint.init(coordinate)
-      let type = "{MKMapPoint=dd}"
-      let value = NSValue(bytes: &point, objCType: type)
-      heatmapdata[value] = 1.0
-    }
-
-    self.dtmHeatmap.setData(heatmapdata as [NSObject : AnyObject])
-    self.mapView.addOverlay(self.dtmHeatmap)
-    self.setMapViewZoom()
+    createREHeatmap()
+//
+//    // this code takes coordinates then uses obj-C functions to convert each one into an NSObject
+//    // which is then passed to the setData function as an [NSObject : AnyObject] dictionary
+//    // together with a value which is always set to 1
+//    // why?! there has to be a better way...
+//    var heatmapdata:[NSObject: Double] = [:]
+//    for coordinate in heatmapperCoordinatesArray {
+//      var point = MKMapPoint.init(coordinate)
+//      let type = "{MKMapPoint=dd}"
+//      let value = NSValue(bytes: &point, objCType: type)
+//      heatmapdata[value] = 1.0
+//    }
+//
+//    self.dtmHeatmap.setData(heatmapdata as [NSObject : AnyObject])
+//    self.mapView.addOverlay(self.dtmHeatmap)
+//    self.setMapViewZoom()
 
   }
 
   func createREHeatmap() {
+
+    // create an array of Heatmap points based upon the coordinates mapped
+    var heatmapPointsArray = [REHeatmapPoint]()
+
+    var heatmapMKPointsArray = heatmapperCoordinatesArray.map {MKMapPoint($0)}
+    heatmapPointsArray = heatmapMKPointsArray.map { REHeatmapPoint.init(mapPoint: $0, radius: 0, heatLevel: 0.0) }
 
     // get the array of heatmap cells based upon the co-ordinates passed in
     let heatmapCellArray = reHeatmapOverlay.setData(coordinateArray: heatmapperCoordinatesArray)

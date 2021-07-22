@@ -59,10 +59,10 @@ class REHeatmapOverlay:  NSObject, MKOverlay {
   // this takes in an array of coordinates
   // it uses them to calculate the heatmap heat at each point in a 256 * 256 matrix
   // then (unlike DTMHeatmap) it needs to return the heatmap cell array
-  func setData(coordinateArray: [CLLocationCoordinate2D]) -> [Double] {
+  func setData(reHeatmapPointArray: [REHeatmapPoint])  {
     
     // convert the set of coordinates to MKMapPoints
-    self.mapPointArray = coordinateArray.map({ MKMapPoint($0)})
+    self.mapPointArray = reHeatmapPointArray.map({ $0.mapPoint})
     
     // these map points mark out the two opposite points of the rectangle
     var upperLeftPoint: MKMapPoint
@@ -129,7 +129,7 @@ class REHeatmapOverlay:  NSObject, MKOverlay {
                                   y: upperLeftPoint.y - kSBMapRectPadding / 2, width: width, height: height)
 
     // finally return the cell array
-    return heatmapCellArray
+    return
   }
   
   // this function takes the rectangle size and scale passed in and returns a dictionary of heat points

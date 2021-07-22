@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import MapKit
+
 
 enum ActivityType: String, Codable {
   case auto         = "Auto Detect"
@@ -210,4 +212,19 @@ extension TimeFormat {
 enum UnitType: String {
   case length
   case distance
+}
+
+
+//MARK: Heatmap objects
+
+struct REHeatmapPoint {
+  var mapPoint  : MKMapPoint
+  var radius    : CGFloat
+  var heatLevel : Double = 0.0
+
+  init(mapPoint: MKMapPoint, radius:  CGFloat, heatLevel: Double) {
+    self.mapPoint   = mapPoint
+    self.radius     = radius
+    self.heatLevel  = heatLevel
+  }
 }
