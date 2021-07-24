@@ -78,6 +78,66 @@
             </objects>
             <point key="canvasLocation" x="81" y="-86"/>
         </scene>
+        <!--Heatmap-->
+        <scene sceneID="Vhz-Vt-d44">
+            <objects>
+                <viewController title="Heatmap" id="HIL-yj-uvc" userLabel="Heatmap" customClass="jdHeatmapViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vZq-KN-BDQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3Jx-L1-XhK">
+                                <rect key="frame" x="0.0" y="832" width="414" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fa-ka-EKP" userLabel="Radius Distinct">
+                                        <rect key="frame" x="0.0" y="0.0" width="134.5" height="30"/>
+                                        <state key="normal" title="Radius Distinct"/>
+                                        <connections>
+                                            <action selector="changeToRadiusDistinct:" destination="HIL-yj-uvc" eventType="touchUpInside" id="eEw-qx-EBg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkP-wz-qdj" userLabel="Radius Blurry">
+                                        <rect key="frame" x="139.5" y="0.0" width="135" height="30"/>
+                                        <state key="normal" title="Radius Blurry"/>
+                                        <connections>
+                                            <action selector="ChangeToRadiusBlurry:" destination="HIL-yj-uvc" eventType="touchUpInside" id="8Go-V1-zZ0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qUW-ZW-8kZ" userLabel="Flat Distinct">
+                                        <rect key="frame" x="279.5" y="0.0" width="134.5" height="30"/>
+                                        <state key="normal" title="Flat Distinct"/>
+                                        <connections>
+                                            <action selector="ChangeToFlatDistinct:" destination="HIL-yj-uvc" eventType="touchUpInside" id="5HM-N9-xwj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcM-dv-NTb" customClass="JDHeatMapView" customModule="Heatmapper" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="108" width="414" height="624"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gJV-c6-TMl"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3Jx-L1-XhK" firstAttribute="top" secondItem="fcM-dv-NTb" secondAttribute="bottom" constant="100" id="4m8-mL-A4Q"/>
+                            <constraint firstItem="3Jx-L1-XhK" firstAttribute="leading" secondItem="gJV-c6-TMl" secondAttribute="leading" id="aAl-0h-Vo1"/>
+                            <constraint firstItem="fcM-dv-NTb" firstAttribute="top" secondItem="gJV-c6-TMl" secondAttribute="top" constant="20" id="cuD-ag-XjU"/>
+                            <constraint firstItem="fcM-dv-NTb" firstAttribute="leading" secondItem="3Jx-L1-XhK" secondAttribute="leading" id="h4J-3A-2rZ"/>
+                            <constraint firstItem="gJV-c6-TMl" firstAttribute="bottom" secondItem="3Jx-L1-XhK" secondAttribute="bottom" id="kog-ii-t0O"/>
+                            <constraint firstItem="gJV-c6-TMl" firstAttribute="trailing" secondItem="3Jx-L1-XhK" secondAttribute="trailing" id="lvr-2f-r9T"/>
+                            <constraint firstItem="fcM-dv-NTb" firstAttribute="trailing" secondItem="3Jx-L1-XhK" secondAttribute="trailing" id="m15-rh-uKp"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="pxR-Ji-wzF"/>
+                    <connections>
+                        <outlet property="mapsView" destination="fcM-dv-NTb" id="RKi-Cm-lcg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rHQ-SJ-9kx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="393" y="1527"/>
+        </scene>
         <!--Tracker-->
         <scene sceneID="mno-dC-kcX">
             <objects>
@@ -118,7 +178,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZ5-bu-aeX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3916" y="790"/>
+            <point key="canvasLocation" x="3764" y="654"/>
         </scene>
         <!--Workout History-->
         <scene sceneID="QA9-GD-v8L">
@@ -192,8 +252,9 @@
                         <outlet property="jdButton" destination="sPj-oH-Nyf" id="6gO-3k-5Kt"/>
                         <outlet property="reButton" destination="zt1-c4-uTO" id="QPJ-Bh-yLM"/>
                         <outlet property="workoutTableView" destination="aWN-Ek-5D4" id="umP-Hq-edH"/>
-                        <segue destination="YiQ-y2-7yO" kind="show" identifier="historyToHeatmap" id="UHU-qN-G4m"/>
+                        <segue destination="YiQ-y2-7yO" kind="show" identifier="historyToDTMHeatmap" id="UHU-qN-G4m"/>
                         <segue destination="Pbk-vr-61V" kind="show" identifier="historyToREHeatmap" id="Q5M-hF-bhw"/>
+                        <segue destination="HIL-yj-uvc" kind="show" identifier="historyToJDHeatmap" id="lpb-Mm-P31"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UC3-lr-6fG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -510,7 +571,7 @@ DQoNCg
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xws-kf-RrH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1797" y="790"/>
+            <point key="canvasLocation" x="-551" y="1527"/>
         </scene>
         <!--Heatmap-->
         <scene sceneID="QjG-zy-Dks">
@@ -570,7 +631,7 @@ DQoNCg
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jp8-LE-TUl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-907" y="1235"/>
+            <point key="canvasLocation" x="1377" y="1527"/>
         </scene>
     </scenes>
     <resources>

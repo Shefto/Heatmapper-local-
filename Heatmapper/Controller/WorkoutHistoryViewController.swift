@@ -39,7 +39,7 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
   }
 
   @IBAction func btnJDHeatmap(_ sender: Any) {
-    self.performSegue(withIdentifier: "historyToREHeatmap", sender: workoutId)
+    self.performSegue(withIdentifier: "historyToJDHeatmap", sender: workoutId)
   }
 
   @IBAction func btnREHeatmap(_ sender: Any) {
@@ -213,6 +213,11 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
 
     if segueToUse == "historyToREHeatmap" {
       let destinationVC = segue.destination as! REHeatmapViewController
+      destinationVC.heatmapWorkoutId = (sender as! UUID)
+    }
+
+    if segueToUse == "historyToJDHeatmap" {
+      let destinationVC = segue.destination as! jdHeatmapViewController
       destinationVC.heatmapWorkoutId = (sender as! UUID)
     }
 
