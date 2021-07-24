@@ -19,14 +19,6 @@ class jdHeatmapViewController: UIViewController {
   // JDHeatmapView is our custom heatmap MapView class
   var heatMap:  JDHeatMapView?
 
-  // this variable sets up an array of coordinates and populates with defaults
-  var testCoordinatesArray = [
-    CLLocationCoordinate2D(latitude: 27, longitude: 120),
-    CLLocationCoordinate2D(latitude: 25.3, longitude: 121),
-    CLLocationCoordinate2D(latitude: 27, longitude: 122),
-    CLLocationCoordinate2D(latitude: 28, longitude: 119)
-  ]
-
   //  var heatmapperCoordinatesArray = LocationManager.sharedInstance.locationDataAsCoordinates
   var heatmapperCoordinatesArray = [CLLocationCoordinate2D]()
   var heatmapWorkoutId : UUID?
@@ -73,28 +65,11 @@ class jdHeatmapViewController: UIViewController {
 
       self.getRouteSampleObject(workout: workout)
 
-
-
-
     }
-
-    //        addRandomData()
-
 
   }
 
-  // this function simply creates random test data
-  func addRandomData()
-  {
-    for _ in 0..<20
-    {
-      // generate random longitude and latitude
-      let longitude     : Double = Double(119) + Double(Float(arc4random()) / Float(UINT32_MAX))
-      let latitude      : Double = Double(25 + arc4random_uniform(4)) + 2 * Double(Float(arc4random()) / Float(UINT32_MAX))
-      testCoordinatesArray.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-    }
-    print("test data: \(testCoordinatesArray)")
-  }
+
 }
 
 // these functions included as delegate of MKMapView
@@ -241,13 +216,17 @@ extension jdHeatmapViewController: JDHeatMapDelegate
 
       // Do something with this batch of location data.
       if done {
-        MyFunc.logMessage(.debug, "Workout Location Data: \(String(describing: locations))")
-        let locationsAsCoordinates = locations.map {$0.coordinate}
-        MyFunc.logMessage(.debug, "locationsAsCoordinates: \(String(describing: locationsAsCoordinates))")
-        heatmapperCoordinatesArray = locationsAsCoordinates
-        MyFunc.logMessage(.debug, "heatmapperCoordinatesArray: \(String(describing: heatmapperCoordinatesArray))")
+
 
         DispatchQueue.main.async {
+
+//          MyFunc.logMessage(.debug, "Workout Location Data: \(String(describing: locations))")
+           let locationsAsCoordinates = locations.map {$0.coordinate}
+//          MyFunc.logMessage(.debug, "locationsAsCoordinates: \(String(describing: locationsAsCoordinates))")
+          heatmapperCoordinatesArray = locationsAsCoordinates
+          MyFunc.logMessage(.debug, "heatmapperCoordinatesArray.count: \(String(describing: heatmapperCoordinatesArray.count))")
+
+
           // sets the heatmap frame to the size of the view and specifies the map type
           heatMap = JDHeatMapView(frame: mapsView.frame, delegate: self, mapType: .FlatDistinct)
 

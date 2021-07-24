@@ -56,17 +56,17 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
       locationManager.stopUpdatingLocation()
       MyFunc.logMessage(.debug, "stopUpdatingLocation called")
     }
-    MyFunc.logMessage(.debug, "locations captured:")
-    MyFunc.logMessage(.debug, String(describing: locationDataArray))
-    locationDataAsCoordinates = locationDataArray.map {$0.coordinate}
-    MyFunc.logMessage(.debug, String(describing: locationDataAsCoordinates))
+//    MyFunc.logMessage(.debug, "locations captured:")
+//    MyFunc.logMessage(.debug, String(describing: locationDataArray))
+//    locationDataAsCoordinates = locationDataArray.map {$0.coordinate}
+//    MyFunc.logMessage(.debug, String(describing: locationDataAsCoordinates))
   }
 
   //MARK: CLLocationManagerDelegate protocol methods
   public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
 
     if let newLocation = locations.last{
-      print("(\(newLocation.coordinate.latitude), \(newLocation.coordinate.longitude))")
+//      print("(\(newLocation.coordinate.latitude), \(newLocation.coordinate.longitude))")
       currentLocation = newLocation
       var locationAdded: Bool
 
@@ -83,21 +83,21 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     let age = -location.timestamp.timeIntervalSinceNow
 
     if age > 10{
-      print("Location is old.")
+//      print("Location is old.")
       return false
     }
 
     if location.horizontalAccuracy < 0{
-      print("Latitidue and longitude values are invalid.")
+//      print("Latitidue and longitude values are invalid.")
       return false
     }
 
     if location.horizontalAccuracy > 100{
-      print("Accuracy is too low.")
+//      print("Accuracy is too low.")
       return false
     }
 
-    print("Location quality is good enough.")
+//    print("Location quality is good enough.")
     locationDataArray.append(location)
 //    locationDataAsCoordinates.append(location.coordinate)
 

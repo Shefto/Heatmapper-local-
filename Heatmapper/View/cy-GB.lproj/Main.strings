@@ -70,17 +70,20 @@
 /* Class = "UIButton"; normalTitle = "Stop Tracking"; ObjectID = "hKy-uJ-mHc"; */
 "hKy-uJ-mHc.normalTitle" = "";
 
+/* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "kh7-pS-WQE"; */
+"kh7-pS-WQE.normalTitle" = "";
+
 /* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "KhR-k9-Udq"; */
 "KhR-k9-Udq.normalTitle" = "";
 
 /* Class = "UIButton"; normalTitle = "Radius Blurry"; ObjectID = "kkP-wz-qdj"; */
 "kkP-wz-qdj.normalTitle" = "";
 
+/* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "mh4-Pn-ffs"; */
+"mh4-Pn-ffs.normalTitle" = "";
+
 /* Class = "UIViewController"; title = "Workout History"; ObjectID = "nCc-eF-wC1"; */
 "nCc-eF-wC1.title" = "";
-
-/* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "onG-Ft-Fwy"; */
-"onG-Ft-Fwy.normalTitle" = "";
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "Pbk-vr-61V"; */
 "Pbk-vr-61V.title" = "";
@@ -94,23 +97,23 @@
 /* Class = "UIButton"; normalTitle = "JD"; ObjectID = "sPj-oH-Nyf"; */
 "sPj-oH-Nyf.normalTitle" = "";
 
+/* Class = "UIViewController"; title = "Heatmap"; ObjectID = "syd-FH-J8R"; */
+"syd-FH-J8R.title" = "";
+
 /* Class = "UIButton"; normalTitle = "Heatmap"; ObjectID = "uxy-2h-68R"; */
 "uxy-2h-68R.normalTitle" = "";
 
 /* Class = "UIButton"; normalTitle = "Radius Blurry"; ObjectID = "vIR-94-5ja"; */
 "vIR-94-5ja.normalTitle" = "";
 
-/* Class = "UIButton"; normalTitle = "Radius Blurry"; ObjectID = "vYH-Sc-0gd"; */
-"vYH-Sc-0gd.normalTitle" = "";
-
 /* Class = "UIButton"; normalTitle = "DTM"; ObjectID = "WMX-9X-sBW"; */
 "WMX-9X-sBW.normalTitle" = "";
 
-/* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "xKN-Nz-x6z"; */
-"xKN-Nz-x6z.normalTitle" = "";
+/* Class = "UINavigationItem"; title = "RE Heatmap"; ObjectID = "xJf-j7-wii"; */
+"xJf-j7-wii.title" = "";
 
-/* Class = "UIViewController"; title = "Heatmap"; ObjectID = "YiQ-y2-7yO"; */
-"YiQ-y2-7yO.title" = "";
+/* Class = "UIButton"; normalTitle = "Radius Blurry"; ObjectID = "Y9X-XR-V0A"; */
+"Y9X-XR-V0A.normalTitle" = "";
 
 /* Class = "UINavigationItem"; title = "RE Heatmap"; ObjectID = "yQa-XH-y2d"; */
 "yQa-XH-y2d.title" = "";

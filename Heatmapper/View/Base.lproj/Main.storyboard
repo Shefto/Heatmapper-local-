@@ -252,9 +252,9 @@
                         <outlet property="jdButton" destination="sPj-oH-Nyf" id="6gO-3k-5Kt"/>
                         <outlet property="reButton" destination="zt1-c4-uTO" id="QPJ-Bh-yLM"/>
                         <outlet property="workoutTableView" destination="aWN-Ek-5D4" id="umP-Hq-edH"/>
-                        <segue destination="YiQ-y2-7yO" kind="show" identifier="historyToDTMHeatmap" id="UHU-qN-G4m"/>
                         <segue destination="Pbk-vr-61V" kind="show" identifier="historyToREHeatmap" id="Q5M-hF-bhw"/>
                         <segue destination="HIL-yj-uvc" kind="show" identifier="historyToJDHeatmap" id="lpb-Mm-P31"/>
+                        <segue destination="syd-FH-J8R" kind="show" identifier="historyToDTMHeatmap" id="vbD-U9-ldd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UC3-lr-6fG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -514,6 +514,65 @@ DQoNCg
             </objects>
             <point key="canvasLocation" x="-1164" y="95"/>
         </scene>
+        <!--DTM Heatmap-->
+        <scene sceneID="WoK-xJ-xL1">
+            <objects>
+                <viewController title="Heatmap" id="syd-FH-J8R" userLabel="DTM Heatmap" customClass="DTMHeatmapViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="83f-bH-LNs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JQg-4i-igJ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="744"/>
+                            </mapView>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1Pn-uk-98W">
+                                <rect key="frame" x="0.0" y="832" width="414" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kh7-pS-WQE" userLabel="Radius Distinct">
+                                        <rect key="frame" x="0.0" y="0.0" width="134.5" height="30"/>
+                                        <state key="normal" title="Radius Distinct"/>
+                                        <connections>
+                                            <action selector="changeToRadiusDistinct:" destination="syd-FH-J8R" eventType="touchUpInside" id="WBn-La-t5j"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9X-XR-V0A" userLabel="Radius Blurry">
+                                        <rect key="frame" x="139.5" y="0.0" width="135" height="30"/>
+                                        <state key="normal" title="Radius Blurry"/>
+                                        <connections>
+                                            <action selector="ChangeToRadiusBlurry:" destination="syd-FH-J8R" eventType="touchUpInside" id="JVQ-w7-4Zl"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mh4-Pn-ffs" userLabel="Flat Distinct">
+                                        <rect key="frame" x="279.5" y="0.0" width="134.5" height="30"/>
+                                        <state key="normal" title="Flat Distinct"/>
+                                        <connections>
+                                            <action selector="ChangeToFlatDistinct:" destination="syd-FH-J8R" eventType="touchUpInside" id="pIe-Dl-DBd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="LCS-r7-OrD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="LCS-r7-OrD" firstAttribute="bottom" secondItem="1Pn-uk-98W" secondAttribute="bottom" id="5fY-87-9yw"/>
+                            <constraint firstItem="JQg-4i-igJ" firstAttribute="leading" secondItem="LCS-r7-OrD" secondAttribute="leading" id="9xe-LT-fIS"/>
+                            <constraint firstItem="1Pn-uk-98W" firstAttribute="top" secondItem="JQg-4i-igJ" secondAttribute="bottom" id="JQv-wr-REs"/>
+                            <constraint firstItem="JQg-4i-igJ" firstAttribute="top" secondItem="LCS-r7-OrD" secondAttribute="top" id="cU7-yt-iNQ"/>
+                            <constraint firstItem="LCS-r7-OrD" firstAttribute="trailing" secondItem="JQg-4i-igJ" secondAttribute="trailing" id="h8C-UJ-i0Z"/>
+                            <constraint firstItem="LCS-r7-OrD" firstAttribute="trailing" secondItem="1Pn-uk-98W" secondAttribute="trailing" id="toF-zM-JVV"/>
+                            <constraint firstItem="1Pn-uk-98W" firstAttribute="leading" secondItem="LCS-r7-OrD" secondAttribute="leading" id="z25-ZZ-F5N"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="RE Heatmap" id="xJf-j7-wii"/>
+                    <connections>
+                        <outlet property="mapView" destination="JQg-4i-igJ" id="rS6-dR-RI1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Wo-VJ-R53" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2141" y="1527"/>
+        </scene>
         <!--RE Heatmap-->
         <scene sceneID="JyV-B9-0oQ">
             <objects>
@@ -572,66 +631,6 @@ DQoNCg
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xws-kf-RrH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-551" y="1527"/>
-        </scene>
-        <!--Heatmap-->
-        <scene sceneID="QjG-zy-Dks">
-            <objects>
-                <viewController title="Heatmap" id="YiQ-y2-7yO" userLabel="Heatmap" customClass="HeatmapViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2y8-Jq-4cf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="q3X-jf-A6A">
-                                <rect key="frame" x="0.0" y="832" width="414" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xKN-Nz-x6z" userLabel="Radius Distinct">
-                                        <rect key="frame" x="0.0" y="0.0" width="134.5" height="30"/>
-                                        <state key="normal" title="Radius Distinct"/>
-                                        <connections>
-                                            <action selector="changeToRadiusDistinct:" destination="YiQ-y2-7yO" eventType="touchUpInside" id="jDk-Sm-uIi"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYH-Sc-0gd" userLabel="Radius Blurry">
-                                        <rect key="frame" x="139.5" y="0.0" width="135" height="30"/>
-                                        <state key="normal" title="Radius Blurry"/>
-                                        <connections>
-                                            <action selector="ChangeToRadiusBlurry:" destination="YiQ-y2-7yO" eventType="touchUpInside" id="FFb-K2-uFj"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onG-Ft-Fwy" userLabel="Flat Distinct">
-                                        <rect key="frame" x="279.5" y="0.0" width="134.5" height="30"/>
-                                        <state key="normal" title="Flat Distinct"/>
-                                        <connections>
-                                            <action selector="ChangeToFlatDistinct:" destination="YiQ-y2-7yO" eventType="touchUpInside" id="P5k-6A-4oa"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YeP-fK-7qO">
-                                <rect key="frame" x="0.0" y="108" width="414" height="624"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="B86-Yb-ipi"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="B86-Yb-ipi" firstAttribute="trailing" secondItem="q3X-jf-A6A" secondAttribute="trailing" id="6YO-0Q-y8r"/>
-                            <constraint firstItem="B86-Yb-ipi" firstAttribute="bottom" secondItem="q3X-jf-A6A" secondAttribute="bottom" id="OMl-Xu-Qlq"/>
-                            <constraint firstItem="YeP-fK-7qO" firstAttribute="trailing" secondItem="q3X-jf-A6A" secondAttribute="trailing" id="cNv-Vf-Tce"/>
-                            <constraint firstItem="q3X-jf-A6A" firstAttribute="leading" secondItem="B86-Yb-ipi" secondAttribute="leading" id="hUK-Aa-PM8"/>
-                            <constraint firstItem="YeP-fK-7qO" firstAttribute="leading" secondItem="q3X-jf-A6A" secondAttribute="leading" id="kqb-Cm-DBD"/>
-                            <constraint firstItem="YeP-fK-7qO" firstAttribute="top" secondItem="B86-Yb-ipi" secondAttribute="top" constant="20" id="tu4-kq-Nky"/>
-                            <constraint firstItem="q3X-jf-A6A" firstAttribute="top" secondItem="YeP-fK-7qO" secondAttribute="bottom" constant="100" id="wfs-Oa-mcj"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="3tg-7C-k34"/>
-                    <connections>
-                        <outlet property="mapsView" destination="YeP-fK-7qO" id="jUE-bg-eV8"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jp8-LE-TUl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1377" y="1527"/>
         </scene>
     </scenes>
     <resources>

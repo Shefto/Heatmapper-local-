@@ -35,7 +35,7 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
   @IBOutlet weak var dtmButton: UIButton!
 
   @IBAction func btnDTMHeatmap(_ sender: Any) {
-    self.performSegue(withIdentifier: "historyToHeatmap", sender: workoutId)
+    self.performSegue(withIdentifier: "historyToDTMHeatmap", sender: workoutId)
   }
 
   @IBAction func btnJDHeatmap(_ sender: Any) {
@@ -206,8 +206,8 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
 
     let segueToUse = segue.identifier
 
-    if segueToUse == "historyToHeatmap" {
-      let destinationVC = segue.destination as! HeatmapViewController
+    if segueToUse == "historyToDTMHeatmap" {
+      let destinationVC = segue.destination as! DTMHeatmapViewController
       destinationVC.heatmapWorkoutId = (sender as! UUID)
     }
 
@@ -234,10 +234,17 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     var samplesToReturnSet = [HKQuantitySample]()
     let workoutPredicate = HKQuery.predicateForObjects(from: workout)
 
+    //2. Get all workouts that only came from this app.
+    let sourcePredicate = HKQuery.predicateForObjects(from: .default())
+
+    //3. Combine the predicates into a single predicate.
+    let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates:
+                                        [workoutPredicate, sourcePredicate])
+
     let startDateSort = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
 
     let query = HKSampleQuery(sampleType: heartRateType,
-                              predicate: workoutPredicate,
+                              predicate: compoundPredicate,
                               limit: 0,
                               sortDescriptors: [startDateSort]) { (sampleQuery, results, error) -> Void in
       guard let heartRateSamples = results as? [HKQuantitySample] else {
