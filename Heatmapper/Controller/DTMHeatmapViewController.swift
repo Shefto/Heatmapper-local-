@@ -1,8 +1,8 @@
-//
+
 //  DTMHeatmapViewController.swift
 //  Heatmapper
 //
-//  Created by Richard English on 24/07/2021.
+//  Created by Richard English on 03/07/2021.
 //  Copyright © 2021 Richard English. All rights reserved.
 //
 //  Heatmap view controller using DTMHeatmap
@@ -17,9 +17,8 @@ import DTMHeatmap
 class DTMHeatmapViewController: UIViewController, MKMapViewDelegate {
 
   @IBOutlet weak var mapView: MKMapView!
-
-  var reHeatmapOverlay = REHeatmapOverlay()
   var dtmHeatmap = DTMHeatmap()
+  //  var heatmapperCoordinatesArray = LocationManager.sharedInstance.locationDataAsCoordinates
   var heatmapperCoordinatesArray = [CLLocationCoordinate2D]()
   var heatmapWorkoutId : UUID?
 
@@ -30,12 +29,11 @@ class DTMHeatmapViewController: UIViewController, MKMapViewDelegate {
 
     self.mapView.delegate = self
 
-    // start getting workout data before anything else - this will take time
     getWorkoutData()
 
     setMapViewCentre()
 
-    //    setMapViewZoom()
+        setMapViewZoom()
 
   }
 
@@ -49,47 +47,21 @@ class DTMHeatmapViewController: UIViewController, MKMapViewDelegate {
   }
 
 
-  func createDTMHeatmap() {
+  func createHeatmap() {
 
+    var heatmapdata:[NSObject: Double] = [:]
+    for coordinate in heatmapperCoordinatesArray {
+      var point = MKMapPoint.init(coordinate)
+      let type = "{MKMapPoint=dd}"
+      let value = NSValue(bytes: &point, objCType: type)
+      heatmapdata[value] = 1.0
+    }
 
-
-        // this code takes coordinates then uses obj-C functions to convert each one into an NSObject
-        // which is then passed to the setData function as an [NSObject : AnyObject] dictionary
-        // together with a value which is always set to 1
-        // why?! there has to be a better way...
-        var heatmapdata:[NSObject: Double] = [:]
-        for coordinate in heatmapperCoordinatesArray {
-          var point = MKMapPoint.init(coordinate)
-          let type = "{MKMapPoint=dd}"
-          let value = NSValue(bytes: &point, objCType: type)
-          heatmapdata[value] = 1.0
-        }
-
-        self.dtmHeatmap.setData(heatmapdata as [NSObject : AnyObject])
-        self.mapView.addOverlay(self.dtmHeatmap)
-        self.setMapViewZoom()
-
-  }
-
-  func createREHeatmap() {
-
-    // create an array of Heatmap points based upon the coordinates mapped
-    var heatmapPointsArray = [REHeatmapPoint]()
-
-    let heatmapMKPointsArray = heatmapperCoordinatesArray.map {MKMapPoint($0)}
-    heatmapPointsArray = heatmapMKPointsArray.map { REHeatmapPoint.init(mapPoint: $0, radius: 0, heatLevel: 0.0) }
-
-    // get the array of heatmap cells based upon the co-ordinates passed in
-    var heatmapCellArray = reHeatmapOverlay.setData(reHeatmapPointArray: heatmapPointsArray)
-    MyFunc.logMessage(.debug, "heatmapCellArray")
-    MyFunc.logMessage(.debug, String(describing: heatmapCellArray))
-
-
+    self.dtmHeatmap.setData(heatmapdata as [NSObject : AnyObject])
     self.mapView.addOverlay(self.dtmHeatmap)
     self.setMapViewZoom()
 
   }
-
 
 
   func setMapViewCentre() {
@@ -100,17 +72,16 @@ class DTMHeatmapViewController: UIViewController, MKMapViewDelegate {
   }
 
 
-  //MARK: call to get workout data
   func getWorkoutData() {
     MyFunc.logMessage(.debug, "workoutId: \(String(describing: heatmapWorkoutId))")
+    // get the route data for the heatmap
 
-    // check Workout Id passed in is valid
     guard let workoutId = heatmapWorkoutId else {
       MyFunc.logMessage(.error, "heatmapWorkoutId is invalid: \(String(describing: heatmapWorkoutId))")
       return
     }
 
-    // get the workout
+
     getWorkout(workoutId: workoutId) { [self] (workouts, error) in
       let workoutReturned = workouts?.first
       MyFunc.logMessage(.debug, "workoutReturned:")
@@ -234,13 +205,11 @@ class DTMHeatmapViewController: UIViewController, MKMapViewDelegate {
       let coordinatesTotal = self.heatmapperCoordinatesArray.count
       MyFunc.logMessage(.debug, "Heatmapper Array count: \(coordinatesTotal)")
 
-      // if done = all data retrieved
-      // only at this point can we start to build a heatmap overlay
+      // Do something with this batch of location data.
       if done {
 
-        // dispatch to the main queue as we are making UI updates
         DispatchQueue.main.async {
-          self.createDTMHeatmap()
+          self.createHeatmap()
           // sets the heatmap frame to the size of the view and specifies the map
         }
 
@@ -290,8 +259,7 @@ class DTMHeatmapViewController: UIViewController, MKMapViewDelegate {
   }
 
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    return REHeatmapRenderer.init(overlay: overlay)
+    return DTMHeatmapRenderer.init(overlay: overlay)
   }
 
 }
-
