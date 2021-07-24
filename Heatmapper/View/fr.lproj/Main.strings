@@ -79,6 +79,9 @@
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "R6w-n5-X7X"; */
 "R6w-n5-X7X.normalTitle" = "";
 
+/* Class = "UIButton"; normalTitle = "JD"; ObjectID = "sPj-oH-Nyf"; */
+"sPj-oH-Nyf.normalTitle" = "";
+
 /* Class = "UIButton"; normalTitle = "Heatmap"; ObjectID = "uxy-2h-68R"; */
 "uxy-2h-68R.normalTitle" = "";
 
@@ -88,6 +91,9 @@
 /* Class = "UIButton"; normalTitle = "Radius Blurry"; ObjectID = "vYH-Sc-0gd"; */
 "vYH-Sc-0gd.normalTitle" = "";
 
+/* Class = "UIButton"; normalTitle = "DTM"; ObjectID = "WMX-9X-sBW"; */
+"WMX-9X-sBW.normalTitle" = "";
+
 /* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "xKN-Nz-x6z"; */
 "xKN-Nz-x6z.normalTitle" = "";
 
@@ -96,3 +102,6 @@
 
 /* Class = "UINavigationItem"; title = "RE Heatmap"; ObjectID = "yQa-XH-y2d"; */
 "yQa-XH-y2d.title" = "";
+
+/* Class = "UIButton"; normalTitle = "RE"; ObjectID = "zt1-c4-uTO"; */
+"zt1-c4-uTO.normalTitle" = "";

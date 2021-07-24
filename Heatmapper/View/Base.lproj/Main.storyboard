@@ -131,8 +131,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lyd-aS-nH0">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aWN-Ek-5D4" userLabel="Workout Table View" customClass="ThemeTableViewNoBackground" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="110" sectionHeaderHeight="1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aWN-Ek-5D4" userLabel="Workout Table View" customClass="ThemeTableViewNoBackground" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="724"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="workoutCell" id="j1U-7R-s18">
@@ -145,6 +145,35 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="koB-cI-YWd">
+                                        <rect key="frame" x="0.0" y="724" width="414" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zt1-c4-uTO" userLabel="RE Heatmap Button">
+                                                <rect key="frame" x="0.0" y="0.0" width="136.5" height="50"/>
+                                                <state key="normal" title="RE"/>
+                                                <connections>
+                                                    <action selector="btnREHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="ewg-5J-Mq5"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPj-oH-Nyf" userLabel="JD Heatmap Button">
+                                                <rect key="frame" x="138.5" y="0.0" width="137" height="50"/>
+                                                <state key="normal" title="JD"/>
+                                                <connections>
+                                                    <action selector="btnJDHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="7jk-Th-NoM"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMX-9X-sBW" userLabel="DTM Heatmap Button">
+                                                <rect key="frame" x="277.5" y="0.0" width="136.5" height="50"/>
+                                                <state key="normal" title="DTM"/>
+                                                <connections>
+                                                    <action selector="btnDTMHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="xk0-Xe-KU6"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="0el-EP-dAJ"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -159,6 +188,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="gOK-0r-wdZ"/>
                     <connections>
+                        <outlet property="dtmButton" destination="WMX-9X-sBW" id="QUR-yd-uce"/>
+                        <outlet property="jdButton" destination="sPj-oH-Nyf" id="6gO-3k-5Kt"/>
+                        <outlet property="reButton" destination="zt1-c4-uTO" id="QPJ-Bh-yLM"/>
                         <outlet property="workoutTableView" destination="aWN-Ek-5D4" id="umP-Hq-edH"/>
                         <segue destination="YiQ-y2-7yO" kind="show" identifier="historyToHeatmap" id="UHU-qN-G4m"/>
                         <segue destination="Pbk-vr-61V" kind="show" identifier="historyToREHeatmap" id="Q5M-hF-bhw"/>

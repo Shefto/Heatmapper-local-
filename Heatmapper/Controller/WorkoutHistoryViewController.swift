@@ -17,6 +17,7 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
   private var workoutArray: [HKWorkout]?
   private let workoutCellId = "workoutCell"
   var workoutId : UUID?
+  var selectedIndexPath : Int? = 0
 
   let locationManager          = CLLocationManager()
   let healthstore = HKHealthStore()
@@ -29,13 +30,29 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
 
 
   @IBOutlet weak var workoutTableView: ThemeTableViewNoBackground!
-  
+  @IBOutlet weak var reButton: UIButton!
+  @IBOutlet weak var jdButton: UIButton!
+  @IBOutlet weak var dtmButton: UIButton!
+
+  @IBAction func btnDTMHeatmap(_ sender: Any) {
+    self.performSegue(withIdentifier: "historyToHeatmap", sender: workoutId)
+  }
+
+  @IBAction func btnJDHeatmap(_ sender: Any) {
+    self.performSegue(withIdentifier: "historyToREHeatmap", sender: workoutId)
+  }
+
+  @IBAction func btnREHeatmap(_ sender: Any) {
+    self.performSegue(withIdentifier: "historyToREHeatmap", sender: workoutId)
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     // added this to ensure Location tracking turned off (it should be by the time this screen is displayed though)
     locationManager.stopUpdatingLocation()
     workoutTableView.dataSource = self
     workoutTableView.delegate = self
+    workoutTableView.allowsSelection = true
 
     workoutTableView.register(UINib(nibName: "WorkoutCell", bundle: nil), forCellReuseIdentifier: "WorkoutTableViewCell")
     workoutTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: workoutTableView.frame.size.width, height: 1))
@@ -62,9 +79,19 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     tableView.deselectRow(at: indexPath, animated: false)
     workoutId = workoutArray?[indexPath.row].uuid
     MyFunc.logMessage(.debug, "workoutId: \(String(describing: workoutId))")
+    selectedIndexPath = indexPath.row
+    self.workoutTableView.reloadData()
 
-    self.performSegue(withIdentifier: "historyToREHeatmap", sender: workoutId)
+//    self.performSegue(withIdentifier: "historyToREHeatmap", sender: workoutId)
   }
+
+  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+
+    selectedIndexPath = nil
+    self.workoutTableView.reloadData()
+    //    self.performSegue(withIdentifier: "historyToREHeatmap", sender: workoutId)
+  }
+
 
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -79,18 +106,16 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     let cell = tableView.dequeueReusableCell(withIdentifier:
                                               "WorkoutTableViewCell", for: indexPath) as! WorkoutTableViewCell
 
-    // get workout for the row
+//    // get workout for the row
     let workout = workouts[indexPath.row]
-    MyFunc.logMessage(.debug, "workout for row \(String(describing: indexPath.row))")
-    MyFunc.logMessage(.debug, String(describing: workout))
+//    MyFunc.logMessage(.debug, "workout for row \(String(describing: indexPath.row))")
+//    MyFunc.logMessage(.debug, String(describing: workout))
 
 
     // load activity date
     cell.activityDate.text = dateFormatter.string(from: workout.startDate)
-
     cell.activityType.text = workout.workoutActivityType.name
 
-    // load workout metric fields
     // load energy used
     if let caloriesBurned = workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) {
       let formattedCalories = String(format: "%.2f kcal",
@@ -102,10 +127,10 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     // load average BPM
-    let heartRateSet = getHeartRateSampleForWorkout(workout: workout)
-    MyFunc.logMessage(.debug, "heartRateSet: ")
-    MyFunc.logMessage(.debug, String(describing: heartRateSet))
-
+//    let heartRateSet = getHeartRateSampleForWorkout(workout: workout)
+//    MyFunc.logMessage(.debug, "heartRateSet: ")
+//    MyFunc.logMessage(.debug, String(describing: heartRateSet))
+//
 //    totalDistance?.doubleValue(for: .meter()) {
 //      let formattedDistance = String(format: "%.2f m", averageBPM)
 //      cell.distanceLabel.text = formattedDistance
@@ -134,8 +159,12 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
 
     cell.distanceImageView.image = cell.distanceImageView.image?.withRenderingMode(.alwaysTemplate)
     cell.distanceImageView.tintColor = UIColor.systemGreen
-
-
+//    MyFunc.logMessage(.debug, "SelectedIndexPath: \(String(describing: selectedIndexPath))")
+    if selectedIndexPath != nil && indexPath.row == selectedIndexPath {
+      cell.contentView.backgroundColor = UIColor.red
+    } else {
+      cell.contentView.backgroundColor = UIColor.clear
+    }
 
     return cell
   }

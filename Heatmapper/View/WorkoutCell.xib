@@ -162,12 +162,14 @@
                 <outlet property="activityType" destination="kRp-Ii-MLI" id="dcP-60-EGg"/>
                 <outlet property="caloriesImageView" destination="Y7D-pQ-YoY" id="ChI-T3-G1j"/>
                 <outlet property="caloriesLabel" destination="Sxr-tH-qwN" id="zyk-Fe-agF"/>
+                <outlet property="contentView" destination="uR8-aH-hbB" id="mGO-OH-txQ"/>
                 <outlet property="distanceImageView" destination="xeR-et-omh" id="OIO-n2-VKd"/>
                 <outlet property="distanceLabel" destination="Xfo-do-Ad5" id="Omp-TN-VdL"/>
                 <outlet property="heartImageView" destination="Xg3-eX-Gme" id="RzF-qI-Czf"/>
                 <outlet property="heartRateLabel" destination="kxG-Ae-P8F" id="U4Q-mJ-lxh"/>
                 <outlet property="speedLabel" destination="RkS-PU-cVA" id="5c4-rL-jBb"/>
                 <outlet property="speedometerImageView" destination="Ett-eS-YOG" id="Ea2-O7-Z73"/>
+                <outlet property="workoutView" destination="boy-Gn-HqB" id="nrI-1J-1an"/>
             </connections>
             <point key="canvasLocation" x="84.799999999999997" y="-141.22938530734635"/>
         </view>

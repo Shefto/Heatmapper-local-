@@ -19,6 +19,7 @@ class WorkoutTableViewCell: ThemeTableViewCellNoBackground {
   @IBOutlet weak var speedLabel: UILabel!
   @IBOutlet weak var distanceLabel: UILabel!
 
+  @IBOutlet weak var workoutView: UIStackView!
   @IBOutlet weak var heartImageView: UIImageView!
   @IBOutlet weak var caloriesImageView: UIImageView!
   @IBOutlet weak var speedometerImageView: UIImageView!
@@ -28,7 +29,7 @@ class WorkoutTableViewCell: ThemeTableViewCellNoBackground {
   override func layoutSubviews() {
     super.layoutSubviews()
 
-    contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
+    contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
   }
 
 }
