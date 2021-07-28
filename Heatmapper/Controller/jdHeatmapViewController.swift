@@ -1,5 +1,5 @@
 //
-//  jdjdHeatmapViewController.swift
+//  jdHeatmapViewController.swift
 //  Heatmapper
 //
 //  Created by Richard English on 24/07/2021.
@@ -23,7 +23,6 @@ class jdHeatmapViewController: UIViewController {
   var heatmapperCoordinatesArray = [CLLocationCoordinate2D]()
   var heatmapWorkoutId : UUID?
 
-
   // the view which renders the heatmap over the map
   @IBOutlet weak var mapsView: UIView!
 
@@ -40,9 +39,28 @@ class jdHeatmapViewController: UIViewController {
     heatMap?.setType(type: .FlatDistinct)
   }
 
-
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    heatmapperCoordinatesArray.removeAll()
+    getWorkoutData()
+
+
+  }
+
+  func createHeatmap() {
+
+    // sets the heatmap frame to the size of the view and specifies the map type
+    heatMap = JDHeatMapView(frame: mapsView.frame, delegate: self, mapType: .FlatDistinct)
+
+    // set this VC as the delegate of the JDSwiftHeatMapView
+    heatMap?.delegate = self
+
+    mapsView.addSubview(heatMap!)
+
+  }
+
+  func getWorkoutData() {
 
     MyFunc.logMessage(.debug, "workoutId: \(String(describing: heatmapWorkoutId))")
     // get the route data for the heatmap
@@ -51,7 +69,6 @@ class jdHeatmapViewController: UIViewController {
       MyFunc.logMessage(.error, "heatmapWorkoutId is invalid: \(String(describing: heatmapWorkoutId))")
       return
     }
-
 
     getWorkout(workoutId: workoutId) { [self] (workouts, error) in
       let workoutReturned = workouts?.first
@@ -68,6 +85,124 @@ class jdHeatmapViewController: UIViewController {
     }
 
   }
+
+  func getWorkout(workoutId: UUID, completion:
+                    @escaping ([HKWorkout]?, Error?) -> Void) {
+
+    let predicate = HKQuery.predicateForObject(with: workoutId)
+
+    let query = HKSampleQuery(
+      sampleType: .workoutType(),
+      predicate: predicate,
+      limit: 0,
+      sortDescriptors: nil
+    )
+    { (query, results, error) in
+      DispatchQueue.main.async {
+        // cast the samples as HKWorkout
+        guard
+          let samples = results as? [HKWorkout],
+          error == nil
+        else {
+          completion(nil, error)
+          return
+        }
+
+        completion(samples, nil)
+      }
+    }
+
+    healthstore.execute(query)
+
+  }
+
+
+  func getRouteSampleObject(workout: HKWorkout) {
+
+    let runningObjectQuery = HKQuery.predicateForObjects(from: workout)
+
+    let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
+
+      guard error == nil else {
+        // Handle any errors here.
+        fatalError("The initial query failed.")
+      }
+
+      // Process the initial route data here.
+      MyFunc.logMessage(.debug, "routeQuery returned samples:")
+      MyFunc.logMessage(.debug, String(describing: samples))
+
+      DispatchQueue.main.async {
+        // cast the samples as HKWorkout
+        guard
+          let routeSamples = samples as? [HKWorkoutRoute],
+          error == nil
+        else {
+          return
+        }
+        MyFunc.logMessage(.debug, "routeSamples:")
+        MyFunc.logMessage(.debug, String(describing: routeSamples))
+        guard let routeReturned = samples?.first as? HKWorkoutRoute else {
+          MyFunc.logMessage(.debug, "Could not convert routeSamples to HKWorkoutRoute")
+          return
+        }
+        self.getRouteLocationData(route: routeReturned)
+
+      }
+
+    }
+
+    routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
+      guard error == nil else {
+        // Handle any errors here.
+        fatalError("The update failed.")
+      }
+    }
+
+    healthstore.execute(routeQuery)
+  }
+
+  func getRouteLocationData(route: HKWorkoutRoute) {
+
+    let samplesCount = route.count
+    MyFunc.logMessage(.debug, "Number of samples: \(samplesCount)")
+
+    // Create the route query
+    let query = HKWorkoutRouteQuery(route: route) { [self] (query, locationsOrNil, done, errorOrNil) in
+
+      // This block may be called multiple times
+      if errorOrNil != nil {
+        MyFunc.logMessage(.debug, "Error retrieving workout locations")
+        return
+      }
+
+      guard let locations = locationsOrNil else {
+        fatalError("*** Invalid State: This can only fail if there was an error. ***")
+      }
+
+      MyFunc.logMessage(.debug, "Workout Location Data: \(String(describing: locations))")
+      let locationsAsCoordinates = locations.map {$0.coordinate}
+      MyFunc.logMessage(.debug, "Locations retrieved: \(locationsAsCoordinates)")
+
+      self.heatmapperCoordinatesArray.append(contentsOf: locationsAsCoordinates)
+      let coordinatesTotal = self.heatmapperCoordinatesArray.count
+      MyFunc.logMessage(.debug, "Heatmapper Array count: \(coordinatesTotal)")
+
+      // if all data retrieved, status = done so we can process it
+      if done {
+
+        // UI work so dispatch to the main queue
+        DispatchQueue.main.async {
+          self.createHeatmap()
+        }
+
+      }
+
+    }
+    healthstore.execute(query)
+  }
+
+
 
 
 }
@@ -114,135 +249,6 @@ extension jdHeatmapViewController: JDHeatMapDelegate
   func heatmap(CoordinateFor index:Int) -> CLLocationCoordinate2D
   {
     return heatmapperCoordinatesArray[index]
-  }
-
-
-
-  func getWorkout(workoutId: UUID, completion:
-                    @escaping ([HKWorkout]?, Error?) -> Void) {
-
-    let predicate = HKQuery.predicateForObject(with: workoutId)
-
-    let query = HKSampleQuery(
-      sampleType: .workoutType(),
-      predicate: predicate,
-      limit: 0,
-      sortDescriptors: nil
-    )
-    { (query, results, error) in
-      DispatchQueue.main.async {
-        //4. Cast the samples as HKWorkout
-        guard
-          let samples = results as? [HKWorkout],
-          error == nil
-        else {
-          completion(nil, error)
-          return
-        }
-
-        completion(samples, nil)
-      }
-    }
-
-    healthstore.execute(query)
-
-  }
-
-
-  func getRouteSampleObject(workout: HKWorkout) {
-
-    let runningObjectQuery = HKQuery.predicateForObjects(from: workout)
-
-    let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
-
-      guard error == nil else {
-        // Handle any errors here.
-        fatalError("The initial query failed.")
-      }
-
-      // Process the initial route data here.
-      MyFunc.logMessage(.debug, "routeQuery returned samples:")
-      MyFunc.logMessage(.debug, String(describing: samples))
-
-      DispatchQueue.main.async {
-        //4. Cast the samples as HKWorkout
-        guard
-          let routeSamples = samples as? [HKWorkoutRoute],
-          error == nil
-        else {
-          return
-        }
-        MyFunc.logMessage(.debug, "routeSamples:")
-        MyFunc.logMessage(.debug, String(describing: routeSamples))
-        guard let routeReturned = samples?.first as? HKWorkoutRoute else {
-          MyFunc.logMessage(.debug, "Could not convert routeSamples to HKWorkoutRoute")
-          return
-        }
-        self.getRouteLocationData(route: routeReturned)
-
-      }
-
-    }
-
-    routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
-
-      guard error == nil else {
-        // Handle any errors here.
-        fatalError("The update failed.")
-      }
-
-      // Process updates or additions here.
-    }
-
-    healthstore.execute(routeQuery)
-
-  }
-
-  func getRouteLocationData(route: HKWorkoutRoute) {
-
-    // Create the route query.
-    let query = HKWorkoutRouteQuery(route: route) { [self] (query, locationsOrNil, done, errorOrNil) in
-
-      // This block may be called multiple times.
-
-      if errorOrNil != nil {
-        // Handle any errors here.
-        return
-      }
-
-      guard let locations = locationsOrNil else {
-        fatalError("*** Invalid State: This can only fail if there was an error. ***")
-      }
-
-      // Do something with this batch of location data.
-      if done {
-
-
-        DispatchQueue.main.async {
-
-//          MyFunc.logMessage(.debug, "Workout Location Data: \(String(describing: locations))")
-           let locationsAsCoordinates = locations.map {$0.coordinate}
-//          MyFunc.logMessage(.debug, "locationsAsCoordinates: \(String(describing: locationsAsCoordinates))")
-          heatmapperCoordinatesArray = locationsAsCoordinates
-          MyFunc.logMessage(.debug, "heatmapperCoordinatesArray.count: \(String(describing: heatmapperCoordinatesArray.count))")
-
-
-          // sets the heatmap frame to the size of the view and specifies the map type
-          heatMap = JDHeatMapView(frame: mapsView.frame, delegate: self, mapType: .FlatDistinct)
-
-          // set this VC as the delegate of the JDSwiftHeatMapView
-          heatMap?.delegate = self
-          // add the JDSwiftHeatMapView to the UI
-          mapsView.addSubview(heatMap!)
-        }
-
-      }
-
-      // You can stop the query by calling:
-      // store.stop(query)
-
-    }
-    healthstore.execute(query)
   }
 
 

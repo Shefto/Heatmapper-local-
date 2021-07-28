@@ -47,23 +47,25 @@ class JDHeatMapManager: NSObject
   {
     rendererPointCreatorPair = [:]
 
-    // call the heatmap delegate
+    // check to ensure the delegate is of the right object type
     guard let heatmapDelegate = jdHeatMapView.heatmapDelegate else {
       return
     }
 
-    // remove the existing overlays
+    // remove the existing overlays - start from a clean slate
     jdHeatMapView.removeOverlays(jdHeatMapView.overlays)
 
     // get the total number of CLLocation points to be added to the heatmap
     let locationPoints = heatmapDelegate.heatmap(HeatPointCount: jdHeatMapView)
 
+    // *** the main heatmap creation process ***
     // loop through each location point we have
     for locationPoint in 0..<locationPoints
     {
       let radius = heatmapDelegate.heatmap(RadiusInKMFor: locationPoint)
       let coordinate = heatmapDelegate.heatmap(CoordinateFor: locationPoint)
       let heatLevel = heatmapDelegate.heatmap(HeatLevelFor: locationPoint)
+      MyFunc.logMessage(.debug, "heatLevel: \(heatLevel)")
 
       // if the heat level of this point is greater than the current max, increase the current max
       maxHeatLevelInMap = (heatLevel > maxHeatLevelInMap) ? heatLevel : maxHeatLevelInMap
@@ -73,7 +75,7 @@ class JDHeatMapManager: NSObject
 
       if (dataPointType == .FlatPoint)
       {
-        // Flat point heatmaps  (i.e with a coloured background)  only require a single overlay
+        // Flat point heatmaps  (i.e with a coloured background)  only require a single overlay because they include the rectangle
         // for some reason declaring this function then calling it immediately afterwards affects the functionality
         // need to understand why
         func collectToOneOverlay()
@@ -86,6 +88,7 @@ class JDHeatMapManager: NSObject
             }
             return
           }
+          // if an overlay has not been created yet, this creates one
           else if(jdHeatMapView.overlays.count == 0) //First Overlay
           {
             let bigOverlay = JDHeatmapOverlay(first: newHeatPoint)
@@ -125,33 +128,43 @@ class JDHeatMapManager: NSObject
 
         closeToOverlay()
       }
+      
     } // func refresh
 
     if (maxHeatLevelInMap == 0) {
 //      fatalError("Max Heat level should not be 0")
-      print("Max Heat level should not be 0")
+      MyFunc.logMessage(.error, "Max Heat level should not be 0")
     }
 
     // this function reduces the overlay size to fit just the points
     func reduceOverlaySize() {
-      var reduceBool : Bool = false
+      var overlayReductionComplete : Bool = false
       repeat
       {
-        reduceBool = false
+        overlayReductionComplete = false
+        // loop through every overlay we have
         for overlayX in jdHeatMapView.overlays
         {
+          //  check the overlay is the correct object type
           guard let heatmapOverlayX = overlayX as? JDHeatmapOverlay
           else {
-            break
+            MyFunc.logMessage(.error, "Invalid overlay type passed to JDHeatmap Manager")
+            return
           }
+          // inner loop through overlays
           for overlayY  in jdHeatMapView.overlays
           {
-            if(overlayY.isEqual(overlayX)) {continue}
-            let overlayXmaprect = overlayX.boundingMapRect
-            let overlayYmaprect = overlayY.boundingMapRect
-            if(overlayXmaprect.intersects(overlayYmaprect))
+            // if the overlays match we cannot reduce any further
+            if(overlayY.isEqual(overlayX)) {
+              // so break out of the loop
+              continue
+            }
+
+            let overlayXMapRect = overlayX.boundingMapRect
+            let overlayYMapRect = overlayY.boundingMapRect
+            if(overlayXMapRect.intersects(overlayYMapRect))
             {
-              reduceBool = true
+              overlayReductionComplete = true
               if let heatmapOverlayY = overlayY as? JDHeatmapOverlay
               {
                 for point in heatmapOverlayY.heatmapPoint2DArray
@@ -163,13 +176,18 @@ class JDHeatMapManager: NSObject
               break
             }
           }
-          if(reduceBool) {break}
+
+          if(overlayReductionComplete) {break}
         }
-      } while(reduceBool)
+      } while(overlayReductionComplete)
     }
+
     reduceOverlaySize()
 
-    // loop through all overlays
+    MyFunc.logMessage(.debug, "Number of overlays: \(jdHeatMapView.overlays.count)")
+
+    // this loop calculates the biggest map region from the overlay's boundingMapRect
+    // this is used later to set the zoom size for the map
     for overlay in jdHeatMapView.overlays
     {
       if let heatmapOverlay = overlay as? JDHeatmapOverlay
@@ -183,6 +201,7 @@ class JDHeatMapManager: NSObject
       }
 
     }
+    // now calculate the heatmap point objects for the overlay
     calculateHeatmapPointObjects()
   }
 
@@ -236,22 +255,24 @@ class JDHeatMapManager: NSObject
       // first check the overlay passed in is of the correct type
       if let rendererForHeatmapOverlay = rendererFor(overlay: heatmapOverlay)
       {
-        // now calculate the heatmap data based upon the points and the maximum heat level (calculated elsewhere in this class)
+        // now calculate the CG Points and Rectangle based upon the points and the maximum heat level (calculated elsewhere in this class)
         if let calculatedHeatmapData = rendererForHeatmapOverlay.calcHeatmapPointsAndRect(maxHeat: maxHeatLevelInMap)
         {
 
           var heatmapPointCreator : JDHeatmapPointCreator!
-          let overlayCGRect = calculatedHeatmapData.rect
-          let localFormData = calculatedHeatmapData.data
+          let overlayCGRect = calculatedHeatmapData.heatmapCGect
+          let heatmapPointCGArray = calculatedHeatmapData.heatmapPointCGArray
+
           // depending upon the type of Heatmap passed in (i.e. flat or radius) call the relevant creator function
           if (dataPointType == .RadiusPoint)
           {
-            heatmapPointCreator  = HeatmapRadiusPointCreator(size: (overlayCGRect.size), heatmapPointArray: localFormData)
+            heatmapPointCreator  = HeatmapRadiusPointCreator(size: (overlayCGRect.size), heatmapPointArray: heatmapPointCGArray)
           }
           else if (dataPointType == .FlatPoint)
           {
-            heatmapPointCreator = HeatmapFlatPointCreator(size: (overlayCGRect.size), heatmapPointArray: localFormData)
+            heatmapPointCreator = HeatmapFlatPointCreator(size: (overlayCGRect.size), heatmapPointArray: heatmapPointCGArray)
           }
+
           rendererPointCreatorPair[rendererForHeatmapOverlay] = heatmapPointCreator
 
           // set the visible area to the biggest map region
@@ -279,7 +300,8 @@ class JDHeatMapManager: NSObject
   {
     print(#function)
     self.calculationInProgress = true
-    func computing()
+
+    func generateHeatmap()
     {
       for overlay in jdHeatMapView.overlays
       {
@@ -289,9 +311,12 @@ class JDHeatMapManager: NSObject
           {
             if let heatmapRenderer = rendererPointCreatorPair[rendererForHeatmapOverlay]
             {
+              // from the point pair, create the heatmap point
               heatmapRenderer.createHeatmapPoint()
+              // set the bitmap size and bytes
               rendererForHeatmapOverlay.bitmapSize = heatmapRenderer.fitnessIntSize
               rendererForHeatmapOverlay.bytesPerRow = heatmapRenderer.BytesPerRow
+              // append the colour used to the renderer's set of colour references
               rendererForHeatmapOverlay.dataReference.append(contentsOf: heatmapRenderer.heatmapPointColourArray)
               rendererForHeatmapOverlay.setNeedsDisplay()
               heatmapRenderer.heatmapPointColourArray = []
@@ -299,6 +324,7 @@ class JDHeatMapManager: NSObject
           }
         }
       }
+
       self.calculationInProgress = false
 
       DispatchQueue.main.sync {
@@ -306,12 +332,16 @@ class JDHeatMapManager: NSObject
         {
           jdHeatMapView.inProgressWheel?.stopAnimating()
         }
+        // set the zoom to fit the heatmap
         let zoomOrigin = MKMapPoint(x: biggestMapRegion.origin.x - biggestMapRegion.size.width * 2, y: biggestMapRegion.origin.y - biggestMapRegion.size.height * 2)
         let zoomedoutRect = MKMapRect(origin: zoomOrigin, size: MKMapSize(width: biggestMapRegion.size.width * 4, height: biggestMapRegion.size.height * 4))
         jdHeatMapView.setVisibleMapRect(zoomedoutRect, animated: true)
+
+        // may be able to convert the overlay here
+
       }
     }
-    computing()
+    generateHeatmap()
   }
 
   var lastVisibleMapRect: MKMapRect = MKMapRect.init()

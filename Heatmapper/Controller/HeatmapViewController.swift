@@ -102,7 +102,7 @@ extension HeatmapViewController: MKMapViewDelegate
   }
 }
 
-// these functions required as delegate of JDHeatMap
+// these functions required as delegate of JDHeatMap - called for each point being looped through
 extension HeatmapViewController: JDHeatMapDelegate
 {
   func heatmap(HeatPointCount heatmap:JDHeatMapView) -> Int
@@ -117,7 +117,8 @@ extension HeatmapViewController: JDHeatMapDelegate
     return 1 + index
   }
 
-  // this sets the radius - key to sizing the heatmap
+  // this sets the radius for each point - have set this to 1m
+  // initial JD code used commented out line - can we restore?
   func heatmap(RadiusInKMFor: Int) -> Double {
     return 0.001
     //    return Double(1 + RadiusInKMFor * 2)

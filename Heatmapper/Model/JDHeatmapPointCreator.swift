@@ -42,6 +42,7 @@ class JDHeatmapPointCreator: NSObject
 
   var heatmapPointColourArray   : [UTF8Char] = []
   var heatmapPointArray         : [HeatmapPointCG] = []
+
   // IntSize is simply a structure with two variables, height and weight
   var fitnessIntSize            : IntSize!
 
@@ -108,7 +109,7 @@ class HeatmapRadiusPointCreator: JDHeatmapPointCreator
         for heatmapPoint in self.heatmapPointArray
         {
           let pixelCGPoint          = CGPoint(x: width, y: height)
-          let bytesDistanceToPoint  : Float = pixelCGPoint.distanceTo(anther: heatmapPoint.localCGpoint)
+          let bytesDistanceToPoint  : Float = pixelCGPoint.distanceTo(another: heatmapPoint.localCGpoint)
           let ratio                 : Float = 1 - (bytesDistanceToPoint / Float(heatmapPoint.radius))
           if  (ratio > 0)
           {
@@ -119,7 +120,7 @@ class HeatmapRadiusPointCreator: JDHeatmapPointCreator
         {
           target = 1
         }
-        let rgb = JDHeatmapPointCreator.theColorMixer.getTargetColourRGB(inDestiny: target)
+        let rgb = JDHeatmapPointCreator.theColorMixer.getTargetColourRGB(targetLevel: target)
 
         let redRow    : UTF8Char = rgb.redRow
         let greenRow  : UTF8Char = rgb.greenRow
@@ -139,38 +140,47 @@ class HeatmapRadiusPointCreator: JDHeatmapPointCreator
 class HeatmapFlatPointCreator: JDHeatmapPointCreator
 {
 
-  // this function creates the heatmap point including calculating the colour required depending upon the point's proximity to other heatmap points
-  // in effect, it adds the heatmap point to the actual heatmap heat area
+  // this function creates the heatmap points including calculating the colour required depending upon the point's proximity to other heatmap points
+  // in effect, it adds the heatmap points to the actual heatmap heat area
   override func createHeatmapPoint()
   {
     print(#function + "w:\(fitnessIntSize.width),h:\(fitnessIntSize.height)")
     var byteCount : Int = 0
+    // loop round every pixel
     for height in 0..<self.fitnessIntSize.height
     {
       for width in 0..<self.fitnessIntSize.width
       {
         var target : Float = 0
+        //loop round every point in the array
         for heatmapPoint in self.heatmapPointArray
         {
-          let pixelCGPoint = CGPoint(x: width, y: height)
-          let bytesDistanceToPoint : Float = pixelCGPoint.distanceTo(anther: heatmapPoint.localCGpoint)
-          let ratio : Float = 1 - (bytesDistanceToPoint / Float(heatmapPoint.radius))
-          if (ratio > 0)
+          let pixelCGPoint                  = CGPoint(x: width, y: height)
+          let directDistanceToPoint : Float  = pixelCGPoint.distanceTo(another: heatmapPoint.localCGpoint)
+          // this is key - it calculates if there is an overlap between the point and the radius of another point
+          let overlap                : Float  = 1 - (directDistanceToPoint / Float(heatmapPoint.radius))
+
+
+          if (overlap > 0)
           {
-            target += ratio * heatmapPoint.heatlevel
+            // if there is an overlap, set the target colour as the level of overlap multiplied by the heat level
+            target += overlap * heatmapPoint.heatlevel
           }
         }
+
+        // if the overlap results in a value greater than 0 or less than 1, keep it within those bounds
         if (target == 0)
         {
           target += 0.01
         }
 
-        if(target > 1)
+        if (target > 1)
         {
           target = 1
         }
 
-        let rgb = JDHeatmapPointCreator.theColorMixer.getTargetColourRGB(inDestiny: target)
+        // this adds the colour generated to the array of heatmapPointColours
+        let rgb = JDHeatmapPointCreator.theColorMixer.getTargetColourRGB(targetLevel: target)
 
         let redRow    : UTF8Char = rgb.redRow
         let greenRow  : UTF8Char = rgb.greenRow
@@ -191,7 +201,8 @@ class HeatmapFlatPointCreator: JDHeatmapPointCreator
 
 extension CGPoint
 {
-  func distanceTo(anther point:CGPoint)->Float
+  // this uses Pythagorean logic to return the direct distance between two points
+  func distanceTo(another point: CGPoint) -> Float
   {
     let xDistance = (self.x - point.x) * (self.x - point.x)
     let yDistance = (self.y - point.y) * (self.y - point.y)

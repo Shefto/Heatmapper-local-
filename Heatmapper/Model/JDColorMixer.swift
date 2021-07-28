@@ -15,7 +15,8 @@ enum ColorMixerMode
   case DistinctMode
 }
 
-// structure for the colour
+// structure for the colour mix
+// this is used to pass colour definitions between modules
 struct BytesRGB
 {
   var redRow      : UTF8Char = 0
@@ -31,6 +32,7 @@ class JDHeatMapColorMixer :  NSObject
   var mixerMode           : ColorMixerMode = .DistinctMode
   let colorMixerThread    = DispatchQueue(label: "ColorMixer.Thread")
 
+  // initialize the colour mixer - set up the array of colours to be used (
   init (array: [UIColor], level: Int)
   {
     super.init()
@@ -38,7 +40,7 @@ class JDHeatMapColorMixer :  NSObject
 
       let divideLevel = level
       if (divideLevel == 0) {
-        fatalError("divideLevel should not be 0")
+        MyFunc.logMessage(.error, "JDHeatMapColorMixer received invalid level 0")
       }
 
       if (divideLevel == 1) {
@@ -48,8 +50,7 @@ class JDHeatMapColorMixer :  NSObject
 
       for index in 0..<array.count
       {
-        // this line included to break out of for...in loop
-        // consider reworking - there must be a better way
+        // this line included to break out of for...in loop if the array is empty
         if (index == array.count-1) {
           break
         }
@@ -75,11 +76,12 @@ class JDHeatMapColorMixer :  NSObject
     }
   }
 
-  func getTargetColourRGB(inDestiny targetFloat: Float) -> BytesRGB
+  func getTargetColourRGB(targetLevel targetFloat: Float) -> BytesRGB
   {
-    func getDistinctRGB(inDestiny targetFloat :Float) -> BytesRGB
+    
+    func getDistinctRGB(inDestiny targetFloat : Float) -> BytesRGB
     {
-      if (targetFloat == 0) // Only None Flat Data Type will Have 0 destiny
+      if (targetFloat == 0) // Only None Flat Data Type will Have 0 target
       {
         let rgb : BytesRGB = BytesRGB(redRow: 0,
                                       greenRow: 0,
@@ -89,19 +91,30 @@ class JDHeatMapColorMixer :  NSObject
       }
 
       let colorCount = colourArray.count
+
+      // if there is only one colour in the palette, add clear so we have a range to work with
       if (colorCount < 2)
       {
         colourArray.append(UIColor.clear)
       }
 
       var targetColour    : UIColor = UIColor()
-      let averageWeight   : Float = 1.0 / Float(colorCount-1)
+      // average weight is the average value of each colour
+      // e.g if there are 10 colours in the palette, the average weight of each is 1/9th (hmmm)
+      let averageWeight   : Float = 1.0 / Float(colorCount - 1)
       var counter         : Float = 0.0
+
       for colour in colourArray
       {
+        // initial next value will be average weight
         let next = counter + averageWeight
-        if((counter <= targetFloat) && targetFloat<next)
+
+        // if the counter is below the target colour
+        // and the target colour is below the average weight
+        // need to work out what this is doing
+        if ((counter <= targetFloat) && targetFloat < next)
         {
+          // set the target UIColor to the colour in the array and exit the loop
           targetColour = colour
           break
         }
@@ -110,14 +123,14 @@ class JDHeatMapColorMixer :  NSObject
           counter = next
         }
       }
-      //
+      // this code  sets the BytesRGB value for the generated colour
       let rgb = targetColour.rgb()
 
-      let redRow:UTF8Char = UTF8Char(Int((rgb?.red)!))
-      let GreenRow:UTF8Char = UTF8Char(Int((rgb?.green)!))
-      let BlueRow:UTF8Char = UTF8Char(Int((rgb?.blue)!))
+      let redRow    : UTF8Char = UTF8Char(Int((rgb?.red)!))
+      let GreenRow  : UTF8Char = UTF8Char(Int((rgb?.green)!))
+      let BlueRow   : UTF8Char = UTF8Char(Int((rgb?.blue)!))
 
-      let colourRGB :BytesRGB = BytesRGB(redRow: redRow,
+      let colourRGB : BytesRGB = BytesRGB(redRow: redRow,
                                          greenRow: GreenRow,
                                          blueRow: BlueRow,
                                          alphaRow: 255)

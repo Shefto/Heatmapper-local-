@@ -59,6 +59,7 @@ class DTMHeatmapViewController: UIViewController, MKMapViewDelegate {
 
     self.dtmHeatmap.setData(heatmapdata as [NSObject : AnyObject])
     self.mapView.addOverlay(self.dtmHeatmap)
+
     self.setMapViewZoom()
 
   }
@@ -221,39 +222,6 @@ class DTMHeatmapViewController: UIViewController, MKMapViewDelegate {
     }
     healthstore.execute(query)
   }
-
-  //  //  func screenshot1(_ sender: UIBarButtonItem) {
-  //  func screenshot1() {
-  //    //Create the UIImage
-  //
-  //
-  //    UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0)
-  //
-  //    guard let context = UIGraphicsGetCurrentContext()
-  //    else {
-  //      return
-  //    }
-  //    view.layer.render(in: context)
-  //    guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return }
-  //    UIGraphicsEndImageContext()
-  //
-  //    //Save it to the camera roll
-  //
-  //    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-  //  }
-  //
-  //
-  //  func screenshot2(_ sender: UIBarButtonItem) {
-  //    //Create the UIImage
-  //    let renderer = UIGraphicsImageRenderer(size: view.frame.size)
-  //    let image = renderer.image(actions: { context in
-  //      view.layer.render(in: context.cgContext)
-  //    })
-  //
-  //    //Save it to the camera roll
-  //    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-  //  }
-
 
   func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
   }

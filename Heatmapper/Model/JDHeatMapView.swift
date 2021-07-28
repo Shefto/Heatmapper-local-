@@ -52,6 +52,7 @@ public class JDHeatMapView : MKMapView
     // this declares the colour mixer as using the 3 primary colours and a divide level of 2
     JDHeatmapPointCreator.theColorMixer = JDHeatMapColorMixer(array: array, level: divideLevel)
 
+    // now depending upon the map type selected, call the heatmap manager to create the heatmap
     if (mapType == .RadiusBlurry)
     {
       heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .RadiusPoint, mode: .BlurryMode)
@@ -64,13 +65,14 @@ public class JDHeatMapView : MKMapView
     {
       heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .RadiusPoint, mode: .DistinctMode)
     }
+  
     refreshView()
     initialiseProgressWheel()
   }
 
+  // this required for initialisation due to use in UIKit
   required public init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-//    fatalError("init(coder:) has not been implemented")
   }
 
   public func refreshView()
@@ -79,6 +81,7 @@ public class JDHeatMapView : MKMapView
     {
       self.inProgressWheel?.startAnimating()
     }
+    // this calls the main JDHeatmapManager function to create the heatmap
     heatmapManager.refresh()
   }
 
@@ -166,8 +169,10 @@ public protocol JDHeatMapDelegate {
 
 extension JDHeatMapDelegate
 {
-  // the default behaviour for the protocol's heatmap function is to return 1km
-  // do not believe this is used in the existing project
+
+  // called by the heatmap creator 
+  // sets the default radius in KM for the heatmap point to 1m
+
   func heatmap(RadiusInKMFor index:Int) -> Double
   {
     return 0.001

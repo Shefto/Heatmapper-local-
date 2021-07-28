@@ -37,7 +37,7 @@ class JDHeatmapOverlayRenderer :  MKOverlayRenderer
   }
 
   // this function is overridden by both this class's subclasses
-  func calcHeatmapPointsAndRect(maxHeat level:Int) -> (data: [HeatmapPointCG], rect:CGRect)?
+  func calcHeatmapPointsAndRect(maxHeat level:Int) -> (heatmapPointCGArray: [HeatmapPointCG], heatmapCGect:CGRect)?
   {
     return nil
   }
@@ -62,6 +62,19 @@ class JDHeatmapOverlayRenderer :  MKOverlayRenderer
     {
       let mapCGRect = rect(for: overlay.boundingMapRect)
       context.draw(lastTimeMoreHighSolutionImage, in: mapCGRect)
+
+      let fileDateFormatter = DateFormatter()
+      fileDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+      let currDate = fileDateFormatter.string(from: Date())
+      let fileName = "JDHeatmap_" + currDate + ".png"
+
+      let uiImage = UIImage(cgImage: lastTimeMoreHighSolutionImage)
+
+        if let data = uiImage.pngData() {
+          let fileURL = getDocumentsDirectory().appendingPathComponent(fileName)
+          try? data.write(to: fileURL)
+        }
+
       return
     }
     else if (dataReference.count == 0 )
@@ -81,6 +94,13 @@ class JDHeatmapOverlayRenderer :  MKOverlayRenderer
     else{
       print("cgcontext error")
     }
+  }
+
+
+  func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let documentsDirectory = paths[0]
+    return documentsDirectory
   }
 
   // this function used above to generate the image
@@ -147,21 +167,28 @@ class JDRadiusPointHeatmapOverlayRenderer : JDHeatmapOverlayRenderer
 
     for heatmapPoint in heatmapOverlay.heatmapPoint2DArray
     {
+      // midMapPoint is the dead centre of the heatmapPoint's coordinate
       let midMapPoint = heatmapPoint.midMapPoint
-      // From the documentation: Returns the point in the overlay renderer’s drawing area corresponding to the specified point on the map.
-      let globalCGPoint:CGPoint = self.point(for: midMapPoint)
+
+      // this converts the MKMapPoint to a Core Graphics point
+      let globalCGPoint : CGPoint = self.point(for: midMapPoint)
       let overlayCGRect = rect(for: heatmapOverlay.boundingMapRect)
-      let localX = globalCGPoint.x - (overlayCGRect.origin.x)
-      let localY = globalCGPoint.y - (overlayCGRect.origin.y)
-      let localCGPoint = CGPoint(x: localX, y: localY)
+      let localX        = globalCGPoint.x - (overlayCGRect.origin.x)
+      let localY        = globalCGPoint.y - (overlayCGRect.origin.y)
+      let localCGPoint  = CGPoint(x: localX, y: localY)
+      // local CGPoint is the Core Graphics equivalent - i.e. where to place the map point on the CG map object
 
-      let radiusinMKDistance : Double = heatmapPoint.radiusInMKDistance
-      let radiusMapRect = MKMapRect(origin: MKMapPoint.init(), size: MKMapSize(width: radiusinMKDistance, height: radiusinMKDistance))
-      let radiusCGDistance = rect(for: radiusMapRect).width
+      // this converts the MapKit radius to a Core Graphics radius
+      let radiusinMKDistance  : Double = heatmapPoint.radiusInMKDistance
+      let radiusMapRect       = MKMapRect(origin: MKMapPoint.init(), size: MKMapSize(width: radiusinMKDistance, height: radiusinMKDistance))
+      let radiusCGDistance    = rect(for: radiusMapRect).width
 
-      let newHeatmapPoint : HeatmapPointCG = HeatmapPointCG(heatlevel: Float(heatmapPoint.heatLevel) / Float(level), localCGpoint: localCGPoint, radius: radiusCGDistance)
-      heatmapPointCGArray.append(newHeatmapPoint)
+      // Take the CG Point, CG radius above and create a HeatmapPointCG from it
+      let newHeatmapPointCG : HeatmapPointCG = HeatmapPointCG(heatlevel: Float(heatmapPoint.heatLevel) / Float(level), localCGpoint: localCGPoint, radius: radiusCGDistance)
+      // append the point to our CG Array
+      heatmapPointCGArray.append(newHeatmapPointCG)
     }
+
     let overlayRect = rect(for: heatmapOverlay.boundingMapRect)
     return (data: heatmapPointCGArray, rect: overlayRect)
   }
@@ -171,12 +198,15 @@ class JDRadiusPointHeatmapOverlayRenderer : JDHeatmapOverlayRenderer
 // virtually identical to the other subclass - this duplication may be unnecessary
 class JDFlatPointHeatmapOverlayRenderer : JDHeatmapOverlayRenderer
 {
-  override func calcHeatmapPointsAndRect(maxHeat level:Int)->(data:[HeatmapPointCG],rect:CGRect)?
+
+  // this is the key logic for actually creating the heatmap
+  // it returns the set of HeatmapPointCGs and the rectangle (or our pitch, effectively)
+  override func calcHeatmapPointsAndRect(maxHeat level:Int) -> (data: [HeatmapPointCG], rect: CGRect)?
   {
     guard let overlay = overlay as? JDHeatmapOverlay else {
       return nil
     }
-    //
+
     var heatmapPointCGArray : [HeatmapPointCG] = []
     let overlayCGRect       : CGRect = rect(for: overlay.boundingMapRect)
     for heatmapPoint2D in overlay.heatmapPoint2DArray
@@ -198,5 +228,7 @@ class JDFlatPointHeatmapOverlayRenderer : JDHeatmapOverlayRenderer
     let cgSize = rect(for: overlay.boundingMapRect)
     return (data: heatmapPointCGArray, rect: cgSize)
   }
+
+
 }
 
