@@ -78,10 +78,10 @@
             </objects>
             <point key="canvasLocation" x="81" y="-86"/>
         </scene>
-        <!--Heatmap-->
+        <!--JDHeatmap-->
         <scene sceneID="Vhz-Vt-d44">
             <objects>
-                <viewController title="Heatmap" id="HIL-yj-uvc" userLabel="Heatmap" customClass="jdHeatmapViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Heatmap" id="HIL-yj-uvc" userLabel="JDHeatmap" customClass="jdHeatmapViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vZq-KN-BDQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

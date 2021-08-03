@@ -17,6 +17,7 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
   var builder       : HKLiveWorkoutBuilder!
   var routeBuilder  : HKWorkoutRouteBuilder!
   var delegate      : WorkoutManagerDelegate!
+  
 
   // Request authorization to access HealthKit.
   func requestAuthorization() {
@@ -234,6 +235,16 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
 
             // add each Sample Array to the Workout
             self.addSamplesToWorkout(sampleArray: HeatmapperWorkout.sampleArray)
+
+            // insert JDHeatmap calculation here
+//
+//            let heatMap = self.JDHeatMapView(frame: mapsView.frame, delegate: self, mapType: .FlatDistinct)
+//
+//              // set this VC as the delegate of the JDSwiftHeatMapView
+//              heatMap?.delegate = self
+
+
+
 
           } // self.routeBuilder.insertRouteDate
 

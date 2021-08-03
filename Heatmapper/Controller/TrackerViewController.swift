@@ -37,7 +37,7 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
   var basalEnergySampleArray      : [HKSample] = []
   var sampleArray                 : [HKSample] = []
 
-  var heatmapperCoordinatesArray = [CLLocationCoordinate2D]()
+//  var heatmapperCoordinatesArray = [CLLocationCoordinate2D]()
 
   let logger = Logger(subsystem: "com.wimbledonappcompany.Heatmapper", category: "TrackerViewController")
 
@@ -45,6 +45,7 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
   @IBAction func btnStop(_ sender: Any) {
     endWorkout()
     navigationItem.hidesBackButton = false
+
   }
 
   override func viewDidLoad() {
@@ -417,7 +418,7 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
   func getRouteLocationData(route: HKWorkoutRoute) {
 
     // Create the route query.
-    let query = HKWorkoutRouteQuery(route: route) { [self] (query, locationsOrNil, done, errorOrNil) in
+    let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNil, done, errorOrNil) in
 
       // This block may be called multiple times.
 
@@ -435,11 +436,11 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
         MyFunc.logMessage(.debug, "Workout Location Data: \(String(describing: locations))")
         let locationsAsCoordinates = locations.map {$0.coordinate}
         MyFunc.logMessage(.debug, "locationsAsCoordinates: \(String(describing: locationsAsCoordinates))")
-        heatmapperCoordinatesArray = locationsAsCoordinates
-        MyFunc.logMessage(.debug, "heatmapperCoordinatesArray: \(String(describing: heatmapperCoordinatesArray))")
-        MyFunc.logMessage(.debug, "Number of coordinates: \(heatmapperCoordinatesArray.count)")
+//        heatmapperCoordinatesArray = locationsAsCoordinates
+//        MyFunc.logMessage(.debug, "heatmapperCoordinatesArray: \(String(describing: heatmapperCoordinatesArray))")
+//        MyFunc.logMessage(.debug, "Number of coordinates: \(heatmapperCoordinatesArray.count)")
 
-
+        // add JDHeatmap generation code here
 
 
       }
