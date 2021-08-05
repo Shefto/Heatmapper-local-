@@ -80,10 +80,10 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if (workoutCollectionView.cellForItem(at: indexPath) as? WorkoutCollectionViewCell) != nil {
 
-      workoutSelected = workoutArray![indexPath.row].description
+      workoutId = workoutArray?[indexPath.row].uuid
 
       selectedIndexPath = indexPath.row
-      print("workoutSelected: \(workoutSelected)")
+
     }
   }
 
@@ -95,6 +95,10 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
     if (workoutCollectionView.cellForItem(at: indexPath) as? WorkoutCollectionViewCell) != nil {
     }
+    workoutSelected = workoutArray![indexPath.row].description
+
+    selectedIndexPath = indexPath.row
+    print("workoutSelected: \(workoutSelected)")
   }
 
   func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
@@ -132,7 +136,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
     for item in items {
       if item.hasSuffix("png") || item.hasSuffix("jpg") || item.hasSuffix("jpeg") {
-        if item.hasPrefix("Heatmap") {
+        if item.hasPrefix("JDHeatmap_") {
           heatmapImagesArray.append(UIImage(named: item)!)
           heatmapImagesStringArray.append(item)
         }

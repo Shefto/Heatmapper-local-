@@ -241,14 +241,6 @@ extension HeatmapViewController: JDHeatMapDelegate
 
       // Do something with this batch of location data.
       if done {
-//        MyFunc.logMessage(.debug, "Workout Location Data: \(String(describing: locations))")
-//        let locationCount = locationsOrNil!.count
-//        MyFunc.logMessage(.debug, "Locations retrieved: \(locationCount)")
-//        let locationsAsCoordinates = locations.map {$0.coordinate}
-//        let coordinatesCount = locationsAsCoordinates.count
-//        MyFunc.logMessage(.debug, "Coordinates retrieved: \(coordinatesCount)")
-//        MyFunc.logMessage(.debug, "locationsAsCoordinates: \(String(describing: locationsAsCoordinates))")
-//        self.heatmapperCoordinatesArray = locationsAsCoordinates
         MyFunc.logMessage(.debug, "heatmapperCoordinatesArray: \(String(describing: self.heatmapperCoordinatesArray))")
 
         DispatchQueue.main.async {
@@ -259,7 +251,7 @@ extension HeatmapViewController: JDHeatMapDelegate
           self.jdHeatMapView?.delegate = self
         // add the JDSwiftHeatMapView to the UI
           self.mapsView.addSubview(self.jdHeatMapView!)
-          self.screenshot1()
+
         }
 
       }
@@ -271,36 +263,5 @@ extension HeatmapViewController: JDHeatMapDelegate
     healthstore.execute(query)
   }
 
-//  func screenshot1(_ sender: UIBarButtonItem) {
-  func screenshot1() {
-    //Create the UIImage
-
-    
-    UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0)
-
-    guard let context = UIGraphicsGetCurrentContext()
-      else {
-        return
-    }
-    view.layer.render(in: context)
-    guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return }
-    UIGraphicsEndImageContext()
-
-    //Save it to the camera roll
-
-    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-  }
-
-
-  func screenshot2(_ sender: UIBarButtonItem) {
-    //Create the UIImage
-    let renderer = UIGraphicsImageRenderer(size: view.frame.size)
-    let image = renderer.image(actions: { context in
-      view.layer.render(in: context.cgContext)
-    })
-
-    //Save it to the camera roll
-    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-  }
 
 }
