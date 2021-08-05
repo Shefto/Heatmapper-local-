@@ -87,6 +87,10 @@
 		79A7E14E25ACE48000D1A952 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15025ACE48000D1A952 /* Localizable.strings */; };
 		79A7E15825AD9F5000D1A952 /* IntervalTableViewFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15A25AD9F5000D1A952 /* IntervalTableViewFooter.xib */; };
 		79A7E16225AD9F8200D1A952 /* IntervalTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E16425AD9F8200D1A952 /* IntervalTypeTableViewCell.xib */; };
+		79A9DC6126B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9DC6026B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift */; };
+		79A9DC6426B9DD060063C3D0 /* WorkoutCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */; };
+		79A9DC6526B9DD060063C3D0 /* WorkoutCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */; };
+		79A9DC6726BA88CF0063C3D0 /* WorkoutCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A9DC6626BA88CF0063C3D0 /* WorkoutCollectionCell.xib */; };
 		79AD9E96265074FC00928384 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFC524A0AF4B002A7870 /* Assets.xcassets */; };
 		79ADB48926264078007BF946 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79ADB48826264078007BF946 /* MapKit.framework */; };
 		79ADB48B262640E3007BF946 /* TrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB48A262640E3007BF946 /* TrackerViewController.swift */; };
@@ -264,6 +268,10 @@
 		79A7E16325AD9F8200D1A952 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IntervalTypeTableViewCell.xib; sourceTree = "<group>"; };
 		79A7E16925AD9F8A00D1A952 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/IntervalTypeTableViewCell.strings; sourceTree = "<group>"; };
 		79A7E16B25AD9F8F00D1A952 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/IntervalTypeTableViewCell.strings; sourceTree = "<group>"; };
+		79A9DC6026B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryCollectionViewController.swift; sourceTree = "<group>"; };
+		79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCollectionViewCell.swift; sourceTree = "<group>"; };
+		79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutCollectionViewCell.xib; sourceTree = "<group>"; };
+		79A9DC6626BA88CF0063C3D0 /* WorkoutCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkoutCollectionCell.xib; sourceTree = "<group>"; };
 		79ADB48826264078007BF946 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		79ADB48A262640E3007BF946 /* TrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewController.swift; sourceTree = "<group>"; };
 		79ADB48F26264153007BF946 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
@@ -375,6 +383,7 @@
 				79ADB48F26264153007BF946 /* UserAnnotation.swift */,
 				79A4EFFB24A88E0E002A7870 /* fartlekCell.xib */,
 				7982B0C0264FEF64001335F3 /* WorkoutCell.xib */,
+				79A9DC6626BA88CF0063C3D0 /* WorkoutCollectionCell.xib */,
 				7982B0C226506C07001335F3 /* WorkoutTableViewCell.swift */,
 				79A7E16425AD9F8200D1A952 /* IntervalTypeTableViewCell.xib */,
 				79A4EFFD24A89063002A7870 /* FartlekTableViewCell.swift */,
@@ -404,6 +413,9 @@
 				79D083B9250925A800274F79 /* ThemeKit Themes.swift */,
 				79ADB48A262640E3007BF946 /* TrackerViewController.swift */,
 				79913162263490D900811731 /* WorkoutHistoryViewController.swift */,
+				79A9DC6026B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift */,
+				79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */,
+				79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */,
 				79A4EFF524A7A109002A7870 /* WorkoutViewController.swift */,
 			);
 			path = Controller;
@@ -645,6 +657,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79A9DC6526B9DD060063C3D0 /* WorkoutCollectionViewCell.xib in Resources */,
+				79A9DC6726BA88CF0063C3D0 /* WorkoutCollectionCell.xib in Resources */,
 				7905990025ED876200316CEF /* FIT_minute_beep.aif in Resources */,
 				79A4EFFC24A88E0E002A7870 /* fartlekCell.xib in Resources */,
 				7905990225ED876200316CEF /* FiT_second_beep.aif in Resources */,
@@ -808,6 +822,7 @@
 				79ADB49026264153007BF946 /* UserAnnotation.swift in Sources */,
 				797BFD0525421E8700426185 /* Audio.swift in Sources */,
 				79DC34162625D2FC0053733C /* LocationManager.swift in Sources */,
+				79A9DC6126B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift in Sources */,
 				79F3A2AE2697968A00667B1B /* REColourProvider.swift in Sources */,
 				7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */,
 				79A4EFF624A7A109002A7870 /* WorkoutViewController.swift in Sources */,
@@ -844,6 +859,7 @@
 				79BED1AA256AAEED0052B160 /* SetIntervalsViewController.swift in Sources */,
 				793D1AE624B86E6F0039441B /* CustomLogger.swift in Sources */,
 				79B3742C24B0C711000E4F7E /* Stopwatch.swift in Sources */,
+				79A9DC6426B9DD060063C3D0 /* WorkoutCollectionViewCell.swift in Sources */,
 				793D1AD924B8650A0039441B /* DataProvider.swift in Sources */,
 				79B6DC992598B13400F573BA /* SettingsViewController.swift in Sources */,
 				7935625125B0BBBE006BBC54 /* UnitConverterPace.swift in Sources */,
