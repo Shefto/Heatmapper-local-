@@ -28,7 +28,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.timeStyle = .short
-    formatter.dateStyle = .medium
+    formatter.dateStyle = .short
     return formatter
   } ()
 
@@ -73,7 +73,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     cell.heatmapImageView.image = heatmapImage
     cell.workoutDateLabel.text = dateFormatter.string(from: workout.startDate)
     cell.workoutTypeLabel.text = workout.workoutActivityType.name
-    MyFunc.logMessage(.debug, "ActivityType: \(workout.workoutActivityType.name)")
+
     if selectedIndexPath != nil && indexPath.row == selectedIndexPath {
       cell.contentView.backgroundColor = theme.buttonPrimary
     } else {
@@ -84,10 +84,9 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if (workoutCollectionView.cellForItem(at: indexPath) as? WorkoutCollectionViewCell) != nil {
-
       workoutId = workoutArray?[indexPath.row].uuid
       selectedIndexPath = indexPath.row
-
+      workoutCollectionView.reloadData()
 
     }
   }
@@ -123,6 +122,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     workoutCollectionView.dataSource = self
     workoutCollectionView.register(UINib(nibName: "WorkoutCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "WorkoutCollectionViewCell")
     workoutCollectionView.collectionViewLayout = createLayout()
+    workoutCollectionView.allowsMultipleSelection = false
 
 
     loadWorkouts { (workouts, error) in
