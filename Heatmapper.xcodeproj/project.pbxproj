@@ -90,7 +90,6 @@
 		79A9DC6126B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9DC6026B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift */; };
 		79A9DC6426B9DD060063C3D0 /* WorkoutCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */; };
 		79A9DC6526B9DD060063C3D0 /* WorkoutCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */; };
-		79A9DC6726BA88CF0063C3D0 /* WorkoutCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A9DC6626BA88CF0063C3D0 /* WorkoutCollectionCell.xib */; };
 		79AD9E96265074FC00928384 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFC524A0AF4B002A7870 /* Assets.xcassets */; };
 		79ADB48926264078007BF946 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79ADB48826264078007BF946 /* MapKit.framework */; };
 		79ADB48B262640E3007BF946 /* TrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB48A262640E3007BF946 /* TrackerViewController.swift */; };
@@ -271,7 +270,6 @@
 		79A9DC6026B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryCollectionViewController.swift; sourceTree = "<group>"; };
 		79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCollectionViewCell.swift; sourceTree = "<group>"; };
 		79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutCollectionViewCell.xib; sourceTree = "<group>"; };
-		79A9DC6626BA88CF0063C3D0 /* WorkoutCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkoutCollectionCell.xib; sourceTree = "<group>"; };
 		79ADB48826264078007BF946 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		79ADB48A262640E3007BF946 /* TrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewController.swift; sourceTree = "<group>"; };
 		79ADB48F26264153007BF946 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
@@ -381,15 +379,19 @@
 				79A4EFB724A0AF4A002A7870 /* LaunchScreen.storyboard */,
 				79A4EFB224A0AF45002A7870 /* Main.storyboard */,
 				79ADB48F26264153007BF946 /* UserAnnotation.swift */,
-				79A4EFFB24A88E0E002A7870 /* fartlekCell.xib */,
 				7982B0C0264FEF64001335F3 /* WorkoutCell.xib */,
-				79A9DC6626BA88CF0063C3D0 /* WorkoutCollectionCell.xib */,
 				7982B0C226506C07001335F3 /* WorkoutTableViewCell.swift */,
 				79A7E16425AD9F8200D1A952 /* IntervalTypeTableViewCell.xib */,
 				79A4EFFD24A89063002A7870 /* FartlekTableViewCell.swift */,
+				79A4EFFB24A88E0E002A7870 /* fartlekCell.xib */,
 				797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */,
 				79A7E15A25AD9F5000D1A952 /* IntervalTableViewFooter.xib */,
 				7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */,
+				79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */,
+				79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */,
+				79D083B72509255A00274F79 /* ThemeKit App Classes.swift */,
+				79D083B5250924C500274F79 /* ThemeKit Theme.swift */,
+				79D083B9250925A800274F79 /* ThemeKit Themes.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -397,8 +399,6 @@
 		793D1AE024B86C1B0039441B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				7935629425B31431006BBC54 /* BartyCrouch.swift */,
-				79D083BD250A0C0900274F79 /* Extensions.swift */,
 				799131232634126800811731 /* HeatmapViewController.swift */,
 				7965F9C126AC1E27008B130D /* jdHeatmapViewController.swift */,
 				79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */,
@@ -408,14 +408,9 @@
 				7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */,
 				79BED1A9256AAEED0052B160 /* SetIntervalsViewController.swift */,
 				79B6DC982598B13400F573BA /* SettingsViewController.swift */,
-				79D083B72509255A00274F79 /* ThemeKit App Classes.swift */,
-				79D083B5250924C500274F79 /* ThemeKit Theme.swift */,
-				79D083B9250925A800274F79 /* ThemeKit Themes.swift */,
 				79ADB48A262640E3007BF946 /* TrackerViewController.swift */,
 				79913162263490D900811731 /* WorkoutHistoryViewController.swift */,
 				79A9DC6026B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift */,
-				79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */,
-				79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */,
 				79A4EFF524A7A109002A7870 /* WorkoutViewController.swift */,
 			);
 			path = Controller;
@@ -435,6 +430,8 @@
 				79B80BD2253DDB8300BEA10F /* SceneDelegate.swift */,
 				79A4EFAC24A0AF45002A7870 /* AppDelegate.swift */,
 				79B3742B24B0C710000E4F7E /* Stopwatch.swift */,
+				7935629425B31431006BBC54 /* BartyCrouch.swift */,
+				79D083BD250A0C0900274F79 /* Extensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -658,7 +655,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				79A9DC6526B9DD060063C3D0 /* WorkoutCollectionViewCell.xib in Resources */,
-				79A9DC6726BA88CF0063C3D0 /* WorkoutCollectionCell.xib in Resources */,
 				7905990025ED876200316CEF /* FIT_minute_beep.aif in Resources */,
 				79A4EFFC24A88E0E002A7870 /* fartlekCell.xib in Resources */,
 				7905990225ED876200316CEF /* FiT_second_beep.aif in Resources */,

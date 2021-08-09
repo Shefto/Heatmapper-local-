@@ -63,7 +63,9 @@ extension Theme {
     }
 
     ThemeSmallTextUILabel.appearance().with {
-      $0.font = UIFont.preferredFont(forTextStyle: .subheadline)
+      let themeFont = UIFont.systemFont(ofSize: 12.0, weight: .regular)
+      $0.font = themeFont
+//      $0.font = UIFont.preferredFont(forTextStyle: .subheadline)
     }
 
     ThemeMediumNumericUILabel.appearance().with {
@@ -72,15 +74,17 @@ extension Theme {
       $0.textColor = textPrimary
     }
 
+    TableRowNameUILabel.appearance().with {
+      $0.font = UIFont.preferredFont(forTextStyle: .title2)
+      $0.textColor = textAlternate
+    }
+
 
     ThemePickerView.appearance().with {
       $0.tintColor = textPrimary
     }
 
-    TableRowNameUILabel.appearance().with {
-      $0.font = UIFont.preferredFont(forTextStyle: .title2)
-      $0.textColor = textAlternate
-    }
+
 
     ThemeTextView.appearance().with {
       $0.textColor = textAlternate

@@ -47,6 +47,7 @@ class TableRowNameUILabel: UILabel {}
 class ThemeSmallTextUILabel: UILabel {}
 class ThemeVeryLargeFontUILabel: UILabel {}
 
+
 // Text View
 class ThemeTextView: UITextView {}
 

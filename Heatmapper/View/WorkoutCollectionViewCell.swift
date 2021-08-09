@@ -11,8 +11,11 @@ import UIKit
 class WorkoutCollectionViewCell: UICollectionViewCell {
 
   @IBOutlet weak var heatmapImageView: UIImageView!
-  @IBOutlet weak var workoutDateLabel: UILabel!
-  @IBOutlet weak var workoutTypeLabel: UILabel!
+  @IBOutlet weak var workoutDateLabel: ThemeSmallTextUILabel!
+  @IBOutlet weak var workoutTypeLabel: ThemeSmallTextUILabel!
+
+
+
 
   override func awakeFromNib() {
         super.awakeFromNib()

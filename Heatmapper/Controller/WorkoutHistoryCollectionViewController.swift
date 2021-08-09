@@ -74,6 +74,11 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     cell.workoutDateLabel.text = dateFormatter.string(from: workout.startDate)
     cell.workoutTypeLabel.text = workout.workoutActivityType.name
     MyFunc.logMessage(.debug, "ActivityType: \(workout.workoutActivityType.name)")
+    if selectedIndexPath != nil && indexPath.row == selectedIndexPath {
+      cell.contentView.backgroundColor = theme.buttonPrimary
+    } else {
+      cell.contentView.backgroundColor = UIColor.clear
+    }
     return cell
   }
 
@@ -81,8 +86,8 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     if (workoutCollectionView.cellForItem(at: indexPath) as? WorkoutCollectionViewCell) != nil {
 
       workoutId = workoutArray?[indexPath.row].uuid
-
       selectedIndexPath = indexPath.row
+
 
     }
   }
@@ -255,10 +260,10 @@ extension WorkoutHistoryCollectionViewController {
 
   private func createLayout() -> UICollectionViewLayout {
 
-    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.25), heightDimension: .fractionalHeight(1.0))
+    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33), heightDimension: .fractionalHeight(1.0))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.25))
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.33))
 
     let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
