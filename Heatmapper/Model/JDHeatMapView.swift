@@ -40,7 +40,7 @@ public class JDHeatMapView : MKMapView
 
   // initialiser called with BasicColors and divideLevel populated within the initialiser
 
-  public init (frame: CGRect, delegate: JDHeatMapDelegate, mapType: JDMapType, BasicColors array: [UIColor] = [UIColor.systemGreen, UIColor.systemOrange, UIColor.systemRed], divideLevel: Int = 2)
+  public init (frame: CGRect, delegate: JDHeatMapDelegate, mapType: JDMapType, BasicColors array: [UIColor] = [UIColor.systemGreen, UIColor.systemOrange, UIColor.systemRed], divideLevel: Int = 2, workoutId: UUID)
   {
     super.init(frame: frame)
     // MKMapView attribute - set to true = shows scale information
@@ -52,18 +52,19 @@ public class JDHeatMapView : MKMapView
     // this declares the colour mixer as using the 3 primary colours and a divide level of 2
     JDHeatmapPointCreator.theColorMixer = JDHeatMapColorMixer(array: array, level: divideLevel)
 
+
     // now depending upon the map type selected, call the heatmap manager to create the heatmap
     if (mapType == .RadiusBlurry)
     {
-      heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .RadiusPoint, mode: .BlurryMode)
+      heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .RadiusPoint, mode: .BlurryMode, workoutId: workoutId)
     }
     else if (mapType == .FlatDistinct)
     {
-      heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .FlatPoint, mode: .DistinctMode)
+      heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .FlatPoint, mode: .DistinctMode, workoutId: workoutId)
     }
     else if (mapType == .RadiusDistinct)
     {
-      heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .RadiusPoint, mode: .DistinctMode)
+      heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .RadiusPoint, mode: .DistinctMode,  workoutId: workoutId)
     }
   
     refreshView()
@@ -86,19 +87,19 @@ public class JDHeatMapView : MKMapView
   }
 
   // called by the buttons on the VC - each passes in a different type
-  public func setType(type: JDMapType)
+  public func setType(type: JDMapType, workoutId: UUID)
   {
     if (type == .RadiusBlurry)
     {
-      heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .RadiusPoint, mode: .BlurryMode)
+      heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .RadiusPoint, mode: .BlurryMode,  workoutId: workoutId)
     }
     else if (type == .FlatDistinct)
     {
-      heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .FlatPoint, mode: .DistinctMode)
+      heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .FlatPoint, mode: .DistinctMode,  workoutId: workoutId)
     }
     else if (type == .RadiusDistinct)
     {
-      heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .RadiusPoint, mode: .DistinctMode)
+      heatmapManager = JDHeatMapManager(JDSwiftHeatMapView: self, datapointType: .RadiusPoint, mode: .DistinctMode,  workoutId: workoutId)
     }
     refreshView ()
   }

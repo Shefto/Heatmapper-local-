@@ -35,15 +35,15 @@ class HeatmapViewController: UIViewController {
 
   // Action buttons
   @IBAction func changeToRadiusDistinct(_ sender: Any) {
-    jdHeatMapView?.setType(type: .RadiusDistinct)
+//    jdHeatMapView?.setType(type: .RadiusDistinct)
   }
 
   @IBAction func ChangeToRadiusBlurry(_ sender: Any) {
-    jdHeatMapView?.setType(type: .RadiusBlurry)
+//    jdHeatMapView?.setType(type: .RadiusBlurry)
   }
 
   @IBAction func ChangeToFlatDistinct(_ sender: Any) {
-    jdHeatMapView?.setType(type: .FlatDistinct)
+//    jdHeatMapView?.setType(type: .FlatDistinct)
   }
 
 
@@ -245,7 +245,11 @@ extension HeatmapViewController: JDHeatMapDelegate
 
         DispatchQueue.main.async {
         // sets the heatmap frame to the size of the view and specifies the map type
-          self.jdHeatMapView = JDHeatMapView(frame: self.mapsView.frame, delegate: self, mapType: .FlatDistinct)
+          guard let workoutId = self.heatmapWorkoutId else {
+            MyFunc.logMessage(.error, "No heatmapWorkoutId passed to JDHeatmapViewController")
+            return
+          }
+          self.jdHeatMapView = JDHeatMapView(frame: self.mapsView.frame, delegate: self, mapType: .FlatDistinct, workoutId: workoutId)
 
         // set this VC as the delegate of the JDSwiftHeatMapView
           self.jdHeatMapView?.delegate = self

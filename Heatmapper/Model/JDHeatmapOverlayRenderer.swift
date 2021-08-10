@@ -66,17 +66,17 @@ class JDHeatmapOverlayRenderer :  MKOverlayRenderer
 //      let fileDateFormatter = DateFormatter()
 //      fileDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
 //      let currDate = fileDateFormatter.string(from: Date())
-        let workoutManager = Workout
+        
 //      let workoutId =
-      let fileName = "JDHeatmap_" + ".png"
-
-      let uiImage = UIImage(cgImage: lastTimeMoreHighSolutionImage)
-
-        if let data = uiImage.pngData() {
-          let fileURL = getDocumentsDirectory().appendingPathComponent(fileName)
-          try? data.write(to: fileURL)
-          MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
-        }
+//      let fileName = "JDHeatmap_" + ".png"
+//
+//      let uiImage = UIImage(cgImage: lastTimeMoreHighSolutionImage)
+//
+//        if let data = uiImage.pngData() {
+//          let fileURL = getDocumentsDirectory().appendingPathComponent(fileName)
+//          try? data.write(to: fileURL)
+//          MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
+//        }
 
       return
     }

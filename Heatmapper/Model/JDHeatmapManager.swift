@@ -31,10 +31,11 @@ class JDHeatMapManager: NSObject
   var maxHeatLevelInMap     : Int = 0
 
   let missionThread         = DispatchQueue(label: "MissionThread")
+  var workoutId             = UUID()
 
   // initializer
   // as stated, this class needs the heatmap view, data point type and colour mixer
-  init (JDSwiftHeatMapView: JDHeatMapView, datapointType: DataPointType, mode: ColorMixerMode)
+  init (JDSwiftHeatMapView: JDHeatMapView, datapointType: DataPointType, mode: ColorMixerMode, workoutId: UUID)
   {
     jdHeatMapView     = JDSwiftHeatMapView
     dataPointType     = datapointType
@@ -416,6 +417,16 @@ extension JDHeatMapManager
                 let newWidth = Int(heatmapRenderer.originalCGSize.width * CGFloat(scaleUIView_MapRect) * 1.5)
                 if let lastimage = rendererForHeatmapOverlay.lastImage
                 {
+
+                  let fileName = "JDHeatmap_\(workoutId).png"
+
+                  let uiImage = UIImage(cgImage: lastimage)
+
+                  if let data = uiImage.pngData() {
+                    let fileURL = getDocumentsDirectory().appendingPathComponent(fileName)
+                    try? data.write(to: fileURL)
+                    MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
+                  }
                   if(lastimage.width > newWidth) { return }
                   else { rendererForHeatmapOverlay.lastImage = nil } //Make it can draw
                 }
@@ -438,7 +449,11 @@ extension JDHeatMapManager
       }
     }
 
-
+    func getDocumentsDirectory() -> URL {
+      let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+      let documentsDirectory = paths[0]
+      return documentsDirectory
+    }
     missionThread.async(execute: {
       computing()
       DispatchQueue.main.sync(execute: {

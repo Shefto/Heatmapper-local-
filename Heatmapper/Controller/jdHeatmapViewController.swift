@@ -23,20 +23,33 @@ class jdHeatmapViewController: UIViewController {
   var heatmapperCoordinatesArray = [CLLocationCoordinate2D]()
   var heatmapWorkoutId : UUID?
 
+
   // the view which renders the heatmap over the map
   @IBOutlet weak var mapsView: UIView!
 
   // Action buttons
   @IBAction func changeToRadiusDistinct(_ sender: Any) {
-    heatMap?.setType(type: .RadiusDistinct)
+    guard let workoutId = heatmapWorkoutId else {
+      MyFunc.logMessage(.error, "No heatmapWorkoutId passed to JDHeatmapViewController")
+      return
+    }
+    heatMap?.setType(type: .RadiusDistinct, workoutId: workoutId)
   }
 
   @IBAction func ChangeToRadiusBlurry(_ sender: Any) {
-    heatMap?.setType(type: .RadiusBlurry)
+    guard let workoutId = heatmapWorkoutId else {
+      MyFunc.logMessage(.error, "No heatmapWorkoutId passed to JDHeatmapViewController")
+      return
+    }
+    heatMap?.setType(type: .RadiusBlurry, workoutId: workoutId)
   }
 
   @IBAction func ChangeToFlatDistinct(_ sender: Any) {
-    heatMap?.setType(type: .FlatDistinct)
+    guard let workoutId = heatmapWorkoutId else {
+      MyFunc.logMessage(.error, "No heatmapWorkoutId passed to JDHeatmapViewController")
+      return
+    }
+    heatMap?.setType(type: .FlatDistinct, workoutId: workoutId)
   }
 
   override func viewDidLoad() {
@@ -50,8 +63,12 @@ class jdHeatmapViewController: UIViewController {
 
   func createHeatmap() {
 
+    guard let workoutId = heatmapWorkoutId else {
+      MyFunc.logMessage(.error, "No heatmapWorkoutId passed to JDHeatmapViewController")
+      return
+    }
     // sets the heatmap frame to the size of the view and specifies the map type
-    heatMap = JDHeatMapView(frame: mapsView.frame, delegate: self, mapType: .FlatDistinct)
+    heatMap = JDHeatMapView(frame: mapsView.frame, delegate: self, mapType: .FlatDistinct, workoutId: workoutId)
 
     // set this VC as the delegate of the JDSwiftHeatMapView
     heatMap?.delegate = self
