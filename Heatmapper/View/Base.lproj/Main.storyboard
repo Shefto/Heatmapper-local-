@@ -215,22 +215,32 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="koB-cI-YWd">
                                         <rect key="frame" x="0.0" y="724" width="414" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zt1-c4-uTO" userLabel="RE Heatmap Button">
-                                                <rect key="frame" x="0.0" y="0.0" width="136.5" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zt1-c4-uTO" userLabel="Stats Heatmap Button" customClass="ThemeActionButton" customModule="Heatmapper" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="102" height="50"/>
+                                                <state key="normal" title="Created">
+                                                    <color key="titleColor" name="navBarTint"/>
+                                                    <color key="titleShadowColor" name="textAlternate"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="btnCreatedHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="uId-jl-sYe"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cin-hP-zjE" userLabel="RE Heatmap Button">
+                                                <rect key="frame" x="104" y="0.0" width="102" height="50"/>
                                                 <state key="normal" title="RE"/>
                                                 <connections>
-                                                    <action selector="btnREHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="ewg-5J-Mq5"/>
+                                                    <action selector="btnREHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="OZg-ZF-yA3"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPj-oH-Nyf" userLabel="JD Heatmap Button">
-                                                <rect key="frame" x="138.5" y="0.0" width="137" height="50"/>
+                                                <rect key="frame" x="208" y="0.0" width="102" height="50"/>
                                                 <state key="normal" title="JD"/>
                                                 <connections>
                                                     <action selector="btnJDHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="7jk-Th-NoM"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMX-9X-sBW" userLabel="DTM Heatmap Button">
-                                                <rect key="frame" x="277.5" y="0.0" width="136.5" height="50"/>
+                                                <rect key="frame" x="312" y="0.0" width="102" height="50"/>
                                                 <state key="normal" title="DTM"/>
                                                 <connections>
                                                     <action selector="btnDTMHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="xk0-Xe-KU6"/>
@@ -259,13 +269,15 @@
                     </view>
                     <navigationItem key="navigationItem" id="gOK-0r-wdZ"/>
                     <connections>
+                        <outlet property="createdHeatmapButton" destination="zt1-c4-uTO" id="iwu-5G-W7a"/>
                         <outlet property="dtmButton" destination="WMX-9X-sBW" id="QUR-yd-uce"/>
                         <outlet property="jdButton" destination="sPj-oH-Nyf" id="6gO-3k-5Kt"/>
-                        <outlet property="reButton" destination="zt1-c4-uTO" id="QPJ-Bh-yLM"/>
+                        <outlet property="reButton" destination="Cin-hP-zjE" id="Lqn-AR-fpW"/>
                         <outlet property="workoutCollectionView" destination="xdx-oz-NWw" id="FZm-9e-HtP"/>
                         <segue destination="Pbk-vr-61V" kind="show" identifier="historyToREHeatmap" id="Q5M-hF-bhw"/>
                         <segue destination="HIL-yj-uvc" kind="show" identifier="historyToJDHeatmap" id="lpb-Mm-P31"/>
                         <segue destination="syd-FH-J8R" kind="show" identifier="historyToDTMHeatmap" id="vbD-U9-ldd"/>
+                        <segue destination="VIb-fl-PFY" kind="show" identifier="historyToCreatedHeatmap" id="w2O-ix-cqE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UC3-lr-6fG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -603,6 +615,66 @@ DQoNCg
             </objects>
             <point key="canvasLocation" x="-1164" y="95"/>
         </scene>
+        <!--CreatedHeatmap-->
+        <scene sceneID="L5h-Lo-kvG">
+            <objects>
+                <viewController title="Heatmap" id="VIb-fl-PFY" userLabel="CreatedHeatmap" customClass="createdHeatmapViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rj1-px-oer">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Z3D-sr-eeK">
+                                <rect key="frame" x="0.0" y="832" width="414" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxp-1X-LEA" userLabel="Button 1">
+                                        <rect key="frame" x="0.0" y="0.0" width="134.5" height="30"/>
+                                        <state key="normal" title="Button 1"/>
+                                        <connections>
+                                            <action selector="changeToRadiusDistinct:" destination="VIb-fl-PFY" eventType="touchUpInside" id="XED-jY-3fP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s05-ex-uEs" userLabel="Button 2">
+                                        <rect key="frame" x="139.5" y="0.0" width="135" height="30"/>
+                                        <state key="normal" title="Buton 2"/>
+                                        <connections>
+                                            <action selector="ChangeToRadiusBlurry:" destination="VIb-fl-PFY" eventType="touchUpInside" id="d7T-Mm-0ip"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dy8-wu-JZc" userLabel="Button 3">
+                                        <rect key="frame" x="279.5" y="0.0" width="134.5" height="30"/>
+                                        <state key="normal" title="Button 3"/>
+                                        <connections>
+                                            <action selector="ChangeToFlatDistinct:" destination="VIb-fl-PFY" eventType="touchUpInside" id="HJu-np-Sca"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrT-Da-JI8" customClass="JDHeatMapView" customModule="Heatmapper" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="108" width="414" height="624"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="142-na-oQ5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Z3D-sr-eeK" firstAttribute="top" secondItem="hrT-Da-JI8" secondAttribute="bottom" constant="100" id="9Ml-mK-QAu"/>
+                            <constraint firstItem="142-na-oQ5" firstAttribute="bottom" secondItem="Z3D-sr-eeK" secondAttribute="bottom" id="RqK-ic-l7l"/>
+                            <constraint firstItem="Z3D-sr-eeK" firstAttribute="leading" secondItem="142-na-oQ5" secondAttribute="leading" id="Tl5-0E-mjr"/>
+                            <constraint firstItem="hrT-Da-JI8" firstAttribute="top" secondItem="142-na-oQ5" secondAttribute="top" constant="20" id="UaO-zf-HD5"/>
+                            <constraint firstItem="142-na-oQ5" firstAttribute="trailing" secondItem="Z3D-sr-eeK" secondAttribute="trailing" id="alV-1a-pEL"/>
+                            <constraint firstItem="hrT-Da-JI8" firstAttribute="leading" secondItem="Z3D-sr-eeK" secondAttribute="leading" id="ctj-NG-8rS"/>
+                            <constraint firstItem="hrT-Da-JI8" firstAttribute="trailing" secondItem="Z3D-sr-eeK" secondAttribute="trailing" id="wS6-18-JpQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="gmD-jc-c6I"/>
+                    <connections>
+                        <outlet property="mapsView" destination="hrT-Da-JI8" id="XF3-cS-CRR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aQj-td-zHN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-614" y="790"/>
+        </scene>
         <!--DTM Heatmap-->
         <scene sceneID="WoK-xJ-xL1">
             <objects>
@@ -725,6 +797,12 @@ DQoNCg
     <resources>
         <namedColor name="buttonPrimary">
             <color red="0.12549019607843137" green="0.6705882352941176" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navBarTint">
+            <color red="1" green="0.77647058823529413" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="textAlternate">
+            <color red="0.0039215686274509803" green="0.27843137254901962" blue="0.47843137254901963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

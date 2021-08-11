@@ -38,6 +38,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   @IBOutlet weak var reButton: UIButton!
   @IBOutlet weak var jdButton: UIButton!
   @IBOutlet weak var dtmButton: UIButton!
+  @IBOutlet weak var createdHeatmapButton: ThemeActionButton!
 
   @IBAction func btnDTMHeatmap(_ sender: Any) {
     self.performSegue(withIdentifier: "historyToDTMHeatmap", sender: workoutId)
@@ -51,6 +52,9 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     self.performSegue(withIdentifier: "historyToREHeatmap", sender: workoutId)
   }
 
+  @IBAction func btnCreatedHeatmap(_ sender: Any) {
+    self.performSegue(withIdentifier: "historyToCreatedHeatmap", sender: workoutId)
+  }
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return workoutArray?.count ?? 0
@@ -123,7 +127,6 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     workoutCollectionView.register(UINib(nibName: "WorkoutCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "WorkoutCollectionViewCell")
     workoutCollectionView.collectionViewLayout = createLayout()
     workoutCollectionView.allowsMultipleSelection = false
-
 
     loadWorkouts { (workouts, error) in
       self.workoutArray = workouts
@@ -214,6 +217,12 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
       let destinationVC = segue.destination as! jdHeatmapViewController
       destinationVC.heatmapWorkoutId = (sender as! UUID)
     }
+
+    if segueToUse == "historyToCreatedHeatmap" {
+      let destinationVC = segue.destination as! createdHeatmapViewController
+      destinationVC.heatmapWorkoutId = (sender as! UUID)
+    }
+
 
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }

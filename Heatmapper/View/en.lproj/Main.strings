@@ -43,6 +43,9 @@
 /* Class = "UIViewController"; title = "Tracker"; ObjectID = "cbs-Dv-Qaf"; */
 "cbs-Dv-Qaf.title" = "";
 
+/* Class = "UIButton"; normalTitle = "RE"; ObjectID = "Cin-hP-zjE"; */
+"Cin-hP-zjE.normalTitle" = "";
+
 /* Class = "UISegmentedControl"; dhi-ac-byn.segmentTitles[0] = "Best for battery"; ObjectID = "dhi-ac-byn"; */
 "dhi-ac-byn.segmentTitles[0]" = "";
 
@@ -51,6 +54,12 @@
 
 /* Class = "UISegmentedControl"; dhi-ac-byn.segmentTitles[2] = "Best for accuracy"; ObjectID = "dhi-ac-byn"; */
 "dhi-ac-byn.segmentTitles[2]" = "";
+
+/* Class = "UIButton"; normalTitle = "Button 3"; ObjectID = "Dy8-wu-JZc"; */
+"Dy8-wu-JZc.normalTitle" = "";
+
+/* Class = "UIButton"; normalTitle = "Button 1"; ObjectID = "fxp-1X-LEA"; */
+"fxp-1X-LEA.normalTitle" = "";
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "HIL-yj-uvc"; */
 "HIL-yj-uvc.title" = "";
@@ -94,6 +103,9 @@
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "R6w-n5-X7X"; */
 "R6w-n5-X7X.normalTitle" = "";
 
+/* Class = "UIButton"; normalTitle = "Buton 2"; ObjectID = "s05-ex-uEs"; */
+"s05-ex-uEs.normalTitle" = "";
+
 /* Class = "UIButton"; normalTitle = "JD"; ObjectID = "sPj-oH-Nyf"; */
 "sPj-oH-Nyf.normalTitle" = "";
 
@@ -108,6 +120,9 @@
 
 /* Class = "UIButton"; normalTitle = "Heatmap"; ObjectID = "uxy-2h-68R"; */
 "uxy-2h-68R.normalTitle" = "";
+
+/* Class = "UIViewController"; title = "Heatmap"; ObjectID = "VIb-fl-PFY"; */
+"VIb-fl-PFY.title" = "";
 
 /* Class = "UIButton"; normalTitle = "Radius Blurry"; ObjectID = "vIR-94-5ja"; */
 "vIR-94-5ja.normalTitle" = "";
@@ -130,5 +145,5 @@
 /* Class = "UINavigationItem"; title = "RE Heatmap"; ObjectID = "yQa-XH-y2d"; */
 "yQa-XH-y2d.title" = "";
 
-/* Class = "UIButton"; normalTitle = "RE"; ObjectID = "zt1-c4-uTO"; */
+/* Class = "UIButton"; normalTitle = "Created"; ObjectID = "zt1-c4-uTO"; */
 "zt1-c4-uTO.normalTitle" = "";
