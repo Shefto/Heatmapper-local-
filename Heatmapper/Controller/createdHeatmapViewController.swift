@@ -12,21 +12,28 @@ import MapKit
 import HealthKit
 import CoreLocation
 
-class createdHeatmapViewController: UIViewController {
+class createdHeatmapViewController: UIViewController, UIScrollViewDelegate {
 
   var heatmapWorkoutId : UUID?
   var heatmapImage : UIImage?
   
   @IBOutlet weak var heatmapImageView: UIImageView!
 
+  @IBOutlet weak var scrollView: UIScrollView! {
+    didSet {
+      scrollView.delegate = self
+      scrollView.minimumZoomScale = 1
+      scrollView.maximumZoomScale = 10
+    }
+  }
 
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     getHeatmapImage()
-
-    heatmapImageView.image = heatmapImage
+    let colouredheatmapImage = heatmapImage?.withBackground(color: UIColor.systemGreen)
+    heatmapImageView.image = colouredheatmapImage
 
 
   }
@@ -42,6 +49,9 @@ class createdHeatmapViewController: UIViewController {
 
   }
 
+  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    return heatmapImageView
+  }
 
 }
 
