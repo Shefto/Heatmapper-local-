@@ -145,7 +145,8 @@ class jdHeatmapViewController: UIViewController {
 
       guard error == nil else {
         // Handle any errors here.
-        fatalError("The initial query failed.")
+        MyFunc.logMessage(.error, "No route information for Workout")
+        return
       }
 
       // Process the initial route data here.

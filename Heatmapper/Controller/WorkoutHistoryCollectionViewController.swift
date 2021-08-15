@@ -20,9 +20,10 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   private var workoutArray: [HKWorkout]?
   private let workoutCellId = "workoutCell"
   var workoutSelectedId : UUID?
-  var selectedIndexPath : Int? = 0
+  var selectedIndexPath : Int?
   var workoutSelected : String = ""
   var documentsDirectoryStr : String = ""
+  var workoutHasHeatmap : Bool = false
 
   let locationManager          = CLLocationManager()
   let healthstore = HKHealthStore()
@@ -54,7 +55,21 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   }
 
   @IBAction func btnCreatedHeatmap(_ sender: Any) {
-    self.performSegue(withIdentifier: "historyToCreatedHeatmap", sender: workoutSelectedId)
+
+    guard let workoutId = workoutSelectedId else {
+      MyFunc.logMessage(.error, "No heatmapWorkoutId passed to btnCreatedHeatmap in WorkoutHistoryCollectionViewController")
+      return
+    }
+    let workoutSelectedString = String(describing: workoutId)
+    let heatmapImageString = "JDHeatmap_" + workoutSelectedString + ".png"
+
+    let heatmapImageFileExists = MyFunc.checkFileExists(filename: heatmapImageString)
+
+    if heatmapImageFileExists {
+      self.performSegue(withIdentifier: "historyToCreatedHeatmap", sender: workoutSelectedId)
+    } else {
+      self.performSegue(withIdentifier: "historyToJDHeatmap", sender: workoutSelectedId)
+    }
   }
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -66,24 +81,24 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
     let workout = workoutArray![indexPath.row]
     let workoutId = workout.uuid
-    let heatmapToDisplayString = workout.description
 
-    let workoutIDString = String(describing: workoutId)
-    let heatmapImageString = "JDHeatmap_" + workoutIDString + ".png"
-
-    let heatmapImageFileExists = MyFunc.checkFileExists(filename: heatmapImageString)
-
-    var heatmapImage  = UIImage()
-    if heatmapImageFileExists {
-      let documentLocationStr = documentsDirectoryStr + heatmapImageString
-      let documentLocationURL = URL(string: documentLocationStr)!
-      if let data = try? Data(contentsOf: documentLocationURL), let loaded = UIImage(data: data) {
-        heatmapImage = loaded
-      } else {
-        heatmapImage = UIImage(named: "Work.png")!
-      }
-
-    }
+    let heatmapImage = getHeatmapImageForWorkout(workoutID: workoutId)
+//    let workoutIDString = String(describing: workoutId)
+//    let heatmapImageString = "JDHeatmap_" + workoutIDString + ".png"
+//
+//    let heatmapImageFileExists = MyFunc.checkFileExists(filename: heatmapImageString)
+//
+//    var heatmapImage  = UIImage()
+//    if heatmapImageFileExists {
+//      let documentLocationStr = documentsDirectoryStr + heatmapImageString
+//      let documentLocationURL = URL(string: documentLocationStr)!
+//      if let data = try? Data(contentsOf: documentLocationURL), let loaded = UIImage(data: data) {
+//        heatmapImage = loaded
+//      } else {
+//        heatmapImage = UIImage(named: "Work.png")!
+//      }
+//
+//    }
 
 
     cell.heatmapImageView.image = heatmapImage
@@ -278,6 +293,29 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
     healthstore.execute(query)
     return samplesToReturnSet
+  }
+
+
+  func getHeatmapImageForWorkout(workoutID: UUID) -> UIImage {
+
+
+    let workoutIDString = String(describing: workoutID)
+    let heatmapImageString = "JDHeatmap_" + workoutIDString + ".png"
+
+    let heatmapImageFileExists = MyFunc.checkFileExists(filename: heatmapImageString)
+
+    var heatmapImage  = UIImage()
+    if heatmapImageFileExists {
+      let documentLocationStr = documentsDirectoryStr + heatmapImageString
+      let documentLocationURL = URL(string: documentLocationStr)!
+      if let data = try? Data(contentsOf: documentLocationURL), let loaded = UIImage(data: data) {
+        heatmapImage = loaded
+      } else {
+        heatmapImage = UIImage(named: "Work.png")!
+      }
+
+    }
+    return heatmapImage
   }
 
 }
