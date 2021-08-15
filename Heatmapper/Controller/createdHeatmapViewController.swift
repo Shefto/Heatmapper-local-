@@ -12,7 +12,7 @@ import MapKit
 import HealthKit
 import CoreLocation
 
-class createdHeatmapViewController: UIViewController, UIScrollViewDelegate {
+class createdHeatmapViewController: UIViewController  {
 
   var heatmapWorkoutId : UUID?
   var heatmapImage : UIImage?
@@ -48,6 +48,10 @@ class createdHeatmapViewController: UIViewController, UIScrollViewDelegate {
     heatmapImage = MyFunciOS.getHeatmapImageForWorkout(workoutID: workoutId)
 
   }
+
+}
+
+extension createdHeatmapViewController: UIScrollViewDelegate {
 
   func viewForZooming(in scrollView: UIScrollView) -> UIView? {
     return heatmapImageView
