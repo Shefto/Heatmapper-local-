@@ -122,6 +122,10 @@
 		79F3A2B2269796FA00667B1B /* REHeatmapOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2B1269796FA00667B1B /* REHeatmapOverlay.swift */; };
 		79F3A2B42697970700667B1B /* RE_DTMDiffHeatmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2B32697970700667B1B /* RE_DTMDiffHeatmap.swift */; };
 		79FB27872561984000E1C9AD /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7994126E255AB9230062AC0D /* Objects.swift */; };
+		79FDDFCB26C98A8E00526FB9 /* CroppableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FDDFCA26C98A8E00526FB9 /* CroppableImageView.swift */; };
+		79FDDFCD26C98BD900526FB9 /* CornerpointClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FDDFCC26C98BD900526FB9 /* CornerpointClientProtocol.swift */; };
+		79FDDFCF26C98C3500526FB9 /* CornerpointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FDDFCE26C98C3500526FB9 /* CornerpointView.swift */; };
+		79FDDFD126C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FDDFD026C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -306,6 +310,10 @@
 		79F3A2AF269796C100667B1B /* RE_DTMDiffColorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RE_DTMDiffColorProvider.swift; sourceTree = "<group>"; };
 		79F3A2B1269796FA00667B1B /* REHeatmapOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REHeatmapOverlay.swift; sourceTree = "<group>"; };
 		79F3A2B32697970700667B1B /* RE_DTMDiffHeatmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RE_DTMDiffHeatmap.swift; sourceTree = "<group>"; };
+		79FDDFCA26C98A8E00526FB9 /* CroppableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CroppableImageView.swift; sourceTree = "<group>"; };
+		79FDDFCC26C98BD900526FB9 /* CornerpointClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerpointClientProtocol.swift; sourceTree = "<group>"; };
+		79FDDFCE26C98C3500526FB9 /* CornerpointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerpointView.swift; sourceTree = "<group>"; };
+		79FDDFD026C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CroppableImageViewDelegateProtocol.swift; sourceTree = "<group>"; };
 		A7C686E6162AA0C13B46EE51 /* Pods_Heatmapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB7D041EEB0CCEFFE81DC061 /* Pods_Heatmapper_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBEF0AF94C19754D8FE4543B /* Pods-Heatmapper WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit Extension/Pods-Heatmapper WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -378,6 +386,9 @@
 		793D1ADF24B86C020039441B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				79FDDFCA26C98A8E00526FB9 /* CroppableImageView.swift */,
+				79FDDFCC26C98BD900526FB9 /* CornerpointClientProtocol.swift */,
+				79FDDFCE26C98C3500526FB9 /* CornerpointView.swift */,
 				79A4EFB724A0AF4A002A7870 /* LaunchScreen.storyboard */,
 				79A4EFB224A0AF45002A7870 /* Main.storyboard */,
 				79ADB48F26264153007BF946 /* UserAnnotation.swift */,
@@ -413,6 +424,7 @@
 				79B6DC982598B13400F573BA /* SettingsViewController.swift */,
 				79ADB48A262640E3007BF946 /* TrackerViewController.swift */,
 				79913162263490D900811731 /* WorkoutHistoryViewController.swift */,
+				79FDDFD026C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift */,
 				79A9DC6026B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift */,
 				79A4EFF524A7A109002A7870 /* WorkoutViewController.swift */,
 			);
@@ -811,6 +823,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				797E7C062575312500EAE473 /* IntervalTypeTableViewCell.swift in Sources */,
+				79FDDFCD26C98BD900526FB9 /* CornerpointClientProtocol.swift in Sources */,
 				79D083BE250A0C0900274F79 /* Extensions.swift in Sources */,
 				7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */,
 				799131292634145F00811731 /* JDHeatMapView.swift in Sources */,
@@ -829,10 +842,12 @@
 				79F3A2B2269796FA00667B1B /* REHeatmapOverlay.swift in Sources */,
 				79F3A2AC269795FA00667B1B /* REHeatmapRenderer.swift in Sources */,
 				793D1ADC24B868840039441B /* SessionCommands.swift in Sources */,
+				79FDDFCB26C98A8E00526FB9 /* CroppableImageView.swift in Sources */,
 				792CCCDD26AC32270024C5B3 /* DTMHeatmapViewController.swift in Sources */,
 				797BFD0A2542B72800426185 /* MyFunciOS.swift in Sources */,
 				79F3A2A7269078F900667B1B /* REHeatmapViewController.swift in Sources */,
 				799131422634151700811731 /* JDHeatmapPointCreator.swift in Sources */,
+				79FDDFD126C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift in Sources */,
 				79913163263490D900811731 /* WorkoutHistoryViewController.swift in Sources */,
 				79D083B42508EF6400274F79 /* MainMenuViewController.swift in Sources */,
 				7965F9C226AC1E27008B130D /* jdHeatmapViewController.swift in Sources */,
@@ -854,6 +869,7 @@
 				7991312E2634148E00811731 /* JDHeatmapManager.swift in Sources */,
 				793D1AF224B87FAD0039441B /* FileTransferObservers.swift in Sources */,
 				79D083B6250924C500274F79 /* ThemeKit Theme.swift in Sources */,
+				79FDDFCF26C98C3500526FB9 /* CornerpointView.swift in Sources */,
 				79913138263414CA00811731 /* JDHeatmapOverlay.swift in Sources */,
 				79201489254343BD00212051 /* MyFunc.swift in Sources */,
 				79BED1AA256AAEED0052B160 /* SetIntervalsViewController.swift in Sources */,
