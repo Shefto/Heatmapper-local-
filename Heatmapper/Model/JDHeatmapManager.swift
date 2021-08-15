@@ -31,7 +31,7 @@ class JDHeatMapManager: NSObject
   var maxHeatLevelInMap     : Int = 0
 
   let missionThread         = DispatchQueue(label: "MissionThread")
-  var workoutId             = UUID()
+  var internalWorkoutId     = UUID()
 
   // initializer
   // as stated, this class needs the heatmap view, data point type and colour mixer
@@ -41,6 +41,7 @@ class JDHeatMapManager: NSObject
     dataPointType     = datapointType
     mapWidthInUIView  = JDSwiftHeatMapView.frame.width
     JDHeatmapPointCreator.theColorMixer.mixerMode = mode
+    internalWorkoutId         = workoutId
   }
 
   // main function called when the heatmap needs to be updated to reflect the new data
@@ -66,7 +67,7 @@ class JDHeatMapManager: NSObject
       let radius = heatmapDelegate.heatmap(RadiusInKMFor: locationPoint)
       let coordinate = heatmapDelegate.heatmap(CoordinateFor: locationPoint)
       let heatLevel = heatmapDelegate.heatmap(HeatLevelFor: locationPoint)
-      MyFunc.logMessage(.debug, "heatLevel: \(heatLevel)")
+      //      MyFunc.logMessage(.debug, "heatLevel: \(heatLevel)")
 
       // if the heat level of this point is greater than the current max, increase the current max
       maxHeatLevelInMap = (heatLevel > maxHeatLevelInMap) ? heatLevel : maxHeatLevelInMap
@@ -130,10 +131,10 @@ class JDHeatMapManager: NSObject
         closeToOverlay()
       }
       
-    } // func refresh
+    }
 
     if (maxHeatLevelInMap == 0) {
-//      fatalError("Max Heat level should not be 0")
+      //      fatalError("Max Heat level should not be 0")
       MyFunc.logMessage(.error, "Max Heat level should not be 0")
     }
 
@@ -204,7 +205,7 @@ class JDHeatMapManager: NSObject
     }
     // now calculate the heatmap point objects for the overlay
     calculateHeatmapPointObjects()
-  }
+  } // func refresh
 
   // create CGPoint versions of each heatmapPoint object
   func calculateHeatmapPointObjects()
@@ -418,15 +419,7 @@ extension JDHeatMapManager
                 if let lastimage = rendererForHeatmapOverlay.lastImage
                 {
 
-                  let fileName = "JDHeatmap_\(workoutId).png"
 
-                  let uiImage = UIImage(cgImage: lastimage)
-
-                  if let data = uiImage.pngData() {
-                    let fileURL = getDocumentsDirectory().appendingPathComponent(fileName)
-                    try? data.write(to: fileURL)
-                    MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
-                  }
                   if(lastimage.width > newWidth) { return }
                   else { rendererForHeatmapOverlay.lastImage = nil } //Make it can draw
                 }
@@ -472,6 +465,7 @@ extension JDHeatMapManager
   {
     let renderer = self.jdHeatMapView.renderer(for: overlay)
     let heatmapRenderer = renderer as? JDHeatmapOverlayRenderer
+    heatmapRenderer?.workoutId = internalWorkoutId
     return heatmapRenderer
   }
 

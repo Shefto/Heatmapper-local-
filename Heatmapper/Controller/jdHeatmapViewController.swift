@@ -67,6 +67,9 @@ class jdHeatmapViewController: UIViewController {
       MyFunc.logMessage(.error, "No heatmapWorkoutId passed to JDHeatmapViewController")
       return
     }
+
+    MyFunc.logMessage(.debug, "heatmapWorkoutId passed to JDHeatmapViewController : \(workoutId)")
+
     // sets the heatmap frame to the size of the view and specifies the map type
     heatMap = JDHeatMapView(frame: mapsView.frame, delegate: self, mapType: .FlatDistinct, workoutId: workoutId)
 

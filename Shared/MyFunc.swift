@@ -449,4 +449,15 @@ class MyFunc {
     }
   }
 
+  // Function to verify file exists at location.
+  static func checkFileExists(filename: String) -> Bool {
+
+    let documentDirectory = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+    let checkingURL = documentDirectory.appendingPathComponent(filename)
+    let checkingString = checkingURL.path
+    let fileExists = FileManager.default.fileExists(atPath: checkingString)
+    return fileExists
+
+  }
+
 }

@@ -7,8 +7,6 @@
 //
 
 
-
-
 import UIKit
 import MapKit
 import HealthKit
@@ -18,6 +16,7 @@ class createdHeatmapViewController: UIViewController {
 
   var heatmapWorkoutId : UUID?
 
+  
   // the view which renders the heatmap over the map
   @IBOutlet weak var mapsView: UIView!
 

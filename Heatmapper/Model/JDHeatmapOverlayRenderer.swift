@@ -21,7 +21,7 @@ class JDHeatmapOverlayRenderer :  MKOverlayRenderer
 {
 
   var lastImage         : CGImage?
-
+  var workoutId         : UUID?
   // IntSize is a custom Struct with a width (Int) and height (Int) both defaulted to zero
   var bitmapSize        : IntSize = IntSize()
   var bitmapMemorySize  : Int {
@@ -63,6 +63,27 @@ class JDHeatmapOverlayRenderer :  MKOverlayRenderer
       let mapCGRect = rect(for: overlay.boundingMapRect)
       context.draw(lastTimeMoreHighSolutionImage, in: mapCGRect)
 
+//      let fileDateFormatter = DateFormatter()
+//      fileDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+//      let currDate = fileDateFormatter.string(from: Date())
+
+      guard let internalWorkoutId = workoutId else {
+        MyFunc.logMessage(.error, "No workoutID received by JDHeatmapOverlayRenderer")
+        return
+
+      }
+
+      let workoutIDString = String(describing: internalWorkoutId)
+
+      let fileName = "JDHeatmap_" + workoutIDString + ".png"
+
+      let uiImage = UIImage(cgImage: lastTimeMoreHighSolutionImage)
+
+        if let data = uiImage.pngData() {
+          let fileURL = getDocumentsDirectory().appendingPathComponent(fileName)
+          try? data.write(to: fileURL)
+          MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
+        }
 
       return
     }
@@ -85,6 +106,12 @@ class JDHeatmapOverlayRenderer :  MKOverlayRenderer
     }
   }
 
+
+  func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let documentsDirectory = paths[0]
+    return documentsDirectory
+  }
 
   // this function used above to generate the image
   // very technical and may be best to simply use it as a black box
