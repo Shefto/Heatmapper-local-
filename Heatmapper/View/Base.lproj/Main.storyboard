@@ -649,26 +649,25 @@ DQoNCg
                                     </button>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrT-Da-JI8" customClass="JDHeatMapView" customModule="Heatmapper" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="108" width="414" height="624"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kqC-cv-6ZX">
+                                <rect key="frame" x="0.0" y="88" width="414" height="744"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="142-na-oQ5"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                         <constraints>
-                            <constraint firstItem="Z3D-sr-eeK" firstAttribute="top" secondItem="hrT-Da-JI8" secondAttribute="bottom" constant="100" id="9Ml-mK-QAu"/>
+                            <constraint firstItem="142-na-oQ5" firstAttribute="trailing" secondItem="kqC-cv-6ZX" secondAttribute="trailing" id="4tH-hS-3Tj"/>
+                            <constraint firstItem="kqC-cv-6ZX" firstAttribute="top" secondItem="142-na-oQ5" secondAttribute="top" id="5jn-BP-dmj"/>
+                            <constraint firstItem="Z3D-sr-eeK" firstAttribute="top" secondItem="kqC-cv-6ZX" secondAttribute="bottom" id="KuT-nl-bY4"/>
                             <constraint firstItem="142-na-oQ5" firstAttribute="bottom" secondItem="Z3D-sr-eeK" secondAttribute="bottom" id="RqK-ic-l7l"/>
                             <constraint firstItem="Z3D-sr-eeK" firstAttribute="leading" secondItem="142-na-oQ5" secondAttribute="leading" id="Tl5-0E-mjr"/>
-                            <constraint firstItem="hrT-Da-JI8" firstAttribute="top" secondItem="142-na-oQ5" secondAttribute="top" constant="20" id="UaO-zf-HD5"/>
                             <constraint firstItem="142-na-oQ5" firstAttribute="trailing" secondItem="Z3D-sr-eeK" secondAttribute="trailing" id="alV-1a-pEL"/>
-                            <constraint firstItem="hrT-Da-JI8" firstAttribute="leading" secondItem="Z3D-sr-eeK" secondAttribute="leading" id="ctj-NG-8rS"/>
-                            <constraint firstItem="hrT-Da-JI8" firstAttribute="trailing" secondItem="Z3D-sr-eeK" secondAttribute="trailing" id="wS6-18-JpQ"/>
+                            <constraint firstItem="kqC-cv-6ZX" firstAttribute="leading" secondItem="142-na-oQ5" secondAttribute="leading" id="nto-4F-jfe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gmD-jc-c6I"/>
                     <connections>
-                        <outlet property="mapsView" destination="hrT-Da-JI8" id="XF3-cS-CRR"/>
+                        <outlet property="heatmapImageView" destination="kqC-cv-6ZX" id="eHa-hV-zV5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aQj-td-zHN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -812,6 +811,9 @@ DQoNCg
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

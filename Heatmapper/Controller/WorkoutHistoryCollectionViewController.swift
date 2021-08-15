@@ -82,7 +82,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     let workout = workoutArray![indexPath.row]
     let workoutId = workout.uuid
 
-    let heatmapImage = getHeatmapImageForWorkout(workoutID: workoutId)
+    let heatmapImage = MyFunciOS.getHeatmapImageForWorkout(workoutID: workoutId)
 //    let workoutIDString = String(describing: workoutId)
 //    let heatmapImageString = "JDHeatmap_" + workoutIDString + ".png"
 //
@@ -146,9 +146,6 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    let documentsDirectory = paths[0]
-    documentsDirectoryStr = String(describing: documentsDirectory)
 
     // added this to ensure Location tracking turned off (it should be by the time this screen is displayed though)
     locationManager.stopUpdatingLocation()
@@ -296,27 +293,27 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   }
 
 
-  func getHeatmapImageForWorkout(workoutID: UUID) -> UIImage {
-
-
-    let workoutIDString = String(describing: workoutID)
-    let heatmapImageString = "JDHeatmap_" + workoutIDString + ".png"
-
-    let heatmapImageFileExists = MyFunc.checkFileExists(filename: heatmapImageString)
-
-    var heatmapImage  = UIImage()
-    if heatmapImageFileExists {
-      let documentLocationStr = documentsDirectoryStr + heatmapImageString
-      let documentLocationURL = URL(string: documentLocationStr)!
-      if let data = try? Data(contentsOf: documentLocationURL), let loaded = UIImage(data: data) {
-        heatmapImage = loaded
-      } else {
-        heatmapImage = UIImage(named: "Work.png")!
-      }
-
-    }
-    return heatmapImage
-  }
+//  func getHeatmapImageForWorkout(workoutID: UUID) -> UIImage {
+//
+//
+//    let workoutIDString = String(describing: workoutID)
+//    let heatmapImageString = "JDHeatmap_" + workoutIDString + ".png"
+//
+//    let heatmapImageFileExists = MyFunc.checkFileExists(filename: heatmapImageString)
+//
+//    var heatmapImage  = UIImage()
+//    if heatmapImageFileExists {
+//      let documentLocationStr = documentsDirectoryStr + heatmapImageString
+//      let documentLocationURL = URL(string: documentLocationStr)!
+//      if let data = try? Data(contentsOf: documentLocationURL), let loaded = UIImage(data: data) {
+//        heatmapImage = loaded
+//      } else {
+//        heatmapImage = UIImage(named: "Work.png")!
+//      }
+//
+//    }
+//    return heatmapImage
+//  }
 
 }
 

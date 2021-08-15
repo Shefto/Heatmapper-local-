@@ -45,7 +45,7 @@
 		797026C0252DB4A500A86A05 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
 		7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */; };
 		797BFD0525421E8700426185 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
-		797BFD0A2542B72800426185 /* MyFunc_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797BFD092542B72800426185 /* MyFunc_iOS.swift */; };
+		797BFD0A2542B72800426185 /* MyFunciOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797BFD092542B72800426185 /* MyFunciOS.swift */; };
 		797E7C062575312500EAE473 /* IntervalTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */; };
 		7980929D252F386300DF1562 /* HeatmapperWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7980929C252F386300DF1562 /* HeatmapperWorkout.swift */; };
 		7981D39C24BDD62500E5D9E7 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFF824A7F1AF002A7870 /* Interval.swift */; };
@@ -214,7 +214,7 @@
 		7965F9C126AC1E27008B130D /* jdHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jdHeatmapViewController.swift; sourceTree = "<group>"; };
 		797026BF252DB4A500A86A05 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntervalTableViewFooter.swift; path = Heatmapper/View/IntervalTableViewFooter.swift; sourceTree = SOURCE_ROOT; };
-		797BFD092542B72800426185 /* MyFunc_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFunc_iOS.swift; sourceTree = "<group>"; };
+		797BFD092542B72800426185 /* MyFunciOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFunciOS.swift; sourceTree = "<group>"; };
 		797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTypeTableViewCell.swift; sourceTree = "<group>"; };
 		7980929C252F386300DF1562 /* HeatmapperWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapperWorkout.swift; sourceTree = "<group>"; };
 		7982B0C0264FEF64001335F3 /* WorkoutCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutCell.xib; sourceTree = "<group>"; };
@@ -429,7 +429,7 @@
 				79913137263414CA00811731 /* JDHeatmapOverlay.swift */,
 				7991313C263414E800811731 /* JDHeatmapOverlayRenderer.swift */,
 				799131412634151700811731 /* JDHeatmapPointCreator.swift */,
-				797BFD092542B72800426185 /* MyFunc_iOS.swift */,
+				797BFD092542B72800426185 /* MyFunciOS.swift */,
 				79B80BD2253DDB8300BEA10F /* SceneDelegate.swift */,
 				79A4EFAC24A0AF45002A7870 /* AppDelegate.swift */,
 				79B3742B24B0C710000E4F7E /* Stopwatch.swift */,
@@ -830,7 +830,7 @@
 				79F3A2AC269795FA00667B1B /* REHeatmapRenderer.swift in Sources */,
 				793D1ADC24B868840039441B /* SessionCommands.swift in Sources */,
 				792CCCDD26AC32270024C5B3 /* DTMHeatmapViewController.swift in Sources */,
-				797BFD0A2542B72800426185 /* MyFunc_iOS.swift in Sources */,
+				797BFD0A2542B72800426185 /* MyFunciOS.swift in Sources */,
 				79F3A2A7269078F900667B1B /* REHeatmapViewController.swift in Sources */,
 				799131422634151700811731 /* JDHeatmapPointCreator.swift in Sources */,
 				79913163263490D900811731 /* WorkoutHistoryViewController.swift in Sources */,
