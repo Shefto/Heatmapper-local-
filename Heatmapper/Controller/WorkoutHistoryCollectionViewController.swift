@@ -72,6 +72,32 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     }
   }
 
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+
+    // added this to ensure Location tracking turned off (it should be by the time this screen is displayed though)
+    locationManager.stopUpdatingLocation()
+
+
+    workoutCollectionView.delegate = self
+    workoutCollectionView.dataSource = self
+    workoutCollectionView.register(UINib(nibName: "WorkoutCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "WorkoutCollectionViewCell")
+    workoutCollectionView.collectionViewLayout = createLayout()
+    workoutCollectionView.allowsMultipleSelection = false
+
+    loadHeatmapImages()
+    loadWorkouts { (workouts, error) in
+      self.workoutArray = workouts
+      MyFunc.logMessage(.debug, "workouts:")
+      MyFunc.logMessage(.debug, String(describing: self.workoutArray))
+      self.workoutCollectionView.reloadData()
+    }
+
+  }
+
+
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return workoutArray?.count ?? 0
   }
@@ -83,23 +109,6 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     let workoutId = workout.uuid
 
     let heatmapImage = MyFunciOS.getHeatmapImageForWorkout(workoutID: workoutId)
-//    let workoutIDString = String(describing: workoutId)
-//    let heatmapImageString = "JDHeatmap_" + workoutIDString + ".png"
-//
-//    let heatmapImageFileExists = MyFunc.checkFileExists(filename: heatmapImageString)
-//
-//    var heatmapImage  = UIImage()
-//    if heatmapImageFileExists {
-//      let documentLocationStr = documentsDirectoryStr + heatmapImageString
-//      let documentLocationURL = URL(string: documentLocationStr)!
-//      if let data = try? Data(contentsOf: documentLocationURL), let loaded = UIImage(data: data) {
-//        heatmapImage = loaded
-//      } else {
-//        heatmapImage = UIImage(named: "Work.png")!
-//      }
-//
-//    }
-
 
     cell.heatmapImageView.image = heatmapImage
     cell.workoutDateLabel.text = dateFormatter.string(from: workout.startDate)
@@ -143,29 +152,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
   }
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
 
-
-    // added this to ensure Location tracking turned off (it should be by the time this screen is displayed though)
-    locationManager.stopUpdatingLocation()
-
-
-    workoutCollectionView.delegate = self
-    workoutCollectionView.dataSource = self
-    workoutCollectionView.register(UINib(nibName: "WorkoutCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "WorkoutCollectionViewCell")
-    workoutCollectionView.collectionViewLayout = createLayout()
-    workoutCollectionView.allowsMultipleSelection = false
-
-    loadHeatmapImages()
-    loadWorkouts { (workouts, error) in
-      self.workoutArray = workouts
-      MyFunc.logMessage(.debug, "workouts:")
-      MyFunc.logMessage(.debug, String(describing: self.workoutArray))
-      self.workoutCollectionView.reloadData()
-    }
-
-  }
 
   func loadHeatmapImages() {
     let fm = FileManager.default
@@ -183,22 +170,21 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
   }
 
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return workoutArray?.count ?? 0
-  }
+//  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//    return workoutArray?.count ?? 0
+//  }
+//
+//
+//  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    tableView.deselectRow(at: indexPath, animated: false)
+//    workoutSelectedId = workoutArray?[indexPath.row].uuid
+//    MyFunc.logMessage(.debug, "workoutId: \(String(describing: workoutSelectedId))")
+//    selectedIndexPath = indexPath.row
+//
+//  }
 
-
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: false)
-    workoutSelectedId = workoutArray?[indexPath.row].uuid
-    MyFunc.logMessage(.debug, "workoutId: \(String(describing: workoutSelectedId))")
-    selectedIndexPath = indexPath.row
-
-  }
-
-
-  func loadWorkouts(completion:
-                      @escaping ([HKWorkout]?, Error?) -> Void) {
+  // retrieve all Heatmapper workouts
+  func loadWorkouts(completion: @escaping ([HKWorkout]?, Error?) -> Void) {
 
     let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate,
                                           ascending: false)
@@ -207,11 +193,10 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     let query = HKSampleQuery(
       sampleType: .workoutType(),
       predicate: sourcePredicate,
-      //      predicate: nil,
+
       limit: 0,
       sortDescriptors: [sortDescriptor]) { (query, samples, error) in
       DispatchQueue.main.async {
-        //4. Cast the samples as HKWorkout
         guard
           let samples = samples as? [HKWorkout],
           error == nil
@@ -292,28 +277,6 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     return samplesToReturnSet
   }
 
-
-//  func getHeatmapImageForWorkout(workoutID: UUID) -> UIImage {
-//
-//
-//    let workoutIDString = String(describing: workoutID)
-//    let heatmapImageString = "JDHeatmap_" + workoutIDString + ".png"
-//
-//    let heatmapImageFileExists = MyFunc.checkFileExists(filename: heatmapImageString)
-//
-//    var heatmapImage  = UIImage()
-//    if heatmapImageFileExists {
-//      let documentLocationStr = documentsDirectoryStr + heatmapImageString
-//      let documentLocationURL = URL(string: documentLocationStr)!
-//      if let data = try? Data(contentsOf: documentLocationURL), let loaded = UIImage(data: data) {
-//        heatmapImage = loaded
-//      } else {
-//        heatmapImage = UIImage(named: "Work.png")!
-//      }
-//
-//    }
-//    return heatmapImage
-//  }
 
 }
 

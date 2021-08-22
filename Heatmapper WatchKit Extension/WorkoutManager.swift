@@ -45,6 +45,7 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
     configuration.activityType = .running
     configuration.locationType = .outdoor
 
+
     return configuration
   }
 
@@ -74,6 +75,10 @@ class WorkoutManager: NSObject, ObservableObject, HKLiveWorkoutBuilderDelegate {
     session.startActivity(with: Date())
     builder.beginCollection(withStart: Date()) { (success, error) in
       // The workout has started.
+    }
+    let metadata = ["Sport" : "Football - 5-a-side", "Event" : "Dad's Football", "Venue" : "Goals Wimbledon", "Pitch" : "9 - Estadio de Luz"]
+    builder.addMetadata(metadata) { (success, error) in
+      print(success ? "Success saving metadata" : error as Any)
     }
   }
 
@@ -173,6 +178,12 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
 
   func addWorkoutEvents(eventArray: [HKWorkoutEvent]) {
 
+    // add metadata
+    let metadata = [HKMetadataKeyWorkoutBrandName: "Heatmapper"]
+    builder.addMetadata(metadata) { (success, error) in
+      print(success ? "Success saving metadata" : error as Any)
+    }
+
     builder.addWorkoutEvents(eventArray, completion: { (success, error) in
       
       guard success == true else {
@@ -183,7 +194,7 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
       let eventsStr = String(describing: eventArray)
       MyFunc.logMessage(.info, eventsStr)
 
-    }) // self.builder.addWorkoutEvents
+    })
 
   }
 

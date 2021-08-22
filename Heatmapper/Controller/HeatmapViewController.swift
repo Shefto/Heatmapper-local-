@@ -50,35 +50,24 @@ class HeatmapViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    MyFunc.logMessage(.debug, "workoutId: \(String(describing: heatmapWorkoutId))")
-    // get the route data for the heatmap
-
     guard let workoutId = heatmapWorkoutId else {
-      MyFunc.logMessage(.error, "heatmapWorkoutId is invalid: \(String(describing: heatmapWorkoutId))")
+      MyFunc.logMessage(.error, "HeatmapViewController heatmapWorkoutId is invalid: \(String(describing: heatmapWorkoutId))")
       return
     }
 
-
     getWorkout(workoutId: workoutId) { [self] (workouts, error) in
       let workoutReturned = workouts?.first
-      MyFunc.logMessage(.debug, "workoutReturned:")
-      MyFunc.logMessage(.debug, String(describing: workoutReturned))
 
       guard let workout : HKWorkout = workoutReturned else {
-        MyFunc.logMessage(.debug, "workoutReturned invalid: \(String(describing: workoutReturned))")
+        MyFunc.logMessage(.debug, "HeatmapViewController workoutReturned invalid: \(String(describing: workoutReturned))")
         return
       }
 
       self.getRouteSampleObject(workout: workout)
 
-
-
-
     }
 
-
   }
-
 
 }
 

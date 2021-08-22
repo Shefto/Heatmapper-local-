@@ -46,6 +46,9 @@
 /* Class = "UIButton"; normalTitle = "RE"; ObjectID = "Cin-hP-zjE"; */
 "Cin-hP-zjE.normalTitle" = "";
 
+/* Class = "UILabel"; text = "Workout Location"; ObjectID = "CTI-FV-Wgi"; */
+"CTI-FV-Wgi.text" = "";
+
 /* Class = "UISegmentedControl"; dhi-ac-byn.segmentTitles[0] = "Best for battery"; ObjectID = "dhi-ac-byn"; */
 "dhi-ac-byn.segmentTitles[0]" = "";
 
@@ -91,11 +94,17 @@
 /* Class = "UIViewController"; title = "Workout History"; ObjectID = "nCc-eF-wC1"; */
 "nCc-eF-wC1.title" = "";
 
+/* Class = "UIButton"; normalTitle = "Button 1"; ObjectID = "nV8-2G-6RS"; */
+"nV8-2G-6RS.normalTitle" = "";
+
 /* Class = "UIButton"; normalTitle = "JD"; ObjectID = "Nzm-xV-84i"; */
 "Nzm-xV-84i.normalTitle" = "";
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "Pbk-vr-61V"; */
 "Pbk-vr-61V.title" = "";
+
+/* Class = "UIButton"; normalTitle = "Buton 2"; ObjectID = "Pox-VV-z2k"; */
+"Pox-VV-z2k.normalTitle" = "";
 
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "qUW-ZW-8kZ"; */
 "qUW-ZW-8kZ.normalTitle" = "";
@@ -115,6 +124,12 @@
 /* Class = "UIButton"; normalTitle = "RE"; ObjectID = "tKC-sN-5NG"; */
 "tKC-sN-5NG.normalTitle" = "";
 
+/* Class = "UIButton"; normalTitle = "Button 3"; ObjectID = "tsO-zO-cLZ"; */
+"tsO-zO-cLZ.normalTitle" = "";
+
+/* Class = "UIButton"; normalTitle = "View Heatmap"; ObjectID = "tZd-9k-xak"; */
+"tZd-9k-xak.normalTitle" = "";
+
 /* Class = "UILabel"; text = "Location accuracy"; ObjectID = "UKj-hg-nT8"; */
 "UKj-hg-nT8.text" = "";
 
@@ -126,6 +141,12 @@
 
 /* Class = "UIButton"; normalTitle = "Radius Blurry"; ObjectID = "vIR-94-5ja"; */
 "vIR-94-5ja.normalTitle" = "";
+
+/* Class = "UIViewController"; title = "Heatmap"; ObjectID = "W9C-nA-RXS"; */
+"W9C-nA-RXS.title" = "";
+
+/* Class = "UILabel"; text = "Workout Name"; ObjectID = "WjU-FP-pZm"; */
+"WjU-FP-pZm.text" = "";
 
 /* Class = "UIButton"; normalTitle = "DTM"; ObjectID = "WMX-9X-sBW"; */
 "WMX-9X-sBW.normalTitle" = "";
@@ -144,6 +165,3 @@
 
 /* Class = "UINavigationItem"; title = "RE Heatmap"; ObjectID = "yQa-XH-y2d"; */
 "yQa-XH-y2d.title" = "";
-
-/* Class = "UIButton"; normalTitle = "Created"; ObjectID = "zt1-c4-uTO"; */
-"zt1-c4-uTO.normalTitle" = "";
