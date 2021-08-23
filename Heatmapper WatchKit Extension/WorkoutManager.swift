@@ -178,11 +178,6 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
 
   func addWorkoutEvents(eventArray: [HKWorkoutEvent]) {
 
-    // add metadata
-    let metadata = [HKMetadataKeyWorkoutBrandName: "Heatmapper"]
-    builder.addMetadata(metadata) { (success, error) in
-      print(success ? "Success saving metadata" : error as Any)
-    }
 
     builder.addWorkoutEvents(eventArray, completion: { (success, error) in
       
@@ -246,14 +241,6 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
 
             // add each Sample Array to the Workout
             self.addSamplesToWorkout(sampleArray: HeatmapperWorkout.sampleArray)
-
-            // insert JDHeatmap calculation here
-//
-//            let heatMap = self.JDHeatMapView(frame: mapsView.frame, delegate: self, mapType: .FlatDistinct)
-//
-//              // set this VC as the delegate of the JDSwiftHeatMapView
-//              heatMap?.delegate = self
-
 
 
 

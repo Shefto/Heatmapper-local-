@@ -52,6 +52,9 @@
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "wkZ-fm-ijo"; */
 "wkZ-fm-ijo.title" = "Réglages";
 
+/* Class = "UILabel"; text = "Pitch"; ObjectID = "3FH-ba-EGv"; */
+"3FH-ba-EGv.text" = "";
+
 /* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "8fa-ka-EKP"; */
 "8fa-ka-EKP.normalTitle" = "";
 
@@ -61,14 +64,20 @@
 /* Class = "UIViewController"; title = "Tracker"; ObjectID = "cbs-Dv-Qaf"; */
 "cbs-Dv-Qaf.title" = "";
 
+/* Class = "UILabel"; text = "Date"; ObjectID = "cdu-fT-Y48"; */
+"cdu-fT-Y48.text" = "";
+
 /* Class = "UIButton"; normalTitle = "RE"; ObjectID = "Cin-hP-zjE"; */
 "Cin-hP-zjE.normalTitle" = "";
 
-/* Class = "UILabel"; text = "Workout Location"; ObjectID = "CTI-FV-Wgi"; */
+/* Class = "UILabel"; text = "Venue"; ObjectID = "CTI-FV-Wgi"; */
 "CTI-FV-Wgi.text" = "";
 
 /* Class = "UIButton"; normalTitle = "Button 3"; ObjectID = "Dy8-wu-JZc"; */
 "Dy8-wu-JZc.normalTitle" = "";
+
+/* Class = "UILabel"; text = "Sport"; ObjectID = "fUb-WJ-pCB"; */
+"fUb-WJ-pCB.text" = "";
 
 /* Class = "UIButton"; normalTitle = "Button 1"; ObjectID = "fxp-1X-LEA"; */
 "fxp-1X-LEA.normalTitle" = "";
@@ -81,6 +90,9 @@
 
 /* Class = "UIButton"; normalTitle = "Stop Tracking"; ObjectID = "hKy-uJ-mHc"; */
 "hKy-uJ-mHc.normalTitle" = "";
+
+/* Class = "UILabel"; text = "Duration"; ObjectID = "K49-iB-Dre"; */
+"K49-iB-Dre.text" = "";
 
 /* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "kh7-pS-WQE"; */
 "kh7-pS-WQE.normalTitle" = "";
@@ -115,6 +127,9 @@
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "R6w-n5-X7X"; */
 "R6w-n5-X7X.normalTitle" = "";
 
+/* Class = "UILabel"; text = "Distance"; ObjectID = "rJh-q3-eQC"; */
+"rJh-q3-eQC.text" = "";
+
 /* Class = "UIButton"; normalTitle = "Buton 2"; ObjectID = "s05-ex-uEs"; */
 "s05-ex-uEs.normalTitle" = "";
 
@@ -142,10 +157,13 @@
 /* Class = "UIButton"; normalTitle = "Radius Blurry"; ObjectID = "vIR-94-5ja"; */
 "vIR-94-5ja.normalTitle" = "";
 
+/* Class = "UILabel"; text = "Calories"; ObjectID = "VUK-Or-FM5"; */
+"VUK-Or-FM5.text" = "";
+
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "W9C-nA-RXS"; */
 "W9C-nA-RXS.title" = "";
 
-/* Class = "UILabel"; text = "Workout Name"; ObjectID = "WjU-FP-pZm"; */
+/* Class = "UILabel"; text = "Event"; ObjectID = "WjU-FP-pZm"; */
 "WjU-FP-pZm.text" = "";
 
 /* Class = "UIButton"; normalTitle = "DTM"; ObjectID = "WMX-9X-sBW"; */
@@ -153,6 +171,9 @@
 
 /* Class = "UINavigationItem"; title = "RE Heatmap"; ObjectID = "xJf-j7-wii"; */
 "xJf-j7-wii.title" = "";
+
+/* Class = "UILabel"; text = "Average Heart Rate"; ObjectID = "XTV-DW-FFR"; */
+"XTV-DW-FFR.text" = "";
 
 /* Class = "UIButton"; normalTitle = "DTM"; ObjectID = "Y4b-e5-pge"; */
 "Y4b-e5-pge.normalTitle" = "";
@@ -165,3 +186,6 @@
 
 /* Class = "UINavigationItem"; title = "RE Heatmap"; ObjectID = "yQa-XH-y2d"; */
 "yQa-XH-y2d.title" = "";
+
+/* Class = "UILabel"; text = "Average Speed"; ObjectID = "yYq-TM-45H"; */
+"yYq-TM-45H.text" = "";

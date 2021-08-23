@@ -65,8 +65,7 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
       MyFunc.logMessage(.debug, String(describing: self.workoutArray))
       self.workoutTableView.reloadData()
     }
-//    MyFunc.logMessage(.debug, "Workouts:")
-//    MyFunc.logMessage(.debug, String(describing: workoutArray))
+
 
   }
 
@@ -222,41 +221,6 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-  }
-
-  func getHeartRateSampleForWorkout(workout: HKWorkout) -> [HKQuantitySample] {
-    guard let heartRateType =
-            HKObjectType.quantityType(forIdentifier:
-                                        HKQuantityTypeIdentifier.heartRate) else {
-      fatalError("*** Unable to create a distance type ***")
-    }
-
-    var samplesToReturnSet = [HKQuantitySample]()
-    let workoutPredicate = HKQuery.predicateForObjects(from: workout)
-
-    //2. Get all workouts that only came from this app.
-    let sourcePredicate = HKQuery.predicateForObjects(from: .default())
-
-    //3. Combine the predicates into a single predicate.
-    let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates:
-                                        [workoutPredicate, sourcePredicate])
-
-    let startDateSort = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
-
-    let query = HKSampleQuery(sampleType: heartRateType,
-                              predicate: compoundPredicate,
-                              limit: 0,
-                              sortDescriptors: [startDateSort]) { (sampleQuery, results, error) -> Void in
-      guard let heartRateSamples = results as? [HKQuantitySample] else {
-        // Perform proper error handling here.
-        return
-      }
-      samplesToReturnSet = heartRateSamples
-      // Use the workout's heartrate samples here.
-    }
-
-    healthstore.execute(query)
-    return samplesToReturnSet
   }
 
 }

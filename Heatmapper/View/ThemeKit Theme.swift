@@ -30,20 +30,15 @@ extension Theme {
 
   func apply(for application: UIApplication) {
 
-    // UIView
-    ThemeView.appearance().backgroundColor = background
 
-    ThemeShadowView.appearance().backgroundColor = background
+    // ********************************************************************************
+    // UILabels
+    // ********************************************************************************
 
-
-
-//    ThemeShadowView.appearance().backgroundColor = UIColor.systemPurple
-
-    // UILabel
-    ThemeLargeNumericUILabel.appearance().with {
-      let themeFont = UIFont.monospacedDigitSystemFont(ofSize: 24.0, weight: .regular)
+    ThemeVeryLargeFontUILabel.appearance().with {
+      let themeFont = UIFont.systemFont(ofSize: 48.0, weight: .regular)
       $0.font = themeFont
-      $0.textColor = textPrimary
+      $0.textColor = textAlternate
     }
 
     ThemeVeryLargeNumericUILabel.appearance().with {
@@ -52,20 +47,22 @@ extension Theme {
       $0.textColor = textPrimary
     }
 
-    ThemeVeryLargeFontUILabel.appearance().with {
-      let themeFont = UIFont.systemFont(ofSize: 48.0, weight: .regular)
+    ThemeLargeFontUILabel.appearance().with {
+      let themeFont = UIFont.systemFont(ofSize: 24.0, weight: .regular)
       $0.font = themeFont
-      $0.textColor = textAlternate
-  }
-    ThemeColumnHeaderUILabel.appearance().with {
-      $0.font = UIFont.preferredFont(forTextStyle: .title2)
       $0.textColor = textAlternate
     }
 
-    ThemeSmallTextUILabel.appearance().with {
-      let themeFont = UIFont.systemFont(ofSize: 12.0, weight: .regular)
+    ThemeLargeNumericUILabel.appearance().with {
+      let themeFont = UIFont.monospacedDigitSystemFont(ofSize: 24.0, weight: .regular)
       $0.font = themeFont
-//      $0.font = UIFont.preferredFont(forTextStyle: .subheadline)
+      $0.textColor = textPrimary
+    }
+
+    ThemeMediumFontUILabel.appearance().with {
+      let themeFont = UIFont.systemFont(ofSize: 22.0, weight: .regular)
+      $0.font = themeFont
+      $0.textColor = textAlternate
     }
 
     ThemeMediumNumericUILabel.appearance().with {
@@ -74,24 +71,42 @@ extension Theme {
       $0.textColor = textPrimary
     }
 
+
+
+    ThemeColumnHeaderUILabel.appearance().with {
+      $0.font = UIFont.preferredFont(forTextStyle: .title2)
+      $0.textColor = textAlternate
+    }
+
+    ThemeSmallTextUILabel.appearance().with {
+      let themeFont = UIFont.systemFont(ofSize: 12.0, weight: .regular)
+      $0.font = themeFont
+    }
+
+
     TableRowNameUILabel.appearance().with {
       $0.font = UIFont.preferredFont(forTextStyle: .title2)
       $0.textColor = textAlternate
     }
 
-
+    // ********************************************************************************
+    // UIViews
+    // ********************************************************************************
     ThemePickerView.appearance().with {
       $0.tintColor = textPrimary
     }
-
-
 
     ThemeTextView.appearance().with {
       $0.textColor = textAlternate
       $0.backgroundColor = background
     }
 
-    // UIButton
+    ThemeView.appearance().backgroundColor = background
+    ThemeShadowView.appearance().backgroundColor = background
+
+    // ********************************************************************************
+    // UIButtons
+    // ********************************************************************************
     ThemeButton.appearance().with {
       $0.setTitleColor(navBarTint, for: .normal)
       $0.setTitleColor(navBarTint.withAlphaComponent(0.3), for: .disabled)
@@ -102,7 +117,9 @@ extension Theme {
       $0.tintColor = buttonPrimary
     }
 
+    // ********************************************************************************
     // UINavigationBar
+    // ********************************************************************************
     let navBarAppearance = UINavigationBarAppearance()
     let navBarFont = UIFont.preferredFont(forTextStyle: .title2)
     navBarAppearance.with {
@@ -123,10 +140,10 @@ extension Theme {
 
     // UISegmentedControl
     let segFont = UIFont.preferredFont(forTextStyle: .title1)
-   ThemeSegmentedControl.appearance().with {
-    $0.setTitleTextAttributes([.font: segFont], for: .normal)
+    ThemeSegmentedControl.appearance().with {
+      $0.setTitleTextAttributes([.font: segFont], for: .normal)
 
-   }
+    }
 
     ThemeTableViewNoBackground.appearance().with {
       $0.backgroundColor = background

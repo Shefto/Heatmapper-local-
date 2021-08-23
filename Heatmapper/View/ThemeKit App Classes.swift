@@ -39,13 +39,19 @@ class ThemeButton: UIButton {
 class ThemeActionButton: UIButton {}
 
 // UILabels
-class ThemeColumnHeaderUILabel: UILabel {}
-class ThemeLargeNumericUILabel: UILabel {}
+class ThemeVeryLargeFontUILabel: UILabel {}
 class ThemeVeryLargeNumericUILabel: UILabel {}
+
+class ThemeLargeFontUILabel: UILabel {}
+class ThemeLargeNumericUILabel: UILabel {}
+
+class ThemeMediumFontUILabel: UILabel {}
 class ThemeMediumNumericUILabel: UILabel {}
+
+class ThemeColumnHeaderUILabel: UILabel {}
+
 class TableRowNameUILabel: UILabel {}
 class ThemeSmallTextUILabel: UILabel {}
-class ThemeVeryLargeFontUILabel: UILabel {}
 
 
 // Text View

@@ -111,7 +111,7 @@ class DTMHeatmapViewController: UIViewController, MKMapViewDelegate {
     )
     { (query, results, error) in
       DispatchQueue.main.async {
-        //4. Cast the samples as HKWorkout
+
         guard
           let samples = results as? [HKWorkout],
           error == nil
