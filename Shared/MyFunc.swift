@@ -433,7 +433,7 @@ class MyFunc {
     MyFunc.logMessage(.debug, "speedStr: \(speedStr)")
     MyFunc.logMessage(.debug, "unitStr: \(unitStr)")
     return speedStr
-//    return (speed: speedString, unit: unitStr)
+
   }
 
   static func removeAdsPurchased() -> Bool {

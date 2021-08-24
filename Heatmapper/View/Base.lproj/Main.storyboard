@@ -822,6 +822,7 @@ DQoNCg
                     <navigationItem key="navigationItem" id="gmD-jc-c6I"/>
                     <connections>
                         <outlet property="avgHeartRateLabel" destination="XTV-DW-FFR" id="404-ie-AMD"/>
+                        <outlet property="avgSpeedLabel" destination="yYq-TM-45H" id="DT6-zF-VYl"/>
                         <outlet property="caloriesLabel" destination="VUK-Or-FM5" id="h0L-6Q-mad"/>
                         <outlet property="dateLabel" destination="cdu-fT-Y48" id="qfk-GB-f8f"/>
                         <outlet property="distanceLabel" destination="rJh-q3-eQC" id="HVr-gj-iMl"/>

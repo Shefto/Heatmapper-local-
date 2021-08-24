@@ -23,7 +23,10 @@ class createdHeatmapViewController: UIViewController  {
   var retrievedWorkout  : HKWorkout?
 
   let workoutDateFormatter  = DateFormatter()
-
+  var measurementFormatter  = MeasurementFormatter()
+  var units: String = ""
+  var unitLength: UnitLength = .meters
+  var unitSpeed: UnitSpeed  = .metersPerSecond
 
   // Outlets and Actions
 
@@ -113,25 +116,34 @@ class createdHeatmapViewController: UIViewController  {
     var workoutEndDateAsString = ""
 
     workoutDateFormatter.dateFormat = "E, d MMM yyyy HH:mm"
-    // start date
-    //    if let workoutStartDate = heatmapWorkout.startDate {
     workoutStartDateAsString = workoutDateFormatter.string(from: heatmapWorkout.startDate)
-    //    }
 
     workoutDateFormatter.dateFormat = "HH:mm"
-    //    if let workoutEndDate = heatmapWorkout.endDate {
     workoutEndDateAsString = workoutDateFormatter.string(from: heatmapWorkout.endDate)
-    //    }
 
     let workoutDateString = workoutStartDateAsString + " - " + workoutEndDateAsString
     dateLabel.text = workoutDateString
 
     // duration
     let workoutIntervalFormatter = DateComponentsFormatter()
-
-    //    if let workoutDuration = heatmapWorkout.duration {
     durationLabel.text = workoutIntervalFormatter.string(from: heatmapWorkout.duration)
-    //    }
+
+    // total distance
+    if let workoutDistance = heatmapWorkout.totalDistance?.doubleValue(for: .meter()) {
+      let formattedDistance = String(format: "%.2f m", workoutDistance)
+      distanceLabel.text = formattedDistance
+
+      let pace = workoutDistance / heatmapWorkout.duration
+      let formattedPace = String(format: "%.2f m/s", pace)
+      let paceString = MyFunc.getUnitSpeedAsString(value: pace, unitSpeed: unitSpeed, formatter: measurementFormatter)
+      let paceUnitString = unitSpeed.symbol
+
+      avgSpeedLabel.text = paceString + " " + paceUnitString
+
+    } else {
+      distanceLabel.text = nil
+    }
+
 
     // total calories
     if let caloriesBurned =
@@ -142,21 +154,14 @@ class createdHeatmapViewController: UIViewController  {
       caloriesLabel.text = nil
     }
 
-    // total distance
-    if let workoutDistance = heatmapWorkout.totalDistance?.doubleValue(for: .meter()) {
-      let formattedDistance = String(format: "%.2f m", workoutDistance)
-      distanceLabel.text = formattedDistance
-    } else {
-      distanceLabel.text = nil
-    }
 
-    // average heart rate
-//    let heartRateSet = getHeartRateSampleForWorkout(workout: heatmapWorkout)
 
-    let heartRateSample = getHeartRateSample(startDate: heatmapWorkout.startDate, endDate: heatmapWorkout.endDate, quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, option: []) 
-    let heartRateAsString = heartRateSample.description + " bpm"
 
-    avgHeartRateLabel.text = heartRateAsString
+    // run query and update label for average Heart Rate
+    loadAverageHeartRateLabel(startDate: heatmapWorkout.startDate, endDate: heatmapWorkout.endDate, quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, option: [])
+
+
+
 
   }
 
@@ -171,105 +176,61 @@ class createdHeatmapViewController: UIViewController  {
   }
 
 
-  func getWorkout(workoutId: UUID, completion:
-                    @escaping ([HKWorkout]?, Error?) -> Void) {
+  func getWorkout(workoutId: UUID, completion: @escaping ([HKWorkout]?, Error?) -> Void) {
 
     let predicate = HKQuery.predicateForObject(with: workoutId)
 
-    let query = HKSampleQuery(
-      sampleType: .workoutType(),
-      predicate: predicate,
-      limit: 0,
-      sortDescriptors: nil
-    )
-    { (query, results, error) in
+    let query = HKSampleQuery(sampleType: .workoutType(), predicate: predicate, limit: 0, sortDescriptors: nil) { (query, results, error) in
       DispatchQueue.main.async {
-
-        guard
-          let samples = results as? [HKWorkout],
-          error == nil
-        else {
+        guard let samples = results as? [HKWorkout], error == nil else {
           completion(nil, error)
           return
         }
-
         completion(samples, nil)
-
-
-
-        // load UI
         self.loadUI()
-
       }
     }
-
     healthstore.execute(query)
 
   }
 
-//
-//  func getHeartRateSampleForWorkout(workout: HKWorkout) -> [HKQuantitySample] {
-//
-//    let heartRateType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
-//    var samplesToReturnSet = [HKQuantitySample]()
-//
-//    let predicateHR = HKQuery.predicateForSamples(withStart: workout.startDate, end: workout.endDate, options: [])
-//
-//    let sourcePredicate = HKQuery.predicateForObjects(from: .default())
-//
-//    //3. Combine the predicates into a single predicate.
-//    let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates:
-//                                                  [predicateHR, sourcePredicate])
-//
-//    let startDateSort = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
-//
-//    let query = HKSampleQuery(sampleType: heartRateType,
-//                              predicate: predicateHR,
-//                              limit: 0,
-//                              sortDescriptors: [startDateSort]) { (sampleQuery, results, error) -> Void in
-//
-//      DispatchQueue.main.async {
-//
-//        guard let heartRateSamples = results as? [HKQuantitySample] else {
-//          // Perform proper error handling here.
-//          return
-//        }
-//        samplesToReturnSet = heartRateSamples
-//        // Use the workout's heartrate samples here.
-//        MyFunc.logMessage(.debug, "heartRateSet")
-//        MyFunc.logMessage(.debug, String(describing: samplesToReturnSet))
-//
-//
-//
-//      }
-//    }
-//
-//    healthstore.execute(query)
-//
-//    return samplesToReturnSet
-//  }
-
-  func getHeartRateSample(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) -> HKSample {
+  func loadAverageHeartRateLabel(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) {
     MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
 
     let quantityPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
-    var quantityResult: Double = 0.0
+    let heartRateQuery = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: quantityPredicate, options: .discreteAverage) { (query, statisticsOrNil, errorOrNil) in
 
-    let squery = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: quantityPredicate, options: .discreteAverage, completionHandler: {(_: HKStatisticsQuery, result: HKStatistics?, _: Error?) -> Void in
-      DispatchQueue.main.async(execute: {() -> Void in
-        let quantity: HKQuantity? = result?.averageQuantity()
-        quantityResult = quantity?.doubleValue(for: HKUnit.count().unitDivided(by: HKUnit.minute())) ?? 0.0
-        MyFunc.logMessage(.debug, "squery returned: \(String(format: "%.f", quantityResult))")
-      })
-    })
-    healthstore.execute(squery)
+      guard let statistics = statisticsOrNil else {
+        return
+      }
+      let average : HKQuantity? = statistics.averageQuantity()
+      let heartRateBPM  = average?.doubleValue(for: HKUnit.count().unitDivided(by: HKUnit.minute())) ?? 0.0
 
-    let quantity = HKQuantity(unit: HKUnit.count().unitDivided(by: HKUnit.minute()), doubleValue: quantityResult)
-    let quantitySample = HKQuantitySample(type: quantityType, quantity: quantity, start: startDate, end: endDate, metadata: ["": ""])
-
-    return quantitySample
+      DispatchQueue.main.async {
+        self.avgHeartRateLabel.text = String(format: "%.2f", heartRateBPM) + " bpm"
+      }
+    }
+    healthstore.execute(heartRateQuery)
   }
 
+  func loadAverageSpeedLabel(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) {
+    MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
+
+    let quantityPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
+    let heartRateQuery = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: quantityPredicate, options: .discreteAverage) { (query, statisticsOrNil, errorOrNil) in
+
+      guard let statistics = statisticsOrNil else {
+        return
+      }
+      let average : HKQuantity? = statistics.averageQuantity()
+      let pace  = average?.doubleValue(for: HKUnit.count().unitDivided(by: HKUnit.minute())) ?? 0.0
+
+      DispatchQueue.main.async {
+        self.avgSpeedLabel.text = String(format: "%.2f", pace) + " bpm"
+      }
+    }
+    healthstore.execute(heartRateQuery)
+  }
 
 }
 
