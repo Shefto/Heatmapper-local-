@@ -151,8 +151,12 @@ class createdHeatmapViewController: UIViewController  {
     }
 
     // average heart rate
-    let heartRateSet = getHeartRateSampleForWorkout(workout: heatmapWorkout)
+//    let heartRateSet = getHeartRateSampleForWorkout(workout: heatmapWorkout)
 
+    let heartRateSample = getHeartRateSample(startDate: heatmapWorkout.startDate, endDate: heatmapWorkout.endDate, quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, option: []) 
+    let heartRateAsString = heartRateSample.description + " bpm"
+
+    avgHeartRateLabel.text = heartRateAsString
 
   }
 
@@ -202,89 +206,69 @@ class createdHeatmapViewController: UIViewController  {
     healthstore.execute(query)
 
   }
-  //
 
-  //
-  //  func getHRSample (startDate: Date, endDate: Date, completion:  @escaping ([HKWorkout]?, Error?) -> Void) {
-  //
-  //    let heartRateType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
-  //    let predicateHR = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
-  //    let sampleQueryHR = HKSampleQuery(sampleType: heartRateType, predicate: predicateHR, limit: 0, sortDescriptors: nil)
-  //    { (sampleQueryHR, samples, error) -> Void in
-  //
-  //      DispatchQueue.main.async {
-  //        guard
-  //          let samples = samples as? [HKWorkout],
-  //          error == nil
-  //        else {
-  //          completion(nil, error)
-  //          return
-  //        }
-  //
-  //        completion(samples, nil)
-  //      }
-  //
-  //    }
-  //
-  //    self.healthstore.execute(sampleQueryHR)
-  //    MyFunc.logMessage(.debug, "HR samples:")
-  //    MyFunc.logMessage(.debug, String(describing: samples))
-  //
-  //  }
+//
+//  func getHeartRateSampleForWorkout(workout: HKWorkout) -> [HKQuantitySample] {
+//
+//    let heartRateType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
+//    var samplesToReturnSet = [HKQuantitySample]()
+//
+//    let predicateHR = HKQuery.predicateForSamples(withStart: workout.startDate, end: workout.endDate, options: [])
+//
+//    let sourcePredicate = HKQuery.predicateForObjects(from: .default())
+//
+//    //3. Combine the predicates into a single predicate.
+//    let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates:
+//                                                  [predicateHR, sourcePredicate])
+//
+//    let startDateSort = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
+//
+//    let query = HKSampleQuery(sampleType: heartRateType,
+//                              predicate: predicateHR,
+//                              limit: 0,
+//                              sortDescriptors: [startDateSort]) { (sampleQuery, results, error) -> Void in
+//
+//      DispatchQueue.main.async {
+//
+//        guard let heartRateSamples = results as? [HKQuantitySample] else {
+//          // Perform proper error handling here.
+//          return
+//        }
+//        samplesToReturnSet = heartRateSamples
+//        // Use the workout's heartrate samples here.
+//        MyFunc.logMessage(.debug, "heartRateSet")
+//        MyFunc.logMessage(.debug, String(describing: samplesToReturnSet))
+//
+//
+//
+//      }
+//    }
+//
+//    healthstore.execute(query)
+//
+//    return samplesToReturnSet
+//  }
 
+  func getHeartRateSample(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) -> HKSample {
+    MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
 
-  func getHeartRateSampleForWorkout(workout: HKWorkout) -> [HKQuantitySample] {
-    //      guard let heartRateType =  HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate) else {
-    //        MyFunc.logMessage(.error, "*** Unable to create a heartRate type ***")
-    //        return
-    //      }
-    let heartRateType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
-    var samplesToReturnSet = [HKQuantitySample]()
+    let quantityPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
+    var quantityResult: Double = 0.0
 
-    let predicateHR = HKQuery.predicateForSamples(withStart: workout.startDate, end: workout.endDate, options: [])
+    let squery = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: quantityPredicate, options: .discreteAverage, completionHandler: {(_: HKStatisticsQuery, result: HKStatistics?, _: Error?) -> Void in
+      DispatchQueue.main.async(execute: {() -> Void in
+        let quantity: HKQuantity? = result?.averageQuantity()
+        quantityResult = quantity?.doubleValue(for: HKUnit.count().unitDivided(by: HKUnit.minute())) ?? 0.0
+        MyFunc.logMessage(.debug, "squery returned: \(String(format: "%.f", quantityResult))")
+      })
+    })
+    healthstore.execute(squery)
 
-    let sourcePredicate = HKQuery.predicateForObjects(from: .default())
+    let quantity = HKQuantity(unit: HKUnit.count().unitDivided(by: HKUnit.minute()), doubleValue: quantityResult)
+    let quantitySample = HKQuantitySample(type: quantityType, quantity: quantity, start: startDate, end: endDate, metadata: ["": ""])
 
-    //3. Combine the predicates into a single predicate.
-    let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates:
-                                                  [predicateHR, sourcePredicate])
-
-    let startDateSort = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
-
-    let query = HKSampleQuery(sampleType: heartRateType,
-                              predicate: predicateHR,
-                              limit: 0,
-                              sortDescriptors: [startDateSort]) { (sampleQuery, results, error) -> Void in
-
-      DispatchQueue.main.async {
-        //        guard
-        //          let samples = samples as? [HKWorkout],
-        //          error == nil
-        //        else {
-        //          completion(nil, error)
-        //          return
-        //        }
-        //
-        //        completion(samples, nil)
-        //      }
-        //
-        guard let heartRateSamples = results as? [HKQuantitySample] else {
-          // Perform proper error handling here.
-          return
-        }
-        samplesToReturnSet = heartRateSamples
-        // Use the workout's heartrate samples here.
-        MyFunc.logMessage(.debug, "heartRateSet")
-        MyFunc.logMessage(.debug, String(describing: samplesToReturnSet))
-      }
-    }
-
-    healthstore.execute(query)
-
-    return samplesToReturnSet
+    return quantitySample
   }
-
-
 
 
 }
