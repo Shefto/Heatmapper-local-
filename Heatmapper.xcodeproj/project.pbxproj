@@ -36,7 +36,7 @@
 		793D1AF024B87F110039441B /* SessionTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AEE24B87F110039441B /* SessionTransfer.swift */; };
 		793D1AF224B87FAD0039441B /* FileTransferObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AF124B87FAD0039441B /* FileTransferObservers.swift */; };
 		793D1AF324B87FAD0039441B /* FileTransferObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793D1AF124B87FAD0039441B /* FileTransferObservers.swift */; };
-		79439B7426C46358001E7CC4 /* createdHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79439B7326C46357001E7CC4 /* createdHeatmapViewController.swift */; };
+		79439B7426C46358001E7CC4 /* SavedHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79439B7326C46357001E7CC4 /* SavedHeatmapViewController.swift */; };
 		7944476F255A9B3B004708E3 /* DurationPickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7944476E255A9B3B004708E3 /* DurationPickerInterfaceController.swift */; };
 		79445D4F25A3292D001D3AC6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79445D4E25A3292C001D3AC6 /* StoreKit.framework */; };
 		7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */; };
@@ -192,7 +192,7 @@
 		793D1AE524B86E6F0039441B /* CustomLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogger.swift; sourceTree = "<group>"; };
 		793D1AEE24B87F110039441B /* SessionTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTransfer.swift; sourceTree = "<group>"; };
 		793D1AF124B87FAD0039441B /* FileTransferObservers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTransferObservers.swift; sourceTree = "<group>"; };
-		79439B7326C46357001E7CC4 /* createdHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createdHeatmapViewController.swift; sourceTree = "<group>"; };
+		79439B7326C46357001E7CC4 /* SavedHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedHeatmapViewController.swift; sourceTree = "<group>"; };
 		7944476E255A9B3B004708E3 /* DurationPickerInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerInterfaceController.swift; sourceTree = "<group>"; };
 		79445D4E25A3292C001D3AC6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
@@ -412,7 +412,7 @@
 		793D1AE024B86C1B0039441B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				79439B7326C46357001E7CC4 /* createdHeatmapViewController.swift */,
+				79439B7326C46357001E7CC4 /* SavedHeatmapViewController.swift */,
 				799131232634126800811731 /* HeatmapViewController.swift */,
 				7965F9C126AC1E27008B130D /* jdHeatmapViewController.swift */,
 				79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */,
@@ -835,7 +835,7 @@
 				797BFD0525421E8700426185 /* Audio.swift in Sources */,
 				79DC34162625D2FC0053733C /* LocationManager.swift in Sources */,
 				79A9DC6126B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift in Sources */,
-				79439B7426C46358001E7CC4 /* createdHeatmapViewController.swift in Sources */,
+				79439B7426C46358001E7CC4 /* SavedHeatmapViewController.swift in Sources */,
 				79F3A2AE2697968A00667B1B /* REColourProvider.swift in Sources */,
 				7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */,
 				79A4EFF624A7A109002A7870 /* WorkoutViewController.swift in Sources */,

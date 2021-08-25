@@ -234,7 +234,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     }
 
     if segueToUse == "historyToCreatedHeatmap" {
-      let destinationVC = segue.destination as! createdHeatmapViewController
+      let destinationVC = segue.destination as! SavedHeatmapViewController
       destinationVC.heatmapWorkoutId = (sender as! UUID)
     }
 

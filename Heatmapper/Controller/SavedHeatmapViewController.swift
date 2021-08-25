@@ -1,5 +1,5 @@
 //
-//  createdHeatmapViewController.swift
+//  SavedHeatmapViewController.swift
 //  Heatmapper
 //
 //  Created by Richard English on 11/08/2021.
@@ -12,11 +12,11 @@ import MapKit
 import HealthKit
 import CoreLocation
 
-class createdHeatmapViewController: UIViewController  {
+class SavedHeatmapViewController: UIViewController  {
 
-  // ****************************************************************************************************
+  // **************************************************
   // Declare class variables
-  // ****************************************************************************************************
+  // **************************************************
   let healthstore       = HKHealthStore()
   var heatmapWorkoutId  : UUID?
   var heatmapImage      : UIImage?
@@ -53,7 +53,9 @@ class createdHeatmapViewController: UIViewController  {
     }
   }
 
+  // **************************************************
   // Core Flow
+  // **************************************************
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -88,14 +90,14 @@ class createdHeatmapViewController: UIViewController  {
   func loadUI() {
 
     guard let heatmapWorkout = retrievedWorkout else {
-      MyFunc.logMessage(.error, "createdHeatmapViewController : no workout returned")
+      MyFunc.logMessage(.error, "SavedHeatmapViewController : no workout returned")
       return
     }
     let colouredheatmapImage = heatmapImage?.withBackground(color: UIColor.systemGreen)
     heatmapImageView.image = colouredheatmapImage
 
     guard let workoutMetadata : Dictionary = heatmapWorkout.metadata  else {
-      MyFunc.logMessage(.error, "createdHeatmapViewController: no workout metadata")
+      MyFunc.logMessage(.error, "SavedHeatmapViewController: no workout metadata")
       return
     }
 
@@ -118,11 +120,16 @@ class createdHeatmapViewController: UIViewController  {
     workoutDateFormatter.dateFormat = "E, d MMM yyyy HH:mm"
     workoutStartDateAsString = workoutDateFormatter.string(from: heatmapWorkout.startDate)
 
+    workoutDateFormatter.dateFormat = "d MMM yyy HH:mm"
+    self.title = workoutDateFormatter.string(from: heatmapWorkout.startDate)
+
+
     workoutDateFormatter.dateFormat = "HH:mm"
     workoutEndDateAsString = workoutDateFormatter.string(from: heatmapWorkout.endDate)
 
     let workoutDateString = workoutStartDateAsString + " - " + workoutEndDateAsString
     dateLabel.text = workoutDateString
+
 
     // duration
     let workoutIntervalFormatter = DateComponentsFormatter()
@@ -154,14 +161,8 @@ class createdHeatmapViewController: UIViewController  {
       caloriesLabel.text = nil
     }
 
-
-
-
     // run query and update label for average Heart Rate
     loadAverageHeartRateLabel(startDate: heatmapWorkout.startDate, endDate: heatmapWorkout.endDate, quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, option: [])
-
-
-
 
   }
 
@@ -169,7 +170,7 @@ class createdHeatmapViewController: UIViewController  {
   func getHeatmapImage() {
 
     guard let workoutId = heatmapWorkoutId else {
-      MyFunc.logMessage(.error, "Invalid heatmapWorkoutId passed to createdHeatmapViewController: \(String(describing: heatmapWorkoutId))")
+      MyFunc.logMessage(.error, "Invalid heatmapWorkoutId passed to SavedHeatmapViewController: \(String(describing: heatmapWorkoutId))")
       return
     }
     heatmapImage = MyFunciOS.getHeatmapImageForWorkout(workoutID: workoutId)
@@ -234,7 +235,7 @@ class createdHeatmapViewController: UIViewController  {
 
 }
 
-extension createdHeatmapViewController: UIScrollViewDelegate {
+extension SavedHeatmapViewController: UIScrollViewDelegate {
 
   func viewForZooming(in scrollView: UIScrollView) -> UIView? {
     return heatmapImageView
