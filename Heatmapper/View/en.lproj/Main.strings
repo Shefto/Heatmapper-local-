@@ -73,6 +73,9 @@
 /* Class = "UIButton"; normalTitle = "Button 1"; ObjectID = "fxp-1X-LEA"; */
 "fxp-1X-LEA.normalTitle" = "";
 
+/* Class = "UIButton"; normalTitle = "Update Workout"; ObjectID = "GxP-i5-0nQ"; */
+"GxP-i5-0nQ.normalTitle" = "";
+
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "HIL-yj-uvc"; */
 "HIL-yj-uvc.title" = "";
 
@@ -118,7 +121,7 @@
 /* Class = "UILabel"; text = "Distance"; ObjectID = "rJh-q3-eQC"; */
 "rJh-q3-eQC.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Buton 2"; ObjectID = "s05-ex-uEs"; */
+/* Class = "UIButton"; normalTitle = "Update Workout"; ObjectID = "s05-ex-uEs"; */
 "s05-ex-uEs.normalTitle" = "";
 
 /* Class = "UIButton"; normalTitle = "JD"; ObjectID = "sPj-oH-Nyf"; */

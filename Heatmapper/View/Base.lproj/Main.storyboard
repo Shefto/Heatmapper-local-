@@ -185,15 +185,15 @@
         <scene sceneID="QA9-GD-v8L">
             <objects>
                 <viewController title="Workout History" id="nCc-eF-wC1" customClass="WorkoutHistoryCollectionViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jzf-ZE-0cG" customClass="ThemeView" customModule="Heatmapper" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="jzf-ZE-0cG" customClass="ThemeView" customModule="Heatmapper" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="lyd-aS-nH0">
-                                <rect key="frame" x="0.0" y="88" width="414" height="972"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="lyd-aS-nH0">
+                                <rect key="frame" x="0.0" y="108" width="414" height="734"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xdx-oz-NWw" userLabel="Workout Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
+                                    <collectionView clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xdx-oz-NWw" userLabel="Workout Collection View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="664"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="api-rD-sS3">
                                             <size key="itemSize" width="128" height="128"/>
@@ -213,11 +213,11 @@
                                         </cells>
                                     </collectionView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" id="6jT-ZL-mzL">
-                                        <rect key="frame" x="0.0" y="902" width="414" height="34"/>
+                                        <rect key="frame" x="0.0" y="665" width="414" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZd-9k-xak" userLabel="Created Heatmap Button" customClass="ThemeActionButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="View Heatmap">
                                                     <color key="titleColor" systemColor="systemGreenColor"/>
@@ -227,16 +227,27 @@
                                                     <action selector="btnCreatedHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="fWE-NN-3jD"/>
                                                 </connections>
                                             </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxP-i5-0nQ" userLabel="Update Workout Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" title="Update Workout">
+                                                    <color key="titleColor" name="autoDetect"/>
+                                                    <color key="titleShadowColor" name="textAlternate"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="btnUpdateWorkout:" destination="nCc-eF-wC1" eventType="touchUpInside" id="ERC-6L-E8V"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="waS-ZS-WLi"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="koB-cI-YWd">
-                                        <rect key="frame" x="0.0" y="938" width="414" height="34"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="koB-cI-YWd">
+                                        <rect key="frame" x="0.0" y="716" width="414" height="18"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cin-hP-zjE" userLabel="RE Heatmap Button">
-                                                <rect key="frame" x="0.0" y="0.0" width="136.66666666666666" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="137.33333333333334" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="RE"/>
                                                 <connections>
@@ -244,7 +255,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPj-oH-Nyf" userLabel="JD Heatmap Button">
-                                                <rect key="frame" x="138.66666666666669" y="0.0" width="136.66666666666669" height="34"/>
+                                                <rect key="frame" x="138.33333333333331" y="0.0" width="137.33333333333331" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="JD"/>
                                                 <connections>
@@ -252,7 +263,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMX-9X-sBW" userLabel="DTM Heatmap Button">
-                                                <rect key="frame" x="277.33333333333331" y="0.0" width="136.66666666666669" height="34"/>
+                                                <rect key="frame" x="276.66666666666669" y="0.0" width="137.33333333333331" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="DTM"/>
                                                 <connections>
@@ -265,6 +276,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
+                                <viewLayoutGuide key="safeArea" id="QHE-RT-z7J"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="xdx-oz-NWw" secondAttribute="trailing" id="SlD-eX-KgX"/>
                                     <constraint firstItem="xdx-oz-NWw" firstAttribute="leading" secondItem="lyd-aS-nH0" secondAttribute="leading" id="aoG-qW-QSr"/>
@@ -276,15 +288,12 @@
                         <constraints>
                             <constraint firstItem="lyd-aS-nH0" firstAttribute="leading" secondItem="WH7-4d-ehI" secondAttribute="leading" id="1r2-E6-NTT"/>
                             <constraint firstItem="WH7-4d-ehI" firstAttribute="trailing" secondItem="lyd-aS-nH0" secondAttribute="trailing" id="PPW-7N-BTj"/>
-                            <constraint firstItem="lyd-aS-nH0" firstAttribute="top" secondItem="WH7-4d-ehI" secondAttribute="top" id="mpM-ss-lwh"/>
-                            <constraint firstItem="WH7-4d-ehI" firstAttribute="bottom" secondItem="lyd-aS-nH0" secondAttribute="bottom" id="tC1-ti-Nwy"/>
+                            <constraint firstItem="lyd-aS-nH0" firstAttribute="top" secondItem="WH7-4d-ehI" secondAttribute="top" constant="20" id="Xvn-Ot-52l"/>
+                            <constraint firstItem="WH7-4d-ehI" firstAttribute="bottom" secondItem="lyd-aS-nH0" secondAttribute="bottom" constant="20" id="a3S-tU-9uw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gOK-0r-wdZ"/>
                     <connections>
-                        <outlet property="dtmButton" destination="WMX-9X-sBW" id="QUR-yd-uce"/>
-                        <outlet property="jdButton" destination="sPj-oH-Nyf" id="6gO-3k-5Kt"/>
-                        <outlet property="reButton" destination="Cin-hP-zjE" id="Lqn-AR-fpW"/>
                         <outlet property="workoutCollectionView" destination="xdx-oz-NWw" id="FZm-9e-HtP"/>
                         <segue destination="Pbk-vr-61V" kind="show" identifier="historyToREHeatmap" id="Q5M-hF-bhw"/>
                         <segue destination="HIL-yj-uvc" kind="show" identifier="historyToJDHeatmap" id="lpb-Mm-P31"/>
@@ -557,19 +566,22 @@ DQoNCg
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Z3D-sr-eeK">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Z3D-sr-eeK">
                                 <rect key="frame" x="0.0" y="832" width="414" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxp-1X-LEA" userLabel="Button 1">
-                                        <rect key="frame" x="0.0" y="0.0" width="134.66666666666666" height="30"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxp-1X-LEA" userLabel="Button 1">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                         <state key="normal" title="Button 1"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s05-ex-uEs" userLabel="Button 2">
-                                        <rect key="frame" x="139.66666666666669" y="0.0" width="134.66666666666669" height="30"/>
-                                        <state key="normal" title="Buton 2"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s05-ex-uEs" userLabel="Button 2" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
+                                        <state key="normal" title="Update Workout"/>
+                                        <connections>
+                                            <action selector="btnUpdateWorkout:" destination="VIb-fl-PFY" eventType="touchUpInside" id="jBw-C5-lKB"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dy8-wu-JZc" userLabel="Button 3">
-                                        <rect key="frame" x="279.33333333333331" y="0.0" width="134.66666666666669" height="30"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dy8-wu-JZc" userLabel="Button 3">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                         <state key="normal" title="Button 3"/>
                                     </button>
                                 </subviews>
@@ -824,6 +836,9 @@ DQoNCg
         </scene>
     </scenes>
     <resources>
+        <namedColor name="autoDetect">
+            <color red="0.93333333333333335" green="0.43529411764705883" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="buttonPrimary">
             <color red="0.12549019607843137" green="0.6705882352941176" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

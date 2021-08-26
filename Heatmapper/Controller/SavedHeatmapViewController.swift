@@ -53,6 +53,12 @@ class SavedHeatmapViewController: UIViewController  {
     }
   }
 
+  @IBAction func btnUpdateWorkout(_ sender: Any) {
+    updateWorkout()
+
+  }
+
+
   // **************************************************
   // Core Flow
   // **************************************************
@@ -162,7 +168,6 @@ class SavedHeatmapViewController: UIViewController  {
 
   }
 
-
   func getHeatmapImage() {
 
     guard let workoutId = heatmapWorkoutId else {
@@ -190,6 +195,37 @@ class SavedHeatmapViewController: UIViewController  {
     healthstore.execute(query)
 
   }
+
+  func updateWorkout() {
+
+    guard let workoutToUpdate = retrievedWorkout else {
+      MyFunc.logMessage(.error, "Cannot get retrievedWorkout")
+      return
+    }
+
+    var metadataToUpdate = workoutToUpdate.metadata
+    let currentDate = Date()
+    let currentDateAsString = String(describing: currentDate)
+
+    metadataToUpdate?.updateValue(currentDateAsString, forKey: "Date")
+
+
+    let workoutToSave = HKWorkout(activityType: workoutToUpdate.workoutActivityType, start: workoutToUpdate.startDate, end: workoutToUpdate.endDate, workoutEvents: workoutToUpdate.workoutEvents, totalEnergyBurned: workoutToUpdate.totalEnergyBurned, totalDistance: workoutToUpdate.totalDistance, device: workoutToUpdate.device, metadata: metadataToUpdate)
+
+    healthstore.save(workoutToSave, withCompletion: { (success, error) in
+
+      if success {
+        // Workout was successfully saved
+        MyFunc.logMessage(.debug, "Workout saved successfully: \(String(describing: workoutToSave))")
+      }
+      else {
+        MyFunc.logMessage(.error, "Error saving workout: \(String(describing: error))")
+      }
+
+    })
+  }
+
+
 
   func loadAverageHeartRateLabel(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) {
     MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")

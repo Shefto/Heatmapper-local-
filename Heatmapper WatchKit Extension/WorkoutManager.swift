@@ -168,7 +168,7 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
       guard let quantityType = type as? HKQuantityType else {
         return // Nothing to do.
       }
-      /// - Tag: GetStatistics
+      // - Tag: GetStatistics
       let statistics = workoutBuilder.statistics(for: quantityType)
       MyFunc.logMessage(.debug, "WorkoutManager.workoutBuilder.didCollectDataOf called")
       // Update the published values.
@@ -241,7 +241,6 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
 
             // add each Sample Array to the Workout
             self.addSamplesToWorkout(sampleArray: HeatmapperWorkout.sampleArray)
-
 
 
           } // self.routeBuilder.insertRouteDate

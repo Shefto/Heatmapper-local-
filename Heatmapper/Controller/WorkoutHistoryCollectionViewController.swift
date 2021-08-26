@@ -37,10 +37,11 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
   @IBOutlet weak var workoutCollectionView: UICollectionView!
   @IBOutlet weak var workoutCollectionViewCell: WorkoutCollectionViewCell!
-  @IBOutlet weak var reButton: UIButton!
-  @IBOutlet weak var jdButton: UIButton!
-  @IBOutlet weak var dtmButton: UIButton!
-  @IBOutlet weak var createdHeatmapButton: ThemeActionButton!
+
+  @IBAction func btnUpdateWorkout(_ sender: Any) {
+
+    updateWorkout()
+  }
 
   @IBAction func btnDTMHeatmap(_ sender: Any) {
     self.performSegue(withIdentifier: "historyToDTMHeatmap", sender: workoutSelectedId)
@@ -170,18 +171,6 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
   }
 
-//  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//    return workoutArray?.count ?? 0
-//  }
-//
-//
-//  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    tableView.deselectRow(at: indexPath, animated: false)
-//    workoutSelectedId = workoutArray?[indexPath.row].uuid
-//    MyFunc.logMessage(.debug, "workoutId: \(String(describing: workoutSelectedId))")
-//    selectedIndexPath = indexPath.row
-//
-//  }
 
   // retrieve all Heatmapper workouts
   func loadWorkouts(completion: @escaping ([HKWorkout]?, Error?) -> Void) {
@@ -242,6 +231,11 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
 
+  func updateWorkout() {
+
+    
+
+  }
  
 
 
