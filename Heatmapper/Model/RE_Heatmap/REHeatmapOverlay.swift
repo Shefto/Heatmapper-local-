@@ -178,7 +178,7 @@ class REHeatmapOverlay:  NSObject, MKOverlay {
       // Scale the value down by the max and add it to the return dictionary
       let heatPointValue = heatmapPoint.heatLevel
 
-      var scaledHeatPointValue = heatPointValue / scaleFactor
+      let scaledHeatPointValue = heatPointValue / scaleFactor
       
       let originalX = Int(heatmapPoint.mapPoint.x)
       let originalY = Int(heatmapPoint.mapPoint.y)

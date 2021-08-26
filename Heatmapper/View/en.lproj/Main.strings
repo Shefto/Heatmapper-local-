@@ -106,9 +106,6 @@
 /* Class = "UIViewController"; title = "Workout History"; ObjectID = "nCc-eF-wC1"; */
 "nCc-eF-wC1.title" = "";
 
-/* Class = "UIButton"; normalTitle = "JD"; ObjectID = "Nzm-xV-84i"; */
-"Nzm-xV-84i.normalTitle" = "";
-
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "Pbk-vr-61V"; */
 "Pbk-vr-61V.title" = "";
 
@@ -129,9 +126,6 @@
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "syd-FH-J8R"; */
 "syd-FH-J8R.title" = "";
-
-/* Class = "UIButton"; normalTitle = "RE"; ObjectID = "tKC-sN-5NG"; */
-"tKC-sN-5NG.normalTitle" = "";
 
 /* Class = "UIButton"; normalTitle = "View Heatmap"; ObjectID = "tZd-9k-xak"; */
 "tZd-9k-xak.normalTitle" = "";
@@ -163,14 +157,8 @@
 /* Class = "UILabel"; text = "Heart Rate"; ObjectID = "XTV-DW-FFR"; */
 "XTV-DW-FFR.text" = "";
 
-/* Class = "UIButton"; normalTitle = "DTM"; ObjectID = "Y4b-e5-pge"; */
-"Y4b-e5-pge.normalTitle" = "";
-
 /* Class = "UIButton"; normalTitle = "Radius Blurry"; ObjectID = "Y9X-XR-V0A"; */
 "Y9X-XR-V0A.normalTitle" = "";
-
-/* Class = "UIViewController"; title = "Workout History"; ObjectID = "ymH-tw-mYJ"; */
-"ymH-tw-mYJ.title" = "";
 
 /* Class = "UINavigationItem"; title = "RE Heatmap"; ObjectID = "yQa-XH-y2d"; */
 "yQa-XH-y2d.title" = "";

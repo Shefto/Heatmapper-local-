@@ -41,7 +41,7 @@
 		79445D4F25A3292D001D3AC6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79445D4E25A3292C001D3AC6 /* StoreKit.framework */; };
 		7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */; };
 		7961D6BF25B74B4900204968 /* MyWKInterfaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */; };
-		7965F9C226AC1E27008B130D /* jdHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7965F9C126AC1E27008B130D /* jdHeatmapViewController.swift */; };
+		7965F9C226AC1E27008B130D /* JDHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */; };
 		797026C0252DB4A500A86A05 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
 		7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */; };
 		797BFD0525421E8700426185 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
@@ -215,7 +215,7 @@
 		7953B58925BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Interface.strings"; sourceTree = "<group>"; };
 		7953B58A25BAD7D200F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWKInterfaceButton.swift; sourceTree = "<group>"; };
-		7965F9C126AC1E27008B130D /* jdHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jdHeatmapViewController.swift; sourceTree = "<group>"; };
+		7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapViewController.swift; sourceTree = "<group>"; };
 		797026BF252DB4A500A86A05 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntervalTableViewFooter.swift; path = Heatmapper/View/IntervalTableViewFooter.swift; sourceTree = SOURCE_ROOT; };
 		797BFD092542B72800426185 /* MyFunciOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFunciOS.swift; sourceTree = "<group>"; };
@@ -414,7 +414,7 @@
 			children = (
 				79439B7326C46357001E7CC4 /* SavedHeatmapViewController.swift */,
 				799131232634126800811731 /* HeatmapViewController.swift */,
-				7965F9C126AC1E27008B130D /* jdHeatmapViewController.swift */,
+				7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */,
 				79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */,
 				792CCCDC26AC32270024C5B3 /* DTMHeatmapViewController.swift */,
 				7935622725AF53C5006BBC54 /* HelpViewController.swift */,
@@ -850,7 +850,7 @@
 				79FDDFD126C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift in Sources */,
 				79913163263490D900811731 /* WorkoutHistoryViewController.swift in Sources */,
 				79D083B42508EF6400274F79 /* MainMenuViewController.swift in Sources */,
-				7965F9C226AC1E27008B130D /* jdHeatmapViewController.swift in Sources */,
+				7965F9C226AC1E27008B130D /* JDHeatmapViewController.swift in Sources */,
 				79B80BD3253DDB8300BEA10F /* SceneDelegate.swift in Sources */,
 				79F3A2B0269796C100667B1B /* RE_DTMDiffColorProvider.swift in Sources */,
 				79FB27872561984000E1C9AD /* Objects.swift in Sources */,

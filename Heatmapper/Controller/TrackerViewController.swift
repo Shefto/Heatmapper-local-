@@ -195,9 +195,9 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
                                       MyFunciOS.openUrl(urlString: "x-apple-health:root&path=BROWSE")
                                      })
     alert.addAction(okAction)
-    //    if workoutStatus != .cancelled {
-    //      alert.addAction(healthAction)
-    //    }
+
+    alert.addAction(healthAction)
+
     present(alert, animated: true, completion: nil)
 
   }

@@ -216,7 +216,7 @@ class WorkoutHistoryViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     if segueToUse == "historyToJDHeatmap" {
-      let destinationVC = segue.destination as! jdHeatmapViewController
+      let destinationVC = segue.destination as! JDHeatmapViewController
       destinationVC.heatmapWorkoutId = (sender as! UUID)
     }
 

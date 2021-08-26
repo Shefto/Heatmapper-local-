@@ -12,14 +12,14 @@ import WatchConnectivity
 class SetIntervalsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDataSource, UITableViewDelegate, IntervalTypeTableViewCellDelegate, SessionCommands {
 
   let theme                       = ColourTheme()
-  let screenSize: CGRect = UIScreen.main.bounds
+  let screenSize                  : CGRect = UIScreen.main.bounds
   let workColour                  = UIColor.systemRed
   let restColour                  = UIColor.systemOrange
   var warmupCooldownColour        = UIColor.systemGreen
 
   var activityType                = ActivityType()
   var activityTemplate            = ActivityTemplate()
-  var intervalTemplateArray: [IntervalTemplate] = []
+  var intervalTemplateArray       : [IntervalTemplate] = []
 
   var secondStride: Int = 5
   let sliderSizeInSeconds: Float = 300
@@ -28,7 +28,7 @@ class SetIntervalsViewController: UIViewController, UIPickerViewDelegate, UIPick
   var largeMinuteArray            = [String]()
   var secondArray                 = [String]()
   var patternArray                = [String]()
-  var isTotalDurationRow: Bool = false
+  var isTotalDurationRow          : Bool = false
 
   var warmupDragStartPosition: CGPoint!
   var warmupDragEndPosition: CGPoint!
@@ -136,9 +136,8 @@ class SetIntervalsViewController: UIViewController, UIPickerViewDelegate, UIPick
     restViewWidth.constant = getWidthFromValue(activityTemplate.rest.duration, restContainerView.bounds.width)
     cooldownViewWidth.constant = getWidthFromValue(activityTemplate.cooldown.duration, cooldownContainerView.bounds.width)
 
-
-
   }
+
   func loadUI() {
 
     loadMinuteItems()

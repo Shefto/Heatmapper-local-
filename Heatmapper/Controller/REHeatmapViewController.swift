@@ -80,7 +80,7 @@ class REHeatmapViewController: UIViewController, MKMapViewDelegate {
     heatmapPointsArray = heatmapMKPointsArray.map { REHeatmapPoint.init(mapPoint: $0, radius: 0, heatLevel: 0.0) }
 
     // get the array of heatmap cells based upon the co-ordinates passed in
-    var heatmapCellArray = reHeatmapOverlay.setData(reHeatmapPointArray: heatmapPointsArray)
+    let heatmapCellArray = reHeatmapOverlay.setData(reHeatmapPointArray: heatmapPointsArray)
     MyFunc.logMessage(.debug, "heatmapCellArray")
     MyFunc.logMessage(.debug, String(describing: heatmapCellArray))
 

@@ -229,7 +229,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     }
 
     if segueToUse == "historyToJDHeatmap" {
-      let destinationVC = segue.destination as! jdHeatmapViewController
+      let destinationVC = segue.destination as! JDHeatmapViewController
       destinationVC.heatmapWorkoutId = (sender as! UUID)
     }
 

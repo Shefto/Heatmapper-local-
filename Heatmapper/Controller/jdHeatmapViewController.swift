@@ -13,7 +13,7 @@ import MapKit
 import HealthKit
 import CoreLocation
 
-class jdHeatmapViewController: UIViewController {
+class JDHeatmapViewController: UIViewController {
 
   let healthstore = HKHealthStore()
   // JDHeatmapView is our custom heatmap MapView class
@@ -229,7 +229,7 @@ class jdHeatmapViewController: UIViewController {
 }
 
 // these functions included as delegate of MKMapView
-extension jdHeatmapViewController: MKMapViewDelegate
+extension JDHeatmapViewController: MKMapViewDelegate
 {
   // returns the renderer from the MKMapView and overlay passed in
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -249,7 +249,7 @@ extension jdHeatmapViewController: MKMapViewDelegate
 }
 
 // these functions required as delegate of JDHeatMap
-extension jdHeatmapViewController: JDHeatMapDelegate
+extension JDHeatmapViewController: JDHeatMapDelegate
 {
   func heatmap(HeatPointCount heatmap:JDHeatMapView) -> Int
   {

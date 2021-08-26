@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="POp-b4-bg1">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -22,7 +22,7 @@
                                 <rect key="frame" x="5" y="617" width="404" height="240"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ape-0k-33h" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="74.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="74.666666666666671"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -33,7 +33,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-uM-bXg" userLabel="Start Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="82.5" width="404" height="75"/>
+                                        <rect key="frame" x="0.0" y="82.666666666666629" width="404" height="74.666666666666686"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -44,7 +44,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="uxy-2h-68R" userLabel="Heatmap Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="165.5" width="404" height="74.5"/>
+                                        <rect key="frame" x="0.0" y="165.33333333333337" width="404" height="74.666666666666686"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -82,7 +82,7 @@
         <!--JDHeatmap-->
         <scene sceneID="Vhz-Vt-d44">
             <objects>
-                <viewController title="Heatmap" id="HIL-yj-uvc" userLabel="JDHeatmap" customClass="jdHeatmapViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Heatmap" id="HIL-yj-uvc" userLabel="JDHeatmap" customClass="JDHeatmapViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vZq-KN-BDQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -91,21 +91,21 @@
                                 <rect key="frame" x="0.0" y="832" width="414" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fa-ka-EKP" userLabel="Radius Distinct">
-                                        <rect key="frame" x="0.0" y="0.0" width="134.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="134.66666666666666" height="30"/>
                                         <state key="normal" title="Radius Distinct"/>
                                         <connections>
                                             <action selector="changeToRadiusDistinct:" destination="HIL-yj-uvc" eventType="touchUpInside" id="eEw-qx-EBg"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkP-wz-qdj" userLabel="Radius Blurry">
-                                        <rect key="frame" x="139.5" y="0.0" width="135" height="30"/>
+                                        <rect key="frame" x="139.66666666666669" y="0.0" width="134.66666666666669" height="30"/>
                                         <state key="normal" title="Radius Blurry"/>
                                         <connections>
                                             <action selector="ChangeToRadiusBlurry:" destination="HIL-yj-uvc" eventType="touchUpInside" id="8Go-V1-zZ0"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qUW-ZW-8kZ" userLabel="Flat Distinct">
-                                        <rect key="frame" x="279.5" y="0.0" width="134.5" height="30"/>
+                                        <rect key="frame" x="279.33333333333331" y="0.0" width="134.66666666666669" height="30"/>
                                         <state key="normal" title="Flat Distinct"/>
                                         <connections>
                                             <action selector="ChangeToFlatDistinct:" destination="HIL-yj-uvc" eventType="touchUpInside" id="5HM-N9-xwj"/>
@@ -193,7 +193,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="972"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xdx-oz-NWw" userLabel="Workout Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="884"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="api-rD-sS3">
                                             <size key="itemSize" width="128" height="128"/>
@@ -213,11 +213,11 @@
                                         </cells>
                                     </collectionView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" id="6jT-ZL-mzL">
-                                        <rect key="frame" x="0.0" y="886" width="414" height="34"/>
+                                        <rect key="frame" x="0.0" y="902" width="414" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZd-9k-xak" userLabel="Created Heatmap Button" customClass="ThemeActionButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="View Heatmap">
                                                     <color key="titleColor" systemColor="systemGreenColor"/>
@@ -236,7 +236,7 @@
                                         <rect key="frame" x="0.0" y="938" width="414" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cin-hP-zjE" userLabel="RE Heatmap Button">
-                                                <rect key="frame" x="0.0" y="0.0" width="136.5" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="136.66666666666666" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="RE"/>
                                                 <connections>
@@ -244,7 +244,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPj-oH-Nyf" userLabel="JD Heatmap Button">
-                                                <rect key="frame" x="138.5" y="0.0" width="137" height="34"/>
+                                                <rect key="frame" x="138.66666666666669" y="0.0" width="136.66666666666669" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="JD"/>
                                                 <connections>
@@ -252,7 +252,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMX-9X-sBW" userLabel="DTM Heatmap Button">
-                                                <rect key="frame" x="277.5" y="0.0" width="136.5" height="34"/>
+                                                <rect key="frame" x="277.33333333333331" y="0.0" width="136.66666666666669" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="DTM"/>
                                                 <connections>
@@ -277,7 +277,7 @@
                             <constraint firstItem="lyd-aS-nH0" firstAttribute="leading" secondItem="WH7-4d-ehI" secondAttribute="leading" id="1r2-E6-NTT"/>
                             <constraint firstItem="WH7-4d-ehI" firstAttribute="trailing" secondItem="lyd-aS-nH0" secondAttribute="trailing" id="PPW-7N-BTj"/>
                             <constraint firstItem="lyd-aS-nH0" firstAttribute="top" secondItem="WH7-4d-ehI" secondAttribute="top" id="mpM-ss-lwh"/>
-                            <constraint firstItem="WH7-4d-ehI" firstAttribute="bottom" secondItem="lyd-aS-nH0" secondAttribute="bottom" constant="10" id="tC1-ti-Nwy"/>
+                            <constraint firstItem="WH7-4d-ehI" firstAttribute="bottom" secondItem="lyd-aS-nH0" secondAttribute="bottom" id="tC1-ti-Nwy"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gOK-0r-wdZ"/>
@@ -295,84 +295,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UC3-lr-6fG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="392.75362318840581" y="789.50892857142856"/>
-        </scene>
-        <!--Workout History TableView-->
-        <scene sceneID="ctL-08-G83">
-            <objects>
-                <viewController title="Workout History" id="ymH-tw-mYJ" userLabel="Workout History TableView" customClass="WorkoutHistoryViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xfx-ZE-WmS" customClass="ThemeView" customModule="Heatmapper" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vYk-Ku-OkY">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="110" sectionHeaderHeight="1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hiI-BG-aTT" userLabel="Workout Table View" customClass="ThemeTableViewNoBackground" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="workoutCell" id="9F9-UV-YG8">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="110"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9F9-UV-YG8" id="Oki-D7-gYH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </prototypes>
-                                    </tableView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="hz6-Qc-3nk">
-                                        <rect key="frame" x="0.0" y="768" width="414" height="50"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKC-sN-5NG" userLabel="RE Heatmap Button">
-                                                <rect key="frame" x="0.0" y="0.0" width="136.5" height="50"/>
-                                                <state key="normal" title="RE"/>
-                                                <connections>
-                                                    <action selector="btnREHeatmap:" destination="ymH-tw-mYJ" eventType="touchUpInside" id="hOI-m6-eL7"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nzm-xV-84i" userLabel="JD Heatmap Button">
-                                                <rect key="frame" x="138.5" y="0.0" width="137" height="50"/>
-                                                <state key="normal" title="JD"/>
-                                                <connections>
-                                                    <action selector="btnJDHeatmap:" destination="ymH-tw-mYJ" eventType="touchUpInside" id="666-NY-qP8"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4b-e5-pge" userLabel="DTM Heatmap Button">
-                                                <rect key="frame" x="277.5" y="0.0" width="136.5" height="50"/>
-                                                <state key="normal" title="DTM"/>
-                                                <connections>
-                                                    <action selector="btnDTMHeatmap:" destination="ymH-tw-mYJ" eventType="touchUpInside" id="zOm-DJ-cMu"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="Jt9-1E-Yqf"/>
-                                        </constraints>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="1gs-gZ-a2k"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="1gs-gZ-a2k" firstAttribute="trailing" secondItem="vYk-Ku-OkY" secondAttribute="trailing" id="0bY-UU-avE"/>
-                            <constraint firstItem="vYk-Ku-OkY" firstAttribute="top" secondItem="1gs-gZ-a2k" secondAttribute="top" id="Hhs-zH-RYq"/>
-                            <constraint firstItem="vYk-Ku-OkY" firstAttribute="leading" secondItem="1gs-gZ-a2k" secondAttribute="leading" id="mDI-53-ESK"/>
-                            <constraint firstItem="1gs-gZ-a2k" firstAttribute="bottom" secondItem="vYk-Ku-OkY" secondAttribute="bottom" id="w5F-PD-CXf"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="HGh-O7-aAL"/>
-                    <connections>
-                        <outlet property="dtmButton" destination="Y4b-e5-pge" id="Txs-sW-m01"/>
-                        <outlet property="jdButton" destination="Nzm-xV-84i" id="0cI-aW-0kk"/>
-                        <outlet property="reButton" destination="tKC-sN-5NG" id="PHE-xW-GfX"/>
-                        <outlet property="workoutTableView" destination="hiI-BG-aTT" id="7J9-rv-MFa"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="thT-5L-gjw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1322" y="790"/>
         </scene>
         <!--Help-->
         <scene sceneID="DQ6-Bi-w9U">
@@ -639,15 +561,15 @@ DQoNCg
                                 <rect key="frame" x="0.0" y="832" width="414" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxp-1X-LEA" userLabel="Button 1">
-                                        <rect key="frame" x="0.0" y="0.0" width="134.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="134.66666666666666" height="30"/>
                                         <state key="normal" title="Button 1"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s05-ex-uEs" userLabel="Button 2">
-                                        <rect key="frame" x="139.5" y="0.0" width="135" height="30"/>
+                                        <rect key="frame" x="139.66666666666669" y="0.0" width="134.66666666666669" height="30"/>
                                         <state key="normal" title="Buton 2"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dy8-wu-JZc" userLabel="Button 3">
-                                        <rect key="frame" x="279.5" y="0.0" width="134.5" height="30"/>
+                                        <rect key="frame" x="279.33333333333331" y="0.0" width="134.66666666666669" height="30"/>
                                         <state key="normal" title="Button 3"/>
                                     </button>
                                 </subviews>
@@ -662,16 +584,16 @@ DQoNCg
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K49-iB-Dre" userLabel="Duration" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="169.5" y="0.0" width="65.5" height="0.0"/>
+                                        <rect key="frame" x="169.33333333333334" y="0.0" width="65.333333333333343" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7p0-Xp-GAh">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="491"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="492"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bi1-ui-buG">
-                                                <rect key="frame" x="0.0" y="0.0" width="404" height="491"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="404" height="492"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -684,40 +606,40 @@ DQoNCg
                                         </constraints>
                                     </scrollView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WjU-FP-pZm" userLabel="Event" customClass="ThemeLargeFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="180.5" y="506" width="43" height="20.5"/>
+                                        <rect key="frame" x="180.66666666666666" y="506.99999999999994" width="42.666666666666657" height="20.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTI-FV-Wgi" userLabel="Venue" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="178" y="541.5" width="48" height="20.5"/>
+                                        <rect key="frame" x="178" y="542.33333333333337" width="48" height="20.333333333333371"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FH-ba-EGv" userLabel="Pitch" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="183" y="577" width="38.5" height="20.5"/>
+                                        <rect key="frame" x="182.66666666666666" y="577.66666666666663" width="38.666666666666657" height="20.333333333333371"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUb-WJ-pCB" userLabel="Sport" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="181" y="612.5" width="42.5" height="20.5"/>
+                                        <rect key="frame" x="181" y="613" width="42.333333333333343" height="20.333333333333371"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ai0-ZQ-fkj">
-                                        <rect key="frame" x="0.0" y="648" width="404" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="648.33333333333337" width="404" height="20.333333333333371"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUK-Or-FM5" userLabel="Calories" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="194.5" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="194.66666666666666" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Heart Rate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTV-DW-FFR" userLabel="Avg Heart Rate" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="209.5" y="0.0" width="194.5" height="20.5"/>
+                                                <rect key="frame" x="209.66666666666663" y="0.0" width="194.33333333333337" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -725,16 +647,16 @@ DQoNCg
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Haw-cx-DRl">
-                                        <rect key="frame" x="0.0" y="683.5" width="404" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="683.66666666666663" width="404" height="20.333333333333371"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYq-TM-45H" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="201" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="201" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJh-q3-eQC" userLabel="Distance" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="203" y="0.0" width="201" height="20.5"/>
+                                                <rect key="frame" x="203" y="0.0" width="201" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -797,21 +719,21 @@ DQoNCg
                                 <rect key="frame" x="0.0" y="832" width="414" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kh7-pS-WQE" userLabel="Radius Distinct">
-                                        <rect key="frame" x="0.0" y="0.0" width="134.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="134.66666666666666" height="30"/>
                                         <state key="normal" title="Radius Distinct"/>
                                         <connections>
                                             <action selector="changeToRadiusDistinct:" destination="syd-FH-J8R" eventType="touchUpInside" id="WBn-La-t5j"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9X-XR-V0A" userLabel="Radius Blurry">
-                                        <rect key="frame" x="139.5" y="0.0" width="135" height="30"/>
+                                        <rect key="frame" x="139.66666666666669" y="0.0" width="134.66666666666669" height="30"/>
                                         <state key="normal" title="Radius Blurry"/>
                                         <connections>
                                             <action selector="ChangeToRadiusBlurry:" destination="syd-FH-J8R" eventType="touchUpInside" id="JVQ-w7-4Zl"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mh4-Pn-ffs" userLabel="Flat Distinct">
-                                        <rect key="frame" x="279.5" y="0.0" width="134.5" height="30"/>
+                                        <rect key="frame" x="279.33333333333331" y="0.0" width="134.66666666666669" height="30"/>
                                         <state key="normal" title="Flat Distinct"/>
                                         <connections>
                                             <action selector="ChangeToFlatDistinct:" destination="syd-FH-J8R" eventType="touchUpInside" id="pIe-Dl-DBd"/>
@@ -856,21 +778,21 @@ DQoNCg
                                 <rect key="frame" x="0.0" y="832" width="414" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KhR-k9-Udq" userLabel="Radius Distinct">
-                                        <rect key="frame" x="0.0" y="0.0" width="134.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="134.66666666666666" height="30"/>
                                         <state key="normal" title="Radius Distinct"/>
                                         <connections>
                                             <action selector="changeToRadiusDistinct:" destination="Pbk-vr-61V" eventType="touchUpInside" id="iD6-xT-NGl"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vIR-94-5ja" userLabel="Radius Blurry">
-                                        <rect key="frame" x="139.5" y="0.0" width="135" height="30"/>
+                                        <rect key="frame" x="139.66666666666669" y="0.0" width="134.66666666666669" height="30"/>
                                         <state key="normal" title="Radius Blurry"/>
                                         <connections>
                                             <action selector="ChangeToRadiusBlurry:" destination="Pbk-vr-61V" eventType="touchUpInside" id="fGG-bg-cdO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R6w-n5-X7X" userLabel="Flat Distinct">
-                                        <rect key="frame" x="279.5" y="0.0" width="134.5" height="30"/>
+                                        <rect key="frame" x="279.33333333333331" y="0.0" width="134.66666666666669" height="30"/>
                                         <state key="normal" title="Flat Distinct"/>
                                         <connections>
                                             <action selector="ChangeToFlatDistinct:" destination="Pbk-vr-61V" eventType="touchUpInside" id="BvA-WK-Tgm"/>

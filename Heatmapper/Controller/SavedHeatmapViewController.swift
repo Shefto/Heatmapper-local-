@@ -110,8 +110,6 @@ class SavedHeatmapViewController: UIViewController  {
     venueLabel.text = workoutVenue
     pitchLabel.text = workoutPitch
     sportLabel.text = workoutSport
-    
-
 
     // start and end date
     var workoutStartDateAsString = ""
@@ -123,13 +121,11 @@ class SavedHeatmapViewController: UIViewController  {
     workoutDateFormatter.dateFormat = "d MMM yyy HH:mm"
     self.title = workoutDateFormatter.string(from: heatmapWorkout.startDate)
 
-
     workoutDateFormatter.dateFormat = "HH:mm"
     workoutEndDateAsString = workoutDateFormatter.string(from: heatmapWorkout.endDate)
 
     let workoutDateString = workoutStartDateAsString + " - " + workoutEndDateAsString
     dateLabel.text = workoutDateString
-
 
     // duration
     let workoutIntervalFormatter = DateComponentsFormatter()
@@ -141,7 +137,7 @@ class SavedHeatmapViewController: UIViewController  {
       distanceLabel.text = formattedDistance
 
       let pace = workoutDistance / heatmapWorkout.duration
-      let formattedPace = String(format: "%.2f m/s", pace)
+    
       let paceString = MyFunc.getUnitSpeedAsString(value: pace, unitSpeed: unitSpeed, formatter: measurementFormatter)
       let paceUnitString = unitSpeed.symbol
 
