@@ -56,6 +56,7 @@ class SavedHeatmapViewController: UIViewController  {
   @IBAction func btnUpdateWorkout(_ sender: Any) {
     updateWorkout()
 
+
   }
 
 
@@ -196,7 +197,7 @@ class SavedHeatmapViewController: UIViewController  {
 
   }
 
-  func updateWorkout() {
+  func updateWorkout()  {
 
     guard let workoutToUpdate = retrievedWorkout else {
       MyFunc.logMessage(.error, "Cannot get retrievedWorkout")
@@ -209,20 +210,22 @@ class SavedHeatmapViewController: UIViewController  {
 
     metadataToUpdate?.updateValue(currentDateAsString, forKey: "Date")
 
-
     let workoutToSave = HKWorkout(activityType: workoutToUpdate.workoutActivityType, start: workoutToUpdate.startDate, end: workoutToUpdate.endDate, workoutEvents: workoutToUpdate.workoutEvents, totalEnergyBurned: workoutToUpdate.totalEnergyBurned, totalDistance: workoutToUpdate.totalDistance, device: workoutToUpdate.device, metadata: metadataToUpdate)
 
     healthstore.save(workoutToSave, withCompletion: { (success, error) in
 
       if success {
         // Workout was successfully saved
-        MyFunc.logMessage(.debug, "Workout saved successfully: \(String(describing: workoutToSave))")
+        MyFunc.logMessage(.debug, "Workout saved successfully: \(String(describing: workoutToSave.uuid))")
+        MyFunciOS.renameHeatmapImageFile(currentID: self.heatmapWorkoutId!, newID: workoutToSave.uuid)
+
       }
       else {
         MyFunc.logMessage(.error, "Error saving workout: \(String(describing: error))")
       }
 
     })
+
   }
 
 

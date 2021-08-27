@@ -23,7 +23,6 @@ class MyFunciOS {
 
   static func getHeatmapImageForWorkout(workoutID: UUID) -> UIImage {
 
-
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     let documentsDirectory = paths[0]
     let documentsDirectoryStr = String(describing: documentsDirectory)
@@ -46,5 +45,42 @@ class MyFunciOS {
     }
     return heatmapImage
   }
+
+  static func renameHeatmapImageFile(currentID: UUID, newID: UUID) {
+
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let documentsDirectory = paths[0]
+    let documentsDirectoryStr = String(describing: documentsDirectory)
+
+    let currentIDString = String(describing: currentID)
+    let currentFilenameString = "JDHeatmap_" + currentIDString + ".png"
+
+    let heatmapImageFileExists = MyFunc.checkFileExists(filename: currentFilenameString)
+
+    if heatmapImageFileExists {
+
+      let documentLocationStr = documentsDirectoryStr + currentFilenameString
+      var currentFileURL = URL(string: documentLocationStr)!
+
+      let newIDString = String(describing: newID)
+      let newFilenameString = "JDHeatmap_" + newIDString + ".png"
+
+      var newURV = URLResourceValues()
+      newURV.name = newFilenameString
+
+      try? currentFileURL.setResourceValues(newURV)
+
+//      if let data = try? Data(contentsOf: documentLocationURL), let loaded = UIImage(data: data) {
+//        heatmapImage = loaded
+//      } else {
+//        heatmapImage = UIImage(named: "Work.png")!
+//      }
+//
+    }
+//    return heatmapImage
+  }
+
+
+
 
 }
