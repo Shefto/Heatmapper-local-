@@ -40,13 +40,19 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
     performSegue(withIdentifier: "mainMenuToTracker", sender: .none)
   }
   
-  @IBAction func btnSettings() {
+  @IBAction func btnSettings(_ sender: Any) {
     performSegue(withIdentifier: "mainMenuToSettings", sender: .none)
   }
 
   @IBAction func btnHeatmap(_ sender: Any) {
     performSegue(withIdentifier: "mainMenuToHeatmap", sender: .none)
   }
+
+  @IBAction func btnReferenceData(_ sender: Any) {
+    performSegue(withIdentifier: "mainMenuToReferenceData", sender: .none)
+
+  }
+
 
   override func viewWillAppear(_ animated: Bool) {
     if MyFunc.removeAdsPurchased() == false {

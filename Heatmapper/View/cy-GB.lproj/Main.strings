@@ -52,6 +52,9 @@
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "wkZ-fm-ijo"; */
 "wkZ-fm-ijo.title" = "Gosodiadau";
 
+/* Class = "UIButton"; normalTitle = "Update Workout"; ObjectID = "2DM-st-7JY"; */
+"2DM-st-7JY.normalTitle" = "";
+
 /* Class = "UILabel"; text = "Pitch"; ObjectID = "3FH-ba-EGv"; */
 "3FH-ba-EGv.text" = "";
 
@@ -63,6 +66,9 @@
 
 /* Class = "UIButton"; normalTitle = "Workout History"; ObjectID = "ape-0k-33h"; */
 "ape-0k-33h.normalTitle" = "";
+
+/* Class = "UIViewController"; title = "Events"; ObjectID = "bKA-ac-svZ"; */
+"bKA-ac-svZ.title" = "";
 
 /* Class = "UIViewController"; title = "Tracker"; ObjectID = "cbs-Dv-Qaf"; */
 "cbs-Dv-Qaf.title" = "";
@@ -118,11 +124,17 @@
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "mh4-Pn-ffs"; */
 "mh4-Pn-ffs.normalTitle" = "";
 
+/* Class = "UIButton"; normalTitle = "Manage Events"; ObjectID = "MUA-HA-gex"; */
+"MUA-HA-gex.normalTitle" = "";
+
 /* Class = "UIViewController"; title = "Workout History"; ObjectID = "nCc-eF-wC1"; */
 "nCc-eF-wC1.title" = "";
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "Pbk-vr-61V"; */
 "Pbk-vr-61V.title" = "";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Qlo-na-RxU"; */
+"Qlo-na-RxU.text" = "";
 
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "qUW-ZW-8kZ"; */
 "qUW-ZW-8kZ.normalTitle" = "";
@@ -141,6 +153,9 @@
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "syd-FH-J8R"; */
 "syd-FH-J8R.title" = "";
+
+/* Class = "UIButton"; normalTitle = "View Heatmap"; ObjectID = "TfY-wi-FxC"; */
+"TfY-wi-FxC.normalTitle" = "";
 
 /* Class = "UIButton"; normalTitle = "View Heatmap"; ObjectID = "tZd-9k-xak"; */
 "tZd-9k-xak.normalTitle" = "";

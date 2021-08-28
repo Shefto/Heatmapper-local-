@@ -18,6 +18,7 @@
 		791BD3C325A64E2600FD994A /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791BD3C225A64E2600FD994A /* WorkoutManager.swift */; };
 		79201489254343BD00212051 /* MyFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083BB25092EBB00274F79 /* MyFunc.swift */; };
 		792CCCDD26AC32270024C5B3 /* DTMHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792CCCDC26AC32270024C5B3 /* DTMHeatmapViewController.swift */; };
+		793477A726DA55EC0004DF0A /* ReferenceDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */; };
 		7935622825AF53C5006BBC54 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7935622725AF53C5006BBC54 /* HelpViewController.swift */; };
 		7935625125B0BBBE006BBC54 /* UnitConverterPace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7935625025B0BBBC006BBC54 /* UnitConverterPace.swift */; };
 		7935625225B0BBC0006BBC54 /* UnitConverterPace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7935625025B0BBBC006BBC54 /* UnitConverterPace.swift */; };
@@ -182,6 +183,7 @@
 		7907E8C024E1468500F3DE0D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		791BD3C225A64E2600FD994A /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
 		792CCCDC26AC32270024C5B3 /* DTMHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTMHeatmapViewController.swift; sourceTree = "<group>"; };
+		793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceDataViewController.swift; sourceTree = "<group>"; };
 		7935622725AF53C5006BBC54 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = SOURCE_ROOT; };
 		7935625025B0BBBC006BBC54 /* UnitConverterPace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterPace.swift; sourceTree = "<group>"; };
 		7935629425B31431006BBC54 /* BartyCrouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartyCrouch.swift; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 		793D1AE024B86C1B0039441B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */,
 				79439B7326C46357001E7CC4 /* SavedHeatmapViewController.swift */,
 				799131232634126800811731 /* HeatmapViewController.swift */,
 				7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */,
@@ -825,6 +828,7 @@
 				797E7C062575312500EAE473 /* IntervalTypeTableViewCell.swift in Sources */,
 				79FDDFCD26C98BD900526FB9 /* CornerpointClientProtocol.swift in Sources */,
 				79D083BE250A0C0900274F79 /* Extensions.swift in Sources */,
+				793477A726DA55EC0004DF0A /* ReferenceDataViewController.swift in Sources */,
 				7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */,
 				799131292634145F00811731 /* JDHeatMapView.swift in Sources */,
 				79A4EFFE24A89063002A7870 /* FartlekTableViewCell.swift in Sources */,
