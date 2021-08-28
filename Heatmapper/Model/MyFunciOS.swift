@@ -70,14 +70,8 @@ class MyFunciOS {
 
       try? currentFileURL.setResourceValues(newURV)
 
-//      if let data = try? Data(contentsOf: documentLocationURL), let loaded = UIImage(data: data) {
-//        heatmapImage = loaded
-//      } else {
-//        heatmapImage = UIImage(named: "Work.png")!
-//      }
-//
     }
-//    return heatmapImage
+
   }
 
 

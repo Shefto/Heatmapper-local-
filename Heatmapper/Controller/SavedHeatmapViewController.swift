@@ -217,10 +217,20 @@ class SavedHeatmapViewController: UIViewController  {
       if success {
         // Workout was successfully saved
         MyFunc.logMessage(.debug, "Workout saved successfully: \(String(describing: workoutToSave.uuid))")
-        MyFunciOS.renameHeatmapImageFile(currentID: self.heatmapWorkoutId!, newID: workoutToSave.uuid)
+        MyFunciOS.renameHeatmapImageFile(currentID: workoutToUpdate.uuid, newID: workoutToSave.uuid)
+        // delete previous workout
 
-      }
-      else {
+        self.healthstore.delete(workoutToUpdate, withCompletion: { (success, error) in
+
+          if success {
+            MyFunc.logMessage(.debug, "Workout with ID \(String(describing: workoutToUpdate.uuid)) deleted successfully")
+          } else {
+            MyFunc.logMessage(.error, "Error deleting workout with ID\(String(describing: workoutToUpdate.uuid)) :  \(String(describing: error))")
+
+          }
+        }
+        )
+      } else {
         MyFunc.logMessage(.error, "Error saving workout: \(String(describing: error))")
       }
 
