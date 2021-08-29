@@ -58,6 +58,9 @@
 /* Class = "UILabel"; text = "Pitch"; ObjectID = "3FH-ba-EGv"; */
 "3FH-ba-EGv.text" = "";
 
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "664-Ic-CaK"; */
+"664-Ic-CaK.title" = "";
+
 /* Class = "UILabel"; text = "Event"; ObjectID = "6f9-XX-mQI"; */
 "6f9-XX-mQI.text" = "";
 

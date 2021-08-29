@@ -36,8 +36,6 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
     eventsArray = defaults.stringArray(forKey: "Events") ?? []
 
-    eventsArray.append("This is a test")
-
     MyFunc.logMessage(.debug, "eventsArray: \(eventsArray)")
     eventTableView.reloadData()
   }
@@ -76,12 +74,38 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
     let segueToUse = segue.identifier
 
-    //    if segueToUse == "historyToDTMHeatmap" {
-    //      let destinationVC = segue.destination as! DTMHeatmapViewController
-    //      destinationVC.heatmapWorkoutId = (sender as! UUID)
-    //    }
+
 
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
+
+
+  @IBAction func addButton(_ sender: UIBarButtonItem) {
+
+    var textField = UITextField()
+
+    let alert = UIAlertController(title: "Add New Event", message: "", preferredStyle: .alert)
+
+    let action = UIAlertAction(title: "Add", style: .default) { (action) in
+
+      let newEvent = textField.text!
+
+      self.eventsArray.append(newEvent)
+      self.defaults.set(self.eventsArray, forKey: "Events")
+      self.eventTableView.reloadData()
+    }
+
+    alert.addAction(action)
+
+    alert.addTextField { (field) in
+      textField = field
+      textField.placeholder = "Add New Event"
+    }
+
+    present(alert, animated: true, completion: nil)
+
+  }
+
+
 
 }
