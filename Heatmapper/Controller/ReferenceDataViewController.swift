@@ -21,9 +21,6 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
   @IBOutlet weak var eventTableView: ThemeTableViewNoBackground!
 
-
-  
-
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -70,25 +67,18 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
     self.eventTableView.reloadData()
   }
 
-
+  // this function manages the swipe-to-delete
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       currentIndexPath = indexPath
       confirmDelete(indexPath: currentIndexPath)
-//      if deleteRecord == true {
-//        deleteRecord = false
-//        eventTableView.deleteRows(at: [indexPath], with: .fade)
-//        eventsArray.remove(at: currentIndexPath.row)
-//        eventTableView.reloadData()
-//
-//      }
-
 
     } else if editingStyle == .insert {
       // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
   }
 
+  // function to handle confirmation after swiping to delete
   func confirmDelete(indexPath: IndexPath) {
     let alert = UIAlertController(title: "Delete Event", message: "Are you sure you want to delete \(eventsArray[indexPath.row])?", preferredStyle: .actionSheet)
 
@@ -98,7 +88,6 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
     alert.addAction(cancelAction)
 
     self.present(alert, animated: true, completion: nil)
-
 
   }
 
@@ -115,9 +104,6 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
   func cancelDeleteEventHandler(alertAction: UIAlertAction!) {
 
   }
-
-
-
 
 
 

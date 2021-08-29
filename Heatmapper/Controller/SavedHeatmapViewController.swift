@@ -12,7 +12,7 @@ import MapKit
 import HealthKit
 import CoreLocation
 
-class SavedHeatmapViewController: UIViewController  {
+class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate  {
 
   // **************************************************
   // Declare class variables
@@ -27,11 +27,14 @@ class SavedHeatmapViewController: UIViewController  {
   var units: String = ""
   var unitLength: UnitLength = .meters
   var unitSpeed: UnitSpeed  = .metersPerSecond
+  var eventArray = [String]()
+  let defaults = UserDefaults.standard
 
   // Outlets and Actions
 
   @IBOutlet weak var heatmapImageView: UIImageView!
 
+  @IBOutlet weak var eventField: UITextField!
   @IBOutlet weak var eventLabel         : ThemeLargeFontUILabel!
   @IBOutlet weak var venueLabel         : ThemeMediumFontUILabel!
   @IBOutlet weak var pitchLabel         : ThemeMediumFontUILabel!
@@ -55,9 +58,29 @@ class SavedHeatmapViewController: UIViewController  {
 
   @IBAction func btnUpdateWorkout(_ sender: Any) {
     updateWorkout()
+  }
 
+
+
+  let eventPicker = UIPickerView()
+
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1
+  }
+
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    eventArray.count
+  }
+
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return eventArray[row]
+  }
+
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    eventField.text = eventArray[row]
 
   }
+
 
 
   // **************************************************
@@ -67,6 +90,7 @@ class SavedHeatmapViewController: UIViewController  {
     super.viewDidLoad()
 
     getWorkoutData()
+    getStaticData()
 
   }
 
@@ -94,7 +118,21 @@ class SavedHeatmapViewController: UIViewController  {
 
   }
 
+  func getStaticData() {
+
+    eventArray = defaults.stringArray(forKey: "Events") ?? []
+  }
+
+
   func loadUI() {
+
+    eventPicker.delegate = self
+    eventField.inputView = eventPicker
+
+    // this code cancels the keyboard and profile picker when field editing finishes
+    let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+    tapGesture.cancelsTouchesInView = false
+    self.view.addGestureRecognizer(tapGesture)
 
     guard let heatmapWorkout = retrievedWorkout else {
       MyFunc.logMessage(.error, "SavedHeatmapViewController : no workout returned")
@@ -113,7 +151,7 @@ class SavedHeatmapViewController: UIViewController  {
     let workoutPitch = workoutMetadata["Pitch"] as? String ?? ""
     let workoutSport = workoutMetadata["Sport"] as? String ?? ""
 
-    eventLabel.text = workoutEvent
+    eventField.text = workoutEvent
     venueLabel.text = workoutVenue
     pitchLabel.text = workoutPitch
     sportLabel.text = workoutSport

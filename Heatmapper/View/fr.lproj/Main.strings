@@ -61,9 +61,6 @@
 /* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "664-Ic-CaK"; */
 "664-Ic-CaK.title" = "";
 
-/* Class = "UILabel"; text = "Event"; ObjectID = "6f9-XX-mQI"; */
-"6f9-XX-mQI.text" = "";
-
 /* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "8fa-ka-EKP"; */
 "8fa-ka-EKP.normalTitle" = "";
 
@@ -135,6 +132,9 @@
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "Pbk-vr-61V"; */
 "Pbk-vr-61V.title" = "";
+
+/* Class = "UINavigationItem"; title = "Events"; ObjectID = "qcv-8e-tba"; */
+"qcv-8e-tba.title" = "";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "Qlo-na-RxU"; */
 "Qlo-na-RxU.text" = "";
