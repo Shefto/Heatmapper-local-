@@ -16,7 +16,8 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
 
   var selectedIndexPath : Int? = 0
-
+  var currentIndexPath  = IndexPath()
+//  var deleteRecord      : Bool = false
 
   @IBOutlet weak var eventTableView: ThemeTableViewNoBackground!
 
@@ -68,6 +69,58 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
     selectedIndexPath = nil
     self.eventTableView.reloadData()
   }
+
+
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      currentIndexPath = indexPath
+      confirmDelete(indexPath: currentIndexPath)
+//      if deleteRecord == true {
+//        deleteRecord = false
+//        eventTableView.deleteRows(at: [indexPath], with: .fade)
+//        eventsArray.remove(at: currentIndexPath.row)
+//        eventTableView.reloadData()
+//
+//      }
+
+
+    } else if editingStyle == .insert {
+      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
+  }
+
+  func confirmDelete(indexPath: IndexPath) {
+    let alert = UIAlertController(title: "Delete Event", message: "Are you sure you want to delete \(eventsArray[indexPath.row])?", preferredStyle: .actionSheet)
+
+    let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: deleteEventHandler)
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteEventHandler)
+    alert.addAction(deleteAction)
+    alert.addAction(cancelAction)
+
+    self.present(alert, animated: true, completion: nil)
+
+
+  }
+
+  func deleteEventHandler(alertAction: UIAlertAction!)  {
+
+    eventsArray.remove(at: currentIndexPath.row)
+    eventTableView.deleteRows(at: [currentIndexPath], with: UITableView.RowAnimation.fade)
+    defaults.set(eventsArray, forKey: "Events")
+    eventTableView.reloadData()
+
+
+  }
+
+  func cancelDeleteEventHandler(alertAction: UIAlertAction!) {
+
+  }
+
+
+
+
+
+
 
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
