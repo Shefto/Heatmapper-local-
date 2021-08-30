@@ -96,6 +96,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     } else {
       sportField.text = sportArray[row]
     }
+    updateWorkout()
     self.view.endEditing(true)
   }
 
@@ -284,8 +285,8 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     let currentDateAsString = String(describing: currentDate)
 
     metadataToUpdate?.updateValue(currentDateAsString, forKey: "Date")
-    metadataToUpdate?.updateValue(eventField.text, forKey: "Event")
-    metadataToUpdate?.updateValue(sportField.text, forKey: "Sport")
+    metadataToUpdate?.updateValue(eventField.text as Any, forKey: "Event")
+    metadataToUpdate?.updateValue(sportField.text as Any, forKey: "Sport")
 
     let workoutToSave = HKWorkout(activityType: workoutToUpdate.workoutActivityType, start: workoutToUpdate.startDate, end: workoutToUpdate.endDate, workoutEvents: workoutToUpdate.workoutEvents, totalEnergyBurned: workoutToUpdate.totalEnergyBurned, totalDistance: workoutToUpdate.totalDistance, device: workoutToUpdate.device, metadata: metadataToUpdate)
 
