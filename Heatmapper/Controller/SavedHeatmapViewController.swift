@@ -284,6 +284,8 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     let currentDateAsString = String(describing: currentDate)
 
     metadataToUpdate?.updateValue(currentDateAsString, forKey: "Date")
+    metadataToUpdate?.updateValue(eventField.text, forKey: "Event")
+    metadataToUpdate?.updateValue(sportField.text, forKey: "Sport")
 
     let workoutToSave = HKWorkout(activityType: workoutToUpdate.workoutActivityType, start: workoutToUpdate.startDate, end: workoutToUpdate.endDate, workoutEvents: workoutToUpdate.workoutEvents, totalEnergyBurned: workoutToUpdate.totalEnergyBurned, totalDistance: workoutToUpdate.totalDistance, device: workoutToUpdate.device, metadata: metadataToUpdate)
 
