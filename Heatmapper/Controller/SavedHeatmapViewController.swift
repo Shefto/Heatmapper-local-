@@ -151,10 +151,10 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     sportField.inputView = sportPicker
 
 
-//    let sportGesture = UITapGestureRecognizer(target: self, action: #selector(self.sportTap(_:)))
-//
-//    sportLabel.isUserInteractionEnabled = true
-//    sportLabel.addGestureRecognizer(sportGesture)
+    //    let sportGesture = UITapGestureRecognizer(target: self, action: #selector(self.sportTap(_:)))
+    //
+    //    sportLabel.isUserInteractionEnabled = true
+    //    sportLabel.addGestureRecognizer(sportGesture)
 
 
     // this code cancels the keyboard and profile picker when field editing finishes
@@ -210,7 +210,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
       distanceLabel.text = formattedDistance
 
       let pace = workoutDistance / heatmapWorkout.duration
-    
+
       let paceString = MyFunc.getUnitSpeedAsString(value: pace, unitSpeed: unitSpeed, formatter: measurementFormatter)
       let paceUnitString = unitSpeed.symbol
 
@@ -235,11 +235,11 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
 
   }
 
-//  @objc func sportTap(_ sender: UITapGestureRecognizer? = nil)
-//  {
-//    self.sportPicker.isHidden = false
-//    self.view.setNeedsLayout()
-//  }
+  //  @objc func sportTap(_ sender: UITapGestureRecognizer? = nil)
+  //  {
+  //    self.sportPicker.isHidden = false
+  //    self.view.setNeedsLayout()
+  //  }
 
 
   func getHeatmapImage() {
@@ -287,29 +287,34 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
 
     let workoutToSave = HKWorkout(activityType: workoutToUpdate.workoutActivityType, start: workoutToUpdate.startDate, end: workoutToUpdate.endDate, workoutEvents: workoutToUpdate.workoutEvents, totalEnergyBurned: workoutToUpdate.totalEnergyBurned, totalDistance: workoutToUpdate.totalDistance, device: workoutToUpdate.device, metadata: metadataToUpdate)
 
-    healthstore.save(workoutToSave, withCompletion: { (success, error) in
+
+
+    self.healthstore.delete(workoutToUpdate, withCompletion: { (success, error) in
 
       if success {
-        // Workout was successfully saved
-        MyFunc.logMessage(.debug, "Workout saved successfully: \(String(describing: workoutToSave.uuid))")
-        MyFunciOS.renameHeatmapImageFile(currentID: workoutToUpdate.uuid, newID: workoutToSave.uuid)
-        // delete previous workout
+        MyFunc.logMessage(.debug, "Workout with ID \(String(describing: workoutToUpdate.uuid)) deleted successfully")
 
-        self.healthstore.delete(workoutToUpdate, withCompletion: { (success, error) in
+        self.healthstore.save(workoutToSave, withCompletion: { (success, error) in
 
           if success {
-            MyFunc.logMessage(.debug, "Workout with ID \(String(describing: workoutToUpdate.uuid)) deleted successfully")
+            // Workout was successfully saved
+            MyFunc.logMessage(.debug, "Workout saved successfully: \(String(describing: workoutToSave.uuid))")
+            MyFunciOS.renameHeatmapImageFile(currentID: workoutToUpdate.uuid, newID: workoutToSave.uuid)
+            // delete previous workout
+
           } else {
-            MyFunc.logMessage(.error, "Error deleting workout with ID\(String(describing: workoutToUpdate.uuid)) :  \(String(describing: error))")
-
+            MyFunc.logMessage(.error, "Error saving workout: \(String(describing: error))")
           }
-        }
-        )
-      } else {
-        MyFunc.logMessage(.error, "Error saving workout: \(String(describing: error))")
-      }
 
-    })
+        })
+
+      } else {
+        MyFunc.logMessage(.error, "Error deleting workout with ID\(String(describing: workoutToUpdate.uuid)) :  \(String(describing: error))")
+
+      }
+    }
+    )
+
 
   }
 

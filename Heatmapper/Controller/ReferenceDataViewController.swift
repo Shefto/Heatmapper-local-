@@ -104,9 +104,6 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
   }
 
 
-
-
-
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -138,7 +135,6 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
     present(alert, animated: true, completion: nil)
 
   }
-
 
 
 }
