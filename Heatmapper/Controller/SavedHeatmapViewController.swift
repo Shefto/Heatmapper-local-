@@ -27,7 +27,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
   var units: String = ""
   var unitLength: UnitLength = .meters
   var unitSpeed: UnitSpeed  = .metersPerSecond
-  var eventArray = [String]()
+  var activityArray = [String]()
   var sportArray = ["Football - 11-a-side", "Football - 5-a-side", "Kabbaddi"]
   let defaults = UserDefaults.standard
 
@@ -36,11 +36,11 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
   @IBOutlet weak var heatmapImageView: UIImageView!
 
   @IBOutlet weak var sportField         : ThemeTextField!
-  @IBOutlet weak var eventField         : ThemeTextField!
-  @IBOutlet weak var eventLabel         : ThemeLargeFontUILabel!
+  @IBOutlet weak var activityField      : ThemeTextField!
+  @IBOutlet weak var activityLabel      : ThemeMediumFontUILabel!
+
   @IBOutlet weak var venueLabel         : ThemeMediumFontUILabel!
   @IBOutlet weak var pitchLabel         : ThemeMediumFontUILabel!
-
 
   @IBOutlet weak var durationLabel      : ThemeMediumFontUILabel!
   @IBOutlet weak var dateLabel          : ThemeMediumFontUILabel!
@@ -58,11 +58,8 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     }
   }
 
-  @IBAction func btnUpdateWorkout(_ sender: Any) {
-    updateWorkout()
-  }
 
-  let eventPicker = UIPickerView()
+  let activityPicker = UIPickerView()
   let sportPicker = UIPickerView()
 
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -71,8 +68,8 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
 
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 
-    if pickerView == eventPicker {
-      return eventArray.count
+    if pickerView == activityPicker {
+      return activityArray.count
     } else {
       return sportArray.count
     }
@@ -81,8 +78,8 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
 
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 
-    if pickerView == eventPicker {
-      return eventArray[row]
+    if pickerView == activityPicker {
+      return activityArray[row]
     } else {
       return sportArray[row]
     }
@@ -91,8 +88,8 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
-    if pickerView == eventPicker {
-      eventField.text = eventArray[row]
+    if pickerView == activityPicker {
+      activityField.text = activityArray[row]
     } else {
       sportField.text = sportArray[row]
     }
@@ -139,15 +136,15 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
 
   func getStaticData() {
 
-    eventArray = defaults.stringArray(forKey: "Events") ?? []
+    activityArray = defaults.stringArray(forKey: "Activity") ?? []
   }
 
 
   func loadUI() {
 
-    eventPicker.delegate = self
-    eventPicker.dataSource = self
-    eventField.inputView = eventPicker
+    activityPicker.delegate = self
+    activityPicker.dataSource = self
+    activityField.inputView = activityPicker
 
     sportPicker.delegate = self
     sportPicker.dataSource = self
@@ -177,12 +174,12 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
       return
     }
 
-    let workoutEvent = workoutMetadata["Event"] as? String ?? ""
+    let workoutActivity = workoutMetadata["Activity"] as? String ?? ""
     let workoutVenue = workoutMetadata["Venue"] as? String ?? ""
     let workoutPitch = workoutMetadata["Pitch"] as? String ?? ""
     let workoutSport = workoutMetadata["Sport"] as? String ?? ""
 
-    eventField.text = workoutEvent
+    activityField.text = workoutActivity
     venueLabel.text = workoutVenue
     pitchLabel.text = workoutPitch
     sportField.text = workoutSport
@@ -285,7 +282,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     let currentDateAsString = String(describing: currentDate)
 
     metadataToUpdate?.updateValue(currentDateAsString, forKey: "Date")
-    metadataToUpdate?.updateValue(eventField.text as Any, forKey: "Event")
+    metadataToUpdate?.updateValue(activityField.text as Any, forKey: "Activity")
     metadataToUpdate?.updateValue(sportField.text as Any, forKey: "Sport")
 
     let workoutToSave = HKWorkout(activityType: workoutToUpdate.workoutActivityType, start: workoutToUpdate.startDate, end: workoutToUpdate.endDate, workoutEvents: workoutToUpdate.workoutEvents, totalEnergyBurned: workoutToUpdate.totalEnergyBurned, totalDistance: workoutToUpdate.totalDistance, device: workoutToUpdate.device, metadata: metadataToUpdate)

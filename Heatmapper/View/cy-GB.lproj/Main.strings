@@ -82,14 +82,8 @@
 /* Class = "UILabel"; text = "Venue"; ObjectID = "CTI-FV-Wgi"; */
 "CTI-FV-Wgi.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Button 3"; ObjectID = "Dy8-wu-JZc"; */
-"Dy8-wu-JZc.normalTitle" = "";
-
 /* Class = "UILabel"; text = "Sport"; ObjectID = "fUb-WJ-pCB"; */
 "fUb-WJ-pCB.text" = "";
-
-/* Class = "UIButton"; normalTitle = "Button 1"; ObjectID = "fxp-1X-LEA"; */
-"fxp-1X-LEA.normalTitle" = "";
 
 /* Class = "UILabel"; text = "Pitch"; ObjectID = "GW0-ht-6cn"; */
 "GW0-ht-6cn.text" = "";
@@ -121,7 +115,7 @@
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "mh4-Pn-ffs"; */
 "mh4-Pn-ffs.normalTitle" = "";
 
-/* Class = "UIButton"; normalTitle = "Manage Events"; ObjectID = "MUA-HA-gex"; */
+/* Class = "UIButton"; normalTitle = "Manage Activities"; ObjectID = "MUA-HA-gex"; */
 "MUA-HA-gex.normalTitle" = "";
 
 /* Class = "UIViewController"; title = "Workout History"; ObjectID = "nCc-eF-wC1"; */
@@ -133,7 +127,7 @@
 /* Class = "UITextField"; text = "Sport Label"; ObjectID = "QAR-0O-1LH"; */
 "QAR-0O-1LH.text" = "";
 
-/* Class = "UINavigationItem"; title = "Events"; ObjectID = "qcv-8e-tba"; */
+/* Class = "UINavigationItem"; title = "Activities"; ObjectID = "qcv-8e-tba"; */
 "qcv-8e-tba.title" = "";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "Qlo-na-RxU"; */
@@ -147,9 +141,6 @@
 
 /* Class = "UILabel"; text = "Distance"; ObjectID = "rJh-q3-eQC"; */
 "rJh-q3-eQC.text" = "";
-
-/* Class = "UIButton"; normalTitle = "Update Workout"; ObjectID = "s05-ex-uEs"; */
-"s05-ex-uEs.normalTitle" = "";
 
 /* Class = "UIButton"; normalTitle = "JD"; ObjectID = "sPj-oH-Nyf"; */
 "sPj-oH-Nyf.normalTitle" = "";

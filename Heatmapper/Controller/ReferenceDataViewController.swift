@@ -1,5 +1,5 @@
 //
-//  EventsViewController.ReferenceDataViewController
+//  ReferenceDataViewController
 //  Heatmapper
 //
 //  Created by Richard English on 28/08/2021.
@@ -12,59 +12,58 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
   let theme = ColourTheme()
   let defaults = UserDefaults.standard
-  private var eventsArray = [String]()
+  private var activityArray = [String]()
 
 
   var selectedIndexPath : Int? = 0
   var currentIndexPath  = IndexPath()
 //  var deleteRecord      : Bool = false
 
-  @IBOutlet weak var eventTableView: ThemeTableViewNoBackground!
+  @IBOutlet weak var activityTableView: ThemeTableViewNoBackground!
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    eventTableView.dataSource = self
-    eventTableView.delegate = self
-    eventTableView.allowsSelection = true
+    activityTableView.dataSource = self
+    activityTableView.delegate = self
+    activityTableView.allowsSelection = true
 
-    //    eventTableView.register(UITableViewCell.self, forCellReuseIdentifier: "eventCell")
-    eventTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: eventTableView.frame.size.width, height: 1))
-    eventTableView.tableHeaderView?.backgroundColor = UIColor.clear
 
-    eventsArray = defaults.stringArray(forKey: "Events") ?? []
+    activityTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: activityTableView.frame.size.width, height: 1))
+    activityTableView.tableHeaderView?.backgroundColor = UIColor.clear
 
-    MyFunc.logMessage(.debug, "eventsArray: \(eventsArray)")
-    eventTableView.reloadData()
+    activityArray = defaults.stringArray(forKey: "Activity") ?? []
+
+    MyFunc.logMessage(.debug, "activityArray: \(activityArray)")
+    activityTableView.reloadData()
   }
 
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return eventsArray.count
+    return activityArray.count
   }
 
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    let cell = eventTableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath)
-    cell.textLabel?.text = eventsArray[indexPath.row]
+    let cell = activityTableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath)
+    cell.textLabel?.text = activityArray[indexPath.row]
     return cell
   }
 
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: false)
-    //    eventId = eventsArray?[indexPath.row]
-    //    MyFunc.logMessage(.debug, "eventId: \(String(describing: eventId))")
+
     selectedIndexPath = indexPath.row
-    self.eventTableView.reloadData()
+    self.activityTableView.reloadData()
 
   }
 
   func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 
     selectedIndexPath = nil
-    self.eventTableView.reloadData()
+    self.activityTableView.reloadData()
   }
 
   // this function manages the swipe-to-delete
@@ -80,10 +79,10 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
   // function to handle confirmation after swiping to delete
   func confirmDelete(indexPath: IndexPath) {
-    let alert = UIAlertController(title: "Delete Event", message: "Are you sure you want to delete \(eventsArray[indexPath.row])?", preferredStyle: .actionSheet)
+    let alert = UIAlertController(title: "Delete Activity", message: "Are you sure you want to delete \(activityArray[indexPath.row])?", preferredStyle: .actionSheet)
 
-    let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: deleteEventHandler)
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteEventHandler)
+    let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: deleteActivityHandler)
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelActivityHandler)
     alert.addAction(deleteAction)
     alert.addAction(cancelAction)
 
@@ -91,17 +90,16 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
   }
 
-  func deleteEventHandler(alertAction: UIAlertAction!)  {
+  func deleteActivityHandler(alertAction: UIAlertAction!)  {
 
-    eventsArray.remove(at: currentIndexPath.row)
-    eventTableView.deleteRows(at: [currentIndexPath], with: UITableView.RowAnimation.fade)
-    defaults.set(eventsArray, forKey: "Events")
-    eventTableView.reloadData()
-
+    activityArray.remove(at: currentIndexPath.row)
+    activityTableView.deleteRows(at: [currentIndexPath], with: UITableView.RowAnimation.fade)
+    defaults.set(activityArray, forKey: "Activity")
+    activityTableView.reloadData()
 
   }
 
-  func cancelDeleteEventHandler(alertAction: UIAlertAction!) {
+  func cancelActivityHandler(alertAction: UIAlertAction!) {
 
   }
 
@@ -111,10 +109,6 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-    let segueToUse = segue.identifier
-
-
-
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
 
@@ -123,22 +117,22 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
     var textField = UITextField()
 
-    let alert = UIAlertController(title: "Add New Event", message: "", preferredStyle: .alert)
+    let alert = UIAlertController(title: "Add New Activity", message: "", preferredStyle: .alert)
 
     let action = UIAlertAction(title: "Add", style: .default) { (action) in
 
-      let newEvent = textField.text!
+      let newActivity = textField.text!
 
-      self.eventsArray.append(newEvent)
-      self.defaults.set(self.eventsArray, forKey: "Events")
-      self.eventTableView.reloadData()
+      self.activityArray.append(newActivity)
+      self.defaults.set(self.activityArray, forKey: "Activity")
+      self.activityTableView.reloadData()
     }
 
     alert.addAction(action)
 
     alert.addTextField { (field) in
       textField = field
-      textField.placeholder = "Add New Event"
+      textField.placeholder = "Add New Activity"
     }
 
     present(alert, animated: true, completion: nil)
