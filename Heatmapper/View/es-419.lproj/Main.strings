@@ -91,9 +91,6 @@
 /* Class = "UIButton"; normalTitle = "Button 1"; ObjectID = "fxp-1X-LEA"; */
 "fxp-1X-LEA.normalTitle" = "";
 
-/* Class = "UILabel"; text = "Sport"; ObjectID = "grn-LU-9XJ"; */
-"grn-LU-9XJ.text" = "";
-
 /* Class = "UILabel"; text = "Pitch"; ObjectID = "GW0-ht-6cn"; */
 "GW0-ht-6cn.text" = "";
 
@@ -132,6 +129,9 @@
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "Pbk-vr-61V"; */
 "Pbk-vr-61V.title" = "";
+
+/* Class = "UITextField"; text = "Sport Label"; ObjectID = "QAR-0O-1LH"; */
+"QAR-0O-1LH.text" = "";
 
 /* Class = "UINavigationItem"; title = "Events"; ObjectID = "qcv-8e-tba"; */
 "qcv-8e-tba.title" = "";
@@ -178,11 +178,14 @@
 /* Class = "UILabel"; text = "Calories"; ObjectID = "VUK-Or-FM5"; */
 "VUK-Or-FM5.text" = "";
 
-/* Class = "UILabel"; text = "Event"; ObjectID = "WjU-FP-pZm"; */
+/* Class = "UILabel"; text = "Activity Name"; ObjectID = "WjU-FP-pZm"; */
 "WjU-FP-pZm.text" = "";
 
 /* Class = "UIButton"; normalTitle = "DTM"; ObjectID = "WMX-9X-sBW"; */
 "WMX-9X-sBW.normalTitle" = "";
+
+/* Class = "UITextField"; text = "Activity"; ObjectID = "Wsp-TC-1FL"; */
+"Wsp-TC-1FL.text" = "";
 
 /* Class = "UINavigationItem"; title = "RE Heatmap"; ObjectID = "xJf-j7-wii"; */
 "xJf-j7-wii.title" = "";

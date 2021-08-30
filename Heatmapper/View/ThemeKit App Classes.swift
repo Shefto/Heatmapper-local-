@@ -53,6 +53,7 @@ class ThemeColumnHeaderUILabel: UILabel {}
 class TableRowNameUILabel: UILabel {}
 class ThemeSmallTextUILabel: UILabel {}
 
+class ThemeTextField: UITextField {}
 
 // Text View
 class ThemeTextView: UITextView {}

@@ -28,17 +28,19 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
   var unitLength: UnitLength = .meters
   var unitSpeed: UnitSpeed  = .metersPerSecond
   var eventArray = [String]()
+  var sportArray = ["Football - 11-a-side", "Football - 5-a-side", "Kabbaddi"]
   let defaults = UserDefaults.standard
 
   // Outlets and Actions
 
   @IBOutlet weak var heatmapImageView: UIImageView!
 
-  @IBOutlet weak var eventField: UITextField!
+  @IBOutlet weak var sportField         : ThemeTextField!
+  @IBOutlet weak var eventField         : ThemeTextField!
   @IBOutlet weak var eventLabel         : ThemeLargeFontUILabel!
   @IBOutlet weak var venueLabel         : ThemeMediumFontUILabel!
   @IBOutlet weak var pitchLabel         : ThemeMediumFontUILabel!
-  @IBOutlet weak var sportLabel         : ThemeMediumFontUILabel!
+
 
   @IBOutlet weak var durationLabel      : ThemeMediumFontUILabel!
   @IBOutlet weak var dateLabel          : ThemeMediumFontUILabel!
@@ -60,25 +62,41 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     updateWorkout()
   }
 
-
-
   let eventPicker = UIPickerView()
+  let sportPicker = UIPickerView()
 
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
 
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    eventArray.count
+
+    if pickerView == eventPicker {
+      return eventArray.count
+    } else {
+      return sportArray.count
+    }
+
   }
 
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return eventArray[row]
+
+    if pickerView == eventPicker {
+      return eventArray[row]
+    } else {
+      return sportArray[row]
+    }
+
   }
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    eventField.text = eventArray[row]
 
+    if pickerView == eventPicker {
+      eventField.text = eventArray[row]
+    } else {
+      sportField.text = sportArray[row]
+    }
+    self.view.endEditing(true)
   }
 
 
@@ -127,7 +145,19 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
   func loadUI() {
 
     eventPicker.delegate = self
+    eventPicker.dataSource = self
     eventField.inputView = eventPicker
+
+    sportPicker.delegate = self
+    sportPicker.dataSource = self
+    sportField.inputView = sportPicker
+
+
+//    let sportGesture = UITapGestureRecognizer(target: self, action: #selector(self.sportTap(_:)))
+//
+//    sportLabel.isUserInteractionEnabled = true
+//    sportLabel.addGestureRecognizer(sportGesture)
+
 
     // this code cancels the keyboard and profile picker when field editing finishes
     let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
@@ -154,7 +184,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     eventField.text = workoutEvent
     venueLabel.text = workoutVenue
     pitchLabel.text = workoutPitch
-    sportLabel.text = workoutSport
+    sportField.text = workoutSport
 
     // start and end date
     var workoutStartDateAsString = ""
@@ -206,6 +236,13 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     loadAverageHeartRateLabel(startDate: heatmapWorkout.startDate, endDate: heatmapWorkout.endDate, quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, option: [])
 
   }
+
+//  @objc func sportTap(_ sender: UITapGestureRecognizer? = nil)
+//  {
+//    self.sportPicker.isHidden = false
+//    self.view.setNeedsLayout()
+//  }
+
 
   func getHeatmapImage() {
 

@@ -298,10 +298,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="lyd-aS-nH0">
-                                <rect key="frame" x="0.0" y="108" width="414" height="766"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="750"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xdx-oz-NWw" userLabel="Workout Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="680"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="664"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="api-rD-sS3">
                                             <size key="itemSize" width="128" height="128"/>
@@ -321,11 +321,11 @@
                                         </cells>
                                     </collectionView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" id="6jT-ZL-mzL">
-                                        <rect key="frame" x="0.0" y="681" width="414" height="34"/>
+                                        <rect key="frame" x="0.0" y="665" width="414" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZd-9k-xak" userLabel="Created Heatmap Button" customClass="ThemeActionButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="View Heatmap">
                                                     <color key="titleColor" systemColor="systemGreenColor"/>
@@ -336,7 +336,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxP-i5-0nQ" userLabel="Update Workout Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="Update Workout">
                                                     <color key="titleColor" name="autoDetect"/>
@@ -352,10 +352,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="koB-cI-YWd">
-                                        <rect key="frame" x="0.0" y="732" width="414" height="34"/>
+                                        <rect key="frame" x="0.0" y="700" width="414" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cin-hP-zjE" userLabel="RE Heatmap Button">
-                                                <rect key="frame" x="0.0" y="0.0" width="137.33333333333334" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="137.33333333333334" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="RE"/>
                                                 <connections>
@@ -363,7 +363,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPj-oH-Nyf" userLabel="JD Heatmap Button">
-                                                <rect key="frame" x="138.33333333333331" y="0.0" width="137.33333333333331" height="34"/>
+                                                <rect key="frame" x="138.33333333333331" y="0.0" width="137.33333333333331" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="JD"/>
                                                 <connections>
@@ -371,7 +371,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMX-9X-sBW" userLabel="DTM Heatmap Button">
-                                                <rect key="frame" x="276.66666666666669" y="0.0" width="137.33333333333331" height="34"/>
+                                                <rect key="frame" x="276.66666666666669" y="0.0" width="137.33333333333331" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="DTM"/>
                                                 <connections>
@@ -734,24 +734,23 @@ DQoNCg
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grn-LU-9XJ" userLabel="Sport" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Sport Label" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QAR-0O-1LH" userLabel="Sport" customClass="ThemeTextField" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="209.66666666666663" y="0.0" width="194.33333333333337" height="20.333333333333332"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="OeP-jF-Pp8">
                                         <rect key="frame" x="0.0" y="542.33333333333337" width="404" height="20.333333333333371"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WjU-FP-pZm" userLabel="Event Label" customClass="ThemeLargeFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WjU-FP-pZm" userLabel="Event Label" customClass="ThemeLargeFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="194.66666666666666" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wsp-TC-1FL" userLabel="Event Field">
+                                            <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Activity" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Wsp-TC-1FL" userLabel="Event Field" customClass="ThemeTextField" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="209.66666666666663" y="0.0" width="194.33333333333337" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -867,7 +866,7 @@ DQoNCg
                         <outlet property="heatmapImageView" destination="Bi1-ui-buG" id="uJP-g2-Vxl"/>
                         <outlet property="pitchLabel" destination="GW0-ht-6cn" id="L37-KV-576"/>
                         <outlet property="scrollView" destination="7p0-Xp-GAh" id="zLP-kV-U88"/>
-                        <outlet property="sportLabel" destination="grn-LU-9XJ" id="4Hb-Fe-LGO"/>
+                        <outlet property="sportField" destination="QAR-0O-1LH" id="hOh-1d-R10"/>
                         <outlet property="venueLabel" destination="uTQ-LO-7d9" id="Wru-AR-ZOV"/>
                     </connections>
                 </viewController>

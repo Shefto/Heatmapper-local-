@@ -71,8 +71,6 @@ extension Theme {
       $0.textColor = textPrimary
     }
 
-
-
     ThemeColumnHeaderUILabel.appearance().with {
       $0.font = UIFont.preferredFont(forTextStyle: .title2)
       $0.textColor = textAlternate
@@ -87,6 +85,16 @@ extension Theme {
     TableRowNameUILabel.appearance().with {
       $0.font = UIFont.preferredFont(forTextStyle: .title2)
       $0.textColor = textAlternate
+    }
+
+
+    // UITextField
+   ThemeTextField.appearance().with {
+      $0.backgroundColor = background
+      $0.textColor = textPrimary
+    let themeFont = UIFont.systemFont(ofSize: 24.0, weight: .regular)
+    $0.font = themeFont
+    $0.textColor = textAlternate
     }
 
     // ********************************************************************************
