@@ -27,7 +27,7 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
     activityTableView.dataSource = self
     activityTableView.delegate = self
     activityTableView.allowsSelection = true
-
+    activityTableView.register(UINib(nibName: "ActivityCell", bundle: nil), forCellReuseIdentifier: "ActivityTableViewCell")
 
     activityTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: activityTableView.frame.size.width, height: 1))
     activityTableView.tableHeaderView?.backgroundColor = UIColor.clear
@@ -36,6 +36,9 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
     MyFunc.logMessage(.debug, "activityArray: \(activityArray)")
     activityTableView.reloadData()
+
+    let sportPicker = UIPickerView()
+    
   }
 
 
@@ -46,8 +49,11 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    let cell = activityTableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath)
-    cell.textLabel?.text = activityArray[indexPath.row]
+    let cell = activityTableView.dequeueReusableCell(withIdentifier: "ActivityTableViewCell", for: indexPath) as! ActivityTableViewCell
+//    cell.textLabel?.text = activityArray[indexPath.row]
+    cell.sportField.text = activityArray[indexPath.row]
+    cell.activityLabel.text = activityArray[indexPath.row]
+
     return cell
   }
 
