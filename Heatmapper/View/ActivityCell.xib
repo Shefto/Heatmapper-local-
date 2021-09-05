@@ -17,19 +17,17 @@
                     <rect key="frame" x="0.0" y="0.0" width="514" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddn-Hw-btL" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="254.5" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="339.5" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Sport" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kgK-Rt-b2k" userLabel="Sport Field" customClass="ThemeTextField" customModule="Heatmapper" customModuleProvider="target">
-                            <rect key="frame" x="259.5" y="0.0" width="254.5" height="40"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKq-xX-MVF" userLabel="Sport Picker View">
+                            <rect key="frame" x="344.5" y="0.0" width="169.5" height="40"/>
+                        </pickerView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="kgK-Rt-b2k" firstAttribute="width" secondItem="ddn-Hw-btL" secondAttribute="width" id="IwI-GH-Yq1"/>
+                        <constraint firstItem="dKq-xX-MVF" firstAttribute="width" secondItem="ddn-Hw-btL" secondAttribute="width" multiplier="0.5" id="cxY-uo-gqD"/>
                     </constraints>
                 </stackView>
             </subviews>
@@ -43,7 +41,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="activityLabel" destination="ddn-Hw-btL" id="isF-T3-pf4"/>
-                <outlet property="sportField" destination="kgK-Rt-b2k" id="K7n-d4-Fqf"/>
+                <outlet property="sportPicker" destination="dKq-xX-MVF" id="m1d-EJ-eib"/>
             </connections>
             <point key="canvasLocation" x="162" y="-22"/>
         </view>

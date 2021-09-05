@@ -51,7 +51,7 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
     let cell = activityTableView.dequeueReusableCell(withIdentifier: "ActivityTableViewCell", for: indexPath) as! ActivityTableViewCell
 //    cell.textLabel?.text = activityArray[indexPath.row]
-    cell.sportField.text = activityArray[indexPath.row]
+    cell.sportPicker.selectRow(0, inComponent: 0, animated: true)
     cell.activityLabel.text = activityArray[indexPath.row]
 
     return cell
