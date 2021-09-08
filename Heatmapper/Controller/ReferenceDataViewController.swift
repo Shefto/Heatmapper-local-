@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActivityTableViewCellDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
   let theme = ColourTheme()
   let defaults = UserDefaults.standard
-  private var activityArray = [String]()
-
+  private var activityArray = [Activity]()
+  var sportArray = [Sport]()
 
   var selectedIndexPath : Int? = 0
   var currentIndexPath  = IndexPath()
@@ -32,12 +32,12 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
     activityTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: activityTableView.frame.size.width, height: 1))
     activityTableView.tableHeaderView?.backgroundColor = UIColor.clear
 
-    activityArray = defaults.stringArray(forKey: "Activity") ?? []
-
+//    activityArray = defaults.stringArray(forKey: "Activity") ?? []
+    activityArray = MyFunc.getHeatmapperActivityDefaults()
     MyFunc.logMessage(.debug, "activityArray: \(activityArray)")
     activityTableView.reloadData()
+    sportArray = Sport.allCases.map { $0 }
 
-    let sportPicker = UIPickerView()
     
   }
 
@@ -50,9 +50,14 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
     let cell = activityTableView.dequeueReusableCell(withIdentifier: "ActivityTableViewCell", for: indexPath) as! ActivityTableViewCell
-//    cell.textLabel?.text = activityArray[indexPath.row]
-    cell.sportPicker.selectRow(0, inComponent: 0, animated: true)
-    cell.activityLabel.text = activityArray[indexPath.row]
+
+    cell.activityLabel.text = activityArray[indexPath.row].name
+    cell.sportPicker.delegate = self
+
+    let activitySportRow : Int = sportArray.firstIndex(where: { $0 == activityArray[indexPath.row].sport  }) ?? 0
+
+    cell.sportPicker.selectRow(activitySportRow, inComponent: 0, animated: true)
+
 
     return cell
   }
@@ -60,7 +65,7 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: false)
-
+    MyFunc.logMessage(.debug, "ReferenceDataViewController.didSelectRow: \(indexPath.row)")
     selectedIndexPath = indexPath.row
     self.activityTableView.reloadData()
 
@@ -124,10 +129,12 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
     let action = UIAlertAction(title: "Add", style: .default) { (action) in
 
-      let newActivity = textField.text!
+      let newActivityName = textField.text!
+      let newSport = Sport.none
+      let newActivity = Activity(name: newActivityName, sport: newSport)
 
       self.activityArray.append(newActivity)
-      self.defaults.set(self.activityArray, forKey: "Activity")
+      MyFunc.saveHeatmapActivityDefaults(self.activityArray)
       self.activityTableView.reloadData()
     }
 
@@ -141,6 +148,32 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
     present(alert, animated: true, completion: nil)
 
   }
+
+
+  func updateSportForActivity(newSport: Sport, indexPathRow: Int) {
+    activityArray[indexPathRow].sport = newSport
+//    let activityToSave = activityArray[indexPath.row]
+    MyFunc.saveHeatmapActivityDefaults(activityArray)
+  }
+
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    MyFunc.logMessage(.debug, "ReferenceDataViewController.didSelectRow: \(row)")
+    let sportSelected = sportArray[row]
+    updateSportForActivity(newSport: sportSelected, indexPathRow: selectedIndexPath ?? 0)
+  }
+
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1
+  }
+
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return sportArray.count
+  }
+
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return sportArray[row].rawValue
+  }
+
 
 
 }

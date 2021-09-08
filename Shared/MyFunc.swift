@@ -119,6 +119,37 @@ class MyFunc {
     return templateToReturn
   }
 
+
+
+  static func getHeatmapperActivityDefaults() -> [Activity] {
+
+    var activitySetToReturn = [Activity]()
+    let defaults = UserDefaults.standard
+
+    if let savedTemplate = defaults.object(forKey: "Heatmapper Activity") as? Data {
+      let decoder = JSONDecoder()
+      if let loadedTemplate = try? decoder.decode([Activity].self, from: savedTemplate) {
+        activitySetToReturn = loadedTemplate
+      }
+    }
+    return activitySetToReturn
+
+  }
+
+  static func saveHeatmapActivityDefaults(_ activityArray: [Activity]) {
+    let defaults = UserDefaults.standard
+    let encoder = JSONEncoder()
+    do {
+      let encoded = try encoder.encode(activityArray)
+      defaults.set(encoded, forKey: "Heatmapper Activity")
+    } catch {
+      logMessage(.error, "Error in MyFunc.saveHeatmapActivityDefaults")
+    }
+
+  }
+
+
+
   static func saveActivityDefaults(_ activityTemplate: ActivityTemplate) {
     let defaults = UserDefaults.standard
     let encoder = JSONEncoder()
@@ -134,7 +165,6 @@ class MyFunc {
 
   static func setContext(_ activityType: ActivityType, _ intervalType: IntervalType) -> String {
     return activityType.rawValue + "~" + intervalType.rawValue
-
   }
 
   static func getContext(_ context: String) -> (activityType: ActivityType, intervalType: IntervalType) {
@@ -403,10 +433,10 @@ class MyFunc {
     // split the resulting string into the distance (i.e. length) and unit
     let lengthStringArray = lengthString.components(separatedBy: .whitespaces)
     let distance = lengthStringArray.first ?? ""
-//    let unit = lengthStringArray.last ?? ""
+    //    let unit = lengthStringArray.last ?? ""
 
     return distance
-//    return (distance: lengthString, unit: unit)
+    //    return (distance: lengthString, unit: unit)
   }
 
   static func getUnitSpeedAsString(value: Double, unitSpeed: UnitSpeed, formatter: MeasurementFormatter) -> String {
@@ -416,7 +446,7 @@ class MyFunc {
     // in order to convert this, first needs to be converted into meters per second
     var speedMPS: Double = 0.0
     if value > 0 {
-       speedMPS = 1/value
+      speedMPS = 1/value
     }
 
     let speed = Measurement<UnitSpeed>(value: speedMPS, unit: UnitSpeed.metersPerSecond)

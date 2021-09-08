@@ -10,6 +10,53 @@ import Foundation
 import MapKit
 
 
+enum Sport: String, Codable, CaseIterable {
+  case football    = "Football"
+  case rugby       = "Rugby"
+  case basketball  = "Basketball"
+  case kabbaddi    = "Kabbaddi"
+  case none        = "None"
+}
+
+extension Sport {
+  init() {
+    self = .none
+  }
+}
+
+struct Activity: Codable {
+  var name  : String
+  var sport : Sport
+
+  enum CodingKeys: String, CodingKey {
+    case name = "Name"
+    case sport = "Sport"
+  }
+
+  init (name: String, sport: Sport) {
+    self.name = name
+    self.sport = sport
+  }
+
+}
+extension Activity {
+  var dictionaryRepresentation: [String: Any] {
+    let data = try! JSONEncoder().encode(self)
+    return try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+  }
+}
+
+// Converting back to struct
+extension Activity {
+  init?(dictionary: [String: Any]) {
+    guard let data = try? JSONSerialization.data(withJSONObject: dictionary, options: []) else { return nil }
+    guard let info = try? JSONDecoder().decode(Activity.self, from: data) else { return nil }
+    self = info
+  }
+}
+
+
+
 enum ActivityType: String, Codable {
   case auto         = "Auto Detect"
   case `repeat`     = "Flat Sets"

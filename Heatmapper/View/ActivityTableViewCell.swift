@@ -8,7 +8,15 @@
 
 import UIKit
 
+protocol ActivityTableViewCellDelegate: class {
+
+  func updateSportForActivity(newSport: Sport, indexPathRow: Int)
+
+}
+
 class ActivityTableViewCell: ThemeTableViewCellNoBackground, UIPickerViewDelegate, UIPickerViewDataSource {
+
+  weak var delegate : ActivityTableViewCellDelegate?
 
   @IBOutlet weak var activityLabel: TableRowNameUILabel!
   @IBOutlet weak var sportPicker: UIPickerView!
@@ -36,18 +44,15 @@ class ActivityTableViewCell: ThemeTableViewCellNoBackground, UIPickerViewDelegat
   }
 
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-
       return sportArray.count
-
   }
 
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
       return sportArray[row]
-
   }
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    MyFunc.logMessage(.debug, "didSelectRow: \(row)")
+    MyFunc.logMessage(.debug, "ActivityTableViewCell.didSelectRow: \(row)")
   }
 
   func loadSportItems() {
