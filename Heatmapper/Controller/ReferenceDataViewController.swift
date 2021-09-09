@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActivityTableViewCellDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+
 
   let theme = ColourTheme()
   let defaults = UserDefaults.standard
@@ -17,7 +18,7 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
   var selectedIndexPath : Int? = 0
   var currentIndexPath  = IndexPath()
-//  var deleteRecord      : Bool = false
+  //  var deleteRecord      : Bool = false
 
   @IBOutlet weak var activityTableView: ThemeTableViewNoBackground!
 
@@ -32,7 +33,7 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
     activityTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: activityTableView.frame.size.width, height: 1))
     activityTableView.tableHeaderView?.backgroundColor = UIColor.clear
 
-//    activityArray = defaults.stringArray(forKey: "Activity") ?? []
+    //    activityArray = defaults.stringArray(forKey: "Activity") ?? []
     activityArray = MyFunc.getHeatmapperActivityDefaults()
     MyFunc.logMessage(.debug, "activityArray: \(activityArray)")
     activityTableView.reloadData()
@@ -152,28 +153,39 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
   func updateSportForActivity(newSport: Sport, indexPathRow: Int) {
     activityArray[indexPathRow].sport = newSport
-//    let activityToSave = activityArray[indexPath.row]
+    //    let activityToSave = activityArray[indexPath.row]
     MyFunc.saveHeatmapActivityDefaults(activityArray)
   }
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     MyFunc.logMessage(.debug, "ReferenceDataViewController.didSelectRow: \(row)")
     let sportSelected = sportArray[row]
-    updateSportForActivity(newSport: sportSelected, indexPathRow: selectedIndexPath ?? 0)
+
+    let tableViewCell = pickerView.superview?.superview as! ActivityTableViewCell
+    guard let tableIndexPath = self.activityTableView.indexPath(for: tableViewCell) else {
+      MyFunc.logMessage(.error, "Invalid or missing indexPath for tableViewCell")
+      return
+    }
+    let tableIndexPathRow = tableIndexPath.row
+    MyFunc.logMessage(.debug, "tableIndexPathRow: \(tableIndexPathRow)")
+    updateSportForActivity(newSport: sportSelected, indexPathRow: tableIndexPath.row)
+
+
+
   }
 
-  func numberOfComponents(in pickerView: UIPickerView) -> Int {
-    return 1
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+      return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+      return sportArray.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+      return sportArray[row].rawValue
+    }
+
+
+
   }
-
-  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return sportArray.count
-  }
-
-  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return sportArray[row].rawValue
-  }
-
-
-
-}
