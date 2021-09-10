@@ -4,45 +4,58 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivityTableViewCell" id="KGk-i7-Jjw" customClass="ActivityTableViewCell" customModule="Heatmapper" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="360" height="60"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM" customClass="ThemeTableViewCellNoBackground" customModule="Heatmapper" customModuleProvider="target">
-                <rect key="frame" x="0.0" y="0.0" width="360" height="60"/>
-                <autoresizingMask key="autoresizingMask"/>
+        <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="1" indentationWidth="10" reuseIdentifier="ActivityTableViewCell" id="KGk-i7-Jjw" customClass="ActivityTableViewCell" customModule="Heatmapper" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="370" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM" customClass="ThemeTableViewCellNoBackground" customModule="Heatmapper" customModuleProvider="target">
+                <rect key="frame" x="0.0" y="0.0" width="370" height="60"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Sr1-UT-BKN">
-                        <rect key="frame" x="0.0" y="15" width="360" height="30"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Sr1-UT-BKN">
+                        <rect key="frame" x="30" y="0.0" width="330" height="60"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Activity Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BnG-Ny-dZx" userLabel="Activity Label" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="179" height="30"/>
+                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="arK-Kt-kPQ" userLabel="Padding View">
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="60"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="IaS-pZ-GaB"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Activity Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BnG-Ny-dZx" userLabel="Activity Label" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                <rect key="frame" x="123" y="0.0" width="102.5" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Sport Field" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hCQ-0E-ANk" userLabel="Sport Field" customClass="ThemeTextField" customModule="Heatmapper" customModuleProvider="target">
-                                <rect key="frame" x="181" y="0.0" width="179" height="30"/>
+                                <rect key="frame" x="227.5" y="0.0" width="102.5" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="GmS-8M-3x7"/>
                         <constraints>
                             <constraint firstItem="hCQ-0E-ANk" firstAttribute="width" secondItem="BnG-Ny-dZx" secondAttribute="width" id="09z-Ru-PIp"/>
-                            <constraint firstItem="BnG-Ny-dZx" firstAttribute="leading" secondItem="Sr1-UT-BKN" secondAttribute="leading" id="Gnf-eJ-sft"/>
-                            <constraint firstAttribute="height" constant="30" id="di8-IK-PLq"/>
-                            <constraint firstAttribute="trailing" secondItem="hCQ-0E-ANk" secondAttribute="trailing" id="lZe-MY-OJC"/>
+                            <constraint firstItem="arK-Kt-kPQ" firstAttribute="bottom" secondItem="GmS-8M-3x7" secondAttribute="bottom" id="3kV-BH-wno"/>
+                            <constraint firstItem="arK-Kt-kPQ" firstAttribute="top" secondItem="GmS-8M-3x7" secondAttribute="top" id="8vy-Ng-mLE"/>
+                            <constraint firstItem="arK-Kt-kPQ" firstAttribute="leading" secondItem="Sr1-UT-BKN" secondAttribute="leading" id="G4h-C2-Lvv"/>
+                            <constraint firstItem="BnG-Ny-dZx" firstAttribute="leading" secondItem="arK-Kt-kPQ" secondAttribute="trailing" id="lQC-z0-CmI"/>
                         </constraints>
                     </stackView>
                 </subviews>
+                <viewLayoutGuide key="safeArea" id="oh8-bf-Rbk"/>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Sr1-UT-BKN" secondAttribute="trailing" constant="10" id="L82-CP-bhc"/>
                     <constraint firstItem="Sr1-UT-BKN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LfL-BB-P14"/>
-                    <constraint firstItem="Sr1-UT-BKN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Umc-EG-LAS"/>
-                    <constraint firstAttribute="trailing" secondItem="Sr1-UT-BKN" secondAttribute="trailing" id="oSQ-Cc-si5"/>
+                    <constraint firstAttribute="bottom" secondItem="Sr1-UT-BKN" secondAttribute="bottom" id="Nqq-cR-Q7U"/>
+                    <constraint firstItem="Sr1-UT-BKN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="T4m-bp-Yfd"/>
+                    <constraint firstItem="Sr1-UT-BKN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="VQm-T1-3Xr"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -50,7 +63,12 @@
                 <outlet property="activityLabel" destination="BnG-Ny-dZx" id="2jk-f1-VE6"/>
                 <outlet property="sportField" destination="hCQ-0E-ANk" id="61q-G6-ts6"/>
             </connections>
-            <point key="canvasLocation" x="33" y="37"/>
+            <point key="canvasLocation" x="20.289855072463769" y="36.830357142857139"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

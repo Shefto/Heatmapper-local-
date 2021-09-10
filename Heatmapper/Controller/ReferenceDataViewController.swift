@@ -58,8 +58,13 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
     let activitySportRow : Int = sportArray.firstIndex(where: { $0 == activityArray[indexPath.row].sport  }) ?? 0
 
     cell.sportPicker.selectRow(activitySportRow, inComponent: 0, animated: true)
+    if #available(iOS 14.0, *) {
+      let pickerSubviews = cell.sportPicker.subviews.count
+      MyFunc.logMessage(.debug, "ReferenceDataViewController.pickerSubviews: \(pickerSubviews)")
 
-
+      cell.sportPicker.subviews[1].backgroundColor = .clear
+//      warmupMinutePicker.subviews[1].backgroundColor = .clear
+    }
     return cell
   }
 
