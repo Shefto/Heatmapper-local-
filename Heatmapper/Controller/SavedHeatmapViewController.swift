@@ -97,6 +97,9 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
 
     if pickerView == activityPicker {
       activityField.text = activityArray[row].name
+//      if sportField.text == "" {
+        sportField.text = activityArray[row].sport.rawValue
+//      }
     } else {
       sportField.text = sportArray[row].rawValue
     }
