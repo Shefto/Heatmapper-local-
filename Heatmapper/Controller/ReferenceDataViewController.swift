@@ -33,7 +33,7 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
     activityTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: activityTableView.frame.size.width, height: 1))
     activityTableView.tableHeaderView?.backgroundColor = UIColor.clear
 
-    //    activityArray = defaults.stringArray(forKey: "Activity") ?? []
+
     activityArray = MyFunc.getHeatmapperActivityDefaults()
     MyFunc.logMessage(.debug, "activityArray: \(activityArray)")
     activityTableView.reloadData()

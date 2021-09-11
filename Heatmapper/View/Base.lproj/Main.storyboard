@@ -291,10 +291,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="lyd-aS-nH0">
-                                <rect key="frame" x="0.0" y="108" width="414" height="1246"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="1294"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xdx-oz-NWw" userLabel="Workout Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1160"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1208"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="api-rD-sS3">
                                             <size key="itemSize" width="128" height="128"/>
@@ -314,7 +314,7 @@
                                         </cells>
                                     </collectionView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" id="6jT-ZL-mzL">
-                                        <rect key="frame" x="0.0" y="1161" width="414" height="34"/>
+                                        <rect key="frame" x="0.0" y="1209" width="414" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZd-9k-xak" userLabel="Created Heatmap Button" customClass="ThemeActionButton" customModule="Heatmapper" customModuleProvider="target">
@@ -345,7 +345,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="koB-cI-YWd">
-                                        <rect key="frame" x="0.0" y="1212" width="414" height="34"/>
+                                        <rect key="frame" x="0.0" y="1260" width="414" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cin-hP-zjE" userLabel="RE Heatmap Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="137.33333333333334" height="34"/>
@@ -683,10 +683,10 @@ DQoNCg
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7p0-Xp-GAh">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="514"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="532.66666666666663"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bi1-ui-buG">
-                                                <rect key="frame" x="0.0" y="0.0" width="404" height="514"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="404" height="532.66666666666663"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -699,16 +699,16 @@ DQoNCg
                                         </constraints>
                                     </scrollView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="OeP-jF-Pp8" userLabel="Activity Stack View">
-                                        <rect key="frame" x="0.0" y="529" width="404" height="18.666666666666629"/>
+                                        <rect key="frame" x="0.0" y="547.66666666666663" width="404" height="20.333333333333371"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WjU-FP-pZm" userLabel="Activity Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="129.66666666666666" height="18.666666666666668"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="129.66666666666666" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Activity" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Wsp-TC-1FL" userLabel="Activity Field" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="144.66666666666666" y="0.0" width="259.33333333333337" height="18.666666666666668"/>
+                                                <rect key="frame" x="144.66666666666666" y="0.0" width="259.33333333333337" height="20.333333333333332"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -719,16 +719,16 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="kOL-Y6-Oaw" userLabel="Sport Stack View">
-                                        <rect key="frame" x="0.0" y="562.66666666666663" width="404" height="18.666666666666629"/>
+                                        <rect key="frame" x="0.0" y="583" width="404" height="20.333333333333371"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUb-WJ-pCB" userLabel="Sport Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="129.66666666666666" height="18.666666666666668"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="129.66666666666666" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Sport Label" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QAR-0O-1LH" userLabel="Sport" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="144.66666666666666" y="0.0" width="259.33333333333337" height="18.666666666666668"/>
+                                                <rect key="frame" x="144.66666666666666" y="0.0" width="259.33333333333337" height="20.333333333333332"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -739,7 +739,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="bB4-MT-r7P" userLabel="Venue Stack View">
-                                        <rect key="frame" x="0.0" y="596.33333333333337" width="404" height="20.333333333333371"/>
+                                        <rect key="frame" x="0.0" y="618.33333333333337" width="404" height="20.333333333333371"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTI-FV-Wgi" userLabel="Venue Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="129.66666666666666" height="20.333333333333332"/>
@@ -759,7 +759,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="5C0-SP-zHb" userLabel="Pitch Stack View">
-                                        <rect key="frame" x="0.0" y="631.66666666666663" width="404" height="20.333333333333371"/>
+                                        <rect key="frame" x="0.0" y="653.66666666666663" width="404" height="20.333333333333371"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FH-ba-EGv" userLabel="Pitch Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="130" height="20.333333333333332"/>
@@ -779,32 +779,33 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ai0-ZQ-fkj" userLabel="Calories and Heart Rate Stack View">
-                                        <rect key="frame" x="0.0" y="667" width="404" height="31"/>
+                                        <rect key="frame" x="0.0" y="689" width="404" height="25"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flame.fill" translatesAutoresizingMaskIntoConstraints="NO" id="ilA-li-CWy">
-                                                <rect key="frame" x="0.0" y="0.0" width="31" height="31"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                 <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="ilA-li-CWy" secondAttribute="height" id="q5W-7Q-xsG"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUK-Or-FM5" userLabel="Calories" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="36" y="0.0" width="163.66666666666666" height="31"/>
+                                                <rect key="frame" x="30" y="0.0" width="169.66666666666666" height="25"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Heart Rate" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTV-DW-FFR" userLabel="Avg Heart Rate" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="204.66666666666663" y="0.0" width="163.33333333333337" height="31"/>
+                                                <rect key="frame" x="204.66666666666663" y="0.0" width="169.33333333333337" height="25"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.fill" translatesAutoresizingMaskIntoConstraints="NO" id="Bdz-po-5cm">
-                                                <rect key="frame" x="373" y="0.0" width="31" height="31"/>
+                                                <rect key="frame" x="379" y="0.0" width="25" height="25"/>
                                                 <color key="tintColor" systemColor="systemRedColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Bdz-po-5cm" secondAttribute="height" id="s2n-Fo-e1h"/>
+                                                    <constraint firstAttribute="height" constant="25" id="wHz-Tl-g6Q"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
@@ -814,32 +815,33 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Haw-cx-DRl" userLabel="Pace and Distance Stack View">
-                                        <rect key="frame" x="0.0" y="713" width="404" height="41"/>
+                                        <rect key="frame" x="0.0" y="729" width="404" height="25"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speedometer" translatesAutoresizingMaskIntoConstraints="NO" id="2JG-dV-1h3">
-                                                <rect key="frame" x="0.0" y="0.0" width="41" height="41"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                 <color key="tintColor" systemColor="systemBlueColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="2JG-dV-1h3" secondAttribute="height" multiplier="1:1" id="vbu-nu-CXO"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYq-TM-45H" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="46" y="0.0" width="153.66666666666666" height="41"/>
+                                                <rect key="frame" x="30" y="0.0" width="169.66666666666666" height="25"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJh-q3-eQC" userLabel="Distance" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="204.66666666666663" y="0.0" width="153.33333333333337" height="41"/>
+                                                <rect key="frame" x="204.66666666666663" y="0.0" width="169.33333333333337" height="25"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map.fill" translatesAutoresizingMaskIntoConstraints="NO" id="vt6-ja-RtC">
-                                                <rect key="frame" x="363" y="0.0" width="41" height="41"/>
+                                                <rect key="frame" x="379" y="0.0" width="25" height="25"/>
                                                 <color key="tintColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="vt6-ja-RtC" secondAttribute="height" multiplier="1:1" id="1lv-kJ-PiY"/>
+                                                    <constraint firstAttribute="height" constant="25" id="Ahx-Ih-2G7"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>

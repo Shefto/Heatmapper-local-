@@ -27,8 +27,8 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
   var units: String = ""
   var unitLength: UnitLength = .meters
   var unitSpeed: UnitSpeed  = .metersPerSecond
-  var activityArray = [String]()
-  var sportArray = ["Football - 11-a-side", "Football - 5-a-side", "Kabbaddi"]
+  var activityArray = [Activity]()
+  var sportArray = [Sport]()
   let defaults = UserDefaults.standard
 
   // Outlets and Actions
@@ -86,9 +86,9 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 
     if pickerView == activityPicker {
-      return activityArray[row]
+      return activityArray[row].name
     } else {
-      return sportArray[row]
+      return sportArray[row].rawValue
     }
 
   }
@@ -96,9 +96,9 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
     if pickerView == activityPicker {
-      activityField.text = activityArray[row]
+      activityField.text = activityArray[row].name
     } else {
-      sportField.text = sportArray[row]
+      sportField.text = sportArray[row].rawValue
     }
     updateWorkout()
     self.view.endEditing(true)
@@ -143,7 +143,8 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
 
   func getStaticData() {
 
-    activityArray = defaults.stringArray(forKey: "Activity") ?? []
+    activityArray = MyFunc.getHeatmapperActivityDefaults()
+    sportArray = Sport.allCases.map { $0 }
   }
 
 
