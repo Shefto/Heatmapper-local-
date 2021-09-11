@@ -35,8 +35,8 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
 
   @IBOutlet weak var heatmapImageView: UIImageView!
 
-  @IBOutlet weak var sportField         : ThemeTextField!
-  @IBOutlet weak var activityField      : ThemeTextField!
+  @IBOutlet weak var sportField         : ThemeMediumFontTextField!
+  @IBOutlet weak var activityField      : ThemeMediumFontTextField!
   @IBOutlet weak var activityLabel      : ThemeMediumFontUILabel!
 
   @IBOutlet weak var venueLabel         : ThemeMediumFontUILabel!
@@ -49,6 +49,13 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
   @IBOutlet weak var caloriesLabel      : ThemeMediumFontUILabel!
   @IBOutlet weak var avgHeartRateLabel  : ThemeMediumFontUILabel!
   @IBOutlet weak var avgSpeedLabel      : ThemeMediumFontUILabel!
+
+  @IBOutlet weak var caloriesImageView  : UIImageView!
+  @IBOutlet weak var paceImageView      : UIImageView!
+  @IBOutlet weak var heartRateImageView : UIImageView!
+  @IBOutlet weak var distanceImageView  : UIImageView!
+
+
 
   @IBOutlet weak var scrollView: UIScrollView! {
     didSet {
@@ -150,13 +157,6 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     sportPicker.dataSource = self
     sportField.inputView = sportPicker
 
-
-    //    let sportGesture = UITapGestureRecognizer(target: self, action: #selector(self.sportTap(_:)))
-    //
-    //    sportLabel.isUserInteractionEnabled = true
-    //    sportLabel.addGestureRecognizer(sportGesture)
-
-
     // this code cancels the keyboard and profile picker when field editing finishes
     let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
     tapGesture.cancelsTouchesInView = false
@@ -183,6 +183,20 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     venueLabel.text = workoutVenue
     pitchLabel.text = workoutPitch
     sportField.text = workoutSport
+
+    // colour icons
+
+    heartRateImageView.image = heartRateImageView.image?.withRenderingMode(.alwaysTemplate)
+    heartRateImageView.tintColor = UIColor.systemRed
+
+    caloriesImageView.image = caloriesImageView.image?.withRenderingMode(.alwaysTemplate)
+    caloriesImageView.tintColor = UIColor.systemOrange
+
+    paceImageView.image = paceImageView.image?.withRenderingMode(.alwaysTemplate)
+    paceImageView.tintColor = UIColor.systemBlue
+
+    distanceImageView.image = distanceImageView.image?.withRenderingMode(.alwaysTemplate)
+    distanceImageView.tintColor = UIColor.systemGreen
 
     // start and end date
     var workoutStartDateAsString = ""
@@ -235,11 +249,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
 
   }
 
-  //  @objc func sportTap(_ sender: UITapGestureRecognizer? = nil)
-  //  {
-  //    self.sportPicker.isHidden = false
-  //    self.view.setNeedsLayout()
-  //  }
+
 
 
   func getHeatmapImage() {
@@ -286,7 +296,6 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     metadataToUpdate?.updateValue(sportField.text as Any, forKey: "Sport")
 
     let workoutToSave = HKWorkout(activityType: workoutToUpdate.workoutActivityType, start: workoutToUpdate.startDate, end: workoutToUpdate.endDate, workoutEvents: workoutToUpdate.workoutEvents, totalEnergyBurned: workoutToUpdate.totalEnergyBurned, totalDistance: workoutToUpdate.totalDistance, device: workoutToUpdate.device, metadata: metadataToUpdate)
-
 
 
     self.healthstore.delete(workoutToUpdate, withCompletion: { (success, error) in

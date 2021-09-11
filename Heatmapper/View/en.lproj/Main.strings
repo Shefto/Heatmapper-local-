@@ -40,9 +40,6 @@
 /* Class = "UILabel"; text = "Pitch"; ObjectID = "3FH-ba-EGv"; */
 "3FH-ba-EGv.text" = "";
 
-/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "664-Ic-CaK"; */
-"664-Ic-CaK.title" = "";
-
 /* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "8fa-ka-EKP"; */
 "8fa-ka-EKP.normalTitle" = "";
 
@@ -166,7 +163,7 @@
 /* Class = "UILabel"; text = "Calories"; ObjectID = "VUK-Or-FM5"; */
 "VUK-Or-FM5.text" = "";
 
-/* Class = "UILabel"; text = "Activity Name"; ObjectID = "WjU-FP-pZm"; */
+/* Class = "UILabel"; text = "Activity"; ObjectID = "WjU-FP-pZm"; */
 "WjU-FP-pZm.text" = "";
 
 /* Class = "UIButton"; normalTitle = "DTM"; ObjectID = "WMX-9X-sBW"; */

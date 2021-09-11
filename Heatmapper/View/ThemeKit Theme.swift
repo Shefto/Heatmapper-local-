@@ -88,14 +88,26 @@ extension Theme {
     }
 
 
-    // UITextField
-   ThemeTextField.appearance().with {
+    // ********************************************************************************
+    // UITextFields
+    // ********************************************************************************
+   ThemeMediumFontTextField.appearance().with {
       $0.backgroundColor = background
       $0.textColor = textPrimary
-    let themeFont = UIFont.systemFont(ofSize: 24.0, weight: .regular)
+    let themeFont = UIFont.systemFont(ofSize: 22.0, weight: .regular)
     $0.font = themeFont
     $0.textColor = textAlternate
     }
+
+    ThemeTextField.appearance().with {
+      $0.backgroundColor = background
+      $0.textColor = textPrimary
+      let themeFont = UIFont.systemFont(ofSize: 20.0, weight: .regular)
+      $0.font = themeFont
+      $0.textColor = textAlternate
+    }
+
+
 
     // ********************************************************************************
     // UIViews

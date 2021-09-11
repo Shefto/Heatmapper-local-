@@ -54,8 +54,8 @@ class TableRowNameUILabel: UILabel {}
 class ThemeSmallTextUILabel: UILabel {}
 
 class ThemeTextField: UITextField {}
+class ThemeMediumFontTextField: UITextField {}
 
-// Text View
 class ThemeTextView: UITextView {}
 
 class ThemePickerView: UIPickerView {}
