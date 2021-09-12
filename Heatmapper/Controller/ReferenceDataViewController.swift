@@ -96,7 +96,7 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
   // function to handle confirmation after swiping to delete
   func confirmDelete(indexPath: IndexPath) {
-    let alert = UIAlertController(title: "Delete Activity", message: "Are you sure you want to delete \(activityArray[indexPath.row])?", preferredStyle: .actionSheet)
+    let alert = UIAlertController(title: "Delete Activity", message: "Are you sure you want to delete \(activityArray[indexPath.row].name)?", preferredStyle: .actionSheet)
 
     let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: deleteActivityHandler)
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelActivityHandler)
@@ -111,7 +111,8 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
     activityArray.remove(at: currentIndexPath.row)
     activityTableView.deleteRows(at: [currentIndexPath], with: UITableView.RowAnimation.fade)
-    defaults.set(activityArray, forKey: "Activity")
+//    defaults.set(activityArray, forKey: "Activity")
+    MyFunc.saveHeatmapActivityDefaults(self.activityArray)
     activityTableView.reloadData()
 
   }

@@ -113,7 +113,8 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
     cell.heatmapImageView.image = heatmapImage
     cell.workoutDateLabel.text = dateFormatter.string(from: workout.startDate)
-    cell.workoutTypeLabel.text = workout.workoutActivityType.name
+    cell.venueLabel.text = workout.metadata?["Venue"] as? String ?? ""
+
 
     if selectedIndexPath != nil && indexPath.row == selectedIndexPath {
       cell.contentView.backgroundColor = theme.buttonPrimary
@@ -128,7 +129,6 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
       workoutSelectedId = workoutArray?[indexPath.row].uuid
       selectedIndexPath = indexPath.row
       workoutCollectionView.reloadData()
-
     }
   }
 
@@ -152,8 +152,6 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     }
 
   }
-
-
 
   func loadHeatmapImages() {
     let fm = FileManager.default

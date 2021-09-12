@@ -12,14 +12,7 @@ class WorkoutCollectionViewCell: UICollectionViewCell {
 
   @IBOutlet weak var heatmapImageView: UIImageView!
   @IBOutlet weak var workoutDateLabel: ThemeSmallTextUILabel!
-  @IBOutlet weak var workoutTypeLabel: ThemeSmallTextUILabel!
-
-
-
-
-  override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
+  @IBOutlet weak var activityLabel: ThemeSmallTextUILabel!
+  @IBOutlet weak var venueLabel: ThemeSmallTextUILabel!
+  
 }
