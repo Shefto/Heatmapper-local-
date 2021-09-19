@@ -169,21 +169,31 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
 //  }
 
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, complete in
       self.activityArray.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .fade)
-//      self.activityTableView.deleteRows(at: [indexPath.row], with: UITableView.RowAnimation.fade)
       MyFunc.saveHeatmapActivityDefaults(self.activityArray)
       self.activityTableView.reloadData()
-
-
       complete(true)
     }
 
     deleteAction.backgroundColor = .red
+//    deleteAction.image = UIImage(systemName: "trash")
 
-    let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-    configuration.performsFirstActionWithFullSwipe = true
+    let editAction = UIContextualAction(style: .destructive, title: "Edit") { _, _, complete in
+      // switch table into edit mode
+
+      MyFunc.saveHeatmapActivityDefaults(self.activityArray)
+      self.activityTableView.reloadData()
+      complete(true)
+    }
+
+    editAction.backgroundColor = .systemGray
+//    editAction.image = UIImage(systemName: "pencil")
+
+    let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+    configuration.performsFirstActionWithFullSwipe = false
     return configuration
   }
 
