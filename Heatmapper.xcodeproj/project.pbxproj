@@ -51,6 +51,8 @@
 		797BFD0525421E8700426185 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
 		797BFD0A2542B72800426185 /* MyFunciOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797BFD092542B72800426185 /* MyFunciOS.swift */; };
 		797E7C062575312500EAE473 /* IntervalTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */; };
+		798007F426F3DF8C00FFC294 /* EditActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798007F326F3DF8C00FFC294 /* EditActivityTableViewCell.swift */; };
+		798007F626F5F64700FFC294 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798007F526F5F64700FFC294 /* ActivityViewController.swift */; };
 		7980929D252F386300DF1562 /* HeatmapperWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7980929C252F386300DF1562 /* HeatmapperWorkout.swift */; };
 		7981D39C24BDD62500E5D9E7 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFF824A7F1AF002A7870 /* Interval.swift */; };
 		7982B0C1264FEF64001335F3 /* WorkoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7982B0C0264FEF64001335F3 /* WorkoutCell.xib */; };
@@ -228,6 +230,9 @@
 		7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntervalTableViewFooter.swift; path = Heatmapper/View/IntervalTableViewFooter.swift; sourceTree = SOURCE_ROOT; };
 		797BFD092542B72800426185 /* MyFunciOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFunciOS.swift; sourceTree = "<group>"; };
 		797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTypeTableViewCell.swift; sourceTree = "<group>"; };
+		798007F226F3DECC00FFC294 /* EditActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditActivityCell.xib; sourceTree = "<group>"; };
+		798007F326F3DF8C00FFC294 /* EditActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActivityTableViewCell.swift; sourceTree = "<group>"; };
+		798007F526F5F64700FFC294 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		7980929C252F386300DF1562 /* HeatmapperWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapperWorkout.swift; sourceTree = "<group>"; };
 		7982B0C0264FEF64001335F3 /* WorkoutCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutCell.xib; sourceTree = "<group>"; };
 		7982B0C226506C07001335F3 /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
@@ -411,6 +416,8 @@
 				793477A826DD66BA0004DF0A /* ActivityTableViewCell.swift */,
 				793477A926DD66BA0004DF0A /* ActivityTableViewCell.xib */,
 				793477AC26DFFFF00004DF0A /* ActivityCell.xib */,
+				798007F326F3DF8C00FFC294 /* EditActivityTableViewCell.swift */,
+				798007F226F3DECC00FFC294 /* EditActivityCell.xib */,
 				79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */,
 				79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */,
 				79D083B72509255A00274F79 /* ThemeKit App Classes.swift */,
@@ -423,6 +430,7 @@
 		793D1AE024B86C1B0039441B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				798007F526F5F64700FFC294 /* ActivityViewController.swift */,
 				793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */,
 				79439B7326C46357001E7CC4 /* SavedHeatmapViewController.swift */,
 				799131232634126800811731 /* HeatmapViewController.swift */,
@@ -872,6 +880,7 @@
 				79FB27872561984000E1C9AD /* Objects.swift in Sources */,
 				7982B0C326506C07001335F3 /* WorkoutTableViewCell.swift in Sources */,
 				79913133263414B600811731 /* JDColorMixer.swift in Sources */,
+				798007F426F3DF8C00FFC294 /* EditActivityTableViewCell.swift in Sources */,
 				7935622825AF53C5006BBC54 /* HelpViewController.swift in Sources */,
 				799131242634126800811731 /* HeatmapViewController.swift in Sources */,
 				79D083B82509255A00274F79 /* ThemeKit App Classes.swift in Sources */,
@@ -892,6 +901,7 @@
 				793D1AE624B86E6F0039441B /* CustomLogger.swift in Sources */,
 				79B3742C24B0C711000E4F7E /* Stopwatch.swift in Sources */,
 				79A9DC6426B9DD060063C3D0 /* WorkoutCollectionViewCell.swift in Sources */,
+				798007F626F5F64700FFC294 /* ActivityViewController.swift in Sources */,
 				793D1AD924B8650A0039441B /* DataProvider.swift in Sources */,
 				79B6DC992598B13400F573BA /* SettingsViewController.swift in Sources */,
 				7935625125B0BBBE006BBC54 /* UnitConverterPace.swift in Sources */,

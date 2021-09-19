@@ -120,7 +120,6 @@ class MyFunc {
   }
 
 
-
   static func getHeatmapperActivityDefaults() -> [Activity] {
 
     var activitySetToReturn = [Activity]()

@@ -8,17 +8,15 @@
 
 import UIKit
 
-class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
-
+class ReferenceDataViewController: UIViewController {
 
   let theme = ColourTheme()
   let defaults = UserDefaults.standard
   private var activityArray = [Activity]()
   var sportArray = [Sport]()
 
-  var selectedIndexPath : Int? = 0
+  var selectedIndexPath : Int?
   var currentIndexPath  = IndexPath()
-  //  var deleteRecord      : Bool = false
 
   @IBOutlet weak var activityTableView: ThemeTableViewNoBackground!
 
@@ -29,100 +27,33 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
     activityTableView.delegate = self
     activityTableView.allowsSelection = true
     activityTableView.register(UINib(nibName: "ActivityCell", bundle: nil), forCellReuseIdentifier: "ActivityTableViewCell")
+    activityTableView.register(UINib(nibName: "EditActivityCell", bundle: nil), forCellReuseIdentifier: "EditActivityTableViewCell")
 
     activityTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: activityTableView.frame.size.width, height: 1))
     activityTableView.tableHeaderView?.backgroundColor = UIColor.clear
 
+    getData()
+    
+  }
+
+  func getData() {
 
     activityArray = MyFunc.getHeatmapperActivityDefaults()
     MyFunc.logMessage(.debug, "activityArray: \(activityArray)")
     activityTableView.reloadData()
     sportArray = Sport.allCases.map { $0 }
 
-    
   }
-
-
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return activityArray.count
-  }
-
-
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-    let cell = activityTableView.dequeueReusableCell(withIdentifier: "ActivityTableViewCell", for: indexPath) as! ActivityTableViewCell
-
-    cell.activityLabel.text = activityArray[indexPath.row].name
-    cell.sportPicker.delegate = self
-
-    let activitySportRow : Int = sportArray.firstIndex(where: { $0 == activityArray[indexPath.row].sport  }) ?? 0
-
-    cell.sportPicker.selectRow(activitySportRow, inComponent: 0, animated: true)
-    if #available(iOS 14.0, *) {
-      let pickerSubviews = cell.sportPicker.subviews.count
-      MyFunc.logMessage(.debug, "ReferenceDataViewController.pickerSubviews: \(pickerSubviews)")
-
-      cell.sportPicker.subviews[1].backgroundColor = .clear
-//      warmupMinutePicker.subviews[1].backgroundColor = .clear
-    }
-    return cell
-  }
-
-
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: false)
-    MyFunc.logMessage(.debug, "ReferenceDataViewController.didSelectRow: \(indexPath.row)")
-    selectedIndexPath = indexPath.row
-    self.activityTableView.reloadData()
-
-  }
-
-  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-
-    selectedIndexPath = nil
-    self.activityTableView.reloadData()
-  }
-
-  // this function manages the swipe-to-delete
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete {
-      currentIndexPath = indexPath
-      confirmDelete(indexPath: currentIndexPath)
-
-    } else if editingStyle == .insert {
-      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
-  }
-
-  // function to handle confirmation after swiping to delete
-  func confirmDelete(indexPath: IndexPath) {
-    let alert = UIAlertController(title: "Delete Activity", message: "Are you sure you want to delete \(activityArray[indexPath.row].name)?", preferredStyle: .actionSheet)
-
-    let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: deleteActivityHandler)
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelActivityHandler)
-    alert.addAction(deleteAction)
-    alert.addAction(cancelAction)
-
-    self.present(alert, animated: true, completion: nil)
-
-  }
-
-  func deleteActivityHandler(alertAction: UIAlertAction!)  {
-
-    activityArray.remove(at: currentIndexPath.row)
-    activityTableView.deleteRows(at: [currentIndexPath], with: UITableView.RowAnimation.fade)
-//    defaults.set(activityArray, forKey: "Activity")
-    MyFunc.saveHeatmapActivityDefaults(self.activityArray)
-    activityTableView.reloadData()
-
-  }
-
-  func cancelActivityHandler(alertAction: UIAlertAction!) {
-
-  }
-
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    let segueToUse = segue.identifier
+
+    if segueToUse == "referenceDataToActivity" {
+      let activityVC = segue.destination as! ActivityViewController
+      activityVC.activityToUpdate = sender as? Activity
+
+    }
 
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
@@ -163,6 +94,116 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
     MyFunc.saveHeatmapActivityDefaults(activityArray)
   }
 
+
+  // functions to handle confirmation after swiping to delete
+  func confirmDelete(indexPath: IndexPath) {
+    let alert = UIAlertController(title: "Delete Activity", message: "Are you sure you want to delete \(activityArray[indexPath.row].name)?", preferredStyle: .actionSheet)
+
+    let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: deleteActivityHandler)
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelActivityHandler)
+    alert.addAction(deleteAction)
+    alert.addAction(cancelAction)
+
+    self.present(alert, animated: true, completion: nil)
+
+  }
+
+  func deleteActivityHandler(alertAction: UIAlertAction!)  {
+
+    activityArray.remove(at: currentIndexPath.row)
+    activityTableView.deleteRows(at: [currentIndexPath], with: UITableView.RowAnimation.fade)
+    //    defaults.set(activityArray, forKey: "Activity")
+    MyFunc.saveHeatmapActivityDefaults(self.activityArray)
+    activityTableView.reloadData()
+
+  }
+
+  func cancelActivityHandler(alertAction: UIAlertAction!) {
+  }
+
+}
+
+extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSource {
+
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return activityArray.count
+  }
+
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+    let cell = activityTableView.dequeueReusableCell(withIdentifier: "ActivityTableViewCell", for: indexPath) as! ActivityTableViewCell
+
+    cell.activityLabel.text = activityArray[indexPath.row].name
+    cell.sportPicker.delegate = self
+
+    // set Picker value
+    let activitySportRow : Int = sportArray.firstIndex(where: { $0 == activityArray[indexPath.row].sport  }) ?? 0
+
+    cell.sportPicker.selectRow(activitySportRow, inComponent: 0, animated: true)
+    if #available(iOS 14.0, *) {
+      cell.sportPicker.subviews[1].backgroundColor = .clear
+    }
+    return cell
+  }
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    MyFunc.logMessage(.debug, "ReferenceDataViewController.didSelectRow: \(indexPath.row)")
+    selectedIndexPath = indexPath.row
+    activityTableView.reloadData()
+
+  }
+
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+
+  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    selectedIndexPath = nil
+    self.activityTableView.reloadData()
+  }
+
+//  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//    MyFunc.logMessage(.debug, "editingStyleForRowAt called")
+//    return .none
+//  }
+
+  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, complete in
+      self.activityArray.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+//      self.activityTableView.deleteRows(at: [indexPath.row], with: UITableView.RowAnimation.fade)
+      MyFunc.saveHeatmapActivityDefaults(self.activityArray)
+      self.activityTableView.reloadData()
+
+
+      complete(true)
+    }
+
+    deleteAction.backgroundColor = .red
+
+    let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+    configuration.performsFirstActionWithFullSwipe = true
+    return configuration
+  }
+
+  // this function manages the swipe-to-delete
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      currentIndexPath = indexPath
+      confirmDelete(indexPath: currentIndexPath)
+
+    } else if editingStyle == .insert {
+
+    }
+  }
+
+
+
+}
+
+extension ReferenceDataViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     MyFunc.logMessage(.debug, "ReferenceDataViewController.didSelectRow: \(row)")
     let sportSelected = sportArray[row]
@@ -180,18 +221,16 @@ class ReferenceDataViewController: UIViewController, UITableViewDataSource, UITa
 
   }
 
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-      return 1
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-      return sportArray.count
-    }
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-      return sportArray[row].rawValue
-    }
-
-
-
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1
   }
+
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return sportArray.count
+  }
+
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return sportArray[row].rawValue
+  }
+
+}

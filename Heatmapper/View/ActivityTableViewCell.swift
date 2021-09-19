@@ -21,6 +21,7 @@ class ActivityTableViewCell: ThemeTableViewCellNoBackground, UIPickerViewDelegat
   @IBOutlet weak var activityLabel: TableRowNameUILabel!
   @IBOutlet weak var sportPicker: UIPickerView!
 
+
   var sportArray = [String]()
 
   override func layoutSubviews() {

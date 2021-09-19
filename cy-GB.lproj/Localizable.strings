@@ -190,3 +190,9 @@
 
 /* Recording interval */
 "\(phrase)" = "";
+
+/* edit reminder nav title */
+"Edit Reminder" = "";
+
+/* view reminder nav title */
+"View Reminder" = "";

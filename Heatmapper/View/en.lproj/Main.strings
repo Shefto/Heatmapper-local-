@@ -70,6 +70,9 @@
 /* Class = "UISegmentedControl"; dhi-ac-byn.segmentTitles[2] = "Best for accuracy"; ObjectID = "dhi-ac-byn"; */
 "dhi-ac-byn.segmentTitles[2]" = "";
 
+/* Class = "UINavigationItem"; title = "View Activity"; ObjectID = "EbZ-Kt-ugg"; */
+"EbZ-Kt-ugg.title" = "";
+
 /* Class = "UILabel"; text = "Sport"; ObjectID = "fUb-WJ-pCB"; */
 "fUb-WJ-pCB.text" = "";
 
@@ -106,6 +109,9 @@
 /* Class = "UISegmentedControl"; KZh-Fy-Ydb.segmentTitles[3] = "mins/mi"; ObjectID = "KZh-Fy-Ydb"; */
 "KZh-Fy-Ydb.segmentTitles[3]" = "";
 
+/* Class = "UILabel"; text = "Title"; ObjectID = "LBN-cy-HVo"; */
+"LBN-cy-HVo.text" = "";
+
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "mh4-Pn-ffs"; */
 "mh4-Pn-ffs.normalTitle" = "";
 
@@ -141,6 +147,9 @@
 
 /* Class = "UIButton"; normalTitle = "View Heatmap"; ObjectID = "TfY-wi-FxC"; */
 "TfY-wi-FxC.normalTitle" = "";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Tnl-UQ-yzh"; */
+"Tnl-UQ-yzh.text" = "";
 
 /* Class = "UIButton"; normalTitle = "View Heatmap"; ObjectID = "tZd-9k-xak"; */
 "tZd-9k-xak.normalTitle" = "";

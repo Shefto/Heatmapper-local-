@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EditActivityTableViewCell" customModule="Heatmapper">
+            <rect key="frame" x="0.0" y="0.0" width="514" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3EF-a8-0kh">
+                    <rect key="frame" x="0.0" y="0.0" width="514" height="40"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Activity Field" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HlQ-bO-JSe">
+                            <rect key="frame" x="0.0" y="0.0" width="514" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddn-Hw-btL" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKq-xX-MVF" userLabel="Sport Picker View">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
+                        </pickerView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="dKq-xX-MVF" firstAttribute="width" secondItem="ddn-Hw-btL" secondAttribute="width" multiplier="0.5" id="cxY-uo-gqD"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="3EF-a8-0kh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JG0-bg-1St"/>
+                <constraint firstAttribute="bottom" secondItem="3EF-a8-0kh" secondAttribute="bottom" id="NvN-dl-dR8"/>
+                <constraint firstItem="3EF-a8-0kh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="XjG-VG-XTs"/>
+                <constraint firstAttribute="trailing" secondItem="3EF-a8-0kh" secondAttribute="trailing" id="pG0-Ca-RaR"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="activityField" destination="HlQ-bO-JSe" id="NR6-0w-Tf1"/>
+                <outlet property="activityLabel" destination="ddn-Hw-btL" id="isF-T3-pf4"/>
+                <outlet property="sportPicker" destination="dKq-xX-MVF" id="m1d-EJ-eib"/>
+            </connections>
+            <point key="canvasLocation" x="162" y="-22"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
