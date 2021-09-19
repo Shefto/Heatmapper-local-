@@ -24,7 +24,7 @@ extension Sport {
   }
 }
 
-struct Activity: Codable {
+struct Activity: Codable, Equatable {
   var name  : String
   var sport : Sport
 

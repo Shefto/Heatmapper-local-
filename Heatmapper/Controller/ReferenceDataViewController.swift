@@ -20,6 +20,11 @@ class ReferenceDataViewController: UIViewController {
 
   @IBOutlet weak var activityTableView: ThemeTableViewNoBackground!
 
+  override func viewWillAppear(_ animated: Bool) {
+    getData()
+    activityTableView.reloadData()
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -32,7 +37,7 @@ class ReferenceDataViewController: UIViewController {
     activityTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: activityTableView.frame.size.width, height: 1))
     activityTableView.tableHeaderView?.backgroundColor = UIColor.clear
 
-    getData()
+
     
   }
 
@@ -46,15 +51,11 @@ class ReferenceDataViewController: UIViewController {
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
     let segueToUse = segue.identifier
-
     if segueToUse == "referenceDataToActivity" {
       let activityVC = segue.destination as! ActivityViewController
       activityVC.activityToUpdate = sender as? Activity
-
     }
-
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
 
@@ -62,15 +63,11 @@ class ReferenceDataViewController: UIViewController {
   @IBAction func addButton(_ sender: UIBarButtonItem) {
 
     var textField = UITextField()
-
     let alert = UIAlertController(title: "Add New Activity", message: "", preferredStyle: .alert)
-
     let action = UIAlertAction(title: "Add", style: .default) { (action) in
-
       let newActivityName = textField.text!
       let newSport = Sport.none
       let newActivity = Activity(name: newActivityName, sport: newSport)
-
       self.activityArray.append(newActivity)
       MyFunc.saveHeatmapActivityDefaults(self.activityArray)
       self.activityTableView.reloadData()
@@ -87,38 +84,10 @@ class ReferenceDataViewController: UIViewController {
 
   }
 
-
   func updateSportForActivity(newSport: Sport, indexPathRow: Int) {
     activityArray[indexPathRow].sport = newSport
     //    let activityToSave = activityArray[indexPath.row]
     MyFunc.saveHeatmapActivityDefaults(activityArray)
-  }
-
-
-  // functions to handle confirmation after swiping to delete
-  func confirmDelete(indexPath: IndexPath) {
-    let alert = UIAlertController(title: "Delete Activity", message: "Are you sure you want to delete \(activityArray[indexPath.row].name)?", preferredStyle: .actionSheet)
-
-    let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: deleteActivityHandler)
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelActivityHandler)
-    alert.addAction(deleteAction)
-    alert.addAction(cancelAction)
-
-    self.present(alert, animated: true, completion: nil)
-
-  }
-
-  func deleteActivityHandler(alertAction: UIAlertAction!)  {
-
-    activityArray.remove(at: currentIndexPath.row)
-    activityTableView.deleteRows(at: [currentIndexPath], with: UITableView.RowAnimation.fade)
-    //    defaults.set(activityArray, forKey: "Activity")
-    MyFunc.saveHeatmapActivityDefaults(self.activityArray)
-    activityTableView.reloadData()
-
-  }
-
-  func cancelActivityHandler(alertAction: UIAlertAction!) {
   }
 
 }
@@ -148,7 +117,7 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    MyFunc.logMessage(.debug, "ReferenceDataViewController.didSelectRow: \(indexPath.row)")
+
     selectedIndexPath = indexPath.row
     activityTableView.reloadData()
 
@@ -163,14 +132,13 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
     self.activityTableView.reloadData()
   }
 
-//  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-//    MyFunc.logMessage(.debug, "editingStyleForRowAt called")
-//    return .none
-//  }
 
+
+  // this function controls the two swipe controls
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, complete in
+
       self.activityArray.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .fade)
       MyFunc.saveHeatmapActivityDefaults(self.activityArray)
@@ -179,36 +147,23 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
     }
 
     deleteAction.backgroundColor = .red
-//    deleteAction.image = UIImage(systemName: "trash")
+    deleteAction.image = UIImage(systemName: "trash")
 
     let editAction = UIContextualAction(style: .destructive, title: "Edit") { _, _, complete in
       // switch table into edit mode
+      let activityToSend = self.activityArray[indexPath.row]
+      self.performSegue(withIdentifier: "referenceDataToActivity", sender: activityToSend)
 
-      MyFunc.saveHeatmapActivityDefaults(self.activityArray)
-      self.activityTableView.reloadData()
       complete(true)
     }
 
     editAction.backgroundColor = .systemGray
-//    editAction.image = UIImage(systemName: "pencil")
+    editAction.image = UIImage(systemName: "pencil")
 
     let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
     configuration.performsFirstActionWithFullSwipe = false
     return configuration
   }
-
-  // this function manages the swipe-to-delete
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete {
-      currentIndexPath = indexPath
-      confirmDelete(indexPath: currentIndexPath)
-
-    } else if editingStyle == .insert {
-
-    }
-  }
-
-
 
 }
 

@@ -291,71 +291,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lMG-hT-cf1">
-                                <rect key="frame" x="0.0" y="118" width="414" height="695"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActivityTitleViewCell" textLabel="LBN-cy-HVo" style="IBUITableViewCellStyleDefault" id="aGu-Ch-euO">
-                                        <rect key="frame" x="0.0" y="24.333333969116211" width="414" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aGu-Ch-euO" id="69H-Ty-yiz">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LBN-cy-HVo">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.666667938232422"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActivityTitleEditCell" id="b0c-Gn-Hya">
-                                        <rect key="frame" x="0.0" y="68.000001907348633" width="414" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b0c-Gn-Hya" id="lUM-7z-WLf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BSO-Ol-TcR" userLabel="Activity">
-                                                    <rect key="frame" x="0.0" y="0.0" width="394" height="30.333333333333332"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tnl-UQ-yzh">
-                                <rect key="frame" x="0.0" y="88" width="414" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Activity" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XJj-hN-I5q" userLabel="Activity Name Text Field">
+                                <rect key="frame" x="10" y="98" width="394" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="F2t-MK-CL4"/>
+                                    <constraint firstAttribute="height" constant="40" id="Rd8-JO-Ti8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="activityNameDidEndOnExit:" destination="Lil-kf-fAA" eventType="editingDidEndOnExit" id="9zU-Kb-Hd1"/>
+                                    <action selector="activityNameEditingDidBegin:" destination="Lil-kf-fAA" eventType="editingDidBegin" id="H8s-AS-xDm"/>
+                                    <action selector="activityNameEditingDidEnd:" destination="Lil-kf-fAA" eventType="editingDidEnd" id="cRc-4f-741"/>
+                                </connections>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Rl-yU-9D7" userLabel="Sport Picker View">
+                                <rect key="frame" x="10" y="148" width="394" height="216"/>
+                            </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bfn-9T-thW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="lMG-hT-cf1" firstAttribute="leading" secondItem="bfn-9T-thW" secondAttribute="leading" id="8Ad-Ns-8J2"/>
-                            <constraint firstItem="bfn-9T-thW" firstAttribute="trailing" secondItem="lMG-hT-cf1" secondAttribute="trailing" id="Jye-P5-1CR"/>
-                            <constraint firstItem="Tnl-UQ-yzh" firstAttribute="top" secondItem="bfn-9T-thW" secondAttribute="top" id="L0S-xx-5Y0"/>
-                            <constraint firstItem="Tnl-UQ-yzh" firstAttribute="leading" secondItem="bfn-9T-thW" secondAttribute="leading" id="U8A-ah-SBl"/>
-                            <constraint firstItem="Tnl-UQ-yzh" firstAttribute="trailing" secondItem="bfn-9T-thW" secondAttribute="trailing" id="YP8-7F-v4R"/>
-                            <constraint firstItem="lMG-hT-cf1" firstAttribute="top" secondItem="Tnl-UQ-yzh" secondAttribute="bottom" id="fQM-Wy-LRy"/>
-                            <constraint firstItem="bfn-9T-thW" firstAttribute="bottom" secondItem="lMG-hT-cf1" secondAttribute="bottom" id="oYR-5x-tzd"/>
+                            <constraint firstItem="XJj-hN-I5q" firstAttribute="top" secondItem="bfn-9T-thW" secondAttribute="top" constant="10" id="Km4-ph-eR7"/>
+                            <constraint firstItem="5Rl-yU-9D7" firstAttribute="top" secondItem="XJj-hN-I5q" secondAttribute="bottom" constant="10" id="Oot-Qc-LwO"/>
+                            <constraint firstItem="bfn-9T-thW" firstAttribute="trailing" secondItem="5Rl-yU-9D7" secondAttribute="trailing" constant="10" id="QM9-Ag-2nc"/>
+                            <constraint firstItem="5Rl-yU-9D7" firstAttribute="leading" secondItem="bfn-9T-thW" secondAttribute="leading" constant="10" id="UhW-BD-pYT"/>
+                            <constraint firstItem="bfn-9T-thW" firstAttribute="trailing" secondItem="XJj-hN-I5q" secondAttribute="trailing" constant="10" id="WXh-2L-h57"/>
+                            <constraint firstItem="XJj-hN-I5q" firstAttribute="leading" secondItem="bfn-9T-thW" secondAttribute="leading" constant="10" id="kA3-FY-STi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="View Activity" id="EbZ-Kt-ugg"/>
+                    <navigationItem key="navigationItem" title="Edit Activity" id="EbZ-Kt-ugg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="kSe-dB-xRG">
+                            <connections>
+                                <action selector="btnSave:" destination="Lil-kf-fAA" id="flf-yy-Hih"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="activityNameLabel" destination="Tnl-UQ-yzh" id="YU2-GQ-Bhx"/>
-                        <outlet property="activityTableView" destination="lMG-hT-cf1" id="SWM-c6-ThE"/>
+                        <outlet property="activityNameField" destination="XJj-hN-I5q" id="jjp-m5-yZm"/>
+                        <outlet property="saveButton" destination="kSe-dB-xRG" id="S2t-Pc-nXv"/>
+                        <outlet property="sportPicker" destination="5Rl-yU-9D7" id="m6j-YC-g5Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wSd-D5-drI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -371,10 +345,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="lyd-aS-nH0">
-                                <rect key="frame" x="0.0" y="108" width="414" height="1342"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="1582"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xdx-oz-NWw" userLabel="Workout Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1272"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1496"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="api-rD-sS3">
                                             <size key="itemSize" width="128" height="128"/>
@@ -394,11 +368,11 @@
                                         </cells>
                                     </collectionView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" id="6jT-ZL-mzL">
-                                        <rect key="frame" x="0.0" y="1273" width="414" height="34"/>
+                                        <rect key="frame" x="0.0" y="1497" width="414" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZd-9k-xak" userLabel="Created Heatmap Button" customClass="ThemeActionButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="View Heatmap">
                                                     <color key="titleColor" systemColor="systemGreenColor"/>
@@ -409,7 +383,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxP-i5-0nQ" userLabel="Update Workout Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="Update Workout">
                                                     <color key="titleColor" name="autoDetect"/>
@@ -425,7 +399,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="koB-cI-YWd">
-                                        <rect key="frame" x="0.0" y="1308" width="414" height="34"/>
+                                        <rect key="frame" x="0.0" y="1548" width="414" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cin-hP-zjE" userLabel="RE Heatmap Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="137.33333333333334" height="34"/>
