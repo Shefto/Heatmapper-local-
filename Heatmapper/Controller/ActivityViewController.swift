@@ -102,10 +102,12 @@ class ActivityViewController: UIViewController {
 
 //    saveRecord()
 
-
-
   }
 
+  override func viewWillDisappear(_ animated: Bool) {
+    print ("viewWillDisappear")
+    saveRecord()
+  }
   @IBAction func activityNameDidEndOnExit(_ sender: Any) {
     MyFunc.logMessage(.debug, "activityNameDidEndOnExit called")
   }
