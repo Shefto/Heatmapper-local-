@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ActivityTableViewCellDelegate: class {
+protocol ActivityTableViewCellDelegate: AnyObject {
 
   func updateSportForActivity(newSport: Sport, indexPathRow: Int)
 
@@ -20,6 +20,7 @@ class ActivityTableViewCell: ThemeTableViewCellNoBackground, UIPickerViewDelegat
 
   @IBOutlet weak var activityLabel: TableRowNameUILabel!
   @IBOutlet weak var sportPicker: UIPickerView!
+  @IBOutlet weak var sportLabel: TableRowNameUILabel!
 
 
   var sportArray = [String]()

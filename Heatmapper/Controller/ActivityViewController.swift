@@ -16,31 +16,36 @@ class ActivityViewController: UIViewController {
   private var activityArray = [Activity]()
   var activityToUpdateRow : Int?
   var sportArray = [Sport]()
+  var newActivity : Bool = false
+  var sportSelected = Sport()
 
   @IBOutlet weak var saveButton: UIBarButtonItem!
 
-  @IBOutlet weak var activityNameField: UITextField!
-  @IBOutlet weak var sportPicker: UIPickerView!
+  @IBOutlet weak var activityNameField: ThemeTextField!
+  @IBOutlet weak var sportPicker: ThemePickerView!
 
 
-    override func viewDidLoad() {
-      super.viewDidLoad()
-      saveButton.isEnabled = false
-      sportPicker.dataSource = self
-      sportPicker.delegate = self
-      getData()
-      updateUI()
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    if activityToUpdate == nil {
+      newActivity = true
     }
+    saveButton.isEnabled = false
+    sportPicker.dataSource = self
+    sportPicker.delegate = self
+    getData()
+    updateUI()
+  }
 
   func getData() {
     activityArray = MyFunc.getHeatmapperActivityDefaults()
-    activityToUpdateRow = activityArray.firstIndex(where: { $0 == activityToUpdate  })
+    activityToUpdateRow = activityArray.firstIndex(where: { $0 == activityToUpdate })
     sportArray = Sport.allCases.map { $0 }
   }
 
   func updateUI() {
     activityNameField.text = activityToUpdate?.name
-    let activitySportRow : Int = sportArray.firstIndex(where: { $0 == activityToUpdate!.sport  }) ?? 0
+    let activitySportRow : Int = sportArray.firstIndex(where: { $0 == activityToUpdate?.sport  }) ?? 0
     sportPicker.selectRow(activitySportRow, inComponent: 0, animated: true)
     if #available(iOS 14.0, *) {
       sportPicker.subviews[1].backgroundColor = .clear
@@ -60,15 +65,34 @@ class ActivityViewController: UIViewController {
 
   @IBAction func btnSave(_ sender: Any) {
 
-    guard let activityToUpdateRowUnwrapped = activityToUpdateRow else {
-      MyFunc.logMessage(.error, "ActivityViewController: activityToUpdateRow empty")
-      return
+    saveRecord()
+  }
+
+  func saveRecord() {
+
+    if newActivity == true {
+
+      let newActivityName = activityNameField.text ?? ""
+      let newSport = sportSelected
+      let newActivity = Activity(name: newActivityName, sport: newSport)
+
+      activityArray.append(newActivity)
+
+    } else {
+
+      guard let activityToUpdateRowUnwrapped = activityToUpdateRow else {
+        MyFunc.logMessage(.error, "ActivityViewController: activityToUpdateRow empty")
+        return
+      }
+      activityArray[activityToUpdateRowUnwrapped].name = activityNameField.text ?? ""
+      activityArray[activityToUpdateRowUnwrapped].sport = sportSelected
     }
 
-    activityArray[activityToUpdateRowUnwrapped].name = activityNameField.text ?? ""
     MyFunc.saveHeatmapActivityDefaults(activityArray)
-    MyFunc.logMessage(.debug, "updates Saved called")
+    MyFunc.logMessage(.debug, "updates Saved")
   }
+
+
 
   @IBAction func activityNameEditingDidBegin(_ sender: Any) {
     MyFunc.logMessage(.debug, "activityNameEditingDidBegin called")
@@ -77,12 +101,9 @@ class ActivityViewController: UIViewController {
 
   @IBAction func activityNameEditingDidEnd(_ sender: Any) {
     MyFunc.logMessage(.debug, "activityNameEditingDidEnd called")
-    guard let activityToUpdateRowUnwrapped = activityToUpdateRow else {
-      MyFunc.logMessage(.error, "ActivityViewController: activityToUpdateRow empty")
-      return
-    }
 
-    activityArray[activityToUpdateRowUnwrapped].name = activityNameField.text ?? ""
+//    saveRecord()
+
 
 
   }
@@ -102,7 +123,7 @@ extension ActivityViewController:  UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityTitleViewCell", for: indexPath)
     cell.textLabel?.text = activityToUpdate?.name
-//    activityTableView.reloadData()
+    //    activityTableView.reloadData()
     return cell
   }
 
@@ -112,16 +133,7 @@ extension ActivityViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     MyFunc.logMessage(.debug, "ActivityViewController.didSelectRow: \(row)")
-    let sportSelected = sportArray[row]
-
-    guard let activityToUpdateRowUnwrapped = activityToUpdateRow else {
-      MyFunc.logMessage(.error, "ActivityViewController: activityToUpdateRow empty")
-      return
-    }
-    activityArray[activityToUpdateRowUnwrapped].sport = sportSelected
-//    MyFunc.saveHeatmapActivityDefaults(activityArray)
-
-
+    sportSelected = sportArray[row]
 
   }
 

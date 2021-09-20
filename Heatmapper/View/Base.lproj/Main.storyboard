@@ -291,32 +291,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Activity" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XJj-hN-I5q" userLabel="Activity Name Text Field">
-                                <rect key="frame" x="10" y="98" width="394" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Rd8-JO-Ti8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="activityNameDidEndOnExit:" destination="Lil-kf-fAA" eventType="editingDidEndOnExit" id="9zU-Kb-Hd1"/>
-                                    <action selector="activityNameEditingDidBegin:" destination="Lil-kf-fAA" eventType="editingDidBegin" id="H8s-AS-xDm"/>
-                                    <action selector="activityNameEditingDidEnd:" destination="Lil-kf-fAA" eventType="editingDidEnd" id="cRc-4f-741"/>
-                                </connections>
-                            </textField>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Rl-yU-9D7" userLabel="Sport Picker View">
-                                <rect key="frame" x="10" y="148" width="394" height="216"/>
-                            </pickerView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="m2z-re-Adk">
+                                <rect key="frame" x="10" y="98" width="394" height="310.66666666666669"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of your activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Xq-LU-MWR" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Activity" borderStyle="bezel" placeholder="Enter name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XJj-hN-I5q" userLabel="Activity Name Text Field" customClass="ThemeTextField" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="30.333333333333343" width="394" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Rd8-JO-Ti8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="activityNameDidEndOnExit:" destination="Lil-kf-fAA" eventType="editingDidEndOnExit" id="9zU-Kb-Hd1"/>
+                                            <action selector="activityNameEditingDidBegin:" destination="Lil-kf-fAA" eventType="editingDidBegin" id="H8s-AS-xDm"/>
+                                            <action selector="activityNameEditingDidEnd:" destination="Lil-kf-fAA" eventType="editingDidEnd" id="cRc-4f-741"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport or activity type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8u-Nv-Fsn" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="80.333333333333343" width="394" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Rl-yU-9D7" userLabel="Sport Picker View" customClass="ThemePickerView" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="110.66666666666666" width="394" height="199.99999999999997"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="Ihf-4W-mhD"/>
+                                        </constraints>
+                                    </pickerView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bfn-9T-thW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="XJj-hN-I5q" firstAttribute="top" secondItem="bfn-9T-thW" secondAttribute="top" constant="10" id="Km4-ph-eR7"/>
-                            <constraint firstItem="5Rl-yU-9D7" firstAttribute="top" secondItem="XJj-hN-I5q" secondAttribute="bottom" constant="10" id="Oot-Qc-LwO"/>
-                            <constraint firstItem="bfn-9T-thW" firstAttribute="trailing" secondItem="5Rl-yU-9D7" secondAttribute="trailing" constant="10" id="QM9-Ag-2nc"/>
-                            <constraint firstItem="5Rl-yU-9D7" firstAttribute="leading" secondItem="bfn-9T-thW" secondAttribute="leading" constant="10" id="UhW-BD-pYT"/>
-                            <constraint firstItem="bfn-9T-thW" firstAttribute="trailing" secondItem="XJj-hN-I5q" secondAttribute="trailing" constant="10" id="WXh-2L-h57"/>
-                            <constraint firstItem="XJj-hN-I5q" firstAttribute="leading" secondItem="bfn-9T-thW" secondAttribute="leading" constant="10" id="kA3-FY-STi"/>
+                            <constraint firstItem="bfn-9T-thW" firstAttribute="trailing" secondItem="m2z-re-Adk" secondAttribute="trailing" constant="10" id="IEf-Yc-cgP"/>
+                            <constraint firstItem="m2z-re-Adk" firstAttribute="leading" secondItem="bfn-9T-thW" secondAttribute="leading" constant="10" id="R7G-cf-pV7"/>
+                            <constraint firstItem="m2z-re-Adk" firstAttribute="top" secondItem="bfn-9T-thW" secondAttribute="top" constant="10" id="gsJ-63-ewS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Activity" id="EbZ-Kt-ugg">
@@ -345,10 +362,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="lyd-aS-nH0">
-                                <rect key="frame" x="0.0" y="108" width="414" height="1582"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="1614"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xdx-oz-NWw" userLabel="Workout Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1496"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1528"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="api-rD-sS3">
                                             <size key="itemSize" width="128" height="128"/>
@@ -368,7 +385,7 @@
                                         </cells>
                                     </collectionView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" id="6jT-ZL-mzL">
-                                        <rect key="frame" x="0.0" y="1497" width="414" height="34"/>
+                                        <rect key="frame" x="0.0" y="1529" width="414" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZd-9k-xak" userLabel="Created Heatmap Button" customClass="ThemeActionButton" customModule="Heatmapper" customModuleProvider="target">
@@ -399,7 +416,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="koB-cI-YWd">
-                                        <rect key="frame" x="0.0" y="1548" width="414" height="34"/>
+                                        <rect key="frame" x="0.0" y="1580" width="414" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cin-hP-zjE" userLabel="RE Heatmap Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="137.33333333333334" height="34"/>

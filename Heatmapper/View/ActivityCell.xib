@@ -17,17 +17,23 @@
                     <rect key="frame" x="0.0" y="0.0" width="514" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddn-Hw-btL" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="339.5" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="363.5" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKq-xX-MVF" userLabel="Sport Picker View">
-                            <rect key="frame" x="344.5" y="0.0" width="169.5" height="40"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxd-cE-oHN" userLabel="Sport Label" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
+                            <rect key="frame" x="368.5" y="0.0" width="145.5" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKq-xX-MVF" userLabel="Sport Picker View">
+                            <rect key="frame" x="514" y="0.0" width="0.0" height="40"/>
                         </pickerView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="dKq-xX-MVF" firstAttribute="width" secondItem="ddn-Hw-btL" secondAttribute="width" multiplier="0.5" id="cxY-uo-gqD"/>
+                        <constraint firstItem="kxd-cE-oHN" firstAttribute="width" secondItem="ddn-Hw-btL" secondAttribute="width" multiplier="0.4" id="qvM-8A-HC1"/>
                     </constraints>
                 </stackView>
             </subviews>
@@ -41,6 +47,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="activityLabel" destination="ddn-Hw-btL" id="isF-T3-pf4"/>
+                <outlet property="sportLabel" destination="kxd-cE-oHN" id="PEs-Gb-UH2"/>
                 <outlet property="sportPicker" destination="dKq-xX-MVF" id="m1d-EJ-eib"/>
             </connections>
             <point key="canvasLocation" x="162" y="-22"/>

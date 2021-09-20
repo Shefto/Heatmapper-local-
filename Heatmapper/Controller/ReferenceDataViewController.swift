@@ -12,7 +12,12 @@ class ReferenceDataViewController: UIViewController {
 
   let theme = ColourTheme()
   let defaults = UserDefaults.standard
-  private var activityArray = [Activity]()
+  private var activityArray = [Activity]() {
+    didSet {
+
+      activityTableView.reloadData()
+    }
+  }
   var sportArray = [Sport]()
 
   var selectedIndexPath : Int?
@@ -20,9 +25,12 @@ class ReferenceDataViewController: UIViewController {
 
   @IBOutlet weak var activityTableView: ThemeTableViewNoBackground!
 
+
   override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     getData()
-    activityTableView.reloadData()
+
+
   }
 
   override func viewDidLoad() {
@@ -30,6 +38,7 @@ class ReferenceDataViewController: UIViewController {
 
     activityTableView.dataSource = self
     activityTableView.delegate = self
+
     activityTableView.allowsSelection = true
     activityTableView.register(UINib(nibName: "ActivityCell", bundle: nil), forCellReuseIdentifier: "ActivityTableViewCell")
     activityTableView.register(UINib(nibName: "EditActivityCell", bundle: nil), forCellReuseIdentifier: "EditActivityTableViewCell")
@@ -46,6 +55,7 @@ class ReferenceDataViewController: UIViewController {
     activityArray = MyFunc.getHeatmapperActivityDefaults()
     MyFunc.logMessage(.debug, "activityArray: \(activityArray)")
     activityTableView.reloadData()
+
     sportArray = Sport.allCases.map { $0 }
 
   }
@@ -62,25 +72,29 @@ class ReferenceDataViewController: UIViewController {
 
   @IBAction func addButton(_ sender: UIBarButtonItem) {
 
-    var textField = UITextField()
-    let alert = UIAlertController(title: "Add New Activity", message: "", preferredStyle: .alert)
-    let action = UIAlertAction(title: "Add", style: .default) { (action) in
-      let newActivityName = textField.text!
-      let newSport = Sport.none
-      let newActivity = Activity(name: newActivityName, sport: newSport)
-      self.activityArray.append(newActivity)
-      MyFunc.saveHeatmapActivityDefaults(self.activityArray)
-      self.activityTableView.reloadData()
-    }
 
-    alert.addAction(action)
+    self.performSegue(withIdentifier: "referenceDataToActivity", sender: nil)
 
-    alert.addTextField { (field) in
-      textField = field
-      textField.placeholder = "Add New Activity"
-    }
-
-    present(alert, animated: true, completion: nil)
+//
+//    var textField = UITextField()
+//    let alert = UIAlertController(title: "Add New Activity", message: "", preferredStyle: .alert)
+//    let action = UIAlertAction(title: "Add", style: .default) { (action) in
+//      let newActivityName = textField.text!
+//      let newSport = Sport.none
+//      let newActivity = Activity(name: newActivityName, sport: newSport)
+//      self.activityArray.append(newActivity)
+//      MyFunc.saveHeatmapActivityDefaults(self.activityArray)
+//      self.activityTableView.reloadData()
+//    }
+//
+//    alert.addAction(action)
+//
+//    alert.addTextField { (field) in
+//      textField = field
+//      textField.placeholder = "Add New Activity"
+//    }
+//
+//    present(alert, animated: true, completion: nil)
 
   }
 
@@ -104,7 +118,9 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
     let cell = activityTableView.dequeueReusableCell(withIdentifier: "ActivityTableViewCell", for: indexPath) as! ActivityTableViewCell
 
     cell.activityLabel.text = activityArray[indexPath.row].name
+    cell.sportLabel.text = activityArray[indexPath.row].sport.rawValue
     cell.sportPicker.delegate = self
+
 
     // set Picker value
     let activitySportRow : Int = sportArray.firstIndex(where: { $0 == activityArray[indexPath.row].sport  }) ?? 0

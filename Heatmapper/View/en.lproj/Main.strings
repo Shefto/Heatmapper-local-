@@ -34,6 +34,9 @@
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "wkZ-fm-ijo"; */
 "wkZ-fm-ijo.title" = "Settings";
 
+/* Class = "UILabel"; text = "Name of your activity"; ObjectID = "1Xq-LU-MWR"; */
+"1Xq-LU-MWR.text" = "";
+
 /* Class = "UIButton"; normalTitle = "Update Workout"; ObjectID = "2DM-st-7JY"; */
 "2DM-st-7JY.normalTitle" = "";
 
@@ -121,6 +124,9 @@
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "Pbk-vr-61V"; */
 "Pbk-vr-61V.title" = "";
 
+/* Class = "UILabel"; text = "Sport or activity type"; ObjectID = "q8u-Nv-Fsn"; */
+"q8u-Nv-Fsn.text" = "";
+
 /* Class = "UITextField"; text = "Sport Label"; ObjectID = "QAR-0O-1LH"; */
 "QAR-0O-1LH.text" = "";
 
@@ -177,6 +183,9 @@
 
 /* Class = "UINavigationItem"; title = "RE Heatmap"; ObjectID = "xJf-j7-wii"; */
 "xJf-j7-wii.title" = "";
+
+/* Class = "UITextField"; placeholder = "Enter name"; ObjectID = "XJj-hN-I5q"; */
+"XJj-hN-I5q.placeholder" = "";
 
 /* Class = "UITextField"; text = "Activity"; ObjectID = "XJj-hN-I5q"; */
 "XJj-hN-I5q.text" = "";
