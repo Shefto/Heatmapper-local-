@@ -92,8 +92,6 @@ class ActivityViewController: UIViewController {
     MyFunc.logMessage(.debug, "updates Saved")
   }
 
-
-
   @IBAction func activityNameEditingDidBegin(_ sender: Any) {
     MyFunc.logMessage(.debug, "activityNameEditingDidBegin called")
     saveButton.isEnabled = true
