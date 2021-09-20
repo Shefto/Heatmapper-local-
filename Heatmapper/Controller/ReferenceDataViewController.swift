@@ -45,8 +45,6 @@ class ReferenceDataViewController: UIViewController {
 
     activityTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: activityTableView.frame.size.width, height: 1))
     activityTableView.tableHeaderView?.backgroundColor = UIColor.clear
-
-
     
   }
 
