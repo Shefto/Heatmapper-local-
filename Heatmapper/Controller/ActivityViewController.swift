@@ -65,7 +65,7 @@ class ActivityViewController: UIViewController {
 
   @IBAction func btnSave(_ sender: Any) {
 
-    saveRecord()
+//    saveRecord()
   }
 
   func saveRecord() {

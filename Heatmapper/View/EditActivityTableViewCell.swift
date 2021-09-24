@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol EditActivityTableViewCellDelegate: class {
+protocol EditActivityTableViewCellDelegate: AnyObject {
 
   func updateSportForActivity(newSport: Sport, indexPathRow: Int)
 

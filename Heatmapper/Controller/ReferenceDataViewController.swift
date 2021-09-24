@@ -12,12 +12,13 @@ class ReferenceDataViewController: UIViewController {
 
   let theme = ColourTheme()
   let defaults = UserDefaults.standard
-  private var activityArray = [Activity]() {
-    didSet {
-
-      activityTableView.reloadData()
-    }
-  }
+  private var activityArray = [Activity]()
+//  {
+//    didSet {
+//
+//      activityTableView.reloadData()
+//    }
+//  }
   var sportArray = [Sport]()
 
   var selectedIndexPath : Int?
