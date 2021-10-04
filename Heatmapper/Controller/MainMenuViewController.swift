@@ -50,7 +50,14 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
 
   @IBAction func btnReferenceData(_ sender: Any) {
     performSegue(withIdentifier: "mainMenuToReferenceData", sender: .none)
+  }
 
+  @IBAction func btnVenues(_ sender: Any) {
+    performSegue(withIdentifier: "mainMenuToVenues", sender: .none)
+  }
+
+  @IBAction func btnTeams(_ sender: Any) {
+    performSegue(withIdentifier: "mainMenuToTeams", sender: .none)
   }
 
 

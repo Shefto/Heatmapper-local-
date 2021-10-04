@@ -99,19 +99,15 @@ class ActivityViewController: UIViewController {
 
   @IBAction func activityNameEditingDidEnd(_ sender: Any) {
     MyFunc.logMessage(.debug, "activityNameEditingDidEnd called")
-
-//    saveRecord()
-
   }
 
   override func viewWillDisappear(_ animated: Bool) {
-    print ("viewWillDisappear")
     saveRecord()
   }
-  @IBAction func activityNameDidEndOnExit(_ sender: Any) {
-    MyFunc.logMessage(.debug, "activityNameDidEndOnExit called")
-  }
 
+  @IBAction func activityNameDidEndOnExit(_ sender: Any) {
+
+  }
 
 }
 

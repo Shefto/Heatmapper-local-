@@ -14,7 +14,7 @@ enum Sport: String, Codable, CaseIterable {
   case football    = "Football"
   case rugby       = "Rugby"
   case basketball  = "Basketball"
-  case kabbaddi    = "Kabbaddi"
+  case tennis      = "Tennis"
   case none        = "None"
 }
 
@@ -23,6 +23,45 @@ extension Sport {
     self = .none
   }
 }
+
+
+struct Team: Codable, Equatable {
+  var name  : String
+  var sport : Sport
+
+  enum CodingKeys: String, CodingKey {
+    case name = "Name"
+    case sport = "Sport"
+  }
+
+  init (name: String, sport: Sport) {
+    self.name = name
+    self.sport = sport
+  }
+
+}
+
+// extension to encode
+extension Team {
+  var dictionaryRepresentation: [String: Any] {
+    let data = try! JSONEncoder().encode(self)
+    return try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+  }
+}
+
+// extension to decode back to Struct
+extension Team {
+  init?(dictionary: [String: Any]) {
+    guard let data = try? JSONSerialization.data(withJSONObject: dictionary, options: []) else { return nil }
+    guard let info = try? JSONDecoder().decode(Team.self, from: data) else { return nil }
+    self = info
+  }
+}
+
+
+
+
+
 
 struct Activity: Codable, Equatable {
   var name  : String
@@ -39,6 +78,8 @@ struct Activity: Codable, Equatable {
   }
 
 }
+
+// extension to encode
 extension Activity {
   var dictionaryRepresentation: [String: Any] {
     let data = try! JSONEncoder().encode(self)
@@ -46,7 +87,7 @@ extension Activity {
   }
 }
 
-// Converting back to struct
+// extension to decode back to Struct
 extension Activity {
   init?(dictionary: [String: Any]) {
     guard let data = try? JSONSerialization.data(withJSONObject: dictionary, options: []) else { return nil }
@@ -54,7 +95,6 @@ extension Activity {
     self = info
   }
 }
-
 
 
 enum ActivityType: String, Codable {

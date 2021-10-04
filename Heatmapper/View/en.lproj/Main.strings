@@ -79,6 +79,9 @@
 /* Class = "UILabel"; text = "Sport"; ObjectID = "fUb-WJ-pCB"; */
 "fUb-WJ-pCB.text" = "";
 
+/* Class = "UINavigationItem"; title = "Workouts"; ObjectID = "gOK-0r-wdZ"; */
+"gOK-0r-wdZ.title" = "";
+
 /* Class = "UILabel"; text = "Pitch"; ObjectID = "GW0-ht-6cn"; */
 "GW0-ht-6cn.text" = "";
 
@@ -142,7 +145,7 @@
 /* Class = "UILabel"; text = "Distance"; ObjectID = "rJh-q3-eQC"; */
 "rJh-q3-eQC.text" = "";
 
-/* Class = "UIButton"; normalTitle = "JD"; ObjectID = "sPj-oH-Nyf"; */
+/* Class = "UIButton"; normalTitle = "Detailed Heatmap"; ObjectID = "sPj-oH-Nyf"; */
 "sPj-oH-Nyf.normalTitle" = "";
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "syd-FH-J8R"; */
@@ -151,7 +154,7 @@
 /* Class = "UIButton"; normalTitle = "View Heatmap"; ObjectID = "TfY-wi-FxC"; */
 "TfY-wi-FxC.normalTitle" = "";
 
-/* Class = "UIButton"; normalTitle = "View Heatmap"; ObjectID = "tZd-9k-xak"; */
+/* Class = "UIButton"; normalTitle = "Saved Heatmap"; ObjectID = "tZd-9k-xak"; */
 "tZd-9k-xak.normalTitle" = "";
 
 /* Class = "UILabel"; text = "Location accuracy"; ObjectID = "UKj-hg-nT8"; */
@@ -175,7 +178,7 @@
 /* Class = "UILabel"; text = "Activity"; ObjectID = "WjU-FP-pZm"; */
 "WjU-FP-pZm.text" = "";
 
-/* Class = "UIButton"; normalTitle = "DTM"; ObjectID = "WMX-9X-sBW"; */
+/* Class = "UIButton"; normalTitle = "Quick Heatmap"; ObjectID = "WMX-9X-sBW"; */
 "WMX-9X-sBW.normalTitle" = "";
 
 /* Class = "UITextField"; text = "Activity"; ObjectID = "Wsp-TC-1FL"; */

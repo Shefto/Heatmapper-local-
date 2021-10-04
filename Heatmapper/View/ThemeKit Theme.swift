@@ -114,6 +114,7 @@ extension Theme {
     // ********************************************************************************
     ThemePickerView.appearance().with {
       $0.tintColor = textPrimary
+
     }
 
     ThemeTextView.appearance().with {

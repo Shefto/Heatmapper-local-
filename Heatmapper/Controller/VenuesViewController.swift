@@ -1,24 +1,25 @@
 //
-//  ReferenceDataViewController
+//  VenuesViewController.swift
 //  Heatmapper
 //
-//  Created by Richard English on 28/08/2021.
+//  Created by Richard English on 01/10/2021.
 //  Copyright © 2021 Richard English. All rights reserved.
 //
 
 import UIKit
 
-class ReferenceDataViewController: UIViewController {
+class VenuesViewController: UIViewController {
+
 
   let theme = ColourTheme()
   let defaults = UserDefaults.standard
   private var activityArray = [Activity]()
-//  {
-//    didSet {
-//
-//      activityTableView.reloadData()
-//    }
-//  }
+  //  {
+  //    didSet {
+  //
+  //      activityTableView.reloadData()
+  //    }
+  //  }
   var sportArray = [Sport]()
 
   var selectedIndexPath : Int?
@@ -46,7 +47,7 @@ class ReferenceDataViewController: UIViewController {
 
     activityTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: activityTableView.frame.size.width, height: 1))
     activityTableView.tableHeaderView?.backgroundColor = UIColor.clear
-    
+
   }
 
   func getData() {
@@ -74,16 +75,19 @@ class ReferenceDataViewController: UIViewController {
 
     self.performSegue(withIdentifier: "referenceDataToActivity", sender: nil)
 
+   
+
   }
 
   func updateSportForActivity(newSport: Sport, indexPathRow: Int) {
     activityArray[indexPathRow].sport = newSport
+    //    let activityToSave = activityArray[indexPath.row]
     MyFunc.saveHeatmapActivityDefaults(activityArray)
   }
 
 }
 
-extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSource {
+extension VenuesViewController: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return activityArray.count
@@ -97,6 +101,7 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
     cell.activityLabel.text = activityArray[indexPath.row].name
     cell.sportLabel.text = activityArray[indexPath.row].sport.rawValue
     cell.sportPicker.delegate = self
+
 
     // set Picker value
     let activitySportRow : Int = sportArray.firstIndex(where: { $0 == activityArray[indexPath.row].sport  }) ?? 0
@@ -159,7 +164,7 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
 
 }
 
-extension ReferenceDataViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension VenuesViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     MyFunc.logMessage(.debug, "ReferenceDataViewController.didSelectRow: \(row)")
@@ -189,5 +194,4 @@ extension ReferenceDataViewController: UIPickerViewDelegate, UIPickerViewDataSou
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     return sportArray[row].rawValue
   }
-
 }

@@ -15,6 +15,8 @@
 		7905990225ED876200316CEF /* FiT_second_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 790598FF25ED876200316CEF /* FiT_second_beep.aif */; };
 		7905990325ED876200316CEF /* FiT_second_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 790598FF25ED876200316CEF /* FiT_second_beep.aif */; };
 		7907E8C124E1468500F3DE0D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7907E8C024E1468500F3DE0D /* Extensions.swift */; };
+		79125ED127085DC0008E9872 /* PlayingArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79125ED027085DC0008E9872 /* PlayingArea.swift */; };
+		79125ED227085DC0008E9872 /* PlayingArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79125ED027085DC0008E9872 /* PlayingArea.swift */; };
 		791BD3C325A64E2600FD994A /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791BD3C225A64E2600FD994A /* WorkoutManager.swift */; };
 		79201489254343BD00212051 /* MyFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083BB25092EBB00274F79 /* MyFunc.swift */; };
 		792CCCDD26AC32270024C5B3 /* DTMHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792CCCDC26AC32270024C5B3 /* DTMHeatmapViewController.swift */; };
@@ -116,6 +118,8 @@
 		79D083B82509255A00274F79 /* ThemeKit App Classes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083B72509255A00274F79 /* ThemeKit App Classes.swift */; };
 		79D083BA250925A800274F79 /* ThemeKit Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083B9250925A800274F79 /* ThemeKit Themes.swift */; };
 		79D083BE250A0C0900274F79 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083BD250A0C0900274F79 /* Extensions.swift */; };
+		79D9BF8D27076E750027D96F /* VenuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D9BF8C27076E750027D96F /* VenuesViewController.swift */; };
+		79D9BF8F270794190027D96F /* TeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D9BF8E270794180027D96F /* TeamsViewController.swift */; };
 		79DC34162625D2FC0053733C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC34152625D2FC0053733C /* LocationManager.swift */; };
 		79DC8A7B253981C6006965D5 /* MyFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083BB25092EBB00274F79 /* MyFunc.swift */; };
 		79F3480E25A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
@@ -186,6 +190,7 @@
 		790598FE25ED876100316CEF /* FIT_minute_beep.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = FIT_minute_beep.aif; sourceTree = "<group>"; };
 		790598FF25ED876200316CEF /* FiT_second_beep.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = FiT_second_beep.aif; sourceTree = "<group>"; };
 		7907E8C024E1468500F3DE0D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		79125ED027085DC0008E9872 /* PlayingArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingArea.swift; sourceTree = "<group>"; };
 		791BD3C225A64E2600FD994A /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
 		792CCCDC26AC32270024C5B3 /* DTMHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTMHeatmapViewController.swift; sourceTree = "<group>"; };
 		793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceDataViewController.swift; sourceTree = "<group>"; };
@@ -315,6 +320,8 @@
 		79D083B9250925A800274F79 /* ThemeKit Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThemeKit Themes.swift"; sourceTree = "<group>"; };
 		79D083BB25092EBB00274F79 /* MyFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFunc.swift; path = Shared/MyFunc.swift; sourceTree = SOURCE_ROOT; };
 		79D083BD250A0C0900274F79 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		79D9BF8C27076E750027D96F /* VenuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenuesViewController.swift; sourceTree = "<group>"; };
+		79D9BF8E270794180027D96F /* TeamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsViewController.swift; sourceTree = "<group>"; };
 		79DC34152625D2FC0053733C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		79F3480D25A3364100762724 /* Heatmapper.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Heatmapper.storekit; sourceTree = "<group>"; };
 		79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REHeatmapViewController.swift; sourceTree = "<group>"; };
@@ -391,6 +398,7 @@
 				793D1AEE24B87F110039441B /* SessionTransfer.swift */,
 				793D1AF124B87FAD0039441B /* FileTransferObservers.swift */,
 				7994126E255AB9230062AC0D /* Objects.swift */,
+				79125ED027085DC0008E9872 /* PlayingArea.swift */,
 				79A4EFF824A7F1AF002A7870 /* Interval.swift */,
 			);
 			path = Shared;
@@ -430,6 +438,8 @@
 		793D1AE024B86C1B0039441B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				79D9BF8E270794180027D96F /* TeamsViewController.swift */,
+				79D9BF8C27076E750027D96F /* VenuesViewController.swift */,
 				798007F526F5F64700FFC294 /* ActivityViewController.swift */,
 				793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */,
 				79439B7326C46357001E7CC4 /* SavedHeatmapViewController.swift */,
@@ -862,6 +872,7 @@
 				79439B7426C46358001E7CC4 /* SavedHeatmapViewController.swift in Sources */,
 				79F3A2AE2697968A00667B1B /* REColourProvider.swift in Sources */,
 				7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */,
+				79D9BF8D27076E750027D96F /* VenuesViewController.swift in Sources */,
 				79A4EFF624A7A109002A7870 /* WorkoutViewController.swift in Sources */,
 				79F3A2B2269796FA00667B1B /* REHeatmapOverlay.swift in Sources */,
 				79F3A2AC269795FA00667B1B /* REHeatmapRenderer.swift in Sources */,
@@ -900,10 +911,12 @@
 				79BED1AA256AAEED0052B160 /* SetIntervalsViewController.swift in Sources */,
 				793D1AE624B86E6F0039441B /* CustomLogger.swift in Sources */,
 				79B3742C24B0C711000E4F7E /* Stopwatch.swift in Sources */,
+				79125ED127085DC0008E9872 /* PlayingArea.swift in Sources */,
 				79A9DC6426B9DD060063C3D0 /* WorkoutCollectionViewCell.swift in Sources */,
 				798007F626F5F64700FFC294 /* ActivityViewController.swift in Sources */,
 				793D1AD924B8650A0039441B /* DataProvider.swift in Sources */,
 				79B6DC992598B13400F573BA /* SettingsViewController.swift in Sources */,
+				79D9BF8F270794190027D96F /* TeamsViewController.swift in Sources */,
 				7935625125B0BBBE006BBC54 /* UnitConverterPace.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -918,6 +931,7 @@
 				7996ADE925682D5D00C25196 /* CustomIntervalsInterfaceController.swift in Sources */,
 				793D1AF024B87F110039441B /* SessionTransfer.swift in Sources */,
 				799BBD5D24E2CEC50009AE2D /* IntervalsInterfaceController.swift in Sources */,
+				79125ED227085DC0008E9872 /* PlayingArea.swift in Sources */,
 				7981D39C24BDD62500E5D9E7 /* Interval.swift in Sources */,
 				79913152263428B900811731 /* LocationManager.swift in Sources */,
 				7980929D252F386300DF1562 /* HeatmapperWorkout.swift in Sources */,
