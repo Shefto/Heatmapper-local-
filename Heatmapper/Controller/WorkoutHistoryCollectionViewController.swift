@@ -107,6 +107,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     let cell = workoutCollectionView.dequeueReusableCell(withReuseIdentifier: "WorkoutCollectionViewCell", for: indexPath) as! WorkoutCollectionViewCell
 
     let workout = workoutArray![indexPath.row]
+    MyFunc.logMessage(.debug, "workout metadata: \(String(describing: workout.metadata))")
     let workoutId = workout.uuid
 
     let heatmapImage = MyFunciOS.getHeatmapImageForWorkout(workoutID: workoutId)
@@ -114,7 +115,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     cell.heatmapImageView.image = heatmapImage
     cell.workoutDateLabel.text = dateFormatter.string(from: workout.startDate)
     cell.venueLabel.text = workout.metadata?["Venue"] as? String ?? ""
-
+    cell.activityLabel.text = workout.metadata?["Activity"] as? String
 
     if selectedIndexPath != nil && indexPath.row == selectedIndexPath {
       cell.contentView.backgroundColor = theme.buttonPrimary
@@ -247,7 +248,8 @@ extension WorkoutHistoryCollectionViewController {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.5))
+//    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.5))
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(300))
 
     let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 

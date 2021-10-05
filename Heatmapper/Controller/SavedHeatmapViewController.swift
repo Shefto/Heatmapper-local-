@@ -292,6 +292,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     }
 
     var metadataToUpdate = workoutToUpdate.metadata
+    MyFunc.logMessage(.debug, "metadataToUpdate: \(String(describing: metadataToUpdate))")
     let currentDate = Date()
     let currentDateAsString = String(describing: currentDate)
 

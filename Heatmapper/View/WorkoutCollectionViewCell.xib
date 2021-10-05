@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="gTV-IL-0wX" customClass="WorkoutCollectionViewCell" customModule="Heatmapper" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" id="gTV-IL-0wX" customClass="WorkoutCollectionViewCell" customModule="Heatmapper" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vWU-Ty-GC7">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="239"/>
+                        <rect key="frame" x="10" y="10" width="180" height="214"/>
+                        <color key="backgroundColor" red="0.015686274510000001" green="0.87058823529999996" blue="0.050980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="C2C-ob-01i"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="YVR-eN-9Hn"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nid-8B-d6G" userLabel="Activity" customClass="ThemeSmallTextUILabel" customModule="Heatmapper" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="239" width="200" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nid-8B-d6G" userLabel="Activity" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="229" width="200" height="20.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20.5" id="cAs-br-5SO"/>
                         </constraints>
@@ -31,7 +34,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bVD-Lj-hBu" userLabel="Venue" customClass="ThemeSmallTextUILabel" customModule="Heatmapper" customModuleProvider="target">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bVD-Lj-hBu" userLabel="Venue" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="279.5" width="200" height="20.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20.5" id="xLJ-nZ-3rq"/>
@@ -40,8 +43,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workout Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L8d-Le-KW8" userLabel="Workout Date" customClass="ThemeSmallTextUILabel" customModule="Heatmapper" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="259.5" width="200" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workout Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L8d-Le-KW8" userLabel="Workout Date" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="254.5" width="200" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="n1i-af-aBE"/>
                         </constraints>
@@ -55,18 +58,18 @@
             <constraints>
                 <constraint firstItem="nid-8B-d6G" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="663-sD-yQe"/>
                 <constraint firstItem="L8d-Le-KW8" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="AyU-Ky-sfs"/>
-                <constraint firstItem="L8d-Le-KW8" firstAttribute="top" secondItem="nid-8B-d6G" secondAttribute="bottom" id="NSd-3i-sxF"/>
-                <constraint firstItem="vWU-Ty-GC7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Ndb-ME-079"/>
-                <constraint firstAttribute="trailing" secondItem="vWU-Ty-GC7" secondAttribute="trailing" id="ONg-lw-wOi"/>
+                <constraint firstItem="L8d-Le-KW8" firstAttribute="top" secondItem="nid-8B-d6G" secondAttribute="bottom" constant="5" id="NSd-3i-sxF"/>
+                <constraint firstItem="vWU-Ty-GC7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="Ndb-ME-079"/>
+                <constraint firstAttribute="trailing" secondItem="vWU-Ty-GC7" secondAttribute="trailing" constant="10" id="ONg-lw-wOi"/>
                 <constraint firstAttribute="bottom" secondItem="bVD-Lj-hBu" secondAttribute="bottom" id="PTP-Ep-N0o"/>
                 <constraint firstAttribute="trailing" secondItem="L8d-Le-KW8" secondAttribute="trailing" id="Wjf-48-5Qs"/>
                 <constraint firstItem="nid-8B-d6G" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ZjH-rk-YaP"/>
                 <constraint firstItem="bVD-Lj-hBu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mnq-kn-64J"/>
                 <constraint firstItem="L8d-Le-KW8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="oNc-tw-kIW"/>
                 <constraint firstAttribute="trailing" secondItem="bVD-Lj-hBu" secondAttribute="trailing" id="oP2-ZA-2HQ"/>
-                <constraint firstItem="nid-8B-d6G" firstAttribute="top" secondItem="vWU-Ty-GC7" secondAttribute="bottom" id="sQf-0B-d5I"/>
-                <constraint firstItem="vWU-Ty-GC7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="sdd-oK-aW8"/>
-                <constraint firstItem="bVD-Lj-hBu" firstAttribute="top" secondItem="L8d-Le-KW8" secondAttribute="bottom" id="unc-mI-5br"/>
+                <constraint firstItem="nid-8B-d6G" firstAttribute="top" secondItem="vWU-Ty-GC7" secondAttribute="bottom" constant="5" id="sQf-0B-d5I"/>
+                <constraint firstItem="vWU-Ty-GC7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="sdd-oK-aW8"/>
+                <constraint firstItem="bVD-Lj-hBu" firstAttribute="top" secondItem="L8d-Le-KW8" secondAttribute="bottom" constant="5" id="unc-mI-5br"/>
                 <constraint firstAttribute="trailing" secondItem="nid-8B-d6G" secondAttribute="trailing" id="xWF-8n-DTW"/>
                 <constraint firstItem="vWU-Ty-GC7" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ysY-dU-8Vj"/>
             </constraints>
