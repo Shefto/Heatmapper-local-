@@ -11,14 +11,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" id="gTV-IL-0wX" customClass="WorkoutCollectionViewCell" customModule="Heatmapper" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+            <rect key="frame" x="0.0" y="0.0" width="200" height="362"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                <rect key="frame" x="0.0" y="0.0" width="200" height="362"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vWU-Ty-GC7">
-                        <rect key="frame" x="10" y="10" width="180" height="214"/>
+                        <rect key="frame" x="10" y="10" width="180" height="236"/>
                         <color key="backgroundColor" red="0.015686274510000001" green="0.87058823529999996" blue="0.050980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="C2C-ob-01i"/>
@@ -26,7 +26,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nid-8B-d6G" userLabel="Activity" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="229" width="200" height="20.5"/>
+                        <rect key="frame" x="0.0" y="251" width="200" height="20.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20.5" id="cAs-br-5SO"/>
                         </constraints>
@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bVD-Lj-hBu" userLabel="Venue" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="279.5" width="200" height="20.5"/>
+                        <rect key="frame" x="0.0" y="301.5" width="200" height="20.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20.5" id="xLJ-nZ-3rq"/>
                         </constraints>
@@ -44,9 +44,27 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workout Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L8d-Le-KW8" userLabel="Workout Date" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="254.5" width="200" height="20"/>
+                        <rect key="frame" x="0.0" y="276.5" width="200" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="n1i-af-aBE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Samples" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8y6-Z3-FlR" userLabel="Samples" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="322" width="200" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="faq-tI-qvV"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Locations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FQW-dS-1Mk" userLabel="Locations" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="342" width="200" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Ru0-id-ZB5"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -58,29 +76,37 @@
             <constraints>
                 <constraint firstItem="nid-8B-d6G" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="663-sD-yQe"/>
                 <constraint firstItem="L8d-Le-KW8" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="AyU-Ky-sfs"/>
+                <constraint firstItem="FQW-dS-1Mk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Fkk-4c-b3P"/>
+                <constraint firstAttribute="trailing" secondItem="8y6-Z3-FlR" secondAttribute="trailing" id="Mtq-wv-Zet"/>
                 <constraint firstItem="L8d-Le-KW8" firstAttribute="top" secondItem="nid-8B-d6G" secondAttribute="bottom" constant="5" id="NSd-3i-sxF"/>
                 <constraint firstItem="vWU-Ty-GC7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="Ndb-ME-079"/>
                 <constraint firstAttribute="trailing" secondItem="vWU-Ty-GC7" secondAttribute="trailing" constant="10" id="ONg-lw-wOi"/>
-                <constraint firstAttribute="bottom" secondItem="bVD-Lj-hBu" secondAttribute="bottom" id="PTP-Ep-N0o"/>
+                <constraint firstItem="8y6-Z3-FlR" firstAttribute="top" secondItem="bVD-Lj-hBu" secondAttribute="bottom" id="WeM-lH-Vs5"/>
                 <constraint firstAttribute="trailing" secondItem="L8d-Le-KW8" secondAttribute="trailing" id="Wjf-48-5Qs"/>
                 <constraint firstItem="nid-8B-d6G" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ZjH-rk-YaP"/>
+                <constraint firstItem="FQW-dS-1Mk" firstAttribute="top" secondItem="8y6-Z3-FlR" secondAttribute="bottom" id="d0u-vz-an1"/>
+                <constraint firstAttribute="bottom" secondItem="FQW-dS-1Mk" secondAttribute="bottom" id="imr-lI-Vqv"/>
                 <constraint firstItem="bVD-Lj-hBu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mnq-kn-64J"/>
+                <constraint firstItem="8y6-Z3-FlR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="nXZ-to-QB4"/>
                 <constraint firstItem="L8d-Le-KW8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="oNc-tw-kIW"/>
                 <constraint firstAttribute="trailing" secondItem="bVD-Lj-hBu" secondAttribute="trailing" id="oP2-ZA-2HQ"/>
                 <constraint firstItem="nid-8B-d6G" firstAttribute="top" secondItem="vWU-Ty-GC7" secondAttribute="bottom" constant="5" id="sQf-0B-d5I"/>
                 <constraint firstItem="vWU-Ty-GC7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="sdd-oK-aW8"/>
                 <constraint firstItem="bVD-Lj-hBu" firstAttribute="top" secondItem="L8d-Le-KW8" secondAttribute="bottom" constant="5" id="unc-mI-5br"/>
+                <constraint firstAttribute="trailing" secondItem="FQW-dS-1Mk" secondAttribute="trailing" id="wVH-VF-jRE"/>
                 <constraint firstAttribute="trailing" secondItem="nid-8B-d6G" secondAttribute="trailing" id="xWF-8n-DTW"/>
                 <constraint firstItem="vWU-Ty-GC7" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ysY-dU-8Vj"/>
             </constraints>
-            <size key="customSize" width="215" height="262"/>
+            <size key="customSize" width="215" height="324"/>
             <connections>
                 <outlet property="activityLabel" destination="nid-8B-d6G" id="2UD-ZR-9Cl"/>
                 <outlet property="heatmapImageView" destination="vWU-Ty-GC7" id="eeE-1f-VBD"/>
+                <outlet property="locations" destination="FQW-dS-1Mk" id="NUu-ku-iY2"/>
+                <outlet property="samples" destination="8y6-Z3-FlR" id="eJS-xK-HA8"/>
                 <outlet property="venueLabel" destination="bVD-Lj-hBu" id="mmV-hw-N42"/>
                 <outlet property="workoutDateLabel" destination="L8d-Le-KW8" id="Y4O-G8-hut"/>
             </connections>
-            <point key="canvasLocation" x="-236" y="54"/>
+            <point key="canvasLocation" x="-236.23188405797103" y="74.330357142857139"/>
         </collectionViewCell>
     </objects>
 </document>

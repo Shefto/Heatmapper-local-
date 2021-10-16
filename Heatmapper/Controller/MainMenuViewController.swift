@@ -45,7 +45,7 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
   }
 
   @IBAction func btnHeatmap(_ sender: Any) {
-    performSegue(withIdentifier: "mainMenuToHeatmap", sender: .none)
+    performSegue(withIdentifier: "mainMenuToREHeatmap", sender: .none)
   }
 
   @IBAction func btnReferenceData(_ sender: Any) {

@@ -21,6 +21,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
   var heatmapWorkoutId  : UUID?
   var heatmapImage      : UIImage?
   var retrievedWorkout  : HKWorkout?
+  var routeCoordinates = [CLLocationCoordinate2D]()
 
   let workoutDateFormatter  = DateFormatter()
   var measurementFormatter  = MeasurementFormatter()
@@ -97,9 +98,9 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
 
     if pickerView == activityPicker {
       activityField.text = activityArray[row].name
-//      if sportField.text == "" {
-        sportField.text = activityArray[row].sport.rawValue
-//      }
+      //      if sportField.text == "" {
+      sportField.text = activityArray[row].sport.rawValue
+      //      }
     } else {
       sportField.text = sportArray[row].rawValue
     }
@@ -137,7 +138,10 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
         return
       }
       retrievedWorkout = workout
+
     }
+
+
 
     // get image for heatmap
     getHeatmapImage()
@@ -276,8 +280,18 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
           completion(nil, error)
           return
         }
+
+        let workoutReturned = samples.first
+
+        guard let workout : HKWorkout = workoutReturned else {
+          MyFunc.logMessage(.debug, "HeatmapViewController workoutReturned invalid: \(String(describing: workoutReturned))")
+          return
+        }
+        self.getRouteSampleObject(workout: workout)
         completion(samples, nil)
+
         self.loadUI()
+
       }
     }
     healthstore.execute(query)
@@ -291,8 +305,13 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
       return
     }
 
+    // get route data for saving to new updated route
+
+    MyFunc.logMessage(.debug, "routeCoordinatesToSave:")
+    MyFunc.logMessage(.debug, String(describing: routeCoordinates))
+
     var metadataToUpdate = workoutToUpdate.metadata
-    MyFunc.logMessage(.debug, "metadataToUpdate: \(String(describing: metadataToUpdate))")
+
     let currentDate = Date()
     let currentDateAsString = String(describing: currentDate)
 
@@ -314,7 +333,9 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
             // Workout was successfully saved
             MyFunc.logMessage(.debug, "Workout saved successfully: \(String(describing: workoutToSave.uuid))")
             MyFunciOS.renameHeatmapImageFile(currentID: workoutToUpdate.uuid, newID: workoutToSave.uuid)
-            // delete previous workout
+
+            // need to add the new workout route here
+
 
           } else {
             MyFunc.logMessage(.error, "Error saving workout: \(String(describing: error))")
@@ -371,6 +392,88 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     }
     healthstore.execute(heartRateQuery)
   }
+
+
+
+
+  // added this to get the route data to save to the updated workout
+  // this needs to be moved into a separate workout manager
+  func getRouteSampleObject(workout: HKWorkout)  {
+
+    let runningObjectQuery = HKQuery.predicateForObjects(from: workout)
+    let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
+
+      guard error == nil else {
+
+        fatalError("The initial query failed.")
+      }
+
+      DispatchQueue.main.async {
+        guard
+          let routeSamples = samples as? [HKWorkoutRoute],
+          error == nil
+        else {
+          return
+        }
+        MyFunc.logMessage(.debug, "routeSamples:")
+        MyFunc.logMessage(.debug, String(describing: routeSamples))
+        guard let routeReturned = samples?.first as? HKWorkoutRoute else {
+          MyFunc.logMessage(.debug, "routeQuery for workout \(String(describing: workout.startDate)) returned no samples")
+          return
+        }
+        self.getRouteLocationData(route: routeReturned, workoutId: workout.uuid)
+      }
+
+    }
+
+    // the update handler process persists between loads and can retrieve additional data
+    // currently not using this to process updates
+    routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
+
+      guard error == nil else {
+        MyFunc.logMessage(.error, "HKWorkoutRoute Anchored Query updateHandler failed with error \(String(describing: error))")
+        return
+      }
+      // Process updates or additions here.
+    }
+    healthstore.execute(routeQuery)
+
+
+  }
+
+  func getRouteLocationData(route: HKWorkoutRoute, workoutId: UUID)   {
+
+
+    let samplesCount = route.count
+    MyFunc.logMessage(.debug, "Number of samples: \(samplesCount)")
+
+    // Create the route query.
+    let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNil, done, errorOrNil) in
+
+      // This block may be called multiple times.
+
+      if errorOrNil != nil {
+        MyFunc.logMessage(.error, "Error retrieving workout locations")
+      }
+
+      guard let locations = locationsOrNil else {
+        MyFunc.logMessage(.error, "Error retrieving workout locations")
+        return
+      }
+
+      if done {
+
+        let locationsAsCoordinates = locations.map {$0.coordinate}
+        self.routeCoordinates = locationsAsCoordinates
+        MyFunc.logMessage(.debug, "Locations retrieved: \(self.routeCoordinates)")
+      }
+    }
+
+    healthstore.execute(query)
+
+  }
+
+
 
 }
 

@@ -9,6 +9,7 @@
 import Foundation
 import MapKit
 
+// this classed used by TrackerViewController
 class UserAnnotation: NSObject, MKAnnotation {
   var coordinate: CLLocationCoordinate2D
   var title: String?

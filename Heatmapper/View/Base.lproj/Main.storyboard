@@ -50,7 +50,7 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
-                                        <state key="normal" title="Heatmap"/>
+                                        <state key="normal" title="Test Heatmap"/>
                                         <connections>
                                             <action selector="btnHeatmap:" destination="hJk-zi-pgB" eventType="touchUpInside" id="o2O-wC-YAr"/>
                                         </connections>
@@ -86,6 +86,7 @@
                         <segue destination="nCc-eF-wC1" kind="show" identifier="mainMenuToHistory" id="jsl-Go-fze"/>
                         <segue destination="cbs-Dv-Qaf" kind="show" identifier="mainMenuToTracker" id="a4G-zq-cd0"/>
                         <segue destination="bKA-ac-svZ" kind="show" identifier="mainMenuToReferenceData" id="HXG-wh-XwM"/>
+                        <segue destination="Pbk-vr-61V" kind="show" identifier="mainMenuToREHeatmap" id="nls-6Q-nxl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pbN-s5-nYY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -374,13 +375,21 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" reuseIdentifier="workoutCollectionViewCell" id="l3P-qx-uHA" customClass="WorkoutCollectionViewCell" customModule="Heatmapper" customModuleProvider="target">
+                                            <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" reuseIdentifier="workoutCollectionViewCell" id="l3P-qx-uHA" customClass="WorkoutCollectionViewCell" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="87" y="8" width="200" height="300"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zH7-NK-jtO">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </collectionViewCellContentView>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </collectionViewCell>
                                         </cells>
                                         <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cwx-VJ-0ky">
@@ -1024,7 +1033,7 @@ DQoNCg
                             <constraint firstItem="1Pn-uk-98W" firstAttribute="leading" secondItem="LCS-r7-OrD" secondAttribute="leading" id="z25-ZZ-F5N"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="RE Heatmap" id="xJf-j7-wii"/>
+                    <navigationItem key="navigationItem" title="DTMHeatmap" id="xJf-j7-wii"/>
                     <connections>
                         <outlet property="mapView" destination="JQg-4i-igJ" id="rS6-dR-RI1"/>
                     </connections>
@@ -1043,6 +1052,10 @@ DQoNCg
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lQG-2T-c3p">
                                 <rect key="frame" x="0.0" y="88" width="414" height="744"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="5fg-O7-Fmq" appends="YES" id="536-f8-JcD"/>
+                                </connections>
                             </mapView>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ron-hr-ShN">
                                 <rect key="frame" x="0.0" y="832" width="414" height="30"/>
@@ -1089,10 +1102,18 @@ DQoNCg
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xws-kf-RrH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="5fg-O7-Fmq">
+                    <connections>
+                        <action selector="tapGesture:" destination="Pbk-vr-61V" id="Bf7-ZC-I5s"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-551" y="1527"/>
+            <point key="canvasLocation" x="-645" y="1822"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Q5M-hF-bhw"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="flame.fill" width="19" height="27"/>
         <image name="heart.fill" width="34" height="31"/>

@@ -12,12 +12,29 @@ import CoreLocation
 
 class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
 
+  struct workoutInfo {
+    var uuid            : UUID
+    var samples         : Bool
+    var locations       : Bool
+    var sampleCount     : Int
+    var locationsCount  : Int
+
+    init(uuid: UUID, samples: Bool, locations: Bool, sampleCount: Int, locationsCount: Int) {
+      self.uuid           = uuid
+      self.samples        = samples
+      self.locations      = locations
+      self.sampleCount    = sampleCount
+      self.locationsCount = locationsCount
+    }
+  }
 
   let theme = ColourTheme()
 
   var heatmapImagesArray = [UIImage]()
   var heatmapImagesStringArray = [String]()
-  private var workoutArray: [HKWorkout]?
+  private var workoutArray = [HKWorkout]()
+  private var workoutInfoArray = [workoutInfo]()
+
   private let workoutCellId = "workoutCell"
   var workoutSelectedId : UUID?
   var selectedIndexPath : Int?
@@ -39,7 +56,6 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   @IBOutlet weak var workoutCollectionViewCell: WorkoutCollectionViewCell!
 
   @IBAction func btnUpdateWorkout(_ sender: Any) {
-
     updateWorkout()
   }
 
@@ -73,14 +89,48 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     }
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
 
+    workoutInfoArray.removeAll()
+    loadHeatmapImages()
+    loadWorkouts { (workouts, error) in
+//      MyFunc.logMessage(.debug, "workouts:")
+//      MyFunc.logMessage(.debug, String(describing: workouts))
+
+      guard let workoutsReturned = workouts else {
+        MyFunc.logMessage(.debug, "No workouts returned")
+        return
+      }
+      self.workoutArray = workoutsReturned
+
+
+      for workoutToProcess in workoutsReturned {
+        let workoutToAppend = workoutInfo(uuid: workoutToProcess.uuid, samples: false, locations: false, sampleCount: 0, locationsCount: 0)
+        self.workoutInfoArray.append(workoutToAppend)
+        self.getRouteSampleObject(workout: workoutToProcess)
+
+
+
+      // flag each workout as having samples or not
+
+      // get route details for each workout
+      // flag each workout as having route details or not
+
+
+      }
+
+
+
+      self.workoutCollectionView.reloadData()
+    }
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
 
-
     // added this to ensure Location tracking turned off (it should be by the time this screen is displayed though)
     locationManager.stopUpdatingLocation()
-
 
     workoutCollectionView.delegate = self
     workoutCollectionView.dataSource = self
@@ -88,29 +138,36 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     workoutCollectionView.collectionViewLayout = createLayout()
     workoutCollectionView.allowsMultipleSelection = false
 
-    loadHeatmapImages()
-    loadWorkouts { (workouts, error) in
-      self.workoutArray = workouts
-      MyFunc.logMessage(.debug, "workouts:")
-      MyFunc.logMessage(.debug, String(describing: self.workoutArray))
-      self.workoutCollectionView.reloadData()
-    }
 
   }
 
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return workoutArray?.count ?? 0
+    return workoutArray.count
+
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = workoutCollectionView.dequeueReusableCell(withReuseIdentifier: "WorkoutCollectionViewCell", for: indexPath) as! WorkoutCollectionViewCell
 
-    let workout = workoutArray![indexPath.row]
-    MyFunc.logMessage(.debug, "workout metadata: \(String(describing: workout.metadata))")
+    let workout = workoutArray[indexPath.row]
+//    MyFunc.logMessage(.debug, "workout metadata: \(String(describing: workout.metadata))")
     let workoutId = workout.uuid
 
     let heatmapImage = MyFunciOS.getHeatmapImageForWorkout(workoutID: workoutId)
+
+    if let workoutInfoToDisplay : workoutInfo = workoutInfoArray.first(where: { $0.uuid == workoutId  }) {
+      let samplesCount = workoutInfoToDisplay.sampleCount.description
+      let samplesStr = "Samples: \(samplesCount)"
+      cell.samples.text = samplesStr
+      let locationsCount = workoutInfoToDisplay.locationsCount.description
+      let locationsStr = "Locs: \(locationsCount)"
+      cell.locations.text = locationsStr
+    } else {
+      cell.samples.text = "No info for"
+      cell.locations.text = workoutId.description
+    }
+
 
     cell.heatmapImageView.image = heatmapImage
     cell.workoutDateLabel.text = dateFormatter.string(from: workout.startDate)
@@ -122,12 +179,14 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     } else {
       cell.contentView.backgroundColor = UIColor.clear
     }
+
+    cell.layer.cornerRadius = 6
     return cell
   }
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if (workoutCollectionView.cellForItem(at: indexPath) as? WorkoutCollectionViewCell) != nil {
-      workoutSelectedId = workoutArray?[indexPath.row].uuid
+      workoutSelectedId = workoutArray[indexPath.row].uuid
       selectedIndexPath = indexPath.row
       workoutCollectionView.reloadData()
     }
@@ -141,7 +200,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
     if (workoutCollectionView.cellForItem(at: indexPath) as? WorkoutCollectionViewCell) != nil {
     }
-    workoutSelected = workoutArray![indexPath.row].description
+    workoutSelected = workoutArray[indexPath.row].description
 
     selectedIndexPath = indexPath.row
     print("workoutSelected: \(workoutSelected)")
@@ -154,6 +213,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
   }
 
+  //MARK: Data load functions
   func loadHeatmapImages() {
     let fm = FileManager.default
     let path = Bundle.main.resourcePath!
@@ -167,36 +227,130 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
         }
       }
     }
-
   }
-
 
   // retrieve all Heatmapper workouts
   func loadWorkouts(completion: @escaping ([HKWorkout]?, Error?) -> Void) {
 
-    let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate,
-                                          ascending: false)
+    let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
     let sourcePredicate = HKQuery.predicateForObjects(from: .default())
 
-    let query = HKSampleQuery(
-      sampleType: .workoutType(),
-      predicate: sourcePredicate,
-
-      limit: 0,
-      sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+    let query = HKSampleQuery(sampleType: .workoutType(), predicate: sourcePredicate, limit: 0, sortDescriptors: [sortDescriptor]) { (query, samples, error) in
       DispatchQueue.main.async {
         guard
-          let samples = samples as? [HKWorkout],
-          error == nil
+          let samples = samples as? [HKWorkout], error == nil
         else {
           completion(nil, error)
           return
         }
-
         completion(samples, nil)
       }
     }
+    healthstore.execute(query)
 
+  }
+
+
+
+  func getRouteSampleObject(workout: HKWorkout)  {
+
+    var samplesReturned : Bool = false
+    let runningObjectQuery = HKQuery.predicateForObjects(from: workout)
+
+    let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
+
+      guard error == nil else {
+        // Handle any errors here.
+        fatalError("The initial query failed.")
+      }
+
+      // Process the initial route data here.
+//      MyFunc.logMessage(.debug, "routeQuery returned samples:")
+//      MyFunc.logMessage(.debug, String(describing: samples))
+
+      DispatchQueue.main.async {
+        guard
+          let routeSamples = samples as? [HKWorkoutRoute],
+          error == nil
+        else {
+          return
+        }
+//        MyFunc.logMessage(.debug, "routeSamples:")
+//        MyFunc.logMessage(.debug, String(describing: routeSamples))
+        guard let routeReturned = samples?.first as? HKWorkoutRoute else {
+          MyFunc.logMessage(.debug, "No Route returned for workout \(String(describing: workout.startDate))")
+          samplesReturned = false
+          return
+        }
+        MyFunc.logMessage(.debug, "Route returned for workout \(String(describing: workout.startDate)):")
+//        MyFunc.logMessage(.debug, routeReturned.description)
+
+
+        samplesReturned = true
+
+        if let workoutInfoRow = self.workoutInfoArray.firstIndex(where: {$0.uuid == workout.uuid}) {
+          self.workoutInfoArray[workoutInfoRow].samples = true
+          self.workoutInfoArray[workoutInfoRow].sampleCount = routeSamples.count
+        }
+        self.getRouteLocationData(route: routeReturned, workoutId: workout.uuid)
+
+
+
+      }
+
+    }
+
+    routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
+
+      guard error == nil else {
+        // Handle any errors here.
+        fatalError("The update failed.")
+      }
+
+      // Process updates or additions here.
+    }
+
+    healthstore.execute(routeQuery)
+
+  }
+
+  func getRouteLocationData(route: HKWorkoutRoute, workoutId: UUID)  {
+
+    var locationsReturned : Bool = false
+    let samplesCount = route.count
+//    MyFunc.logMessage(.debug, "Number of samples: \(samplesCount)")
+
+    // Create the route query.
+    let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNil, done, errorOrNil) in
+
+      // This block may be called multiple times.
+//      MyFunc.logMessage(.debug, "Workout Start Date: \(String(describing: route.startDate))")
+      if errorOrNil != nil {
+        // Handle any errors here.
+        MyFunc.logMessage(.debug, "Error retrieving workout locations")
+
+      }
+
+      guard let locations = locationsOrNil else {
+        fatalError("*** Invalid State: This can only fail if there was an error. ***")
+      }
+
+      //      MyFunc.logMessage(.debug, "Workout Location Data: \(String(describing: locations))")
+      let locationsAsCoordinates = locations.map {$0.coordinate}
+//      MyFunc.logMessage(.debug, "Locations retrieved: \(locationsAsCoordinates)")
+
+      if locationsAsCoordinates.count == 0 {
+        locationsReturned = false
+      } else {
+        locationsReturned = true
+      }
+      if let workoutInfoRow = self.workoutInfoArray.firstIndex(where: {$0.uuid == workoutId}) {
+        self.workoutInfoArray[workoutInfoRow].locations = locationsReturned
+        self.workoutInfoArray[workoutInfoRow].locationsCount = locationsAsCoordinates.count
+      }
+
+
+    }
     healthstore.execute(query)
 
   }
@@ -232,8 +386,6 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
   func updateWorkout() {
 
-    
-
   }
  
 
@@ -258,6 +410,12 @@ extension WorkoutHistoryCollectionViewController {
     
     return layout
   }
+
+
+
+
+
+
 }
 
 

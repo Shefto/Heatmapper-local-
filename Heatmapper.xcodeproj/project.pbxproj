@@ -49,6 +49,9 @@
 		7961D6BF25B74B4900204968 /* MyWKInterfaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */; };
 		7965F9C226AC1E27008B130D /* JDHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */; };
 		797026C0252DB4A500A86A05 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
+		7972371927176687002F4548 /* FootballPitchOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972371827176687002F4548 /* FootballPitchOverlay.swift */; };
+		7972371B271768AB002F4548 /* FootballPitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972371A271768AB002F4548 /* FootballPitch.swift */; };
+		7972371D2719E203002F4548 /* FootballPitchOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972371C2719E203002F4548 /* FootballPitchOverlayView.swift */; };
 		7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */; };
 		797BFD0525421E8700426185 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
 		797BFD0A2542B72800426185 /* MyFunciOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797BFD092542B72800426185 /* MyFunciOS.swift */; };
@@ -232,6 +235,9 @@
 		7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWKInterfaceButton.swift; sourceTree = "<group>"; };
 		7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapViewController.swift; sourceTree = "<group>"; };
 		797026BF252DB4A500A86A05 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		7972371827176687002F4548 /* FootballPitchOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPitchOverlay.swift; sourceTree = "<group>"; };
+		7972371A271768AB002F4548 /* FootballPitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPitch.swift; sourceTree = "<group>"; };
+		7972371C2719E203002F4548 /* FootballPitchOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPitchOverlayView.swift; sourceTree = "<group>"; };
 		7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntervalTableViewFooter.swift; path = Heatmapper/View/IntervalTableViewFooter.swift; sourceTree = SOURCE_ROOT; };
 		797BFD092542B72800426185 /* MyFunciOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFunciOS.swift; sourceTree = "<group>"; };
 		797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTypeTableViewCell.swift; sourceTree = "<group>"; };
@@ -407,6 +413,7 @@
 		793D1ADF24B86C020039441B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7972371C2719E203002F4548 /* FootballPitchOverlayView.swift */,
 				79FDDFCA26C98A8E00526FB9 /* CroppableImageView.swift */,
 				79FDDFCC26C98BD900526FB9 /* CornerpointClientProtocol.swift */,
 				79FDDFCE26C98C3500526FB9 /* CornerpointView.swift */,
@@ -431,6 +438,8 @@
 				79D083B72509255A00274F79 /* ThemeKit App Classes.swift */,
 				79D083B5250924C500274F79 /* ThemeKit Theme.swift */,
 				79D083B9250925A800274F79 /* ThemeKit Themes.swift */,
+				7972371827176687002F4548 /* FootballPitchOverlay.swift */,
+				7972371A271768AB002F4548 /* FootballPitch.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -438,24 +447,24 @@
 		793D1AE024B86C1B0039441B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				79D9BF8E270794180027D96F /* TeamsViewController.swift */,
-				79D9BF8C27076E750027D96F /* VenuesViewController.swift */,
 				798007F526F5F64700FFC294 /* ActivityViewController.swift */,
-				793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */,
-				79439B7326C46357001E7CC4 /* SavedHeatmapViewController.swift */,
-				799131232634126800811731 /* HeatmapViewController.swift */,
-				7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */,
-				79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */,
+				79FDDFD026C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift */,
 				792CCCDC26AC32270024C5B3 /* DTMHeatmapViewController.swift */,
+				799131232634126800811731 /* HeatmapViewController.swift */,
 				7935622725AF53C5006BBC54 /* HelpViewController.swift */,
+				7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */,
 				79D083B32508EF6400274F79 /* MainMenuViewController.swift */,
+				793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */,
+				79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */,
+				79439B7326C46357001E7CC4 /* SavedHeatmapViewController.swift */,
 				7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */,
 				79BED1A9256AAEED0052B160 /* SetIntervalsViewController.swift */,
 				79B6DC982598B13400F573BA /* SettingsViewController.swift */,
+				79D9BF8E270794180027D96F /* TeamsViewController.swift */,
 				79ADB48A262640E3007BF946 /* TrackerViewController.swift */,
-				79913162263490D900811731 /* WorkoutHistoryViewController.swift */,
-				79FDDFD026C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift */,
+				79D9BF8C27076E750027D96F /* VenuesViewController.swift */,
 				79A9DC6026B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift */,
+				79913162263490D900811731 /* WorkoutHistoryViewController.swift */,
 				79A4EFF524A7A109002A7870 /* WorkoutViewController.swift */,
 			);
 			path = Controller;
@@ -862,9 +871,11 @@
 				799131292634145F00811731 /* JDHeatMapView.swift in Sources */,
 				79A4EFFE24A89063002A7870 /* FartlekTableViewCell.swift in Sources */,
 				793D1AD624B855540039441B /* CommandStatus.swift in Sources */,
+				7972371D2719E203002F4548 /* FootballPitchOverlayView.swift in Sources */,
 				79F3A2B42697970700667B1B /* RE_DTMDiffHeatmap.swift in Sources */,
 				793D1AD424B854EB0039441B /* SessionDelegator.swift in Sources */,
 				79ADB49026264153007BF946 /* UserAnnotation.swift in Sources */,
+				7972371927176687002F4548 /* FootballPitchOverlay.swift in Sources */,
 				797BFD0525421E8700426185 /* Audio.swift in Sources */,
 				79DC34162625D2FC0053733C /* LocationManager.swift in Sources */,
 				79A9DC6126B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift in Sources */,
@@ -898,6 +909,7 @@
 				7991313D263414E800811731 /* JDHeatmapOverlayRenderer.swift in Sources */,
 				79A4EFF924A7F1AF002A7870 /* Interval.swift in Sources */,
 				7935629525B31431006BBC54 /* BartyCrouch.swift in Sources */,
+				7972371B271768AB002F4548 /* FootballPitch.swift in Sources */,
 				79D083BA250925A800274F79 /* ThemeKit Themes.swift in Sources */,
 				793D1AEF24B87F110039441B /* SessionTransfer.swift in Sources */,
 				79ADB48B262640E3007BF946 /* TrackerViewController.swift in Sources */,

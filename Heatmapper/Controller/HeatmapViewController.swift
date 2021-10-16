@@ -163,7 +163,7 @@ extension HeatmapViewController: JDHeatMapDelegate
       }
 
       // Process the initial route data here.
-      MyFunc.logMessage(.debug, "routeQuery returned samples:")
+      MyFunc.logMessage(.debug, "routeQuery for workout \(String(describing: workout.startDate)) returned samples:")
       MyFunc.logMessage(.debug, String(describing: samples))
 
       DispatchQueue.main.async {
@@ -174,10 +174,10 @@ extension HeatmapViewController: JDHeatMapDelegate
         else {
           return
         }
-        MyFunc.logMessage(.debug, "routeSamples:")
+        MyFunc.logMessage(.debug, "samples cast to HKWorkoutRoute:")
         MyFunc.logMessage(.debug, String(describing: routeSamples))
         guard let routeReturned = samples?.first as? HKWorkoutRoute else {
-          MyFunc.logMessage(.debug, "Could not convert routeSamples to HKWorkoutRoute")
+          MyFunc.logMessage(.debug, "Could not convert routeSamples to HKWorkoutRoute for workout \(workout.uuid.description)")
           return
         }
         self.getRouteLocationData(route: routeReturned)

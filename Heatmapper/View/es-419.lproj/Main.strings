@@ -163,7 +163,7 @@
 /* Class = "UILabel"; text = "Venue"; ObjectID = "uTQ-LO-7d9"; */
 "uTQ-LO-7d9.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Heatmap"; ObjectID = "uxy-2h-68R"; */
+/* Class = "UIButton"; normalTitle = "Test Heatmap"; ObjectID = "uxy-2h-68R"; */
 "uxy-2h-68R.normalTitle" = "";
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "VIb-fl-PFY"; */
@@ -184,7 +184,7 @@
 /* Class = "UITextField"; text = "Activity"; ObjectID = "Wsp-TC-1FL"; */
 "Wsp-TC-1FL.text" = "";
 
-/* Class = "UINavigationItem"; title = "RE Heatmap"; ObjectID = "xJf-j7-wii"; */
+/* Class = "UINavigationItem"; title = "DTMHeatmap"; ObjectID = "xJf-j7-wii"; */
 "xJf-j7-wii.title" = "";
 
 /* Class = "UITextField"; placeholder = "Enter name"; ObjectID = "XJj-hN-I5q"; */

@@ -14,5 +14,7 @@ class WorkoutCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var workoutDateLabel: ThemeSmallTextUILabel!
   @IBOutlet weak var activityLabel: ThemeSmallTextUILabel!
   @IBOutlet weak var venueLabel: ThemeSmallTextUILabel!
-  
+  @IBOutlet weak var samples: ThemeMediumFontUILabel!
+  @IBOutlet weak var locations: ThemeMediumFontUILabel!
+
 }
