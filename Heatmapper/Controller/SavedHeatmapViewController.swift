@@ -17,11 +17,15 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
   // **************************************************
   // Declare class variables
   // **************************************************
-  let healthstore       = HKHealthStore()
+  let healthStore                 = HKHealthStore()
+  let workoutConfiguration        = HKWorkoutConfiguration()
+  var builder                     : HKWorkoutBuilder!
+  var routeBuilder                : HKWorkoutRouteBuilder!
+
   var heatmapWorkoutId  : UUID?
   var heatmapImage      : UIImage?
   var retrievedWorkout  : HKWorkout?
-  var routeCoordinates = [CLLocationCoordinate2D]()
+  var routeCoordinatesArray = [CLLocation]()
 
   let workoutDateFormatter  = DateFormatter()
   var measurementFormatter  = MeasurementFormatter()
@@ -104,7 +108,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     } else {
       sportField.text = sportArray[row].rawValue
     }
-    updateWorkout()
+
     self.view.endEditing(true)
   }
 
@@ -116,10 +120,21 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    workoutConfiguration.activityType = .running
+    workoutConfiguration.locationType = .outdoor
+
+    builder = HKWorkoutBuilder(healthStore: healthStore, configuration: workoutConfiguration, device: .local())
+    routeBuilder = HKWorkoutRouteBuilder(healthStore: healthStore, device: nil)
+
     getWorkoutData()
     getStaticData()
 
   }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    updateWorkout()
+  }
+
 
   func getWorkoutData() {
 
@@ -140,8 +155,6 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
       retrievedWorkout = workout
 
     }
-
-
 
     // get image for heatmap
     getHeatmapImage()
@@ -258,8 +271,6 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
   }
 
 
-
-
   func getHeatmapImage() {
 
     guard let workoutId = heatmapWorkoutId else {
@@ -294,7 +305,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
 
       }
     }
-    healthstore.execute(query)
+    healthStore.execute(query)
 
   }
 
@@ -308,7 +319,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     // get route data for saving to new updated route
 
     MyFunc.logMessage(.debug, "routeCoordinatesToSave:")
-    MyFunc.logMessage(.debug, String(describing: routeCoordinates))
+    MyFunc.logMessage(.debug, String(describing: routeCoordinatesArray))
 
     var metadataToUpdate = workoutToUpdate.metadata
 
@@ -322,12 +333,12 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
     let workoutToSave = HKWorkout(activityType: workoutToUpdate.workoutActivityType, start: workoutToUpdate.startDate, end: workoutToUpdate.endDate, workoutEvents: workoutToUpdate.workoutEvents, totalEnergyBurned: workoutToUpdate.totalEnergyBurned, totalDistance: workoutToUpdate.totalDistance, device: workoutToUpdate.device, metadata: metadataToUpdate)
 
 
-    self.healthstore.delete(workoutToUpdate, withCompletion: { (success, error) in
+    self.healthStore.delete(workoutToUpdate, withCompletion: { (success, error) in
 
       if success {
         MyFunc.logMessage(.debug, "Workout with ID \(String(describing: workoutToUpdate.uuid)) deleted successfully")
 
-        self.healthstore.save(workoutToSave, withCompletion: { (success, error) in
+        self.healthStore.save(workoutToSave, withCompletion: { (success, error) in
 
           if success {
             // Workout was successfully saved
@@ -335,7 +346,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
             MyFunciOS.renameHeatmapImageFile(currentID: workoutToUpdate.uuid, newID: workoutToSave.uuid)
 
             // need to add the new workout route here
-
+            self.beginCollection()
 
           } else {
             MyFunc.logMessage(.error, "Error saving workout: \(String(describing: error))")
@@ -371,7 +382,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
         self.avgHeartRateLabel.text = String(format: "%.2f", heartRateBPM) + " bpm"
       }
     }
-    healthstore.execute(heartRateQuery)
+    healthStore.execute(heartRateQuery)
   }
 
   func loadAverageSpeedLabel(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) {
@@ -390,7 +401,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
         self.avgSpeedLabel.text = String(format: "%.2f", pace) + " bpm"
       }
     }
-    healthstore.execute(heartRateQuery)
+    healthStore.execute(heartRateQuery)
   }
 
 
@@ -436,7 +447,7 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
       }
       // Process updates or additions here.
     }
-    healthstore.execute(routeQuery)
+    healthStore.execute(routeQuery)
 
 
   }
@@ -463,17 +474,83 @@ class SavedHeatmapViewController: UIViewController, UIPickerViewDataSource, UIPi
 
       if done {
 
-        let locationsAsCoordinates = locations.map {$0.coordinate}
-        self.routeCoordinates = locationsAsCoordinates
-        MyFunc.logMessage(.debug, "Locations retrieved: \(self.routeCoordinates)")
+//        let locationsAsCoordinates = locations.map {$0.coordinate}
+        self.routeCoordinatesArray = locations
+        MyFunc.logMessage(.debug, "Locations retrieved: \(self.routeCoordinatesArray)")
       }
     }
 
-    healthstore.execute(query)
+    healthStore.execute(query)
 
   }
 
+  func beginCollection() {
 
+    guard let retrievedWorkoutUnwrapped = retrievedWorkout else {
+      MyFunc.logMessage(.error, "Error unwrapping retrieved Workout")
+      return
+    }
+
+    // begin collecting Workout data
+    builder.beginCollection(withStart: retrievedWorkoutUnwrapped.startDate, completion: { (success, error) in
+      guard success else {
+        MyFunc.logMessage(.error, "Error beginning data collection in Workout Builder: \(String(describing: error))")
+        return
+      }
+      MyFunc.logMessage(.debug, "SavedHeatmapViewController.builder.beginCollection success: \(success)")
+    })
+
+
+
+    // end Workout Builder data collection
+    builder.endCollection(withEnd: retrievedWorkoutUnwrapped.endDate, completion: { (success, error) in
+      guard success else {
+        MyFunc.logMessage(.error, "SavedHeatmapViewController.builder.endCollection error: \(String(describing: error))")
+        return
+      }
+
+      // save the Workout
+      self.builder.finishWorkout { [self] (savedWorkout, error) in
+
+        guard savedWorkout != nil else {
+          MyFunc.logMessage(.error, "SavedHeatmapViewController.builder.finishWorkout error: \(String(describing: error))")
+          return
+        }
+
+        MyFunc.logMessage(.info, "Workout saved successfully:")
+        MyFunc.logMessage(.info, String(describing: savedWorkout))
+
+        // insert the route data from the Location array
+        routeBuilder.insertRouteData(self.routeCoordinatesArray) { (success, error) in
+          if !success {
+            MyFunc.logMessage(.error, "SavedHeatmapViewController.insertRouteData.finishWorkout error: \(String(describing: error))")
+          }
+
+          MyFunc.logMessage(.debug, "SavedHeatmapViewController.insertRouteData.finishWorkout success: \(String(describing: success))")
+
+          // save the Workout Route
+          routeBuilder.finishRoute(with: savedWorkout!, metadata: ["Activity Type": "Heatmapper"]) {(workoutRoute, error) in
+            guard workoutRoute != nil else {
+              MyFunc.logMessage(.error, "Failed to save Workout Route with error : \(String(describing: error))")
+              return
+            }
+
+            MyFunc.logMessage(.info, "Workout Route saved successfully:")
+            MyFunc.logMessage(.info, String(describing: workoutRoute))
+            MyFunc.logMessage(.info, "Saved Events: \(String(describing: savedWorkout?.workoutEvents))")
+
+            //need to delete old workout route here
+
+          } // finishRoute
+
+        } // insertRouteData
+
+      } // finishWorkout
+
+    }) // endCollection
+
+
+  }
 
 }
 
