@@ -13,7 +13,7 @@ import WatchConnectivity
 // bridge the UI. Shared by the iOS app and watchOS app.
 protocol SessionCommands {
   func transferFile(_ file: URL, metadata: [String: Any])
-  func updateApplicationContextForActivityTemplate(activityTemplate: ActivityTemplate)
+//  func updateApplicationContextForActivityTemplate(activityTemplate: ActivityTemplate)
   func updateApplicationContextForUserDefault(_ context: [String: Any])
 }
 
@@ -33,42 +33,42 @@ extension SessionCommands {
     //        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
   }
 
-  func updateApplicationContextForActivityTemplate(activityTemplate: ActivityTemplate) {
-    // this function sends the Activity Template to the watch / phone using WatchConnectivity
-    // the Template must first be connected to a dictionary in order for updateApplicationContext to pass it
-
-    // get the Activity Template in dictionary form
-    var templateAsDictionary = activityTemplate.dictionaryRepresentation
-    // add a Date key to the payload
-    // this ensures uniqueness, otherwise updateApplicationContext will ignore it
-    // consider removing this line once syncing confirmed to work
-    templateAsDictionary.updateValue(Date(), forKey: "Date")
-    // tell the receiver what we're sending
-    templateAsDictionary.updateValue("ActivityTemplate", forKey: "Contents")
-    var commandStatus = CommandStatus(command: .updateAppContext, phrase: .updated)
-
-    #if os(iOS)
-    guard WCSession.default.isPaired == true else {
-      MyFunc.logMessage(.error, "Error : Watch and iPhone not paired")
-      return
-    }
-    guard WCSession.default.isWatchAppInstalled == true else {
-      MyFunc.logMessage(.error, "Error : Watch app not installed")
-      return
-    }
-    #endif
-    guard WCSession.default.activationState == .activated else {
-      return handleSessionUnactivated(with: commandStatus)
-    }
-    do {
-      try WCSession.default.updateApplicationContext(templateAsDictionary)
-    } catch {
-      commandStatus.phrase = .failed
-      commandStatus.errorMessage = error.localizedDescription
-    }
-
-    postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
-  }
+//  func updateApplicationContextForActivityTemplate(activityTemplate: ActivityTemplate) {
+//    // this function sends the Activity Template to the watch / phone using WatchConnectivity
+//    // the Template must first be connected to a dictionary in order for updateApplicationContext to pass it
+//
+//    // get the Activity Template in dictionary form
+//    var templateAsDictionary = activityTemplate.dictionaryRepresentation
+//    // add a Date key to the payload
+//    // this ensures uniqueness, otherwise updateApplicationContext will ignore it
+//    // consider removing this line once syncing confirmed to work
+//    templateAsDictionary.updateValue(Date(), forKey: "Date")
+//    // tell the receiver what we're sending
+//    templateAsDictionary.updateValue("ActivityTemplate", forKey: "Contents")
+//    var commandStatus = CommandStatus(command: .updateAppContext, phrase: .updated)
+//
+//    #if os(iOS)
+//    guard WCSession.default.isPaired == true else {
+//      MyFunc.logMessage(.error, "Error : Watch and iPhone not paired")
+//      return
+//    }
+//    guard WCSession.default.isWatchAppInstalled == true else {
+//      MyFunc.logMessage(.error, "Error : Watch app not installed")
+//      return
+//    }
+//    #endif
+//    guard WCSession.default.activationState == .activated else {
+//      return handleSessionUnactivated(with: commandStatus)
+//    }
+//    do {
+//      try WCSession.default.updateApplicationContext(templateAsDictionary)
+//    } catch {
+//      commandStatus.phrase = .failed
+//      commandStatus.errorMessage = error.localizedDescription
+//    }
+//
+//    postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+//  }
 
   func updateApplicationContextForUserDefault(_ context: [String: Any]) {
     // this function sends a Dictionary to the watch / phone using WatchConnectivity

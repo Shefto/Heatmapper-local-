@@ -18,9 +18,9 @@ class CountdownInterfaceController: WKInterfaceController {
   var countdownTimer = Timer()
   //  let audio = Audio()
 
-  var activityTemplate    = ActivityTemplate()
-  var activityType        = ActivityType()
-  var intervalType        = IntervalType()
+//  var activityTemplate    = ActivityTemplate()
+//  var activityType        = ActivityType()
+//  var intervalType        = IntervalType()
 
   @IBOutlet weak var countdownTimerLabel: WKInterfaceLabel!
 
@@ -100,7 +100,7 @@ class CountdownInterfaceController: WKInterfaceController {
     var screenArray   = [String]()
     var contextArray  = [Any]()
     screenArray = ["ActionsInterfaceController", "WorkoutInterfaceController"]
-    contextArray = ["", activityType]
+    contextArray = ["", ""]
 
     //  set up page-based navigation for 2 screens but with initial focus on second
     WKInterfaceController.reloadRootPageControllers(withNames:

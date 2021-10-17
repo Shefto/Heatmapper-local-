@@ -57,13 +57,13 @@ class SessionDelegator: NSObject, WCSessionDelegate {
     dictionaryFromContext.removeValue(forKey: "Contents")
 
     switch contents {
-    case "ActivityTemplate":
-
-      guard let templateReceived = ActivityTemplate.init(dictionary: dictionaryFromContext) else {
-        MyFunc.logMessage(.error, "Failed to create ActivityTemplate from dictionary: \(dictionaryFromContext)")
-        return
-      }
-      MyFunc.saveActivityDefaults(templateReceived)
+//    case "ActivityTemplate":
+//
+//      guard let templateReceived = ActivityTemplate.init(dictionary: dictionaryFromContext) else {
+//        MyFunc.logMessage(.error, "Failed to create ActivityTemplate from dictionary: \(dictionaryFromContext)")
+//        return
+//      }
+//      MyFunc.saveActivityDefaults(templateReceived)
 
     case "UserDefault":
       guard let defaultForUpdate = dictionaryFromContext.first else {
