@@ -40,9 +40,6 @@
 /* Class = "UIButton"; normalTitle = "Update Workout"; ObjectID = "2DM-st-7JY"; */
 "2DM-st-7JY.normalTitle" = "";
 
-/* Class = "UILabel"; text = "Pitch"; ObjectID = "3FH-ba-EGv"; */
-"3FH-ba-EGv.text" = "";
-
 /* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "8fa-ka-EKP"; */
 "8fa-ka-EKP.normalTitle" = "";
 
@@ -61,9 +58,6 @@
 /* Class = "UIButton"; normalTitle = "RE"; ObjectID = "Cin-hP-zjE"; */
 "Cin-hP-zjE.normalTitle" = "";
 
-/* Class = "UILabel"; text = "Venue"; ObjectID = "CTI-FV-Wgi"; */
-"CTI-FV-Wgi.text" = "";
-
 /* Class = "UISegmentedControl"; dhi-ac-byn.segmentTitles[0] = "Best for battery"; ObjectID = "dhi-ac-byn"; */
 "dhi-ac-byn.segmentTitles[0]" = "";
 
@@ -76,14 +70,17 @@
 /* Class = "UINavigationItem"; title = "Edit Activity"; ObjectID = "EbZ-Kt-ugg"; */
 "EbZ-Kt-ugg.title" = "";
 
+/* Class = "UITextField"; text = "Venue"; ObjectID = "eXy-MY-Yhq"; */
+"eXy-MY-Yhq.text" = "";
+
+/* Class = "UILabel"; text = "Venue"; ObjectID = "Fgr-lP-daT"; */
+"Fgr-lP-daT.text" = "";
+
 /* Class = "UILabel"; text = "Sport"; ObjectID = "fUb-WJ-pCB"; */
 "fUb-WJ-pCB.text" = "";
 
 /* Class = "UINavigationItem"; title = "Workouts"; ObjectID = "gOK-0r-wdZ"; */
 "gOK-0r-wdZ.title" = "";
-
-/* Class = "UILabel"; text = "Pitch"; ObjectID = "GW0-ht-6cn"; */
-"GW0-ht-6cn.text" = "";
 
 /* Class = "UIButton"; normalTitle = "Update Workout"; ObjectID = "GxP-i5-0nQ"; */
 "GxP-i5-0nQ.normalTitle" = "";
@@ -118,6 +115,9 @@
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "mh4-Pn-ffs"; */
 "mh4-Pn-ffs.normalTitle" = "";
 
+/* Class = "UILabel"; text = "Pitch"; ObjectID = "Mo8-X3-Hdn"; */
+"Mo8-X3-Hdn.text" = "";
+
 /* Class = "UIButton"; normalTitle = "Manage Activities"; ObjectID = "MUA-HA-gex"; */
 "MUA-HA-gex.normalTitle" = "";
 
@@ -130,7 +130,7 @@
 /* Class = "UILabel"; text = "Sport or activity type"; ObjectID = "q8u-Nv-Fsn"; */
 "q8u-Nv-Fsn.text" = "";
 
-/* Class = "UITextField"; text = "Sport Label"; ObjectID = "QAR-0O-1LH"; */
+/* Class = "UITextField"; text = "Sport"; ObjectID = "QAR-0O-1LH"; */
 "QAR-0O-1LH.text" = "";
 
 /* Class = "UINavigationItem"; title = "Activities"; ObjectID = "qcv-8e-tba"; */
@@ -160,9 +160,6 @@
 /* Class = "UILabel"; text = "Location accuracy"; ObjectID = "UKj-hg-nT8"; */
 "UKj-hg-nT8.text" = "";
 
-/* Class = "UILabel"; text = "Venue"; ObjectID = "uTQ-LO-7d9"; */
-"uTQ-LO-7d9.text" = "";
-
 /* Class = "UIButton"; normalTitle = "Test Heatmap"; ObjectID = "uxy-2h-68R"; */
 "uxy-2h-68R.normalTitle" = "";
 
@@ -183,6 +180,9 @@
 
 /* Class = "UITextField"; text = "Activity"; ObjectID = "Wsp-TC-1FL"; */
 "Wsp-TC-1FL.text" = "";
+
+/* Class = "UITextField"; text = "Pitch"; ObjectID = "xgG-Zc-e1D"; */
+"xgG-Zc-e1D.text" = "";
 
 /* Class = "UINavigationItem"; title = "DTMHeatmap"; ObjectID = "xJf-j7-wii"; */
 "xJf-j7-wii.title" = "";

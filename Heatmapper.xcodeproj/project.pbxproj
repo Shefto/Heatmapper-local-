@@ -55,7 +55,6 @@
 		7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */; };
 		797BFD0525421E8700426185 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
 		797BFD0A2542B72800426185 /* MyFunciOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797BFD092542B72800426185 /* MyFunciOS.swift */; };
-		797E7C062575312500EAE473 /* IntervalTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */; };
 		798007F426F3DF8C00FFC294 /* EditActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798007F326F3DF8C00FFC294 /* EditActivityTableViewCell.swift */; };
 		798007F626F5F64700FFC294 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798007F526F5F64700FFC294 /* ActivityViewController.swift */; };
 		7980929D252F386300DF1562 /* HeatmapperWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7980929C252F386300DF1562 /* HeatmapperWorkout.swift */; };
@@ -92,13 +91,10 @@
 		79A4EFD624A0AF4C002A7870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFD524A0AF4C002A7870 /* Assets.xcassets */; };
 		79A4EFF624A7A109002A7870 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFF524A7A109002A7870 /* WorkoutViewController.swift */; };
 		79A4EFF924A7F1AF002A7870 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFF824A7F1AF002A7870 /* Interval.swift */; };
-		79A4EFFC24A88E0E002A7870 /* fartlekCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFFB24A88E0E002A7870 /* fartlekCell.xib */; };
-		79A4EFFE24A89063002A7870 /* FartlekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFFD24A89063002A7870 /* FartlekTableViewCell.swift */; };
 		79A7E14C25ACE48000D1A952 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15025ACE48000D1A952 /* Localizable.strings */; };
 		79A7E14D25ACE48000D1A952 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15025ACE48000D1A952 /* Localizable.strings */; };
 		79A7E14E25ACE48000D1A952 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15025ACE48000D1A952 /* Localizable.strings */; };
 		79A7E15825AD9F5000D1A952 /* IntervalTableViewFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15A25AD9F5000D1A952 /* IntervalTableViewFooter.xib */; };
-		79A7E16225AD9F8200D1A952 /* IntervalTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E16425AD9F8200D1A952 /* IntervalTypeTableViewCell.xib */; };
 		79A9DC6126B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9DC6026B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift */; };
 		79A9DC6426B9DD060063C3D0 /* WorkoutCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */; };
 		79A9DC6526B9DD060063C3D0 /* WorkoutCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */; };
@@ -112,7 +108,6 @@
 		79B6DC992598B13400F573BA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B6DC982598B13400F573BA /* SettingsViewController.swift */; };
 		79B80BD3253DDB8300BEA10F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B80BD2253DDB8300BEA10F /* SceneDelegate.swift */; };
 		79BB8FF02563DB4500019900 /* CountdownInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB8FEF2563DB4500019900 /* CountdownInterfaceController.swift */; };
-		79BED1AA256AAEED0052B160 /* SetIntervalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BED1A9256AAEED0052B160 /* SetIntervalsViewController.swift */; };
 		79C657792559A6B900E6DBCE /* SetIntervalsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C657782559A6B900E6DBCE /* SetIntervalsInterfaceController.swift */; };
 		79CA514B25C2DC9F00415F84 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79CA514D25C2DC9F00415F84 /* InfoPlist.strings */; };
 		79CA515D25C2DF4E00415F84 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79CA515F25C2DF4E00415F84 /* InfoPlist.strings */; };
@@ -216,19 +211,16 @@
 		7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
 		7953B57625BACC0D00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		7953B57725BACC0D00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
-		7953B57825BACC0E00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/IntervalTypeTableViewCell.strings"; sourceTree = "<group>"; };
 		7953B57925BACC0E00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/IntervalTableViewFooter.strings"; sourceTree = "<group>"; };
 		7953B57A25BACC0E00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Interface.strings"; sourceTree = "<group>"; };
 		7953B57B25BACC0F00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7953B57F25BAD5B500F35EBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		7953B58025BAD5B500F35EBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
-		7953B58125BAD5B500F35EBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/IntervalTypeTableViewCell.strings; sourceTree = "<group>"; };
 		7953B58225BAD5B600F35EBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/IntervalTableViewFooter.strings; sourceTree = "<group>"; };
 		7953B58325BAD5B600F35EBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Interface.strings; sourceTree = "<group>"; };
 		7953B58425BAD5B600F35EBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7953B58525BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		7953B58625BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Main.strings"; sourceTree = "<group>"; };
-		7953B58725BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/IntervalTypeTableViewCell.strings"; sourceTree = "<group>"; };
 		7953B58825BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/IntervalTableViewFooter.strings"; sourceTree = "<group>"; };
 		7953B58925BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Interface.strings"; sourceTree = "<group>"; };
 		7953B58A25BAD7D200F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -240,7 +232,6 @@
 		7972371C2719E203002F4548 /* FootballPitchOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPitchOverlayView.swift; sourceTree = "<group>"; };
 		7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntervalTableViewFooter.swift; path = Heatmapper/View/IntervalTableViewFooter.swift; sourceTree = SOURCE_ROOT; };
 		797BFD092542B72800426185 /* MyFunciOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFunciOS.swift; sourceTree = "<group>"; };
-		797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTypeTableViewCell.swift; sourceTree = "<group>"; };
 		798007F226F3DECC00FFC294 /* EditActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditActivityCell.xib; sourceTree = "<group>"; };
 		798007F326F3DF8C00FFC294 /* EditActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActivityTableViewCell.swift; sourceTree = "<group>"; };
 		798007F526F5F64700FFC294 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
@@ -284,8 +275,6 @@
 		79A4EFF524A7A109002A7870 /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 		79A4EFF724A7F1AD002A7870 /* Heatmapper WatchKit App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Heatmapper WatchKit App-Bridging-Header.h"; sourceTree = "<group>"; };
 		79A4EFF824A7F1AF002A7870 /* Interval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interval.swift; sourceTree = "<group>"; };
-		79A4EFFB24A88E0E002A7870 /* fartlekCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = fartlekCell.xib; sourceTree = "<group>"; };
-		79A4EFFD24A89063002A7870 /* FartlekTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FartlekTableViewCell.swift; sourceTree = "<group>"; };
 		79A79A5524B5DB3F005A4433 /* Heatmapper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Heatmapper.entitlements; sourceTree = "<group>"; };
 		79A7E14025ABA8AA00D1A952 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		79A7E14125ABA8AB00D1A952 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Interface.strings; sourceTree = "<group>"; };
@@ -294,9 +283,6 @@
 		79A7E15925AD9F5000D1A952 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IntervalTableViewFooter.xib; sourceTree = "<group>"; };
 		79A7E15F25AD9F5F00D1A952 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/IntervalTableViewFooter.strings; sourceTree = "<group>"; };
 		79A7E16125AD9F6400D1A952 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/IntervalTableViewFooter.strings; sourceTree = "<group>"; };
-		79A7E16325AD9F8200D1A952 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IntervalTypeTableViewCell.xib; sourceTree = "<group>"; };
-		79A7E16925AD9F8A00D1A952 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/IntervalTypeTableViewCell.strings; sourceTree = "<group>"; };
-		79A7E16B25AD9F8F00D1A952 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/IntervalTypeTableViewCell.strings; sourceTree = "<group>"; };
 		79A9DC6026B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryCollectionViewController.swift; sourceTree = "<group>"; };
 		79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCollectionViewCell.swift; sourceTree = "<group>"; };
 		79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -308,7 +294,6 @@
 		79B6DC982598B13400F573BA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		79B80BD2253DDB8300BEA10F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		79BB8FEF2563DB4500019900 /* CountdownInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownInterfaceController.swift; sourceTree = "<group>"; };
-		79BED1A9256AAEED0052B160 /* SetIntervalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetIntervalsViewController.swift; sourceTree = "<group>"; };
 		79C657782559A6B900E6DBCE /* SetIntervalsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetIntervalsInterfaceController.swift; sourceTree = "<group>"; usesTabs = 0; };
 		79CA514C25C2DC9F00415F84 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		79CA515125C2DCAB00415F84 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -422,10 +407,6 @@
 				79ADB48F26264153007BF946 /* UserAnnotation.swift */,
 				7982B0C0264FEF64001335F3 /* WorkoutCell.xib */,
 				7982B0C226506C07001335F3 /* WorkoutTableViewCell.swift */,
-				79A4EFFD24A89063002A7870 /* FartlekTableViewCell.swift */,
-				79A4EFFB24A88E0E002A7870 /* fartlekCell.xib */,
-				79A7E16425AD9F8200D1A952 /* IntervalTypeTableViewCell.xib */,
-				797E7C042575312500EAE473 /* IntervalTypeTableViewCell.swift */,
 				79A7E15A25AD9F5000D1A952 /* IntervalTableViewFooter.xib */,
 				7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */,
 				793477A826DD66BA0004DF0A /* ActivityTableViewCell.swift */,
@@ -458,7 +439,6 @@
 				79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */,
 				79439B7326C46357001E7CC4 /* SavedHeatmapViewController.swift */,
 				7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */,
-				79BED1A9256AAEED0052B160 /* SetIntervalsViewController.swift */,
 				79B6DC982598B13400F573BA /* SettingsViewController.swift */,
 				79D9BF8E270794180027D96F /* TeamsViewController.swift */,
 				79ADB48A262640E3007BF946 /* TrackerViewController.swift */,
@@ -711,7 +691,6 @@
 				79A9DC6526B9DD060063C3D0 /* WorkoutCollectionViewCell.xib in Resources */,
 				793477AD26DFFFF10004DF0A /* ActivityCell.xib in Resources */,
 				7905990025ED876200316CEF /* FIT_minute_beep.aif in Resources */,
-				79A4EFFC24A88E0E002A7870 /* fartlekCell.xib in Resources */,
 				7905990225ED876200316CEF /* FiT_second_beep.aif in Resources */,
 				79CA514B25C2DC9F00415F84 /* InfoPlist.strings in Resources */,
 				79AD9E96265074FC00928384 /* Assets.xcassets in Resources */,
@@ -722,7 +701,6 @@
 				793477AB26DD66BE0004DF0A /* ActivityTableViewCell.xib in Resources */,
 				79A4EFB924A0AF4A002A7870 /* LaunchScreen.storyboard in Resources */,
 				79A4EFB624A0AF4A002A7870 /* Assets.xcassets in Resources */,
-				79A7E16225AD9F8200D1A952 /* IntervalTypeTableViewCell.xib in Resources */,
 				79F3480E25A3364100762724 /* Heatmapper.storekit in Resources */,
 				79A4EFB424A0AF45002A7870 /* Main.storyboard in Resources */,
 			);
@@ -863,13 +841,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				797E7C062575312500EAE473 /* IntervalTypeTableViewCell.swift in Sources */,
 				79FDDFCD26C98BD900526FB9 /* CornerpointClientProtocol.swift in Sources */,
 				79D083BE250A0C0900274F79 /* Extensions.swift in Sources */,
 				793477A726DA55EC0004DF0A /* ReferenceDataViewController.swift in Sources */,
 				7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */,
 				799131292634145F00811731 /* JDHeatMapView.swift in Sources */,
-				79A4EFFE24A89063002A7870 /* FartlekTableViewCell.swift in Sources */,
 				793D1AD624B855540039441B /* CommandStatus.swift in Sources */,
 				7972371D2719E203002F4548 /* FootballPitchOverlayView.swift in Sources */,
 				79F3A2B42697970700667B1B /* RE_DTMDiffHeatmap.swift in Sources */,
@@ -920,7 +896,6 @@
 				79FDDFCF26C98C3500526FB9 /* CornerpointView.swift in Sources */,
 				79913138263414CA00811731 /* JDHeatmapOverlay.swift in Sources */,
 				79201489254343BD00212051 /* MyFunc.swift in Sources */,
-				79BED1AA256AAEED0052B160 /* SetIntervalsViewController.swift in Sources */,
 				793D1AE624B86E6F0039441B /* CustomLogger.swift in Sources */,
 				79B3742C24B0C711000E4F7E /* Stopwatch.swift in Sources */,
 				79125ED127085DC0008E9872 /* PlayingArea.swift in Sources */,
@@ -1045,19 +1020,6 @@
 				7953B58825BAD7D100F35EBD /* cy-GB */,
 			);
 			name = IntervalTableViewFooter.xib;
-			sourceTree = "<group>";
-		};
-		79A7E16425AD9F8200D1A952 /* IntervalTypeTableViewCell.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				79A7E16325AD9F8200D1A952 /* Base */,
-				79A7E16925AD9F8A00D1A952 /* es */,
-				79A7E16B25AD9F8F00D1A952 /* en */,
-				7953B57825BACC0E00F35EBD /* es-419 */,
-				7953B58125BAD5B500F35EBD /* fr */,
-				7953B58725BAD7D100F35EBD /* cy-GB */,
-			);
-			name = IntervalTypeTableViewCell.xib;
 			sourceTree = "<group>";
 		};
 		79CA514D25C2DC9F00415F84 /* InfoPlist.strings */ = {

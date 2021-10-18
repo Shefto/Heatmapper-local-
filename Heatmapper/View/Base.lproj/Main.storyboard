@@ -810,7 +810,7 @@ DQoNCg
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Sport Label" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QAR-0O-1LH" userLabel="Sport" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Sport" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QAR-0O-1LH" userLabel="Sport" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="144.66666666666666" y="0.0" width="259.33333333333337" height="20.333333333333332"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -824,41 +824,41 @@ DQoNCg
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="bB4-MT-r7P" userLabel="Venue Stack View">
                                         <rect key="frame" x="0.0" y="618.33333333333337" width="404" height="20.333333333333371"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTI-FV-Wgi" userLabel="Venue Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fgr-lP-daT" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="129.66666666666666" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTQ-LO-7d9" userLabel="Venue" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Venue" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXy-MY-Yhq" userLabel="Venue" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="144.66666666666666" y="0.0" width="259.33333333333337" height="20.333333333333332"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="uTQ-LO-7d9" firstAttribute="width" secondItem="CTI-FV-Wgi" secondAttribute="width" multiplier="2" id="Pl1-rk-TEx"/>
+                                            <constraint firstItem="eXy-MY-Yhq" firstAttribute="width" secondItem="Fgr-lP-daT" secondAttribute="width" multiplier="2" id="py8-PC-JHp"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="5C0-SP-zHb" userLabel="Pitch Stack View">
                                         <rect key="frame" x="0.0" y="653.66666666666663" width="404" height="20.333333333333371"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FH-ba-EGv" userLabel="Pitch Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mo8-X3-Hdn" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="130" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pitch" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GW0-ht-6cn" userLabel="Pitch" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Pitch" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xgG-Zc-e1D" userLabel="Venue" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="144" y="0.0" width="260" height="20.333333333333332"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="GW0-ht-6cn" firstAttribute="width" secondItem="3FH-ba-EGv" secondAttribute="width" multiplier="2" id="nTl-qS-pCO"/>
+                                            <constraint firstItem="xgG-Zc-e1D" firstAttribute="width" secondItem="Mo8-X3-Hdn" secondAttribute="width" multiplier="2" id="fbd-Ag-iec"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ai0-ZQ-fkj" userLabel="Calories and Heart Rate Stack View">
@@ -973,10 +973,11 @@ DQoNCg
                         <outlet property="heartRateImageView" destination="Bdz-po-5cm" id="ngY-ip-ROT"/>
                         <outlet property="heatmapImageView" destination="Bi1-ui-buG" id="uJP-g2-Vxl"/>
                         <outlet property="paceImageView" destination="2JG-dV-1h3" id="Osn-e9-Bhb"/>
-                        <outlet property="pitchLabel" destination="GW0-ht-6cn" id="L37-KV-576"/>
+                        <outlet property="pitchField" destination="xgG-Zc-e1D" id="qOa-aE-9dw"/>
                         <outlet property="scrollView" destination="7p0-Xp-GAh" id="zLP-kV-U88"/>
                         <outlet property="sportField" destination="QAR-0O-1LH" id="oRM-yP-EdU"/>
-                        <outlet property="venueLabel" destination="uTQ-LO-7d9" id="Wru-AR-ZOV"/>
+                        <outlet property="sportLabel" destination="fUb-WJ-pCB" id="rPG-ea-CGC"/>
+                        <outlet property="venueField" destination="eXy-MY-Yhq" id="ha3-bT-SNa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aQj-td-zHN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1112,7 +1113,7 @@ DQoNCg
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Q5M-hF-bhw"/>
+        <segue reference="nls-6Q-nxl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="flame.fill" width="19" height="27"/>

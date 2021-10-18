@@ -120,6 +120,34 @@ class MyFunc {
 //  }
 
 
+  static func getWorkoutMetadata() -> [WorkoutMetadata] {
+
+    var metadataToReturn = [WorkoutMetadata]()
+    let defaults = UserDefaults.standard
+
+    if let savedTemplate = defaults.object(forKey: "Workout Metadata") as? Data {
+      let decoder = JSONDecoder()
+      if let loadedTemplate = try? decoder.decode([WorkoutMetadata].self, from: savedTemplate) {
+        metadataToReturn = loadedTemplate
+      }
+    }
+    return metadataToReturn
+
+  }
+
+  static func saveWorkoutMetadata(_ workoutMetadataArray: [WorkoutMetadata]) {
+    let defaults = UserDefaults.standard
+    let encoder = JSONEncoder()
+    do {
+
+      let encoded = try encoder.encode(workoutMetadataArray)
+      defaults.set(encoded, forKey: "Workout Metadata")
+    } catch {
+      logMessage(.error, "Error in MyFunc.saveWorkoutMetadata")
+    }
+
+  }
+
   static func getHeatmapperActivityDefaults() -> [Activity] {
 
     var activitySetToReturn = [Activity]()

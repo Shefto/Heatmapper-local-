@@ -26,21 +26,25 @@ extension Sport {
 
 struct WorkoutMetadata: Codable {
   var workoutId : UUID
-  var activity  : Activity
-  var sport     : Sport
-//  var Venue     : Venue
-//  var Pitch     : Pitch
+  var activity  : String
+  var sport     : String
+  var venue     : String
+  var pitch     : String
 
   enum CodingKeys: String, CodingKey {
-    case workoutId = "Name"
-    case activity = "Activity"
-    case sport    = "Sport"
+    case workoutId  = "WorkoutId"
+    case activity   = "Activity"
+    case sport      = "Sport"
+    case venue      = "Venue"
+    case pitch      = "Pitch"
   }
 
-  init (workoutId: UUID, activity: Activity, sport: Sport) {
+  init (workoutId: UUID, activity: String, sport: String, venue: String, pitch: String) {
     self.workoutId  = workoutId
     self.activity   = activity
     self.sport      = sport
+    self.venue      = venue
+    self.pitch      = pitch
   }
 
 }

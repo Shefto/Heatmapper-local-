@@ -22,6 +22,9 @@ class SavedHeatmapViewController: UIViewController {
   var builder                     : HKWorkoutBuilder!
   var routeBuilder                : HKWorkoutRouteBuilder!
 
+  var workoutMetadataArray        =  [WorkoutMetadata]()
+  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
+
   var heatmapWorkoutId  : UUID?
   var heatmapImage      : UIImage?
   var retrievedWorkout  : HKWorkout?
@@ -33,18 +36,21 @@ class SavedHeatmapViewController: UIViewController {
   var unitLength: UnitLength = .meters
   var unitSpeed: UnitSpeed  = .metersPerSecond
   var activityArray = [Activity]()
-  var sportArray = [Sport]()
+  var sportArray    = [Sport]()
   let defaults = UserDefaults.standard
 
   // Outlets and Actions
   @IBOutlet weak var heatmapImageView: UIImageView!
 
-  @IBOutlet weak var sportField         : ThemeMediumFontTextField!
-  @IBOutlet weak var activityField      : ThemeMediumFontTextField!
   @IBOutlet weak var activityLabel      : ThemeMediumFontUILabel!
-
+  @IBOutlet weak var sportLabel         : ThemeMediumFontUILabel!
   @IBOutlet weak var venueLabel         : ThemeMediumFontUILabel!
   @IBOutlet weak var pitchLabel         : ThemeMediumFontUILabel!
+
+  @IBOutlet weak var activityField      : ThemeMediumFontTextField!
+  @IBOutlet weak var sportField         : ThemeMediumFontTextField!
+  @IBOutlet weak var venueField         : ThemeMediumFontTextField!
+  @IBOutlet weak var pitchField         : ThemeMediumFontTextField!
 
   @IBOutlet weak var durationLabel      : ThemeMediumFontUILabel!
   @IBOutlet weak var dateLabel          : ThemeMediumFontUILabel!
@@ -58,8 +64,6 @@ class SavedHeatmapViewController: UIViewController {
   @IBOutlet weak var paceImageView      : UIImageView!
   @IBOutlet weak var heartRateImageView : UIImageView!
   @IBOutlet weak var distanceImageView  : UIImageView!
-
-
 
   @IBOutlet weak var scrollView: UIScrollView! {
     didSet {
@@ -120,7 +124,7 @@ class SavedHeatmapViewController: UIViewController {
     getHeatmapImage()
 
     // add function to get metadata from elsewhere
-
+    getWorkoutMetadata()
   }
 
   func getStaticData() {
@@ -129,6 +133,19 @@ class SavedHeatmapViewController: UIViewController {
     sportArray = Sport.allCases.map { $0 }
   }
 
+  func getWorkoutMetadata() {
+    // calling this with the workoutId for now
+    // currently retrieving the whole array but will tighten this up once working
+    workoutMetadataArray = MyFunc.getWorkoutMetadata()
+    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
+    
+    if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == heatmapWorkoutId}) {
+      workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
+    }
+
+
+
+  }
 
   func loadUI() {
 
@@ -152,23 +169,18 @@ class SavedHeatmapViewController: UIViewController {
     let colouredheatmapImage = heatmapImage?.withBackground(color: UIColor.systemGreen)
     heatmapImageView.image = colouredheatmapImage
 
-    guard let workoutMetadata : Dictionary = heatmapWorkout.metadata  else {
-      MyFunc.logMessage(.error, "SavedHeatmapViewController: no workout metadata")
-      return
-    }
 
-    let workoutActivity = workoutMetadata["Activity"] as? String ?? ""
-    let workoutVenue = workoutMetadata["Venue"] as? String ?? ""
-    let workoutPitch = workoutMetadata["Pitch"] as? String ?? ""
-    let workoutSport = workoutMetadata["Sport"] as? String ?? ""
+    let workoutActivity = workoutMetadata.activity
+    let workoutVenue = workoutMetadata.venue
+    let workoutPitch = workoutMetadata.pitch
+    let workoutSport = workoutMetadata.sport
 
     activityField.text = workoutActivity
-    venueLabel.text = workoutVenue
-    pitchLabel.text = workoutPitch
+    venueField.text = workoutVenue
+    pitchField.text = workoutPitch
     sportField.text = workoutSport
 
     // colour icons
-
     heartRateImageView.image = heartRateImageView.image?.withRenderingMode(.alwaysTemplate)
     heartRateImageView.tintColor = UIColor.systemRed
 
@@ -254,12 +266,12 @@ class SavedHeatmapViewController: UIViewController {
           return
         }
 
-        let workoutReturned = samples.first
+//        let workoutReturned = samples.first
 
-        guard let workout : HKWorkout = workoutReturned else {
-          MyFunc.logMessage(.debug, "HeatmapViewController workoutReturned invalid: \(String(describing: workoutReturned))")
-          return
-        }
+//        guard let workout : HKWorkout = workoutReturned else {
+//          MyFunc.logMessage(.debug, "HeatmapViewController workoutReturned invalid: \(String(describing: workoutReturned))")
+//          return
+//        }
 
         completion(samples, nil)
 
@@ -273,15 +285,26 @@ class SavedHeatmapViewController: UIViewController {
 
   func updateWorkout()  {
 
-    let currentDate = Date()
-    let currentDateAsString = String(describing: currentDate)
+    guard let workoutId = heatmapWorkoutId else {
+      MyFunc.logMessage(.error, "Invalid heatmapWorkoutId passed to SavedHeatmapViewController: \(String(describing: heatmapWorkoutId))")
+      return
+    }
 
+    let activity = activityField.text ?? ""
+    let venue = venueField.text ?? ""
+    let sport = sportField.text ?? ""
+    let pitch = pitchField.text ?? ""
 
-//    metadataToUpdate?.updateValue(currentDateAsString, forKey: "Date")
-//    metadataToUpdate?.updateValue(activityField.text as Any, forKey: "Activity")
-//    metadataToUpdate?.updateValue(sportField.text as Any, forKey: "Sport")
+    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, venue: venue, pitch: pitch)
+    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
+    if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
+      workoutMetadataArray[row] = workoutMetadataToSave
+    } else {
+      workoutMetadataArray.append(workoutMetadataToSave)
+    }
+    MyFunc.saveWorkoutMetadata(workoutMetadataArray)
+    MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadataToSave))")
 
-    // add code to update this e.g. to userdefaults
 
   }
 
@@ -371,6 +394,7 @@ extension SavedHeatmapViewController:  UIPickerViewDataSource, UIPickerViewDeleg
     } else {
       sportField.text = sportArray[row].rawValue
     }
+    updateWorkout()
 
     self.view.endEditing(true)
   }
