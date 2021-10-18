@@ -11,6 +11,7 @@ import WatchConnectivity
 //import GoogleMobileAds
 import HealthKit
 import os
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -49,6 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // apply colour theme
     theme.apply(for: application)
+
+    IQKeyboardManager.shared.enable = true
     return true
 
   }
