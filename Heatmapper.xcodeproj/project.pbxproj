@@ -71,7 +71,6 @@
 		7991313D263414E800811731 /* JDHeatmapOverlayRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7991313C263414E800811731 /* JDHeatmapOverlayRenderer.swift */; };
 		799131422634151700811731 /* JDHeatmapPointCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799131412634151700811731 /* JDHeatmapPointCreator.swift */; };
 		79913152263428B900811731 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC34152625D2FC0053733C /* LocationManager.swift */; };
-		79913163263490D900811731 /* WorkoutHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79913162263490D900811731 /* WorkoutHistoryViewController.swift */; };
 		7991886B24B618AE008F0EA5 /* IntervalRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7991886A24B618AE008F0EA5 /* IntervalRowController.swift */; };
 		7994126F255AB9230062AC0D /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7994126E255AB9230062AC0D /* Objects.swift */; };
 		7996ADE925682D5D00C25196 /* CustomIntervalsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7996ADE825682D5D00C25196 /* CustomIntervalsInterfaceController.swift */; };
@@ -247,7 +246,6 @@
 		79913137263414CA00811731 /* JDHeatmapOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapOverlay.swift; sourceTree = "<group>"; };
 		7991313C263414E800811731 /* JDHeatmapOverlayRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapOverlayRenderer.swift; sourceTree = "<group>"; };
 		799131412634151700811731 /* JDHeatmapPointCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapPointCreator.swift; sourceTree = "<group>"; };
-		79913162263490D900811731 /* WorkoutHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryViewController.swift; sourceTree = "<group>"; };
 		7991886A24B618AE008F0EA5 /* IntervalRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalRowController.swift; sourceTree = "<group>"; };
 		7994126E255AB9230062AC0D /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		7996ADE825682D5D00C25196 /* CustomIntervalsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIntervalsInterfaceController.swift; sourceTree = "<group>"; };
@@ -400,29 +398,29 @@
 		793D1ADF24B86C020039441B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7972371C2719E203002F4548 /* FootballPitchOverlayView.swift */,
-				79FDDFCA26C98A8E00526FB9 /* CroppableImageView.swift */,
-				79FDDFCC26C98BD900526FB9 /* CornerpointClientProtocol.swift */,
-				79FDDFCE26C98C3500526FB9 /* CornerpointView.swift */,
-				79A4EFB724A0AF4A002A7870 /* LaunchScreen.storyboard */,
-				79A4EFB224A0AF45002A7870 /* Main.storyboard */,
-				79ADB48F26264153007BF946 /* UserAnnotation.swift */,
-				7982B0C0264FEF64001335F3 /* WorkoutCell.xib */,
-				7982B0C226506C07001335F3 /* WorkoutTableViewCell.swift */,
-				79A7E15A25AD9F5000D1A952 /* IntervalTableViewFooter.xib */,
-				7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */,
+				793477AC26DFFFF00004DF0A /* ActivityCell.xib */,
 				793477A826DD66BA0004DF0A /* ActivityTableViewCell.swift */,
 				793477A926DD66BA0004DF0A /* ActivityTableViewCell.xib */,
-				793477AC26DFFFF00004DF0A /* ActivityCell.xib */,
-				798007F326F3DF8C00FFC294 /* EditActivityTableViewCell.swift */,
+				79FDDFCC26C98BD900526FB9 /* CornerpointClientProtocol.swift */,
+				79FDDFCE26C98C3500526FB9 /* CornerpointView.swift */,
+				79FDDFCA26C98A8E00526FB9 /* CroppableImageView.swift */,
 				798007F226F3DECC00FFC294 /* EditActivityCell.xib */,
-				79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */,
-				79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */,
+				798007F326F3DF8C00FFC294 /* EditActivityTableViewCell.swift */,
+				7972371A271768AB002F4548 /* FootballPitch.swift */,
+				7972371827176687002F4548 /* FootballPitchOverlay.swift */,
+				7972371C2719E203002F4548 /* FootballPitchOverlayView.swift */,
+				7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */,
+				79A7E15A25AD9F5000D1A952 /* IntervalTableViewFooter.xib */,
+				79A4EFB724A0AF4A002A7870 /* LaunchScreen.storyboard */,
+				79A4EFB224A0AF45002A7870 /* Main.storyboard */,
 				79D083B72509255A00274F79 /* ThemeKit App Classes.swift */,
 				79D083B5250924C500274F79 /* ThemeKit Theme.swift */,
 				79D083B9250925A800274F79 /* ThemeKit Themes.swift */,
-				7972371827176687002F4548 /* FootballPitchOverlay.swift */,
-				7972371A271768AB002F4548 /* FootballPitch.swift */,
+				79ADB48F26264153007BF946 /* UserAnnotation.swift */,
+				7982B0C0264FEF64001335F3 /* WorkoutCell.xib */,
+				79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */,
+				79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */,
+				7982B0C226506C07001335F3 /* WorkoutTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -446,7 +444,6 @@
 				79ADB48A262640E3007BF946 /* TrackerViewController.swift */,
 				79D9BF8C27076E750027D96F /* VenuesViewController.swift */,
 				79A9DC6026B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift */,
-				79913162263490D900811731 /* WorkoutHistoryViewController.swift */,
 				79A4EFF524A7A109002A7870 /* WorkoutViewController.swift */,
 			);
 			path = Controller;
@@ -878,7 +875,6 @@
 				79F3A2A7269078F900667B1B /* REHeatmapViewController.swift in Sources */,
 				799131422634151700811731 /* JDHeatmapPointCreator.swift in Sources */,
 				79FDDFD126C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift in Sources */,
-				79913163263490D900811731 /* WorkoutHistoryViewController.swift in Sources */,
 				79D083B42508EF6400274F79 /* MainMenuViewController.swift in Sources */,
 				7965F9C226AC1E27008B130D /* JDHeatmapViewController.swift in Sources */,
 				79B80BD3253DDB8300BEA10F /* SceneDelegate.swift in Sources */,

@@ -52,7 +52,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Samples" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8y6-Z3-FlR" userLabel="Samples" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Samples" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8y6-Z3-FlR" userLabel="Samples" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="322" width="200" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="faq-tI-qvV"/>
@@ -61,7 +61,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Locations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FQW-dS-1Mk" userLabel="Locations" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Locations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FQW-dS-1Mk" userLabel="Locations" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="342" width="200" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Ru0-id-ZB5"/>

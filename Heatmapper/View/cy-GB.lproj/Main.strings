@@ -73,9 +73,6 @@
 /* Class = "UILabel"; text = "Date"; ObjectID = "cdu-fT-Y48"; */
 "cdu-fT-Y48.text" = "";
 
-/* Class = "UIButton"; normalTitle = "RE"; ObjectID = "Cin-hP-zjE"; */
-"Cin-hP-zjE.normalTitle" = "";
-
 /* Class = "UINavigationItem"; title = "Edit Activity"; ObjectID = "EbZ-Kt-ugg"; */
 "EbZ-Kt-ugg.title" = "";
 
@@ -91,7 +88,7 @@
 /* Class = "UINavigationItem"; title = "Workouts"; ObjectID = "gOK-0r-wdZ"; */
 "gOK-0r-wdZ.title" = "";
 
-/* Class = "UIButton"; normalTitle = "Update Workout"; ObjectID = "GxP-i5-0nQ"; */
+/* Class = "UIButton"; normalTitle = "RE Heatmap"; ObjectID = "GxP-i5-0nQ"; */
 "GxP-i5-0nQ.normalTitle" = "";
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "HIL-yj-uvc"; */
@@ -148,7 +145,7 @@
 /* Class = "UILabel"; text = "Distance"; ObjectID = "rJh-q3-eQC"; */
 "rJh-q3-eQC.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Detailed Heatmap"; ObjectID = "sPj-oH-Nyf"; */
+/* Class = "UIButton"; normalTitle = "Detailed Heatmap (JD)"; ObjectID = "sPj-oH-Nyf"; */
 "sPj-oH-Nyf.normalTitle" = "";
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "syd-FH-J8R"; */
@@ -175,7 +172,7 @@
 /* Class = "UILabel"; text = "Activity"; ObjectID = "WjU-FP-pZm"; */
 "WjU-FP-pZm.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Quick Heatmap"; ObjectID = "WMX-9X-sBW"; */
+/* Class = "UIButton"; normalTitle = "Quick Heatmap (DTM)"; ObjectID = "WMX-9X-sBW"; */
 "WMX-9X-sBW.normalTitle" = "";
 
 /* Class = "UITextField"; text = "Activity"; ObjectID = "Wsp-TC-1FL"; */

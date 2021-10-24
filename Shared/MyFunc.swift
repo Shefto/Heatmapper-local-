@@ -28,6 +28,7 @@ class MyFunc {
 
   static func logMessage(_ level: LogLevel, _ message: String) {
 
+
     // this custom function added to ensure all watchOS logging stored as oslog not working
     let logDateFormatter      = DateFormatter()
     logDateFormatter.dateFormat = "HH:mm:ss"
@@ -44,81 +45,6 @@ class MyFunc {
     }
 
   }
-//
-//  static func getActivityDefaults(_ activityType: ActivityType) -> ActivityTemplate {
-//
-//    var templateToReturn = ActivityTemplate()
-//    let defaults = UserDefaults.standard
-//
-//    if let savedTemplate = defaults.object(forKey: activityType.rawValue) as? Data {
-//      let decoder = JSONDecoder()
-//      if let loadedTemplate = try? decoder.decode(ActivityTemplate.self, from: savedTemplate) {
-//        templateToReturn = loadedTemplate
-//      }
-//
-//    } else {
-//
-//      // no saved Repeat Set so default to initial values and save these
-//      switch activityType {
-//      case .tabata:
-//        templateToReturn.activityType = .tabata
-//        templateToReturn.warmup   = IntervalTemplate(activityType: .warmup, duration: 300)
-//        templateToReturn.work     = IntervalTemplate(activityType: .work, duration: 20)
-//        templateToReturn.rest     = IntervalTemplate(activityType: .rest, duration: 10)
-//        templateToReturn.sets     = 8
-//        templateToReturn.cooldown = IntervalTemplate(activityType: .cooldown, duration: 120)
-//      case .random:
-//        templateToReturn.activityType = .random
-//        templateToReturn.warmup   = IntervalTemplate(activityType: .warmup, duration: 120)
-//        templateToReturn.work     = IntervalTemplate(activityType: .work, duration: 300)
-//        templateToReturn.activityLevel = .moderate
-//        templateToReturn.cooldown = IntervalTemplate(activityType: .cooldown, duration: 120)
-//
-//      case .repeat:
-//        templateToReturn.activityType = .repeat
-//        templateToReturn.warmup   = IntervalTemplate(activityType: .warmup, duration: 180)
-//        templateToReturn.work     = IntervalTemplate(activityType: .work, duration: 60)
-//        templateToReturn.rest     = IntervalTemplate(activityType: .rest, duration: 30)
-//        templateToReturn.sets     = 4
-//        templateToReturn.cooldown = IntervalTemplate(activityType: .cooldown, duration: 180)
-//
-//      case .pyramid:
-//        templateToReturn.activityType = .pyramid
-//        templateToReturn.warmup   = IntervalTemplate(activityType: .warmup, duration: 180)
-//        templateToReturn.work     = IntervalTemplate(activityType: .work, duration: 60)
-//        templateToReturn.rest     = IntervalTemplate(activityType: .rest, duration: 30)
-//        templateToReturn.sets     = 5
-//        templateToReturn.cooldown = IntervalTemplate(activityType: .cooldown, duration: 180)
-//
-//      case .custom:
-//        templateToReturn.activityType = .custom
-//        templateToReturn.warmup   = IntervalTemplate(activityType: .warmup, duration: 60)
-//        templateToReturn.work     = IntervalTemplate(activityType: .work, duration: 60)
-//        templateToReturn.rest     = IntervalTemplate(activityType: .rest, duration: 30)
-//        templateToReturn.sets     = 4
-//        templateToReturn.cooldown = IntervalTemplate(activityType: .cooldown, duration: 60)
-//
-//        let warmupSet = IntervalTemplate(activityType: .warmup, duration: 60)
-//        let workSet = IntervalTemplate(activityType: .work, duration: 60)
-//        let restSet = IntervalTemplate(activityType: .rest, duration: 30)
-//        let cooldownSet = IntervalTemplate(activityType: .cooldown, duration: 60)
-//        templateToReturn.intervals.append(warmupSet)
-//        for _ in 1...3 {
-//          templateToReturn.intervals.append(workSet)
-//          templateToReturn.intervals.append(restSet)
-//        }
-//        templateToReturn.intervals.append(cooldownSet)
-//
-//      default:
-//        logMessage(.error, "No default values available for activityType: \(activityType)")
-//      }
-//
-//      saveActivityDefaults(templateToReturn)
-//
-//    }
-//    return templateToReturn
-//  }
-
 
   static func getWorkoutMetadata() -> [WorkoutMetadata] {
 

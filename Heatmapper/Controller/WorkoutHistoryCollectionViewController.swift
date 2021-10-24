@@ -30,10 +30,12 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
   let theme = ColourTheme()
 
-  var heatmapImagesArray = [UIImage]()
-  var heatmapImagesStringArray = [String]()
-  private var workoutArray = [HKWorkout]()
-  private var workoutInfoArray = [workoutInfo]()
+  var heatmapImagesArray          = [UIImage]()
+  var heatmapImagesStringArray    = [String]()
+  private var workoutArray        = [HKWorkout]()
+  private var workoutInfoArray    = [workoutInfo]()
+  var workoutMetadataArray        =  [WorkoutMetadata]()
+  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
 
   private let workoutCellId = "workoutCell"
   var workoutSelectedId : UUID?
@@ -55,9 +57,6 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   @IBOutlet weak var workoutCollectionView: UICollectionView!
   @IBOutlet weak var workoutCollectionViewCell: WorkoutCollectionViewCell!
 
-  @IBAction func btnUpdateWorkout(_ sender: Any) {
-    updateWorkout()
-  }
 
   @IBAction func btnDTMHeatmap(_ sender: Any) {
     self.performSegue(withIdentifier: "historyToDTMHeatmap", sender: workoutSelectedId)
@@ -109,19 +108,8 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
         let workoutToAppend = workoutInfo(uuid: workoutToProcess.uuid, samples: false, locations: false, sampleCount: 0, locationsCount: 0)
         self.workoutInfoArray.append(workoutToAppend)
         self.getRouteSampleObject(workout: workoutToProcess)
-
-
-
-      // flag each workout as having samples or not
-
-      // get route details for each workout
-      // flag each workout as having route details or not
-
-
       }
-
-
-
+      self.getWorkoutMetadata()
       self.workoutCollectionView.reloadData()
     }
   }
@@ -154,6 +142,9 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 //    MyFunc.logMessage(.debug, "workout metadata: \(String(describing: workout.metadata))")
     let workoutId = workout.uuid
 
+    if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
+      workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
+    }
     let heatmapImage = MyFunciOS.getHeatmapImageForWorkout(workoutID: workoutId)
 
     if let workoutInfoToDisplay : workoutInfo = workoutInfoArray.first(where: { $0.uuid == workoutId  }) {
@@ -171,8 +162,8 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
     cell.heatmapImageView.image = heatmapImage
     cell.workoutDateLabel.text = dateFormatter.string(from: workout.startDate)
-    cell.venueLabel.text = workout.metadata?["Venue"] as? String ?? ""
-    cell.activityLabel.text = workout.metadata?["Activity"] as? String
+    cell.venueLabel.text = workoutMetadata.venue
+    cell.activityLabel.text = workoutMetadata.activity
 
     if selectedIndexPath != nil && indexPath.row == selectedIndexPath {
       cell.contentView.backgroundColor = theme.buttonPrimary
@@ -384,11 +375,12 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
 
-  func updateWorkout() {
-
+  func getWorkoutMetadata() {
+    // calling this with the workoutId for now
+    // currently retrieving the whole array but will tighten this up once working
+    workoutMetadataArray = MyFunc.getWorkoutMetadata()
+    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
   }
- 
-
 
 }
 
@@ -410,11 +402,6 @@ extension WorkoutHistoryCollectionViewController {
     
     return layout
   }
-
-
-
-
-
 
 }
 
