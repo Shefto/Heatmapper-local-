@@ -101,8 +101,7 @@ class REHeatmapViewController: UIViewController {
     MyFunc.logMessage(.debug, String(describing: heatmapCellArray))
 
     let pitch = FootballPitch()
-    let footballPitch11Overlay = FootballPitchOverlay(pitch: pitch)
-
+    let footballPitch11Overlay = FootballPitchOverlay(pitchRect: rect)
     self.mapView.addOverlay(footballPitch11Overlay)
     //    let pitchRect = footballPitch11Overlay.boundingMapRect
     self.setMapViewZoom(rect: rect)
