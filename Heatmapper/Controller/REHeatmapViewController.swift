@@ -23,6 +23,7 @@ class REHeatmapViewController: UIViewController {
   var heatmapperLocationsArray    = [CLLocation]()
   var heatmapWorkoutId            : UUID?
   var pointCount                  : Int = 0
+  var angle                       : CGFloat = 0.0
 
 
   let healthstore = HKHealthStore()
@@ -90,20 +91,34 @@ class REHeatmapViewController: UIViewController {
     MyFunc.logMessage(.debug, "minY: \(String(describing: minY))")
     MyFunc.logMessage(.debug, "maxY: \(String(describing: maxY))")
 
+    // get the angle we want to set the pitch at
+
+
     // this rectangle covers the area of all points
     let rect = MKMapRect.init(x: minX!, y: minY!, width: maxX! - minX!, height: maxY! - minY!)
+    let rectTopLeftX = rect.minX
+    let rectTopLeftY = rect.minY
+    let rectBottomRightX = rect.maxX
+    let rectBottomRightY = rect.maxY
 
+    let rectTopLeftPoint = CGPoint(x: rectTopLeftX, y: rectTopLeftY)
+    let rectBottomRightPoint = CGPoint(x: rectBottomRightX, y: rectBottomRightY)
+    let rectAngle = MyFunc.angle(between: rectTopLeftPoint, ending: rectBottomRightPoint)
+
+    MyFunc.logMessage(.debug, "rect: \(rect)")
+    MyFunc.logMessage(.debug, "rectAngle: \(rectAngle)")
+    angle = rectAngle
     // next create an overlay of the pitch based upon the rectangle
 
     // get the array of heatmap cells based upon the co-ordinates passed in
-    let heatmapCellArray = reHeatmapOverlay.setData(reHeatmapPointArray: heatmapPointsArray)
-    MyFunc.logMessage(.debug, "heatmapCellArray")
-    MyFunc.logMessage(.debug, String(describing: heatmapCellArray))
+//    let heatmapCellArray = reHeatmapOverlay.setData(reHeatmapPointArray: heatmapPointsArray)
+//    MyFunc.logMessage(.debug, "heatmapCellArray")
+//    MyFunc.logMessage(.debug, String(describing: heatmapCellArray))
 
-    let pitch = FootballPitch()
+//    let pitch = FootballPitch()
     let footballPitch11Overlay = FootballPitchOverlay(pitchRect: rect)
     self.mapView.addOverlay(footballPitch11Overlay)
-    //    let pitchRect = footballPitch11Overlay.boundingMapRect
+
     self.setMapViewZoom(rect: rect)
 
   }
@@ -306,7 +321,7 @@ extension REHeatmapViewController: MKMapViewDelegate {
     if overlay is FootballPitchOverlay {
       if let pitchImage = UIImage(named: "football pitch 11.png")
       {
-        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage)
+        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: self.angle)
         return footballPitchOverlayView
 
       }

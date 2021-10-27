@@ -8,7 +8,7 @@
 //  This class contains custom functions shared across iOS and watchOS platforms
 //
 
-import Foundation
+import UIKit
 
 enum LogLevel: String {
   case debug
@@ -443,7 +443,11 @@ class MyFunc {
 
   }
 
-
-
+  static func angle(between starting: CGPoint, ending: CGPoint) -> CGFloat {
+    let center = CGPoint(x: ending.x - starting.x, y: ending.y - starting.y)
+    let radians = atan2(center.y, center.x)
+    let degrees = radians * 180 / .pi
+    return degrees > 0 ? degrees : degrees + degrees
+  }
 
 }

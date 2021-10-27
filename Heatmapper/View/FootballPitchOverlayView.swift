@@ -10,10 +10,12 @@ import MapKit
 
 class FootballPitchOverlayView: MKOverlayRenderer {
   let overlayImage: UIImage
+  let angle : CGFloat
 
   // 1
-  init(overlay: MKOverlay, overlayImage: UIImage) {
+  init(overlay: MKOverlay, overlayImage: UIImage, angle: CGFloat) {
     self.overlayImage = overlayImage
+    self.angle = angle
     super.init(overlay: overlay)
   }
 
@@ -24,7 +26,9 @@ class FootballPitchOverlayView: MKOverlayRenderer {
     let rect = self.rect(for: overlay.boundingMapRect)
     context.scaleBy(x: 1.0, y: -1.0)
     context.translateBy(x: 0.0, y: -rect.size.height)
+    context.rotate(by: angle)
     context.draw(imageReference, in: rect)
+
   }
 }
 

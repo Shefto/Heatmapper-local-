@@ -9,18 +9,13 @@
 import MapKit
 
 class FootballPitchOverlay: NSObject, MKOverlay {
-//  let coordinate: CLLocationCoordinate2D
-  let boundingMapRect: MKMapRect
 
-//  init(pitch: FootballPitch) {
-//    boundingMapRect = pitch.overlayBoundingMapRect
-//    coordinate = pitch.midCoordinate
-//  }
+  let boundingMapRect: MKMapRect
 
   init(pitchRect: MKMapRect) {
     boundingMapRect = pitchRect
-
   }
+
   // centre of Overlay
   var coordinate : CLLocationCoordinate2D
   {
@@ -28,16 +23,5 @@ class FootballPitchOverlay: NSObject, MKOverlay {
     return midMKPoint.coordinate
   }
 
-  // covered range of Overlay
-//  var boundingMapRect: MKMapRect
-//  {
-//    guard let beenCalculatedMapRect = calculatedMapRect else {
-//      fatalError("boundingMapRect Error")
-//    }
-//    return beenCalculatedMapRect
-//
-//
-//
-//  }
 
 }
