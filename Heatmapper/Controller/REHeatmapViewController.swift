@@ -24,6 +24,7 @@ class REHeatmapViewController: UIViewController {
   var heatmapWorkoutId            : UUID?
   var pointCount                  : Int = 0
   var angle                       : CGFloat = 0.0
+  var pointsDistance              : CGFloat = 0.0
 
 
   let healthstore = HKHealthStore()
@@ -91,11 +92,11 @@ class REHeatmapViewController: UIViewController {
     MyFunc.logMessage(.debug, "minY: \(String(describing: minY))")
     MyFunc.logMessage(.debug, "maxY: \(String(describing: maxY))")
 
-    // get the angle we want to set the pitch at
-
 
     // this rectangle covers the area of all points
     let rect = MKMapRect.init(x: minX!, y: minY!, width: maxX! - minX!, height: maxY! - minY!)
+
+    // get the angle we want to set the pitch at
     let rectTopLeftX = rect.minX
     let rectTopLeftY = rect.minY
     let rectBottomRightX = rect.maxX
@@ -108,16 +109,23 @@ class REHeatmapViewController: UIViewController {
     MyFunc.logMessage(.debug, "rect: \(rect)")
     MyFunc.logMessage(.debug, "rectAngle: \(rectAngle)")
     angle = rectAngle
-    // next create an overlay of the pitch based upon the rectangle
+
+    pointsDistance = MyFunc.distanceBetween(point1: rectTopLeftPoint, point2: rectBottomRightPoint)
+    MyFunc.logMessage(.debug, "pointsDistance: \(pointsDistance)")
+    // get the size of the pitch based upon the distance between the points
+
+
+
 
     // get the array of heatmap cells based upon the co-ordinates passed in
 //    let heatmapCellArray = reHeatmapOverlay.setData(reHeatmapPointArray: heatmapPointsArray)
 //    MyFunc.logMessage(.debug, "heatmapCellArray")
 //    MyFunc.logMessage(.debug, String(describing: heatmapCellArray))
 
-//    let pitch = FootballPitch()
+    //  create an overlay of the pitch based upon the rectangle
     let footballPitch11Overlay = FootballPitchOverlay(pitchRect: rect)
     self.mapView.addOverlay(footballPitch11Overlay)
+
 
     self.setMapViewZoom(rect: rect)
 
@@ -295,7 +303,9 @@ class REHeatmapViewController: UIViewController {
         // dispatch to the main queue as we are making UI updates
         DispatchQueue.main.async {
 
+          self.createDTMHeatmap()
           self.createREHeatmap()
+
           // sets the heatmap frame to the size of the view and specifies the map
         }
 
@@ -321,12 +331,14 @@ extension REHeatmapViewController: MKMapViewDelegate {
     if overlay is FootballPitchOverlay {
       if let pitchImage = UIImage(named: "football pitch 11.png")
       {
-        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: self.angle)
+        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: self.angle, pointsDistance: self.pointsDistance)
         return footballPitchOverlayView
-
       }
     }
-    return REHeatmapRenderer.init(overlay: overlay)
+
+
+    return DTMHeatmapRenderer.init(overlay: overlay)
+//    return REHeatmapRenderer.init(overlay: overlay)
   }
 
 
@@ -359,5 +371,25 @@ extension REHeatmapViewController: MKMapViewDelegate {
 
     return pinAnnotationView
   }
+
+
+  func createDTMHeatmap() {
+
+    var heatmapdata:[NSObject: Double] = [:]
+    for coordinate in heatmapperCoordinatesArray {
+      var point = MKMapPoint.init(coordinate)
+      let type = "{MKMapPoint=dd}"
+      let value = NSValue(bytes: &point, objCType: type)
+      heatmapdata[value] = 1.0
+    }
+
+    self.dtmHeatmap.setData(heatmapdata as [NSObject : AnyObject])
+    self.mapView.addOverlay(self.dtmHeatmap)
+
+
+
+  }
+
+
 
 }

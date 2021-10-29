@@ -450,4 +450,12 @@ class MyFunc {
     return degrees > 0 ? degrees : degrees + degrees
   }
 
+  static func distanceBetween (point1: CGPoint, point2: CGPoint) -> CGFloat
+  {
+    // effectively this uses Pythagorean calculation to get the hypotenuse distance
+
+    let distance = hypotf(Float((point1.x - point2.x)), Float((point1.y - point2.y)))
+    return CGFloat(distance)
+  }
+
 }
