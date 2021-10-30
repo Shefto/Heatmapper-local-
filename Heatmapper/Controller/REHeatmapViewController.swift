@@ -25,6 +25,7 @@ class REHeatmapViewController: UIViewController {
   var pointCount                  : Int = 0
   var angle                       : CGFloat = 0.0
   var pointsDistance              : CGFloat = 0.0
+  var dtmRect                     = MKMapRect()
 
 
   let healthstore = HKHealthStore()
@@ -108,7 +109,8 @@ class REHeatmapViewController: UIViewController {
 
     MyFunc.logMessage(.debug, "rect: \(rect)")
     MyFunc.logMessage(.debug, "rectAngle: \(rectAngle)")
-    angle = rectAngle
+
+    angle = rectAngle + 90
 
     pointsDistance = MyFunc.distanceBetween(point1: rectTopLeftPoint, point2: rectBottomRightPoint)
     MyFunc.logMessage(.debug, "pointsDistance: \(pointsDistance)")
@@ -130,18 +132,6 @@ class REHeatmapViewController: UIViewController {
     self.setMapViewZoom(rect: rect)
 
   }
-
-  //  commenting this out for now as using user's location as centre - restore when replacing with a drawn map
-  //  func setMapViewCentre() {
-  //    let currentLocationCoordinate = LocationManager.sharedInstance.currentLocation.coordinate
-  //    let region = MKCoordinateRegion(center: currentLocationCoordinate, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
-  //    self.mapView.setRegion(region, animated: true)
-  //
-  //  }
-
-
-
-
 
 
   //  func addPitchAnnotation(coordinate:CLLocationCoordinate2D){
@@ -303,10 +293,10 @@ class REHeatmapViewController: UIViewController {
         // dispatch to the main queue as we are making UI updates
         DispatchQueue.main.async {
 
-          self.createDTMHeatmap()
           self.createREHeatmap()
+          self.createDTMHeatmap()
 
-          // sets the heatmap frame to the size of the view and specifies the map
+
         }
 
       }
@@ -385,8 +375,11 @@ extension REHeatmapViewController: MKMapViewDelegate {
 
     self.dtmHeatmap.setData(heatmapdata as [NSObject : AnyObject])
     self.mapView.addOverlay(self.dtmHeatmap)
-
-
+    let dtmBoundingRect = self.dtmHeatmap.boundingRect
+    dtmRect = dtmBoundingRect
+    let dtmCoordinate = self.dtmHeatmap.coordinate
+    MyFunc.logMessage(.debug, "dtmBoundingRect: \(dtmBoundingRect)")
+    MyFunc.logMessage(.debug, "dtmCoordinate: \(dtmCoordinate)")
 
   }
 

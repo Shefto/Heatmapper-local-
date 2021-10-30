@@ -14,12 +14,14 @@ class FootballPitchOverlay: NSObject, MKOverlay {
 
   init(pitchRect: MKMapRect) {
     boundingMapRect = pitchRect
+    MyFunc.logMessage(.debug, "FootballPitchOverlay initialised with boundingMapRect = \(boundingMapRect)")
   }
 
   // centre of Overlay
   var coordinate : CLLocationCoordinate2D
   {
     let midMKPoint = MKMapPoint(x: boundingMapRect.midX, y: boundingMapRect.midY)
+    MyFunc.logMessage(.debug, "FootballPitchOverlay coordinate set to \(String(describing: midMKPoint.coordinate))")
     return midMKPoint.coordinate
   }
 
