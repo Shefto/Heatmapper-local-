@@ -29,6 +29,8 @@ class REHeatmapViewController: UIViewController {
 
   let healthstore = HKHealthStore()
 
+  // this gesture created to enable user to tap points on which the overlay size will be based
+  // not currently in use
   @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
     if sender.state == .ended {
       let tapGestureEndedLocation = sender.location(in: mapView)
@@ -52,14 +54,14 @@ class REHeatmapViewController: UIViewController {
 
     self.mapView.delegate = self
 
-    // start getting workout data before anything else - this will take time
+    // get workout data
+    // all UI work is called within the function as the data retrieval works asynchronously
     getWorkoutData()
 
-    MyFunc.logMessage(.debug, "heatmapperCoordinatesArray:")
-    MyFunc.logMessage(.debug, String(describing: heatmapperCoordinatesArray))
+//    MyFunc.logMessage(.debug, "heatmapperCoordinatesArray:")
+//    MyFunc.logMessage(.debug, String(describing: heatmapperCoordinatesArray))
 
-    //    setMapViewCentre()
-    //    setMapViewZoom()
+
 
   }
 
@@ -68,34 +70,29 @@ class REHeatmapViewController: UIViewController {
     //    let insets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
 
     mapView.setVisibleMapRect(rect, edgePadding: insets, animated: true)
-//    mapView.userTrackingMode = .follow
 
   }
 
   func createREHeatmap() {
 
-//    // create an array of Heatmap points based upon the coordinates mapped
-//    var heatmapPointsArray = [REHeatmapPoint]()
-//    heatmapPointsArray = heatmapMKPointsArray.map { REHeatmapPoint.init(mapPoint: $0, radius: 0, heatLevel: 0.0) }
-
-
+    // get the max and min latitude and longitudes from all the points to be displayed in the heatmap
     let maxLat = heatmapperCoordinatesArray.map {$0.latitude}.max()
     let minLat = heatmapperCoordinatesArray.map {$0.latitude}.min()
     let maxLong = heatmapperCoordinatesArray.map {$0.longitude}.max()
     let minLong = heatmapperCoordinatesArray.map {$0.longitude}.min()
 
-
     let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
     let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
 
-    addAnnotation(coordinate: minCoord)
-    addAnnotation(coordinate: maxCoord)
+    // pinning these purely for reference - remove when ready to ship
+//    addAnnotation(coordinate: minCoord)
+//    addAnnotation(coordinate: maxCoord)
 
+    // get the max and min X and Y points from the above coordinates as MKMapPoints
     let minX = MKMapPoint(minCoord).x
     let maxX = MKMapPoint(maxCoord).x
     let minY = MKMapPoint(minCoord).y
     let maxY = MKMapPoint(maxCoord).y
-
 
 
     // create array of MKMapPoints from the Coordinates array
@@ -105,32 +102,43 @@ class REHeatmapViewController: UIViewController {
 //    let maxX = heatmapMKPointsArray.map {$0.x}.max()
 //    let minY = heatmapMKPointsArray.map {$0.y}.min()
 //    let maxY = heatmapMKPointsArray.map {$0.y}.max()
+//    MyFunc.logMessage(.debug, "minX: \(String(describing: minX))")
+//    MyFunc.logMessage(.debug, "maxX: \(String(describing: maxX))")
+//    MyFunc.logMessage(.debug, "minY: \(String(describing: minY))")
+//    MyFunc.logMessage(.debug, "maxY: \(String(describing: maxY))")
 
-    MyFunc.logMessage(.debug, "minX: \(String(describing: minX))")
-    MyFunc.logMessage(.debug, "maxX: \(String(describing: maxX))")
-    MyFunc.logMessage(.debug, "minY: \(String(describing: minY))")
-    MyFunc.logMessage(.debug, "maxY: \(String(describing: maxY))")
+    // get the dimensions of the rectangle from the distance between the point extremes
+    var rectWidth = maxX - minX
+    var rectHeight = minY - maxY
+    // set the scale of the border
+    let rectBorderScale = 0.2
+    // set the rectangle origin as the plot dimensions plus the border
+    let rectX = minX - (rectWidth * rectBorderScale)
+    let rectY = minY + (rectHeight * rectBorderScale)
 
+    // increase the rectangle width and height by the border * 2
+    rectWidth = rectWidth + (rectWidth * rectBorderScale * 2)
+    rectHeight = rectHeight + (rectHeight * rectBorderScale * 2)
 
     // this rectangle covers the area of all points
-    let rect = MKMapRect.init(x: minX, y: minY, width: maxX - minX, height: minY - maxY)
+//    let rect = MKMapRect.init(x: minX, y: minY, width: maxX - minX, height: minY - maxY)
+    let rect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
 
     // get the angle we want to set the pitch at
-    let rectTopLeftX = rect.minX
-    let rectTopLeftY = rect.minY
-    let rectBottomRightX = rect.maxX
-    let rectBottomRightY = rect.maxY
+//    let rectTopLeftX = rect.minX
+//    let rectTopLeftY = rect.minY
+//    let rectBottomRightX = rect.maxX
+//    let rectBottomRightY = rect.maxY
+//
+//    let rectTopLeftPoint = CGPoint(x: rectTopLeftX, y: rectTopLeftY)
+//    let rectBottomRightPoint = CGPoint(x: rectBottomRightX, y: rectBottomRightY)
+//    let rectAngle = MyFunc.angle(between: rectTopLeftPoint, ending: rectBottomRightPoint)
+//
+//    MyFunc.logMessage(.debug, "rect: \(rect)")
+//    MyFunc.logMessage(.debug, "rectAngle: \(rectAngle)")
+//    angle = rectAngle
 
-    let rectTopLeftPoint = CGPoint(x: rectTopLeftX, y: rectTopLeftY)
-    let rectBottomRightPoint = CGPoint(x: rectBottomRightX, y: rectBottomRightY)
-    let rectAngle = MyFunc.angle(between: rectTopLeftPoint, ending: rectBottomRightPoint)
-
-    MyFunc.logMessage(.debug, "rect: \(rect)")
-    MyFunc.logMessage(.debug, "rectAngle: \(rectAngle)")
-
-//    angle = 180
-
-    pointsDistance = MyFunc.distanceBetween(point1: rectTopLeftPoint, point2: rectBottomRightPoint)
+//    pointsDistance = MyFunc.distanceBetween(point1: rectTopLeftPoint, point2: rectBottomRightPoint)
     MyFunc.logMessage(.debug, "pointsDistance: \(pointsDistance)")
     // get the size of the pitch based upon the distance between the points
 
