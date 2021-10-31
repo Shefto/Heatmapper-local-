@@ -36,13 +36,13 @@ class FootballPitchOverlayView: MKOverlayRenderer {
     let imageHypotenuse = sqrt(imageHypotenuseSquared)
 
 
-    MyFunc.logMessage(.debug, "imageHypotenuse: \(imageHypotenuse)")
+//    MyFunc.logMessage(.debug, "imageHypotenuse: \(imageHypotenuse)")
     let imageScale = pointsDistance / imageHypotenuse
-    MyFunc.logMessage(.debug, "imageScale: \(imageScale)")
+//    MyFunc.logMessage(.debug, "imageScale: \(imageScale)")
 
     let rect = self.rect(for: overlay.boundingMapRect)
-//    context.scaleBy(x: 1.0, y: -1.0)
-    context.scaleBy(x: imageScale, y: imageScale)
+    context.scaleBy(x: 1.0, y: -1.0)
+//    context.scaleBy(x: imageScale, y: imageScale)
 //    context.translateBy(x: 0.0, y: -rect.size.height)
     context.rotate(by: angle)
     context.draw(imageReference, in: rect)

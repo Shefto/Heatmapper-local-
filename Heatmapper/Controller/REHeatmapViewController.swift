@@ -17,7 +17,6 @@ import DTMHeatmap
 class REHeatmapViewController: UIViewController {
 
   var reHeatmapOverlay            = REHeatmapOverlay()
-
   var dtmHeatmap                  = DTMHeatmap()
   var heatmapperCoordinatesArray  = [CLLocationCoordinate2D]()
   var heatmapperLocationsArray    = [CLLocation]()
@@ -34,7 +33,7 @@ class REHeatmapViewController: UIViewController {
     if sender.state == .ended {
       let tapGestureEndedLocation = sender.location(in: mapView)
       print("tapGestureEndedLocation: \(tapGestureEndedLocation)")
-      let tappedCoordinate = mapView.convert(tapGestureEndedLocation, toCoordinateFrom: mapView)
+//      let tappedCoordinate = mapView.convert(tapGestureEndedLocation, toCoordinateFrom: mapView)
       //      addAnnotation(coordinate: tappedCoordinate)
       pointCount += 1
 
@@ -56,12 +55,10 @@ class REHeatmapViewController: UIViewController {
     // start getting workout data before anything else - this will take time
     getWorkoutData()
 
-    MyFunc.logMessage(.debug, "REHeatmapViewController.viewdidLoad")
     MyFunc.logMessage(.debug, "heatmapperCoordinatesArray:")
     MyFunc.logMessage(.debug, String(describing: heatmapperCoordinatesArray))
 
     //    setMapViewCentre()
-
     //    setMapViewZoom()
 
   }
@@ -77,16 +74,37 @@ class REHeatmapViewController: UIViewController {
 
   func createREHeatmap() {
 
-    // create an array of Heatmap points based upon the coordinates mapped
-    var heatmapPointsArray = [REHeatmapPoint]()
+//    // create an array of Heatmap points based upon the coordinates mapped
+//    var heatmapPointsArray = [REHeatmapPoint]()
+//    heatmapPointsArray = heatmapMKPointsArray.map { REHeatmapPoint.init(mapPoint: $0, radius: 0, heatLevel: 0.0) }
 
-    let heatmapMKPointsArray = heatmapperCoordinatesArray.map {MKMapPoint($0)}
-    heatmapPointsArray = heatmapMKPointsArray.map { REHeatmapPoint.init(mapPoint: $0, radius: 0, heatLevel: 0.0) }
 
-    let minX = heatmapMKPointsArray.map {$0.x}.min()
-    let maxX = heatmapMKPointsArray.map {$0.x}.max()
-    let minY = heatmapMKPointsArray.map {$0.y}.min()
-    let maxY = heatmapMKPointsArray.map {$0.y}.max()
+    let maxLat = heatmapperCoordinatesArray.map {$0.latitude}.max()
+    let minLat = heatmapperCoordinatesArray.map {$0.latitude}.min()
+    let maxLong = heatmapperCoordinatesArray.map {$0.longitude}.max()
+    let minLong = heatmapperCoordinatesArray.map {$0.longitude}.min()
+
+
+    let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
+    let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
+
+    addAnnotation(coordinate: minCoord)
+    addAnnotation(coordinate: maxCoord)
+
+    let minX = MKMapPoint(minCoord).x
+    let maxX = MKMapPoint(maxCoord).x
+    let minY = MKMapPoint(minCoord).y
+    let maxY = MKMapPoint(maxCoord).y
+
+
+
+    // create array of MKMapPoints from the Coordinates array
+//    let heatmapMKPointsArray = heatmapperCoordinatesArray.map {MKMapPoint($0)}
+
+//    let minX = heatmapMKPointsArray.map {$0.x}.min()
+//    let maxX = heatmapMKPointsArray.map {$0.x}.max()
+//    let minY = heatmapMKPointsArray.map {$0.y}.min()
+//    let maxY = heatmapMKPointsArray.map {$0.y}.max()
 
     MyFunc.logMessage(.debug, "minX: \(String(describing: minX))")
     MyFunc.logMessage(.debug, "maxX: \(String(describing: maxX))")
@@ -95,7 +113,7 @@ class REHeatmapViewController: UIViewController {
 
 
     // this rectangle covers the area of all points
-    let rect = MKMapRect.init(x: minX!, y: minY!, width: maxX! - minX!, height: maxY! - minY!)
+    let rect = MKMapRect.init(x: minX, y: minY, width: maxX - minX, height: minY - maxY)
 
     // get the angle we want to set the pitch at
     let rectTopLeftX = rect.minX
@@ -110,7 +128,7 @@ class REHeatmapViewController: UIViewController {
     MyFunc.logMessage(.debug, "rect: \(rect)")
     MyFunc.logMessage(.debug, "rectAngle: \(rectAngle)")
 
-    angle = rectAngle + 90
+//    angle = 180
 
     pointsDistance = MyFunc.distanceBetween(point1: rectTopLeftPoint, point2: rectBottomRightPoint)
     MyFunc.logMessage(.debug, "pointsDistance: \(pointsDistance)")
@@ -134,23 +152,12 @@ class REHeatmapViewController: UIViewController {
   }
 
 
-  //  func addPitchAnnotation(coordinate:CLLocationCoordinate2D){
-  //    let annotation = MKPointAnnotation()
-  //    annotation.coordinate = coordinate
-  //    mapView.addAnnotation(annotation)
-  //  }
-  //
-  //
-  //  func addAnnotation(coordinate:CLLocationCoordinate2D){
-  //    let annotation = MKPointAnnotation()
-  //    annotation.coordinate = coordinate
-  //    mapView.addAnnotation(annotation)
-  //  }
-  //
+    func addAnnotation(coordinate:CLLocationCoordinate2D){
+      let annotation = MKPointAnnotation()
+      annotation.coordinate = coordinate
+      mapView.addAnnotation(annotation)
+    }
 
-
-
-  // *** WORKOUT CALLS - RESTORE WHEN DATA REQUIRED ***
   //  //MARK: call to get workout data
   func getWorkoutData() {
     MyFunc.logMessage(.debug, "worko«utId: \(String(describing: heatmapWorkoutId))")

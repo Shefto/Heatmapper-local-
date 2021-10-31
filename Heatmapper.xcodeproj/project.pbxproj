@@ -61,7 +61,6 @@
 		7980929D252F386300DF1562 /* HeatmapperWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7980929C252F386300DF1562 /* HeatmapperWorkout.swift */; };
 		7981D39C24BDD62500E5D9E7 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFF824A7F1AF002A7870 /* Interval.swift */; };
 		7982B0C1264FEF64001335F3 /* WorkoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7982B0C0264FEF64001335F3 /* WorkoutCell.xib */; };
-		7982B0C326506C07001335F3 /* WorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982B0C226506C07001335F3 /* WorkoutTableViewCell.swift */; };
 		7989157225605679004983BD /* WorkoutInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7989157125605679004983BD /* WorkoutInterfaceController.swift */; };
 		799131242634126800811731 /* HeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799131232634126800811731 /* HeatmapViewController.swift */; };
 		799131292634145F00811731 /* JDHeatMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799131282634145F00811731 /* JDHeatMapView.swift */; };
@@ -89,7 +88,6 @@
 		79A4EFCD24A0AF4B002A7870 /* Heatmapper WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 79A4EFCC24A0AF4B002A7870 /* Heatmapper WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		79A4EFD424A0AF4B002A7870 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFD324A0AF4B002A7870 /* ExtensionDelegate.swift */; };
 		79A4EFD624A0AF4C002A7870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79A4EFD524A0AF4C002A7870 /* Assets.xcassets */; };
-		79A4EFF624A7A109002A7870 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFF524A7A109002A7870 /* WorkoutViewController.swift */; };
 		79A4EFF924A7F1AF002A7870 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4EFF824A7F1AF002A7870 /* Interval.swift */; };
 		79A7E14C25ACE48000D1A952 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15025ACE48000D1A952 /* Localizable.strings */; };
 		79A7E14D25ACE48000D1A952 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79A7E15025ACE48000D1A952 /* Localizable.strings */; };
@@ -237,7 +235,6 @@
 		798007F526F5F64700FFC294 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		7980929C252F386300DF1562 /* HeatmapperWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapperWorkout.swift; sourceTree = "<group>"; };
 		7982B0C0264FEF64001335F3 /* WorkoutCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutCell.xib; sourceTree = "<group>"; };
-		7982B0C226506C07001335F3 /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		7989157125605679004983BD /* WorkoutInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInterfaceController.swift; sourceTree = "<group>"; };
 		799131232634126800811731 /* HeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapViewController.swift; sourceTree = "<group>"; };
 		799131282634145F00811731 /* JDHeatMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatMapView.swift; sourceTree = "<group>"; };
@@ -271,7 +268,6 @@
 		79A4EFE524A0C2F1002A7870 /* Heatmapper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Heatmapper.entitlements; sourceTree = "<group>"; };
 		79A4EFE924A0C654002A7870 /* Heatmapper WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Heatmapper WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		79A4EFEC24A0C746002A7870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		79A4EFF524A7A109002A7870 /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 		79A4EFF724A7F1AD002A7870 /* Heatmapper WatchKit App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Heatmapper WatchKit App-Bridging-Header.h"; sourceTree = "<group>"; };
 		79A4EFF824A7F1AF002A7870 /* Interval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interval.swift; sourceTree = "<group>"; };
 		79A79A5524B5DB3F005A4433 /* Heatmapper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Heatmapper.entitlements; sourceTree = "<group>"; };
@@ -420,7 +416,6 @@
 				7982B0C0264FEF64001335F3 /* WorkoutCell.xib */,
 				79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */,
 				79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */,
-				7982B0C226506C07001335F3 /* WorkoutTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -444,7 +439,6 @@
 				79ADB48A262640E3007BF946 /* TrackerViewController.swift */,
 				79D9BF8C27076E750027D96F /* VenuesViewController.swift */,
 				79A9DC6026B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift */,
-				79A4EFF524A7A109002A7870 /* WorkoutViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -865,7 +859,6 @@
 				79F3A2AE2697968A00667B1B /* REColourProvider.swift in Sources */,
 				7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */,
 				79D9BF8D27076E750027D96F /* VenuesViewController.swift in Sources */,
-				79A4EFF624A7A109002A7870 /* WorkoutViewController.swift in Sources */,
 				79F3A2B2269796FA00667B1B /* REHeatmapOverlay.swift in Sources */,
 				79F3A2AC269795FA00667B1B /* REHeatmapRenderer.swift in Sources */,
 				793D1ADC24B868840039441B /* SessionCommands.swift in Sources */,
@@ -880,7 +873,6 @@
 				79B80BD3253DDB8300BEA10F /* SceneDelegate.swift in Sources */,
 				79F3A2B0269796C100667B1B /* RE_DTMDiffColorProvider.swift in Sources */,
 				79FB27872561984000E1C9AD /* Objects.swift in Sources */,
-				7982B0C326506C07001335F3 /* WorkoutTableViewCell.swift in Sources */,
 				79913133263414B600811731 /* JDColorMixer.swift in Sources */,
 				798007F426F3DF8C00FFC294 /* EditActivityTableViewCell.swift in Sources */,
 				7935622825AF53C5006BBC54 /* HelpViewController.swift in Sources */,

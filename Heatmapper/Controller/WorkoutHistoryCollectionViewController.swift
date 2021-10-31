@@ -53,10 +53,8 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     return formatter
   } ()
 
-
   @IBOutlet weak var workoutCollectionView: UICollectionView!
   @IBOutlet weak var workoutCollectionViewCell: WorkoutCollectionViewCell!
-
 
   @IBAction func btnDTMHeatmap(_ sender: Any) {
     self.performSegue(withIdentifier: "historyToDTMHeatmap", sender: workoutSelectedId)
@@ -94,9 +92,6 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     workoutInfoArray.removeAll()
     loadHeatmapImages()
     loadWorkouts { (workouts, error) in
-//      MyFunc.logMessage(.debug, "workouts:")
-//      MyFunc.logMessage(.debug, String(describing: workouts))
-
       guard let workoutsReturned = workouts else {
         MyFunc.logMessage(.debug, "No workouts returned")
         return
@@ -308,12 +303,12 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   func getRouteLocationData(route: HKWorkoutRoute, workoutId: UUID)  {
 
     var locationsReturned : Bool = false
-    let samplesCount = route.count
+//    let samplesCount = route.count
 //    MyFunc.logMessage(.debug, "Number of samples: \(samplesCount)")
 
     // Create the route query.
     let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNil, done, errorOrNil) in
-
+//
       // This block may be called multiple times.
 //      MyFunc.logMessage(.debug, "Workout Start Date: \(String(describing: route.startDate))")
       if errorOrNil != nil {
