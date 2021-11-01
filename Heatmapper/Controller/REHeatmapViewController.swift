@@ -25,6 +25,8 @@ class REHeatmapViewController: UIViewController {
   var angle                       : CGFloat = 0.0
   var pointsDistance              : CGFloat = 0.0
   var dtmRect                     = MKMapRect()
+  var reHeatmapPoint              : REHeatmapPoint?
+  var reHeatmapPointImage         : UIImage?
 
 
   let healthstore = HKHealthStore()
@@ -53,6 +55,7 @@ class REHeatmapViewController: UIViewController {
     super.viewDidLoad()
 
     self.mapView.delegate = self
+    reHeatmapPointImage = UIImage(systemName: "circle.fill")
 
     // get workout data
     // all UI work is called within the function as the data retrieval works asynchronously
@@ -75,6 +78,16 @@ class REHeatmapViewController: UIViewController {
 
   func createREHeatmap() {
 
+    for heatmapperCoordinate in heatmapperCoordinatesArray {
+
+      addHeatmapPoint(coordinate: heatmapperCoordinate)
+    }
+
+  }
+
+
+  func createPitchOverlay() {
+
     // get the max and min latitude and longitudes from all the points to be displayed in the heatmap
     let maxLat = heatmapperCoordinatesArray.map {$0.latitude}.max()
     let minLat = heatmapperCoordinatesArray.map {$0.latitude}.min()
@@ -85,27 +98,14 @@ class REHeatmapViewController: UIViewController {
     let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
 
     // pinning these purely for reference - remove when ready to ship
-//    addAnnotation(coordinate: minCoord)
-//    addAnnotation(coordinate: maxCoord)
+    addAnnotation(coordinate: minCoord)
+    addAnnotation(coordinate: maxCoord)
 
     // get the max and min X and Y points from the above coordinates as MKMapPoints
     let minX = MKMapPoint(minCoord).x
     let maxX = MKMapPoint(maxCoord).x
     let minY = MKMapPoint(minCoord).y
     let maxY = MKMapPoint(maxCoord).y
-
-
-    // create array of MKMapPoints from the Coordinates array
-//    let heatmapMKPointsArray = heatmapperCoordinatesArray.map {MKMapPoint($0)}
-
-//    let minX = heatmapMKPointsArray.map {$0.x}.min()
-//    let maxX = heatmapMKPointsArray.map {$0.x}.max()
-//    let minY = heatmapMKPointsArray.map {$0.y}.min()
-//    let maxY = heatmapMKPointsArray.map {$0.y}.max()
-//    MyFunc.logMessage(.debug, "minX: \(String(describing: minX))")
-//    MyFunc.logMessage(.debug, "maxX: \(String(describing: maxX))")
-//    MyFunc.logMessage(.debug, "minY: \(String(describing: minY))")
-//    MyFunc.logMessage(.debug, "maxY: \(String(describing: maxY))")
 
     // this code ensures the pitch size is larger than the heatmap by adding a margin
     // get the dimensions of the rectangle from the distance between the point extremes
@@ -140,14 +140,6 @@ class REHeatmapViewController: UIViewController {
 //    angle = rectAngle
 
 //    pointsDistance = MyFunc.distanceBetween(point1: rectTopLeftPoint, point2: rectBottomRightPoint)
-    MyFunc.logMessage(.debug, "pointsDistance: \(pointsDistance)")
-    // get the size of the pitch based upon the distance between the points
-
-
-    // get the array of heatmap cells based upon the co-ordinates passed in
-//    let heatmapCellArray = reHeatmapOverlay.setData(reHeatmapPointArray: heatmapPointsArray)
-//    MyFunc.logMessage(.debug, "heatmapCellArray")
-//    MyFunc.logMessage(.debug, String(describing: heatmapCellArray))
 
     //  create an overlay of the pitch based upon the rectangle
     let footballPitch11Overlay = FootballPitchOverlay(pitchRect: rect)
@@ -158,6 +150,11 @@ class REHeatmapViewController: UIViewController {
 
   }
 
+  func addHeatmapPoint(coordinate:CLLocationCoordinate2D){
+    let annotation = REHeatmapPointAnnotation()
+    annotation.coordinate = coordinate
+    mapView.addAnnotation(annotation)
+  }
 
     func addAnnotation(coordinate:CLLocationCoordinate2D){
       let annotation = MKPointAnnotation()
@@ -307,8 +304,9 @@ class REHeatmapViewController: UIViewController {
         // dispatch to the main queue as we are making UI updates
         DispatchQueue.main.async {
 
+          self.createPitchOverlay()
           self.createREHeatmap()
-          self.createDTMHeatmap()
+//          self.createDTMHeatmap()
 
 
         }
@@ -362,18 +360,34 @@ extension REHeatmapViewController: MKMapViewDelegate {
       return nil
     }
 
-    let reuseId = "pin"
-    var pinAnnotationView: MKPinAnnotationView? = self.mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-    if pinAnnotationView == nil {
-      pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-      pinAnnotationView?.isDraggable = true
-      pinAnnotationView?.canShowCallout = true
-      pinAnnotationView?.pinTintColor = .blue
-    } else {
-      pinAnnotationView?.annotation = annotation
+    if annotation is UserAnnotation {
+      MyFunc.logMessage(.debug, "UserAnnotation")
+
     }
 
-    return pinAnnotationView
+    let reuseId = "heatmapPoint"
+    var heatmapPointAnnotationView: MKAnnotationView? = self.mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKAnnotationView
+
+    if heatmapPointAnnotationView == nil {
+        heatmapPointAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        heatmapPointAnnotationView?.image = self.reHeatmapPointImage
+        heatmapPointAnnotationView?.frame.size = CGSize(width: 3, height: 3)
+
+    } else {
+      heatmapPointAnnotationView?.annotation = annotation
+    }
+
+//    var pinAnnotationView: MKPinAnnotationView? = self.mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+//    if pinAnnotationView == nil {
+//      pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+//      pinAnnotationView?.isDraggable = true
+//      pinAnnotationView?.canShowCallout = true
+//      pinAnnotationView?.pinTintColor = .blue
+//    } else {
+//      pinAnnotationView?.annotation = annotation
+//    }
+
+    return heatmapPointAnnotationView
   }
 
 

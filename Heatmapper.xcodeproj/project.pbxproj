@@ -107,6 +107,7 @@
 		79B80BD3253DDB8300BEA10F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B80BD2253DDB8300BEA10F /* SceneDelegate.swift */; };
 		79BB8FF02563DB4500019900 /* CountdownInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB8FEF2563DB4500019900 /* CountdownInterfaceController.swift */; };
 		79C657792559A6B900E6DBCE /* SetIntervalsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C657782559A6B900E6DBCE /* SetIntervalsInterfaceController.swift */; };
+		79C78CFD27308EBD00D395E1 /* REHeatmapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C78CFC27308EBD00D395E1 /* REHeatmapPoint.swift */; };
 		79CA514B25C2DC9F00415F84 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79CA514D25C2DC9F00415F84 /* InfoPlist.strings */; };
 		79CA515D25C2DF4E00415F84 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79CA515F25C2DF4E00415F84 /* InfoPlist.strings */; };
 		79D083B42508EF6400274F79 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083B32508EF6400274F79 /* MainMenuViewController.swift */; };
@@ -290,6 +291,7 @@
 		79B80BD2253DDB8300BEA10F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		79BB8FEF2563DB4500019900 /* CountdownInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownInterfaceController.swift; sourceTree = "<group>"; };
 		79C657782559A6B900E6DBCE /* SetIntervalsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetIntervalsInterfaceController.swift; sourceTree = "<group>"; usesTabs = 0; };
+		79C78CFC27308EBD00D395E1 /* REHeatmapPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REHeatmapPoint.swift; sourceTree = "<group>"; };
 		79CA514C25C2DC9F00415F84 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		79CA515125C2DCAB00415F84 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		79CA515225C2DCAC00415F84 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 		793D1ADF24B86C020039441B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				79C78CFC27308EBD00D395E1 /* REHeatmapPoint.swift */,
 				793477AC26DFFFF00004DF0A /* ActivityCell.xib */,
 				793477A826DD66BA0004DF0A /* ActivityTableViewCell.swift */,
 				793477A926DD66BA0004DF0A /* ActivityTableViewCell.xib */,
@@ -870,6 +873,7 @@
 				79FDDFD126C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift in Sources */,
 				79D083B42508EF6400274F79 /* MainMenuViewController.swift in Sources */,
 				7965F9C226AC1E27008B130D /* JDHeatmapViewController.swift in Sources */,
+				79C78CFD27308EBD00D395E1 /* REHeatmapPoint.swift in Sources */,
 				79B80BD3253DDB8300BEA10F /* SceneDelegate.swift in Sources */,
 				79F3A2B0269796C100667B1B /* RE_DTMDiffColorProvider.swift in Sources */,
 				79FB27872561984000E1C9AD /* Objects.swift in Sources */,
