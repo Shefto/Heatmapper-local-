@@ -34,8 +34,9 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   var heatmapImagesStringArray    = [String]()
   private var workoutArray        = [HKWorkout]()
   private var workoutInfoArray    = [workoutInfo]()
-  var workoutMetadataArray        =  [WorkoutMetadata]()
-  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
+  var workoutMetadataArray        = [WorkoutMetadata]()
+//  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
+  var workoutMetadata             = WorkoutMetadata()
 
   private let workoutCellId = "workoutCell"
   var workoutSelectedId : UUID?
@@ -96,8 +97,10 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
         MyFunc.logMessage(.debug, "No workouts returned")
         return
       }
-      self.workoutArray = workoutsReturned
+      MyFunc.logMessage(.debug, "loadWorkouts returned workouts:")
+      MyFunc.logMessage(.debug, String(describing: workoutsReturned))
 
+      self.workoutArray = workoutsReturned
 
       for workoutToProcess in workoutsReturned {
         let workoutToAppend = workoutInfo(uuid: workoutToProcess.uuid, samples: false, locations: false, sampleCount: 0, locationsCount: 0)
@@ -121,13 +124,10 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     workoutCollectionView.collectionViewLayout = createLayout()
     workoutCollectionView.allowsMultipleSelection = false
 
-
   }
-
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return workoutArray.count
-
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -137,9 +137,13 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 //    MyFunc.logMessage(.debug, "workout metadata: \(String(describing: workout.metadata))")
     let workoutId = workout.uuid
 
+    var metadata = WorkoutMetadata()
+
     if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
-      workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
+      metadata = self.workoutMetadataArray[workoutMetadataRow]
     }
+    workoutMetadata = metadata
+
     let heatmapImage = MyFunciOS.getHeatmapImageForWorkout(workoutID: workoutId)
 
     if let workoutInfoToDisplay : workoutInfo = workoutInfoArray.first(where: { $0.uuid == workoutId  }) {

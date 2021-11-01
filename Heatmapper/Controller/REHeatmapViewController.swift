@@ -107,18 +107,19 @@ class REHeatmapViewController: UIViewController {
 //    MyFunc.logMessage(.debug, "minY: \(String(describing: minY))")
 //    MyFunc.logMessage(.debug, "maxY: \(String(describing: maxY))")
 
+    // this code ensures the pitch size is larger than the heatmap by adding a margin
     // get the dimensions of the rectangle from the distance between the point extremes
     var rectWidth = maxX - minX
     var rectHeight = minY - maxY
     // set the scale of the border
-    let rectBorderScale = 0.2
+    let rectMarginScale = 0.2
     // set the rectangle origin as the plot dimensions plus the border
-    let rectX = minX - (rectWidth * rectBorderScale)
-    let rectY = minY + (rectHeight * rectBorderScale)
+    let rectX = minX - (rectWidth * rectMarginScale)
+    let rectY = minY + (rectHeight * rectMarginScale)
 
     // increase the rectangle width and height by the border * 2
-    rectWidth = rectWidth + (rectWidth * rectBorderScale * 2)
-    rectHeight = rectHeight + (rectHeight * rectBorderScale * 2)
+    rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
+    rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
 
     // this rectangle covers the area of all points
 //    let rect = MKMapRect.init(x: minX, y: minY, width: maxX - minX, height: minY - maxY)
@@ -141,8 +142,6 @@ class REHeatmapViewController: UIViewController {
 //    pointsDistance = MyFunc.distanceBetween(point1: rectTopLeftPoint, point2: rectBottomRightPoint)
     MyFunc.logMessage(.debug, "pointsDistance: \(pointsDistance)")
     // get the size of the pitch based upon the distance between the points
-
-
 
 
     // get the array of heatmap cells based upon the co-ordinates passed in
