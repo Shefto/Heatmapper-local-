@@ -374,21 +374,21 @@
 		793D1ADE24B86BC90039441B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				79DC34152625D2FC0053733C /* LocationManager.swift */,
 				790598FE25ED876100316CEF /* FIT_minute_beep.aif */,
 				790598FF25ED876200316CEF /* FiT_second_beep.aif */,
-				7935625025B0BBBC006BBC54 /* UnitConverterPace.swift */,
-				79D083BB25092EBB00274F79 /* MyFunc.swift */,
 				793D1AD524B855540039441B /* CommandStatus.swift */,
-				793D1ADB24B868840039441B /* SessionCommands.swift */,
-				793D1AD324B854EB0039441B /* SessionDelegator.swift */,
-				793D1AD824B8650A0039441B /* DataProvider.swift */,
 				793D1AE524B86E6F0039441B /* CustomLogger.swift */,
-				793D1AEE24B87F110039441B /* SessionTransfer.swift */,
+				793D1AD824B8650A0039441B /* DataProvider.swift */,
 				793D1AF124B87FAD0039441B /* FileTransferObservers.swift */,
+				79A4EFF824A7F1AF002A7870 /* Interval.swift */,
+				79DC34152625D2FC0053733C /* LocationManager.swift */,
+				79D083BB25092EBB00274F79 /* MyFunc.swift */,
 				7994126E255AB9230062AC0D /* Objects.swift */,
 				79125ED027085DC0008E9872 /* PlayingArea.swift */,
-				79A4EFF824A7F1AF002A7870 /* Interval.swift */,
+				793D1ADB24B868840039441B /* SessionCommands.swift */,
+				793D1AD324B854EB0039441B /* SessionDelegator.swift */,
+				793D1AEE24B87F110039441B /* SessionTransfer.swift */,
+				7935625025B0BBBC006BBC54 /* UnitConverterPace.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
