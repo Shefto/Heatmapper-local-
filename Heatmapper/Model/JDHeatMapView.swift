@@ -29,6 +29,7 @@ public class JDHeatMapView : MKMapView
   var heatmapManager        : JDHeatMapManager!
   var inProgressWheel       : UIActivityIndicatorView?
 
+  // variable purely for the In Progress wheel
   public var showIndicator  : Bool = true {
     didSet{
       if (!showIndicator)
@@ -46,6 +47,7 @@ public class JDHeatMapView : MKMapView
     // MKMapView attribute - set to true = shows scale information
     self.showsScale = true
     self.delegate = self
+    // set the heatmapDelegate to the calling class (in this case, JDHeatmapViewController)
     self.heatmapDelegate = delegate
 
     // this class declared elsewhere
@@ -76,6 +78,8 @@ public class JDHeatMapView : MKMapView
     super.init(coder: aDecoder)
   }
 
+  // this function effectively a wrapper
+  // it starts the progress wheel then calls the JDHeatmapManager instance to "refresh" or build the heatmap
   public func refreshView()
   {
     if (self.showIndicator)
@@ -86,7 +90,7 @@ public class JDHeatMapView : MKMapView
     heatmapManager.refresh()
   }
 
-  // called by the buttons on the VC - each passes in a different type
+  // called by the buttons on the JDHeatmapViewController - each passes in a different type
   public func setType(type: JDMapType, workoutId: UUID)
   {
     if (type == .RadiusBlurry)
@@ -104,7 +108,7 @@ public class JDHeatMapView : MKMapView
     refreshView ()
   }
 
-
+  // function purely to initialise the progress wheel
   func initialiseProgressWheel()
   {
     inProgressWheel = UIActivityIndicatorView(style: .large)

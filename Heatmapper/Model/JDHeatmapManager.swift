@@ -24,6 +24,7 @@ class JDHeatMapManager: NSObject
 
   weak var jdHeatMapView    : JDHeatMapView!
   var calculationInProgress : Bool = false
+  // defaults the DataPointType but the initialiser can pass in an alternative
   var dataPointType         : DataPointType = .RadiusPoint
   let mapWidthInUIView      : CGFloat
 
@@ -34,7 +35,7 @@ class JDHeatMapManager: NSObject
   var internalWorkoutId     = UUID()
 
   // initializer
-  // as stated, this class needs the heatmap view, data point type and colour mixer
+  // as stated, this class needs the heatmap view which calls it, data point type and colour mixer
   init (JDSwiftHeatMapView: JDHeatMapView, datapointType: DataPointType, mode: ColorMixerMode, workoutId: UUID)
   {
     jdHeatMapView     = JDSwiftHeatMapView
@@ -58,6 +59,7 @@ class JDHeatMapManager: NSObject
     jdHeatMapView.removeOverlays(jdHeatMapView.overlays)
 
     // get the total number of CLLocation points to be added to the heatmap
+    // this is set in JDHeatmapViewController
     let locationPoints = heatmapDelegate.heatmap(HeatPointCount: jdHeatMapView)
 
     // *** the main heatmap creation process ***
@@ -78,7 +80,7 @@ class JDHeatMapManager: NSObject
       if (dataPointType == .FlatPoint)
       {
         // Flat point heatmaps  (i.e with a coloured background)  only require a single overlay because they include the rectangle
-        // for some reason declaring this function then calling it immediately afterwards affects the functionality
+        // declaring this function then calling it immediately afterwards affects the functionality
         // need to understand why
         func collectToOneOverlay()
         {
@@ -86,7 +88,7 @@ class JDHeatMapManager: NSObject
           {
             if let flatOverlay = jdHeatMapView.overlays.first as? JDHeatmapOverlay
             {
-              flatOverlay.insertHeatpoint(input: newHeatPoint)
+              flatOverlay.insertHeatpoint(heatmapPoint: newHeatPoint)
             }
             return
           }
@@ -117,7 +119,7 @@ class JDHeatMapManager: NSObject
               //...then use this overlay and insert the current heatpoint into it
               if let heatmapOverlay = overlay as? JDHeatmapOverlay
               {
-                heatmapOverlay.insertHeatpoint(input: newHeatPoint)
+                heatmapOverlay.insertHeatpoint(heatmapPoint: newHeatPoint)
                 return
               }
             }
@@ -171,7 +173,7 @@ class JDHeatMapManager: NSObject
               {
                 for point in heatmapOverlayY.heatmapPoint2DArray
                 {
-                  heatmapOverlayX.insertHeatpoint(input: point)
+                  heatmapOverlayX.insertHeatpoint(heatmapPoint: point)
                 }
               }
               jdHeatMapView.removeOverlay(overlayY)

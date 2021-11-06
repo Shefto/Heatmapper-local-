@@ -16,7 +16,7 @@ import MapKit
  Just give it to HeatmapPoint class to manufacture and give it a Heatmap Point */
 
 // MKOverlayRenderer is the class that draws (renders) the overlays onto the map
-// Overlays are anything that is drawn on to the map
+
 class JDHeatmapOverlayRenderer :  MKOverlayRenderer
 {
 

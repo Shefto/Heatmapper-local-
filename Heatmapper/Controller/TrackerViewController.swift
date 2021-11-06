@@ -223,10 +223,22 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
 
     if overlay === self.accuracyRangeCircle{
-      let circleRenderer = MKCircleRenderer(circle: overlay as! MKCircle)
-      circleRenderer.fillColor = UIColor(white: 0.0, alpha: 0.25)
-      circleRenderer.lineWidth = 0
+      let circleRenderer = heatmapPointCircleRenderer(circle: overlay as! MKCircle)
       return circleRenderer
+
+
+//      let circleRenderer = MKCircleRenderer(circle: overlay as! MKCircle)
+////      circleRenderer.fillColor = UIColor(white: 0.0, alpha: 0.25)
+//      circleRenderer.fillColor = UIColor.brown
+//
+//      let gradientColour = CAGradientLayer()
+//      gradientColour.type = .radial
+//      gradientColour.colors = [UIColor.black, UIColor.clear]
+//      gradientColour.startPoint
+//      circleRenderer.fillColor = gradientColour
+//
+//      circleRenderer.lineWidth = 0
+//      return circleRenderer
     }else{
       let polylineRenderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
       polylineRenderer.strokeColor = UIColor(rgb:0x1b60fe)
