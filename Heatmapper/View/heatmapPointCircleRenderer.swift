@@ -9,14 +9,14 @@
 
 import MapKit
 
-class heatmapPointCircleRenderer: MKCircleRenderer {
+class HeatmapPointCircleRenderer: MKCircleRenderer {
   override func fillPath(_ path: CGPath, in context: CGContext) {
     let rect: CGRect = path.boundingBox
     context.addPath(path)
     context.clip()
     let gradientLocations: [CGFloat]  = [0.0, 0.6]
 //    let gradientColors: [CGFloat] = [1.0, 1.0, 1.0, 0.25, 0.0, 1.0, 0.0, 0.25]
-    let gradientColors: [CGFloat] = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+    let gradientColors: [CGFloat] = [1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0]
     let colorSpace = CGColorSpaceCreateDeviceRGB()
     let cgColorArray = [UIColor.systemRed.cgColor, UIColor.systemYellow.cgColor] as CFArray
 

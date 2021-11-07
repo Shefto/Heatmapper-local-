@@ -25,11 +25,12 @@ class REHeatmapViewController: UIViewController {
   var angle                       : CGFloat = 0.0
   var pointsDistance              : CGFloat = 0.0
   var dtmRect                     = MKMapRect()
+
+  var heatmapPointCircle          : MKCircle?
   var reHeatmapPoint              : REHeatmapPoint?
   var reHeatmapPointImage         : UIImage?
 
-
-  let healthstore = HKHealthStore()
+  let healthstore                 = HKHealthStore()
 
   // this gesture created to enable user to tap points on which the overlay size will be based
   // not currently in use
@@ -69,7 +70,7 @@ class REHeatmapViewController: UIViewController {
   }
 
   func setMapViewZoom(rect: MKMapRect) {
-    let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    let insets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     //    let insets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
 
     mapView.setVisibleMapRect(rect, edgePadding: insets, animated: true)
@@ -79,7 +80,6 @@ class REHeatmapViewController: UIViewController {
   func createREHeatmap() {
 
     for heatmapperCoordinate in heatmapperCoordinatesArray {
-
       addHeatmapPoint(coordinate: heatmapperCoordinate)
     }
 
@@ -151,16 +151,22 @@ class REHeatmapViewController: UIViewController {
   }
 
   func addHeatmapPoint(coordinate:CLLocationCoordinate2D){
-    let annotation = REHeatmapPointAnnotation()
+
+    // create MKCircle for each heatmap point
+    let heatmapPointCircle = MKCircle(center: coordinate, radius: 3)
+    mapView.addOverlay(heatmapPointCircle)
+//    self.accuracyRangeCircle = MKCircle(center: location.coordinate, radius: accuracyRadius as CLLocationDistance)
+
+//    let annotation = REHeatmapPointAnnotation()
+//    annotation.coordinate = coordinate
+//    mapView.addAnnotation(annotation)
+  }
+
+  func addAnnotation(coordinate:CLLocationCoordinate2D){
+    let annotation = MKPointAnnotation()
     annotation.coordinate = coordinate
     mapView.addAnnotation(annotation)
   }
-
-    func addAnnotation(coordinate:CLLocationCoordinate2D){
-      let annotation = MKPointAnnotation()
-      annotation.coordinate = coordinate
-      mapView.addAnnotation(annotation)
-    }
 
   //  //MARK: call to get workout data
   func getWorkoutData() {
@@ -329,6 +335,11 @@ extension REHeatmapViewController: MKMapViewDelegate {
   }
 
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+
+    if overlay is MKCircle  {
+      let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle)
+      return circleRenderer
+    }
 
     if overlay is FootballPitchOverlay {
       if let pitchImage = UIImage(named: "football pitch 11.png")

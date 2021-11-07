@@ -49,7 +49,7 @@
 		7961D6BF25B74B4900204968 /* MyWKInterfaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */; };
 		7965F9C226AC1E27008B130D /* JDHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */; };
 		797026C0252DB4A500A86A05 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
-		797205152736A76500125BBD /* heatmapPointCircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797205142736A76500125BBD /* heatmapPointCircleRenderer.swift */; };
+		797205152736A76500125BBD /* HeatmapPointCircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797205142736A76500125BBD /* HeatmapPointCircleRenderer.swift */; };
 		7972371927176687002F4548 /* FootballPitchOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972371827176687002F4548 /* FootballPitchOverlay.swift */; };
 		7972371B271768AB002F4548 /* FootballPitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972371A271768AB002F4548 /* FootballPitch.swift */; };
 		7972371D2719E203002F4548 /* FootballPitchOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972371C2719E203002F4548 /* FootballPitchOverlayView.swift */; };
@@ -227,7 +227,7 @@
 		7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWKInterfaceButton.swift; sourceTree = "<group>"; };
 		7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapViewController.swift; sourceTree = "<group>"; };
 		797026BF252DB4A500A86A05 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
-		797205142736A76500125BBD /* heatmapPointCircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = heatmapPointCircleRenderer.swift; sourceTree = "<group>"; };
+		797205142736A76500125BBD /* HeatmapPointCircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapPointCircleRenderer.swift; sourceTree = "<group>"; };
 		7972371827176687002F4548 /* FootballPitchOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPitchOverlay.swift; sourceTree = "<group>"; };
 		7972371A271768AB002F4548 /* FootballPitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPitch.swift; sourceTree = "<group>"; };
 		7972371C2719E203002F4548 /* FootballPitchOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPitchOverlayView.swift; sourceTree = "<group>"; };
@@ -421,7 +421,7 @@
 				7982B0C0264FEF64001335F3 /* WorkoutCell.xib */,
 				79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */,
 				79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */,
-				797205142736A76500125BBD /* heatmapPointCircleRenderer.swift */,
+				797205142736A76500125BBD /* HeatmapPointCircleRenderer.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -862,7 +862,7 @@
 				79A9DC6126B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift in Sources */,
 				793477AA26DD66BE0004DF0A /* ActivityTableViewCell.swift in Sources */,
 				79439B7426C46358001E7CC4 /* SavedHeatmapViewController.swift in Sources */,
-				797205152736A76500125BBD /* heatmapPointCircleRenderer.swift in Sources */,
+				797205152736A76500125BBD /* HeatmapPointCircleRenderer.swift in Sources */,
 				79F3A2AE2697968A00667B1B /* REColourProvider.swift in Sources */,
 				7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */,
 				79D9BF8D27076E750027D96F /* VenuesViewController.swift in Sources */,

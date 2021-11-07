@@ -9,22 +9,19 @@
 import Foundation
 import MapKit
 
-// this classed used by TrackerViewController
+// custom heatmap point class
 class REHeatmapPointAnnotation: NSObject, MKAnnotation {
   var coordinate: CLLocationCoordinate2D
   var title: String?
 
 
-
   convenience override init() {
-    self.init(coordinate:CLLocationCoordinate2DMake(41.887, -87.622), title:"", subtitle:"")
+    self.init(coordinate:CLLocationCoordinate2DMake(0, 0), title:"", subtitle:"")
   }
 
   required init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String) {
     self.title = title
-
     self.coordinate = coordinate
-
     super.init()
   }
 
