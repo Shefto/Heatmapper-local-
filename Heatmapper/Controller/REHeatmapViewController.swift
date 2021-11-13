@@ -143,7 +143,7 @@ class REHeatmapViewController: UIViewController {
 
     //  create an overlay of the pitch based upon the rectangle
     let footballPitch11Overlay = FootballPitchOverlay(pitchRect: rect)
-    self.mapView.addOverlay(footballPitch11Overlay)
+//    self.mapView.addOverlay(footballPitch11Overlay)
 
 
     self.setMapViewZoom(rect: rect)
@@ -153,7 +153,7 @@ class REHeatmapViewController: UIViewController {
   func addHeatmapPoint(coordinate:CLLocationCoordinate2D){
 
     // create MKCircle for each heatmap point
-    let heatmapPointCircle = MKCircle(center: coordinate, radius: 3)
+    let heatmapPointCircle = MKCircle(center: coordinate, radius: 2)
     mapView.addOverlay(heatmapPointCircle)
 //    self.accuracyRangeCircle = MKCircle(center: location.coordinate, radius: accuracyRadius as CLLocationDistance)
 
