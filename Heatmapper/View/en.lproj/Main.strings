@@ -85,6 +85,9 @@
 /* Class = "UITextField"; text = "Venue"; ObjectID = "eXy-MY-Yhq"; */
 "eXy-MY-Yhq.text" = "";
 
+/* Class = "UILabel"; text = "A"; ObjectID = "f0h-Hc-TuC"; */
+"f0h-Hc-TuC.text" = "";
+
 /* Class = "UILabel"; text = "2"; ObjectID = "fbT-Ew-3QE"; */
 "fbT-Ew-3QE.text" = "";
 
@@ -102,6 +105,9 @@
 
 /* Class = "UILabel"; text = "B"; ObjectID = "h17-zx-9Ce"; */
 "h17-zx-9Ce.text" = "";
+
+/* Class = "UILabel"; text = "R"; ObjectID = "h2g-Xv-CUX"; */
+"h2g-Xv-CUX.text" = "";
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "HIL-yj-uvc"; */
 "HIL-yj-uvc.title" = "";
@@ -129,6 +135,12 @@
 
 /* Class = "UISegmentedControl"; KZh-Fy-Ydb.segmentTitles[3] = "mins/mi"; ObjectID = "KZh-Fy-Ydb"; */
 "KZh-Fy-Ydb.segmentTitles[3]" = "";
+
+/* Class = "UILabel"; text = "Middle"; ObjectID = "lMk-16-Sn4"; */
+"lMk-16-Sn4.text" = "";
+
+/* Class = "UILabel"; text = "B"; ObjectID = "mD4-1z-vd2"; */
+"mD4-1z-vd2.text" = "";
 
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "mh4-Pn-ffs"; */
 "mh4-Pn-ffs.normalTitle" = "";
@@ -168,6 +180,9 @@
 
 /* Class = "UILabel"; text = "Distance"; ObjectID = "rJh-q3-eQC"; */
 "rJh-q3-eQC.text" = "";
+
+/* Class = "UILabel"; text = "G"; ObjectID = "SMA-YX-L9d"; */
+"SMA-YX-L9d.text" = "";
 
 /* Class = "UIButton"; normalTitle = "Detailed Heatmap (JD)"; ObjectID = "sPj-oH-Nyf"; */
 "sPj-oH-Nyf.normalTitle" = "";
@@ -232,7 +247,7 @@
 /* Class = "UIButton"; normalTitle = "Radius Blurry"; ObjectID = "Y9X-XR-V0A"; */
 "Y9X-XR-V0A.normalTitle" = "";
 
-/* Class = "UINavigationItem"; title = "RE Heatmap"; ObjectID = "yQa-XH-y2d"; */
+/* Class = "UINavigationItem"; title = "Heatmap"; ObjectID = "yQa-XH-y2d"; */
 "yQa-XH-y2d.title" = "";
 
 /* Class = "UILabel"; text = "Pace"; ObjectID = "yYq-TM-45H"; */

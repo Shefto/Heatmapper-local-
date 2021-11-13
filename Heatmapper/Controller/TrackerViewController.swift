@@ -223,7 +223,8 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
 
     if overlay === self.accuracyRangeCircle {
-      let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle)
+//      let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle)
+      let circleRenderer = MKCircleRenderer(circle: overlay as! MKCircle)
       return circleRenderer
 
 

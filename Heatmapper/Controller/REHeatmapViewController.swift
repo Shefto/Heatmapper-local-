@@ -32,6 +32,50 @@ class REHeatmapViewController: UIViewController {
 
   let healthstore                 = HKHealthStore()
 
+  var innerColourRed              : String = "1.0"
+  var innerColourGreen            : String = "0.0"
+  var innerColourBlue             : String = "0.0"
+  var innerColourAlpha            : String = "0.9"
+
+  var middleColourRed             : String = "1.0"
+  var middleColourGreen           : String = "0.5"
+  var middleColourBlue            : String = "0.0"
+  var middleColourAlpha           : String = "0.5"
+
+  var outerColourRed              : String = "1.0"
+  var outerColourGreen            : String = "1.0"
+  var outerColourBlue             : String = "0.0"
+  var outerColourAlpha            : String = "0.3"
+
+  var blendMode                   = CGBlendMode.normal
+  var gradientLocation1           : Float = 0.1
+  var gradientLocation2           : Float = 0.3
+  var gradientLocation3           : Float = 0.5
+
+// tester outlets
+
+  @IBOutlet weak var gradient1: UITextField!
+  @IBOutlet weak var gradient2: UITextField!
+  @IBOutlet weak var gradient3: UITextField!
+
+  @IBOutlet weak var innerRed: UITextField!
+  @IBOutlet weak var innerGreen: UITextField!
+  @IBOutlet weak var innerBlue: UITextField!
+  @IBOutlet weak var innerAlpha: UITextField!
+
+  @IBOutlet weak var middleRed: UITextField!
+  @IBOutlet weak var middleGreen: UITextField!
+  @IBOutlet weak var middleBlue: UITextField!
+  @IBOutlet weak var middleAlpha: UITextField!
+
+  @IBOutlet weak var outerRed: UITextField!
+  @IBOutlet weak var outerGreen: UITextField!
+  @IBOutlet weak var outerBlue: UITextField!
+  @IBOutlet weak var outerAlpha: UITextField!
+
+  @IBOutlet weak var blendModePicker: UIPickerView!
+
+
   // this gesture created to enable user to tap points on which the overlay size will be based
   // not currently in use
   @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
@@ -50,6 +94,10 @@ class REHeatmapViewController: UIViewController {
     }
   }
 
+  @IBAction func textfieldEditingDidEnd(_ sender: Any) {
+    print("textFieldEditingDidEnd")
+  }
+
   @IBOutlet weak var mapView: MKMapView!
 
   override func viewDidLoad() {
@@ -58,16 +106,36 @@ class REHeatmapViewController: UIViewController {
     self.mapView.delegate = self
     reHeatmapPointImage = UIImage(systemName: "circle.fill")
 
+    setTesterFields()
     // get workout data
     // all UI work is called within the function as the data retrieval works asynchronously
     getWorkoutData()
+  }
 
-//    MyFunc.logMessage(.debug, "heatmapperCoordinatesArray:")
-//    MyFunc.logMessage(.debug, String(describing: heatmapperCoordinatesArray))
+  func setTesterFields() {
 
+    gradient1.text = gradientLocation1.description
+    gradient2.text = gradientLocation2.description
+    gradient3.text = gradientLocation3.description
 
+    innerRed.text = innerColourRed
+    innerBlue.text = innerColourBlue
+    innerGreen.text = innerColourGreen
+    innerAlpha.text = innerColourAlpha
+
+    middleRed.text = middleColourRed
+    middleBlue.text = middleColourBlue
+    middleGreen.text = middleColourGreen
+    middleAlpha.text = middleColourAlpha
+
+    outerRed.text = outerColourRed
+    outerBlue.text = outerColourBlue
+    outerGreen.text = outerColourGreen
+    outerAlpha.text = outerColourAlpha
 
   }
+
+
 
   func setMapViewZoom(rect: MKMapRect) {
     let insets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
@@ -98,8 +166,8 @@ class REHeatmapViewController: UIViewController {
     let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
 
     // pinning these purely for reference - remove when ready to ship
-    addAnnotation(coordinate: minCoord)
-    addAnnotation(coordinate: maxCoord)
+//    addAnnotation(coordinate: minCoord)
+//    addAnnotation(coordinate: maxCoord)
 
     // get the max and min X and Y points from the above coordinates as MKMapPoints
     let minX = MKMapPoint(minCoord).x
@@ -112,7 +180,7 @@ class REHeatmapViewController: UIViewController {
     var rectWidth = maxX - minX
     var rectHeight = minY - maxY
     // set the scale of the border
-    let rectMarginScale = 0.2
+    let rectMarginScale = 0.1
     // set the rectangle origin as the plot dimensions plus the border
     let rectX = minX - (rectWidth * rectMarginScale)
     let rectY = minY + (rectHeight * rectMarginScale)
@@ -144,7 +212,6 @@ class REHeatmapViewController: UIViewController {
     //  create an overlay of the pitch based upon the rectangle
     let footballPitch11Overlay = FootballPitchOverlay(pitchRect: rect)
 //    self.mapView.addOverlay(footballPitch11Overlay)
-
 
     self.setMapViewZoom(rect: rect)
 
@@ -326,6 +393,11 @@ class REHeatmapViewController: UIViewController {
     healthstore.execute(query)
   }
 
+  func textFieldDidEndEditing(_ textField: UITextField) {
+
+    print("In here")
+  }
+
 
 }
 
@@ -337,7 +409,61 @@ extension REHeatmapViewController: MKMapViewDelegate {
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
 
     if overlay is MKCircle  {
-      let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle)
+
+      // convert UI values to CGFloats for the Renderer
+      let innerColourRedFloat = Float(innerColourRed) ?? 0.0
+      let innerColourGreenFloat = Float(innerColourGreen) ?? 0.0
+      let innerColourBlueFloat = Float(innerColourBlue) ?? 0.0
+      let innerColourAlphaFloat = Float(innerColourAlpha) ?? 0.0
+
+      let innerColourRedCGFloat = CGFloat(innerColourRedFloat)
+      let innerColourGreenCGFloat = CGFloat(innerColourGreenFloat)
+      let innerColourBlueCGFloat = CGFloat(innerColourBlueFloat)
+      let innerColourAlphaCGFloat = CGFloat(innerColourAlphaFloat)
+
+      var innerColourArray = [CGFloat]()
+      innerColourArray.append(innerColourRedCGFloat)
+      innerColourArray.append(innerColourGreenCGFloat)
+      innerColourArray.append(innerColourBlueCGFloat)
+      innerColourArray.append(innerColourAlphaCGFloat)
+
+      let middleColourRedFloat = Float(middleColourRed) ?? 0.0
+      let middleColourGreenFloat = Float(middleColourGreen) ?? 0.0
+      let middleColourBlueFloat = Float(middleColourBlue) ?? 0.0
+      let middleColourAlphaFloat = Float(middleColourAlpha) ?? 0.0
+
+      let middleColourRedCGFloat = CGFloat(middleColourRedFloat)
+      let middleColourGreenCGFloat = CGFloat(middleColourGreenFloat)
+      let middleColourBlueCGFloat = CGFloat(middleColourBlueFloat)
+      let middleColourAlphaCGFloat = CGFloat(middleColourAlphaFloat)
+
+      var middleColourArray = [CGFloat]()
+      middleColourArray.append(middleColourRedCGFloat)
+      middleColourArray.append(middleColourGreenCGFloat)
+      middleColourArray.append(middleColourBlueCGFloat)
+      middleColourArray.append(middleColourAlphaCGFloat)
+
+      // convert UI values to CGFloats for the Renderer
+      let outerColourRedFloat = Float(outerColourRed) ?? 0.0
+      let outerColourGreenFloat = Float(outerColourGreen) ?? 0.0
+      let outerColourBlueFloat = Float(outerColourBlue) ?? 0.0
+      let outerColourAlphaFloat = Float(outerColourAlpha) ?? 0.0
+
+      let outerColourRedCGFloat = CGFloat(outerColourRedFloat)
+      let outerColourGreenCGFloat = CGFloat(outerColourGreenFloat)
+      let outerColourBlueCGFloat = CGFloat(outerColourBlueFloat)
+      let outerColourAlphaCGFloat = CGFloat(outerColourAlphaFloat)
+
+      var outerColourArray = [CGFloat]()
+      outerColourArray.append(outerColourRedCGFloat)
+      outerColourArray.append(outerColourGreenCGFloat)
+      outerColourArray.append(outerColourBlueCGFloat)
+      outerColourArray.append(outerColourAlphaCGFloat)
+
+//      let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle)
+      let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle,
+                                                      innerColourArray: innerColourArray, middleColourArray: middleColourArray, outerColourArray: outerColourArray, gradientLocationsArray: [0.3, 0.6, 0.9], blendMode: CGBlendMode.multiply)
+
       return circleRenderer
     }
 
