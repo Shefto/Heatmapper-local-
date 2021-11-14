@@ -1398,7 +1398,7 @@ DQoNCg
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rvE-3u-XzY">
-                                                <rect key="frame" x="205" y="0.0" width="199" height="50"/>
+                                                <rect key="frame" x="204.66666666666663" y="0.0" width="199.33333333333337" height="50"/>
                                             </pickerView>
                                         </subviews>
                                         <constraints>

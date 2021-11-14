@@ -9,6 +9,47 @@
 import Foundation
 import MapKit
 
+enum BlendMode: String, Codable, CaseIterable {
+  case normal       = "normal"
+  case multiply     = "multiply"
+  case screen       = "screen"
+  case overlay      = "overlay"
+  case darken       = "darken"
+  case lighten      = "lighten"
+  case colorDodge   = "colorDodge"
+  case colorBurn    = "colorBurn"
+  case softLight    = "softLight"
+  case hardLight    = "hardLight"
+  case difference   = "difference"
+  case exclusion    = "exclusion"
+  case hue          = "hue"
+  case saturation   = "saturation"
+  case color        = "color"
+  case luminosity   = "luminosity"
+  case clear        = "clear"
+  case copy         = "copy"
+  case sourceIn     = "sourceIn"
+  case sourceOut    = "sourceOut"
+  case sourceAtop   = "sourceAtop"
+  case destinationOver    = "destinationOver"
+  case destinationIn      = "destinationIn"
+  case destinationOut     = "destinationOut"
+  case destinationAtop    = "destinationAtop"
+  case xor                = "xor"
+  case plusDarker         = "plusDarker"
+  case plusLighter        = "plusLighter"
+
+}
+
+extension BlendMode {
+  init() {
+    self = .normal
+  }
+}
+
+
+
+
 enum Sport: String, Codable, CaseIterable {
   case football    = "Football"
   case rugby       = "Rugby"

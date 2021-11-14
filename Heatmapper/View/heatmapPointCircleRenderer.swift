@@ -11,10 +11,16 @@ import MapKit
 
 class HeatmapPointCircleRenderer: MKCircleRenderer {
 
-  var innerColour       :     [CGFloat] = [1.0, 0.0, 0.0, 0.9]
-  var middleColour      :     [CGFloat] = [1.0, 0.5, 0.0, 0.3]
-  var outerColour       :     [CGFloat] = [1.0, 1.0, 0.0, 0.2]
-  var gradientLocations :     [CGFloat] = [0.1, 0.4, 0.7]
+//  var innerColour       :     [CGFloat] = [1.0, 0.0, 0.0, 0.9]
+//  var middleColour      :     [CGFloat] = [1.0, 0.5, 0.0, 0.3]
+//  var outerColour       :     [CGFloat] = [1.0, 1.0, 0.0, 0.2]
+//  var gradientLocations :     [CGFloat] = [0.1, 0.4, 0.7]
+    var innerColour       =     [CGFloat]()
+    var middleColour      =     [CGFloat]()
+    var outerColour       =     [CGFloat]()
+    var gradientLocations =     [CGFloat]()
+
+
   var blendMode                         = CGBlendMode.multiply
 
   init(circle: MKCircle, innerColourArray: [CGFloat], middleColourArray: [CGFloat], outerColourArray: [CGFloat], gradientLocationsArray: [CGFloat], blendMode: CGBlendMode) {
@@ -31,7 +37,7 @@ class HeatmapPointCircleRenderer: MKCircleRenderer {
     let rect: CGRect = path.boundingBox
     context.addPath(path)
     context.clip()
-    context.setBlendMode(.multiply)
+    context.setBlendMode(blendMode)
 
 
 //    let gradientColors: [CGFloat] = [1.0, 0.0, 0.0, 0.9,

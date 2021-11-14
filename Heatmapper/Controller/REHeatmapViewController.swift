@@ -52,6 +52,8 @@ class REHeatmapViewController: UIViewController {
   var gradientLocation2           : String = "0.3"
   var gradientLocation3           : String = "0.5"
 
+  var blendModeArray = [BlendMode]()
+  
 // tester outlets
 
   @IBOutlet weak var gradient1: UITextField!
@@ -74,6 +76,8 @@ class REHeatmapViewController: UIViewController {
   @IBOutlet weak var outerAlpha: UITextField!
 
   @IBOutlet weak var blendModePicker: UIPickerView!
+
+
 
 
   // this gesture created to enable user to tap points on which the overlay size will be based
@@ -117,12 +121,7 @@ class REHeatmapViewController: UIViewController {
     outerColourGreen = outerGreen.text ?? ""
     outerColourAlpha = outerAlpha.text ?? ""
 
-
-    let overlays = mapView.overlays
-    mapView.removeOverlays(overlays)
-
-    self.createPitchOverlay()
-    self.createREHeatmap()
+    refreshHeatmap()
   }
 
   @IBOutlet weak var mapView: MKMapView!
@@ -130,16 +129,26 @@ class REHeatmapViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    self.mapView.delegate = self
+    blendModePicker.delegate = self
+    blendModePicker.dataSource = self
+    mapView.delegate = self
     reHeatmapPointImage = UIImage(systemName: "circle.fill")
 
-    setTesterFields()
+    loadTesterUI()
     // get workout data
     // all UI work is called within the function as the data retrieval works asynchronously
     getWorkoutData()
   }
 
-  func setTesterFields() {
+  func refreshHeatmap() {
+    let overlays = mapView.overlays
+    mapView.removeOverlays(overlays)
+
+    self.createPitchOverlay()
+    self.createREHeatmap()
+  }
+
+  func loadTesterUI() {
 
     gradient1.text = gradientLocation1
     gradient2.text = gradientLocation2
@@ -159,6 +168,8 @@ class REHeatmapViewController: UIViewController {
     outerBlue.text = outerColourBlue
     outerGreen.text = outerColourGreen
     outerAlpha.text = outerColourAlpha
+
+    blendModeArray = BlendMode.allCases.map { $0 }
 
   }
 
@@ -191,10 +202,6 @@ class REHeatmapViewController: UIViewController {
 
     let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
     let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
-
-    // pinning these purely for reference - remove when ready to ship
-//    addAnnotation(coordinate: minCoord)
-//    addAnnotation(coordinate: maxCoord)
 
     // get the max and min X and Y points from the above coordinates as MKMapPoints
     let minX = MKMapPoint(minCoord).x
@@ -493,7 +500,7 @@ extension REHeatmapViewController: MKMapViewDelegate {
 
 //      let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle)
       let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle,
-                                                      innerColourArray: innerColourArray, middleColourArray: middleColourArray, outerColourArray: outerColourArray, gradientLocationsArray: [0.3, 0.6, 0.9], blendMode: CGBlendMode.multiply)
+                                                      innerColourArray: innerColourArray, middleColourArray: middleColourArray, outerColourArray: outerColourArray, gradientLocationsArray: gradientLocationsArray, blendMode: blendMode)
 
       return circleRenderer
     }
@@ -534,11 +541,11 @@ extension REHeatmapViewController: MKMapViewDelegate {
     }
 
     let reuseId = "heatmapPoint"
-    var heatmapPointAnnotationView: MKAnnotationView? = self.mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKAnnotationView
+    var heatmapPointAnnotationView: MKAnnotationView? = self.mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
 
     if heatmapPointAnnotationView == nil {
         heatmapPointAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-        heatmapPointAnnotationView?.image = self.reHeatmapPointImage
+      heatmapPointAnnotationView?.image = self.reHeatmapPointImage
         heatmapPointAnnotationView?.frame.size = CGSize(width: 3, height: 3)
 
     } else {
@@ -579,6 +586,89 @@ extension REHeatmapViewController: MKMapViewDelegate {
 
   }
 
+}
 
+extension REHeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    MyFunc.logMessage(.debug, "REHeatmapViewController.didSelectRow: \(row)")
+
+    let blendModeSelected = blendModeArray[row]
+
+    switch blendModeSelected {
+    case .normal:
+      blendMode = .normal
+    case .multiply:
+      blendMode = .multiply
+    case .screen:
+      blendMode = .screen
+    case .overlay:
+      blendMode = .overlay
+    case .darken:
+      blendMode = .darken
+    case .lighten:
+      blendMode = .lighten
+    case .colorDodge:
+      blendMode = .colorDodge
+    case .colorBurn:
+      blendMode = .colorBurn
+    case .softLight:
+      blendMode = .softLight
+    case .hardLight:
+      blendMode = .hardLight
+    case .difference:
+      blendMode = .difference
+    case .exclusion:
+      blendMode = .exclusion
+    case .hue:
+      blendMode = .hue
+    case .saturation:
+      blendMode = .saturation
+    case .color:
+      blendMode = .color
+    case .luminosity:
+      blendMode = .luminosity
+    case .clear:
+      blendMode = .clear
+    case .copy:
+      blendMode = .copy
+    case .sourceIn:
+      blendMode = .sourceIn
+    case .sourceOut:
+      blendMode = .sourceOut
+    case .sourceAtop:
+      blendMode = .sourceAtop
+    case .destinationOver:
+      blendMode = .destinationOver
+    case .destinationIn:
+      blendMode = .destinationIn
+    case .destinationOut:
+      blendMode = .destinationOut
+    case .destinationAtop:
+      blendMode = .destinationAtop
+    case .xor:
+      blendMode = .xor
+    case .plusDarker:
+      blendMode = .plusDarker
+    case .plusLighter:
+      blendMode = .plusLighter
+    default:
+      blendMode = .normal
+    }
+
+    refreshHeatmap()
+
+  }
+
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1
+  }
+
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return blendModeArray.count
+  }
+
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return blendModeArray[row].rawValue
+  }
 
 }
