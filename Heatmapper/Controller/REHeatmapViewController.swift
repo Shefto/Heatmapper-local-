@@ -48,9 +48,9 @@ class REHeatmapViewController: UIViewController {
   var outerColourAlpha            : String = "0.3"
 
   var blendMode                   = CGBlendMode.normal
-  var gradientLocation1           : Float = 0.1
-  var gradientLocation2           : Float = 0.3
-  var gradientLocation3           : Float = 0.5
+  var gradientLocation1           : String = "0.1"
+  var gradientLocation2           : String = "0.3"
+  var gradientLocation3           : String = "0.5"
 
 // tester outlets
 
@@ -96,6 +96,33 @@ class REHeatmapViewController: UIViewController {
 
   @IBAction func textfieldEditingDidEnd(_ sender: Any) {
     print("textFieldEditingDidEnd")
+
+    // update fields from UI values
+    gradientLocation1 =  gradient1.text ?? ""
+    gradientLocation2 = gradient2.text ?? ""
+    gradientLocation3 = gradient3.text ?? ""
+
+    innerColourRed = innerRed.text ?? ""
+    innerColourBlue = innerBlue.text ?? ""
+    innerColourGreen = innerGreen.text ?? ""
+    innerColourAlpha = innerAlpha.text ?? ""
+
+    middleColourRed = middleRed.text ?? ""
+    middleColourBlue = middleBlue.text ?? ""
+    middleColourGreen = middleGreen.text ?? ""
+    middleColourAlpha = middleAlpha.text ?? ""
+
+    outerColourRed = outerRed.text ?? ""
+    outerColourBlue = outerBlue.text ?? ""
+    outerColourGreen = outerGreen.text ?? ""
+    outerColourAlpha = outerAlpha.text ?? ""
+
+
+    let overlays = mapView.overlays
+    mapView.removeOverlays(overlays)
+
+    self.createPitchOverlay()
+    self.createREHeatmap()
   }
 
   @IBOutlet weak var mapView: MKMapView!
@@ -114,9 +141,9 @@ class REHeatmapViewController: UIViewController {
 
   func setTesterFields() {
 
-    gradient1.text = gradientLocation1.description
-    gradient2.text = gradientLocation2.description
-    gradient3.text = gradientLocation3.description
+    gradient1.text = gradientLocation1
+    gradient2.text = gradientLocation2
+    gradient3.text = gradientLocation3
 
     innerRed.text = innerColourRed
     innerBlue.text = innerColourBlue
@@ -222,11 +249,7 @@ class REHeatmapViewController: UIViewController {
     // create MKCircle for each heatmap point
     let heatmapPointCircle = MKCircle(center: coordinate, radius: 2)
     mapView.addOverlay(heatmapPointCircle)
-//    self.accuracyRangeCircle = MKCircle(center: location.coordinate, radius: accuracyRadius as CLLocationDistance)
 
-//    let annotation = REHeatmapPointAnnotation()
-//    annotation.coordinate = coordinate
-//    mapView.addAnnotation(annotation)
   }
 
   func addAnnotation(coordinate:CLLocationCoordinate2D){
@@ -393,11 +416,6 @@ class REHeatmapViewController: UIViewController {
     healthstore.execute(query)
   }
 
-  func textFieldDidEndEditing(_ textField: UITextField) {
-
-    print("In here")
-  }
-
 
 }
 
@@ -443,7 +461,6 @@ extension REHeatmapViewController: MKMapViewDelegate {
       middleColourArray.append(middleColourBlueCGFloat)
       middleColourArray.append(middleColourAlphaCGFloat)
 
-      // convert UI values to CGFloats for the Renderer
       let outerColourRedFloat = Float(outerColourRed) ?? 0.0
       let outerColourGreenFloat = Float(outerColourGreen) ?? 0.0
       let outerColourBlueFloat = Float(outerColourBlue) ?? 0.0
@@ -459,6 +476,20 @@ extension REHeatmapViewController: MKMapViewDelegate {
       outerColourArray.append(outerColourGreenCGFloat)
       outerColourArray.append(outerColourBlueCGFloat)
       outerColourArray.append(outerColourAlphaCGFloat)
+
+      let gradientLocation1Float = Float(gradientLocation1) ?? 0.0
+      let gradientLocation2Float = Float(gradientLocation2) ?? 0.0
+      let gradientLocation3Float = Float(gradientLocation3) ?? 0.0
+
+      let gradientLocationCG1Float = CGFloat(gradientLocation1Float)
+      let gradientLocationCG2Float = CGFloat(gradientLocation2Float)
+      let gradientLocationCG3Float = CGFloat(gradientLocation3Float)
+
+      var gradientLocationsArray = [CGFloat]()
+      gradientLocationsArray.append(gradientLocationCG1Float)
+      gradientLocationsArray.append(gradientLocationCG2Float)
+      gradientLocationsArray.append(gradientLocationCG3Float)
+
 
 //      let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle)
       let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle,
