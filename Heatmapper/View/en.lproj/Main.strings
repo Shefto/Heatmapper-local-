@@ -43,7 +43,7 @@
 /* Class = "UILabel"; text = "R"; ObjectID = "5CF-Cw-ohk"; */
 "5CF-Cw-ohk.text" = "";
 
-/* Class = "UILabel"; text = "GradientLocations"; ObjectID = "5dC-VT-O0m"; */
+/* Class = "UILabel"; text = "Gradient\nLocations"; ObjectID = "5dC-VT-O0m"; */
 "5dC-VT-O0m.text" = "";
 
 /* Class = "UILabel"; text = "Blend Mode"; ObjectID = "7aw-dP-nVy"; */
@@ -136,7 +136,7 @@
 /* Class = "UISegmentedControl"; KZh-Fy-Ydb.segmentTitles[3] = "mins/mi"; ObjectID = "KZh-Fy-Ydb"; */
 "KZh-Fy-Ydb.segmentTitles[3]" = "";
 
-/* Class = "UILabel"; text = "Middle"; ObjectID = "lMk-16-Sn4"; */
+/* Class = "UILabel"; text = "2"; ObjectID = "lMk-16-Sn4"; */
 "lMk-16-Sn4.text" = "";
 
 /* Class = "UILabel"; text = "B"; ObjectID = "mD4-1z-vd2"; */
@@ -187,7 +187,7 @@
 /* Class = "UIButton"; normalTitle = "Detailed Heatmap (JD)"; ObjectID = "sPj-oH-Nyf"; */
 "sPj-oH-Nyf.normalTitle" = "";
 
-/* Class = "UILabel"; text = "Inner"; ObjectID = "SvV-vh-hzu"; */
+/* Class = "UILabel"; text = "1"; ObjectID = "SvV-vh-hzu"; */
 "SvV-vh-hzu.text" = "";
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "syd-FH-J8R"; */
@@ -208,7 +208,7 @@
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "VIb-fl-PFY"; */
 "VIb-fl-PFY.title" = "";
 
-/* Class = "UILabel"; text = "Outer"; ObjectID = "vit-gX-tNf"; */
+/* Class = "UILabel"; text = "3"; ObjectID = "vit-gX-tNf"; */
 "vit-gX-tNf.text" = "";
 
 /* Class = "UILabel"; text = "R"; ObjectID = "vTJ-T1-tpf"; */

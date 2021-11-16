@@ -77,7 +77,14 @@ class REHeatmapViewController: UIViewController {
 
   @IBOutlet weak var blendModePicker: UIPickerView!
 
+  @IBAction func innerStepper(_ sender: Any) {
+  }
 
+  @IBAction func middleStepper(_ sender: Any) {
+  }
+
+  @IBAction func outerStepper(_ sender: Any) {
+  }
 
 
   // this gesture created to enable user to tap points on which the overlay size will be based
@@ -651,8 +658,8 @@ extension REHeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource 
       blendMode = .plusDarker
     case .plusLighter:
       blendMode = .plusLighter
-    default:
-      blendMode = .normal
+//    default:
+//      blendMode = .normal
     }
 
     refreshHeatmap()
