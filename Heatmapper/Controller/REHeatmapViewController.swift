@@ -25,6 +25,7 @@ class REHeatmapViewController: UIViewController {
   var angle                       : CGFloat = 0.0
   var pointsDistance              : CGFloat = 0.0
   var dtmRect                     = MKMapRect()
+  var pitchOn                     : Bool = false
 
   var heatmapPointCircle          : MKCircle?
   var reHeatmapPoint              : REHeatmapPoint?
@@ -48,27 +49,27 @@ class REHeatmapViewController: UIViewController {
   var outerColourAlpha            : String = "0.3"
 
   var blendMode                   = CGBlendMode.normal
-  var gradientLocation1           : String = "0.1"
-  var gradientLocation2           : String = "0.3"
-  var gradientLocation3           : String = "0.5"
+  var innerColourGradient           : String = "0.1"
+  var middleColourGradient           : String = "0.3"
+  var outerColourGradient           : String = "0.5"
+  var radius                       : Int = 2
 
   var blendModeArray = [BlendMode]()
-  
+  var overlayCenter               : CLLocationCoordinate2D?
 // tester outlets
 
-  @IBOutlet weak var gradient1: UITextField!
-  @IBOutlet weak var gradient2: UITextField!
-  @IBOutlet weak var gradient3: UITextField!
 
   @IBOutlet weak var innerRed: UITextField!
   @IBOutlet weak var innerGreen: UITextField!
   @IBOutlet weak var innerBlue: UITextField!
   @IBOutlet weak var innerAlpha: UITextField!
+  @IBOutlet weak var innerGradient: UITextField!
 
   @IBOutlet weak var middleRed: UITextField!
   @IBOutlet weak var middleGreen: UITextField!
   @IBOutlet weak var middleBlue: UITextField!
   @IBOutlet weak var middleAlpha: UITextField!
+  @IBOutlet weak var middleGradient: UITextField!
 
   @IBOutlet weak var outerRed: UITextField!
   @IBOutlet weak var outerGreen: UITextField!
@@ -76,14 +77,153 @@ class REHeatmapViewController: UIViewController {
   @IBOutlet weak var outerAlpha: UITextField!
 
   @IBOutlet weak var blendModePicker: UIPickerView!
+  @IBOutlet weak var outerGradient: UITextField!
 
-  @IBAction func innerStepper(_ sender: Any) {
+  @IBOutlet weak var innerRedStepper: UIStepper!
+  @IBOutlet weak var innerGreenStepper: UIStepper!
+  @IBOutlet weak var innerBlueStepper: UIStepper!
+  @IBOutlet weak var innerAlphaStepper: UIStepper!
+  @IBOutlet weak var innerGradientStepper: UIStepper!
+
+  @IBOutlet weak var middleRedStepper: UIStepper!
+  @IBOutlet weak var middleGreenStepper: UIStepper!
+  @IBOutlet weak var middleBlueStepper: UIStepper!
+  @IBOutlet weak var middleAlphaStepper: UIStepper!
+  @IBOutlet weak var middleGradientStepper: UIStepper!
+
+  @IBOutlet weak var outerRedStepper: UIStepper!
+  @IBOutlet weak var outerGreenStepper: UIStepper!
+  @IBOutlet weak var outerBlueStepper: UIStepper!
+  @IBOutlet weak var outerAlphaStepper: UIStepper!
+  @IBOutlet weak var outerGradientStepper: UIStepper!
+
+  @IBOutlet weak var radiusField: UITextField!
+  @IBOutlet weak var radiusStepper: UIStepper!
+
+  @IBOutlet weak var pitchSegmentedControl: UISegmentedControl!
+  @IBOutlet weak var mapSegmentedControl: UISegmentedControl!
+
+  @IBAction func stepperRadius(_ sender: UIStepper) {
+    radius = Int(sender.value)
+    radiusField.text = String(describing: radius)
+    refreshHeatmap()
   }
 
-  @IBAction func middleStepper(_ sender: Any) {
+  @IBAction func segMap(_ sender: UISegmentedControl) {
+    switch sender.selectedSegmentIndex {
+    case 0:
+      self.mapView.mapType = .standard
+    case 1:
+      self.mapView.mapType = .satellite
+    default:
+      self.mapView.mapType = .standard
+    }
+
   }
 
-  @IBAction func outerStepper(_ sender: Any) {
+  @IBAction func segPitch(_ sender: UISegmentedControl) {
+
+    switch sender.selectedSegmentIndex {
+    case 0:
+      pitchOn = true
+    case 1:
+      pitchOn = false
+    default:
+      pitchOn = true
+    }
+
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperInnerRed(_ sender: UIStepper) {
+    innerColourRed = String(format:"%.1f", sender.value)
+    print(sender.value)
+    innerRed.text = innerColourRed
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperInnerGreen(_ sender: UIStepper) {
+    innerColourGreen = String(format:"%.1f", sender.value)
+    innerGreen.text = innerColourGreen
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperInnerBlue(_ sender: UIStepper) {
+    innerColourBlue = String(format:"%.1f", sender.value)
+    innerBlue.text = innerColourBlue
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperInnerAlpha(_ sender: UIStepper) {
+    innerColourAlpha = String(format:"%.1f", sender.value)
+    innerAlpha.text = innerColourAlpha
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperInnerGradient(_ sender: UIStepper) {
+    innerColourGradient = String(format:"%.1f", sender.value)
+    innerGradient.text = innerColourGradient
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperMiddleRed(_ sender: UIStepper) {
+    middleColourRed = String(format:"%.1f", sender.value)
+    middleRed.text = middleColourRed
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperMiddleGreen(_ sender: UIStepper) {
+    middleColourGreen = String(format:"%.1f", sender.value)
+    middleGreen.text = middleColourGreen
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperMiddleBlue(_ sender: UIStepper) {
+    middleColourBlue = String(format:"%.1f", sender.value)
+    middleBlue.text = middleColourBlue
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperMiddleAlpha(_ sender: UIStepper) {
+    middleColourAlpha = String(format:"%.1f", sender.value)
+    middleAlpha.text = middleColourAlpha
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperMiddleGradient(_ sender: UIStepper) {
+    middleColourGradient = String(format:"%.1f", sender.value)
+    middleGradient.text = middleColourGradient
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperOuterRed(_ sender: UIStepper) {
+    outerColourRed =  String(format:"%.1f", sender.value)
+    outerRed.text = outerColourRed
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperOuterGreen(_ sender: UIStepper) {
+    outerColourGreen = String(format:"%.1f", sender.value)
+    outerGreen.text = outerColourGreen
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperOuterBlue(_ sender: UIStepper) {
+    outerColourBlue = String(format:"%.1f", sender.value)
+    outerBlue.text = outerColourBlue
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperOuterAlpha(_ sender: UIStepper) {
+    outerColourAlpha = String(format:"%.1f", sender.value)
+    outerAlpha.text = outerColourAlpha
+    refreshHeatmap()
+  }
+
+  @IBAction func stepperOuterGradient(_ sender: UIStepper) {
+    outerColourGradient = String(format:"%.1f", sender.value)
+    outerGradient.text = outerColourGradient
+    refreshHeatmap()
   }
 
 
@@ -109,9 +249,9 @@ class REHeatmapViewController: UIViewController {
     print("textFieldEditingDidEnd")
 
     // update fields from UI values
-    gradientLocation1 =  gradient1.text ?? ""
-    gradientLocation2 = gradient2.text ?? ""
-    gradientLocation3 = gradient3.text ?? ""
+    innerColourGradient =  innerGradient.text ?? ""
+    middleColourGradient = middleGradient.text ?? ""
+    outerColourGradient = outerGradient.text ?? ""
 
     innerColourRed = innerRed.text ?? ""
     innerColourBlue = innerBlue.text ?? ""
@@ -144,6 +284,11 @@ class REHeatmapViewController: UIViewController {
     loadTesterUI()
     // get workout data
     // all UI work is called within the function as the data retrieval works asynchronously
+//    getWorkoutData()
+  }
+
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
     getWorkoutData()
   }
 
@@ -157,9 +302,9 @@ class REHeatmapViewController: UIViewController {
 
   func loadTesterUI() {
 
-    gradient1.text = gradientLocation1
-    gradient2.text = gradientLocation2
-    gradient3.text = gradientLocation3
+    innerGradient.text = innerColourGradient
+    middleGradient.text = middleColourGradient
+    outerGradient.text = outerColourGradient
 
     innerRed.text = innerColourRed
     innerBlue.text = innerColourBlue
@@ -178,15 +323,45 @@ class REHeatmapViewController: UIViewController {
 
     blendModeArray = BlendMode.allCases.map { $0 }
 
+    innerRedStepper.transform = innerRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    innerGreenStepper.transform = innerGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    innerBlueStepper.transform = innerBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    innerAlphaStepper.transform = innerAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    innerGradientStepper.transform = innerGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
+
+    middleRedStepper.transform = middleRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    middleGreenStepper.transform = middleGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    middleBlueStepper.transform = middleBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    middleAlphaStepper.transform = middleAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    middleGradientStepper.transform = middleGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
+
+    outerRedStepper.transform = outerRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    outerGreenStepper.transform = outerGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    outerBlueStepper.transform = outerBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    outerAlphaStepper.transform = outerAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    outerGradientStepper.transform = outerGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
+
+    radiusStepper.transform = radiusStepper.transform.scaledBy(x: 0.75, y: 1.0)
+
+
+    switch pitchOn {
+    case true:
+      pitchSegmentedControl.selectedSegmentIndex = 0
+    case false:
+      pitchSegmentedControl.selectedSegmentIndex = 1
+
+    }
+
   }
 
 
 
   func setMapViewZoom(rect: MKMapRect) {
-    let insets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    let insets = UIEdgeInsets(top: 0, left: 5, bottom: 5, right: 5)
     //    let insets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
 
-    mapView.setVisibleMapRect(rect, edgePadding: insets, animated: true)
+    mapView.setVisibleMapRect(rect, edgePadding: insets, animated: false)
+    mapView.setCenter(overlayCenter!, animated: false)
 
   }
 
@@ -209,6 +384,10 @@ class REHeatmapViewController: UIViewController {
 
     let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
     let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
+
+    let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
+    let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
+    overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
 
     // get the max and min X and Y points from the above coordinates as MKMapPoints
     let minX = MKMapPoint(minCoord).x
@@ -252,16 +431,22 @@ class REHeatmapViewController: UIViewController {
 
     //  create an overlay of the pitch based upon the rectangle
     let footballPitch11Overlay = FootballPitchOverlay(pitchRect: rect)
-//    self.mapView.addOverlay(footballPitch11Overlay)
 
+    if pitchOn == true {
+        self.mapView.addOverlay(footballPitch11Overlay)
+    }
+
+//    self.addAnnotation(coordinate: mapCenter)
+//    self.mapView.setCenter(mapCenter, animated: true)
     self.setMapViewZoom(rect: rect)
+
 
   }
 
   func addHeatmapPoint(coordinate:CLLocationCoordinate2D){
 
     // create MKCircle for each heatmap point
-    let heatmapPointCircle = MKCircle(center: coordinate, radius: 2)
+    let heatmapPointCircle = MKCircle(center: coordinate, radius: CLLocationDistance(radius))
     mapView.addOverlay(heatmapPointCircle)
 
   }
@@ -491,9 +676,9 @@ extension REHeatmapViewController: MKMapViewDelegate {
       outerColourArray.append(outerColourBlueCGFloat)
       outerColourArray.append(outerColourAlphaCGFloat)
 
-      let gradientLocation1Float = Float(gradientLocation1) ?? 0.0
-      let gradientLocation2Float = Float(gradientLocation2) ?? 0.0
-      let gradientLocation3Float = Float(gradientLocation3) ?? 0.0
+      let gradientLocation1Float = Float(innerColourGradient) ?? 0.0
+      let gradientLocation2Float = Float(middleColourGradient) ?? 0.0
+      let gradientLocation3Float = Float(outerColourGradient) ?? 0.0
 
       let gradientLocationCG1Float = CGFloat(gradientLocation1Float)
       let gradientLocationCG2Float = CGFloat(gradientLocation2Float)
@@ -516,6 +701,7 @@ extension REHeatmapViewController: MKMapViewDelegate {
       if let pitchImage = UIImage(named: "football pitch 11.png")
       {
         let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: self.angle, pointsDistance: self.pointsDistance)
+
         return footballPitchOverlayView
       }
     }

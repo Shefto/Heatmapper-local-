@@ -58,15 +58,6 @@
 /* Class = "UIButton"; normalTitle = "Update Workout"; ObjectID = "2DM-st-7JY"; */
 "2DM-st-7JY.normalTitle" = "";
 
-/* Class = "UILabel"; text = "R"; ObjectID = "5CF-Cw-ohk"; */
-"5CF-Cw-ohk.text" = "";
-
-/* Class = "UILabel"; text = "Gradient\nLocations"; ObjectID = "5dC-VT-O0m"; */
-"5dC-VT-O0m.text" = "";
-
-/* Class = "UILabel"; text = "Blend Mode"; ObjectID = "7aw-dP-nVy"; */
-"7aw-dP-nVy.text" = "";
-
 /* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "8fa-ka-EKP"; */
 "8fa-ka-EKP.normalTitle" = "";
 
@@ -82,23 +73,11 @@
 /* Class = "UILabel"; text = "Date"; ObjectID = "cdu-fT-Y48"; */
 "cdu-fT-Y48.text" = "";
 
-/* Class = "UILabel"; text = "G"; ObjectID = "ch5-g1-Wfo"; */
-"ch5-g1-Wfo.text" = "";
-
-/* Class = "UILabel"; text = "B"; ObjectID = "Cm2-6z-jXZ"; */
-"Cm2-6z-jXZ.text" = "";
-
 /* Class = "UINavigationItem"; title = "Edit Activity"; ObjectID = "EbZ-Kt-ugg"; */
 "EbZ-Kt-ugg.title" = "";
 
 /* Class = "UITextField"; text = "Venue"; ObjectID = "eXy-MY-Yhq"; */
 "eXy-MY-Yhq.text" = "";
-
-/* Class = "UILabel"; text = "A"; ObjectID = "f0h-Hc-TuC"; */
-"f0h-Hc-TuC.text" = "";
-
-/* Class = "UILabel"; text = "2"; ObjectID = "fbT-Ew-3QE"; */
-"fbT-Ew-3QE.text" = "";
 
 /* Class = "UILabel"; text = "Venue"; ObjectID = "Fgr-lP-daT"; */
 "Fgr-lP-daT.text" = "";
@@ -112,12 +91,6 @@
 /* Class = "UIButton"; normalTitle = "RE Heatmap"; ObjectID = "GxP-i5-0nQ"; */
 "GxP-i5-0nQ.normalTitle" = "";
 
-/* Class = "UILabel"; text = "B"; ObjectID = "h17-zx-9Ce"; */
-"h17-zx-9Ce.text" = "";
-
-/* Class = "UILabel"; text = "R"; ObjectID = "h2g-Xv-CUX"; */
-"h2g-Xv-CUX.text" = "";
-
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "HIL-yj-uvc"; */
 "HIL-yj-uvc.title" = "";
 
@@ -127,23 +100,20 @@
 /* Class = "UIButton"; normalTitle = "Stop Tracking"; ObjectID = "hKy-uJ-mHc"; */
 "hKy-uJ-mHc.normalTitle" = "";
 
-/* Class = "UILabel"; text = "G"; ObjectID = "ij2-Er-6LV"; */
-"ij2-Er-6LV.text" = "";
-
 /* Class = "UILabel"; text = "Duration"; ObjectID = "K49-iB-Dre"; */
 "K49-iB-Dre.text" = "";
+
+/* Class = "UISegmentedControl"; kdm-8Y-EsM.segmentTitles[0] = "Map"; ObjectID = "kdm-8Y-EsM"; */
+"kdm-8Y-EsM.segmentTitles[0]" = "";
+
+/* Class = "UISegmentedControl"; kdm-8Y-EsM.segmentTitles[1] = "Sat"; ObjectID = "kdm-8Y-EsM"; */
+"kdm-8Y-EsM.segmentTitles[1]" = "";
 
 /* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "kh7-pS-WQE"; */
 "kh7-pS-WQE.normalTitle" = "";
 
 /* Class = "UIButton"; normalTitle = "Radius Blurry"; ObjectID = "kkP-wz-qdj"; */
 "kkP-wz-qdj.normalTitle" = "";
-
-/* Class = "UILabel"; text = "2"; ObjectID = "lMk-16-Sn4"; */
-"lMk-16-Sn4.text" = "";
-
-/* Class = "UILabel"; text = "B"; ObjectID = "mD4-1z-vd2"; */
-"mD4-1z-vd2.text" = "";
 
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "mh4-Pn-ffs"; */
 "mh4-Pn-ffs.normalTitle" = "";
@@ -156,9 +126,6 @@
 
 /* Class = "UIViewController"; title = "Workout History"; ObjectID = "nCc-eF-wC1"; */
 "nCc-eF-wC1.title" = "";
-
-/* Class = "UILabel"; text = "3"; ObjectID = "O5G-Nc-CYY"; */
-"O5G-Nc-CYY.text" = "";
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "Pbk-vr-61V"; */
 "Pbk-vr-61V.title" = "";
@@ -175,23 +142,11 @@
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "qUW-ZW-8kZ"; */
 "qUW-ZW-8kZ.normalTitle" = "";
 
-/* Class = "UILabel"; text = "A"; ObjectID = "rgb-PD-Wqr"; */
-"rgb-PD-Wqr.text" = "";
-
-/* Class = "UILabel"; text = "A"; ObjectID = "rIZ-ie-KQw"; */
-"rIZ-ie-KQw.text" = "";
-
 /* Class = "UILabel"; text = "Distance"; ObjectID = "rJh-q3-eQC"; */
 "rJh-q3-eQC.text" = "";
 
-/* Class = "UILabel"; text = "G"; ObjectID = "SMA-YX-L9d"; */
-"SMA-YX-L9d.text" = "";
-
 /* Class = "UIButton"; normalTitle = "Detailed Heatmap (JD)"; ObjectID = "sPj-oH-Nyf"; */
 "sPj-oH-Nyf.normalTitle" = "";
-
-/* Class = "UILabel"; text = "1"; ObjectID = "SvV-vh-hzu"; */
-"SvV-vh-hzu.text" = "";
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "syd-FH-J8R"; */
 "syd-FH-J8R.title" = "";
@@ -208,12 +163,6 @@
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "VIb-fl-PFY"; */
 "VIb-fl-PFY.title" = "";
 
-/* Class = "UILabel"; text = "3"; ObjectID = "vit-gX-tNf"; */
-"vit-gX-tNf.text" = "";
-
-/* Class = "UILabel"; text = "R"; ObjectID = "vTJ-T1-tpf"; */
-"vTJ-T1-tpf.text" = "";
-
 /* Class = "UILabel"; text = "Calories"; ObjectID = "VUK-Or-FM5"; */
 "VUK-Or-FM5.text" = "";
 
@@ -228,9 +177,6 @@
 
 /* Class = "UITextField"; text = "Pitch"; ObjectID = "xgG-Zc-e1D"; */
 "xgG-Zc-e1D.text" = "";
-
-/* Class = "UILabel"; text = "1"; ObjectID = "xJa-W2-MJy"; */
-"xJa-W2-MJy.text" = "";
 
 /* Class = "UINavigationItem"; title = "DTMHeatmap"; ObjectID = "xJf-j7-wii"; */
 "xJf-j7-wii.title" = "";
@@ -252,3 +198,9 @@
 
 /* Class = "UILabel"; text = "Pace"; ObjectID = "yYq-TM-45H"; */
 "yYq-TM-45H.text" = "";
+
+/* Class = "UISegmentedControl"; zTz-Oe-w55.segmentTitles[0] = "On"; ObjectID = "zTz-Oe-w55"; */
+"zTz-Oe-w55.segmentTitles[0]" = "";
+
+/* Class = "UISegmentedControl"; zTz-Oe-w55.segmentTitles[1] = "Off"; ObjectID = "zTz-Oe-w55"; */
+"zTz-Oe-w55.segmentTitles[1]" = "";

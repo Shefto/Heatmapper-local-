@@ -48,8 +48,6 @@ extension BlendMode {
 }
 
 
-
-
 enum Sport: String, Codable, CaseIterable {
   case football    = "Football"
   case rugby       = "Rugby"
