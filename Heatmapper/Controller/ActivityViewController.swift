@@ -102,6 +102,7 @@ class ActivityViewController: UIViewController {
   }
 
   override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
     saveRecord()
   }
 

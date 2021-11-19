@@ -281,15 +281,38 @@ class REHeatmapViewController: UIViewController {
     mapView.delegate = self
     reHeatmapPointImage = UIImage(systemName: "circle.fill")
 
+
+    loadTesterData()
     loadTesterUI()
     // get workout data
     // all UI work is called within the function as the data retrieval works asynchronously
-//    getWorkoutData()
+    getWorkoutData()
   }
 
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    getWorkoutData()
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    var testerArray = [String]()
+
+    testerArray.append(innerColourRed)
+    testerArray.append(innerColourGreen)
+    testerArray.append(innerColourBlue)
+    testerArray.append(innerColourAlpha)
+    testerArray.append(innerColourGradient)
+
+    testerArray.append(middleColourRed)
+    testerArray.append(middleColourGreen)
+    testerArray.append(middleColourBlue)
+    testerArray.append(middleColourAlpha)
+    testerArray.append(middleColourGradient)
+
+    testerArray.append(outerColourRed)
+    testerArray.append(outerColourGreen)
+    testerArray.append(outerColourBlue)
+    testerArray.append(outerColourAlpha)
+    testerArray.append(outerColourGradient)
+
+
+    MyFunc.saveTesterData(testerArray)
   }
 
   func refreshHeatmap() {
@@ -299,6 +322,33 @@ class REHeatmapViewController: UIViewController {
     self.createPitchOverlay()
     self.createREHeatmap()
   }
+
+  func loadTesterData() {
+    let loadedTesterArray = MyFunc.getTesterData()
+    if loadedTesterArray.isEmpty == false {
+
+    innerColourRed = loadedTesterArray[0]
+    innerColourGreen = loadedTesterArray[1]
+    innerColourBlue = loadedTesterArray[2]
+    innerColourAlpha = loadedTesterArray[3]
+    innerColourGradient = loadedTesterArray[4]
+
+    middleColourRed = loadedTesterArray[5]
+    middleColourGreen = loadedTesterArray[6]
+    middleColourBlue = loadedTesterArray[7]
+    middleColourAlpha = loadedTesterArray[8]
+    middleColourGradient = loadedTesterArray[9]
+
+    outerColourRed = loadedTesterArray[10]
+    outerColourGreen = loadedTesterArray[11]
+    outerColourBlue = loadedTesterArray[12]
+    outerColourAlpha = loadedTesterArray[13]
+    outerColourGradient = loadedTesterArray[14]
+
+    }
+  }
+
+
 
   func loadTesterUI() {
 

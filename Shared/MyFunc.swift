@@ -45,6 +45,35 @@ class MyFunc {
 
   }
 
+  static func getTesterData() -> [String] {
+
+    var metadataToReturn = [String]()
+    let defaults = UserDefaults.standard
+
+    if let savedTemplate = defaults.object(forKey: "Tester Metadata") as? Data {
+      let decoder = JSONDecoder()
+      if let loadedTemplate = try? decoder.decode([String].self, from: savedTemplate) {
+        metadataToReturn = loadedTemplate
+      }
+    }
+    return metadataToReturn
+
+  }
+
+  static func saveTesterData(_ testerDataArray: [String]) {
+    let defaults = UserDefaults.standard
+    let encoder = JSONEncoder()
+    do {
+
+      let encoded = try encoder.encode(testerDataArray)
+      defaults.set(encoded, forKey: "Tester Metadata")
+    } catch {
+      logMessage(.error, "Error in MyFunc.saveTesterData")
+    }
+
+  }
+
+
   static func getWorkoutMetadata() -> [WorkoutMetadata] {
 
     var metadataToReturn = [WorkoutMetadata]()

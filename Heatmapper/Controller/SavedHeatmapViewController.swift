@@ -96,6 +96,7 @@ class SavedHeatmapViewController: UIViewController {
   }
 
   override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
     updateWorkout()
   }
 
