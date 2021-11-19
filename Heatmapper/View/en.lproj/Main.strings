@@ -112,6 +112,9 @@
 /* Class = "UISegmentedControl"; KZh-Fy-Ydb.segmentTitles[3] = "mins/mi"; ObjectID = "KZh-Fy-Ydb"; */
 "KZh-Fy-Ydb.segmentTitles[3]" = "";
 
+/* Class = "UILabel"; text = "Radius"; ObjectID = "M01-L4-JTt"; */
+"M01-L4-JTt.text" = "";
+
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "mh4-Pn-ffs"; */
 "mh4-Pn-ffs.normalTitle" = "";
 
@@ -141,6 +144,12 @@
 
 /* Class = "UILabel"; text = "Distance"; ObjectID = "rJh-q3-eQC"; */
 "rJh-q3-eQC.text" = "";
+
+/* Class = "UIButton"; configuration.title = "Reset"; ObjectID = "RP2-WR-Hbm"; */
+"RP2-WR-Hbm.configuration.title" = "";
+
+/* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "RP2-WR-Hbm"; */
+"RP2-WR-Hbm.normalTitle" = "";
 
 /* Class = "UIButton"; normalTitle = "Detailed Heatmap (JD)"; ObjectID = "sPj-oH-Nyf"; */
 "sPj-oH-Nyf.normalTitle" = "";

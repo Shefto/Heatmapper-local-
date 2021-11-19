@@ -32,6 +32,7 @@ class REHeatmapViewController: UIViewController {
   var reHeatmapPointImage         : UIImage?
 
   let healthstore                 = HKHealthStore()
+  let theme = ColourTheme()
 
   var innerColourRed              : String = "1.0"
   var innerColourGreen            : String = "0.0"
@@ -245,6 +246,35 @@ class REHeatmapViewController: UIViewController {
     }
   }
 
+
+  @IBAction func btnReset(_ sender: Any) {
+
+    innerColourGradient = "0.1"
+    middleColourGradient = "0.3"
+    outerColourGradient = "0.5"
+
+    innerColourRed = "1.0"
+    innerColourGreen = "0.0"
+    innerColourBlue = "0.0"
+    innerColourAlpha = "0.9"
+
+    middleColourRed = "1.0"
+    middleColourBlue = "0.0"
+    middleColourGreen = "0.5"
+    middleColourAlpha = "0.5"
+
+    outerColourRed = "1.0"
+    outerColourBlue = "0.0"
+    outerColourGreen = "1.0"
+    outerColourAlpha = "0.3"
+
+    blendMode                   = CGBlendMode.normal
+    loadTesterUI()
+    refreshHeatmap()
+  }
+
+
+
   @IBAction func textfieldEditingDidEnd(_ sender: Any) {
     print("textFieldEditingDidEnd")
 
@@ -279,11 +309,11 @@ class REHeatmapViewController: UIViewController {
     blendModePicker.delegate = self
     blendModePicker.dataSource = self
     mapView.delegate = self
-    reHeatmapPointImage = UIImage(systemName: "circle.fill")
+//    reHeatmapPointImage = UIImage(systemName: "circle.fill")
+    self.loadTesterData()
+    self.loadTesterUI()
 
 
-    loadTesterData()
-    loadTesterUI()
     // get workout data
     // all UI work is called within the function as the data retrieval works asynchronously
     getWorkoutData()
@@ -372,6 +402,7 @@ class REHeatmapViewController: UIViewController {
     outerAlpha.text = outerColourAlpha
 
     blendModeArray = BlendMode.allCases.map { $0 }
+
 
     innerRedStepper.transform = innerRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
     innerGreenStepper.transform = innerGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
