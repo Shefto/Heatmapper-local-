@@ -50,11 +50,21 @@ class REHeatmapViewController: UIViewController {
   var outerColourAlpha            : String = "0.3"
 
   var blendMode                   = CGBlendMode.normal
-  var innerColourGradient           : String = "0.1"
-  var middleColourGradient           : String = "0.3"
-  var outerColourGradient           : String = "0.5"
-  var radius                       : Int = 2
+  var innerColourGradient         : String = "0.1"
+  var middleColourGradient        : String = "0.3"
+  var outerColourGradient         : String = "0.5"
+  var radius                      : Int = 2
 
+  var inProgressWheel       : UIActivityIndicatorView?
+  // variable purely for the In Progress wheel
+  public var showIndicator  : Bool = true {
+    didSet{
+      if (!showIndicator)
+      {
+        inProgressWheel?.stopAnimating()
+      }
+    }
+  }
   var blendModeArray = [BlendMode]()
   var overlayCenter               : CLLocationCoordinate2D?
 // tester outlets
@@ -267,6 +277,7 @@ class REHeatmapViewController: UIViewController {
     outerColourBlue = "0.0"
     outerColourGreen = "1.0"
     outerColourAlpha = "0.3"
+    radius = 2
 
     blendMode                   = CGBlendMode.normal
     loadTesterUI()
@@ -310,6 +321,7 @@ class REHeatmapViewController: UIViewController {
     blendModePicker.dataSource = self
     mapView.delegate = self
 //    reHeatmapPointImage = UIImage(systemName: "circle.fill")
+    self.loadUI()
     self.loadTesterData()
     self.loadTesterUI()
 
@@ -346,6 +358,12 @@ class REHeatmapViewController: UIViewController {
   }
 
   func refreshHeatmap() {
+
+    if (self.showIndicator)
+    {
+      self.inProgressWheel?.startAnimating()
+    }
+
     let overlays = mapView.overlays
     mapView.removeOverlays(overlays)
 
@@ -378,7 +396,28 @@ class REHeatmapViewController: UIViewController {
     }
   }
 
+  func loadUI() {
+    blendModeArray = BlendMode.allCases.map { $0 }
 
+    innerRedStepper.transform = innerRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    innerGreenStepper.transform = innerGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    innerBlueStepper.transform = innerBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    innerAlphaStepper.transform = innerAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    innerGradientStepper.transform = innerGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
+
+    middleRedStepper.transform = middleRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    middleGreenStepper.transform = middleGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    middleBlueStepper.transform = middleBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    middleAlphaStepper.transform = middleAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    middleGradientStepper.transform = middleGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
+
+    outerRedStepper.transform = outerRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    outerGreenStepper.transform = outerGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    outerBlueStepper.transform = outerBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    outerAlphaStepper.transform = outerAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    outerGradientStepper.transform = outerGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    radiusStepper.transform = radiusStepper.transform.scaledBy(x: 0.75, y: 1.0)
+  }
 
   func loadTesterUI() {
 
@@ -401,29 +440,28 @@ class REHeatmapViewController: UIViewController {
     outerGreen.text = outerColourGreen
     outerAlpha.text = outerColourAlpha
 
-    blendModeArray = BlendMode.allCases.map { $0 }
+
+    innerRedStepper.value = Double(innerColourRed)!
+    innerGreenStepper.value = Double(innerColourGreen)!
+    innerBlueStepper.value = Double(innerColourBlue)!
+    innerAlphaStepper.value = Double(innerColourAlpha)!
+    innerGradientStepper.value = Double(innerColourGradient)!
+
+    middleRedStepper.value = Double(middleColourRed)!
+    middleGreenStepper.value = Double(middleColourGreen)!
+    middleBlueStepper.value = Double(middleColourBlue)!
+    middleAlphaStepper.value = Double(middleColourAlpha)!
+    middleGradientStepper.value = Double(middleColourGradient)!
 
 
-    innerRedStepper.transform = innerRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
-    innerGreenStepper.transform = innerGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
-    innerBlueStepper.transform = innerBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
-    innerAlphaStepper.transform = innerAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
-    innerGradientStepper.transform = innerGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
+    outerRedStepper.value = Double(outerColourRed)!
+    outerGreenStepper.value = Double(outerColourGreen)!
+    outerBlueStepper.value = Double(outerColourBlue)!
+    outerAlphaStepper.value = Double(outerColourAlpha)!
+    outerGradientStepper.value = Double(outerColourGradient)!
+    radiusStepper.value = Double(radius)
 
-    middleRedStepper.transform = middleRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
-    middleGreenStepper.transform = middleGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
-    middleBlueStepper.transform = middleBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
-    middleAlphaStepper.transform = middleAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
-    middleGradientStepper.transform = middleGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
-
-    outerRedStepper.transform = outerRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
-    outerGreenStepper.transform = outerGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
-    outerBlueStepper.transform = outerBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
-    outerAlphaStepper.transform = outerAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
-    outerGradientStepper.transform = outerGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
-
-    radiusStepper.transform = radiusStepper.transform.scaledBy(x: 0.75, y: 1.0)
-
+    radiusField.text = String(radius)
 
     switch pitchOn {
     case true:
@@ -694,6 +732,21 @@ class REHeatmapViewController: UIViewController {
 
     }
     healthstore.execute(query)
+  }
+
+  func initialiseProgressWheel()
+  {
+    inProgressWheel = UIActivityIndicatorView(style: .large)
+    inProgressWheel?.translatesAutoresizingMaskIntoConstraints = false
+    self.view.addSubview(inProgressWheel!)
+    let sizeWidth = NSLayoutConstraint(item: inProgressWheel!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 60)
+    let sizeHeight = NSLayoutConstraint(item: inProgressWheel!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 60)
+    let CenterX = NSLayoutConstraint(item: inProgressWheel!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0)
+    let CenterY = NSLayoutConstraint(item: inProgressWheel!, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0)
+
+    inProgressWheel?.addConstraints([sizeWidth,sizeHeight])
+    self.view.addConstraints([CenterX,CenterY])
+    self.view.updateConstraints()
   }
 
 
