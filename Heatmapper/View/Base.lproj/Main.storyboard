@@ -1051,7 +1051,7 @@ DQoNCg
                                 <rect key="frame" x="0.0" y="88" width="414" height="350"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="350" id="fJF-dn-msC"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="fJF-dn-msC"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="5fg-O7-Fmq" appends="YES" id="536-f8-JcD"/>
@@ -1060,14 +1060,29 @@ DQoNCg
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hGX-Pw-hDX">
                                 <rect key="frame" x="2" y="443" width="410" height="414"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="B95-es-MiE">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="phB-N3-4AZ" userLabel="Controls Upper Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="410" height="50"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8E-UV-nEK" userLabel="Reset" customClass="ThemeActionButton" customModule="Heatmapper" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="410" height="50"/>
+                                                <color key="tintColor" name="autoDetect"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Reset"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Resize"/>
+                                                <connections>
+                                                    <action selector="btnResize:" destination="Pbk-vr-61V" eventType="touchUpInside" id="qCh-Fx-kZd"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="W5n-eu-HlY"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="B95-es-MiE" userLabel="Controls Middle Stack View">
+                                        <rect key="frame" x="0.0" y="50" width="410" height="50"/>
+                                        <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kdm-8Y-EsM" userLabel="Map, Satellite">
-                                                <rect key="frame" x="0.0" y="0.0" width="120" height="51"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="120" id="EMG-3X-gDA"/>
-                                                </constraints>
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="51"/>
                                                 <segments>
                                                     <segment title="Map"/>
                                                     <segment title="Sat"/>
@@ -1076,14 +1091,48 @@ DQoNCg
                                                     <action selector="segMap:" destination="Pbk-vr-61V" eventType="valueChanged" id="eGj-SW-fgi"/>
                                                 </connections>
                                             </segmentedControl>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zTz-Oe-w55">
+                                                <rect key="frame" x="160" y="0.0" width="120" height="51"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="120" id="XcA-qz-kKC"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="Pitch"/>
+                                                    <segment title="Off"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="segPitch:" destination="Pbk-vr-61V" eventType="valueChanged" id="vxb-ud-MCy"/>
+                                                </connections>
+                                            </segmentedControl>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dHI-7R-bms" userLabel="Panel Seg Control">
+                                                <rect key="frame" x="290" y="0.0" width="120" height="51"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="120" id="5ng-Fb-P1T"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="Panel"/>
+                                                    <segment title="Hide"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="segPanel:" destination="Pbk-vr-61V" eventType="valueChanged" id="unE-YF-mxP"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="dF1-ze-EEj"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ron-hr-ShN" userLabel="Controls Lower Mode Stack View">
+                                        <rect key="frame" x="0.0" y="100" width="410" height="50"/>
+                                        <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Radius" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M01-L4-JTt">
-                                                <rect key="frame" x="130" y="0.0" width="140" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="51.666666666666664" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gFp-PM-FdW" userLabel="Radius">
-                                                <rect key="frame" x="280" y="0.0" width="40" height="50"/>
+                                                <rect key="frame" x="61.666666666666657" y="0.0" width="40" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="Fvg-Rg-xga"/>
                                                 </constraints>
@@ -1091,7 +1140,7 @@ DQoNCg
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="IvV-Fr-PtZ" userLabel="Radius Stepper">
-                                                <rect key="frame" x="330" y="0.0" width="80" height="50"/>
+                                                <rect key="frame" x="111.66666666666669" y="0.0" width="80" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="80" id="v7v-63-iok"/>
                                                 </constraints>
@@ -1099,29 +1148,8 @@ DQoNCg
                                                     <action selector="stepperRadius:" destination="Pbk-vr-61V" eventType="valueChanged" id="yfR-yH-DfM"/>
                                                 </connections>
                                             </stepper>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="dF1-ze-EEj"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ron-hr-ShN" userLabel="Blend Mode Stack View">
-                                        <rect key="frame" x="0.0" y="50" width="410" height="50"/>
-                                        <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zTz-Oe-w55">
-                                                <rect key="frame" x="0.0" y="0.0" width="120" height="51"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="120" id="XcA-qz-kKC"/>
-                                                </constraints>
-                                                <segments>
-                                                    <segment title="On"/>
-                                                    <segment title="Off"/>
-                                                </segments>
-                                                <connections>
-                                                    <action selector="segPitch:" destination="Pbk-vr-61V" eventType="valueChanged" id="vxb-ud-MCy"/>
-                                                </connections>
-                                            </segmentedControl>
                                             <pickerView contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="rvE-3u-XzY">
-                                                <rect key="frame" x="130" y="0.0" width="209.33333333333337" height="50"/>
+                                                <rect key="frame" x="201.66666666666669" y="0.0" width="137.66666666666669" height="50"/>
                                             </pickerView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RP2-WR-Hbm" userLabel="Reset" customClass="ThemeActionButton" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="349.33333333333331" y="0.0" width="60.666666666666686" height="50"/>
@@ -1138,14 +1166,14 @@ DQoNCg
                                             <constraint firstAttribute="height" constant="50" id="X9T-62-oAt"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jgg-IX-Tu7">
-                                        <rect key="frame" x="0.0" y="100" width="410" height="314"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jgg-IX-Tu7" userLabel="Colours Stack View">
+                                        <rect key="frame" x="0.0" y="150" width="410" height="264"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Mie-50-eU8" userLabel="Inner Colour Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="314"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="130" height="264"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WfV-Ol-Txj">
-                                                        <rect key="frame" x="18" y="0.0" width="94" height="58.666666666666664"/>
+                                                        <rect key="frame" x="18" y="0.0" width="94" height="48.666666666666664"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V6i-G1-fPs" userLabel="Red Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1161,7 +1189,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="gSW-v0-V87" userLabel="1R Stepper">
-                                                                <rect key="frame" x="0.0" y="35" width="94" height="23.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="35" width="94" height="13.666666666666664"/>
                                                                 <connections>
                                                                     <action selector="stepperInnerRed:" destination="Pbk-vr-61V" eventType="valueChanged" id="PJL-qz-zWs"/>
                                                                 </connections>
@@ -1169,7 +1197,7 @@ DQoNCg
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xwf-my-ugW">
-                                                        <rect key="frame" x="18" y="63.666666666666629" width="94" height="59"/>
+                                                        <rect key="frame" x="18" y="53.666666666666629" width="94" height="49"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4wU-wA-7jK" userLabel="Green Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1182,7 +1210,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="qKZ-Xe-sYW" userLabel="1G Stepper">
-                                                                <rect key="frame" x="0.0" y="35" width="94" height="24"/>
+                                                                <rect key="frame" x="0.0" y="35" width="94" height="14"/>
                                                                 <connections>
                                                                     <action selector="stepperInnerGreen:" destination="Pbk-vr-61V" eventType="valueChanged" id="EoT-bo-rGi"/>
                                                                 </connections>
@@ -1190,7 +1218,7 @@ DQoNCg
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="81o-a9-scw">
-                                                        <rect key="frame" x="18" y="127.66666666666664" width="94" height="58.666666666666671"/>
+                                                        <rect key="frame" x="18" y="107.66666666666664" width="94" height="48.666666666666671"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eh6-GU-dtA" userLabel="Blue Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1202,7 +1230,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="nfg-16-CCc" userLabel="1B Stepper">
-                                                                <rect key="frame" x="0.0" y="35" width="94" height="23.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="35" width="94" height="13.666666666666664"/>
                                                                 <connections>
                                                                     <action selector="stepperInnerBlue:" destination="Pbk-vr-61V" eventType="valueChanged" id="DhC-nX-wav"/>
                                                                 </connections>
@@ -1210,7 +1238,7 @@ DQoNCg
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="72B-Ba-Nob">
-                                                        <rect key="frame" x="18" y="191.33333333333337" width="94" height="59"/>
+                                                        <rect key="frame" x="18" y="161.33333333333337" width="94" height="49"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pn7-fV-SdX" userLabel="Alpha  Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1221,7 +1249,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="XtR-97-GVQ" userLabel="1A Stepper">
-                                                                <rect key="frame" x="0.0" y="30" width="94" height="29"/>
+                                                                <rect key="frame" x="0.0" y="30" width="94" height="19"/>
                                                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.90000000000000002" height="1"/>
                                                                 <connections>
                                                                     <action selector="stepperInnerAlpha:" destination="Pbk-vr-61V" eventType="valueChanged" id="5qO-Q8-80W"/>
@@ -1230,7 +1258,7 @@ DQoNCg
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="70X-eN-0a6">
-                                                        <rect key="frame" x="18" y="255.33333333333334" width="94" height="58.666666666666657"/>
+                                                        <rect key="frame" x="18" y="215.33333333333337" width="94" height="48.666666666666686"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tmz-Yd-efd" userLabel="Gradient Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1242,7 +1270,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="lwu-gE-WtO" userLabel="1L Stepper">
-                                                                <rect key="frame" x="0.0" y="35" width="94" height="23.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="35" width="94" height="13.666666666666664"/>
                                                                 <connections>
                                                                     <action selector="stepperInnerGradient:" destination="Pbk-vr-61V" eventType="valueChanged" id="IWg-OK-K2s"/>
                                                                 </connections>
@@ -1262,10 +1290,10 @@ DQoNCg
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KMt-kP-jCU" userLabel="Middle Colour Stack View">
-                                                <rect key="frame" x="140" y="0.0" width="130" height="314"/>
+                                                <rect key="frame" x="140" y="0.0" width="130" height="264"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cyK-Ep-p5X">
-                                                        <rect key="frame" x="18" y="0.0" width="94" height="58.666666666666664"/>
+                                                        <rect key="frame" x="18" y="0.0" width="94" height="48.666666666666664"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Iz-86-rek" userLabel="Red Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1281,7 +1309,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="tJL-vj-Dwe" userLabel="2R Stepper">
-                                                                <rect key="frame" x="0.0" y="35" width="94" height="23.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="35" width="94" height="13.666666666666664"/>
                                                                 <connections>
                                                                     <action selector="stepperMiddleRed:" destination="Pbk-vr-61V" eventType="valueChanged" id="iVL-HV-nv1"/>
                                                                 </connections>
@@ -1289,7 +1317,7 @@ DQoNCg
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qSM-rx-Oh3">
-                                                        <rect key="frame" x="18" y="63.666666666666629" width="94" height="59"/>
+                                                        <rect key="frame" x="18" y="53.666666666666629" width="94" height="49"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eal-Le-AFd" userLabel="Green Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1302,7 +1330,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="jPc-b1-uDT" userLabel="2G Stepper">
-                                                                <rect key="frame" x="0.0" y="35" width="94" height="24"/>
+                                                                <rect key="frame" x="0.0" y="35" width="94" height="14"/>
                                                                 <connections>
                                                                     <action selector="stepperMiddleGreen:" destination="Pbk-vr-61V" eventType="valueChanged" id="a6y-H9-hJ7"/>
                                                                 </connections>
@@ -1310,7 +1338,7 @@ DQoNCg
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4jc-kW-gfx">
-                                                        <rect key="frame" x="18" y="127.66666666666664" width="94" height="58.666666666666671"/>
+                                                        <rect key="frame" x="18" y="107.66666666666664" width="94" height="48.666666666666671"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pzg-qm-Hzw" userLabel="Blue Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1322,7 +1350,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="cYj-QU-YZu" userLabel="2B Stepper">
-                                                                <rect key="frame" x="0.0" y="35" width="94" height="23.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="35" width="94" height="13.666666666666664"/>
                                                                 <connections>
                                                                     <action selector="stepperMiddleBlue:" destination="Pbk-vr-61V" eventType="valueChanged" id="YTS-nO-nCX"/>
                                                                 </connections>
@@ -1330,7 +1358,7 @@ DQoNCg
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eEA-4j-9hU">
-                                                        <rect key="frame" x="18" y="191.33333333333337" width="94" height="59"/>
+                                                        <rect key="frame" x="18" y="161.33333333333337" width="94" height="49"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e2v-aE-h1G" userLabel="Alpha  Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1341,7 +1369,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="IGJ-7n-lmz" userLabel="2A Stepper">
-                                                                <rect key="frame" x="0.0" y="30" width="94" height="29"/>
+                                                                <rect key="frame" x="0.0" y="30" width="94" height="19"/>
                                                                 <connections>
                                                                     <action selector="stepperMiddleAlpha:" destination="Pbk-vr-61V" eventType="valueChanged" id="uem-1S-DeM"/>
                                                                 </connections>
@@ -1349,7 +1377,7 @@ DQoNCg
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Biv-x3-1HV">
-                                                        <rect key="frame" x="18" y="255.33333333333334" width="94" height="58.666666666666657"/>
+                                                        <rect key="frame" x="18" y="215.33333333333337" width="94" height="48.666666666666686"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rpJ-o8-47I" userLabel="3 Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1361,7 +1389,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="TW1-Ba-2Ek" userLabel="2L Stepper">
-                                                                <rect key="frame" x="0.0" y="35" width="94" height="23.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="35" width="94" height="13.666666666666664"/>
                                                                 <connections>
                                                                     <action selector="stepperMiddleGradient:" destination="Pbk-vr-61V" eventType="valueChanged" id="my1-Pw-KJ4"/>
                                                                 </connections>
@@ -1381,10 +1409,10 @@ DQoNCg
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="2rb-IV-SXD" userLabel="Outer Colour Stack View">
-                                                <rect key="frame" x="280" y="0.0" width="130" height="314"/>
+                                                <rect key="frame" x="280" y="0.0" width="130" height="264"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="NX8-Lw-WdD">
-                                                        <rect key="frame" x="18" y="0.0" width="94" height="58.666666666666664"/>
+                                                        <rect key="frame" x="18" y="0.0" width="94" height="48.666666666666664"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ry2-CU-81x" userLabel="Red Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1400,7 +1428,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="NU3-dH-LyF" userLabel="3R Stepper">
-                                                                <rect key="frame" x="0.0" y="35" width="94" height="23.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="35" width="94" height="13.666666666666664"/>
                                                                 <connections>
                                                                     <action selector="stepperOuterRed:" destination="Pbk-vr-61V" eventType="valueChanged" id="62e-55-5rs"/>
                                                                 </connections>
@@ -1408,7 +1436,7 @@ DQoNCg
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="oka-XJ-gbd">
-                                                        <rect key="frame" x="18" y="63.666666666666629" width="94" height="59"/>
+                                                        <rect key="frame" x="18" y="53.666666666666629" width="94" height="49"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x3P-mE-mXN" userLabel="Green Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1421,7 +1449,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="UXv-oN-ZfT" userLabel="3G Stepper">
-                                                                <rect key="frame" x="0.0" y="35" width="94" height="24"/>
+                                                                <rect key="frame" x="0.0" y="35" width="94" height="14"/>
                                                                 <connections>
                                                                     <action selector="stepperOuterGreen:" destination="Pbk-vr-61V" eventType="valueChanged" id="Z2h-ib-CEL"/>
                                                                 </connections>
@@ -1429,7 +1457,7 @@ DQoNCg
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ByF-bD-3Ve">
-                                                        <rect key="frame" x="18" y="127.66666666666664" width="94" height="58.666666666666671"/>
+                                                        <rect key="frame" x="18" y="107.66666666666664" width="94" height="48.666666666666671"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a4L-Jk-fHV" userLabel="Blue Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1441,7 +1469,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="6EX-OG-Kvi" userLabel="3B Stepper">
-                                                                <rect key="frame" x="0.0" y="35" width="94" height="23.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="35" width="94" height="13.666666666666664"/>
                                                                 <connections>
                                                                     <action selector="stepperOuterBlue:" destination="Pbk-vr-61V" eventType="valueChanged" id="OGa-QH-BYb"/>
                                                                 </connections>
@@ -1449,7 +1477,7 @@ DQoNCg
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oUj-on-HEo">
-                                                        <rect key="frame" x="18" y="191.33333333333337" width="94" height="59"/>
+                                                        <rect key="frame" x="18" y="161.33333333333337" width="94" height="49"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vMC-RA-jti" userLabel="Alpha  Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1460,7 +1488,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="uSb-PV-udz" userLabel="3A Stepper">
-                                                                <rect key="frame" x="0.0" y="30" width="94" height="29"/>
+                                                                <rect key="frame" x="0.0" y="30" width="94" height="19"/>
                                                                 <connections>
                                                                     <action selector="stepperOuterAlpha:" destination="Pbk-vr-61V" eventType="valueChanged" id="059-9P-xqi"/>
                                                                 </connections>
@@ -1468,7 +1496,7 @@ DQoNCg
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fpv-kB-MW5">
-                                                        <rect key="frame" x="18" y="255.33333333333334" width="94" height="58.666666666666657"/>
+                                                        <rect key="frame" x="18" y="215.33333333333337" width="94" height="48.666666666666686"/>
                                                         <subviews>
                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Sy-2y-yhd" userLabel="3 Field">
                                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="30"/>
@@ -1480,7 +1508,7 @@ DQoNCg
                                                                 </connections>
                                                             </textField>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="6rE-qR-yvA" userLabel="3L Stepper">
-                                                                <rect key="frame" x="0.0" y="35" width="94" height="23.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="35" width="94" height="13.666666666666664"/>
                                                                 <connections>
                                                                     <action selector="stepperOuterGradient:" destination="Pbk-vr-61V" eventType="valueChanged" id="4Az-03-dEn"/>
                                                                 </connections>
@@ -1520,6 +1548,7 @@ DQoNCg
                     <navigationItem key="navigationItem" title="Heatmap" id="yQa-XH-y2d"/>
                     <connections>
                         <outlet property="blendModePicker" destination="rvE-3u-XzY" id="5t9-tm-Jyf"/>
+                        <outlet property="coloursStackView" destination="jgg-IX-Tu7" id="Oev-2N-dN4"/>
                         <outlet property="innerAlpha" destination="Pn7-fV-SdX" id="GRr-7v-Vxo"/>
                         <outlet property="innerAlphaStepper" destination="XtR-97-GVQ" id="acq-Mo-eXQ"/>
                         <outlet property="innerBlue" destination="Eh6-GU-dtA" id="hRN-3p-9xj"/>
@@ -1530,6 +1559,7 @@ DQoNCg
                         <outlet property="innerGreenStepper" destination="qKZ-Xe-sYW" id="LCN-LI-dPB"/>
                         <outlet property="innerRed" destination="V6i-G1-fPs" id="0zD-sD-tyJ"/>
                         <outlet property="innerRedStepper" destination="gSW-v0-V87" id="WbX-HK-lt7"/>
+                        <outlet property="lowerControlsStackView" destination="ron-hr-ShN" id="CGS-HD-4kF"/>
                         <outlet property="mapSegmentedControl" destination="kdm-8Y-EsM" id="CMC-QR-SLl"/>
                         <outlet property="mapView" destination="lQG-2T-c3p" id="AGg-3I-kSX"/>
                         <outlet property="middleAlpha" destination="e2v-aE-h1G" id="aNd-2t-d6W"/>
@@ -1552,6 +1582,7 @@ DQoNCg
                         <outlet property="outerGreenStepper" destination="UXv-oN-ZfT" id="O5Q-CL-nlC"/>
                         <outlet property="outerRed" destination="ry2-CU-81x" id="B3T-hO-9WE"/>
                         <outlet property="outerRedStepper" destination="NU3-dH-LyF" id="R5c-of-1MX"/>
+                        <outlet property="panelSegmentedControl" destination="dHI-7R-bms" id="fCZ-sN-LEn"/>
                         <outlet property="pitchSegmentedControl" destination="zTz-Oe-w55" id="HRA-rh-emM"/>
                         <outlet property="radiusField" destination="gFp-PM-FdW" id="Pt8-yX-2O5"/>
                         <outlet property="radiusStepper" destination="IvV-Fr-PtZ" id="qMT-us-elH"/>

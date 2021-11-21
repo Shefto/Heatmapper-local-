@@ -73,6 +73,12 @@
 /* Class = "UILabel"; text = "Date"; ObjectID = "cdu-fT-Y48"; */
 "cdu-fT-Y48.text" = "";
 
+/* Class = "UISegmentedControl"; dHI-7R-bms.segmentTitles[0] = "Panel"; ObjectID = "dHI-7R-bms"; */
+"dHI-7R-bms.segmentTitles[0]" = "";
+
+/* Class = "UISegmentedControl"; dHI-7R-bms.segmentTitles[1] = "Hide"; ObjectID = "dHI-7R-bms"; */
+"dHI-7R-bms.segmentTitles[1]" = "";
+
 /* Class = "UINavigationItem"; title = "Edit Activity"; ObjectID = "EbZ-Kt-ugg"; */
 "EbZ-Kt-ugg.title" = "";
 
@@ -169,6 +175,12 @@
 /* Class = "UIButton"; normalTitle = "Test Heatmap"; ObjectID = "uxy-2h-68R"; */
 "uxy-2h-68R.normalTitle" = "";
 
+/* Class = "UIButton"; configuration.title = "Resize"; ObjectID = "V8E-UV-nEK"; */
+"V8E-UV-nEK.configuration.title" = "";
+
+/* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "V8E-UV-nEK"; */
+"V8E-UV-nEK.normalTitle" = "";
+
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "VIb-fl-PFY"; */
 "VIb-fl-PFY.title" = "";
 
@@ -208,7 +220,7 @@
 /* Class = "UILabel"; text = "Pace"; ObjectID = "yYq-TM-45H"; */
 "yYq-TM-45H.text" = "";
 
-/* Class = "UISegmentedControl"; zTz-Oe-w55.segmentTitles[0] = "On"; ObjectID = "zTz-Oe-w55"; */
+/* Class = "UISegmentedControl"; zTz-Oe-w55.segmentTitles[0] = "Pitch"; ObjectID = "zTz-Oe-w55"; */
 "zTz-Oe-w55.segmentTitles[0]" = "";
 
 /* Class = "UISegmentedControl"; zTz-Oe-w55.segmentTitles[1] = "Off"; ObjectID = "zTz-Oe-w55"; */

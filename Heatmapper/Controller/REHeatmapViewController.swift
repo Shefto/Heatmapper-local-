@@ -114,11 +114,34 @@ class REHeatmapViewController: UIViewController {
   @IBOutlet weak var pitchSegmentedControl: UISegmentedControl!
   @IBOutlet weak var mapSegmentedControl: UISegmentedControl!
 
+  @IBOutlet weak var panelSegmentedControl: UISegmentedControl!
+
+  @IBOutlet weak var coloursStackView: UIStackView!
+  @IBOutlet weak var lowerControlsStackView: UIStackView!
+
   @IBAction func stepperRadius(_ sender: UIStepper) {
     radius = Int(sender.value)
     radiusField.text = String(describing: radius)
     refreshHeatmap()
   }
+
+
+  @IBAction func segPanel(_ sender: UISegmentedControl) {
+    switch sender.selectedSegmentIndex {
+    case 0:
+      coloursStackView.isHidden = false
+      lowerControlsStackView.isHidden = false
+    case 1:
+      coloursStackView.isHidden = true
+      lowerControlsStackView.isHidden = true
+    default:
+      coloursStackView.isHidden = false
+      lowerControlsStackView.isHidden = false
+    }
+
+
+  }
+
 
   @IBAction func segMap(_ sender: UISegmentedControl) {
     switch sender.selectedSegmentIndex {
@@ -256,6 +279,10 @@ class REHeatmapViewController: UIViewController {
     }
   }
 
+  // this is where the fun begins... resize mode
+  @IBAction func btnResize(_ sender: Any) {
+    
+  }
 
   @IBAction func btnReset(_ sender: Any) {
 
