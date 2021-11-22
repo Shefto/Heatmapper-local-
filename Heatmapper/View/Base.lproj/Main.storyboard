@@ -1054,7 +1054,8 @@ DQoNCg
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="fJF-dn-msC"/>
                                 </constraints>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="5fg-O7-Fmq" appends="YES" id="536-f8-JcD"/>
+                                    <outletCollection property="gestureRecognizers" destination="3oV-14-ihe" appends="YES" id="lDQ-xB-zev"/>
+                                    <outletCollection property="gestureRecognizers" destination="6oP-mK-T7t" appends="YES" id="W9Y-PY-KVC"/>
                                 </connections>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hGX-Pw-hDX">
@@ -1561,7 +1562,7 @@ DQoNCg
                         <outlet property="innerRedStepper" destination="gSW-v0-V87" id="WbX-HK-lt7"/>
                         <outlet property="lowerControlsStackView" destination="ron-hr-ShN" id="CGS-HD-4kF"/>
                         <outlet property="mapSegmentedControl" destination="kdm-8Y-EsM" id="CMC-QR-SLl"/>
-                        <outlet property="mapView" destination="lQG-2T-c3p" id="AGg-3I-kSX"/>
+                        <outlet property="mapView" destination="lQG-2T-c3p" id="miF-qq-zXX"/>
                         <outlet property="middleAlpha" destination="e2v-aE-h1G" id="aNd-2t-d6W"/>
                         <outlet property="middleAlphaStepper" destination="IGJ-7n-lmz" id="XgP-99-2VD"/>
                         <outlet property="middleBlue" destination="Pzg-qm-Hzw" id="xsd-vD-Cil"/>
@@ -1589,11 +1590,16 @@ DQoNCg
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xws-kf-RrH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="5fg-O7-Fmq">
+                <panGestureRecognizer minimumNumberOfTouches="1" id="3oV-14-ihe">
                     <connections>
-                        <action selector="tapGesture:" destination="Pbk-vr-61V" id="Bf7-ZC-I5s"/>
+                        <action selector="panGesture:" destination="Pbk-vr-61V" id="fNZ-WJ-kYA"/>
                     </connections>
-                </tapGestureRecognizer>
+                </panGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="6oP-mK-T7t">
+                    <connections>
+                        <action selector="longPressRecognizer:" destination="Pbk-vr-61V" id="Vve-8L-hdb"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-645" y="1822"/>
         </scene>

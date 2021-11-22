@@ -260,28 +260,34 @@ class REHeatmapViewController: UIViewController {
     refreshHeatmap()
   }
 
+  @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
 
-  // this gesture created to enable user to tap points on which the overlay size will be based
-  // not currently in use
-  @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
-    if sender.state == .ended {
-      let tapGestureEndedLocation = sender.location(in: mapView)
-      print("tapGestureEndedLocation: \(tapGestureEndedLocation)")
-//      let tappedCoordinate = mapView.convert(tapGestureEndedLocation, toCoordinateFrom: mapView)
-      //      addAnnotation(coordinate: tappedCoordinate)
-      pointCount += 1
-
-      if pointCount == 2 {
-
-        print("pointCount = 2 - time to insert the overlay")
-
-      }
-    }
+    print("PanGesture recognized")
   }
+
+
+//  // this gesture created to enable user to tap points on which the overlay size will be based
+//  // not currently in use
+//  @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
+//
+//    if sender.state == .ended {
+//      let tapGestureEndedLocation = sender.location(in: mapView)
+//      print("tapGestureEndedLocation: \(tapGestureEndedLocation)")
+////      let tappedCoordinate = mapView.convert(tapGestureEndedLocation, toCoordinateFrom: mapView)
+//      //      addAnnotation(coordinate: tappedCoordinate)
+////      pointCount += 1
+////
+////      if pointCount == 2 {
+////
+////        print("pointCount = 2 - time to insert the overlay")
+////
+////      }
+//    }
+//  }
 
   // this is where the fun begins... resize mode
   @IBAction func btnResize(_ sender: Any) {
-    
+
   }
 
   @IBAction func btnReset(_ sender: Any) {
@@ -341,13 +347,29 @@ class REHeatmapViewController: UIViewController {
 
   @IBOutlet weak var mapView: MKMapView!
 
+
+  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    return true
+  }
+
+  @IBAction func longPressRecognizer(_ sender: UILongPressGestureRecognizer) {
+    print("longPress")
+  }
+
+
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
     blendModePicker.delegate = self
     blendModePicker.dataSource = self
     mapView.delegate = self
-//    reHeatmapPointImage = UIImage(systemName: "circle.fill")
+
+    let mapViewFrame = mapView.globalFrame!
+    let touchView = UIView(frame: mapViewFrame)
+//    touchView.backgroundColor = .systemBlue
+    self.view.addSubview(touchView)
+
     self.loadUI()
     self.loadTesterData()
     self.loadTesterUI()
@@ -357,6 +379,47 @@ class REHeatmapViewController: UIViewController {
     // all UI work is called within the function as the data retrieval works asynchronously
     getWorkoutData()
   }
+
+//  private var mapChangedFromUserInteraction = false
+//
+//  private func mapViewRegionDidChangeFromUserInteraction() -> Bool {
+//    let view = self.mapView.subviews[0]
+//    //  Look through gesture recognizers to determine whether this region change is from user interaction
+//    if let gestureRecognizers = view.gestureRecognizers {
+//      for recognizer in gestureRecognizers {
+//        if( recognizer.state == UIGestureRecognizer.State.began || recognizer.state == UIGestureRecognizer.State.ended ) {
+//          return true
+//        }
+//      }
+//    }
+//    return false
+//  }
+//
+//  func mapView(mapView: MKMapView, regionWillChangeAnimated animated:
+//               Bool) {
+//    mapChangedFromUserInteraction =
+//    mapViewRegionDidChangeFromUserInteraction()
+//    if (mapChangedFromUserInteraction) {
+//      // user changed map region
+//    }
+//  }
+//
+//  func mapView(mapView: MKMapView, regionDidChangeAnimated animated:
+//               Bool) {
+//    if (mapChangedFromUserInteraction) {
+//      // user changed map region
+//    }
+//  }
+
+
+
+
+
+
+
+
+
+
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
@@ -580,6 +643,7 @@ class REHeatmapViewController: UIViewController {
 
     if pitchOn == true {
         self.mapView.addOverlay(footballPitch11Overlay)
+
     }
 
 //    self.addAnnotation(coordinate: mapCenter)
