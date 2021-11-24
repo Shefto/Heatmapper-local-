@@ -70,7 +70,7 @@ class REHeatmapViewController: UIViewController {
   }
   var blendModeArray = [BlendMode]()
   var overlayCenter               : CLLocationCoordinate2D?
-// tester outlets
+  // tester outlets
 
 
   @IBOutlet weak var innerRed: UITextField!
@@ -266,29 +266,29 @@ class REHeatmapViewController: UIViewController {
     refreshHeatmap()
   }
 
-  @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
-    print("PanGesture recognized")
-  }
+  //  @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
+  //    print("PanGesture recognized")
+  //  }
 
 
-//  // this gesture created to enable user to tap points on which the overlay size will be based
-//  // not currently in use
-//  @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
-//
-//    if sender.state == .ended {
-//      let tapGestureEndedLocation = sender.location(in: mapView)
-//      print("tapGestureEndedLocation: \(tapGestureEndedLocation)")
-////      let tappedCoordinate = mapView.convert(tapGestureEndedLocation, toCoordinateFrom: mapView)
-//      //      addAnnotation(coordinate: tappedCoordinate)
-////      pointCount += 1
-////
-////      if pointCount == 2 {
-////
-////        print("pointCount = 2 - time to insert the overlay")
-////
-////      }
-//    }
-//  }
+  //  // this gesture created to enable user to tap points on which the overlay size will be based
+  //  // not currently in use
+  //  @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
+  //
+  //    if sender.state == .ended {
+  //      let tapGestureEndedLocation = sender.location(in: mapView)
+  //      print("tapGestureEndedLocation: \(tapGestureEndedLocation)")
+  ////      let tappedCoordinate = mapView.convert(tapGestureEndedLocation, toCoordinateFrom: mapView)
+  //      //      addAnnotation(coordinate: tappedCoordinate)
+  ////      pointCount += 1
+  ////
+  ////      if pointCount == 2 {
+  ////
+  ////        print("pointCount = 2 - time to insert the overlay")
+  ////
+  ////      }
+  //    }
+  //  }
 
 
   @IBAction func btnReset(_ sender: Any) {
@@ -352,6 +352,10 @@ class REHeatmapViewController: UIViewController {
     print("resizeTap called")
   }
 
+  @objc func resizePan(_ sender: UITapGestureRecognizer? = nil) {
+    print("resizePan called")
+  }
+
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
     return true
   }
@@ -359,8 +363,6 @@ class REHeatmapViewController: UIViewController {
   @IBAction func longPressRecognizer(_ sender: UILongPressGestureRecognizer) {
     print("longPress")
   }
-
-
 
   @IBAction func panGestureRecognizer(_ sender: UIPanGestureRecognizer) {
     print("panGestureRecognizer called")
@@ -391,13 +393,25 @@ class REHeatmapViewController: UIViewController {
     blendModePicker.dataSource = self
     mapView.delegate = self
     let tapper = UITapGestureRecognizer(target: self,action: #selector(self.resizeTap(_:)))
+    let panner = UIPanGestureRecognizer(target: self,action: #selector(self.resizePan(_:)))
 
     let mapViewFrame = mapView.globalFrame!
     touchView = UIView(frame: mapViewFrame)
-    touchView.backgroundColor = .systemBlue
+    touchView.bounds = mapView.bounds
+    touchView.isOpaque = true
     touchView.isUserInteractionEnabled = true
+
     touchView.addGestureRecognizer(tapper)
-    self.view.addSubview(touchView)
+    touchView.addGestureRecognizer(panner)
+    touchView.translatesAutoresizingMaskIntoConstraints = false
+
+    self.mapView.addSubview(touchView)
+    // this code ensures the touchView is completely aligned with the mapView
+    let attributes: [NSLayoutConstraint.Attribute] = [.top, .bottom, .right, .left]
+    NSLayoutConstraint.activate(attributes.map {
+      NSLayoutConstraint(item: touchView as Any, attribute: $0, relatedBy: .equal, toItem: touchView.superview, attribute: $0, multiplier: 1, constant: 0)
+    })
+
 
 
     self.loadUI()
@@ -409,46 +423,6 @@ class REHeatmapViewController: UIViewController {
     // all UI work is called within the function as the data retrieval works asynchronously
     getWorkoutData()
   }
-
-//  private var mapChangedFromUserInteraction = false
-//
-//  private func mapViewRegionDidChangeFromUserInteraction() -> Bool {
-//    let view = self.mapView.subviews[0]
-//    //  Look through gesture recognizers to determine whether this region change is from user interaction
-//    if let gestureRecognizers = view.gestureRecognizers {
-//      for recognizer in gestureRecognizers {
-//        if( recognizer.state == UIGestureRecognizer.State.began || recognizer.state == UIGestureRecognizer.State.ended ) {
-//          return true
-//        }
-//      }
-//    }
-//    return false
-//  }
-//
-//  func mapView(mapView: MKMapView, regionWillChangeAnimated animated:
-//               Bool) {
-//    mapChangedFromUserInteraction =
-//    mapViewRegionDidChangeFromUserInteraction()
-//    if (mapChangedFromUserInteraction) {
-//      // user changed map region
-//    }
-//  }
-//
-//  func mapView(mapView: MKMapView, regionDidChangeAnimated animated:
-//               Bool) {
-//    if (mapChangedFromUserInteraction) {
-//      // user changed map region
-//    }
-//  }
-
-
-
-
-
-
-
-
-
 
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -495,23 +469,23 @@ class REHeatmapViewController: UIViewController {
     let loadedTesterArray = MyFunc.getTesterData()
     if loadedTesterArray.isEmpty == false {
 
-    innerColourRed = loadedTesterArray[0]
-    innerColourGreen = loadedTesterArray[1]
-    innerColourBlue = loadedTesterArray[2]
-    innerColourAlpha = loadedTesterArray[3]
-    innerColourGradient = loadedTesterArray[4]
+      innerColourRed = loadedTesterArray[0]
+      innerColourGreen = loadedTesterArray[1]
+      innerColourBlue = loadedTesterArray[2]
+      innerColourAlpha = loadedTesterArray[3]
+      innerColourGradient = loadedTesterArray[4]
 
-    middleColourRed = loadedTesterArray[5]
-    middleColourGreen = loadedTesterArray[6]
-    middleColourBlue = loadedTesterArray[7]
-    middleColourAlpha = loadedTesterArray[8]
-    middleColourGradient = loadedTesterArray[9]
+      middleColourRed = loadedTesterArray[5]
+      middleColourGreen = loadedTesterArray[6]
+      middleColourBlue = loadedTesterArray[7]
+      middleColourAlpha = loadedTesterArray[8]
+      middleColourGradient = loadedTesterArray[9]
 
-    outerColourRed = loadedTesterArray[10]
-    outerColourGreen = loadedTesterArray[11]
-    outerColourBlue = loadedTesterArray[12]
-    outerColourAlpha = loadedTesterArray[13]
-    outerColourGradient = loadedTesterArray[14]
+      outerColourRed = loadedTesterArray[10]
+      outerColourGreen = loadedTesterArray[11]
+      outerColourBlue = loadedTesterArray[12]
+      outerColourAlpha = loadedTesterArray[13]
+      outerColourGradient = loadedTesterArray[14]
 
     }
   }
@@ -649,35 +623,35 @@ class REHeatmapViewController: UIViewController {
     rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
 
     // this rectangle covers the area of all points
-//    let rect = MKMapRect.init(x: minX, y: minY, width: maxX - minX, height: minY - maxY)
+    //    let rect = MKMapRect.init(x: minX, y: minY, width: maxX - minX, height: minY - maxY)
     let rect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
 
     // get the angle we want to set the pitch at
-//    let rectTopLeftX = rect.minX
-//    let rectTopLeftY = rect.minY
-//    let rectBottomRightX = rect.maxX
-//    let rectBottomRightY = rect.maxY
-//
-//    let rectTopLeftPoint = CGPoint(x: rectTopLeftX, y: rectTopLeftY)
-//    let rectBottomRightPoint = CGPoint(x: rectBottomRightX, y: rectBottomRightY)
-//    let rectAngle = MyFunc.angle(between: rectTopLeftPoint, ending: rectBottomRightPoint)
-//
-//    MyFunc.logMessage(.debug, "rect: \(rect)")
-//    MyFunc.logMessage(.debug, "rectAngle: \(rectAngle)")
-//    angle = rectAngle
+    //    let rectTopLeftX = rect.minX
+    //    let rectTopLeftY = rect.minY
+    //    let rectBottomRightX = rect.maxX
+    //    let rectBottomRightY = rect.maxY
+    //
+    //    let rectTopLeftPoint = CGPoint(x: rectTopLeftX, y: rectTopLeftY)
+    //    let rectBottomRightPoint = CGPoint(x: rectBottomRightX, y: rectBottomRightY)
+    //    let rectAngle = MyFunc.angle(between: rectTopLeftPoint, ending: rectBottomRightPoint)
+    //
+    //    MyFunc.logMessage(.debug, "rect: \(rect)")
+    //    MyFunc.logMessage(.debug, "rectAngle: \(rectAngle)")
+    //    angle = rectAngle
 
-//    pointsDistance = MyFunc.distanceBetween(point1: rectTopLeftPoint, point2: rectBottomRightPoint)
+    //    pointsDistance = MyFunc.distanceBetween(point1: rectTopLeftPoint, point2: rectBottomRightPoint)
 
     //  create an overlay of the pitch based upon the rectangle
     let footballPitch11Overlay = FootballPitchOverlay(pitchRect: rect)
 
     if pitchOn == true {
-        self.mapView.addOverlay(footballPitch11Overlay)
+      self.mapView.addOverlay(footballPitch11Overlay)
 
     }
 
-//    self.addAnnotation(coordinate: mapCenter)
-//    self.mapView.setCenter(mapCenter, animated: true)
+    //    self.addAnnotation(coordinate: mapCenter)
+    //    self.mapView.setCenter(mapCenter, animated: true)
     self.setMapViewZoom(rect: rect)
 
 
@@ -841,7 +815,7 @@ class REHeatmapViewController: UIViewController {
 
           self.createPitchOverlay()
           self.createREHeatmap()
-//          self.createDTMHeatmap()
+          //          self.createDTMHeatmap()
 
 
         }
@@ -945,7 +919,7 @@ extension REHeatmapViewController: MKMapViewDelegate {
       gradientLocationsArray.append(gradientLocationCG3Float)
 
 
-//      let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle)
+      //      let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle)
       let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle,
                                                       innerColourArray: innerColourArray, middleColourArray: middleColourArray, outerColourArray: outerColourArray, gradientLocationsArray: gradientLocationsArray, blendMode: blendMode)
 
@@ -963,7 +937,7 @@ extension REHeatmapViewController: MKMapViewDelegate {
 
 
     return DTMHeatmapRenderer.init(overlay: overlay)
-//    return REHeatmapRenderer.init(overlay: overlay)
+    //    return REHeatmapRenderer.init(overlay: overlay)
   }
 
 
@@ -992,23 +966,23 @@ extension REHeatmapViewController: MKMapViewDelegate {
     var heatmapPointAnnotationView: MKAnnotationView? = self.mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
 
     if heatmapPointAnnotationView == nil {
-        heatmapPointAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+      heatmapPointAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
       heatmapPointAnnotationView?.image = self.reHeatmapPointImage
-        heatmapPointAnnotationView?.frame.size = CGSize(width: 3, height: 3)
+      heatmapPointAnnotationView?.frame.size = CGSize(width: 3, height: 3)
 
     } else {
       heatmapPointAnnotationView?.annotation = annotation
     }
 
-//    var pinAnnotationView: MKPinAnnotationView? = self.mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-//    if pinAnnotationView == nil {
-//      pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-//      pinAnnotationView?.isDraggable = true
-//      pinAnnotationView?.canShowCallout = true
-//      pinAnnotationView?.pinTintColor = .blue
-//    } else {
-//      pinAnnotationView?.annotation = annotation
-//    }
+    //    var pinAnnotationView: MKPinAnnotationView? = self.mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+    //    if pinAnnotationView == nil {
+    //      pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+    //      pinAnnotationView?.isDraggable = true
+    //      pinAnnotationView?.canShowCallout = true
+    //      pinAnnotationView?.pinTintColor = .blue
+    //    } else {
+    //      pinAnnotationView?.annotation = annotation
+    //    }
 
     return heatmapPointAnnotationView
   }
@@ -1099,8 +1073,8 @@ extension REHeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource 
       blendMode = .plusDarker
     case .plusLighter:
       blendMode = .plusLighter
-//    default:
-//      blendMode = .normal
+      //    default:
+      //      blendMode = .normal
     }
 
     refreshHeatmap()

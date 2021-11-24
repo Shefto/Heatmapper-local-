@@ -1057,7 +1057,7 @@ DQoNCg
                                     <outletCollection property="gestureRecognizers" destination="6oP-mK-T7t" appends="YES" id="W9Y-PY-KVC"/>
                                 </connections>
                             </mapView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hGX-Pw-hDX">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hGX-Pw-hDX" userLabel="ButtonStackView">
                                 <rect key="frame" x="2" y="443" width="410" height="414"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="phB-N3-4AZ" userLabel="Controls Upper Stack View">
@@ -1074,6 +1074,7 @@ DQoNCg
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <color key="tintColor" name="autoDetect"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="W5n-eu-HlY"/>
                                         </constraints>
