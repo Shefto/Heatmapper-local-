@@ -26,6 +26,7 @@ class REHeatmapViewController: UIViewController {
   var pointsDistance              : CGFloat = 0.0
   var dtmRect                     = MKMapRect()
   var pitchOn                     : Bool = false
+  var ResizeOn                    : Bool = false
 
   var heatmapPointCircle          : MKCircle?
   var reHeatmapPoint              : REHeatmapPoint?
@@ -54,6 +55,8 @@ class REHeatmapViewController: UIViewController {
   var middleColourGradient        : String = "0.3"
   var outerColourGradient         : String = "0.5"
   var radius                      : Int = 2
+
+  var touchView                   : UIView!
 
   var inProgressWheel       : UIActivityIndicatorView?
   // variable purely for the In Progress wheel
@@ -118,6 +121,9 @@ class REHeatmapViewController: UIViewController {
 
   @IBOutlet weak var coloursStackView: UIStackView!
   @IBOutlet weak var lowerControlsStackView: UIStackView!
+
+  @IBOutlet weak var resizeButton: UIButton!
+
 
   @IBAction func stepperRadius(_ sender: UIStepper) {
     radius = Int(sender.value)
@@ -261,7 +267,6 @@ class REHeatmapViewController: UIViewController {
   }
 
   @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
-
     print("PanGesture recognized")
   }
 
@@ -285,10 +290,6 @@ class REHeatmapViewController: UIViewController {
 //    }
 //  }
 
-  // this is where the fun begins... resize mode
-  @IBAction func btnResize(_ sender: Any) {
-
-  }
 
   @IBAction func btnReset(_ sender: Any) {
 
@@ -347,6 +348,9 @@ class REHeatmapViewController: UIViewController {
 
   @IBOutlet weak var mapView: MKMapView!
 
+  @objc func resizeTap(_ sender: UITapGestureRecognizer? = nil) {
+    print("resizeTap called")
+  }
 
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
     return true
@@ -358,17 +362,43 @@ class REHeatmapViewController: UIViewController {
 
 
 
+  @IBAction func panGestureRecognizer(_ sender: UIPanGestureRecognizer) {
+    print("panGestureRecognizer called")
+  }
+
+
+  // this is where the fun begins... resize mode
+  @IBAction func btnResize(_ sender: Any) {
+
+    if ResizeOn == false {
+      ResizeOn = true
+      resizeButton.setTitle("Resize ON", for: .normal)
+      self.touchView.isHidden = true
+
+
+    } else {
+      ResizeOn = false
+      resizeButton.setTitle("Resize OFF", for: .normal)
+      self.touchView.isHidden = false
+
+    }
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
     blendModePicker.delegate = self
     blendModePicker.dataSource = self
     mapView.delegate = self
+    let tapper = UITapGestureRecognizer(target: self,action: #selector(self.resizeTap(_:)))
 
     let mapViewFrame = mapView.globalFrame!
-    let touchView = UIView(frame: mapViewFrame)
-//    touchView.backgroundColor = .systemBlue
+    touchView = UIView(frame: mapViewFrame)
+    touchView.backgroundColor = .systemBlue
+    touchView.isUserInteractionEnabled = true
+    touchView.addGestureRecognizer(tapper)
     self.view.addSubview(touchView)
+
 
     self.loadUI()
     self.loadTesterData()

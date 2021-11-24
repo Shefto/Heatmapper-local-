@@ -1054,7 +1054,6 @@ DQoNCg
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="fJF-dn-msC"/>
                                 </constraints>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="3oV-14-ihe" appends="YES" id="lDQ-xB-zev"/>
                                     <outletCollection property="gestureRecognizers" destination="6oP-mK-T7t" appends="YES" id="W9Y-PY-KVC"/>
                                 </connections>
                             </mapView>
@@ -1064,7 +1063,7 @@ DQoNCg
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="phB-N3-4AZ" userLabel="Controls Upper Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="410" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8E-UV-nEK" userLabel="Reset" customClass="ThemeActionButton" customModule="Heatmapper" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8E-UV-nEK" userLabel="Reset">
                                                 <rect key="frame" x="0.0" y="0.0" width="410" height="50"/>
                                                 <color key="tintColor" name="autoDetect"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -1587,12 +1586,13 @@ DQoNCg
                         <outlet property="pitchSegmentedControl" destination="zTz-Oe-w55" id="HRA-rh-emM"/>
                         <outlet property="radiusField" destination="gFp-PM-FdW" id="Pt8-yX-2O5"/>
                         <outlet property="radiusStepper" destination="IvV-Fr-PtZ" id="qMT-us-elH"/>
+                        <outlet property="resizeButton" destination="V8E-UV-nEK" id="8PR-AJ-xS5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xws-kf-RrH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="3oV-14-ihe">
                     <connections>
-                        <action selector="panGesture:" destination="Pbk-vr-61V" id="fNZ-WJ-kYA"/>
+                        <action selector="panGestureRecognizer:" destination="Pbk-vr-61V" id="4a8-as-pGB"/>
                     </connections>
                 </panGestureRecognizer>
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="6oP-mK-T7t">
