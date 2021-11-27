@@ -266,30 +266,6 @@ class REHeatmapViewController: UIViewController {
     refreshHeatmap()
   }
 
-  //  @IBAction func panGesture(_ sender: UIPanGestureRecognizer) {
-  //    print("PanGesture recognized")
-  //  }
-
-
-  //  // this gesture created to enable user to tap points on which the overlay size will be based
-  //  // not currently in use
-  //  @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
-  //
-  //    if sender.state == .ended {
-  //      let tapGestureEndedLocation = sender.location(in: mapView)
-  //      print("tapGestureEndedLocation: \(tapGestureEndedLocation)")
-  ////      let tappedCoordinate = mapView.convert(tapGestureEndedLocation, toCoordinateFrom: mapView)
-  //      //      addAnnotation(coordinate: tappedCoordinate)
-  ////      pointCount += 1
-  ////
-  ////      if pointCount == 2 {
-  ////
-  ////        print("pointCount = 2 - time to insert the overlay")
-  ////
-  ////      }
-  //    }
-  //  }
-
 
   @IBAction func btnReset(_ sender: Any) {
 
@@ -352,8 +328,31 @@ class REHeatmapViewController: UIViewController {
     print("resizeTap called")
   }
 
-  @objc func resizePan(_ sender: UIPanGestureRecognizer) {
-    print("resizePan called")
+  @objc func handleRotate(_ gesture: UIRotationGestureRecognizer) {
+    guard let gestureView = gesture.view else {
+      return
+    }
+
+    gestureView.transform = gestureView.transform.rotated(
+      by: gesture.rotation
+    )
+    gesture.rotation = 0
+  }
+
+  @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+    guard let gestureView = gesture.view else {
+      return
+    }
+
+    gestureView.transform = gestureView.transform.scaledBy(
+      x: gesture.scale,
+      y: gesture.scale
+    )
+    gesture.scale = 1
+  }
+
+  @objc func handlePan(_ sender: UIPanGestureRecognizer) {
+    print("handlePan called")
     // 1
     let translation = sender.translation(in: view)
 
@@ -391,29 +390,21 @@ class REHeatmapViewController: UIViewController {
     finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
     finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
 
-    // 8
-    UIView.animate(
-      withDuration: Double(slideFactor * 2),
-      delay: 0,
-      // 9
-      options: .curveEaseOut,
-      animations: {
-        gestureView.center = finalPoint
-      })
+//    // 8
+//    UIView.animate(
+//      withDuration: Double(slideFactor * 2),
+//      delay: 0,
+//      // 9
+//      options: .curveEaseOut,
+//      animations: {
+//        gestureView.center = finalPoint
+//      })
 
   }
 
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
     return true
   }
-
-//  @IBAction func longPressRecognizer(_ sender: UILongPressGestureRecognizer) {
-//    print("longPress")
-//  }
-//
-//  @IBAction func panGestureRecognizer(_ sender: UIPanGestureRecognizer) {
-//    print("panGestureRecognizer called")
-//  }
 
 
   // this is where the fun begins... resize mode
@@ -442,8 +433,9 @@ class REHeatmapViewController: UIViewController {
 
     mapView.delegate = self
 
-    let tapper = UITapGestureRecognizer(target: self,action: #selector(self.resizeTap(_:)))
-    let panner = UIPanGestureRecognizer(target: self,action: #selector(self.resizePan(_:)))
+    let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
+    let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
+    let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
 
     // add the touchView
     // doing this programmatically to avoid Storyboard complaining about overlap
@@ -452,9 +444,7 @@ class REHeatmapViewController: UIViewController {
     touchView.bounds = mapView.bounds
 //    touchView.isOpaque = true
     touchView.translatesAutoresizingMaskIntoConstraints = false
-    touchView.isUserInteractionEnabled = true
-//    touchView.addGestureRecognizer(tapper)
-    touchView.addGestureRecognizer(panner)
+//    touchView.isUserInteractionEnabled = true
 
     self.mapView.addSubview(touchView)
 
@@ -471,8 +461,10 @@ class REHeatmapViewController: UIViewController {
     pitchView.isUserInteractionEnabled = true
     //    touchView.addGestureRecognizer(tapper)
     pitchView.addGestureRecognizer(panner)
-
+    pitchView.addGestureRecognizer(rotator)
+    pitchView.addGestureRecognizer(pincher)
     self.touchView.addSubview(pitchView)
+
 
     self.loadUI()
     self.loadTesterData()
