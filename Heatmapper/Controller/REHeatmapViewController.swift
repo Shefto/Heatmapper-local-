@@ -389,30 +389,40 @@ class REHeatmapViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    // set up the tester picker
     blendModePicker.delegate = self
     blendModePicker.dataSource = self
+
     mapView.delegate = self
+
     let tapper = UITapGestureRecognizer(target: self,action: #selector(self.resizeTap(_:)))
     let panner = UIPanGestureRecognizer(target: self,action: #selector(self.resizePan(_:)))
 
+    // add the touchView
+    // doing this programmatically to avoid Storyboard complaining about overlap
     let mapViewFrame = mapView.globalFrame!
     touchView = UIView(frame: mapViewFrame)
     touchView.bounds = mapView.bounds
     touchView.isOpaque = true
+    touchView.translatesAutoresizingMaskIntoConstraints = false
     touchView.isUserInteractionEnabled = true
 
     touchView.addGestureRecognizer(tapper)
     touchView.addGestureRecognizer(panner)
-    touchView.translatesAutoresizingMaskIntoConstraints = false
 
     self.mapView.addSubview(touchView)
+
     // this code ensures the touchView is completely aligned with the mapView
     let attributes: [NSLayoutConstraint.Attribute] = [.top, .bottom, .right, .left]
     NSLayoutConstraint.activate(attributes.map {
       NSLayoutConstraint(item: touchView as Any, attribute: $0, relatedBy: .equal, toItem: touchView.superview, attribute: $0, multiplier: 1, constant: 0)
     })
 
+    let pitchImage = UIImage(named: "football pitch 11")
+    let pitchView = UIImageView(image: pitchImage)
+    pitchView.layer.opacity = 0.5
 
+    self.touchView.addSubview(pitchView)
 
     self.loadUI()
     self.loadTesterData()
@@ -623,24 +633,7 @@ class REHeatmapViewController: UIViewController {
     rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
 
     // this rectangle covers the area of all points
-    //    let rect = MKMapRect.init(x: minX, y: minY, width: maxX - minX, height: minY - maxY)
     let rect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
-
-    // get the angle we want to set the pitch at
-    //    let rectTopLeftX = rect.minX
-    //    let rectTopLeftY = rect.minY
-    //    let rectBottomRightX = rect.maxX
-    //    let rectBottomRightY = rect.maxY
-    //
-    //    let rectTopLeftPoint = CGPoint(x: rectTopLeftX, y: rectTopLeftY)
-    //    let rectBottomRightPoint = CGPoint(x: rectBottomRightX, y: rectBottomRightY)
-    //    let rectAngle = MyFunc.angle(between: rectTopLeftPoint, ending: rectBottomRightPoint)
-    //
-    //    MyFunc.logMessage(.debug, "rect: \(rect)")
-    //    MyFunc.logMessage(.debug, "rectAngle: \(rectAngle)")
-    //    angle = rectAngle
-
-    //    pointsDistance = MyFunc.distanceBetween(point1: rectTopLeftPoint, point2: rectBottomRightPoint)
 
     //  create an overlay of the pitch based upon the rectangle
     let footballPitch11Overlay = FootballPitchOverlay(pitchRect: rect)
