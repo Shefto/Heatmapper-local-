@@ -37,7 +37,7 @@ class FootballPitchOverlayView: MKOverlayRenderer {
 
 
 //    MyFunc.logMessage(.debug, "imageHypotenuse: \(imageHypotenuse)")
-    let imageScale = pointsDistance / imageHypotenuse
+//    let imageScale = pointsDistance / imageHypotenuse
 //    MyFunc.logMessage(.debug, "imageScale: \(imageScale)")
 
     let rect = self.rect(for: overlay.boundingMapRect)

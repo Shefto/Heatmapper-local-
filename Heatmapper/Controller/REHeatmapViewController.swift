@@ -26,7 +26,7 @@ class REHeatmapViewController: UIViewController {
   var pointsDistance              : CGFloat = 0.0
   var dtmRect                     = MKMapRect()
   var pitchOn                     : Bool = false
-  var ResizeOn                    : Bool = false
+  var resizeOn                    : Bool = true
 
   var heatmapPointCircle          : MKCircle?
   var reHeatmapPoint              : REHeatmapPoint?
@@ -57,6 +57,7 @@ class REHeatmapViewController: UIViewController {
   var radius                      : Int = 2
 
   var touchView                   : UIView!
+  var pitchView                   : UIImageView!
 
   var inProgressWheel       : UIActivityIndicatorView?
   // variable purely for the In Progress wheel
@@ -337,6 +338,7 @@ class REHeatmapViewController: UIViewController {
       by: gesture.rotation
     )
     gesture.rotation = 0
+    printPitchCoordinates()
   }
 
   @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
@@ -349,10 +351,11 @@ class REHeatmapViewController: UIViewController {
       y: gesture.scale
     )
     gesture.scale = 1
+    printPitchCoordinates()
   }
 
   @objc func handlePan(_ sender: UIPanGestureRecognizer) {
-    print("handlePan called")
+
     // 1
     let translation = sender.translation(in: view)
 
@@ -389,6 +392,7 @@ class REHeatmapViewController: UIViewController {
     // 7
     finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
     finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
+    printPitchCoordinates()
 
 //    // 8
 //    UIView.animate(
@@ -406,19 +410,36 @@ class REHeatmapViewController: UIViewController {
     return true
   }
 
+  func printPitchCoordinates() {
+
+    MyFunc.logMessage(.debug, "pitchView location:")
+
+    let pitchViewFrame = self.pitchView.frame
+    let frameStr = String(describing: pitchViewFrame)
+    MyFunc.logMessage(.debug, frameStr)
+
+    let pitchSizeAsRect = self.mapView.convert(pitchViewFrame, toRegionFrom: mapView)
+    let pitchSizeAsRectStr = String(describing: pitchSizeAsRect)
+    print("pitchSizeAsRect: \(pitchSizeAsRectStr)")
+  }
+
 
   // this is where the fun begins... resize mode
   @IBAction func btnResize(_ sender: Any) {
 
-    if ResizeOn == false {
-      ResizeOn = true
-      resizeButton.setTitle("Resize ON", for: .normal)
+    if resizeOn == true {
+      resizeOn = false
+      resizeButton.setTitle("Adjust Pitch Size", for: .normal)
+      resizeButton.tintColor = UIColor.systemGreen
+      printPitchCoordinates()
+
       self.touchView.isHidden = true
 
 
     } else {
-      ResizeOn = false
-      resizeButton.setTitle("Resize OFF", for: .normal)
+      resizeOn = true
+      resizeButton.setTitle("Save Pitch Size", for: .normal)
+      resizeButton.tintColor = UIColor.systemRed
       self.touchView.isHidden = false
 
     }
@@ -455,7 +476,7 @@ class REHeatmapViewController: UIViewController {
     })
 
     let pitchImage = UIImage(named: "football pitch 11")
-    let pitchView = UIImageView(image: pitchImage)
+    pitchView = UIImageView(image: pitchImage)
     pitchView.layer.opacity = 0.5
     pitchView.translatesAutoresizingMaskIntoConstraints = false
     pitchView.isUserInteractionEnabled = true
@@ -464,7 +485,10 @@ class REHeatmapViewController: UIViewController {
     pitchView.addGestureRecognizer(rotator)
     pitchView.addGestureRecognizer(pincher)
     self.touchView.addSubview(pitchView)
-
+    resizeOn = false
+    resizeButton.setTitle("Adjust Pitch Size", for: .normal)
+    resizeButton.tintColor = UIColor.systemGreen
+    self.touchView.isHidden = true
 
     self.loadUI()
     self.loadTesterData()
@@ -965,6 +989,7 @@ extension REHeatmapViewController: MKMapViewDelegate {
       if let pitchImage = UIImage(named: "football pitch 11.png")
       {
         let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: self.angle, pointsDistance: self.pointsDistance)
+        footballPitchOverlayView.alpha = 0.5
 
         return footballPitchOverlayView
       }
@@ -1009,15 +1034,6 @@ extension REHeatmapViewController: MKMapViewDelegate {
       heatmapPointAnnotationView?.annotation = annotation
     }
 
-    //    var pinAnnotationView: MKPinAnnotationView? = self.mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-    //    if pinAnnotationView == nil {
-    //      pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-    //      pinAnnotationView?.isDraggable = true
-    //      pinAnnotationView?.canShowCallout = true
-    //      pinAnnotationView?.pinTintColor = .blue
-    //    } else {
-    //      pinAnnotationView?.annotation = annotation
-    //    }
 
     return heatmapPointAnnotationView
   }

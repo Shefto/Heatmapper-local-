@@ -175,7 +175,7 @@
 /* Class = "UIButton"; normalTitle = "Test Heatmap"; ObjectID = "uxy-2h-68R"; */
 "uxy-2h-68R.normalTitle" = "";
 
-/* Class = "UIButton"; configuration.title = "Resize"; ObjectID = "V8E-UV-nEK"; */
+/* Class = "UIButton"; configuration.title = "Adjust Pitch Size"; ObjectID = "V8E-UV-nEK"; */
 "V8E-UV-nEK.configuration.title" = "";
 
 /* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "V8E-UV-nEK"; */

@@ -1053,9 +1053,6 @@ DQoNCg
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="fJF-dn-msC"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="6oP-mK-T7t" appends="YES" id="W9Y-PY-KVC"/>
-                                </connections>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hGX-Pw-hDX" userLabel="ButtonStackView">
                                 <rect key="frame" x="2" y="443" width="410" height="414"/>
@@ -1063,18 +1060,19 @@ DQoNCg
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="phB-N3-4AZ" userLabel="Controls Upper Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="410" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8E-UV-nEK" userLabel="Reset">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8E-UV-nEK" userLabel="Resize">
                                                 <rect key="frame" x="0.0" y="0.0" width="410" height="50"/>
-                                                <color key="tintColor" name="autoDetect"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                <color key="tintColor" systemColor="systemGreenColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Reset"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Resize"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Adjust Pitch Size"/>
                                                 <connections>
                                                     <action selector="btnResize:" destination="Pbk-vr-61V" eventType="touchUpInside" id="qCh-Fx-kZd"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="tintColor" name="autoDetect"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="W5n-eu-HlY"/>
                                         </constraints>
@@ -1532,6 +1530,7 @@ DQoNCg
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" name="navBar"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dWO-9w-WBa"/>
@@ -1591,16 +1590,6 @@ DQoNCg
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xws-kf-RrH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="3oV-14-ihe">
-                    <connections>
-                        <action selector="panGestureRecognizer:" destination="Pbk-vr-61V" id="4a8-as-pGB"/>
-                    </connections>
-                </panGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="6oP-mK-T7t">
-                    <connections>
-                        <action selector="longPressRecognizer:" destination="Pbk-vr-61V" id="Vve-8L-hdb"/>
-                    </connections>
-                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-645" y="1822"/>
         </scene>
