@@ -352,21 +352,68 @@ class REHeatmapViewController: UIViewController {
     print("resizeTap called")
   }
 
-  @objc func resizePan(_ sender: UITapGestureRecognizer? = nil) {
+  @objc func resizePan(_ sender: UIPanGestureRecognizer) {
     print("resizePan called")
+    // 1
+    let translation = sender.translation(in: view)
+
+    // 2
+    guard let gestureView = sender.view else {
+      return
+    }
+
+    gestureView.center = CGPoint(
+      x: gestureView.center.x + translation.x,
+      y: gestureView.center.y + translation.y
+    )
+
+    // 3
+    sender.setTranslation(.zero, in: view)
+
+    guard sender.state == .ended else {
+      return
+    }
+
+    // 4
+    let velocity = sender.velocity(in: view)
+    let magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y))
+    let slideMultiplier = magnitude / 200
+
+    // 5
+    let slideFactor = 0.1 * slideMultiplier
+    // 6
+    var finalPoint = CGPoint(
+      x: gestureView.center.x + (velocity.x * slideFactor),
+      y: gestureView.center.y + (velocity.y * slideFactor)
+    )
+
+    // 7
+    finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
+    finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
+
+    // 8
+    UIView.animate(
+      withDuration: Double(slideFactor * 2),
+      delay: 0,
+      // 9
+      options: .curveEaseOut,
+      animations: {
+        gestureView.center = finalPoint
+      })
+
   }
 
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
     return true
   }
 
-  @IBAction func longPressRecognizer(_ sender: UILongPressGestureRecognizer) {
-    print("longPress")
-  }
-
-  @IBAction func panGestureRecognizer(_ sender: UIPanGestureRecognizer) {
-    print("panGestureRecognizer called")
-  }
+//  @IBAction func longPressRecognizer(_ sender: UILongPressGestureRecognizer) {
+//    print("longPress")
+//  }
+//
+//  @IBAction func panGestureRecognizer(_ sender: UIPanGestureRecognizer) {
+//    print("panGestureRecognizer called")
+//  }
 
 
   // this is where the fun begins... resize mode
@@ -403,11 +450,10 @@ class REHeatmapViewController: UIViewController {
     let mapViewFrame = mapView.globalFrame!
     touchView = UIView(frame: mapViewFrame)
     touchView.bounds = mapView.bounds
-    touchView.isOpaque = true
+//    touchView.isOpaque = true
     touchView.translatesAutoresizingMaskIntoConstraints = false
     touchView.isUserInteractionEnabled = true
-
-    touchView.addGestureRecognizer(tapper)
+//    touchView.addGestureRecognizer(tapper)
     touchView.addGestureRecognizer(panner)
 
     self.mapView.addSubview(touchView)
@@ -421,6 +467,10 @@ class REHeatmapViewController: UIViewController {
     let pitchImage = UIImage(named: "football pitch 11")
     let pitchView = UIImageView(image: pitchImage)
     pitchView.layer.opacity = 0.5
+    pitchView.translatesAutoresizingMaskIntoConstraints = false
+    pitchView.isUserInteractionEnabled = true
+    //    touchView.addGestureRecognizer(tapper)
+    pitchView.addGestureRecognizer(panner)
 
     self.touchView.addSubview(pitchView)
 
