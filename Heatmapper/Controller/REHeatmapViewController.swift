@@ -21,6 +21,10 @@ class REHeatmapViewController: UIViewController {
   var heatmapperCoordinatesArray  = [CLLocationCoordinate2D]()
   var heatmapperLocationsArray    = [CLLocation]()
   var heatmapWorkoutId            : UUID?
+  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
+  var workoutMetadataArray        =  [WorkoutMetadata]()
+
+
   var pointCount                  : Int = 0
   var angle                       : CGFloat = 0.0
   var pointsDistance              : CGFloat = 0.0
@@ -338,7 +342,7 @@ class REHeatmapViewController: UIViewController {
       by: gesture.rotation
     )
     gesture.rotation = 0
-
+    savePitchCoordinates()
   }
 
   @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
@@ -351,6 +355,7 @@ class REHeatmapViewController: UIViewController {
       y: gesture.scale
     )
     gesture.scale = 1
+    savePitchCoordinates()
 
   }
 
@@ -393,6 +398,7 @@ class REHeatmapViewController: UIViewController {
     finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
     finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
 
+    savePitchCoordinates()
 
 //    // 8
 //    UIView.animate(
@@ -406,24 +412,6 @@ class REHeatmapViewController: UIViewController {
 
   }
 
-  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-    return true
-  }
-
-  func printPitchCoordinates() {
-
-    MyFunc.logMessage(.debug, "pitchView location:")
-
-    let pitchViewFrame = self.pitchView.frame
-    let frameStr = String(describing: pitchViewFrame)
-    MyFunc.logMessage(.debug, frameStr)
-
-    let pitchSizeAsRect = self.mapView.convert(pitchViewFrame, toRegionFrom: mapView)
-    let pitchSizeAsRectStr = String(describing: pitchSizeAsRect)
-    print("pitchSizeAsRect: \(pitchSizeAsRectStr)")
-  }
-
-
   // this is where the fun begins... resize mode
   @IBAction func btnResize(_ sender: Any) {
 
@@ -431,7 +419,6 @@ class REHeatmapViewController: UIViewController {
       resizeOn = false
       resizeButton.setTitle("Adjust Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemGreen
-      printPitchCoordinates()
 
       self.touchView.isHidden = true
 
@@ -485,6 +472,9 @@ class REHeatmapViewController: UIViewController {
     pitchView.addGestureRecognizer(rotator)
     pitchView.addGestureRecognizer(pincher)
     self.touchView.addSubview(pitchView)
+
+
+
     resizeOn = false
     resizeButton.setTitle("Adjust Pitch Size", for: .normal)
     resizeButton.tintColor = UIColor.systemGreen
@@ -498,6 +488,7 @@ class REHeatmapViewController: UIViewController {
     // get workout data
     // all UI work is called within the function as the data retrieval works asynchronously
     getWorkoutData()
+    
   }
 
 
@@ -644,6 +635,49 @@ class REHeatmapViewController: UIViewController {
   }
 
 
+  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    return true
+  }
+
+  func savePitchCoordinates() {
+
+
+
+    MyFunc.logMessage(.debug, "pitchView location:")
+
+    let pitchViewFrame = self.pitchView.frame
+    let frameStr = String(describing: pitchViewFrame)
+    MyFunc.logMessage(.debug, "pitchView.frame \(frameStr)")
+
+    let pitchSizeAsMapRegion = self.mapView.convert(pitchViewFrame, toRegionFrom: mapView)
+    let pitchSizeAsMapRect = mapRectForCoordinateRegion(pitchSizeAsMapRegion)
+    workoutMetadata.pitchArea = pitchSizeAsMapRect
+
+
+    if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == heatmapWorkoutId}) {
+      workoutMetadataArray[row] = workoutMetadata
+    } else {
+      MyFunc.logMessage(.error, "Error updating workoutMetadata with pitch area")
+    }
+    MyFunc.saveWorkoutMetadata(workoutMetadataArray)
+    MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadata))")
+
+
+
+    let pitchSizeAsRectStr = String(describing: pitchSizeAsMapRegion)
+    print("pitchSizeAsRect: \(pitchSizeAsRectStr)")
+
+
+
+  }
+
+  func mapRectForCoordinateRegion(_ region: MKCoordinateRegion) -> MKMapRect {
+    let topLeftCoordinate = CLLocationCoordinate2DMake(region.center.latitude + (region.span.latitudeDelta / 2.0), region.center.longitude - (region.span.longitudeDelta / 2.0))
+    let topLeftMapPoint = MKMapPoint(topLeftCoordinate)
+    let bottomRightCoordinate = CLLocationCoordinate2DMake(region.center.latitude - (region.span.latitudeDelta / 2.0), region.center.longitude + (region.span.longitudeDelta / 2.0))
+    let bottomRightMapPoint = MKMapPoint(bottomRightCoordinate)
+    return MKMapRect(x: topLeftMapPoint.x, y: topLeftMapPoint.y, width: fabs(bottomRightMapPoint.x - topLeftMapPoint.x), height: fabs(bottomRightMapPoint.y - topLeftMapPoint.y))
+  }
 
   func setMapViewZoom(rect: MKMapRect) {
     let insets = UIEdgeInsets(top: 0, left: 5, bottom: 5, right: 5)
@@ -740,6 +774,7 @@ class REHeatmapViewController: UIViewController {
       return
     }
 
+
     // get the workout
     getWorkout(workoutId: workoutId) { [self] (workouts, error) in
       let workoutReturned = workouts?.first
@@ -751,7 +786,14 @@ class REHeatmapViewController: UIViewController {
         return
       }
 
+      // get the workout's metadata
+      workoutMetadataArray = MyFunc.getWorkoutMetadata()
+      if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == heatmapWorkoutId}) {
+        workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
+      }
+      
       self.getRouteSampleObject(workout: workout)
+
     }
 
   }

@@ -1,15 +1,15 @@
+////
+////  CornerpointClientProtocol.swift
+////  Heatmapper
+////
+////  Created by Richard English on 15/08/2021.
+////  Copyright © 2021 Richard English. All rights reserved.
+////
 //
-//  CornerpointClientProtocol.swift
-//  Heatmapper
+//import Foundation
 //
-//  Created by Richard English on 15/08/2021.
-//  Copyright © 2021 Richard English. All rights reserved.
+//@objc protocol CornerpointClientProtocol
+//{
+//  func cornerHasChanged(_: CornerpointView)
+//}
 //
-
-import Foundation
-
-@objc protocol CornerpointClientProtocol
-{
-  func cornerHasChanged(_: CornerpointView)
-}
-
