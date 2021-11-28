@@ -338,7 +338,7 @@ class REHeatmapViewController: UIViewController {
       by: gesture.rotation
     )
     gesture.rotation = 0
-    printPitchCoordinates()
+
   }
 
   @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
@@ -351,7 +351,7 @@ class REHeatmapViewController: UIViewController {
       y: gesture.scale
     )
     gesture.scale = 1
-    printPitchCoordinates()
+
   }
 
   @objc func handlePan(_ sender: UIPanGestureRecognizer) {
@@ -392,7 +392,7 @@ class REHeatmapViewController: UIViewController {
     // 7
     finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
     finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
-    printPitchCoordinates()
+
 
 //    // 8
 //    UIView.animate(
