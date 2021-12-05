@@ -272,6 +272,14 @@ class REHeatmapViewController: UIViewController {
   }
 
 
+  @IBAction func btnPoints(_ sender: Any) {
+
+    let annotations = mapView.annotations
+    mapView.removeAnnotations(annotations)
+    savePitchCoordinates()
+
+  }
+
   @IBAction func btnReset(_ sender: Any) {
 
     innerColourGradient = "0.1"
@@ -337,12 +345,13 @@ class REHeatmapViewController: UIViewController {
     guard let gestureView = gesture.view else {
       return
     }
-
     gestureView.transform = gestureView.transform.rotated(
       by: gesture.rotation
     )
+    let rotationStr = String(describing: gesture.rotation)
+    print("rotationStr: \(rotationStr)")
     gesture.rotation = 0
-    savePitchCoordinates()
+//    savePitchCoordinates()
   }
 
   @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
@@ -355,7 +364,7 @@ class REHeatmapViewController: UIViewController {
       y: gesture.scale
     )
     gesture.scale = 1
-    savePitchCoordinates()
+//    savePitchCoordinates()
 
   }
 
@@ -398,17 +407,17 @@ class REHeatmapViewController: UIViewController {
     finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
     finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
 
-    savePitchCoordinates()
+//    savePitchCoordinates()
 
-//    // 8
-//    UIView.animate(
-//      withDuration: Double(slideFactor * 2),
-//      delay: 0,
-//      // 9
-//      options: .curveEaseOut,
-//      animations: {
-//        gestureView.center = finalPoint
-//      })
+    //    // 8
+    //    UIView.animate(
+    //      withDuration: Double(slideFactor * 2),
+    //      delay: 0,
+    //      // 9
+    //      options: .curveEaseOut,
+    //      animations: {
+    //        gestureView.center = finalPoint
+    //      })
 
   }
 
@@ -421,6 +430,7 @@ class REHeatmapViewController: UIViewController {
       resizeButton.tintColor = UIColor.systemGreen
 
       self.touchView.isHidden = true
+      savePitchCoordinates()
 
 
     } else {
@@ -450,9 +460,9 @@ class REHeatmapViewController: UIViewController {
     let mapViewFrame = mapView.globalFrame!
     touchView = UIView(frame: mapViewFrame)
     touchView.bounds = mapView.bounds
-//    touchView.isOpaque = true
+    //    touchView.isOpaque = true
     touchView.translatesAutoresizingMaskIntoConstraints = false
-//    touchView.isUserInteractionEnabled = true
+    //    touchView.isUserInteractionEnabled = true
 
     self.mapView.addSubview(touchView)
 
@@ -488,7 +498,7 @@ class REHeatmapViewController: UIViewController {
     // get workout data
     // all UI work is called within the function as the data retrieval works asynchronously
     getWorkoutData()
-    
+
   }
 
 
@@ -639,8 +649,8 @@ class REHeatmapViewController: UIViewController {
     return true
   }
 
-  func savePitchCoordinates() {
 
+  func savePitchCoordinates() {
 
 
     MyFunc.logMessage(.debug, "pitchView location:")
@@ -649,9 +659,63 @@ class REHeatmapViewController: UIViewController {
     let frameStr = String(describing: pitchViewFrame)
     MyFunc.logMessage(.debug, "pitchView.frame \(frameStr)")
 
-    let pitchSizeAsMapRegion = self.mapView.convert(pitchViewFrame, toRegionFrom: mapView)
+
+    let pitchViewRotation = self.pitchView.transform
+    let pitchViewRotationStr = String(describing: pitchViewRotation)
+    MyFunc.logMessage(.debug, "pitchView.frame \(pitchViewRotationStr)")
+
+    let pitchSizeAsMapRegion = self.mapView.convert(pitchViewFrame, toRegionFrom: touchView)
+    print("pitchSizeAsMapRegion:")
+    print(pitchSizeAsMapRegion)
     let pitchSizeAsMapRect = mapRectForCoordinateRegion(pitchSizeAsMapRegion)
-    workoutMetadata.pitchArea = pitchSizeAsMapRect
+//    workoutMetadata.pitchArea = pitchSizeAsMapRect
+
+
+    // adding code to save pitch corner points as coordinates
+
+    // first need to get the pitch corners on the touch view
+    let pitchMinX = pitchView.frame.minX
+    let pitchMaxX = pitchView.frame.maxX
+    let pitchMinY = pitchView.frame.minY
+    let pitchMaxY = pitchView.frame.maxY
+
+    print ("pitchView points:")
+    print (pitchMinX)
+    print (pitchMinY)
+    print (pitchMaxX)
+    print (pitchMaxY)
+
+    let pitchMapTopLeftCGPoint = CGPoint(x: pitchMinX, y: pitchMinY)
+    let pitchMapTopRightCGPoint = CGPoint(x: pitchMaxX, y: pitchMinY)
+    let pitchMapBottomLeftCGPoint = CGPoint(x: pitchMinX, y: pitchMaxY)
+    let pitchMapBottomRightCGPoint = CGPoint(x: pitchMaxX, y: pitchMaxY)
+
+
+
+    // then workout out the corresponding co-ordinates at these points on the map view
+    let pitchMapTopLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
+    let pitchMapTopRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
+    let pitchMapBottomLefCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
+    let pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
+
+    // let's confirm these are where we expect them to be
+    setPinUsingMKPlacemark(coordinate: pitchMapTopLeftCoordinate)
+    setPinUsingMKPlacemark(coordinate: pitchMapTopRightCoordinate)
+    setPinUsingMKPlacemark(coordinate: pitchMapBottomLefCoordinate)
+    setPinUsingMKPlacemark(coordinate: pitchMapBottomRightCoordinate)
+
+
+    // then save these co-ordinates as a pitch view
+
+
+    // then construct an overlay on the map view to match them
+
+
+
+
+
+
+
 
 
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == heatmapWorkoutId}) {
@@ -786,12 +850,8 @@ class REHeatmapViewController: UIViewController {
         return
       }
 
-      // get the workout's metadata
-      workoutMetadataArray = MyFunc.getWorkoutMetadata()
-      if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == heatmapWorkoutId}) {
-        workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
-      }
-      
+
+
       self.getRouteSampleObject(workout: workout)
 
     }
@@ -914,9 +974,31 @@ class REHeatmapViewController: UIViewController {
         // dispatch to the main queue as we are making UI updates
         DispatchQueue.main.async {
 
+          // get the workout's metadata
+          self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
+          if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == self.heatmapWorkoutId}) {
+            self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
+          }
+
+//          if self.workoutMetadata.pitchArea != nil {
+//
+//
+//            guard let savedPitchMapRect = self.workoutMetadata.pitchArea else {
+//              MyFunc.logMessage(.error, "Cannot convert saved pitch to CGRect")
+//              return
+//            }
+//
+//            let savedPitchAsCoordinateRegion = MKCoordinateRegion.init(savedPitchMapRect)
+//            let savedPitchAsCGRect = self.mapView.convert(savedPitchAsCoordinateRegion, toRectTo: self.mapView)
+//
+//            self.pitchView.frame = savedPitchAsCGRect
+//
+//
+//          }
+
           self.createPitchOverlay()
           self.createREHeatmap()
-          //          self.createDTMHeatmap()
+
 
 
         }
@@ -1030,7 +1112,9 @@ extension REHeatmapViewController: MKMapViewDelegate {
     if overlay is FootballPitchOverlay {
       if let pitchImage = UIImage(named: "football pitch 11.png")
       {
-        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: self.angle, pointsDistance: self.pointsDistance)
+        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: self.angle)
+//        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: self.angle, pointsDistance: self.pointsDistance)
+
         footballPitchOverlayView.alpha = 0.5
 
         return footballPitchOverlayView
@@ -1053,32 +1137,32 @@ extension REHeatmapViewController: MKMapViewDelegate {
     default: break
     }
   }
-
-  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    if annotation is MKUserLocation {
-      return nil
-    }
-
-    if annotation is UserAnnotation {
-      MyFunc.logMessage(.debug, "UserAnnotation")
-
-    }
-
-    let reuseId = "heatmapPoint"
-    var heatmapPointAnnotationView: MKAnnotationView? = self.mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
-
-    if heatmapPointAnnotationView == nil {
-      heatmapPointAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-      heatmapPointAnnotationView?.image = self.reHeatmapPointImage
-      heatmapPointAnnotationView?.frame.size = CGSize(width: 3, height: 3)
-
-    } else {
-      heatmapPointAnnotationView?.annotation = annotation
-    }
-
-
-    return heatmapPointAnnotationView
-  }
+//
+//  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//    if annotation is MKUserLocation {
+//      return nil
+//    }
+//
+//    if annotation is UserAnnotation {
+//      MyFunc.logMessage(.debug, "UserAnnotation")
+//
+//    }
+//
+//    let reuseId = "heatmapPoint"
+//    var heatmapPointAnnotationView: MKAnnotationView? = self.mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+//
+//    if heatmapPointAnnotationView == nil {
+//      heatmapPointAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+//      heatmapPointAnnotationView?.image = self.reHeatmapPointImage
+//      heatmapPointAnnotationView?.frame.size = CGSize(width: 3, height: 3)
+//
+//    } else {
+//      heatmapPointAnnotationView?.annotation = annotation
+//    }
+//
+//
+//    return heatmapPointAnnotationView
+//  }
 
 
   func createDTMHeatmap() {
@@ -1185,5 +1269,14 @@ extension REHeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource 
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     return blendModeArray[row].rawValue
   }
+
+  func setPinUsingMKPlacemark(coordinate: CLLocationCoordinate2D) {
+    let pin = MKPlacemark(coordinate: coordinate)
+//    let coordinateRegion = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 800, longitudinalMeters: 800)
+//    mapView.setRegion(coordinateRegion, animated: true)
+    mapView.addAnnotation(pin)
+  }
+
+
 
 }

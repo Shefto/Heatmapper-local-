@@ -11,7 +11,7 @@ import CoreLocation
 
 // this struct created to provide a Codable equivalent for CLLocationCoordinate2D
 // see https://programmingwithswift.com/easily-conform-to-codable/
-struct Coordinate: Codable {
+struct CodableCLLCoordinate2D: Codable {
   let latitude: Double
   let longitude: Double
 
@@ -28,13 +28,12 @@ struct PlayingArea: Codable, Equatable {
   }
 
 
-
   var name  : String
   var sport : Sport
-  var minX  : Coordinate
-  var maxX  : Coordinate
-  var minY  : Coordinate
-  var maxY  : Coordinate
+  var minX  : CodableCLLCoordinate2D
+  var maxX  : CodableCLLCoordinate2D
+  var minY  : CodableCLLCoordinate2D
+  var maxY  : CodableCLLCoordinate2D
 
 
   enum CodingKeys: String, CodingKey {
@@ -46,7 +45,7 @@ struct PlayingArea: Codable, Equatable {
     case maxY = "MaxY"
   }
 
-  init (name: String, sport: Sport, minX: Coordinate, maxX: Coordinate, minY: Coordinate, maxY: Coordinate) {
+  init (name: String, sport: Sport, minX: CodableCLLCoordinate2D, maxX: CodableCLLCoordinate2D, minY: CodableCLLCoordinate2D, maxY: CodableCLLCoordinate2D) {
     self.name = name
     self.sport = sport
     self.minX = minX

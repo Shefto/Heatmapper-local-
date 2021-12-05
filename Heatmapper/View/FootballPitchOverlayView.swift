@@ -13,12 +13,14 @@ import MapKit
 class FootballPitchOverlayView: MKOverlayRenderer {
   let overlayImage: UIImage
   let angle : CGFloat
-  let pointsDistance : CGFloat
+//  let pointsDistance : CGFloat
 
-  init(overlay: MKOverlay, overlayImage: UIImage, angle: CGFloat, pointsDistance: CGFloat) {
+  init(overlay: MKOverlay, overlayImage: UIImage, angle: CGFloat) {
+//    init(overlay: MKOverlay, overlayImage: UIImage, angle: CGFloat, pointsDistance: CGFloat) {
+
     self.overlayImage = overlayImage
     self.angle = angle
-    self.pointsDistance = pointsDistance
+//    self.pointsDistance = pointsDistance
     super.init(overlay: overlay)
   }
 
@@ -27,14 +29,14 @@ class FootballPitchOverlayView: MKOverlayRenderer {
     guard let imageReference = overlayImage.cgImage else { return }
 
 
-    let imageHeight = overlayImage.size.height
-    let imageWidth  = overlayImage.size.width
-
-    let imageHeightSquared = imageHeight * imageHeight
-    let imageWidthSquared =  imageWidth * imageWidth
-    let imageHypotenuseSquared = imageHeightSquared + imageWidthSquared
-    let imageHypotenuse = sqrt(imageHypotenuseSquared)
-
+//    let imageHeight = overlayImage.size.height
+//    let imageWidth  = overlayImage.size.width
+//
+//    let imageHeightSquared = imageHeight * imageHeight
+//    let imageWidthSquared =  imageWidth * imageWidth
+//    let imageHypotenuseSquared = imageHeightSquared + imageWidthSquared
+//    let imageHypotenuse = sqrt(imageHypotenuseSquared)
+//
 
 //    MyFunc.logMessage(.debug, "imageHypotenuse: \(imageHypotenuse)")
 //    let imageScale = pointsDistance / imageHypotenuse
@@ -45,6 +47,8 @@ class FootballPitchOverlayView: MKOverlayRenderer {
 //    context.scaleBy(x: imageScale, y: imageScale)
 //    context.translateBy(x: 0.0, y: -rect.size.height)
     context.rotate(by: angle)
+    let contextCTMStr = String(describing: context.ctm)
+    print ("contextCTMStr: \(contextCTMStr)")
     context.draw(imageReference, in: rect)
 
   }

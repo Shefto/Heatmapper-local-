@@ -69,7 +69,7 @@ struct WorkoutMetadata: Codable {
   var sport     : String?
   var venue     : String?
   var pitch     : String?
-  var pitchArea : MKMapRect?
+//  var pitchArea : MKMapRect?
 
   enum CodingKeys: String, CodingKey {
     case workoutId  = "WorkoutId"
@@ -77,6 +77,7 @@ struct WorkoutMetadata: Codable {
     case sport      = "Sport"
     case venue      = "Venue"
     case pitch      = "Pitch"
+//    case pitchArea  = "PitchArea"
   }
 //
 //  init (workoutId: UUID, activity: String? = nil, sport: String? = nil, venue: String? = nil, pitch: String? = nil) {

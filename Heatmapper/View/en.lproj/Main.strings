@@ -118,6 +118,12 @@
 /* Class = "UISegmentedControl"; KZh-Fy-Ydb.segmentTitles[3] = "mins/mi"; ObjectID = "KZh-Fy-Ydb"; */
 "KZh-Fy-Ydb.segmentTitles[3]" = "";
 
+/* Class = "UIButton"; configuration.title = "Mark Corners"; ObjectID = "lwp-w4-qwC"; */
+"lwp-w4-qwC.configuration.title" = "";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "lwp-w4-qwC"; */
+"lwp-w4-qwC.normalTitle" = "";
+
 /* Class = "UILabel"; text = "Radius"; ObjectID = "M01-L4-JTt"; */
 "M01-L4-JTt.text" = "";
 
