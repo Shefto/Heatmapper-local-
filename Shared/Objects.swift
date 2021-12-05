@@ -9,6 +9,7 @@
 import Foundation
 import MapKit
 
+
 enum BlendMode: String, Codable, CaseIterable {
   case normal       = "normal"
   case multiply     = "multiply"

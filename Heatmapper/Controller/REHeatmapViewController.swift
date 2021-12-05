@@ -14,6 +14,44 @@ import HealthKit
 import CoreLocation
 import DTMHeatmap
 
+
+struct ViewCorners {
+  private(set) var topLeft:     CGPoint!
+  private(set) var topRight:    CGPoint!
+  private(set) var bottomLeft:  CGPoint!
+  private(set) var bottomRight: CGPoint!
+
+  private let originalCenter: CGPoint
+  private let transformedView: UIView
+
+  private func pointWith(multipliedWidth: CGFloat, multipliedHeight: CGFloat) -> CGPoint {
+    var x = originalCenter.x
+    x += transformedView.bounds.width  / 2 * multipliedWidth
+
+    var y = originalCenter.y
+    y += transformedView.bounds.height / 2 * multipliedHeight
+
+    var result = CGPoint(x: x, y: y).applying(transformedView.transform)
+    result.x += transformedView.transform.tx
+    result.y += transformedView.transform.ty
+
+    return result
+  }
+
+  init(view: UIView) {
+    transformedView = view
+    originalCenter = view.center.applying(view.transform.inverted())
+
+    topLeft =     pointWith(multipliedWidth:-1, multipliedHeight:-1)
+    topRight =    pointWith(multipliedWidth: 1, multipliedHeight:-1)
+    bottomLeft =  pointWith(multipliedWidth:-1, multipliedHeight: 1)
+    bottomRight = pointWith(multipliedWidth: 1, multipliedHeight: 1)
+
+  }
+}
+
+
+
 class REHeatmapViewController: UIViewController {
 
   var reHeatmapOverlay            = REHeatmapOverlay()
@@ -62,6 +100,9 @@ class REHeatmapViewController: UIViewController {
 
   var touchView                   : UIView!
   var pitchView                   : UIImageView!
+
+  var pitchViewRotation           : CGFloat = 0.0
+  var pitchViewOrigin             : CGPoint!
 
   var inProgressWheel       : UIActivityIndicatorView?
   // variable purely for the In Progress wheel
@@ -348,10 +389,13 @@ class REHeatmapViewController: UIViewController {
     gestureView.transform = gestureView.transform.rotated(
       by: gesture.rotation
     )
-    let rotationStr = String(describing: gesture.rotation)
-    print("rotationStr: \(rotationStr)")
+
+    pitchViewRotation += gesture.rotation
+
+//    let rotationStr = String(describing: gesture.rotation)
+//    print("rotationStr: \(rotationStr)")
     gesture.rotation = 0
-//    savePitchCoordinates()
+
   }
 
   @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
@@ -364,7 +408,7 @@ class REHeatmapViewController: UIViewController {
       y: gesture.scale
     )
     gesture.scale = 1
-//    savePitchCoordinates()
+
 
   }
 
@@ -481,6 +525,7 @@ class REHeatmapViewController: UIViewController {
     pitchView.addGestureRecognizer(panner)
     pitchView.addGestureRecognizer(rotator)
     pitchView.addGestureRecognizer(pincher)
+    pitchViewOrigin = pitchView.frame.origin
     self.touchView.addSubview(pitchView)
 
 
@@ -611,7 +656,6 @@ class REHeatmapViewController: UIViewController {
     outerGreen.text = outerColourGreen
     outerAlpha.text = outerColourAlpha
 
-
     innerRedStepper.value = Double(innerColourRed)!
     innerGreenStepper.value = Double(innerColourGreen)!
     innerBlueStepper.value = Double(innerColourBlue)!
@@ -623,7 +667,6 @@ class REHeatmapViewController: UIViewController {
     middleBlueStepper.value = Double(middleColourBlue)!
     middleAlphaStepper.value = Double(middleColourAlpha)!
     middleGradientStepper.value = Double(middleColourGradient)!
-
 
     outerRedStepper.value = Double(outerColourRed)!
     outerGreenStepper.value = Double(outerColourGreen)!
@@ -653,7 +696,7 @@ class REHeatmapViewController: UIViewController {
   func savePitchCoordinates() {
 
 
-    MyFunc.logMessage(.debug, "pitchView location:")
+    MyFunc.logMessage(.debug, "pitchView rotation: \(pitchViewRotation)")
 
     let pitchViewFrame = self.pitchView.frame
     let frameStr = String(describing: pitchViewFrame)
@@ -663,6 +706,11 @@ class REHeatmapViewController: UIViewController {
     let pitchViewRotation = self.pitchView.transform
     let pitchViewRotationStr = String(describing: pitchViewRotation)
     MyFunc.logMessage(.debug, "pitchView.frame \(pitchViewRotationStr)")
+
+
+    let pitchViewTransform = pitchViewOrigin.applying(pitchView.transform)
+    let pitchViewTranformStr = String(describing: pitchViewTransform)
+    MyFunc.logMessage(.debug, "pitchViewTransform \(pitchViewTranformStr)")
 
     let pitchSizeAsMapRegion = self.mapView.convert(pitchViewFrame, toRegionFrom: touchView)
     print("pitchSizeAsMapRegion:")
@@ -674,6 +722,10 @@ class REHeatmapViewController: UIViewController {
     // adding code to save pitch corner points as coordinates
 
     // first need to get the pitch corners on the touch view
+
+
+
+    // the below does not work : it only gives the corners of the view frame NOT the actual corners of the rectangle inside the view
     let pitchMinX = pitchView.frame.minX
     let pitchMaxX = pitchView.frame.maxX
     let pitchMinY = pitchView.frame.minY
@@ -684,13 +736,25 @@ class REHeatmapViewController: UIViewController {
     print (pitchMinY)
     print (pitchMaxX)
     print (pitchMaxY)
+//
+//    let pitchMapTopLeftCGPoint = CGPoint(x: pitchMinX, y: pitchMinY)
+//    let pitchMapTopRightCGPoint = CGPoint(x: pitchMaxX, y: pitchMinY)
+//    let pitchMapBottomLeftCGPoint = CGPoint(x: pitchMinX, y: pitchMaxY)
+//    let pitchMapBottomRightCGPoint = CGPoint(x: pitchMaxX, y: pitchMaxY)
+//
 
-    let pitchMapTopLeftCGPoint = CGPoint(x: pitchMinX, y: pitchMinY)
-    let pitchMapTopRightCGPoint = CGPoint(x: pitchMaxX, y: pitchMinY)
-    let pitchMapBottomLeftCGPoint = CGPoint(x: pitchMinX, y: pitchMaxY)
-    let pitchMapBottomRightCGPoint = CGPoint(x: pitchMaxX, y: pitchMaxY)
+    let corners = ViewCorners(view: pitchView)
+    print("pitchView.corners")
+    print(corners.topLeft as Any,
+          corners.topRight as Any,
+          corners.bottomLeft as Any,
+          corners.bottomRight as Any,
+          separator: "\n")
 
-
+    let pitchMapTopLeftCGPoint : CGPoint = corners.topLeft
+    let pitchMapTopRightCGPoint : CGPoint  = corners.topRight
+    let pitchMapBottomLeftCGPoint : CGPoint  = corners.bottomLeft
+    let pitchMapBottomRightCGPoint : CGPoint  =  corners.bottomRight
 
     // then workout out the corresponding co-ordinates at these points on the map view
     let pitchMapTopLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
