@@ -451,7 +451,7 @@ class REHeatmapViewController: UIViewController {
     finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
     finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
 
-//    savePitchCoordinates()
+
 
     //    // 8
     //    UIView.animate(
@@ -516,7 +516,7 @@ class REHeatmapViewController: UIViewController {
       NSLayoutConstraint(item: touchView as Any, attribute: $0, relatedBy: .equal, toItem: touchView.superview, attribute: $0, multiplier: 1, constant: 0)
     })
 
-    let pitchImage = UIImage(named: "football pitch 11")
+    let pitchImage = UIImage(named: "Figma Pitch 11 Green")
     pitchView = UIImageView(image: pitchImage)
     pitchView.layer.opacity = 0.5
     pitchView.translatesAutoresizingMaskIntoConstraints = false
@@ -723,33 +723,8 @@ class REHeatmapViewController: UIViewController {
 
     // first need to get the pitch corners on the touch view
 
-
-
-    // the below does not work : it only gives the corners of the view frame NOT the actual corners of the rectangle inside the view
-    let pitchMinX = pitchView.frame.minX
-    let pitchMaxX = pitchView.frame.maxX
-    let pitchMinY = pitchView.frame.minY
-    let pitchMaxY = pitchView.frame.maxY
-
-    print ("pitchView points:")
-    print (pitchMinX)
-    print (pitchMinY)
-    print (pitchMaxX)
-    print (pitchMaxY)
-//
-//    let pitchMapTopLeftCGPoint = CGPoint(x: pitchMinX, y: pitchMinY)
-//    let pitchMapTopRightCGPoint = CGPoint(x: pitchMaxX, y: pitchMinY)
-//    let pitchMapBottomLeftCGPoint = CGPoint(x: pitchMinX, y: pitchMaxY)
-//    let pitchMapBottomRightCGPoint = CGPoint(x: pitchMaxX, y: pitchMaxY)
-//
-
     let corners = ViewCorners(view: pitchView)
-    print("pitchView.corners")
-    print(corners.topLeft as Any,
-          corners.topRight as Any,
-          corners.bottomLeft as Any,
-          corners.bottomRight as Any,
-          separator: "\n")
+
 
     let pitchMapTopLeftCGPoint : CGPoint = corners.topLeft
     let pitchMapTopRightCGPoint : CGPoint  = corners.topRight
@@ -1174,7 +1149,7 @@ extension REHeatmapViewController: MKMapViewDelegate {
     }
 
     if overlay is FootballPitchOverlay {
-      if let pitchImage = UIImage(named: "football pitch 11.png")
+      if let pitchImage = UIImage(named: "Figma Pitch 11 Green.png")
       {
         let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: self.angle)
 //        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: self.angle, pointsDistance: self.pointsDistance)
