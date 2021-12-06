@@ -42,6 +42,9 @@ struct ViewCorners {
     transformedView = view
     originalCenter = view.center.applying(view.transform.inverted())
 
+    let vcTransform = String(describing: view.transform)
+    MyFunc.logMessage(.debug, "viewTransform: \(vcTransform)")
+
     topLeft =     pointWith(multipliedWidth:-1, multipliedHeight:-1)
     topRight =    pointWith(multipliedWidth: 1, multipliedHeight:-1)
     bottomLeft =  pointWith(multipliedWidth:-1, multipliedHeight: 1)
@@ -516,8 +519,8 @@ class REHeatmapViewController: UIViewController {
       NSLayoutConstraint(item: touchView as Any, attribute: $0, relatedBy: .equal, toItem: touchView.superview, attribute: $0, multiplier: 1, constant: 0)
     })
 
-    let pitchImage = UIImage(named: "Figma Pitch 11 Green")
-    pitchView = UIImageView(image: pitchImage)
+    let pitchImageBlue = UIImage(named: "Figma Pitch 11 Blue")
+    pitchView = UIImageView(image: pitchImageBlue)
     pitchView.layer.opacity = 0.5
     pitchView.translatesAutoresizingMaskIntoConstraints = false
     pitchView.isUserInteractionEnabled = true
@@ -826,8 +829,12 @@ class REHeatmapViewController: UIViewController {
     print("pitchSizeAsRect: \(pitchSizeAsRectStr)")
 
 
-
   }
+
+  func rotation(from transform: CGAffineTransform) -> Double {
+    return atan2(Double(transform.b), Double(transform.a))
+  }
+
 
   func mapRectForCoordinateRegion(_ region: MKCoordinateRegion) -> MKMapRect {
     let topLeftCoordinate = CLLocationCoordinate2DMake(region.center.latitude + (region.span.latitudeDelta / 2.0), region.center.longitude - (region.span.longitudeDelta / 2.0))
@@ -1206,7 +1213,13 @@ extension REHeatmapViewController: MKMapViewDelegate {
     if overlay is FootballPitchOverlay {
       if let pitchImage = UIImage(named: "Figma Pitch 11 Green.png")
       {
-        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: self.angle)
+
+        let viewRotation = rotation(from: pitchView.transform.inverted())
+        let viewRotationAsCGFloat = CGFloat(viewRotation)
+        let viewRotationStr = String(describing: viewRotation)
+        MyFunc.logMessage(.debug, "pitchView rotation: \(viewRotationStr)")
+
+        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: viewRotationAsCGFloat)
 //        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: self.angle, pointsDistance: self.pointsDistance)
 
         footballPitchOverlayView.alpha = 0.5
