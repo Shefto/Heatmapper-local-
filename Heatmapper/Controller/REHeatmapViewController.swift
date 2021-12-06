@@ -722,9 +722,7 @@ class REHeatmapViewController: UIViewController {
     // adding code to save pitch corner points as coordinates
 
     // first need to get the pitch corners on the touch view
-
     let corners = ViewCorners(view: pitchView)
-
 
     let pitchMapTopLeftCGPoint : CGPoint = corners.topLeft
     let pitchMapTopRightCGPoint : CGPoint  = corners.topRight
@@ -734,20 +732,44 @@ class REHeatmapViewController: UIViewController {
     // then workout out the corresponding co-ordinates at these points on the map view
     let pitchMapTopLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
     let pitchMapTopRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
-    let pitchMapBottomLefCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
+    let pitchMapBottomLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
     let pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
 
     // let's confirm these are where we expect them to be
-    setPinUsingMKPlacemark(coordinate: pitchMapTopLeftCoordinate)
-    setPinUsingMKPlacemark(coordinate: pitchMapTopRightCoordinate)
-    setPinUsingMKPlacemark(coordinate: pitchMapBottomLefCoordinate)
-    setPinUsingMKPlacemark(coordinate: pitchMapBottomRightCoordinate)
-
+    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "TL")
+    setPinUsingMKAnnotation(coordinate: pitchMapTopRightCoordinate, title: "TR")
+    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "BL")
+    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "BR")
 
     // then save these co-ordinates as a pitch view
 
 
     // then construct an overlay on the map view to match them
+
+    // first work out the centre of the overlay from the co-ordinates of the 4 corners
+    // get the midpoint of the latitudes and longitudes of the opposite corner pairs
+    // either pair will do as this should be the same
+
+    let midpointLatitudeTLBR = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
+    let midpointLongitudeTLBR = (pitchMapTopLeftCoordinate.longitude + pitchMapBottomRightCoordinate.longitude) / 2
+    let midpointTLBRCoordinate = CLLocationCoordinate2D(latitude: midpointLatitudeTLBR, longitude: midpointLongitudeTLBR)
+    setPinUsingMKAnnotation(coordinate: midpointTLBRCoordinate, title: "TLBR")
+
+//    let tlbrStr = String(describing: midpointTLBRCoordinate)
+//    print("TLBR: \(tlbrStr)")
+
+      // below code would do the job just as well
+//    let midpointLatitudeBLTR = (pitchMapBottomLeftCoordinate.latitude + pitchMapTopRightCoordinate.latitude) / 2
+//    let midpointLongitudeBLTR = (pitchMapBottomLeftCoordinate.longitude + pitchMapTopRightCoordinate.longitude) / 2
+//    let midpointBLTRCoordinate = CLLocationCoordinate2D(latitude: midpointLatitudeBLTR, longitude: midpointLongitudeBLTR)
+//
+//    let bltrStr = String(describing: midpointBLTRCoordinate)
+//    print("BLTR: \(bltrStr)")
+
+    // then calculate the rect
+
+    // finally get the rotation
+
 
 
 
@@ -1311,11 +1333,17 @@ extension REHeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource 
 
   func setPinUsingMKPlacemark(coordinate: CLLocationCoordinate2D) {
     let pin = MKPlacemark(coordinate: coordinate)
-//    let coordinateRegion = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 800, longitudinalMeters: 800)
-//    mapView.setRegion(coordinateRegion, animated: true)
+
     mapView.addAnnotation(pin)
   }
 
+  func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
+    let annotation = MKPointAnnotation()
+    annotation.coordinate = coordinate
+    annotation.title = title
+    mapView.addAnnotation(annotation)
+
+  }
 
 
 }
