@@ -766,10 +766,43 @@ class REHeatmapViewController: UIViewController {
 //    let bltrStr = String(describing: midpointBLTRCoordinate)
 //    print("BLTR: \(bltrStr)")
 
-    // then calculate the rect
+    // then calculate the rect from the co-ordinate pairs
+
+//    let maxLat = heatmapperCoordinatesArray.map {$0.latitude}.max()
+//    let minLat = heatmapperCoordinatesArray.map {$0.latitude}.min()
+//    let maxLong = heatmapperCoordinatesArray.map {$0.longitude}.max()
+//    let minLong = heatmapperCoordinatesArray.map {$0.longitude}.min()
+//
+//    let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
+//    let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
+
+
+
+    // get the max and min X and Y points from the above coordinates as MKMapPoints
+    let topLeftMapPoint = MKMapPoint(pitchMapTopLeftCoordinate)
+    let topRightMapPoint = MKMapPoint(pitchMapTopRightCoordinate)
+    let bottomLeftMapPoint = MKMapPoint(pitchMapBottomLeftCoordinate)
+    let bottomRightMapPoint = MKMapPoint(pitchMapBottomRightCoordinate)
+
+
+    // get the dimensions of the rectangle from the distance between the point extremes
+    let pitchRectWidth = topRightMapPoint.x - topLeftMapPoint.x
+    let pitchRectHeight = bottomRightMapPoint.y - topRightMapPoint.y
+
+    let pitchMapOriginX = bottomLeftMapPoint.x
+    let pitchMapOriginY = bottomLeftMapPoint.y
+
+    // set up the rectangele
+    let pitchRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
+
+
 
     // finally get the rotation
 
+
+    //  create an overlay of the pitch based upon the rectangle
+    let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchRect)
+    self.mapView.addOverlay(adjustedPitchOverlay)
 
 
 
