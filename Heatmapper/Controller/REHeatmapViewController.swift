@@ -14,7 +14,7 @@ import HealthKit
 import CoreLocation
 import DTMHeatmap
 
-
+// this struct manages the conversion of the rotated view to create a rotated MKMapRect
 struct ViewCorners {
   private(set) var topLeft:     CGPoint!
   private(set) var topRight:    CGPoint!
@@ -105,7 +105,7 @@ class REHeatmapViewController: UIViewController {
   var pitchView                   : UIImageView!
 
   var pitchViewRotation           : CGFloat = 0.0
-  var pitchViewOrigin             : CGPoint!
+//  var pitchViewOrigin             : CGPoint!
 
   var inProgressWheel       : UIActivityIndicatorView?
   // variable purely for the In Progress wheel
@@ -489,6 +489,8 @@ class REHeatmapViewController: UIViewController {
     }
   }
 
+
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -528,8 +530,16 @@ class REHeatmapViewController: UIViewController {
     pitchView.addGestureRecognizer(panner)
     pitchView.addGestureRecognizer(rotator)
     pitchView.addGestureRecognizer(pincher)
-    pitchViewOrigin = pitchView.frame.origin
+//    pitchViewOrigin = pitchView.frame.origin
+
     self.touchView.addSubview(pitchView)
+     NSLayoutConstraint.activate([
+
+      pitchView.topAnchor.constraint(equalTo: touchView.topAnchor, constant: 10),
+      pitchView.leftAnchor.constraint(equalTo: touchView.leftAnchor, constant: 10),
+      pitchView.bottomAnchor.constraint(equalTo: touchView.bottomAnchor, constant: -10),
+      pitchView.rightAnchor.constraint(equalTo: touchView.rightAnchor, constant: -10)
+    ])
 
 
 
@@ -699,26 +709,26 @@ class REHeatmapViewController: UIViewController {
   func savePitchCoordinates() {
 
 
-    MyFunc.logMessage(.debug, "pitchView rotation: \(pitchViewRotation)")
-
-    let pitchViewFrame = self.pitchView.frame
-    let frameStr = String(describing: pitchViewFrame)
-    MyFunc.logMessage(.debug, "pitchView.frame \(frameStr)")
-
-
-    let pitchViewRotation = self.pitchView.transform
-    let pitchViewRotationStr = String(describing: pitchViewRotation)
-    MyFunc.logMessage(.debug, "pitchView.frame \(pitchViewRotationStr)")
-
-
-    let pitchViewTransform = pitchViewOrigin.applying(pitchView.transform)
-    let pitchViewTranformStr = String(describing: pitchViewTransform)
-    MyFunc.logMessage(.debug, "pitchViewTransform \(pitchViewTranformStr)")
-
-    let pitchSizeAsMapRegion = self.mapView.convert(pitchViewFrame, toRegionFrom: touchView)
-    print("pitchSizeAsMapRegion:")
-    print(pitchSizeAsMapRegion)
-    let pitchSizeAsMapRect = mapRectForCoordinateRegion(pitchSizeAsMapRegion)
+//    MyFunc.logMessage(.debug, "pitchView rotation: \(pitchViewRotation)")
+//
+//    let pitchViewFrame = self.pitchView.frame
+//    let frameStr = String(describing: pitchViewFrame)
+//    MyFunc.logMessage(.debug, "pitchView.frame \(frameStr)")
+//
+//
+//    let pitchViewRotation = self.pitchView.transform
+//    let pitchViewRotationStr = String(describing: pitchViewRotation)
+//    MyFunc.logMessage(.debug, "pitchView.frame \(pitchViewRotationStr)")
+//
+//
+//    let pitchViewTransform = pitchViewOrigin.applying(pitchView.transform)
+//    let pitchViewTranformStr = String(describing: pitchViewTransform)
+//    MyFunc.logMessage(.debug, "pitchViewTransform \(pitchViewTranformStr)")
+//
+//    let pitchSizeAsMapRegion = self.mapView.convert(pitchViewFrame, toRegionFrom: touchView)
+//    print("pitchSizeAsMapRegion:")
+//    print(pitchSizeAsMapRegion)
+//    let pitchSizeAsMapRect = mapRectForCoordinateRegion(pitchSizeAsMapRegion)
 //    workoutMetadata.pitchArea = pitchSizeAsMapRect
 
 
@@ -798,6 +808,9 @@ class REHeatmapViewController: UIViewController {
     // set up the rectangele
     let pitchRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
 
+    let pitchRectStr = String(describing: pitchRect)
+
+    MyFunc.logMessage(.debug, "pitch MKMapRect: \(pitchRectStr)")
 
 
     // finally get the rotation
@@ -806,13 +819,6 @@ class REHeatmapViewController: UIViewController {
     //  create an overlay of the pitch based upon the rectangle
     let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchRect)
     self.mapView.addOverlay(adjustedPitchOverlay)
-
-
-
-
-
-
-
 
 
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == heatmapWorkoutId}) {
@@ -825,12 +831,13 @@ class REHeatmapViewController: UIViewController {
 
 
 
-    let pitchSizeAsRectStr = String(describing: pitchSizeAsMapRegion)
-    print("pitchSizeAsRect: \(pitchSizeAsRectStr)")
+//    let pitchSizeAsRectStr = String(describing: pitchSizeAsMapRegion)
+//    print("pitchSizeAsRect: \(pitchSizeAsRectStr)")
 
 
   }
 
+  // this function gets just the rotation from an affine transform
   func rotation(from transform: CGAffineTransform) -> Double {
     return atan2(Double(transform.b), Double(transform.a))
   }
