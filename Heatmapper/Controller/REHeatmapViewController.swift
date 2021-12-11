@@ -535,10 +535,10 @@ class REHeatmapViewController: UIViewController {
     self.touchView.addSubview(pitchView)
      NSLayoutConstraint.activate([
 
-      pitchView.topAnchor.constraint(equalTo: touchView.topAnchor, constant: 10),
-      pitchView.leftAnchor.constraint(equalTo: touchView.leftAnchor, constant: 10),
-      pitchView.bottomAnchor.constraint(equalTo: touchView.bottomAnchor, constant: -10),
-      pitchView.rightAnchor.constraint(equalTo: touchView.rightAnchor, constant: -10)
+      pitchView.topAnchor.constraint(equalTo: touchView.topAnchor, constant: 20),
+      pitchView.leftAnchor.constraint(equalTo: touchView.leftAnchor, constant: 20),
+      pitchView.bottomAnchor.constraint(equalTo: touchView.bottomAnchor, constant: -20),
+      pitchView.rightAnchor.constraint(equalTo: touchView.rightAnchor, constant: -20)
     ])
 
 
@@ -709,29 +709,6 @@ class REHeatmapViewController: UIViewController {
   func savePitchCoordinates() {
 
 
-//    MyFunc.logMessage(.debug, "pitchView rotation: \(pitchViewRotation)")
-//
-//    let pitchViewFrame = self.pitchView.frame
-//    let frameStr = String(describing: pitchViewFrame)
-//    MyFunc.logMessage(.debug, "pitchView.frame \(frameStr)")
-//
-//
-//    let pitchViewRotation = self.pitchView.transform
-//    let pitchViewRotationStr = String(describing: pitchViewRotation)
-//    MyFunc.logMessage(.debug, "pitchView.frame \(pitchViewRotationStr)")
-//
-//
-//    let pitchViewTransform = pitchViewOrigin.applying(pitchView.transform)
-//    let pitchViewTranformStr = String(describing: pitchViewTransform)
-//    MyFunc.logMessage(.debug, "pitchViewTransform \(pitchViewTranformStr)")
-//
-//    let pitchSizeAsMapRegion = self.mapView.convert(pitchViewFrame, toRegionFrom: touchView)
-//    print("pitchSizeAsMapRegion:")
-//    print(pitchSizeAsMapRegion)
-//    let pitchSizeAsMapRect = mapRectForCoordinateRegion(pitchSizeAsMapRegion)
-//    workoutMetadata.pitchArea = pitchSizeAsMapRect
-
-
     // adding code to save pitch corner points as coordinates
 
     // first need to get the pitch corners on the touch view
@@ -768,26 +745,20 @@ class REHeatmapViewController: UIViewController {
     let midpointTLBRCoordinate = CLLocationCoordinate2D(latitude: midpointLatitudeTLBR, longitude: midpointLongitudeTLBR)
     setPinUsingMKAnnotation(coordinate: midpointTLBRCoordinate, title: "TLBR")
 
-//    let tlbrStr = String(describing: midpointTLBRCoordinate)
-//    print("TLBR: \(tlbrStr)")
-
-      // below code would do the job just as well
-//    let midpointLatitudeBLTR = (pitchMapBottomLeftCoordinate.latitude + pitchMapTopRightCoordinate.latitude) / 2
-//    let midpointLongitudeBLTR = (pitchMapBottomLeftCoordinate.longitude + pitchMapTopRightCoordinate.longitude) / 2
-//    let midpointBLTRCoordinate = CLLocationCoordinate2D(latitude: midpointLatitudeBLTR, longitude: midpointLongitudeBLTR)
+    var pitchCornerArray = [CLLocationCoordinate2D]()
+    pitchCornerArray.append(pitchMapTopLeftCoordinate)
+    pitchCornerArray.append(pitchMapTopRightCoordinate)
+    pitchCornerArray.append(pitchMapBottomLeftCoordinate)
+    pitchCornerArray.append(pitchMapBottomRightCoordinate)
 //
-//    let bltrStr = String(describing: midpointBLTRCoordinate)
-//    print("BLTR: \(bltrStr)")
-
-    // then calculate the rect from the co-ordinate pairs
-
-//    let maxLat = heatmapperCoordinatesArray.map {$0.latitude}.max()
-//    let minLat = heatmapperCoordinatesArray.map {$0.latitude}.min()
-//    let maxLong = heatmapperCoordinatesArray.map {$0.longitude}.max()
-//    let minLong = heatmapperCoordinatesArray.map {$0.longitude}.min()
+//    let maxLat = pitchCornerArray.map {$0.latitude}.max()
+//    let minLat = pitchCornerArray.map {$0.latitude}.min()
+//    let maxLong = pitchCornerArray.map {$0.longitude}.max()
+//    let minLong = pitchCornerArray.map {$0.longitude}.min()
 //
 //    let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
-//    let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
+//
+//    setPinUsingMKAnnotation(coordinate: minCoord, title: "MIN")
 
 
 
@@ -802,6 +773,7 @@ class REHeatmapViewController: UIViewController {
     let pitchRectWidth = topRightMapPoint.x - topLeftMapPoint.x
     let pitchRectHeight = bottomRightMapPoint.y - topRightMapPoint.y
 
+    // using the bottom left as the origin of the rectangle (currently)
     let pitchMapOriginX = bottomLeftMapPoint.x
     let pitchMapOriginY = bottomLeftMapPoint.y
 
@@ -814,7 +786,6 @@ class REHeatmapViewController: UIViewController {
 
 
     // finally get the rotation
-
 
     //  create an overlay of the pitch based upon the rectangle
     let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchRect)
@@ -1088,26 +1059,8 @@ class REHeatmapViewController: UIViewController {
             self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
           }
 
-//          if self.workoutMetadata.pitchArea != nil {
-//
-//
-//            guard let savedPitchMapRect = self.workoutMetadata.pitchArea else {
-//              MyFunc.logMessage(.error, "Cannot convert saved pitch to CGRect")
-//              return
-//            }
-//
-//            let savedPitchAsCoordinateRegion = MKCoordinateRegion.init(savedPitchMapRect)
-//            let savedPitchAsCGRect = self.mapView.convert(savedPitchAsCoordinateRegion, toRectTo: self.mapView)
-//
-//            self.pitchView.frame = savedPitchAsCGRect
-//
-//
-//          }
-
           self.createPitchOverlay()
           self.createREHeatmap()
-
-
 
         }
 
@@ -1251,33 +1204,6 @@ extension REHeatmapViewController: MKMapViewDelegate {
     default: break
     }
   }
-//
-//  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//    if annotation is MKUserLocation {
-//      return nil
-//    }
-//
-//    if annotation is UserAnnotation {
-//      MyFunc.logMessage(.debug, "UserAnnotation")
-//
-//    }
-//
-//    let reuseId = "heatmapPoint"
-//    var heatmapPointAnnotationView: MKAnnotationView? = self.mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
-//
-//    if heatmapPointAnnotationView == nil {
-//      heatmapPointAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-//      heatmapPointAnnotationView?.image = self.reHeatmapPointImage
-//      heatmapPointAnnotationView?.frame.size = CGSize(width: 3, height: 3)
-//
-//    } else {
-//      heatmapPointAnnotationView?.annotation = annotation
-//    }
-//
-//
-//    return heatmapPointAnnotationView
-//  }
-
 
   func createDTMHeatmap() {
 
