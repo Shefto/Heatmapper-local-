@@ -43,7 +43,7 @@ struct ViewCorners {
     originalCenter = view.center.applying(view.transform.inverted())
 
     let vcTransform = String(describing: view.transform)
-    MyFunc.logMessage(.debug, "viewTransform: \(vcTransform)")
+//    MyFunc.logMessage(.debug, "viewTransform: \(vcTransform)")
 
     topLeft =     pointWith(multipliedWidth:-1, multipliedHeight:-1)
     topRight =    pointWith(multipliedWidth: 1, multipliedHeight:-1)
@@ -226,7 +226,6 @@ class REHeatmapViewController: UIViewController {
 
   @IBAction func stepperInnerRed(_ sender: UIStepper) {
     innerColourRed = String(format:"%.1f", sender.value)
-    print(sender.value)
     innerRed.text = innerColourRed
     refreshHeatmap()
   }
@@ -354,7 +353,7 @@ class REHeatmapViewController: UIViewController {
 
 
   @IBAction func textfieldEditingDidEnd(_ sender: Any) {
-    print("textFieldEditingDidEnd")
+
 
     // update fields from UI values
     innerColourGradient =  innerGradient.text ?? ""
@@ -382,7 +381,7 @@ class REHeatmapViewController: UIViewController {
   @IBOutlet weak var mapView: MKMapView!
 
   @objc func resizeTap(_ sender: UITapGestureRecognizer? = nil) {
-    print("resizeTap called")
+
   }
 
   @objc func handleRotate(_ gesture: UIRotationGestureRecognizer) {
@@ -395,9 +394,11 @@ class REHeatmapViewController: UIViewController {
 
     pitchViewRotation += gesture.rotation
 
-//    let rotationStr = String(describing: gesture.rotation)
-//    print("rotationStr: \(rotationStr)")
+
     gesture.rotation = 0
+
+
+
 
   }
 
@@ -760,14 +761,14 @@ class REHeatmapViewController: UIViewController {
     let adjustedHeight = pitchView.bounds.size.height * scaleY
 //    let adjustedSize = CGSize(width: pitchView.bounds.size.width * scaleX, height: pitchView.bounds.size.height * scaleY)
 
-    print("pitchView angle Radians: \(angleRadians)")
-    print("pitchView angle Degrees: \(angleDegrees)")
-    print("pitchView scaleX: \(scaleX)")
-    print("pitchView scaleY: \(scaleY)")
-//    print("pitchView adjustedSize: \(adjustedSize)")
-    print("pitchView adjustedWidth: \(adjustedWidth)")
-    print("pitchView adjustedHeight: \(adjustedHeight)")
-    print("pitchView frame: \(pitchView.frame)")
+//    print("pitchView angle Radians: \(angleRadians)")
+//    print("pitchView angle Degrees: \(angleDegrees)")
+//    print("pitchView scaleX: \(scaleX)")
+//    print("pitchView scaleY: \(scaleY)")
+////    print("pitchView adjustedSize: \(adjustedSize)")
+//    print("pitchView adjustedWidth: \(adjustedWidth)")
+//    print("pitchView adjustedHeight: \(adjustedHeight)")
+//    print("pitchView frame: \(pitchView.frame)")
 
 
     // get the max and min X and Y points from the above coordinates as MKMapPoints
@@ -776,10 +777,10 @@ class REHeatmapViewController: UIViewController {
     let bottomLeftMapPoint = MKMapPoint(pitchMapBottomLeftCoordinate)
     let bottomRightMapPoint = MKMapPoint(pitchMapBottomRightCoordinate)
 
-    print ("topLeftMapPoint: \(topLeftMapPoint)")
-    print ("topRightMapPoint: \(topRightMapPoint)")
-    print ("bottomLeftMapPoint: \(bottomLeftMapPoint)")
-    print ("bottomRightMapPoint: \(bottomRightMapPoint)")
+//    print ("topLeftMapPoint: \(topLeftMapPoint)")
+//    print ("topRightMapPoint: \(topRightMapPoint)")
+//    print ("bottomLeftMapPoint: \(bottomLeftMapPoint)")
+//    print ("bottomRightMapPoint: \(bottomRightMapPoint)")
 
 //    let pitchRectHeight = bottomLeftMapPoint.distance(to: topLeftMapPoint)
 //    let pitchRectWidth = bottomLeftMapPoint.distance(to: bottomRightMapPoint)
@@ -791,7 +792,7 @@ class REHeatmapViewController: UIViewController {
     let pitchMapOriginX = bottomLeftMapPoint.x
     let pitchMapOriginY = bottomLeftMapPoint.y
 
-    // set up the rectangele
+    // set up the rectangle
     let pitchRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
 //    let pitchRect =  MKMapRect(x: pitchMapOriginX, y:pitchMapOriginY, width: fabs(bottomLeftMapPoint.x - bottomRightMapPoint.x), height: fabs(topLeftMapPoint.y - bottomLeftMapPoint.y))
 
@@ -947,11 +948,11 @@ class REHeatmapViewController: UIViewController {
     // get the workout
     getWorkout(workoutId: workoutId) { [self] (workouts, error) in
       let workoutReturned = workouts?.first
-      MyFunc.logMessage(.debug, "workoutReturned:")
-      MyFunc.logMessage(.debug, String(describing: workoutReturned))
+//      MyFunc.logMessage(.debug, "workoutReturned:")
+//      MyFunc.logMessage(.debug, String(describing: workoutReturned))
 
       guard let workout : HKWorkout = workoutReturned else {
-        MyFunc.logMessage(.debug, "workoutReturned invalid: \(String(describing: workoutReturned))")
+//        MyFunc.logMessage(.debug, "workoutReturned invalid: \(String(describing: workoutReturned))")
         return
       }
 
@@ -1006,8 +1007,8 @@ class REHeatmapViewController: UIViewController {
       }
 
       // Process the initial route data here.
-      MyFunc.logMessage(.debug, "routeQuery returned samples:")
-      MyFunc.logMessage(.debug, String(describing: samples))
+//      MyFunc.logMessage(.debug, "routeQuery returned samples:")
+//      MyFunc.logMessage(.debug, String(describing: samples))
 
       DispatchQueue.main.async {
         //4. Cast the samples as HKWorkout
@@ -1017,8 +1018,8 @@ class REHeatmapViewController: UIViewController {
         else {
           return
         }
-        MyFunc.logMessage(.debug, "routeSamples:")
-        MyFunc.logMessage(.debug, String(describing: routeSamples))
+//        MyFunc.logMessage(.debug, "routeSamples:")
+//        MyFunc.logMessage(.debug, String(describing: routeSamples))
         guard let routeReturned = samples?.first as? HKWorkoutRoute else {
           MyFunc.logMessage(.debug, "Could not convert routeSamples to HKWorkoutRoute")
           return
@@ -1046,7 +1047,7 @@ class REHeatmapViewController: UIViewController {
   func getRouteLocationData(route: HKWorkoutRoute) {
 
     let samplesCount = route.count
-    MyFunc.logMessage(.debug, "Number of samples: \(samplesCount)")
+//    MyFunc.logMessage(.debug, "Number of samples: \(samplesCount)")
 
     // Create the route query.
     let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNil, done, errorOrNil) in
@@ -1062,15 +1063,15 @@ class REHeatmapViewController: UIViewController {
       guard let locations = locationsOrNil else {
         fatalError("*** Invalid State: This can only fail if there was an error. ***")
       }
-
-      MyFunc.logMessage(.debug, "Locations retrieved: \(String(describing: locations))")
+//
+//      MyFunc.logMessage(.debug, "Locations retrieved: \(String(describing: locations))")
 
       let locationsAsCoordinates = locations.map {$0.coordinate}
-      MyFunc.logMessage(.debug, "Coordinates retrieved: \(locationsAsCoordinates)")
+//      MyFunc.logMessage(.debug, "Coordinates retrieved: \(locationsAsCoordinates)")
 
       self.heatmapperCoordinatesArray.append(contentsOf: locationsAsCoordinates)
       let coordinatesTotal = self.heatmapperCoordinatesArray.count
-      MyFunc.logMessage(.debug, "Total coordinates: \(coordinatesTotal)")
+//      MyFunc.logMessage(.debug, "Total coordinates: \(coordinatesTotal)")
 
       // if done = all data retrieved
       // only at this point can we start to build a heatmap overlay
@@ -1200,14 +1201,23 @@ extension REHeatmapViewController: MKMapViewDelegate {
       if let pitchImage = UIImage(named: "Figma Pitch 11 Green.png")
       {
 
+        // get the rotation of the pitchView
         let viewRotation = rotation(from: pitchView.transform.inverted())
+
         let viewRotationAsCGFloat = CGFloat(viewRotation)
         let viewRotationStr = String(describing: viewRotation)
         MyFunc.logMessage(.debug, "pitchView rotation: \(viewRotationStr)")
 
-        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: viewRotationAsCGFloat)
-//        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: self.angle, pointsDistance: self.pointsDistance)
+        let mapViewHeading = mapView.camera.heading
+        let mapViewHeadingInt = Int(mapViewHeading)
+        let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
+        print("mapViewHeading: \(mapViewHeading)")
+        print("mapViewHeadingRadians: \(mapViewHeadingRadians)")
+        // this incorporates any rotation of the map into the rotation to apply to the overlay
+        let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
 
+        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation)
+//        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: viewRotationAsCGFloat)
         footballPitchOverlayView.alpha = 0.5
 
         return footballPitchOverlayView
@@ -1246,8 +1256,8 @@ extension REHeatmapViewController: MKMapViewDelegate {
     let dtmBoundingRect = self.dtmHeatmap.boundingRect
     dtmRect = dtmBoundingRect
     let dtmCoordinate = self.dtmHeatmap.coordinate
-    MyFunc.logMessage(.debug, "dtmBoundingRect: \(dtmBoundingRect)")
-    MyFunc.logMessage(.debug, "dtmCoordinate: \(dtmCoordinate)")
+//    MyFunc.logMessage(.debug, "dtmBoundingRect: \(dtmBoundingRect)")
+//    MyFunc.logMessage(.debug, "dtmCoordinate: \(dtmCoordinate)")
 
   }
 
@@ -1255,7 +1265,7 @@ extension REHeatmapViewController: MKMapViewDelegate {
 
 extension REHeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    MyFunc.logMessage(.debug, "REHeatmapViewController.didSelectRow: \(row)")
+//    MyFunc.logMessage(.debug, "REHeatmapViewController.didSelectRow: \(row)")
 
     let blendModeSelected = blendModeArray[row]
 

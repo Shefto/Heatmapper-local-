@@ -47,8 +47,8 @@ class FootballPitchOverlayView: MKOverlayRenderer {
 //    context.scaleBy(x: imageScale, y: imageScale)
 //    context.translateBy(x: 0.0, y: -rect.size.height)
     context.rotate(by: angle)
-    let contextCTMStr = String(describing: context.ctm)
-    print ("contextCTMStr: \(contextCTMStr)")
+//    let contextCTMStr = String(describing: context.ctm)
+//    print ("contextCTMStr: \(contextCTMStr)")
     context.draw(imageReference, in: rect)
 
   }
