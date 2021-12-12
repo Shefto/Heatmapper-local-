@@ -740,26 +740,34 @@ class REHeatmapViewController: UIViewController {
     // get the midpoint of the latitudes and longitudes of the opposite corner pairs
     // either pair will do as this should be the same
 
-    let midpointLatitudeTLBR = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
-    let midpointLongitudeTLBR = (pitchMapTopLeftCoordinate.longitude + pitchMapBottomRightCoordinate.longitude) / 2
-    let midpointTLBRCoordinate = CLLocationCoordinate2D(latitude: midpointLatitudeTLBR, longitude: midpointLongitudeTLBR)
-    setPinUsingMKAnnotation(coordinate: midpointTLBRCoordinate, title: "TLBR")
+//    let midpointLatitudeTLBR = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
+//    let midpointLongitudeTLBR = (pitchMapTopLeftCoordinate.longitude + pitchMapBottomRightCoordinate.longitude) / 2
+//    let midpointTLBRCoordinate = CLLocationCoordinate2D(latitude: midpointLatitudeTLBR, longitude: midpointLongitudeTLBR)
+//    setPinUsingMKAnnotation(coordinate: midpointTLBRCoordinate, title: "TLBR")
 
     var pitchCornerArray = [CLLocationCoordinate2D]()
     pitchCornerArray.append(pitchMapTopLeftCoordinate)
     pitchCornerArray.append(pitchMapTopRightCoordinate)
     pitchCornerArray.append(pitchMapBottomLeftCoordinate)
     pitchCornerArray.append(pitchMapBottomRightCoordinate)
-//
-//    let maxLat = pitchCornerArray.map {$0.latitude}.max()
-//    let minLat = pitchCornerArray.map {$0.latitude}.min()
-//    let maxLong = pitchCornerArray.map {$0.longitude}.max()
-//    let minLong = pitchCornerArray.map {$0.longitude}.min()
-//
-//    let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
-//
-//    setPinUsingMKAnnotation(coordinate: minCoord, title: "MIN")
 
+    // this helpful in getting the pitch scale and height but not sure how this will be useful - rotation might be though
+    let angleRadians = pitchView.transform.angle
+    let angleDegrees = pitchView.transform.angleInDegrees
+    let scaleX = pitchView.transform.scaleX
+    let scaleY = pitchView.transform.scaleY
+    let adjustedWidth = pitchView.bounds.size.width * scaleX
+    let adjustedHeight = pitchView.bounds.size.height * scaleY
+//    let adjustedSize = CGSize(width: pitchView.bounds.size.width * scaleX, height: pitchView.bounds.size.height * scaleY)
+
+    print("pitchView angle Radians: \(angleRadians)")
+    print("pitchView angle Degrees: \(angleDegrees)")
+    print("pitchView scaleX: \(scaleX)")
+    print("pitchView scaleY: \(scaleY)")
+//    print("pitchView adjustedSize: \(adjustedSize)")
+    print("pitchView adjustedWidth: \(adjustedWidth)")
+    print("pitchView adjustedHeight: \(adjustedHeight)")
+    print("pitchView frame: \(pitchView.frame)")
 
 
     // get the max and min X and Y points from the above coordinates as MKMapPoints
@@ -768,17 +776,25 @@ class REHeatmapViewController: UIViewController {
     let bottomLeftMapPoint = MKMapPoint(pitchMapBottomLeftCoordinate)
     let bottomRightMapPoint = MKMapPoint(pitchMapBottomRightCoordinate)
 
+    print ("topLeftMapPoint: \(topLeftMapPoint)")
+    print ("topRightMapPoint: \(topRightMapPoint)")
+    print ("bottomLeftMapPoint: \(bottomLeftMapPoint)")
+    print ("bottomRightMapPoint: \(bottomRightMapPoint)")
 
-    // get the dimensions of the rectangle from the distance between the point extremes
-    let pitchRectWidth = topRightMapPoint.x - topLeftMapPoint.x
-    let pitchRectHeight = bottomRightMapPoint.y - topRightMapPoint.y
+//    let pitchRectHeight = bottomLeftMapPoint.distance(to: topLeftMapPoint)
+//    let pitchRectWidth = bottomLeftMapPoint.distance(to: bottomRightMapPoint)
 
-    // using the bottom left as the origin of the rectangle (currently)
+    let pitchRectHeight = MKMapPointDistance(from: bottomLeftMapPoint, to: topLeftMapPoint)
+    let pitchRectWidth = MKMapPointDistance(from: bottomLeftMapPoint, to: bottomRightMapPoint)
+
+//    // using the bottom left as the origin of the rectangle (currently)
     let pitchMapOriginX = bottomLeftMapPoint.x
     let pitchMapOriginY = bottomLeftMapPoint.y
 
     // set up the rectangele
     let pitchRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
+//    let pitchRect =  MKMapRect(x: pitchMapOriginX, y:pitchMapOriginY, width: fabs(bottomLeftMapPoint.x - bottomRightMapPoint.x), height: fabs(topLeftMapPoint.y - bottomLeftMapPoint.y))
+
 
     let pitchRectStr = String(describing: pitchRect)
 
@@ -808,19 +824,29 @@ class REHeatmapViewController: UIViewController {
 
   }
 
+  func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
+    return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)
+  }
+
+  func CGPointDistance(from: CGPoint, to: CGPoint) -> CGFloat {
+    return sqrt(CGPointDistanceSquared(from: from, to: to))
+  }
+
+
+  func MKMapPointDistanceSquared(from: MKMapPoint, to: MKMapPoint) -> Double {
+    return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)
+  }
+
+  func MKMapPointDistance(from: MKMapPoint, to: MKMapPoint) -> Double {
+    return sqrt(MKMapPointDistanceSquared(from: from, to: to))
+  }
+
   // this function gets just the rotation from an affine transform
   func rotation(from transform: CGAffineTransform) -> Double {
     return atan2(Double(transform.b), Double(transform.a))
   }
 
 
-  func mapRectForCoordinateRegion(_ region: MKCoordinateRegion) -> MKMapRect {
-    let topLeftCoordinate = CLLocationCoordinate2DMake(region.center.latitude + (region.span.latitudeDelta / 2.0), region.center.longitude - (region.span.longitudeDelta / 2.0))
-    let topLeftMapPoint = MKMapPoint(topLeftCoordinate)
-    let bottomRightCoordinate = CLLocationCoordinate2DMake(region.center.latitude - (region.span.latitudeDelta / 2.0), region.center.longitude + (region.span.longitudeDelta / 2.0))
-    let bottomRightMapPoint = MKMapPoint(bottomRightCoordinate)
-    return MKMapRect(x: topLeftMapPoint.x, y: topLeftMapPoint.y, width: fabs(bottomRightMapPoint.x - topLeftMapPoint.x), height: fabs(bottomRightMapPoint.y - topLeftMapPoint.y))
-  }
 
   func setMapViewZoom(rect: MKMapRect) {
     let insets = UIEdgeInsets(top: 0, left: 5, bottom: 5, right: 5)
