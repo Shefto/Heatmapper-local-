@@ -110,6 +110,10 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
       self.getWorkoutMetadata()
       self.workoutCollectionView.reloadData()
     }
+//
+
+
+    
   }
   
   override func viewDidLoad() {
@@ -244,7 +248,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
   func getRouteSampleObject(workout: HKWorkout)  {
 
-    var samplesReturned : Bool = false
+//    var samplesReturned : Bool = false
     let runningObjectQuery = HKQuery.predicateForObjects(from: workout)
 
     let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
@@ -269,14 +273,14 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 //        MyFunc.logMessage(.debug, String(describing: routeSamples))
         guard let routeReturned = samples?.first as? HKWorkoutRoute else {
           MyFunc.logMessage(.debug, "No Route returned for workout \(String(describing: workout.startDate))")
-          samplesReturned = false
+//          samplesReturned = false
           return
         }
         MyFunc.logMessage(.debug, "Route returned for workout \(String(describing: workout.startDate)):")
 //        MyFunc.logMessage(.debug, routeReturned.description)
 
 
-        samplesReturned = true
+//        samplesReturned = true
 
         if let workoutInfoRow = self.workoutInfoArray.firstIndex(where: {$0.uuid == workout.uuid}) {
           self.workoutInfoArray[workoutInfoRow].samples = true

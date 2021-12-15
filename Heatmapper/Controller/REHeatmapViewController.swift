@@ -42,7 +42,7 @@ struct ViewCorners {
     transformedView = view
     originalCenter = view.center.applying(view.transform.inverted())
 
-    let vcTransform = String(describing: view.transform)
+//    let vcTransform = String(describing: view.transform)
 //    MyFunc.logMessage(.debug, "viewTransform: \(vcTransform)")
 
     topLeft =     pointWith(multipliedWidth:-1, multipliedHeight:-1)
@@ -57,7 +57,7 @@ struct ViewCorners {
 
 class REHeatmapViewController: UIViewController {
 
-  var reHeatmapOverlay            = REHeatmapOverlay()
+//  var reHeatmapOverlay            = REHeatmapOverlay()
   var dtmHeatmap                  = DTMHeatmap()
   var heatmapperCoordinatesArray  = [CLLocationCoordinate2D]()
   var heatmapperLocationsArray    = [CLLocation]()
@@ -542,7 +542,8 @@ class REHeatmapViewController: UIViewController {
       pitchView.rightAnchor.constraint(equalTo: touchView.rightAnchor, constant: -20)
     ])
 
-
+    coloursStackView.isHidden = true
+    lowerControlsStackView.isHidden = true
 
     resizeOn = false
     resizeButton.setTitle("Adjust Pitch Size", for: .normal)
@@ -726,11 +727,11 @@ class REHeatmapViewController: UIViewController {
     let pitchMapBottomLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
     let pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
 
-    // let's confirm these are where we expect them to be
-    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "TL")
-    setPinUsingMKAnnotation(coordinate: pitchMapTopRightCoordinate, title: "TR")
-    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "BL")
-    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "BR")
+//    // let's confirm these are where we expect them to be
+//    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "TL")
+//    setPinUsingMKAnnotation(coordinate: pitchMapTopRightCoordinate, title: "TR")
+//    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "BL")
+//    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "BR")
 
     // then save these co-ordinates as a pitch view
 
@@ -753,12 +754,12 @@ class REHeatmapViewController: UIViewController {
     pitchCornerArray.append(pitchMapBottomRightCoordinate)
 
     // this helpful in getting the pitch scale and height but not sure how this will be useful - rotation might be though
-    let angleRadians = pitchView.transform.angle
-    let angleDegrees = pitchView.transform.angleInDegrees
-    let scaleX = pitchView.transform.scaleX
-    let scaleY = pitchView.transform.scaleY
-    let adjustedWidth = pitchView.bounds.size.width * scaleX
-    let adjustedHeight = pitchView.bounds.size.height * scaleY
+//    let angleRadians = pitchView.transform.angle
+//    let angleDegrees = pitchView.transform.angleInDegrees
+//    let scaleX = pitchView.transform.scaleX
+//    let scaleY = pitchView.transform.scaleY
+//    let adjustedWidth = pitchView.bounds.size.width * scaleX
+//    let adjustedHeight = pitchView.bounds.size.height * scaleY
 //    let adjustedSize = CGSize(width: pitchView.bounds.size.width * scaleX, height: pitchView.bounds.size.height * scaleY)
 
 //    print("pitchView angle Radians: \(angleRadians)")
@@ -773,7 +774,7 @@ class REHeatmapViewController: UIViewController {
 
     // get the max and min X and Y points from the above coordinates as MKMapPoints
     let topLeftMapPoint = MKMapPoint(pitchMapTopLeftCoordinate)
-    let topRightMapPoint = MKMapPoint(pitchMapTopRightCoordinate)
+//    let topRightMapPoint = MKMapPoint(pitchMapTopRightCoordinate)
     let bottomLeftMapPoint = MKMapPoint(pitchMapBottomLeftCoordinate)
     let bottomRightMapPoint = MKMapPoint(pitchMapBottomRightCoordinate)
 
