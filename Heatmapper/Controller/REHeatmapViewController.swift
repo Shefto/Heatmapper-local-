@@ -598,7 +598,7 @@ class REHeatmapViewController: UIViewController {
     let overlays = mapView.overlays
     mapView.removeOverlays(overlays)
 
-    self.createPitchOverlay()
+    self.createDefaultPitchOverlay()
     self.createREHeatmap()
   }
 
@@ -702,7 +702,6 @@ class REHeatmapViewController: UIViewController {
 
   }
 
-
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
     return true
   }
@@ -727,87 +726,31 @@ class REHeatmapViewController: UIViewController {
     let pitchMapBottomLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
     let pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
 
-//    // let's confirm these are where we expect them to be
-//    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "TL")
-//    setPinUsingMKAnnotation(coordinate: pitchMapTopRightCoordinate, title: "TR")
-//    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "BL")
-//    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "BR")
-
-    // then save these co-ordinates as a pitch view
-
-
-    // then construct an overlay on the map view to match them
-
-    // first work out the centre of the overlay from the co-ordinates of the 4 corners
-    // get the midpoint of the latitudes and longitudes of the opposite corner pairs
-    // either pair will do as this should be the same
-
-//    let midpointLatitudeTLBR = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
-//    let midpointLongitudeTLBR = (pitchMapTopLeftCoordinate.longitude + pitchMapBottomRightCoordinate.longitude) / 2
-//    let midpointTLBRCoordinate = CLLocationCoordinate2D(latitude: midpointLatitudeTLBR, longitude: midpointLongitudeTLBR)
-//    setPinUsingMKAnnotation(coordinate: midpointTLBRCoordinate, title: "TLBR")
-
-    var pitchCornerArray = [CLLocationCoordinate2D]()
-    pitchCornerArray.append(pitchMapTopLeftCoordinate)
-    pitchCornerArray.append(pitchMapTopRightCoordinate)
-    pitchCornerArray.append(pitchMapBottomLeftCoordinate)
-    pitchCornerArray.append(pitchMapBottomRightCoordinate)
-
-    // this helpful in getting the pitch scale and height but not sure how this will be useful - rotation might be though
-//    let angleRadians = pitchView.transform.angle
-//    let angleDegrees = pitchView.transform.angleInDegrees
-//    let scaleX = pitchView.transform.scaleX
-//    let scaleY = pitchView.transform.scaleY
-//    let adjustedWidth = pitchView.bounds.size.width * scaleX
-//    let adjustedHeight = pitchView.bounds.size.height * scaleY
-//    let adjustedSize = CGSize(width: pitchView.bounds.size.width * scaleX, height: pitchView.bounds.size.height * scaleY)
-
-//    print("pitchView angle Radians: \(angleRadians)")
-//    print("pitchView angle Degrees: \(angleDegrees)")
-//    print("pitchView scaleX: \(scaleX)")
-//    print("pitchView scaleY: \(scaleY)")
-////    print("pitchView adjustedSize: \(adjustedSize)")
-//    print("pitchView adjustedWidth: \(adjustedWidth)")
-//    print("pitchView adjustedHeight: \(adjustedHeight)")
-//    print("pitchView frame: \(pitchView.frame)")
-
-
+    createPitchOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
     // get the max and min X and Y points from the above coordinates as MKMapPoints
-    let topLeftMapPoint = MKMapPoint(pitchMapTopLeftCoordinate)
-//    let topRightMapPoint = MKMapPoint(pitchMapTopRightCoordinate)
-    let bottomLeftMapPoint = MKMapPoint(pitchMapBottomLeftCoordinate)
-    let bottomRightMapPoint = MKMapPoint(pitchMapBottomRightCoordinate)
-
-//    print ("topLeftMapPoint: \(topLeftMapPoint)")
-//    print ("topRightMapPoint: \(topRightMapPoint)")
-//    print ("bottomLeftMapPoint: \(bottomLeftMapPoint)")
-//    print ("bottomRightMapPoint: \(bottomRightMapPoint)")
-
-//    let pitchRectHeight = bottomLeftMapPoint.distance(to: topLeftMapPoint)
-//    let pitchRectWidth = bottomLeftMapPoint.distance(to: bottomRightMapPoint)
-
-    let pitchRectHeight = MKMapPointDistance(from: bottomLeftMapPoint, to: topLeftMapPoint)
-    let pitchRectWidth = MKMapPointDistance(from: bottomLeftMapPoint, to: bottomRightMapPoint)
-
-//    // using the bottom left as the origin of the rectangle (currently)
-    let pitchMapOriginX = bottomLeftMapPoint.x
-    let pitchMapOriginY = bottomLeftMapPoint.y
-
-    // set up the rectangle
-    let pitchRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
-//    let pitchRect =  MKMapRect(x: pitchMapOriginX, y:pitchMapOriginY, width: fabs(bottomLeftMapPoint.x - bottomRightMapPoint.x), height: fabs(topLeftMapPoint.y - bottomLeftMapPoint.y))
-
-
-    let pitchRectStr = String(describing: pitchRect)
-
-    MyFunc.logMessage(.debug, "pitch MKMapRect: \(pitchRectStr)")
-
-
-    // finally get the rotation
-
-    //  create an overlay of the pitch based upon the rectangle
-    let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchRect)
-    self.mapView.addOverlay(adjustedPitchOverlay)
+//    let topLeftMapPoint = MKMapPoint(pitchMapTopLeftCoordinate)
+////    let topRightMapPoint = MKMapPoint(pitchMapTopRightCoordinate)
+//    let bottomLeftMapPoint = MKMapPoint(pitchMapBottomLeftCoordinate)
+//    let bottomRightMapPoint = MKMapPoint(pitchMapBottomRightCoordinate)
+//
+//    let pitchRectHeight = MKMapPointDistance(from: bottomLeftMapPoint, to: topLeftMapPoint)
+//    let pitchRectWidth = MKMapPointDistance(from: bottomLeftMapPoint, to: bottomRightMapPoint)
+//
+////    // using the bottom left as the origin of the rectangle (currently)
+//    let pitchMapOriginX = bottomLeftMapPoint.x
+//    let pitchMapOriginY = bottomLeftMapPoint.y
+//
+//    // set up the rectangle
+//    let pitchRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
+//
+//
+//    let pitchRectStr = String(describing: pitchRect)
+//
+//    MyFunc.logMessage(.debug, "pitch MKMapRect: \(pitchRectStr)")
+//
+//    //  create an overlay of the pitch based upon the rectangle
+//    let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchRect)
+//    self.mapView.addOverlay(adjustedPitchOverlay)
 
 
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == heatmapWorkoutId}) {
@@ -815,16 +758,66 @@ class REHeatmapViewController: UIViewController {
     } else {
       MyFunc.logMessage(.error, "Error updating workoutMetadata with pitch area")
     }
+
+    // save the pitch here
+    // we need the co-ordinates of the 4 points and the rotation to successfully recreate it
+
+    let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopLeftCoordinate.latitude, longitude: pitchMapTopLeftCoordinate.longitude)
+    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
+    let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
+    let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
+    let transformToSave = getMapRotation()
+
+
     MyFunc.saveWorkoutMetadata(workoutMetadataArray)
     MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadata))")
 
 
 
-//    let pitchSizeAsRectStr = String(describing: pitchSizeAsMapRegion)
-//    print("pitchSizeAsRect: \(pitchSizeAsRectStr)")
+  }
 
+
+  func createPitchOverlay(topLeft: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) {
+
+    // get the max and min X and Y points from the above coordinates as MKMapPoints
+    let topLeftMapPoint = MKMapPoint(topLeft)
+    //    let topRightMapPoint = MKMapPoint(pitchMapTopRightCoordinate)
+    let bottomLeftMapPoint = MKMapPoint(bottomLeft)
+    let bottomRightMapPoint = MKMapPoint(bottomRight)
+
+    let pitchRectHeight = MKMapPointDistance(from: bottomLeftMapPoint, to: topLeftMapPoint)
+    let pitchRectWidth = MKMapPointDistance(from: bottomLeftMapPoint, to: bottomRightMapPoint)
+
+    //    // using the bottom left as the origin of the rectangle (currently)
+    let pitchMapOriginX = bottomLeftMapPoint.x
+    let pitchMapOriginY = bottomLeftMapPoint.y
+
+    // set up the rectangle
+    let pitchRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
+
+
+    let pitchRectStr = String(describing: pitchRect)
+
+    MyFunc.logMessage(.debug, "pitch MKMapRect: \(pitchRectStr)")
+
+    //  create an overlay of the pitch based upon the rectangle
+    let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchRect)
+    self.mapView.addOverlay(adjustedPitchOverlay)
 
   }
+
+  func getMapRotation() -> CGFloat {
+
+    let viewRotation = rotation(from: pitchView.transform.inverted())
+    let mapViewHeading = mapView.camera.heading
+    let viewRotationAsCGFloat = CGFloat(viewRotation)
+
+    let mapViewHeadingInt = Int(mapViewHeading)
+    let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
+    let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
+    return angleIncMapRotation
+  }
+
 
   func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
     return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)
@@ -868,7 +861,7 @@ class REHeatmapViewController: UIViewController {
   }
 
 
-  func createPitchOverlay() {
+  func createDefaultPitchOverlay() {
 
     // get the max and min latitude and longitudes from all the points to be displayed in the heatmap
     let maxLat = heatmapperCoordinatesArray.map {$0.latitude}.max()
@@ -917,7 +910,6 @@ class REHeatmapViewController: UIViewController {
     //    self.addAnnotation(coordinate: mapCenter)
     //    self.mapView.setCenter(mapCenter, animated: true)
     self.setMapViewZoom(rect: rect)
-
 
   }
 
@@ -1087,7 +1079,7 @@ class REHeatmapViewController: UIViewController {
             self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
           }
 
-          self.createPitchOverlay()
+          self.createDefaultPitchOverlay()
           self.createREHeatmap()
 
         }
@@ -1101,20 +1093,22 @@ class REHeatmapViewController: UIViewController {
     healthstore.execute(query)
   }
 
-  func initialiseProgressWheel()
-  {
-    inProgressWheel = UIActivityIndicatorView(style: .large)
-    inProgressWheel?.translatesAutoresizingMaskIntoConstraints = false
-    self.view.addSubview(inProgressWheel!)
-    let sizeWidth = NSLayoutConstraint(item: inProgressWheel!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 60)
-    let sizeHeight = NSLayoutConstraint(item: inProgressWheel!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 60)
-    let CenterX = NSLayoutConstraint(item: inProgressWheel!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0)
-    let CenterY = NSLayoutConstraint(item: inProgressWheel!, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0)
 
-    inProgressWheel?.addConstraints([sizeWidth,sizeHeight])
-    self.view.addConstraints([CenterX,CenterY])
-    self.view.updateConstraints()
-  }
+
+//  func initialiseProgressWheel()
+//  {
+//    inProgressWheel = UIActivityIndicatorView(style: .large)
+//    inProgressWheel?.translatesAutoresizingMaskIntoConstraints = false
+//    self.view.addSubview(inProgressWheel!)
+//    let sizeWidth = NSLayoutConstraint(item: inProgressWheel!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 60)
+//    let sizeHeight = NSLayoutConstraint(item: inProgressWheel!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 60)
+//    let CenterX = NSLayoutConstraint(item: inProgressWheel!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0)
+//    let CenterY = NSLayoutConstraint(item: inProgressWheel!, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0)
+//
+//    inProgressWheel?.addConstraints([sizeWidth,sizeHeight])
+//    self.view.addConstraints([CenterX,CenterY])
+//    self.view.updateConstraints()
+//  }
 
 
 }
@@ -1203,19 +1197,16 @@ extension REHeatmapViewController: MKMapViewDelegate {
       {
 
         // get the rotation of the pitchView
+        // this incorporates any rotation of the map into the rotation to apply to the overlay
         let viewRotation = rotation(from: pitchView.transform.inverted())
-
-        let viewRotationAsCGFloat = CGFloat(viewRotation)
-        let viewRotationStr = String(describing: viewRotation)
-        MyFunc.logMessage(.debug, "pitchView rotation: \(viewRotationStr)")
-
         let mapViewHeading = mapView.camera.heading
+        let viewRotationAsCGFloat = CGFloat(viewRotation)
+
         let mapViewHeadingInt = Int(mapViewHeading)
         let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
-        print("mapViewHeading: \(mapViewHeading)")
-        print("mapViewHeadingRadians: \(mapViewHeadingRadians)")
-        // this incorporates any rotation of the map into the rotation to apply to the overlay
-        let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
+//        let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
+        let angleIncMapRotation = getMapRotation()
+
 
         let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation)
 //        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: viewRotationAsCGFloat)
@@ -1256,7 +1247,7 @@ extension REHeatmapViewController: MKMapViewDelegate {
     self.mapView.addOverlay(self.dtmHeatmap)
     let dtmBoundingRect = self.dtmHeatmap.boundingRect
     dtmRect = dtmBoundingRect
-    let dtmCoordinate = self.dtmHeatmap.coordinate
+//    let dtmCoordinate = self.dtmHeatmap.coordinate
 //    MyFunc.logMessage(.debug, "dtmBoundingRect: \(dtmBoundingRect)")
 //    MyFunc.logMessage(.debug, "dtmCoordinate: \(dtmCoordinate)")
 
