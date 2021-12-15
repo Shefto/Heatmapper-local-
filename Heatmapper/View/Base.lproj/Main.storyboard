@@ -23,7 +23,7 @@
                                 <rect key="frame" x="5" y="617" width="404" height="240"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ape-0k-33h" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="54"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="74.666666666666671"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -34,7 +34,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-uM-bXg" userLabel="Start Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="62" width="404" height="54"/>
+                                        <rect key="frame" x="0.0" y="82.666666666666629" width="404" height="74.666666666666686"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -44,19 +44,8 @@
                                             <action selector="btnMatch:" destination="hJk-zi-pgB" eventType="touchUpInside" id="YdV-R2-M2g"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="uxy-2h-68R" userLabel="Heatmap Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="124" width="404" height="54"/>
-                                        <color key="backgroundColor" name="buttonPrimary"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
-                                        <state key="normal" title="Test Heatmap"/>
-                                        <connections>
-                                            <action selector="btnHeatmap:" destination="hJk-zi-pgB" eventType="touchUpInside" id="o2O-wC-YAr"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="MUA-HA-gex" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="186" width="404" height="54"/>
+                                        <rect key="frame" x="0.0" y="165.33333333333337" width="404" height="74.666666666666686"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -86,7 +75,6 @@
                         <segue destination="nCc-eF-wC1" kind="show" identifier="mainMenuToHistory" id="jsl-Go-fze"/>
                         <segue destination="cbs-Dv-Qaf" kind="show" identifier="mainMenuToTracker" id="a4G-zq-cd0"/>
                         <segue destination="bKA-ac-svZ" kind="show" identifier="mainMenuToReferenceData" id="HXG-wh-XwM"/>
-                        <segue destination="Pbk-vr-61V" kind="show" identifier="mainMenuToREHeatmap" id="nls-6Q-nxl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pbN-s5-nYY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -366,7 +354,7 @@
                                 <rect key="frame" x="5" y="98" width="404" height="758"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xdx-oz-NWw" userLabel="Workout Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="658"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="708"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="biu-CG-Ke5">
                                             <size key="itemSize" width="200" height="300"/>
@@ -399,14 +387,14 @@
                                         </collectionReusableView>
                                     </collectionView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="6jT-ZL-mzL" userLabel="Top Stack View">
-                                        <rect key="frame" x="0.0" y="668" width="404" height="40"/>
+                                        <rect key="frame" x="0.0" y="718" width="404" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZd-9k-xak" userLabel="Created Heatmap Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="201" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="coh-V1-McT"/>
                                                 </constraints>
-                                                <state key="normal" title="Saved Heatmap">
+                                                <state key="normal" title="Heatmap Info">
                                                     <color key="titleColor" name="buttonPrimary"/>
                                                     <color key="titleShadowColor" name="textAlternate"/>
                                                 </state>
@@ -414,10 +402,10 @@
                                                     <action selector="btnCreatedHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="fWE-NN-3jD"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxP-i5-0nQ" userLabel="Update Workout Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxP-i5-0nQ" userLabel="Heatmap Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="203" y="0.0" width="201" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" title="RE Heatmap">
+                                                <state key="normal" title="Heatmap">
                                                     <color key="titleColor" name="buttonPrimary"/>
                                                     <color key="titleShadowColor" name="textAlternate"/>
                                                 </state>
@@ -430,8 +418,8 @@
                                             <constraint firstAttribute="height" constant="40" id="7dN-fi-Etf"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="koB-cI-YWd" userLabel="Bottom Stack View">
-                                        <rect key="frame" x="0.0" y="718" width="404" height="40"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="koB-cI-YWd" userLabel="Bottom Stack View">
+                                        <rect key="frame" x="0.0" y="758" width="404" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPj-oH-Nyf" userLabel="JD Heatmap Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="201.66666666666666" height="40"/>
@@ -474,6 +462,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Workouts" id="gOK-0r-wdZ"/>
                     <connections>
+                        <outlet property="heatmapButton" destination="GxP-i5-0nQ" id="oyz-9i-SUd"/>
+                        <outlet property="heatmapInfoButton" destination="tZd-9k-xak" id="CB5-Fu-bQN"/>
                         <outlet property="workoutCollectionView" destination="xdx-oz-NWw" id="FZm-9e-HtP"/>
                         <segue destination="Pbk-vr-61V" kind="show" identifier="historyToREHeatmap" id="Q5M-hF-bhw"/>
                         <segue destination="HIL-yj-uvc" kind="show" identifier="historyToJDHeatmap" id="lpb-Mm-P31"/>
@@ -1039,10 +1029,10 @@ DQoNCg
             </objects>
             <point key="canvasLocation" x="1212" y="1527"/>
         </scene>
-        <!--RE Heatmap-->
+        <!--Heatmap-->
         <scene sceneID="JyV-B9-0oQ">
             <objects>
-                <viewController title="Heatmap" id="Pbk-vr-61V" userLabel="RE Heatmap" customClass="REHeatmapViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Heatmap" id="Pbk-vr-61V" customClass="REHeatmapViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kHH-B5-aZm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1600,12 +1590,9 @@ DQoNCg
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xws-kf-RrH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-645" y="1822"/>
+            <point key="canvasLocation" x="-688" y="1768"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="Q5M-hF-bhw"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="flame.fill" width="19" height="27"/>
         <image name="heart.fill" width="34" height="31"/>

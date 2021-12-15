@@ -87,8 +87,15 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     }
   }
 
+  @IBOutlet weak var heatmapButton: ThemeButton!
+
+  @IBOutlet weak var heatmapInfoButton: ThemeButton!
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+
+    heatmapButton.isEnabled = false
+    heatmapInfoButton.isEnabled = false
 
     workoutInfoArray.removeAll()
     loadHeatmapImages()
@@ -110,8 +117,6 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
       self.getWorkoutMetadata()
       self.workoutCollectionView.reloadData()
     }
-//
-
 
     
   }
@@ -183,6 +188,8 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
       workoutSelectedId = workoutArray[indexPath.row].uuid
       selectedIndexPath = indexPath.row
       workoutCollectionView.reloadData()
+      heatmapButton.isEnabled = true
+      heatmapInfoButton.isEnabled = true
     }
   }
 

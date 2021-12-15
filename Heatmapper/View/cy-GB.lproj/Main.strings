@@ -94,7 +94,7 @@
 /* Class = "UINavigationItem"; title = "Workouts"; ObjectID = "gOK-0r-wdZ"; */
 "gOK-0r-wdZ.title" = "";
 
-/* Class = "UIButton"; normalTitle = "RE Heatmap"; ObjectID = "GxP-i5-0nQ"; */
+/* Class = "UIButton"; normalTitle = "Heatmap"; ObjectID = "GxP-i5-0nQ"; */
 "GxP-i5-0nQ.normalTitle" = "";
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "HIL-yj-uvc"; */
@@ -175,11 +175,8 @@
 /* Class = "UIButton"; normalTitle = "View Heatmap"; ObjectID = "TfY-wi-FxC"; */
 "TfY-wi-FxC.normalTitle" = "";
 
-/* Class = "UIButton"; normalTitle = "Saved Heatmap"; ObjectID = "tZd-9k-xak"; */
+/* Class = "UIButton"; normalTitle = "Heatmap Info"; ObjectID = "tZd-9k-xak"; */
 "tZd-9k-xak.normalTitle" = "";
-
-/* Class = "UIButton"; normalTitle = "Test Heatmap"; ObjectID = "uxy-2h-68R"; */
-"uxy-2h-68R.normalTitle" = "";
 
 /* Class = "UIButton"; configuration.title = "Adjust Pitch Size"; ObjectID = "V8E-UV-nEK"; */
 "V8E-UV-nEK.configuration.title" = "";
