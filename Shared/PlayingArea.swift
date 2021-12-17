@@ -6,7 +6,7 @@
 //  Copyright © 2021 Richard English. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
 
 // this struct created to provide a Codable equivalent for CLLocationCoordinate2D
@@ -30,28 +30,28 @@ struct PlayingArea: Codable, Equatable {
 
   var name  : String
   var sport : Sport
-  var minX  : CodableCLLCoordinate2D
-  var maxX  : CodableCLLCoordinate2D
-  var minY  : CodableCLLCoordinate2D
-  var maxY  : CodableCLLCoordinate2D
+  var bottomLeft  : CodableCLLCoordinate2D
+  var bottomRight  : CodableCLLCoordinate2D
+  var topLeft  : CodableCLLCoordinate2D
+  var rotation : CGFloat
 
 
   enum CodingKeys: String, CodingKey {
     case name = "Name"
     case sport = "Sport"
-    case minX = "MinX"
-    case maxX = "MaxX"
-    case minY = "MinY"
-    case maxY = "MaxY"
+    case bottomLeft = "BottomLeft"
+    case bottomRight = "BottomRight"
+    case topLeft = "TopLeft"
+    case rotation = "Rotation"
   }
 
-  init (name: String, sport: Sport, minX: CodableCLLCoordinate2D, maxX: CodableCLLCoordinate2D, minY: CodableCLLCoordinate2D, maxY: CodableCLLCoordinate2D) {
+  init (name: String, sport: Sport, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, rotation: CGFloat) {
     self.name = name
     self.sport = sport
-    self.minX = minX
-    self.maxX = maxX
-    self.minY = minY
-    self.maxY = maxY
+    self.bottomLeft = bottomLeft
+    self.bottomRight = bottomRight
+    self.topLeft = topLeft
+    self.rotation = rotation
 
   }
 

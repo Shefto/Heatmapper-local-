@@ -743,8 +743,8 @@ class REHeatmapViewController: UIViewController {
     let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
     let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
     let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
-    let transformToSave = getMapRotation()
-
+//    let transformToSave = getMapRotation()
+    let viewRotation = rotation(from: pitchView.transform.inverted())
 
     MyFunc.saveWorkoutMetadata(workoutMetadataArray)
     MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadata))")
@@ -1173,14 +1173,6 @@ extension REHeatmapViewController: MKMapViewDelegate {
       {
 
         // get the rotation of the pitchView
-        // this incorporates any rotation of the map into the rotation to apply to the overlay
-//        let viewRotation = rotation(from: pitchView.transform.inverted())
-//        let mapViewHeading = mapView.camera.heading
-//        let viewRotationAsCGFloat = CGFloat(viewRotation)
-//
-//        let mapViewHeadingInt = Int(mapViewHeading)
-//        let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
-//        let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
         let angleIncMapRotation = getMapRotation()
 
 
