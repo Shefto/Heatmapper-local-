@@ -73,6 +73,36 @@ class MyFunc {
 
   }
 
+  static func getPlayingArea() -> PlayingArea {
+
+    var playingAreaToReturn = PlayingArea(dictionary: [:])!
+    let defaults = UserDefaults.standard
+
+    if let savedTemplate = defaults.object(forKey: "Playing Area") as? Data {
+      let decoder = JSONDecoder()
+      if let loadedTemplate = try? decoder.decode(PlayingArea.self, from: savedTemplate) {
+        playingAreaToReturn = loadedTemplate
+      }
+    }
+    return playingAreaToReturn
+
+  }
+
+  static func savePlayingArea(_ playingArea: PlayingArea) {
+    let defaults = UserDefaults.standard
+    let encoder = JSONEncoder()
+    do {
+      let encoded = try encoder.encode(playingArea)
+      defaults.set(encoded, forKey: "Playing Area")
+      let playingAreaStr = String(describing: playingArea)
+      logMessage(.debug, "Playing Area saved:")
+      logMessage(.debug, playingAreaStr)
+    } catch {
+      logMessage(.error, "Error in MyFunc.savePlayingArea")
+    }
+
+  }
+
 
   static func getWorkoutMetadata() -> [WorkoutMetadata] {
 

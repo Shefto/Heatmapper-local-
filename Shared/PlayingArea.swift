@@ -28,8 +28,8 @@ struct PlayingArea: Codable, Equatable {
   }
 
 
-  var name  : String
-  var sport : Sport
+  var workoutID : UUID
+//  var sport : Sport
   var bottomLeft  : CodableCLLCoordinate2D
   var bottomRight  : CodableCLLCoordinate2D
   var topLeft  : CodableCLLCoordinate2D
@@ -37,17 +37,17 @@ struct PlayingArea: Codable, Equatable {
 
 
   enum CodingKeys: String, CodingKey {
-    case name = "Name"
-    case sport = "Sport"
+    case workoutID = "WorkoutId"
+//    case sport = "Sport"
     case bottomLeft = "BottomLeft"
     case bottomRight = "BottomRight"
     case topLeft = "TopLeft"
     case rotation = "Rotation"
   }
 
-  init (name: String, sport: Sport, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, rotation: CGFloat) {
-    self.name = name
-    self.sport = sport
+  init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, rotation: CGFloat) {
+    self.workoutID  = workoutID
+//    self.sport = sport
     self.bottomLeft = bottomLeft
     self.bottomRight = bottomRight
     self.topLeft = topLeft
