@@ -727,30 +727,7 @@ class REHeatmapViewController: UIViewController {
     let pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
 
     createPitchOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
-    // get the max and min X and Y points from the above coordinates as MKMapPoints
-//    let topLeftMapPoint = MKMapPoint(pitchMapTopLeftCoordinate)
-////    let topRightMapPoint = MKMapPoint(pitchMapTopRightCoordinate)
-//    let bottomLeftMapPoint = MKMapPoint(pitchMapBottomLeftCoordinate)
-//    let bottomRightMapPoint = MKMapPoint(pitchMapBottomRightCoordinate)
-//
-//    let pitchRectHeight = MKMapPointDistance(from: bottomLeftMapPoint, to: topLeftMapPoint)
-//    let pitchRectWidth = MKMapPointDistance(from: bottomLeftMapPoint, to: bottomRightMapPoint)
-//
-////    // using the bottom left as the origin of the rectangle (currently)
-//    let pitchMapOriginX = bottomLeftMapPoint.x
-//    let pitchMapOriginY = bottomLeftMapPoint.y
-//
-//    // set up the rectangle
-//    let pitchRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
-//
-//
-//    let pitchRectStr = String(describing: pitchRect)
-//
-//    MyFunc.logMessage(.debug, "pitch MKMapRect: \(pitchRectStr)")
-//
-//    //  create an overlay of the pitch based upon the rectangle
-//    let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchRect)
-//    self.mapView.addOverlay(adjustedPitchOverlay)
+
 
 
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == heatmapWorkoutId}) {
@@ -794,7 +771,6 @@ class REHeatmapViewController: UIViewController {
 
     // set up the rectangle
     let pitchRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
-
 
     let pitchRectStr = String(describing: pitchRect)
 
@@ -1198,12 +1174,12 @@ extension REHeatmapViewController: MKMapViewDelegate {
 
         // get the rotation of the pitchView
         // this incorporates any rotation of the map into the rotation to apply to the overlay
-        let viewRotation = rotation(from: pitchView.transform.inverted())
-        let mapViewHeading = mapView.camera.heading
-        let viewRotationAsCGFloat = CGFloat(viewRotation)
-
-        let mapViewHeadingInt = Int(mapViewHeading)
-        let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
+//        let viewRotation = rotation(from: pitchView.transform.inverted())
+//        let mapViewHeading = mapView.camera.heading
+//        let viewRotationAsCGFloat = CGFloat(viewRotation)
+//
+//        let mapViewHeadingInt = Int(mapViewHeading)
+//        let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
 //        let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
         let angleIncMapRotation = getMapRotation()
 
