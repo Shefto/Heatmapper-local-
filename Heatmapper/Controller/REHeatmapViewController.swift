@@ -350,8 +350,6 @@ class REHeatmapViewController: UIViewController {
     refreshHeatmap()
   }
 
-
-
   @IBAction func textfieldEditingDidEnd(_ sender: Any) {
 
 
@@ -763,6 +761,16 @@ class REHeatmapViewController: UIViewController {
         let playingAreaStr = String(describing: playingArea)
         MyFunc.logMessage(.debug, playingAreaStr)
 
+        let overlays = self.mapView.overlays
+        self.mapView.removeOverlays(overlays)
+        MyFunc.logMessage(.debug, "Overlays removed")
+
+        let topLeftCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
+        let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
+        let bottomRightCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
+        self.createPitchOverlay(topLeft: topLeftCoord, bottomLeft: bottomLeftCoord, bottomRight: bottomRightCoord)
+
+
       }
     })
 
@@ -1085,23 +1093,6 @@ class REHeatmapViewController: UIViewController {
     }
     healthstore.execute(query)
   }
-
-
-
-//  func initialiseProgressWheel()
-//  {
-//    inProgressWheel = UIActivityIndicatorView(style: .large)
-//    inProgressWheel?.translatesAutoresizingMaskIntoConstraints = false
-//    self.view.addSubview(inProgressWheel!)
-//    let sizeWidth = NSLayoutConstraint(item: inProgressWheel!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 60)
-//    let sizeHeight = NSLayoutConstraint(item: inProgressWheel!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 60)
-//    let CenterX = NSLayoutConstraint(item: inProgressWheel!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0)
-//    let CenterY = NSLayoutConstraint(item: inProgressWheel!, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0)
-//
-//    inProgressWheel?.addConstraints([sizeWidth,sizeHeight])
-//    self.view.addConstraints([CenterX,CenterY])
-//    self.view.updateConstraints()
-//  }
 
 
 }
