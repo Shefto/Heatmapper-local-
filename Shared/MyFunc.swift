@@ -73,27 +73,35 @@ class MyFunc {
 
   }
 
-  static func getPlayingArea() -> PlayingArea {
 
-    var playingAreaToReturn = PlayingArea(dictionary: [:])!
-    let defaults = UserDefaults.standard
+  static func getPlayingArea(workoutId: UUID, successClosure: @escaping (Result<PlayingArea,dataRetrievalError>) -> Void) {
 
-    if let savedTemplate = defaults.object(forKey: "Playing Area") as? Data {
+//  static func getPlayingArea(workoutId: UUID) -> PlayingArea {
+   let defaults = UserDefaults.standard
+
+    let workoutIdStr = String(describing: workoutId)
+    let keyStr : String = "Playing Area: " + workoutIdStr
+    if let savedTemplate = defaults.object(forKey: keyStr) as? Data {
       let decoder = JSONDecoder()
       if let loadedTemplate = try? decoder.decode(PlayingArea.self, from: savedTemplate) {
-        playingAreaToReturn = loadedTemplate
+        let playingAreaToReturn = loadedTemplate
+        successClosure(.success(playingAreaToReturn))
       }
+    } else {
+      successClosure(.failure(.dataError))
     }
-    return playingAreaToReturn
 
   }
 
   static func savePlayingArea(_ playingArea: PlayingArea) {
     let defaults = UserDefaults.standard
     let encoder = JSONEncoder()
+
+    let workoutIdStr = String(describing: playingArea.workoutID)
+    let keyStr : String = "Playing Area: " + workoutIdStr
     do {
       let encoded = try encoder.encode(playingArea)
-      defaults.set(encoded, forKey: "Playing Area")
+      defaults.set(encoded, forKey: keyStr)
       let playingAreaStr = String(describing: playingArea)
       logMessage(.debug, "Playing Area saved:")
       logMessage(.debug, playingAreaStr)

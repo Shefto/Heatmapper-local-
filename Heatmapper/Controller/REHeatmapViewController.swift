@@ -753,6 +753,19 @@ class REHeatmapViewController: UIViewController {
     MyFunc.saveWorkoutMetadata(workoutMetadataArray)
     MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadata))")
 
+     MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
+
+      switch result {
+      case .failure(let error):
+        MyFunc.logMessage(.error, "Error retrieving PlayingArea : \(error)")
+      case .success(let playingArea):
+        MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
+        let playingAreaStr = String(describing: playingArea)
+        MyFunc.logMessage(.debug, playingAreaStr)
+
+      }
+    })
+
 
 
   }

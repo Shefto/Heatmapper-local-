@@ -22,32 +22,37 @@ struct CodableCLLCoordinate2D: Codable {
 }
 
 
-struct PlayingArea: Codable, Equatable {
-  static func == (lhs: PlayingArea, rhs: PlayingArea) -> Bool {
-    return true
-  }
-
+struct PlayingArea: Codable {
+//  static func == (lhs: PlayingArea, rhs: PlayingArea) -> Bool {
+//    return true
+//  }
 
   var workoutID : UUID
-//  var sport : Sport
   var bottomLeft  : CodableCLLCoordinate2D
   var bottomRight  : CodableCLLCoordinate2D
   var topLeft  : CodableCLLCoordinate2D
   var rotation : CGFloat
 
-
   enum CodingKeys: String, CodingKey {
     case workoutID = "WorkoutId"
-//    case sport = "Sport"
     case bottomLeft = "BottomLeft"
     case bottomRight = "BottomRight"
     case topLeft = "TopLeft"
     case rotation = "Rotation"
   }
 
+//  init() {
+//    var coord = CodableCLLCoordinate2D(
+//    self.workoutID    = UUID.init()
+//    self.bottomLeft   = CodableCLLCoordinate2D
+//    self.bottomRight  = CodableCLLCoordinate2D()
+//    self.topLeft      = CodableCLLCoordinate2D()
+//    self.rotation     = 0.0
+//  }
+
+
   init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, rotation: CGFloat) {
     self.workoutID  = workoutID
-//    self.sport = sport
     self.bottomLeft = bottomLeft
     self.bottomRight = bottomRight
     self.topLeft = topLeft
@@ -65,6 +70,7 @@ extension PlayingArea {
   }
 }
 
+
 // extension to decode back to Struct
 extension PlayingArea {
   init?(dictionary: [String: Any]) {
@@ -73,3 +79,4 @@ extension PlayingArea {
     self = info
   }
 }
+

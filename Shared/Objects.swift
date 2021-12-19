@@ -9,6 +9,10 @@
 import Foundation
 import MapKit
 
+enum dataRetrievalError : Error {
+  case dataError
+}
+
 
 enum BlendMode: String, Codable, CaseIterable {
   case normal       = "normal"
