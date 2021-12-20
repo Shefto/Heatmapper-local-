@@ -105,9 +105,8 @@ class REHeatmapViewController: UIViewController {
   var pitchView                   : UIImageView!
 
   var pitchViewRotation           : CGFloat = 0.0
-//  var pitchViewOrigin             : CGPoint!
 
-  var inProgressWheel       : UIActivityIndicatorView?
+  var inProgressWheel            : UIActivityIndicatorView?
   // variable purely for the In Progress wheel
   public var showIndicator  : Bool = true {
     didSet{
@@ -120,7 +119,6 @@ class REHeatmapViewController: UIViewController {
   var blendModeArray = [BlendMode]()
   var overlayCenter               : CLLocationCoordinate2D?
   // tester outlets
-
 
   @IBOutlet weak var innerRed: UITextField!
   @IBOutlet weak var innerGreen: UITextField!
@@ -165,14 +163,12 @@ class REHeatmapViewController: UIViewController {
 
   @IBOutlet weak var pitchSegmentedControl: UISegmentedControl!
   @IBOutlet weak var mapSegmentedControl: UISegmentedControl!
-
   @IBOutlet weak var panelSegmentedControl: UISegmentedControl!
 
   @IBOutlet weak var coloursStackView: UIStackView!
   @IBOutlet weak var lowerControlsStackView: UIStackView!
 
   @IBOutlet weak var resizeButton: UIButton!
-
 
   @IBAction func stepperRadius(_ sender: UIStepper) {
     radius = Int(sender.value)
@@ -193,7 +189,6 @@ class REHeatmapViewController: UIViewController {
       coloursStackView.isHidden = false
       lowerControlsStackView.isHidden = false
     }
-
 
   }
 
@@ -352,7 +347,6 @@ class REHeatmapViewController: UIViewController {
 
   @IBAction func textfieldEditingDidEnd(_ sender: Any) {
 
-
     // update fields from UI values
     innerColourGradient =  innerGradient.text ?? ""
     middleColourGradient = middleGradient.text ?? ""
@@ -379,7 +373,6 @@ class REHeatmapViewController: UIViewController {
   @IBOutlet weak var mapView: MKMapView!
 
   @objc func resizeTap(_ sender: UITapGestureRecognizer? = nil) {
-
   }
 
   @objc func handleRotate(_ gesture: UIRotationGestureRecognizer) {
@@ -389,28 +382,19 @@ class REHeatmapViewController: UIViewController {
     gestureView.transform = gestureView.transform.rotated(
       by: gesture.rotation
     )
-
     pitchViewRotation += gesture.rotation
-
-
     gesture.rotation = 0
-
-
-
-
   }
 
   @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
     guard let gestureView = gesture.view else {
       return
     }
-
     gestureView.transform = gestureView.transform.scaledBy(
       x: gesture.scale,
       y: gesture.scale
     )
     gesture.scale = 1
-
 
   }
 
@@ -508,9 +492,7 @@ class REHeatmapViewController: UIViewController {
     let mapViewFrame = mapView.globalFrame!
     touchView = UIView(frame: mapViewFrame)
     touchView.bounds = mapView.bounds
-    //    touchView.isOpaque = true
     touchView.translatesAutoresizingMaskIntoConstraints = false
-    //    touchView.isUserInteractionEnabled = true
 
     self.mapView.addSubview(touchView)
 
@@ -525,15 +507,13 @@ class REHeatmapViewController: UIViewController {
     pitchView.layer.opacity = 0.5
     pitchView.translatesAutoresizingMaskIntoConstraints = false
     pitchView.isUserInteractionEnabled = true
-    //    touchView.addGestureRecognizer(tapper)
     pitchView.addGestureRecognizer(panner)
     pitchView.addGestureRecognizer(rotator)
     pitchView.addGestureRecognizer(pincher)
-//    pitchViewOrigin = pitchView.frame.origin
 
     self.touchView.addSubview(pitchView)
-     NSLayoutConstraint.activate([
 
+    NSLayoutConstraint.activate([
       pitchView.topAnchor.constraint(equalTo: touchView.topAnchor, constant: 20),
       pitchView.leftAnchor.constraint(equalTo: touchView.leftAnchor, constant: 20),
       pitchView.bottomAnchor.constraint(equalTo: touchView.bottomAnchor, constant: -20),
@@ -552,13 +532,10 @@ class REHeatmapViewController: UIViewController {
     self.loadTesterData()
     self.loadTesterUI()
 
-
     // get workout data
-    // all UI work is called within the function as the data retrieval works asynchronously
+    // Note: all UI work is called within this function as the data retrieval works asynchronously
     getWorkoutData()
-
   }
-
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
@@ -581,7 +558,6 @@ class REHeatmapViewController: UIViewController {
     testerArray.append(outerColourBlue)
     testerArray.append(outerColourAlpha)
     testerArray.append(outerColourGradient)
-
 
     MyFunc.saveTesterData(testerArray)
   }
@@ -751,61 +727,34 @@ class REHeatmapViewController: UIViewController {
     MyFunc.saveWorkoutMetadata(workoutMetadataArray)
     MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadata))")
 
-     MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
-
-      switch result {
-      case .failure(let error):
-        MyFunc.logMessage(.error, "Error retrieving PlayingArea : \(error)")
-      case .success(let playingArea):
-        MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
-        let playingAreaStr = String(describing: playingArea)
-        MyFunc.logMessage(.debug, playingAreaStr)
-
-        let overlays = self.mapView.overlays
-        self.mapView.removeOverlays(overlays)
-        MyFunc.logMessage(.debug, "Overlays removed")
-
-        let topLeftCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
-        let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
-        let bottomRightCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
-        self.createPitchOverlay(topLeft: topLeftCoord, bottomLeft: bottomLeftCoord, bottomRight: bottomRightCoord)
-
-
-      }
-    })
-
-
-
-  }
+//     MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
+//
+//      switch result {
+//      case .failure(let error):
+//        MyFunc.logMessage(.error, "Error retrieving PlayingArea : \(error)")
+//      case .success(let playingArea):
+//        MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
+//        let playingAreaStr = String(describing: playingArea)
+//        MyFunc.logMessage(.debug, playingAreaStr)
+//
+//        let overlays = self.mapView.overlays
+//        self.mapView.removeOverlays(overlays)
+//        MyFunc.logMessage(.debug, "Overlays removed")
+//
+//        let topLeftCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
+//        let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
+//        let bottomRightCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
+//        self.createPitchOverlay(topLeft: topLeftCoord, bottomLeft: bottomLeftCoord, bottomRight: bottomRightCoord)
+//
+//
+//      }
+//    })
 
 
-  func createPitchOverlay(topLeft: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) {
-
-    // get the max and min X and Y points from the above coordinates as MKMapPoints
-    let topLeftMapPoint = MKMapPoint(topLeft)
-    //    let topRightMapPoint = MKMapPoint(pitchMapTopRightCoordinate)
-    let bottomLeftMapPoint = MKMapPoint(bottomLeft)
-    let bottomRightMapPoint = MKMapPoint(bottomRight)
-
-    let pitchRectHeight = MKMapPointDistance(from: bottomLeftMapPoint, to: topLeftMapPoint)
-    let pitchRectWidth = MKMapPointDistance(from: bottomLeftMapPoint, to: bottomRightMapPoint)
-
-    //    // using the bottom left as the origin of the rectangle (currently)
-    let pitchMapOriginX = bottomLeftMapPoint.x
-    let pitchMapOriginY = bottomLeftMapPoint.y
-
-    // set up the rectangle
-    let pitchRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
-
-    let pitchRectStr = String(describing: pitchRect)
-
-    MyFunc.logMessage(.debug, "pitch MKMapRect: \(pitchRectStr)")
-
-    //  create an overlay of the pitch based upon the rectangle
-    let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchRect)
-    self.mapView.addOverlay(adjustedPitchOverlay)
 
   }
+
+
 
   func getMapRotation() -> CGFloat {
 
@@ -849,7 +798,7 @@ class REHeatmapViewController: UIViewController {
     //    let insets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
 
     mapView.setVisibleMapRect(rect, edgePadding: insets, animated: false)
-    mapView.setCenter(overlayCenter!, animated: false)
+    mapView.setCenter(self.overlayCenter!, animated: false)
 
   }
 
@@ -864,56 +813,100 @@ class REHeatmapViewController: UIViewController {
 
   func createDefaultPitchOverlay() {
 
-    // get the max and min latitude and longitudes from all the points to be displayed in the heatmap
-    let maxLat = heatmapperCoordinatesArray.map {$0.latitude}.max()
-    let minLat = heatmapperCoordinatesArray.map {$0.latitude}.min()
-    let maxLong = heatmapperCoordinatesArray.map {$0.longitude}.max()
-    let minLong = heatmapperCoordinatesArray.map {$0.longitude}.min()
+    MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
 
-    let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
-    let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
+      switch result {
+      case .failure(let error):
+        // no playing area retrieved so create a default area
+        MyFunc.logMessage(.debug, "No playing area retrieved: \(error.localizedDescription) so creating default")
 
-    let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
-    let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
-    overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+        // get the max and min latitude and longitudes from all the points to be displayed in the heatmap
+        let maxLat = self.heatmapperCoordinatesArray.map {$0.latitude}.max()
+        let minLat = self.heatmapperCoordinatesArray.map {$0.latitude}.min()
+        let maxLong = self.heatmapperCoordinatesArray.map {$0.longitude}.max()
+        let minLong = self.heatmapperCoordinatesArray.map {$0.longitude}.min()
 
-    // get the max and min X and Y points from the above coordinates as MKMapPoints
-    let minX = MKMapPoint(minCoord).x
-    let maxX = MKMapPoint(maxCoord).x
-    let minY = MKMapPoint(minCoord).y
-    let maxY = MKMapPoint(maxCoord).y
+        let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
+        let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
 
-    // this code ensures the pitch size is larger than the heatmap by adding a margin
-    // get the dimensions of the rectangle from the distance between the point extremes
-    var rectWidth = maxX - minX
-    var rectHeight = minY - maxY
-    // set the scale of the border
-    let rectMarginScale = 0.1
-    // set the rectangle origin as the plot dimensions plus the border
-    let rectX = minX - (rectWidth * rectMarginScale)
-    let rectY = minY + (rectHeight * rectMarginScale)
+        let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
+        let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
+        self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
 
-    // increase the rectangle width and height by the border * 2
-    rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
-    rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
+        // get the max and min X and Y points from the above coordinates as MKMapPoints
+        let minX = MKMapPoint(minCoord).x
+        let maxX = MKMapPoint(maxCoord).x
+        let minY = MKMapPoint(minCoord).y
+        let maxY = MKMapPoint(maxCoord).y
 
-    // this rectangle covers the area of all points
-    let rect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
+        // this code ensures the pitch size is larger than the heatmap by adding a margin
+        // get the dimensions of the rectangle from the distance between the point extremes
+        var rectWidth = maxX - minX
+        var rectHeight = minY - maxY
+        // set the scale of the border
+        let rectMarginScale = 0.1
+        // set the rectangle origin as the plot dimensions plus the border
+        let rectX = minX - (rectWidth * rectMarginScale)
+        let rectY = minY + (rectHeight * rectMarginScale)
 
-    //  create an overlay of the pitch based upon the rectangle
-    let footballPitch11Overlay = FootballPitchOverlay(pitchRect: rect)
+        // increase the rectangle width and height by the border * 2
+        rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
+        rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
 
-    if pitchOn == true {
-      self.mapView.addOverlay(footballPitch11Overlay)
+        // this rectangle covers the area of all points
+        let rect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
 
-    }
+        //  create an overlay of the pitch based upon the rectangle
+        let footballPitch11Overlay = FootballPitchOverlay(pitchRect: rect)
+        self.mapView.addOverlay(footballPitch11Overlay)
+        self.setMapViewZoom(rect: rect)
 
-    //    self.addAnnotation(coordinate: mapCenter)
-    //    self.mapView.setCenter(mapCenter, animated: true)
-    self.setMapViewZoom(rect: rect)
+      case .success(let playingArea):
+        MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
+        let playingAreaStr = String(describing: playingArea)
+        MyFunc.logMessage(.debug, playingAreaStr)
+
+        let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomLeft.latitude) / 2
+        let midpointLongitude = (playingArea.bottomLeft.longitude + playingArea.bottomRight.longitude) / 2
+        self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+        let topLeftCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
+        let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
+        let bottomRightCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
+        self.createPitchOverlay(topLeft: topLeftCoord, bottomLeft: bottomLeftCoord, bottomRight: bottomRightCoord)
+
+      }
+    })
 
   }
 
+  func createPitchOverlay(topLeft: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) {
+
+    // get the max and min X and Y points from the above coordinates as MKMapPoints
+    let topLeftMapPoint = MKMapPoint(topLeft)
+    //    let topRightMapPoint = MKMapPoint(pitchMapTopRightCoordinate)
+    let bottomLeftMapPoint = MKMapPoint(bottomLeft)
+    let bottomRightMapPoint = MKMapPoint(bottomRight)
+
+    let pitchRectHeight = MKMapPointDistance(from: bottomLeftMapPoint, to: topLeftMapPoint)
+    let pitchRectWidth = MKMapPointDistance(from: bottomLeftMapPoint, to: bottomRightMapPoint)
+
+    //    // using the bottom left as the origin of the rectangle (currently)
+    let pitchMapOriginX = bottomLeftMapPoint.x
+    let pitchMapOriginY = bottomLeftMapPoint.y
+
+    // set up the rectangle
+    let pitchRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
+
+    let pitchRectStr = String(describing: pitchRect)
+
+    MyFunc.logMessage(.debug, "pitch MKMapRect: \(pitchRectStr)")
+
+    //  create an overlay of the pitch based upon the rectangle
+    let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchRect)
+    self.mapView.addOverlay(adjustedPitchOverlay)
+    self.setMapViewZoom(rect: pitchRect)
+
+  }
   func addHeatmapPoint(coordinate:CLLocationCoordinate2D){
 
     // create MKCircle for each heatmap point
@@ -938,22 +931,16 @@ class REHeatmapViewController: UIViewController {
       return
     }
 
-
     // get the workout
     getWorkout(workoutId: workoutId) { [self] (workouts, error) in
       let workoutReturned = workouts?.first
-//      MyFunc.logMessage(.debug, "workoutReturned:")
-//      MyFunc.logMessage(.debug, String(describing: workoutReturned))
 
       guard let workout : HKWorkout = workoutReturned else {
-//        MyFunc.logMessage(.debug, "workoutReturned invalid: \(String(describing: workoutReturned))")
+        MyFunc.logMessage(.error, "workoutReturned invalid: \(String(describing: workoutReturned))")
         return
       }
 
-
-
       self.getRouteSampleObject(workout: workout)
-
     }
 
   }
@@ -983,7 +970,6 @@ class REHeatmapViewController: UIViewController {
         completion(samples, nil)
       }
     }
-
     healthstore.execute(query)
 
   }
@@ -1000,10 +986,6 @@ class REHeatmapViewController: UIViewController {
         fatalError("The initial query failed.")
       }
 
-      // Process the initial route data here.
-//      MyFunc.logMessage(.debug, "routeQuery returned samples:")
-//      MyFunc.logMessage(.debug, String(describing: samples))
-
       DispatchQueue.main.async {
         //4. Cast the samples as HKWorkout
         guard
@@ -1012,16 +994,13 @@ class REHeatmapViewController: UIViewController {
         else {
           return
         }
-//        MyFunc.logMessage(.debug, "routeSamples:")
-//        MyFunc.logMessage(.debug, String(describing: routeSamples))
+
         guard let routeReturned = samples?.first as? HKWorkoutRoute else {
-          MyFunc.logMessage(.debug, "Could not convert routeSamples to HKWorkoutRoute")
+          MyFunc.logMessage(.error, "Could not convert routeSamples to HKWorkoutRoute")
           return
         }
         self.getRouteLocationData(route: routeReturned)
-
       }
-
     }
 
     routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
@@ -1030,18 +1009,14 @@ class REHeatmapViewController: UIViewController {
         // Handle any errors here.
         fatalError("The update failed.")
       }
-
-      // Process updates or additions here.
     }
 
     healthstore.execute(routeQuery)
-
   }
 
   func getRouteLocationData(route: HKWorkoutRoute) {
 
     let samplesCount = route.count
-//    MyFunc.logMessage(.debug, "Number of samples: \(samplesCount)")
 
     // Create the route query.
     let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNil, done, errorOrNil) in
@@ -1049,23 +1024,19 @@ class REHeatmapViewController: UIViewController {
       // This block may be called multiple times.
 
       if errorOrNil != nil {
-        // Handle any errors here.
-        MyFunc.logMessage(.debug, "Error retrieving workout locations")
+        MyFunc.logMessage(.error, "Error retrieving workout locations")
         return
       }
 
       guard let locations = locationsOrNil else {
+        MyFunc.logMessage(.error, "Error retrieving workout locations")
+
         fatalError("*** Invalid State: This can only fail if there was an error. ***")
       }
-//
-//      MyFunc.logMessage(.debug, "Locations retrieved: \(String(describing: locations))")
 
       let locationsAsCoordinates = locations.map {$0.coordinate}
-//      MyFunc.logMessage(.debug, "Coordinates retrieved: \(locationsAsCoordinates)")
 
       self.heatmapperCoordinatesArray.append(contentsOf: locationsAsCoordinates)
-      let coordinatesTotal = self.heatmapperCoordinatesArray.count
-//      MyFunc.logMessage(.debug, "Total coordinates: \(coordinatesTotal)")
 
       // if done = all data retrieved
       // only at this point can we start to build a heatmap overlay
