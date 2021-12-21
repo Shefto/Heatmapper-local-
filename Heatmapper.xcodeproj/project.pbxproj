@@ -52,7 +52,7 @@
 		797205152736A76500125BBD /* HeatmapPointCircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797205142736A76500125BBD /* HeatmapPointCircleRenderer.swift */; };
 		7972371927176687002F4548 /* FootballPitchOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972371827176687002F4548 /* FootballPitchOverlay.swift */; };
 		7972371B271768AB002F4548 /* FootballPitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972371A271768AB002F4548 /* FootballPitch.swift */; };
-		7972371D2719E203002F4548 /* FootballPitchOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972371C2719E203002F4548 /* FootballPitchOverlayView.swift */; };
+		7972371D2719E203002F4548 /* FootballPitchOverlayRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972371C2719E203002F4548 /* FootballPitchOverlayRenderer.swift */; };
 		7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */; };
 		7978EE57271E0DC3004AEC91 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7978EE56271E0DC3004AEC91 /* IQKeyboardManagerSwift */; };
 		797BFD0525421E8700426185 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
@@ -230,7 +230,7 @@
 		797205142736A76500125BBD /* HeatmapPointCircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapPointCircleRenderer.swift; sourceTree = "<group>"; };
 		7972371827176687002F4548 /* FootballPitchOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPitchOverlay.swift; sourceTree = "<group>"; };
 		7972371A271768AB002F4548 /* FootballPitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPitch.swift; sourceTree = "<group>"; };
-		7972371C2719E203002F4548 /* FootballPitchOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPitchOverlayView.swift; sourceTree = "<group>"; };
+		7972371C2719E203002F4548 /* FootballPitchOverlayRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPitchOverlayRenderer.swift; sourceTree = "<group>"; };
 		7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntervalTableViewFooter.swift; path = Heatmapper/View/IntervalTableViewFooter.swift; sourceTree = SOURCE_ROOT; };
 		797BFD092542B72800426185 /* MyFunciOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFunciOS.swift; sourceTree = "<group>"; };
 		798007F226F3DECC00FFC294 /* EditActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditActivityCell.xib; sourceTree = "<group>"; };
@@ -405,7 +405,7 @@
 				798007F326F3DF8C00FFC294 /* EditActivityTableViewCell.swift */,
 				7972371A271768AB002F4548 /* FootballPitch.swift */,
 				7972371827176687002F4548 /* FootballPitchOverlay.swift */,
-				7972371C2719E203002F4548 /* FootballPitchOverlayView.swift */,
+				7972371C2719E203002F4548 /* FootballPitchOverlayRenderer.swift */,
 				797205142736A76500125BBD /* HeatmapPointCircleRenderer.swift */,
 				7973BBE3258BCE0E0015785D /* IntervalTableViewFooter.swift */,
 				79C78CFC27308EBD00D395E1 /* REHeatmapPoint.swift */,
@@ -852,7 +852,7 @@
 				7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */,
 				799131292634145F00811731 /* JDHeatMapView.swift in Sources */,
 				793D1AD624B855540039441B /* CommandStatus.swift in Sources */,
-				7972371D2719E203002F4548 /* FootballPitchOverlayView.swift in Sources */,
+				7972371D2719E203002F4548 /* FootballPitchOverlayRenderer.swift in Sources */,
 				79F3A2B42697970700667B1B /* RE_DTMDiffHeatmap.swift in Sources */,
 				793D1AD424B854EB0039441B /* SessionDelegator.swift in Sources */,
 				79ADB49026264153007BF946 /* UserAnnotation.swift in Sources */,

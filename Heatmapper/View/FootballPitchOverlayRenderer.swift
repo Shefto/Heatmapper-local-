@@ -10,7 +10,7 @@
 
 import MapKit
 
-class FootballPitchOverlayView: MKOverlayRenderer {
+class FootballPitchOverlayRenderer: MKOverlayRenderer {
   let overlayImage: UIImage
   let angle : CGFloat
 //  let pointsDistance : CGFloat
@@ -20,7 +20,6 @@ class FootballPitchOverlayView: MKOverlayRenderer {
 
     self.overlayImage = overlayImage
     self.angle = angle
-//    self.pointsDistance = pointsDistance
     super.init(overlay: overlay)
   }
 
@@ -29,26 +28,9 @@ class FootballPitchOverlayView: MKOverlayRenderer {
     guard let imageReference = overlayImage.cgImage else { return }
 
 
-//    let imageHeight = overlayImage.size.height
-//    let imageWidth  = overlayImage.size.width
-//
-//    let imageHeightSquared = imageHeight * imageHeight
-//    let imageWidthSquared =  imageWidth * imageWidth
-//    let imageHypotenuseSquared = imageHeightSquared + imageWidthSquared
-//    let imageHypotenuse = sqrt(imageHypotenuseSquared)
-//
-
-//    MyFunc.logMessage(.debug, "imageHypotenuse: \(imageHypotenuse)")
-//    let imageScale = pointsDistance / imageHypotenuse
-//    MyFunc.logMessage(.debug, "imageScale: \(imageScale)")
-
     let rect = self.rect(for: overlay.boundingMapRect)
     context.scaleBy(x: 1.0, y: -1.0)
-//    context.scaleBy(x: imageScale, y: imageScale)
-//    context.translateBy(x: 0.0, y: -rect.size.height)
     context.rotate(by: angle)
-//    let contextCTMStr = String(describing: context.ctm)
-//    print ("contextCTMStr: \(contextCTMStr)")
     context.draw(imageReference, in: rect)
 
   }
