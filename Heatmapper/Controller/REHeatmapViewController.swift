@@ -12,7 +12,7 @@ import UIKit
 import MapKit
 import HealthKit
 import CoreLocation
-import DTMHeatmap
+//import DTMHeatmap
 
 // this struct manages the conversion of the rotated view to create a rotated MKMapRect
 struct ViewCorners {
@@ -54,7 +54,7 @@ struct ViewCorners {
 
 class REHeatmapViewController: UIViewController {
 
-  var dtmHeatmap                  = DTMHeatmap()
+//  var dtmHeatmap                  = DTMHeatmap()
   var heatmapperCoordinatesArray  = [CLLocationCoordinate2D]()
   var heatmapperLocationsArray    = [CLLocation]()
   var heatmapWorkoutId            : UUID?
@@ -451,6 +451,7 @@ class REHeatmapViewController: UIViewController {
   @IBAction func btnResize(_ sender: Any) {
 
     if resizeOn == true {
+      // turn everything off (as it's on)
       resizeOn = false
       resizeButton.setTitle("Adjust Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemGreen
@@ -458,16 +459,27 @@ class REHeatmapViewController: UIViewController {
       self.touchView.isHidden = true
       savePitchCoordinates()
 
-
     } else {
+      // turn everything on (as it's off)
+
       resizeOn = true
       resizeButton.setTitle("Save Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemRed
       self.touchView.isHidden = false
 
+      //remove the pitch overlay
+
+      if let overlays = mapView?.overlays {
+        for overlay in overlays {
+          // remove all MKPolyline-Overlays
+          if overlay is FootballPitchOverlay {
+            mapView?.removeOverlay(overlay)
+          }
+        }
+      }
+
     }
   }
-
 
 
   override func viewDidLoad() {
@@ -685,19 +697,15 @@ class REHeatmapViewController: UIViewController {
     let corners = ViewCorners(view: pitchView)
 
     let pitchMapTopLeftCGPoint : CGPoint = corners.topLeft
-    let pitchMapTopRightCGPoint : CGPoint  = corners.topRight
     let pitchMapBottomLeftCGPoint : CGPoint  = corners.bottomLeft
     let pitchMapBottomRightCGPoint : CGPoint  =  corners.bottomRight
 
     // then workout out the corresponding co-ordinates at these points on the map view
     let pitchMapTopLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
-    let pitchMapTopRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
     let pitchMapBottomLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
     let pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
 
     createPitchOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
-
-
 
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == heatmapWorkoutId}) {
       workoutMetadataArray[row] = workoutMetadata
@@ -706,13 +714,12 @@ class REHeatmapViewController: UIViewController {
     }
 
     // save the pitch here
-    // we need the co-ordinates of the 4 points and the rotation to successfully recreate it
+    // we need the co-ordinates of 3 of the 4 points and the rotation to successfully recreate it
 
     let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopLeftCoordinate.latitude, longitude: pitchMapTopLeftCoordinate.longitude)
-//    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
     let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
     let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
-    let viewRotation = rotation(from: pitchView.transform.inverted())
+    let viewRotation = rotation(from: pitchView.transform)
 
     let playingAreaToSave = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, rotation: viewRotation)
 
@@ -831,11 +838,6 @@ class REHeatmapViewController: UIViewController {
         self.mapView.addOverlay(footballPitch11Overlay)
         self.setMapViewZoom(rect: pitchMKMapRect)
 
-        // get the origin of the rectangle as a coordinate
-//        let pitchViewCGRect = MKOverlayRenderer.rect(<#T##self: MKOverlayRenderer##MKOverlayRenderer#>)
-
-
-
 
       case .success(let playingArea):
         MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
@@ -848,6 +850,15 @@ class REHeatmapViewController: UIViewController {
         let topLeftCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
         let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
         let bottomRightCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
+
+
+        let savedPitchViewRotationStr = self.pitchView.transform.angle
+        print("savedPitchViewRotationStr: \(savedPitchViewRotationStr)")
+
+        self.pitchView.transform = self.pitchView.transform.rotated(by: playingArea.rotation)
+        let pitchViewRotationStr = self.pitchView.transform.angle
+        print("pitchViewRotationStr: \(pitchViewRotationStr)")
+
         self.createPitchOverlay(topLeft: topLeftCoord, bottomLeft: bottomLeftCoord, bottomRight: bottomRightCoord)
 
       }
@@ -881,8 +892,8 @@ class REHeatmapViewController: UIViewController {
     let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
     self.mapView.addOverlay(adjustedPitchOverlay)
     self.setMapViewZoom(rect: pitchMKMapRect)
-
   }
+
   func addHeatmapPoint(coordinate:CLLocationCoordinate2D){
 
     // create MKCircle for each heatmap point
@@ -1136,14 +1147,16 @@ extension REHeatmapViewController: MKMapViewDelegate {
         let pitchViewCGRect = footballPitchOverlayRenderer.rect(for: overlay.boundingMapRect)
         let pitchViewCGRectStr = String(describing: pitchViewCGRect)
         print("pitchViewCGRect:")
-        print(pitchViewCGRect)
+        print(pitchViewCGRectStr)
         pitchView.frame = pitchViewCGRect
         return footballPitchOverlayRenderer
       }
     }
 
-    return DTMHeatmapRenderer.init(overlay: overlay)
-    //    return REHeatmapRenderer.init(overlay: overlay)
+    // should never call this... needs to be fixed
+    let defaultOverlayRenderer = MKOverlayRenderer()
+    return defaultOverlayRenderer
+
   }
 
 
@@ -1157,26 +1170,26 @@ extension REHeatmapViewController: MKMapViewDelegate {
     default: break
     }
   }
-
-  func createDTMHeatmap() {
-
-    var heatmapdata:[NSObject: Double] = [:]
-    for coordinate in heatmapperCoordinatesArray {
-      var point = MKMapPoint.init(coordinate)
-      let type = "{MKMapPoint=dd}"
-      let value = NSValue(bytes: &point, objCType: type)
-      heatmapdata[value] = 1.0
-    }
-
-    self.dtmHeatmap.setData(heatmapdata as [NSObject : AnyObject])
-    self.mapView.addOverlay(self.dtmHeatmap)
-    let dtmBoundingRect = self.dtmHeatmap.boundingRect
-    dtmRect = dtmBoundingRect
-//    let dtmCoordinate = self.dtmHeatmap.coordinate
-//    MyFunc.logMessage(.debug, "dtmBoundingRect: \(dtmBoundingRect)")
-//    MyFunc.logMessage(.debug, "dtmCoordinate: \(dtmCoordinate)")
-
-  }
+//
+//  func createDTMHeatmap() {
+//
+//    var heatmapdata:[NSObject: Double] = [:]
+//    for coordinate in heatmapperCoordinatesArray {
+//      var point = MKMapPoint.init(coordinate)
+//      let type = "{MKMapPoint=dd}"
+//      let value = NSValue(bytes: &point, objCType: type)
+//      heatmapdata[value] = 1.0
+//    }
+//
+//    self.dtmHeatmap.setData(heatmapdata as [NSObject : AnyObject])
+//    self.mapView.addOverlay(self.dtmHeatmap)
+//    let dtmBoundingRect = self.dtmHeatmap.boundingRect
+//    dtmRect = dtmBoundingRect
+////    let dtmCoordinate = self.dtmHeatmap.coordinate
+////    MyFunc.logMessage(.debug, "dtmBoundingRect: \(dtmBoundingRect)")
+////    MyFunc.logMessage(.debug, "dtmCoordinate: \(dtmCoordinate)")
+//
+//  }
 
 }
 
