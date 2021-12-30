@@ -266,8 +266,6 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
       }
 
       // Process the initial route data here.
-//      MyFunc.logMessage(.debug, "routeQuery returned samples:")
-//      MyFunc.logMessage(.debug, String(describing: samples))
 
       DispatchQueue.main.async {
         guard
@@ -276,18 +274,11 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
         else {
           return
         }
-//        MyFunc.logMessage(.debug, "routeSamples:")
-//        MyFunc.logMessage(.debug, String(describing: routeSamples))
         guard let routeReturned = samples?.first as? HKWorkoutRoute else {
           MyFunc.logMessage(.debug, "No Route returned for workout \(String(describing: workout.startDate))")
-//          samplesReturned = false
+
           return
         }
-        MyFunc.logMessage(.debug, "Route returned for workout \(String(describing: workout.startDate)):")
-//        MyFunc.logMessage(.debug, routeReturned.description)
-
-
-//        samplesReturned = true
 
         if let workoutInfoRow = self.workoutInfoArray.firstIndex(where: {$0.uuid == workout.uuid}) {
           self.workoutInfoArray[workoutInfoRow].samples = true

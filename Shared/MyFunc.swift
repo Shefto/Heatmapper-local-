@@ -93,6 +93,23 @@ class MyFunc {
 
   }
 
+
+  static func deletePlayingAreas() {
+    let defaults = UserDefaults.standard
+    let allUserDefaults = defaults.dictionaryRepresentation()
+
+    allUserDefaults.forEach{
+      let defaultName = $0.key
+      let prefixStr = defaultName.prefix(7)
+      if prefixStr == "Playing" {
+      defaults.removeObject(forKey: defaultName)
+      MyFunc.logMessage(.debug, "Playing area \(defaultName) deleted")
+      }
+      }
+
+  }
+
+
   static func savePlayingArea(_ playingArea: PlayingArea) {
     let defaults = UserDefaults.standard
     let encoder = JSONEncoder()

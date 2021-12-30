@@ -68,6 +68,7 @@ class REHeatmapViewController: UIViewController {
   var dtmRect                     = MKMapRect()
   var pitchOn                     : Bool = false
   var resizeOn                    : Bool = true
+  var startResize                 : Bool = false
 
   var heatmapPointCircle          : MKCircle?
   var reHeatmapPoint              : REHeatmapPoint?
@@ -102,16 +103,10 @@ class REHeatmapViewController: UIViewController {
 
   var pitchViewRotation           : CGFloat = 0.0
 
-  var inProgressWheel            : UIActivityIndicatorView?
-  // variable purely for the In Progress wheel
-  public var showIndicator  : Bool = true {
-    didSet{
-      if (!showIndicator)
-      {
-        inProgressWheel?.stopAnimating()
-      }
-    }
-  }
+  var bottomLeftCoord             : CLLocationCoordinate2D?
+  var topLeftCoord                : CLLocationCoordinate2D?
+  var bottomRightCoord            : CLLocationCoordinate2D?
+
   var blendModeArray = [BlendMode]()
   var overlayCenter               : CLLocationCoordinate2D?
   // tester outlets
@@ -392,6 +387,8 @@ class REHeatmapViewController: UIViewController {
     )
     gesture.scale = 1
 
+    print("gestureView frame: \(gestureView.frame.debugDescription)")
+
   }
 
   @objc func handlePan(_ sender: UIPanGestureRecognizer) {
@@ -433,7 +430,7 @@ class REHeatmapViewController: UIViewController {
     finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
     finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
 
-
+    print("gestureView frame: \(gestureView.frame.debugDescription)")
 
     //    // 8
     //    UIView.animate(
@@ -447,6 +444,10 @@ class REHeatmapViewController: UIViewController {
 
   }
 
+  @IBAction func resetPitches(_ sender: Any) {
+    MyFunc.deletePlayingAreas()
+  }
+  
   // this is where the fun begins... resize mode
   @IBAction func btnResize(_ sender: Any) {
 
@@ -463,9 +464,38 @@ class REHeatmapViewController: UIViewController {
       // turn everything on (as it's off)
 
       resizeOn = true
+      startResize = true
       resizeButton.setTitle("Save Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemRed
       self.touchView.isHidden = false
+
+
+      // now need to size the pitchView from the MapView information
+
+      // we have the mapView rect from the overlay and the coordinates
+      // let's try the coordinates first as MapView has better conversion functions
+
+      let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
+      let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
+      let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
+
+      let pitchViewBottomLefttStr = String(describing: pitchViewBottomLeft)
+      print("pitchViewBottomLeft: \(pitchViewBottomLefttStr)")
+      let pitchViewTopLeftStr = String(describing: pitchViewTopLeft)
+      print("pitchViewTopLeft: \(pitchViewTopLeftStr)")
+      let pitchViewBottomRightStr = String(describing: pitchViewBottomRight)
+      print("pitchViewBottomRight: \(pitchViewBottomRightStr)")
+
+
+      let pitchViewHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
+      let pitchViewWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
+
+//      pitchView.frame = CGRect(x: pitchViewBottomLeft.x, y: pitchViewBottomLeft.y, width: pitchViewWidth, height: pitchViewHeight)
+
+      print("pitchView frame from Region: \(self.pitchView.frame.debugDescription)")
+
+
+
 
       //remove the pitch overlay
 
@@ -473,13 +503,48 @@ class REHeatmapViewController: UIViewController {
         for overlay in overlays {
           // remove all MKPolyline-Overlays
           if overlay is FootballPitchOverlay {
+            let overlayRect = overlay.boundingMapRect
+            let overlayRectStr = String(describing: overlayRect)
+            print ("overlayRect: \(overlayRectStr)")
+
             mapView?.removeOverlay(overlay)
           }
         }
       }
-
     }
+
+
   }
+//
+//  override func viewDidLayoutSubviews() {
+//    super.viewDidLayoutSubviews()
+//
+//    pitchView.superview!.setNeedsLayout()
+//    pitchView.superview!.layoutIfNeeded()
+//
+//    if startResize == true {
+//    // Now modify bottomView's frame here
+//    let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
+//    let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
+//    let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
+//
+//    let pitchViewBottomLefttStr = String(describing: pitchViewBottomLeft)
+//    print("pitchViewBottomLeft: \(pitchViewBottomLefttStr)")
+//    let pitchViewTopLeftStr = String(describing: pitchViewTopLeft)
+//    print("pitchViewTopLeft: \(pitchViewTopLeftStr)")
+//    let pitchViewBottomRightStr = String(describing: pitchViewBottomRight)
+//    print("pitchViewBottomRight: \(pitchViewBottomRightStr)")
+//
+//
+//    let pitchViewHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
+//    let pitchViewWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
+//
+//    pitchView.frame = CGRect(x: pitchViewBottomLeft.x, y: pitchViewBottomLeft.y, width: pitchViewWidth, height: pitchViewHeight)
+//
+//    print("pitchView frame from Region: \(self.pitchView.frame.debugDescription)")
+//      startResize = false
+//    }
+//  }
 
 
   override func viewDidLoad() {
@@ -521,12 +586,12 @@ class REHeatmapViewController: UIViewController {
 
     self.touchView.addSubview(pitchView)
 
-    NSLayoutConstraint.activate([
-      pitchView.topAnchor.constraint(equalTo: touchView.topAnchor, constant: 20),
-      pitchView.leftAnchor.constraint(equalTo: touchView.leftAnchor, constant: 20),
-      pitchView.bottomAnchor.constraint(equalTo: touchView.bottomAnchor, constant: -20),
-      pitchView.rightAnchor.constraint(equalTo: touchView.rightAnchor, constant: -20)
-    ])
+//    NSLayoutConstraint.activate([
+//      pitchView.topAnchor.constraint(greaterThanOrEqualTo: touchView.topAnchor, constant: 20),
+//      pitchView.leftAnchor.constraint(greaterThanOrEqualTo: touchView.leftAnchor, constant: 20),
+//      pitchView.bottomAnchor.constraint(greaterThanOrEqualTo: touchView.bottomAnchor, constant: -20),
+//      pitchView.rightAnchor.constraint(greaterThanOrEqualTo: touchView.rightAnchor, constant: -20)
+//    ])
 
     coloursStackView.isHidden = true
     lowerControlsStackView.isHidden = true
@@ -571,11 +636,6 @@ class REHeatmapViewController: UIViewController {
   }
 
   func refreshHeatmap() {
-
-    if (self.showIndicator)
-    {
-      self.inProgressWheel?.startAnimating()
-    }
 
     let overlays = mapView.overlays
     mapView.removeOverlays(overlays)
@@ -728,9 +788,7 @@ class REHeatmapViewController: UIViewController {
     MyFunc.saveWorkoutMetadata(workoutMetadataArray)
     MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadata))")
 
-
   }
-
 
 
   func getMapRotation() -> CGFloat {
@@ -806,6 +864,11 @@ class REHeatmapViewController: UIViewController {
         let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
         let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
 
+        self.bottomLeftCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
+        self.bottomRightCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: maxLong!)
+        self.topLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: minLong!)
+
+
         let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
         let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
         self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
@@ -838,7 +901,6 @@ class REHeatmapViewController: UIViewController {
         self.mapView.addOverlay(footballPitch11Overlay)
         self.setMapViewZoom(rect: pitchMKMapRect)
 
-
       case .success(let playingArea):
         MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
         let playingAreaStr = String(describing: playingArea)
@@ -848,18 +910,40 @@ class REHeatmapViewController: UIViewController {
         let midpointLongitude = (playingArea.bottomLeft.longitude + playingArea.bottomRight.longitude) / 2
         self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
         let topLeftCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
+
         let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
         let bottomRightCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
 
+        self.bottomLeftCoord = bottomLeftCoord
+        self.bottomRightCoord = bottomRightCoord
+        self.topLeftCoord = topLeftCoord
 
+
+        // now get the CGPoints for these Coordinates
+        let bottomLeftCGPoint = self.mapView.convert(bottomLeftCoord, toPointTo: self.mapView)
+        let bottomLeftCGPointStr = String(describing: bottomLeftCGPoint)
+        print("bottomLeftCGPoint: \(bottomLeftCGPointStr)")
+
+        let topLeftCGPoint = self.mapView.convert(topLeftCoord, toPointTo: self.mapView)
+        let topLeftCGPointStr = String(describing: topLeftCGPoint)
+        print("topLeftCGPoint: \(topLeftCGPointStr)")
+
+        let bottomRightCGPoint = self.mapView.convert(bottomRightCoord, toPointTo: self.mapView)
+        let bottomRightCGPointStr = String(describing: bottomRightCGPoint)
+        print("bottomRightCGPoint: \(bottomRightCGPointStr)")
+
+
+        // the rotation is straightforward - rotate the pitchView by the same angle as the saved PlayingArea
         let savedPitchViewRotationStr = self.pitchView.transform.angle
         print("savedPitchViewRotationStr: \(savedPitchViewRotationStr)")
 
         self.pitchView.transform = self.pitchView.transform.rotated(by: playingArea.rotation)
+
         let pitchViewRotationStr = self.pitchView.transform.angle
         print("pitchViewRotationStr: \(pitchViewRotationStr)")
 
         self.createPitchOverlay(topLeft: topLeftCoord, bottomLeft: bottomLeftCoord, bottomRight: bottomRightCoord)
+
 
       }
     })
@@ -892,6 +976,9 @@ class REHeatmapViewController: UIViewController {
     let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
     self.mapView.addOverlay(adjustedPitchOverlay)
     self.setMapViewZoom(rect: pitchMKMapRect)
+
+
+
   }
 
   func addHeatmapPoint(coordinate:CLLocationCoordinate2D){
@@ -1141,7 +1228,7 @@ extension REHeatmapViewController: MKMapViewDelegate {
         let angleIncMapRotation = getMapRotation()
 
         let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation)
-//        let footballPitchOverlayView = FootballPitchOverlayView(overlay: overlay, overlayImage: pitchImage, angle: viewRotationAsCGFloat)
+
         footballPitchOverlayRenderer.alpha = 0.5
 
         let pitchViewCGRect = footballPitchOverlayRenderer.rect(for: overlay.boundingMapRect)
@@ -1170,26 +1257,6 @@ extension REHeatmapViewController: MKMapViewDelegate {
     default: break
     }
   }
-//
-//  func createDTMHeatmap() {
-//
-//    var heatmapdata:[NSObject: Double] = [:]
-//    for coordinate in heatmapperCoordinatesArray {
-//      var point = MKMapPoint.init(coordinate)
-//      let type = "{MKMapPoint=dd}"
-//      let value = NSValue(bytes: &point, objCType: type)
-//      heatmapdata[value] = 1.0
-//    }
-//
-//    self.dtmHeatmap.setData(heatmapdata as [NSObject : AnyObject])
-//    self.mapView.addOverlay(self.dtmHeatmap)
-//    let dtmBoundingRect = self.dtmHeatmap.boundingRect
-//    dtmRect = dtmBoundingRect
-////    let dtmCoordinate = self.dtmHeatmap.coordinate
-////    MyFunc.logMessage(.debug, "dtmBoundingRect: \(dtmBoundingRect)")
-////    MyFunc.logMessage(.debug, "dtmCoordinate: \(dtmCoordinate)")
-//
-//  }
 
 }
 

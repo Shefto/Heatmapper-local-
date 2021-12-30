@@ -27,7 +27,6 @@ class FootballPitchOverlayRenderer: MKOverlayRenderer {
   override func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
     guard let imageReference = overlayImage.cgImage else { return }
 
-
     let rect = self.rect(for: overlay.boundingMapRect)
     context.scaleBy(x: 1.0, y: -1.0)
     context.rotate(by: angle)

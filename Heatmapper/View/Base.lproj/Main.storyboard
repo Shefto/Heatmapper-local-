@@ -1061,8 +1061,20 @@ DQoNCg
                                                     <action selector="btnResize:" destination="Pbk-vr-61V" eventType="touchUpInside" id="qCh-Fx-kZd"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwp-w4-qwC" userLabel="Points">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fek-oh-fSQ" userLabel="Reset">
                                                 <rect key="frame" x="210" y="0.0" width="200" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                <color key="tintColor" systemColor="systemGreenColor"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Reset"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Reset Pitch Sizes"/>
+                                                <connections>
+                                                    <action selector="btnResize:" destination="Pbk-vr-61V" eventType="touchUpInside" id="ajt-eT-es1"/>
+                                                    <action selector="resetPitches:" destination="Pbk-vr-61V" eventType="touchUpInside" id="4aI-KG-6gD"/>
+                                                </connections>
+                                            </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwp-w4-qwC" userLabel="Points">
+                                                <rect key="frame" x="410" y="0.0" width="0.0" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemPurpleColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="Mark Corners"/>

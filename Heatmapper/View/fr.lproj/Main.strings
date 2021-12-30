@@ -85,6 +85,12 @@
 /* Class = "UITextField"; text = "Venue"; ObjectID = "eXy-MY-Yhq"; */
 "eXy-MY-Yhq.text" = "";
 
+/* Class = "UIButton"; configuration.title = "Reset Pitch Sizes"; ObjectID = "Fek-oh-fSQ"; */
+"Fek-oh-fSQ.configuration.title" = "";
+
+/* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "Fek-oh-fSQ"; */
+"Fek-oh-fSQ.normalTitle" = "";
+
 /* Class = "UILabel"; text = "Venue"; ObjectID = "Fgr-lP-daT"; */
 "Fgr-lP-daT.text" = "";
 

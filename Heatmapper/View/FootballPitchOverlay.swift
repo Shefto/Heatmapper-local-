@@ -21,7 +21,7 @@ class FootballPitchOverlay: NSObject, MKOverlay {
   var coordinate : CLLocationCoordinate2D
   {
     let midMKPoint = MKMapPoint(x: boundingMapRect.midX, y: boundingMapRect.midY)
-    MyFunc.logMessage(.debug, "FootballPitchOverlay coordinate set to \(String(describing: midMKPoint.coordinate))")
+
     return midMKPoint.coordinate
   }
 
