@@ -21,8 +21,7 @@ class HeatmapViewController: UIViewController {
   var heatmapWorkoutId            : UUID?
   var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
   var workoutMetadataArray        =  [WorkoutMetadata]()
-  
-  
+
   var pointCount                  : Int = 0
   var angle                       : CGFloat = 0.0
   var pointsDistance              : CGFloat = 0.0
