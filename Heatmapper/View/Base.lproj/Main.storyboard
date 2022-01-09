@@ -1822,7 +1822,15 @@ DQoNCg
                     </view>
                     <navigationItem key="navigationItem" title="Heatmap" id="yQa-XH-y2d"/>
                     <connections>
+                        <outlet property="activityField" destination="4NC-ab-YSz" id="NAl-CC-0sb"/>
+                        <outlet property="avgHeartRateLabel" destination="ay0-XU-veN" id="a35-Du-Ghc"/>
+                        <outlet property="avgSpeedLabel" destination="rdq-3I-zId" id="sUv-Zc-GWE"/>
+                        <outlet property="caloriesLabel" destination="SsR-z7-NTJ" id="G7G-0K-mgg"/>
+                        <outlet property="distanceLabel" destination="CTV-Fu-jHN" id="PNi-eo-7dD"/>
                         <outlet property="mapView" destination="lQG-2T-c3p" id="miF-qq-zXX"/>
+                        <outlet property="pitchField" destination="2Hb-dc-c99" id="LgZ-aN-OuT"/>
+                        <outlet property="sportField" destination="F5h-cl-Tm7" id="Su1-78-35A"/>
+                        <outlet property="venueField" destination="9nK-7l-9X9" id="sfm-yc-2Ts"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xws-kf-RrH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

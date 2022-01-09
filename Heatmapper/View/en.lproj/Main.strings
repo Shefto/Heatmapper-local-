@@ -61,9 +61,6 @@
 /* Class = "UITextField"; text = "Activity"; ObjectID = "4NC-ab-YSz"; */
 "4NC-ab-YSz.text" = "";
 
-/* Class = "UILabel"; text = "Date"; ObjectID = "678-zI-xAq"; */
-"678-zI-xAq.text" = "";
-
 /* Class = "UISegmentedControl"; 7U9-Pn-MJX.segmentTitles[0] = "Map"; ObjectID = "7U9-Pn-MJX"; */
 "7U9-Pn-MJX.segmentTitles[0]" = "";
 
@@ -171,9 +168,6 @@
 
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "mh4-Pn-ffs"; */
 "mh4-Pn-ffs.normalTitle" = "";
-
-/* Class = "UILabel"; text = "Duration"; ObjectID = "mj8-Qg-7GL"; */
-"mj8-Qg-7GL.text" = "";
 
 /* Class = "UILabel"; text = "Pitch"; ObjectID = "Mo8-X3-Hdn"; */
 "Mo8-X3-Hdn.text" = "";

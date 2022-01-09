@@ -14,8 +14,7 @@ import HealthKit
 import CoreLocation
 
 class HeatmapViewController: UIViewController {
-  
-  //  var dtmHeatmap                  = DTMHeatmap()
+
   var heatmapperCoordinatesArray  = [CLLocationCoordinate2D]()
   var heatmapperLocationsArray    = [CLLocation]()
   var heatmapWorkoutId            : UUID?
@@ -67,259 +66,24 @@ class HeatmapViewController: UIViewController {
   var topLeftCoord                : CLLocationCoordinate2D?
   var bottomRightCoord            : CLLocationCoordinate2D?
   
-  var blendModeArray = [BlendMode]()
+  var blendModeArray              = [BlendMode]()
+  var activityArray               = [Activity]()
+  var sportArray                  = [Sport]()
+
   var overlayCenter               : CLLocationCoordinate2D?
-  // tester outlets
+
+  @IBOutlet weak var activityField      : ThemeMediumFontTextField!
+  @IBOutlet weak var sportField         : ThemeMediumFontTextField!
+  @IBOutlet weak var venueField         : ThemeMediumFontTextField!
+  @IBOutlet weak var pitchField         : ThemeMediumFontTextField!
   
-//  @IBOutlet weak var innerRed: UITextField!
-//  @IBOutlet weak var innerGreen: UITextField!
-//  @IBOutlet weak var innerBlue: UITextField!
-//  @IBOutlet weak var innerAlpha: UITextField!
-//  @IBOutlet weak var innerGradient: UITextField!
-//
-//  @IBOutlet weak var middleRed: UITextField!
-//  @IBOutlet weak var middleGreen: UITextField!
-//  @IBOutlet weak var middleBlue: UITextField!
-//  @IBOutlet weak var middleAlpha: UITextField!
-//  @IBOutlet weak var middleGradient: UITextField!
-//
-//  @IBOutlet weak var outerRed: UITextField!
-//  @IBOutlet weak var outerGreen: UITextField!
-//  @IBOutlet weak var outerBlue: UITextField!
-//  @IBOutlet weak var outerAlpha: UITextField!
-//
-//  @IBOutlet weak var blendModePicker: UIPickerView!
-//  @IBOutlet weak var outerGradient: UITextField!
-//
-//  @IBOutlet weak var innerRedStepper: UIStepper!
-//  @IBOutlet weak var innerGreenStepper: UIStepper!
-//  @IBOutlet weak var innerBlueStepper: UIStepper!
-//  @IBOutlet weak var innerAlphaStepper: UIStepper!
-//  @IBOutlet weak var innerGradientStepper: UIStepper!
-//
-//  @IBOutlet weak var middleRedStepper: UIStepper!
-//  @IBOutlet weak var middleGreenStepper: UIStepper!
-//  @IBOutlet weak var middleBlueStepper: UIStepper!
-//  @IBOutlet weak var middleAlphaStepper: UIStepper!
-//  @IBOutlet weak var middleGradientStepper: UIStepper!
-//
-//  @IBOutlet weak var outerRedStepper: UIStepper!
-//  @IBOutlet weak var outerGreenStepper: UIStepper!
-//  @IBOutlet weak var outerBlueStepper: UIStepper!
-//  @IBOutlet weak var outerAlphaStepper: UIStepper!
-//  @IBOutlet weak var outerGradientStepper: UIStepper!
-//
-//  @IBOutlet weak var radiusField: UITextField!
-//  @IBOutlet weak var radiusStepper: UIStepper!
-//
-//  @IBOutlet weak var pitchSegmentedControl: UISegmentedControl!
-//  @IBOutlet weak var mapSegmentedControl: UISegmentedControl!
-//  @IBOutlet weak var panelSegmentedControl: UISegmentedControl!
-//
-//  @IBOutlet weak var coloursStackView: UIStackView!
-//  @IBOutlet weak var lowerControlsStackView: UIStackView!
-//
-//  @IBOutlet weak var resizeButton: UIButton!
-//
-//  @IBAction func stepperRadius(_ sender: UIStepper) {
-//    radius = Int(sender.value)
-//    radiusField.text = String(describing: radius)
-//    refreshHeatmap()
-//  }
-//
-//
-//  @IBAction func segPanel(_ sender: UISegmentedControl) {
-//    switch sender.selectedSegmentIndex {
-//    case 0:
-//      coloursStackView.isHidden = false
-//      lowerControlsStackView.isHidden = false
-//    case 1:
-//      coloursStackView.isHidden = true
-//      lowerControlsStackView.isHidden = true
-//    default:
-//      coloursStackView.isHidden = false
-//      lowerControlsStackView.isHidden = false
-//    }
-//
-//  }
-//
-//
-//  @IBAction func segMap(_ sender: UISegmentedControl) {
-//    switch sender.selectedSegmentIndex {
-//    case 0:
-//      self.mapView.mapType = .standard
-//    case 1:
-//      self.mapView.mapType = .satellite
-//    default:
-//      self.mapView.mapType = .standard
-//    }
-//
-//  }
-//
-//  @IBAction func segPitch(_ sender: UISegmentedControl) {
-//
-//    switch sender.selectedSegmentIndex {
-//    case 0:
-//      pitchOn = true
-//    case 1:
-//      pitchOn = false
-//    default:
-//      pitchOn = true
-//    }
-//
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperInnerRed(_ sender: UIStepper) {
-//    innerColourRed = String(format:"%.1f", sender.value)
-//    innerRed.text = innerColourRed
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperInnerGreen(_ sender: UIStepper) {
-//    innerColourGreen = String(format:"%.1f", sender.value)
-//    innerGreen.text = innerColourGreen
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperInnerBlue(_ sender: UIStepper) {
-//    innerColourBlue = String(format:"%.1f", sender.value)
-//    innerBlue.text = innerColourBlue
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperInnerAlpha(_ sender: UIStepper) {
-//    innerColourAlpha = String(format:"%.1f", sender.value)
-//    innerAlpha.text = innerColourAlpha
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperInnerGradient(_ sender: UIStepper) {
-//    innerColourGradient = String(format:"%.1f", sender.value)
-//    innerGradient.text = innerColourGradient
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperMiddleRed(_ sender: UIStepper) {
-//    middleColourRed = String(format:"%.1f", sender.value)
-//    middleRed.text = middleColourRed
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperMiddleGreen(_ sender: UIStepper) {
-//    middleColourGreen = String(format:"%.1f", sender.value)
-//    middleGreen.text = middleColourGreen
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperMiddleBlue(_ sender: UIStepper) {
-//    middleColourBlue = String(format:"%.1f", sender.value)
-//    middleBlue.text = middleColourBlue
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperMiddleAlpha(_ sender: UIStepper) {
-//    middleColourAlpha = String(format:"%.1f", sender.value)
-//    middleAlpha.text = middleColourAlpha
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperMiddleGradient(_ sender: UIStepper) {
-//    middleColourGradient = String(format:"%.1f", sender.value)
-//    middleGradient.text = middleColourGradient
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperOuterRed(_ sender: UIStepper) {
-//    outerColourRed =  String(format:"%.1f", sender.value)
-//    outerRed.text = outerColourRed
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperOuterGreen(_ sender: UIStepper) {
-//    outerColourGreen = String(format:"%.1f", sender.value)
-//    outerGreen.text = outerColourGreen
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperOuterBlue(_ sender: UIStepper) {
-//    outerColourBlue = String(format:"%.1f", sender.value)
-//    outerBlue.text = outerColourBlue
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperOuterAlpha(_ sender: UIStepper) {
-//    outerColourAlpha = String(format:"%.1f", sender.value)
-//    outerAlpha.text = outerColourAlpha
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperOuterGradient(_ sender: UIStepper) {
-//    outerColourGradient = String(format:"%.1f", sender.value)
-//    outerGradient.text = outerColourGradient
-//    refreshHeatmap()
-//  }
-//
-//
-//  @IBAction func btnPoints(_ sender: Any) {
-//
-//    let annotations = mapView.annotations
-//    mapView.removeAnnotations(annotations)
-//    savePitchCoordinates()
-//
-//  }
-//
-//  @IBAction func btnReset(_ sender: Any) {
-//
-//    innerColourGradient = "0.1"
-//    middleColourGradient = "0.3"
-//    outerColourGradient = "0.5"
-//
-//    innerColourRed = "1.0"
-//    innerColourGreen = "0.0"
-//    innerColourBlue = "0.0"
-//    innerColourAlpha = "0.9"
-//
-//    middleColourRed = "1.0"
-//    middleColourBlue = "0.0"
-//    middleColourGreen = "0.5"
-//    middleColourAlpha = "0.5"
-//
-//    outerColourRed = "1.0"
-//    outerColourBlue = "0.0"
-//    outerColourGreen = "1.0"
-//    outerColourAlpha = "0.3"
-//    radius = 2
-//
-//    blendMode                   = CGBlendMode.normal
-//    loadTesterUI()
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func textfieldEditingDidEnd(_ sender: Any) {
-//
-//    // update fields from UI values
-//    innerColourGradient =  innerGradient.text ?? ""
-//    middleColourGradient = middleGradient.text ?? ""
-//    outerColourGradient = outerGradient.text ?? ""
-//
-//    innerColourRed = innerRed.text ?? ""
-//    innerColourBlue = innerBlue.text ?? ""
-//    innerColourGreen = innerGreen.text ?? ""
-//    innerColourAlpha = innerAlpha.text ?? ""
-//
-//    middleColourRed = middleRed.text ?? ""
-//    middleColourBlue = middleBlue.text ?? ""
-//    middleColourGreen = middleGreen.text ?? ""
-//    middleColourAlpha = middleAlpha.text ?? ""
-//
-//    outerColourRed = outerRed.text ?? ""
-//    outerColourBlue = outerBlue.text ?? ""
-//    outerColourGreen = outerGreen.text ?? ""
-//    outerColourAlpha = outerAlpha.text ?? ""
-//
-//    refreshHeatmap()
-//  }
+  @IBOutlet weak var distanceLabel      : ThemeMediumFontUILabel!
+  @IBOutlet weak var caloriesLabel      : ThemeMediumFontUILabel!
+  @IBOutlet weak var avgHeartRateLabel  : ThemeMediumFontUILabel!
+  @IBOutlet weak var avgSpeedLabel      : ThemeMediumFontUILabel!
+
+  let activityPicker              = UIPickerView()
+  let sportPicker                 = UIPickerView()
   
   @IBOutlet weak var mapView: MKMapView!
   
@@ -479,11 +243,7 @@ class HeatmapViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    // set up the tester picker
-//    blendModePicker.delegate = self
-//    blendModePicker.dataSource = self
-    
+
     mapView.delegate = self
     
     let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
@@ -516,25 +276,14 @@ class HeatmapViewController: UIViewController {
     
     self.touchView.addSubview(pitchView)
     
-    //    NSLayoutConstraint.activate([
-    //      pitchView.topAnchor.constraint(greaterThanOrEqualTo: touchView.topAnchor, constant: 20),
-    //      pitchView.leftAnchor.constraint(greaterThanOrEqualTo: touchView.leftAnchor, constant: 20),
-    //      pitchView.bottomAnchor.constraint(greaterThanOrEqualTo: touchView.bottomAnchor, constant: -20),
-    //      pitchView.rightAnchor.constraint(greaterThanOrEqualTo: touchView.rightAnchor, constant: -20)
-    //    ])
-    
-//    coloursStackView.isHidden = true
-//    lowerControlsStackView.isHidden = true
-//
+
     resizeOn = false
-//    resizeButton.setTitle("Adjust Pitch Size", for: .normal)
-//    resizeButton.tintColor = UIColor.systemGreen
     self.touchView.isHidden = true
     
     self.loadUI()
     self.loadTesterData()
-//    self.loadTesterUI()
-    
+    getStaticData()
+
     // get workout data
     // Note: all UI work is called within this function as the data retrieval works asynchronously
     getWorkoutData()
@@ -542,29 +291,36 @@ class HeatmapViewController: UIViewController {
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    var testerArray = [String]()
-    
-    testerArray.append(innerColourRed)
-    testerArray.append(innerColourGreen)
-    testerArray.append(innerColourBlue)
-    testerArray.append(innerColourAlpha)
-    testerArray.append(innerColourGradient)
-    
-    testerArray.append(middleColourRed)
-    testerArray.append(middleColourGreen)
-    testerArray.append(middleColourBlue)
-    testerArray.append(middleColourAlpha)
-    testerArray.append(middleColourGradient)
-    
-    testerArray.append(outerColourRed)
-    testerArray.append(outerColourGreen)
-    testerArray.append(outerColourBlue)
-    testerArray.append(outerColourAlpha)
-    testerArray.append(outerColourGradient)
-    
-    MyFunc.saveTesterData(testerArray)
+//    var testerArray = [String]()
+//
+//    testerArray.append(innerColourRed)
+//    testerArray.append(innerColourGreen)
+//    testerArray.append(innerColourBlue)
+//    testerArray.append(innerColourAlpha)
+//    testerArray.append(innerColourGradient)
+//
+//    testerArray.append(middleColourRed)
+//    testerArray.append(middleColourGreen)
+//    testerArray.append(middleColourBlue)
+//    testerArray.append(middleColourAlpha)
+//    testerArray.append(middleColourGradient)
+//
+//    testerArray.append(outerColourRed)
+//    testerArray.append(outerColourGreen)
+//    testerArray.append(outerColourBlue)
+//    testerArray.append(outerColourAlpha)
+//    testerArray.append(outerColourGradient)
+//
+//    MyFunc.saveTesterData(testerArray)
   }
-  
+
+  func getStaticData() {
+
+    activityArray = MyFunc.getHeatmapperActivityDefaults()
+    sportArray = Sport.allCases.map { $0 }
+  }
+
+
   func refreshHeatmap() {
     
     let overlays = mapView.overlays
@@ -600,6 +356,14 @@ class HeatmapViewController: UIViewController {
   }
   
   func loadUI() {
+
+    activityPicker.delegate = self
+    activityPicker.dataSource = self
+    activityField.inputView = activityPicker
+
+    sportPicker.delegate = self
+    sportPicker.dataSource = self
+    sportField.inputView = sportPicker
     blendModeArray = BlendMode.allCases.map { $0 }
     
 //    innerRedStepper.transform = innerRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
@@ -1187,105 +951,176 @@ extension HeatmapViewController: MKMapViewDelegate {
     default: break
     }
   }
-  
-}
 
-extension HeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    //    MyFunc.logMessage(.debug, "TesterViewController.didSelectRow: \(row)")
-    
-    let blendModeSelected = blendModeArray[row]
-    
-    switch blendModeSelected {
-    case .normal:
-      blendMode = .normal
-    case .multiply:
-      blendMode = .multiply
-    case .screen:
-      blendMode = .screen
-    case .overlay:
-      blendMode = .overlay
-    case .darken:
-      blendMode = .darken
-    case .lighten:
-      blendMode = .lighten
-    case .colorDodge:
-      blendMode = .colorDodge
-    case .colorBurn:
-      blendMode = .colorBurn
-    case .softLight:
-      blendMode = .softLight
-    case .hardLight:
-      blendMode = .hardLight
-    case .difference:
-      blendMode = .difference
-    case .exclusion:
-      blendMode = .exclusion
-    case .hue:
-      blendMode = .hue
-    case .saturation:
-      blendMode = .saturation
-    case .color:
-      blendMode = .color
-    case .luminosity:
-      blendMode = .luminosity
-    case .clear:
-      blendMode = .clear
-    case .copy:
-      blendMode = .copy
-    case .sourceIn:
-      blendMode = .sourceIn
-    case .sourceOut:
-      blendMode = .sourceOut
-    case .sourceAtop:
-      blendMode = .sourceAtop
-    case .destinationOver:
-      blendMode = .destinationOver
-    case .destinationIn:
-      blendMode = .destinationIn
-    case .destinationOut:
-      blendMode = .destinationOut
-    case .destinationAtop:
-      blendMode = .destinationAtop
-    case .xor:
-      blendMode = .xor
-    case .plusDarker:
-      blendMode = .plusDarker
-    case .plusLighter:
-      blendMode = .plusLighter
-      //    default:
-      //      blendMode = .normal
-    }
-    
-    refreshHeatmap()
-    
-  }
-  
-  func numberOfComponents(in pickerView: UIPickerView) -> Int {
-    return 1
-  }
-  
-  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return blendModeArray.count
-  }
-  
-  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return blendModeArray[row].rawValue
-  }
-  
   func setPinUsingMKPlacemark(coordinate: CLLocationCoordinate2D) {
     let pin = MKPlacemark(coordinate: coordinate)
-    
+
     mapView.addAnnotation(pin)
   }
-  
+
   func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
     let annotation = MKPointAnnotation()
     annotation.coordinate = coordinate
     annotation.title = title
     mapView.addAnnotation(annotation)
-    
+
   }
+
+  func updateWorkout()  {
+
+    guard let workoutId = heatmapWorkoutId else {
+      MyFunc.logMessage(.error, "Invalid heatmapWorkoutId passed to SavedHeatmapViewController: \(String(describing: heatmapWorkoutId))")
+      return
+    }
+
+    let activity = activityField.text ?? ""
+    let venue = venueField.text ?? ""
+    let sport = sportField.text ?? ""
+    let pitch = pitchField.text ?? ""
+
+    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, venue: venue, pitch: pitch)
+    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
+    if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
+      workoutMetadataArray[row] = workoutMetadataToSave
+    } else {
+      workoutMetadataArray.append(workoutMetadataToSave)
+    }
+    MyFunc.saveWorkoutMetadata(workoutMetadataArray)
+    MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadataToSave))")
+
+
+  }
+
+
+
+}
+
+extension HeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+//  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//    //    MyFunc.logMessage(.debug, "TesterViewController.didSelectRow: \(row)")
+//    
+//    let blendModeSelected = blendModeArray[row]
+//    
+//    switch blendModeSelected {
+//    case .normal:
+//      blendMode = .normal
+//    case .multiply:
+//      blendMode = .multiply
+//    case .screen:
+//      blendMode = .screen
+//    case .overlay:
+//      blendMode = .overlay
+//    case .darken:
+//      blendMode = .darken
+//    case .lighten:
+//      blendMode = .lighten
+//    case .colorDodge:
+//      blendMode = .colorDodge
+//    case .colorBurn:
+//      blendMode = .colorBurn
+//    case .softLight:
+//      blendMode = .softLight
+//    case .hardLight:
+//      blendMode = .hardLight
+//    case .difference:
+//      blendMode = .difference
+//    case .exclusion:
+//      blendMode = .exclusion
+//    case .hue:
+//      blendMode = .hue
+//    case .saturation:
+//      blendMode = .saturation
+//    case .color:
+//      blendMode = .color
+//    case .luminosity:
+//      blendMode = .luminosity
+//    case .clear:
+//      blendMode = .clear
+//    case .copy:
+//      blendMode = .copy
+//    case .sourceIn:
+//      blendMode = .sourceIn
+//    case .sourceOut:
+//      blendMode = .sourceOut
+//    case .sourceAtop:
+//      blendMode = .sourceAtop
+//    case .destinationOver:
+//      blendMode = .destinationOver
+//    case .destinationIn:
+//      blendMode = .destinationIn
+//    case .destinationOut:
+//      blendMode = .destinationOut
+//    case .destinationAtop:
+//      blendMode = .destinationAtop
+//    case .xor:
+//      blendMode = .xor
+//    case .plusDarker:
+//      blendMode = .plusDarker
+//    case .plusLighter:
+//      blendMode = .plusLighter
+//      //    default:
+//      //      blendMode = .normal
+//    }
+//    
+//    refreshHeatmap()
+//    
+//  }
+//  
+//  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//    return 1
+//  }
+//  
+//  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//    return blendModeArray.count
+//  }
+//  
+//  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//    return blendModeArray[row].rawValue
+//  }
+
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1
+  }
+
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+
+    if pickerView == activityPicker {
+      return activityArray.count
+    } else {
+      return sportArray.count
+    }
+
+  }
+
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+
+    if pickerView == activityPicker {
+      return activityArray[row].name
+    } else {
+      return sportArray[row].rawValue
+    }
+
+  }
+
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
+    if pickerView == activityPicker {
+      activityField.text = activityArray[row].name
+      //      if sportField.text == "" {
+      sportField.text = activityArray[row].sport.rawValue
+      //      }
+    } else {
+      sportField.text = sportArray[row].rawValue
+    }
+    updateWorkout()
+
+    self.view.endEditing(true)
+  }
+
+
+
+
+
   
   
 }
