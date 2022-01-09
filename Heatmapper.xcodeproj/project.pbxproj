@@ -123,7 +123,7 @@
 		79F3480E25A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
 		79F3480F25A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
 		79F3481025A3364100762724 /* Heatmapper.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 79F3480D25A3364100762724 /* Heatmapper.storekit */; };
-		79F3A2A7269078F900667B1B /* REHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */; };
+		79F3A2A7269078F900667B1B /* TesterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2A6269078F900667B1B /* TesterViewController.swift */; };
 		79F3A2AC269795FA00667B1B /* REHeatmapRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2AB269795F900667B1B /* REHeatmapRenderer.swift */; };
 		79F3A2AE2697968A00667B1B /* REColourProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2AD2697968A00667B1B /* REColourProvider.swift */; };
 		79F3A2B0269796C100667B1B /* RE_DTMDiffColorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3A2AF269796C100667B1B /* RE_DTMDiffColorProvider.swift */; };
@@ -314,7 +314,7 @@
 		79D9BF8E270794180027D96F /* TeamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsViewController.swift; sourceTree = "<group>"; };
 		79DC34152625D2FC0053733C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		79F3480D25A3364100762724 /* Heatmapper.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Heatmapper.storekit; sourceTree = "<group>"; };
-		79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REHeatmapViewController.swift; sourceTree = "<group>"; };
+		79F3A2A6269078F900667B1B /* TesterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesterViewController.swift; sourceTree = "<group>"; };
 		79F3A2AB269795F900667B1B /* REHeatmapRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REHeatmapRenderer.swift; sourceTree = "<group>"; };
 		79F3A2AD2697968A00667B1B /* REColourProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REColourProvider.swift; sourceTree = "<group>"; };
 		79F3A2AF269796C100667B1B /* RE_DTMDiffColorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RE_DTMDiffColorProvider.swift; sourceTree = "<group>"; };
@@ -437,7 +437,7 @@
 				7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */,
 				79D083B32508EF6400274F79 /* MainMenuViewController.swift */,
 				793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */,
-				79F3A2A6269078F900667B1B /* REHeatmapViewController.swift */,
+				79F3A2A6269078F900667B1B /* TesterViewController.swift */,
 				79439B7326C46357001E7CC4 /* SavedHeatmapViewController.swift */,
 				7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */,
 				79B6DC982598B13400F573BA /* SettingsViewController.swift */,
@@ -872,7 +872,7 @@
 				79FDDFCB26C98A8E00526FB9 /* CroppableImageView.swift in Sources */,
 				792CCCDD26AC32270024C5B3 /* DTMHeatmapViewController.swift in Sources */,
 				797BFD0A2542B72800426185 /* MyFunciOS.swift in Sources */,
-				79F3A2A7269078F900667B1B /* REHeatmapViewController.swift in Sources */,
+				79F3A2A7269078F900667B1B /* TesterViewController.swift in Sources */,
 				799131422634151700811731 /* JDHeatmapPointCreator.swift in Sources */,
 				79FDDFD126C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift in Sources */,
 				79D083B42508EF6400274F79 /* MainMenuViewController.swift in Sources */,

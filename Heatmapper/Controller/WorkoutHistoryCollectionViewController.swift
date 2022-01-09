@@ -66,7 +66,11 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   }
 
   @IBAction func btnREHeatmap(_ sender: Any) {
-    self.performSegue(withIdentifier: "historyToREHeatmap", sender: workoutSelectedId)
+    self.performSegue(withIdentifier: "historyToHeatmap", sender: workoutSelectedId)
+  }
+
+  @IBAction func btnTester(_ sender: Any) {
+    self.performSegue(withIdentifier: "historyToTester", sender: workoutSelectedId)
   }
 
   @IBAction func btnCreatedHeatmap(_ sender: Any) {
@@ -357,8 +361,13 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
       destinationVC.heatmapWorkoutId = (sender as! UUID)
     }
 
-    if segueToUse == "historyToREHeatmap" {
-      let destinationVC = segue.destination as! REHeatmapViewController
+    if segueToUse == "historyToHeatmap" {
+      let destinationVC = segue.destination as! HeatmapViewController
+      destinationVC.heatmapWorkoutId = (sender as! UUID)
+    }
+
+    if segueToUse == "historyToTester" {
+      let destinationVC = segue.destination as! TesterViewController
       destinationVC.heatmapWorkoutId = (sender as! UUID)
     }
 

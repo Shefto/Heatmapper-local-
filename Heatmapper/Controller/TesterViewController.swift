@@ -1,5 +1,5 @@
 //
-//  REHeatmapViewController.swift
+//  TesterViewController.swift
 //  Heatmapper
 //
 //  Created by Richard English on 03/07/2021.
@@ -52,7 +52,7 @@ struct ViewCorners {
 
 
 
-class REHeatmapViewController: UIViewController {
+class TesterViewController: UIViewController {
 
 //  var dtmHeatmap                  = DTMHeatmap()
   var heatmapperCoordinatesArray  = [CLLocationCoordinate2D]()
@@ -515,36 +515,6 @@ class REHeatmapViewController: UIViewController {
 
 
   }
-//
-//  override func viewDidLayoutSubviews() {
-//    super.viewDidLayoutSubviews()
-//
-//    pitchView.superview!.setNeedsLayout()
-//    pitchView.superview!.layoutIfNeeded()
-//
-//    if startResize == true {
-//    // Now modify bottomView's frame here
-//    let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
-//    let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
-//    let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
-//
-//    let pitchViewBottomLefttStr = String(describing: pitchViewBottomLeft)
-//    print("pitchViewBottomLeft: \(pitchViewBottomLefttStr)")
-//    let pitchViewTopLeftStr = String(describing: pitchViewTopLeft)
-//    print("pitchViewTopLeft: \(pitchViewTopLeftStr)")
-//    let pitchViewBottomRightStr = String(describing: pitchViewBottomRight)
-//    print("pitchViewBottomRight: \(pitchViewBottomRightStr)")
-//
-//
-//    let pitchViewHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
-//    let pitchViewWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
-//
-//    pitchView.frame = CGRect(x: pitchViewBottomLeft.x, y: pitchViewBottomLeft.y, width: pitchViewWidth, height: pitchViewHeight)
-//
-//    print("pitchView frame from Region: \(self.pitchView.frame.debugDescription)")
-//      startResize = false
-//    }
-//  }
 
 
   override func viewDidLoad() {
@@ -1142,7 +1112,7 @@ class REHeatmapViewController: UIViewController {
 
 }
 
-extension REHeatmapViewController: MKMapViewDelegate {
+extension TesterViewController: MKMapViewDelegate {
 
   func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
   }
@@ -1260,7 +1230,7 @@ extension REHeatmapViewController: MKMapViewDelegate {
 
 }
 
-extension REHeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension TesterViewController: UIPickerViewDelegate, UIPickerViewDataSource {
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 //    MyFunc.logMessage(.debug, "REHeatmapViewController.didSelectRow: \(row)")
 
