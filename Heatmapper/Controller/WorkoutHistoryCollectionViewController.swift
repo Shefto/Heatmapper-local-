@@ -66,7 +66,12 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   }
 
   @IBAction func btnREHeatmap(_ sender: Any) {
-    self.performSegue(withIdentifier: "historyToHeatmap", sender: workoutSelectedId)
+
+    guard let workoutId = workoutSelectedId else {
+      MyFunc.logMessage(.error, "No heatmapWorkoutId passed to btnCreatedHeatmap in WorkoutHistoryCollectionViewController")
+      return
+    }
+    self.performSegue(withIdentifier: "historyToHeatmap", sender: workoutId)
   }
 
   @IBAction func btnTester(_ sender: Any) {

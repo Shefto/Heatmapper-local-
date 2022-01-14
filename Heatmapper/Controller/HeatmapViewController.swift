@@ -82,6 +82,12 @@ class HeatmapViewController: UIViewController {
   @IBOutlet weak var avgHeartRateLabel  : ThemeMediumFontUILabel!
   @IBOutlet weak var avgSpeedLabel      : ThemeMediumFontUILabel!
 
+  @IBOutlet weak var caloriesImageView  : UIImageView!
+  @IBOutlet weak var paceImageView      : UIImageView!
+  @IBOutlet weak var heartRateImageView : UIImageView!
+  @IBOutlet weak var distanceImageView  : UIImageView!
+
+
   let activityPicker              = UIPickerView()
   let sportPicker                 = UIPickerView()
   
@@ -280,7 +286,7 @@ class HeatmapViewController: UIViewController {
     resizeOn = false
     self.touchView.isHidden = true
     
-    self.loadUI()
+
     self.loadTesterData()
     getStaticData()
 
@@ -288,30 +294,11 @@ class HeatmapViewController: UIViewController {
     // Note: all UI work is called within this function as the data retrieval works asynchronously
     getWorkoutData()
   }
-  
+
+
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-//    var testerArray = [String]()
-//
-//    testerArray.append(innerColourRed)
-//    testerArray.append(innerColourGreen)
-//    testerArray.append(innerColourBlue)
-//    testerArray.append(innerColourAlpha)
-//    testerArray.append(innerColourGradient)
-//
-//    testerArray.append(middleColourRed)
-//    testerArray.append(middleColourGreen)
-//    testerArray.append(middleColourBlue)
-//    testerArray.append(middleColourAlpha)
-//    testerArray.append(middleColourGradient)
-//
-//    testerArray.append(outerColourRed)
-//    testerArray.append(outerColourGreen)
-//    testerArray.append(outerColourBlue)
-//    testerArray.append(outerColourAlpha)
-//    testerArray.append(outerColourGradient)
-//
-//    MyFunc.saveTesterData(testerArray)
+    updateWorkout()
   }
 
   func getStaticData() {
@@ -364,80 +351,46 @@ class HeatmapViewController: UIViewController {
     sportPicker.delegate = self
     sportPicker.dataSource = self
     sportField.inputView = sportPicker
+
+    // this code cancels the keyboard and profile picker when field editing finishes
+    let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+    tapGesture.cancelsTouchesInView = false
+    self.view.addGestureRecognizer(tapGesture)
+
+//    guard let heatmapWorkout = retrievedWorkout else {
+//      MyFunc.logMessage(.error, "SavedHeatmapViewController : no workout returned")
+//      return
+//    }
+//    let colouredheatmapImage = heatmapImage?.withBackground(color: UIColor.systemGreen)
+//    heatmapImageView.image = colouredheatmapImage
+
+
+    let workoutActivity = workoutMetadata.activity
+    let workoutVenue = workoutMetadata.venue
+    let workoutPitch = workoutMetadata.pitch
+    let workoutSport = workoutMetadata.sport
+
+    activityField.text = workoutActivity
+    venueField.text = workoutVenue
+    pitchField.text = workoutPitch
+    sportField.text = workoutSport
+
+    // colour icons
+    heartRateImageView.image = heartRateImageView.image?.withRenderingMode(.alwaysTemplate)
+    heartRateImageView.tintColor = UIColor.systemRed
+
+    caloriesImageView.image = caloriesImageView.image?.withRenderingMode(.alwaysTemplate)
+    caloriesImageView.tintColor = UIColor.systemOrange
+
+    paceImageView.image = paceImageView.image?.withRenderingMode(.alwaysTemplate)
+    paceImageView.tintColor = UIColor.systemBlue
+
+    distanceImageView.image = distanceImageView.image?.withRenderingMode(.alwaysTemplate)
+    distanceImageView.tintColor = UIColor.systemGreen
     blendModeArray = BlendMode.allCases.map { $0 }
     
-//    innerRedStepper.transform = innerRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    innerGreenStepper.transform = innerGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    innerBlueStepper.transform = innerBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    innerAlphaStepper.transform = innerAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    innerGradientStepper.transform = innerGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//
-//    middleRedStepper.transform = middleRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    middleGreenStepper.transform = middleGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    middleBlueStepper.transform = middleBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    middleAlphaStepper.transform = middleAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    middleGradientStepper.transform = middleGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//
-//    outerRedStepper.transform = outerRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    outerGreenStepper.transform = outerGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    outerBlueStepper.transform = outerBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    outerAlphaStepper.transform = outerAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    outerGradientStepper.transform = outerGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    radiusStepper.transform = radiusStepper.transform.scaledBy(x: 0.75, y: 1.0)
+
   }
-  
-//  func loadTesterUI() {
-//
-//    innerGradient.text = innerColourGradient
-//    middleGradient.text = middleColourGradient
-//    outerGradient.text = outerColourGradient
-//
-//    innerRed.text = innerColourRed
-//    innerBlue.text = innerColourBlue
-//    innerGreen.text = innerColourGreen
-//    innerAlpha.text = innerColourAlpha
-//
-//    middleRed.text = middleColourRed
-//    middleBlue.text = middleColourBlue
-//    middleGreen.text = middleColourGreen
-//    middleAlpha.text = middleColourAlpha
-//
-//    outerRed.text = outerColourRed
-//    outerBlue.text = outerColourBlue
-//    outerGreen.text = outerColourGreen
-//    outerAlpha.text = outerColourAlpha
-//
-//    innerRedStepper.value = Double(innerColourRed)!
-//    innerGreenStepper.value = Double(innerColourGreen)!
-//    innerBlueStepper.value = Double(innerColourBlue)!
-//    innerAlphaStepper.value = Double(innerColourAlpha)!
-//    innerGradientStepper.value = Double(innerColourGradient)!
-//
-//    middleRedStepper.value = Double(middleColourRed)!
-//    middleGreenStepper.value = Double(middleColourGreen)!
-//    middleBlueStepper.value = Double(middleColourBlue)!
-//    middleAlphaStepper.value = Double(middleColourAlpha)!
-//    middleGradientStepper.value = Double(middleColourGradient)!
-//
-//    outerRedStepper.value = Double(outerColourRed)!
-//    outerGreenStepper.value = Double(outerColourGreen)!
-//    outerBlueStepper.value = Double(outerColourBlue)!
-//    outerAlphaStepper.value = Double(outerColourAlpha)!
-//    outerGradientStepper.value = Double(outerColourGradient)!
-//    radiusStepper.value = Double(radius)
-//
-//    radiusField.text = String(radius)
-//
-//    switch pitchOn {
-//    case true:
-//      pitchSegmentedControl.selectedSegmentIndex = 0
-//    case false:
-//      pitchSegmentedControl.selectedSegmentIndex = 1
-//
-//    }
-//
-//  }
-  
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
     return true
   }
@@ -821,7 +774,7 @@ class HeatmapViewController: UIViewController {
           
           self.createDefaultPitchOverlay()
           self.createREHeatmap()
-          
+          self.loadUI()
         }
         
       }
@@ -996,87 +949,6 @@ extension HeatmapViewController: MKMapViewDelegate {
 }
 
 extension HeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-//  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//    //    MyFunc.logMessage(.debug, "TesterViewController.didSelectRow: \(row)")
-//    
-//    let blendModeSelected = blendModeArray[row]
-//    
-//    switch blendModeSelected {
-//    case .normal:
-//      blendMode = .normal
-//    case .multiply:
-//      blendMode = .multiply
-//    case .screen:
-//      blendMode = .screen
-//    case .overlay:
-//      blendMode = .overlay
-//    case .darken:
-//      blendMode = .darken
-//    case .lighten:
-//      blendMode = .lighten
-//    case .colorDodge:
-//      blendMode = .colorDodge
-//    case .colorBurn:
-//      blendMode = .colorBurn
-//    case .softLight:
-//      blendMode = .softLight
-//    case .hardLight:
-//      blendMode = .hardLight
-//    case .difference:
-//      blendMode = .difference
-//    case .exclusion:
-//      blendMode = .exclusion
-//    case .hue:
-//      blendMode = .hue
-//    case .saturation:
-//      blendMode = .saturation
-//    case .color:
-//      blendMode = .color
-//    case .luminosity:
-//      blendMode = .luminosity
-//    case .clear:
-//      blendMode = .clear
-//    case .copy:
-//      blendMode = .copy
-//    case .sourceIn:
-//      blendMode = .sourceIn
-//    case .sourceOut:
-//      blendMode = .sourceOut
-//    case .sourceAtop:
-//      blendMode = .sourceAtop
-//    case .destinationOver:
-//      blendMode = .destinationOver
-//    case .destinationIn:
-//      blendMode = .destinationIn
-//    case .destinationOut:
-//      blendMode = .destinationOut
-//    case .destinationAtop:
-//      blendMode = .destinationAtop
-//    case .xor:
-//      blendMode = .xor
-//    case .plusDarker:
-//      blendMode = .plusDarker
-//    case .plusLighter:
-//      blendMode = .plusLighter
-//      //    default:
-//      //      blendMode = .normal
-//    }
-//    
-//    refreshHeatmap()
-//    
-//  }
-//  
-//  func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//    return 1
-//  }
-//  
-//  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//    return blendModeArray.count
-//  }
-//  
-//  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//    return blendModeArray[row].rawValue
-//  }
 
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
@@ -1118,10 +990,6 @@ extension HeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
   }
 
 
-
-
-
-  
   
 }
 
