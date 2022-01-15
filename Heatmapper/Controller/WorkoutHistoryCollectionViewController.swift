@@ -98,6 +98,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
   @IBOutlet weak var heatmapButton: ThemeButton!
 
+  @IBOutlet weak var heatmapTesterButton: ThemeButton!
   @IBOutlet weak var heatmapInfoButton: ThemeButton!
 
   override func viewWillAppear(_ animated: Bool) {
@@ -105,6 +106,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
     heatmapButton.isEnabled = false
     heatmapInfoButton.isEnabled = false
+    heatmapTesterButton.isEnabled = false
 
     workoutInfoArray.removeAll()
     loadHeatmapImages()
@@ -199,6 +201,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
       workoutCollectionView.reloadData()
       heatmapButton.isEnabled = true
       heatmapInfoButton.isEnabled = true
+      heatmapTesterButton.isEnabled = true
     }
   }
 
