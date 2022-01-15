@@ -214,9 +214,6 @@
 /* Class = "UISegmentedControl"; S3c-ue-W2b.segmentTitles[1] = "Off"; ObjectID = "S3c-ue-W2b"; */
 "S3c-ue-W2b.segmentTitles[1]" = "";
 
-/* Class = "UIButton"; normalTitle = "Detailed Heatmap (JD)"; ObjectID = "sPj-oH-Nyf"; */
-"sPj-oH-Nyf.normalTitle" = "";
-
 /* Class = "UILabel"; text = "Calories"; ObjectID = "SsR-z7-NTJ"; */
 "SsR-z7-NTJ.text" = "";
 
@@ -243,9 +240,6 @@
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "WjU-FP-pZm"; */
 "WjU-FP-pZm.text" = "";
-
-/* Class = "UIButton"; normalTitle = "Quick Heatmap (DTM)"; ObjectID = "WMX-9X-sBW"; */
-"WMX-9X-sBW.normalTitle" = "";
 
 /* Class = "UITextField"; text = "Activity"; ObjectID = "Wsp-TC-1FL"; */
 "Wsp-TC-1FL.text" = "";

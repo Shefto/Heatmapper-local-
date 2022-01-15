@@ -169,13 +169,13 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     if let workoutInfoToDisplay : workoutInfo = workoutInfoArray.first(where: { $0.uuid == workoutId  }) {
       let samplesCount = workoutInfoToDisplay.sampleCount.description
       let samplesStr = "Samples: \(samplesCount)"
-      cell.samples.text = samplesStr
+//      cell.samples.text = samplesStr
       let locationsCount = workoutInfoToDisplay.locationsCount.description
       let locationsStr = "Locs: \(locationsCount)"
-      cell.locations.text = locationsStr
+//      cell.locations.text = locationsStr
     } else {
-      cell.samples.text = "No info for"
-      cell.locations.text = workoutId.description
+//      cell.samples.text = "No info for"
+//      cell.locations.text = workoutId.description
     }
 
 

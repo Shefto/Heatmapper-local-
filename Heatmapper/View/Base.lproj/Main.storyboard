@@ -431,34 +431,6 @@
                                             <constraint firstAttribute="height" constant="40" id="7dN-fi-Etf"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="koB-cI-YWd" userLabel="Bottom Stack View">
-                                        <rect key="frame" x="0.0" y="758" width="404" height="40"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPj-oH-Nyf" userLabel="JD Heatmap Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="201.66666666666666" height="40"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" title="Detailed Heatmap (JD)">
-                                                    <color key="titleColor" name="buttonPrimary"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="btnJDHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="7jk-Th-NoM"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMX-9X-sBW" userLabel="DTM Heatmap Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="202.66666666666663" y="0.0" width="201.33333333333337" height="40"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" title="Quick Heatmap (DTM)">
-                                                    <color key="titleColor" name="buttonPrimary"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="btnDTMHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="xk0-Xe-KU6"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="tKo-wb-QQ0"/>
-                                        </constraints>
-                                    </stackView>
                                 </subviews>
                                 <viewLayoutGuide key="safeArea" id="QHE-RT-z7J"/>
                             </stackView>
