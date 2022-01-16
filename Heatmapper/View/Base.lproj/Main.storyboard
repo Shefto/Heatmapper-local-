@@ -1796,15 +1796,15 @@ DQoNCg
                     <navigationItem key="navigationItem" title="Heatmap" id="yQa-XH-y2d"/>
                     <connections>
                         <outlet property="activityField" destination="4NC-ab-YSz" id="NAl-CC-0sb"/>
-                        <outlet property="avgHeartRateLabel" destination="ay0-XU-veN" id="a35-Du-Ghc"/>
-                        <outlet property="avgSpeedLabel" destination="rdq-3I-zId" id="sUv-Zc-GWE"/>
                         <outlet property="caloriesImageView" destination="NUS-eY-InW" id="yhc-13-siW"/>
                         <outlet property="caloriesLabel" destination="SsR-z7-NTJ" id="G7G-0K-mgg"/>
                         <outlet property="distanceImageView" destination="LOa-ak-VMN" id="HDC-it-4FO"/>
                         <outlet property="distanceLabel" destination="CTV-Fu-jHN" id="PNi-eo-7dD"/>
                         <outlet property="heartRateImageView" destination="Y9q-X2-028" id="kGx-cM-4AB"/>
+                        <outlet property="heartRateLabel" destination="ay0-XU-veN" id="Hul-o5-vVB"/>
                         <outlet property="mapView" destination="lQG-2T-c3p" id="miF-qq-zXX"/>
                         <outlet property="paceImageView" destination="G2E-Dn-slr" id="RXx-aY-4ta"/>
+                        <outlet property="paceLabel" destination="rdq-3I-zId" id="bXX-CT-BFQ"/>
                         <outlet property="pitchField" destination="2Hb-dc-c99" id="LgZ-aN-OuT"/>
                         <outlet property="sportField" destination="F5h-cl-Tm7" id="Su1-78-35A"/>
                         <outlet property="venueField" destination="9nK-7l-9X9" id="sfm-yc-2Ts"/>

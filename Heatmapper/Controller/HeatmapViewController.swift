@@ -1,5 +1,5 @@
 //
-//  REHeatmapViewController.swift
+//  HeatmapViewController.swift
 //  Heatmapper
 //
 //  Created by Richard English on 08/01/2021.
@@ -79,8 +79,8 @@ class HeatmapViewController: UIViewController {
   
   @IBOutlet weak var distanceLabel      : ThemeMediumFontUILabel!
   @IBOutlet weak var caloriesLabel      : ThemeMediumFontUILabel!
-  @IBOutlet weak var avgHeartRateLabel  : ThemeMediumFontUILabel!
-  @IBOutlet weak var avgSpeedLabel      : ThemeMediumFontUILabel!
+  @IBOutlet weak var heartRateLabel  : ThemeMediumFontUILabel!
+  @IBOutlet weak var paceLabel      : ThemeMediumFontUILabel!
 
   @IBOutlet weak var caloriesImageView  : UIImageView!
   @IBOutlet weak var paceImageView      : UIImageView!
@@ -662,6 +662,7 @@ class HeatmapViewController: UIViewController {
       }
       
       self.getRouteSampleObject(workout: workout)
+      self.getDistanceSampleObject(workout: workout)
     }
     
   }
@@ -679,23 +680,50 @@ class HeatmapViewController: UIViewController {
     )
     { (query, results, error) in
       DispatchQueue.main.async {
-        //4. Cast the samples as HKWorkout
-        guard
-          let samples = results as? [HKWorkout],
-          error == nil
+
+        guard let samples = results as? [HKWorkout], error == nil
         else {
           completion(nil, error)
           return
         }
-        
+        let samplesStr = String(describing: samples)
+        print("Samples returned: \(samplesStr)")
         completion(samples, nil)
       }
     }
     healthstore.execute(query)
-    
+
+
+
   }
   
-  
+
+  func getDistanceSampleObject(workout: HKWorkout) {
+
+    guard let distanceWalkingRunning = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning) else {
+
+      MyFunc.logMessage(.critical, "Unable to create a distance type")
+      return
+    }
+    let workoutObjectQuery = HKQuery.predicateForObjects(from: workout)
+    let startDateSort = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
+
+    let sampleQuery =  HKSampleQuery(sampleType: distanceWalkingRunning,
+                                predicate: workoutObjectQuery,
+                                limit: 0,
+                                sortDescriptors: [startDateSort]) { (sampleQuery, results, error) -> Void in
+        guard let distanceSamples = results as? [HKQuantitySample] else {
+          // Perform proper error handling here.
+          return
+        }
+      let distanceSamplesStr = String(describing: distanceSamples)
+      print("Distance Samples: \(distanceSamplesStr)")
+        // Use the workout's distance samples here.
+      }
+
+    healthstore.execute(sampleQuery)
+  }
+
   func getRouteSampleObject(workout: HKWorkout) {
     
     let runningObjectQuery = HKQuery.predicateForObjects(from: workout)
@@ -708,7 +736,7 @@ class HeatmapViewController: UIViewController {
       }
       
       DispatchQueue.main.async {
-        //4. Cast the samples as HKWorkout
+        //cast the samples as HKWorkoutRoute
         guard
           let routeSamples = samples as? [HKWorkoutRoute],
           error == nil
