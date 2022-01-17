@@ -174,78 +174,78 @@ class HeatmapViewController: UIViewController {
     
   }
   
-//  @IBAction func resetPitches(_ sender: Any) {
-//    MyFunc.deletePlayingAreas()
-//  }
-//
-//  // this is where the fun begins... resize mode
-//  @IBAction func btnResize(_ sender: Any) {
-//
-//    if resizeOn == true {
-//      // turn everything off (as it's on)
-//      resizeOn = false
-//      resizeButton.setTitle("Adjust Pitch Size", for: .normal)
-//      resizeButton.tintColor = UIColor.systemGreen
-//
-//      self.touchView.isHidden = true
-//      savePitchCoordinates()
-//
-//    } else {
-//      // turn everything on (as it's off)
-//
-//      resizeOn = true
-//      startResize = true
-//      resizeButton.setTitle("Save Pitch Size", for: .normal)
-//      resizeButton.tintColor = UIColor.systemRed
-//      self.touchView.isHidden = false
-//
-//
-//      // now need to size the pitchView from the MapView information
-//
-//      // we have the mapView rect from the overlay and the coordinates
-//      // let's try the coordinates first as MapView has better conversion functions
-//
-//      let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
-//      let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
-//      let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
-//
-//      let pitchViewBottomLefttStr = String(describing: pitchViewBottomLeft)
-//      print("pitchViewBottomLeft: \(pitchViewBottomLefttStr)")
-//      let pitchViewTopLeftStr = String(describing: pitchViewTopLeft)
-//      print("pitchViewTopLeft: \(pitchViewTopLeftStr)")
-//      let pitchViewBottomRightStr = String(describing: pitchViewBottomRight)
-//      print("pitchViewBottomRight: \(pitchViewBottomRightStr)")
-//
-//
-//      let pitchViewHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
-//      let pitchViewWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
-//
-//      //      pitchView.frame = CGRect(x: pitchViewBottomLeft.x, y: pitchViewBottomLeft.y, width: pitchViewWidth, height: pitchViewHeight)
-//
-//      print("pitchView frame from Region: \(self.pitchView.frame.debugDescription)")
-//
-//
-//
-//
-//      //remove the pitch overlay
-//
-//      if let overlays = mapView?.overlays {
-//        for overlay in overlays {
-//          // remove all MKPolyline-Overlays
-//          if overlay is FootballPitchOverlay {
-//            let overlayRect = overlay.boundingMapRect
-//            let overlayRectStr = String(describing: overlayRect)
-//            print ("overlayRect: \(overlayRectStr)")
-//
-//            mapView?.removeOverlay(overlay)
-//          }
-//        }
-//      }
-//    }
-//
-//
-//  }
-//
+  //  @IBAction func resetPitches(_ sender: Any) {
+  //    MyFunc.deletePlayingAreas()
+  //  }
+  //
+  //  // this is where the fun begins... resize mode
+  //  @IBAction func btnResize(_ sender: Any) {
+  //
+  //    if resizeOn == true {
+  //      // turn everything off (as it's on)
+  //      resizeOn = false
+  //      resizeButton.setTitle("Adjust Pitch Size", for: .normal)
+  //      resizeButton.tintColor = UIColor.systemGreen
+  //
+  //      self.touchView.isHidden = true
+  //      savePitchCoordinates()
+  //
+  //    } else {
+  //      // turn everything on (as it's off)
+  //
+  //      resizeOn = true
+  //      startResize = true
+  //      resizeButton.setTitle("Save Pitch Size", for: .normal)
+  //      resizeButton.tintColor = UIColor.systemRed
+  //      self.touchView.isHidden = false
+  //
+  //
+  //      // now need to size the pitchView from the MapView information
+  //
+  //      // we have the mapView rect from the overlay and the coordinates
+  //      // let's try the coordinates first as MapView has better conversion functions
+  //
+  //      let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
+  //      let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
+  //      let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
+  //
+  //      let pitchViewBottomLefttStr = String(describing: pitchViewBottomLeft)
+  //      print("pitchViewBottomLeft: \(pitchViewBottomLefttStr)")
+  //      let pitchViewTopLeftStr = String(describing: pitchViewTopLeft)
+  //      print("pitchViewTopLeft: \(pitchViewTopLeftStr)")
+  //      let pitchViewBottomRightStr = String(describing: pitchViewBottomRight)
+  //      print("pitchViewBottomRight: \(pitchViewBottomRightStr)")
+  //
+  //
+  //      let pitchViewHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
+  //      let pitchViewWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
+  //
+  //      //      pitchView.frame = CGRect(x: pitchViewBottomLeft.x, y: pitchViewBottomLeft.y, width: pitchViewWidth, height: pitchViewHeight)
+  //
+  //      print("pitchView frame from Region: \(self.pitchView.frame.debugDescription)")
+  //
+  //
+  //
+  //
+  //      //remove the pitch overlay
+  //
+  //      if let overlays = mapView?.overlays {
+  //        for overlay in overlays {
+  //          // remove all MKPolyline-Overlays
+  //          if overlay is FootballPitchOverlay {
+  //            let overlayRect = overlay.boundingMapRect
+  //            let overlayRectStr = String(describing: overlayRect)
+  //            print ("overlayRect: \(overlayRectStr)")
+  //
+  //            mapView?.removeOverlay(overlay)
+  //          }
+  //        }
+  //      }
+  //    }
+  //
+  //
+  //  }
+  //
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -357,12 +357,12 @@ class HeatmapViewController: UIViewController {
     tapGesture.cancelsTouchesInView = false
     self.view.addGestureRecognizer(tapGesture)
 
-//    guard let heatmapWorkout = retrievedWorkout else {
-//      MyFunc.logMessage(.error, "SavedHeatmapViewController : no workout returned")
-//      return
-//    }
-//    let colouredheatmapImage = heatmapImage?.withBackground(color: UIColor.systemGreen)
-//    heatmapImageView.image = colouredheatmapImage
+    //    guard let heatmapWorkout = retrievedWorkout else {
+    //      MyFunc.logMessage(.error, "SavedHeatmapViewController : no workout returned")
+    //      return
+    //    }
+    //    let colouredheatmapImage = heatmapImage?.withBackground(color: UIColor.systemGreen)
+    //    heatmapImageView.image = colouredheatmapImage
 
 
     let workoutActivity = workoutMetadata.activity
@@ -709,17 +709,20 @@ class HeatmapViewController: UIViewController {
     let startDateSort = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
 
     let sampleQuery =  HKSampleQuery(sampleType: distanceWalkingRunning,
-                                predicate: workoutObjectQuery,
-                                limit: 0,
-                                sortDescriptors: [startDateSort]) { (sampleQuery, results, error) -> Void in
-        guard let distanceSamples = results as? [HKQuantitySample] else {
-          // Perform proper error handling here.
-          return
-        }
-      let distanceSamplesStr = String(describing: distanceSamples)
-      print("Distance Samples: \(distanceSamplesStr)")
-        // Use the workout's distance samples here.
+                                     predicate: workoutObjectQuery,
+                                     limit: 0,
+                                     sortDescriptors: [startDateSort]) { (sampleQuery, results, error) -> Void in
+      guard let distanceSamplesArray = results as? [HKQuantitySample] else {
+        // Perform proper error handling here.
+        return
       }
+      let distanceSamplesStr = String(describing: distanceSamplesArray)
+      print("Distance Samples: \(distanceSamplesStr)")
+      // Use the workout's distance samples here.
+      let distanceSum = distanceSamplesArray.reduce(0, {$0 + $1.quantity.doubleValue(for: HKUnit.meter())})
+      let distanceSumStr = String(describing: distanceSum)
+      print("Distance total: \(distanceSumStr)")
+    }
 
     healthstore.execute(sampleQuery)
   }
