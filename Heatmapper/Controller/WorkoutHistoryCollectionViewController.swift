@@ -46,7 +46,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   var workoutHasHeatmap : Bool = false
 
   let locationManager          = CLLocationManager()
-  let healthstore = HKHealthStore()
+  let healthStore = HKHealthStore()
   lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.timeStyle = .short
@@ -259,7 +259,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
         completion(samples, nil)
       }
     }
-    healthstore.execute(query)
+    healthStore.execute(query)
 
   }
 
@@ -314,7 +314,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
       // Process updates or additions here.
     }
 
-    healthstore.execute(routeQuery)
+    healthStore.execute(routeQuery)
 
   }
 
@@ -355,7 +355,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
 
     }
-    healthstore.execute(query)
+    healthStore.execute(query)
 
   }
 

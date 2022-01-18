@@ -15,7 +15,7 @@ import CoreLocation
 
 class JDHeatmapViewController: UIViewController {
 
-  let healthstore = HKHealthStore()
+  let healthStore = HKHealthStore()
   // JDHeatmapView is our custom heatmap MapView class
   var heatMap:  JDHeatMapView?
 
@@ -132,7 +132,7 @@ class JDHeatmapViewController: UIViewController {
       }
     }
 
-    healthstore.execute(query)
+    healthStore.execute(query)
 
   }
 
@@ -180,7 +180,7 @@ class JDHeatmapViewController: UIViewController {
       }
     }
 
-    healthstore.execute(routeQuery)
+    healthStore.execute(routeQuery)
   }
 
   func getRouteLocationData(route: HKWorkoutRoute) {
@@ -220,7 +220,7 @@ class JDHeatmapViewController: UIViewController {
       }
 
     }
-    healthstore.execute(query)
+    healthStore.execute(query)
   }
 
 

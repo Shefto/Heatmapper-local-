@@ -74,7 +74,7 @@ class TesterViewController: UIViewController {
   var reHeatmapPoint              : REHeatmapPoint?
   var reHeatmapPointImage         : UIImage?
 
-  let healthstore                 = HKHealthStore()
+  let healthStore                 = HKHealthStore()
   let theme = ColourTheme()
 
   var innerColourRed              : String = "1.0"
@@ -1014,7 +1014,7 @@ class TesterViewController: UIViewController {
         completion(samples, nil)
       }
     }
-    healthstore.execute(query)
+    healthStore.execute(query)
 
   }
 
@@ -1055,7 +1055,7 @@ class TesterViewController: UIViewController {
       }
     }
 
-    healthstore.execute(routeQuery)
+    healthStore.execute(routeQuery)
   }
 
   func getRouteLocationData(route: HKWorkoutRoute) {
@@ -1106,7 +1106,7 @@ class TesterViewController: UIViewController {
       // store.stop(query)
 
     }
-    healthstore.execute(query)
+    healthStore.execute(query)
   }
 
 

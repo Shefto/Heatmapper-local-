@@ -22,7 +22,7 @@ class DTMHeatmapViewController: UIViewController, MKMapViewDelegate {
   var heatmapperCoordinatesArray = [CLLocationCoordinate2D]()
   var heatmapWorkoutId : UUID?
 
-  let healthstore = HKHealthStore()
+  let healthStore = HKHealthStore()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -124,7 +124,7 @@ class DTMHeatmapViewController: UIViewController, MKMapViewDelegate {
       }
     }
 
-    healthstore.execute(query)
+    healthStore.execute(query)
 
   }
 
@@ -174,7 +174,7 @@ class DTMHeatmapViewController: UIViewController, MKMapViewDelegate {
       // Process updates or additions here.
     }
 
-    healthstore.execute(routeQuery)
+    healthStore.execute(routeQuery)
 
   }
 
@@ -220,7 +220,7 @@ class DTMHeatmapViewController: UIViewController, MKMapViewDelegate {
       // store.stop(query)
 
     }
-    healthstore.execute(query)
+    healthStore.execute(query)
   }
 
   func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {

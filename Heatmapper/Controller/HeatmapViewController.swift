@@ -21,6 +21,17 @@ class HeatmapViewController: UIViewController {
   var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
   var workoutMetadataArray        =  [WorkoutMetadata]()
 
+  var heatmapImage                : UIImage?
+  var retrievedWorkout            : HKWorkout?
+  var routeCoordinatesArray       = [CLLocation]()
+
+  let workoutDateFormatter        = DateFormatter()
+  var measurementFormatter        = MeasurementFormatter()
+  var units                       : String = ""
+  var unitLength                  : UnitLength = .meters
+  var unitSpeed                   : UnitSpeed  = .metersPerSecond
+  let defaults                    = UserDefaults.standard
+
   var pointCount                  : Int = 0
   var angle                       : CGFloat = 0.0
   var pointsDistance              : CGFloat = 0.0
@@ -33,7 +44,7 @@ class HeatmapViewController: UIViewController {
   var reHeatmapPoint              : REHeatmapPoint?
   var reHeatmapPointImage         : UIImage?
   
-  let healthstore                 = HKHealthStore()
+  let healthStore                 = HKHealthStore()
   let theme = ColourTheme()
   
   var innerColourRed              : String = "0.9"
@@ -79,8 +90,8 @@ class HeatmapViewController: UIViewController {
   
   @IBOutlet weak var distanceLabel      : ThemeMediumFontUILabel!
   @IBOutlet weak var caloriesLabel      : ThemeMediumFontUILabel!
-  @IBOutlet weak var heartRateLabel  : ThemeMediumFontUILabel!
-  @IBOutlet weak var paceLabel      : ThemeMediumFontUILabel!
+  @IBOutlet weak var heartRateLabel     : ThemeMediumFontUILabel!
+  @IBOutlet weak var paceLabel          : ThemeMediumFontUILabel!
 
   @IBOutlet weak var caloriesImageView  : UIImageView!
   @IBOutlet weak var paceImageView      : UIImageView!
@@ -388,7 +399,68 @@ class HeatmapViewController: UIViewController {
     distanceImageView.image = distanceImageView.image?.withRenderingMode(.alwaysTemplate)
     distanceImageView.tintColor = UIColor.systemGreen
     blendModeArray = BlendMode.allCases.map { $0 }
+
+
+    guard let heatmapWorkout = retrievedWorkout else {
+      MyFunc.logMessage(.error, "SavedHeatmapViewController : no workout returned")
+      return
+    }
+
+
+
+    // start and end date
+    var workoutStartDateAsString = ""
+    var workoutEndDateAsString = ""
     
+    workoutDateFormatter.dateFormat = "E, d MMM yyyy HH:mm"
+    workoutStartDateAsString = workoutDateFormatter.string(from: heatmapWorkout.startDate)
+
+    workoutDateFormatter.dateFormat = "d MMM yyy HH:mm"
+    self.title = workoutDateFormatter.string(from: heatmapWorkout.startDate)
+
+    workoutDateFormatter.dateFormat = "HH:mm"
+    workoutEndDateAsString = workoutDateFormatter.string(from: heatmapWorkout.endDate)
+
+    let workoutDateString = workoutStartDateAsString + " - " + workoutEndDateAsString
+//    dateLabel.text = workoutDateString
+
+    // duration
+    let workoutIntervalFormatter = DateComponentsFormatter()
+//    durationLabel.text = workoutIntervalFormatter.string(from: heatmapWorkout.duration)
+
+    // total distance
+    if let workoutDistance = heatmapWorkout.totalDistance?.doubleValue(for: .meter()) {
+      let formattedDistance = String(format: "%.2f m", workoutDistance)
+      distanceLabel.text = formattedDistance
+
+      let pace = workoutDistance / heatmapWorkout.duration
+
+      let paceString = MyFunc.getUnitSpeedAsString(value: pace, unitSpeed: unitSpeed, formatter: measurementFormatter)
+      let paceUnitString = unitSpeed.symbol
+
+      paceLabel.text = paceString + " " + paceUnitString
+
+    } else {
+      distanceLabel.text = nil
+    }
+
+
+    // total calories
+    if let caloriesBurned =
+        heatmapWorkout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) {
+      let formattedCalories = String(format: "%.2f kCal", caloriesBurned)
+      caloriesLabel.text = formattedCalories
+    } else {
+      caloriesLabel.text = nil
+    }
+
+    // run query and update label for average Heart Rate
+    loadAverageHeartRateLabel(startDate: heatmapWorkout.startDate, endDate: heatmapWorkout.endDate, quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, option: [])
+
+
+
+
+
 
   }
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -660,7 +732,8 @@ class HeatmapViewController: UIViewController {
         MyFunc.logMessage(.error, "workoutReturned invalid: \(String(describing: workoutReturned))")
         return
       }
-      
+
+      retrievedWorkout = workout
       self.getRouteSampleObject(workout: workout)
       self.getDistanceSampleObject(workout: workout)
     }
@@ -691,12 +764,50 @@ class HeatmapViewController: UIViewController {
         completion(samples, nil)
       }
     }
-    healthstore.execute(query)
-
-
+    healthStore.execute(query)
 
   }
-  
+
+
+
+  func loadAverageHeartRateLabel(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) {
+    MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
+
+    let quantityPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
+    let heartRateQuery = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: quantityPredicate, options: .discreteAverage) { (query, statisticsOrNil, errorOrNil) in
+
+      guard let statistics = statisticsOrNil else {
+        return
+      }
+      let average : HKQuantity? = statistics.averageQuantity()
+      let heartRateBPM  = average?.doubleValue(for: HKUnit.count().unitDivided(by: HKUnit.minute())) ?? 0.0
+
+      DispatchQueue.main.async {
+        self.heartRateLabel.text = String(format: "%.2f", heartRateBPM) + " bpm"
+      }
+    }
+    healthStore.execute(heartRateQuery)
+  }
+
+  func loadAverageSpeedLabel(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) {
+    MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
+
+    let quantityPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
+    let heartRateQuery = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: quantityPredicate, options: .discreteAverage) { (query, statisticsOrNil, errorOrNil) in
+
+      guard let statistics = statisticsOrNil else {
+        return
+      }
+      let average : HKQuantity? = statistics.averageQuantity()
+      let pace  = average?.doubleValue(for: HKUnit.count().unitDivided(by: HKUnit.minute())) ?? 0.0
+
+      DispatchQueue.main.async {
+        self.paceLabel.text = String(format: "%.2f", pace) + " bpm"
+      }
+    }
+    healthStore.execute(heartRateQuery)
+  }
+
 
   func getDistanceSampleObject(workout: HKWorkout) {
 
@@ -724,7 +835,7 @@ class HeatmapViewController: UIViewController {
       print("Distance total: \(distanceSumStr)")
     }
 
-    healthstore.execute(sampleQuery)
+    healthStore.execute(sampleQuery)
   }
 
   func getRouteSampleObject(workout: HKWorkout) {
@@ -763,7 +874,7 @@ class HeatmapViewController: UIViewController {
       }
     }
     
-    healthstore.execute(routeQuery)
+    healthStore.execute(routeQuery)
   }
   
   func getRouteLocationData(route: HKWorkoutRoute) {
@@ -814,7 +925,7 @@ class HeatmapViewController: UIViewController {
       // store.stop(query)
       
     }
-    healthstore.execute(query)
+    healthStore.execute(query)
   }
   
   
