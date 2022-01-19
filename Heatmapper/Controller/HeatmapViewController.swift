@@ -409,23 +409,23 @@ class HeatmapViewController: UIViewController {
 
 
     // start and end date
-    var workoutStartDateAsString = ""
-    var workoutEndDateAsString = ""
-    
-    workoutDateFormatter.dateFormat = "E, d MMM yyyy HH:mm"
-    workoutStartDateAsString = workoutDateFormatter.string(from: heatmapWorkout.startDate)
+//    var workoutStartDateAsString = ""
+//    var workoutEndDateAsString = ""
+//    
+//    workoutDateFormatter.dateFormat = "E, d MMM yyyy HH:mm"
+//    workoutStartDateAsString = workoutDateFormatter.string(from: heatmapWorkout.startDate)
+//
+//    workoutDateFormatter.dateFormat = "d MMM yyy HH:mm"
+//    self.title = workoutDateFormatter.string(from: heatmapWorkout.startDate)
+//
+//    workoutDateFormatter.dateFormat = "HH:mm"
+//    workoutEndDateAsString = workoutDateFormatter.string(from: heatmapWorkout.endDate)
 
-    workoutDateFormatter.dateFormat = "d MMM yyy HH:mm"
-    self.title = workoutDateFormatter.string(from: heatmapWorkout.startDate)
-
-    workoutDateFormatter.dateFormat = "HH:mm"
-    workoutEndDateAsString = workoutDateFormatter.string(from: heatmapWorkout.endDate)
-
-    let workoutDateString = workoutStartDateAsString + " - " + workoutEndDateAsString
+//    let workoutDateString = workoutStartDateAsString + " - " + workoutEndDateAsString
 //    dateLabel.text = workoutDateString
 
     // duration
-    let workoutIntervalFormatter = DateComponentsFormatter()
+//    let workoutIntervalFormatter = DateComponentsFormatter()
 //    durationLabel.text = workoutIntervalFormatter.string(from: heatmapWorkout.duration)
 
     // total distance
@@ -851,13 +851,8 @@ class HeatmapViewController: UIViewController {
       
       DispatchQueue.main.async {
         //cast the samples as HKWorkoutRoute
-        guard
-          let routeSamples = samples as? [HKWorkoutRoute],
-          error == nil
-        else {
-          return
-        }
-        
+
+
         guard let routeReturned = samples?.first as? HKWorkoutRoute else {
           MyFunc.logMessage(.error, "Could not convert routeSamples to HKWorkoutRoute")
           return
@@ -878,8 +873,6 @@ class HeatmapViewController: UIViewController {
   }
   
   func getRouteLocationData(route: HKWorkoutRoute) {
-    
-    let samplesCount = route.count
     
     // Create the route query.
     let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNil, done, errorOrNil) in

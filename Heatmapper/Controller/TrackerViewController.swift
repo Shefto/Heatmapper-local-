@@ -154,7 +154,7 @@ class TrackerViewController: UIViewController, MKMapViewDelegate {
   func exportLog() {
 
     let fileDateFormatter = DateFormatter()
-    var log : String = ""
+    let log : String = ""
 
     // generate filename including timestamp
     let currDate = fileDateFormatter.string(from: Date())

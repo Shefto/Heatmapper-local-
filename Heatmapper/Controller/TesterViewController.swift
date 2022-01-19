@@ -487,8 +487,8 @@ class TesterViewController: UIViewController {
       print("pitchViewBottomRight: \(pitchViewBottomRightStr)")
 
 
-      let pitchViewHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
-      let pitchViewWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
+//      let pitchViewHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
+//      let pitchViewWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
 
 //      pitchView.frame = CGRect(x: pitchViewBottomLeft.x, y: pitchViewBottomLeft.y, width: pitchViewWidth, height: pitchViewHeight)
 
@@ -1031,13 +1031,6 @@ class TesterViewController: UIViewController {
       }
 
       DispatchQueue.main.async {
-        //4. Cast the samples as HKWorkout
-        guard
-          let routeSamples = samples as? [HKWorkoutRoute],
-          error == nil
-        else {
-          return
-        }
 
         guard let routeReturned = samples?.first as? HKWorkoutRoute else {
           MyFunc.logMessage(.error, "Could not convert routeSamples to HKWorkoutRoute")

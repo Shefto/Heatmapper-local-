@@ -166,17 +166,17 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
     let heatmapImage = MyFunciOS.getHeatmapImageForWorkout(workoutID: workoutId)
 
-    if let workoutInfoToDisplay : workoutInfo = workoutInfoArray.first(where: { $0.uuid == workoutId  }) {
-      let samplesCount = workoutInfoToDisplay.sampleCount.description
-      let samplesStr = "Samples: \(samplesCount)"
+//    if let workoutInfoToDisplay : workoutInfo = workoutInfoArray.first(where: { $0.uuid == workoutId  }) {
+//      let samplesCount = workoutInfoToDisplay.sampleCount.description
+//      let samplesStr = "Samples: \(samplesCount)"
 //      cell.samples.text = samplesStr
-      let locationsCount = workoutInfoToDisplay.locationsCount.description
-      let locationsStr = "Locs: \(locationsCount)"
+//      let locationsCount = workoutInfoToDisplay.locationsCount.description
+//      let locationsStr = "Locs: \(locationsCount)"
 //      cell.locations.text = locationsStr
-    } else {
+//    } else {
 //      cell.samples.text = "No info for"
 //      cell.locations.text = workoutId.description
-    }
+//    }
 
 
     cell.heatmapImageView.image = heatmapImage
