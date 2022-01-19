@@ -1053,7 +1053,7 @@ class TesterViewController: UIViewController {
 
   func getRouteLocationData(route: HKWorkoutRoute) {
 
-    let samplesCount = route.count
+//    let samplesCount = route.count
 
     // Create the route query.
     let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNil, done, errorOrNil) in

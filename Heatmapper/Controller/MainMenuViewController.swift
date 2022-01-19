@@ -60,7 +60,7 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
   override func viewWillAppear(_ animated: Bool) {
     if MyFunc.removeAdsPurchased() == false {
       // In this case, we instantiate the banner with desired ad size.
-      bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+      bannerView = GADBannerView(adSize: GADAdSizeBanner)
       bannerView.delegate = self
       addBannerViewToView(bannerView)
       // line to swap in when testing
@@ -231,24 +231,24 @@ class MainMenuViewController: UIViewController, CLLocationManagerDelegate, GADBa
   }
 
   /// Tells the delegate an ad request failed.
-  func adView(_ bannerView: GADBannerView,
-              didFailToReceiveAdWithError error: GADRequestError) {
+  private func adView(_ bannerView: GADBannerView,
+              didFailToReceiveAdWithError error: Error) {
     print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
   }
 
   /// Tells the delegate that a full-screen view will be presented in response
   /// to the user clicking on an ad.
-  func adViewWillPresentScreen(_ bannerView: GADBannerView) {
+  private func adViewWillPresentScreen(_ bannerView: GADBannerView) {
     print("adViewWillPresentScreen")
   }
 
   /// Tells the delegate that the full-screen view will be dismissed.
-  func adViewWillDismissScreen(_ bannerView: GADBannerView) {
+  private func adViewWillDismissScreen(_ bannerView: GADBannerView) {
     print("adViewWillDismissScreen")
   }
 
   /// Tells the delegate that the full-screen view has been dismissed.
-  func adViewDidDismissScreen(_ bannerView: GADBannerView) {
+  private func adViewDidDismissScreen(_ bannerView: GADBannerView) {
     print("adViewDidDismissScreen")
   }
 
