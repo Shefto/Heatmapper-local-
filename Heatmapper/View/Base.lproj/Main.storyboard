@@ -239,7 +239,7 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="gwI-3R-oHI"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="gwI-3R-oHI"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -381,7 +381,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </collectionViewCell>
                                         </cells>
-                                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cwx-VJ-0ky">
+                                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="header" id="cwx-VJ-0ky">
                                             <rect key="frame" x="0.0" y="308" width="404" height="10"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionReusableView>
@@ -975,7 +975,7 @@ DQoNCg
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eQz-Gl-Msd" userLabel="ButtonStackView">
                                 <rect key="frame" x="2" y="443" width="410" height="414"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OIW-PB-g9a" userLabel="Controls Upper Stack View">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OIW-PB-g9a" userLabel="Controls Upper Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="410" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1LI-I1-lMj" userLabel="Resize">
@@ -983,8 +983,7 @@ DQoNCg
                                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <color key="tintColor" systemColor="systemGreenColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="Reset"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Adjust Pitch Size"/>
+                                                <state key="normal" title="Adjust Pitch Size"/>
                                                 <connections>
                                                     <action selector="btnResize:" destination="vbg-Le-o0h" eventType="touchUpInside" id="GQM-bP-6qY"/>
                                                 </connections>
@@ -994,8 +993,7 @@ DQoNCg
                                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <color key="tintColor" systemColor="systemGreenColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="Reset"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Reset Pitch Sizes"/>
+                                                <state key="normal" title="Reset Pitch Sizes"/>
                                                 <connections>
                                                     <action selector="btnResize:" destination="vbg-Le-o0h" eventType="touchUpInside" id="mTq-Z2-7Fl"/>
                                                     <action selector="resetPitches:" destination="vbg-Le-o0h" eventType="touchUpInside" id="BpC-Av-kSa"/>
@@ -1004,8 +1002,8 @@ DQoNCg
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FJL-2d-ixe" userLabel="Points">
                                                 <rect key="frame" x="410" y="0.0" width="0.0" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemPurpleColor"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Mark Corners"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Mark Corners"/>
                                                 <connections>
                                                     <action selector="btnPoints:" destination="vbg-Le-o0h" eventType="touchUpInside" id="Vey-GU-hHp"/>
                                                 </connections>
@@ -1019,7 +1017,7 @@ DQoNCg
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CU9-5G-Mh9" userLabel="Controls Middle Stack View">
                                         <rect key="frame" x="0.0" y="50" width="410" height="50"/>
                                         <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7U9-Pn-MJX" userLabel="Map, Satellite">
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7U9-Pn-MJX" userLabel="Map, Satellite">
                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="51"/>
                                                 <segments>
                                                     <segment title="Map"/>
@@ -1029,10 +1027,10 @@ DQoNCg
                                                     <action selector="segMap:" destination="vbg-Le-o0h" eventType="valueChanged" id="LmW-wm-KMf"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="S3c-ue-W2b">
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="S3c-ue-W2b">
                                                 <rect key="frame" x="160" y="0.0" width="120" height="51"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="120" id="v3e-Fo-r0E"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="v3e-Fo-r0E"/>
                                                 </constraints>
                                                 <segments>
                                                     <segment title="Pitch"/>
@@ -1042,10 +1040,10 @@ DQoNCg
                                                     <action selector="segPitch:" destination="vbg-Le-o0h" eventType="valueChanged" id="qId-SC-2Hh"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cWZ-Az-CbX" userLabel="Panel Seg Control">
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cWZ-Az-CbX" userLabel="Panel Seg Control">
                                                 <rect key="frame" x="290" y="0.0" width="120" height="51"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="120" id="Zq7-Ln-UAA"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="Zq7-Ln-UAA"/>
                                                 </constraints>
                                                 <segments>
                                                     <segment title="Panel"/>
@@ -1087,14 +1085,13 @@ DQoNCg
                                                 </connections>
                                             </stepper>
                                             <pickerView contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="NOi-sh-Bnc">
-                                                <rect key="frame" x="201.66666666666669" y="0.0" width="137.66666666666669" height="50"/>
+                                                <rect key="frame" x="201.66666666666663" y="0.0" width="152.33333333333337" height="50"/>
                                             </pickerView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zim-pa-PKm" userLabel="Reset" customClass="ThemeActionButton" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="349.33333333333331" y="0.0" width="60.666666666666686" height="50"/>
+                                                <rect key="frame" x="364" y="0.0" width="46" height="50"/>
                                                 <color key="tintColor" name="autoDetect"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Reset"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Reset"/>
                                                 <connections>
                                                     <action selector="btnReset:" destination="vbg-Le-o0h" eventType="touchUpInside" id="3dL-tF-24I"/>
                                                 </connections>

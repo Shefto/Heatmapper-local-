@@ -52,16 +52,10 @@
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "wkZ-fm-ijo"; */
 "wkZ-fm-ijo.title" = "Configuraciones";
 
-/* Class = "UIButton"; configuration.title = "Reset Pitch Sizes"; ObjectID = "0Rk-jk-rYb"; */
-"0Rk-jk-rYb.configuration.title" = "";
-
-/* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "0Rk-jk-rYb"; */
+/* Class = "UIButton"; normalTitle = "Reset Pitch Sizes"; ObjectID = "0Rk-jk-rYb"; */
 "0Rk-jk-rYb.normalTitle" = "";
 
-/* Class = "UIButton"; configuration.title = "Adjust Pitch Size"; ObjectID = "1LI-I1-lMj"; */
-"1LI-I1-lMj.configuration.title" = "";
-
-/* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "1LI-I1-lMj"; */
+/* Class = "UIButton"; normalTitle = "Adjust Pitch Size"; ObjectID = "1LI-I1-lMj"; */
 "1LI-I1-lMj.normalTitle" = "";
 
 /* Class = "UILabel"; text = "Name of your activity"; ObjectID = "1Xq-LU-MWR"; */
@@ -133,10 +127,7 @@
 /* Class = "UILabel"; text = "Venue"; ObjectID = "Fgr-lP-daT"; */
 "Fgr-lP-daT.text" = "";
 
-/* Class = "UIButton"; configuration.title = "Mark Corners"; ObjectID = "FJL-2d-ixe"; */
-"FJL-2d-ixe.configuration.title" = "";
-
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "FJL-2d-ixe"; */
+/* Class = "UIButton"; normalTitle = "Mark Corners"; ObjectID = "FJL-2d-ixe"; */
 "FJL-2d-ixe.normalTitle" = "";
 
 /* Class = "UILabel"; text = "Sport"; ObjectID = "fUb-WJ-pCB"; */
@@ -267,9 +258,6 @@
 
 /* Class = "UILabel"; text = "Pace"; ObjectID = "yYq-TM-45H"; */
 "yYq-TM-45H.text" = "";
-
-/* Class = "UIButton"; configuration.title = "Reset"; ObjectID = "zim-pa-PKm"; */
-"zim-pa-PKm.configuration.title" = "";
 
 /* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "zim-pa-PKm"; */
 "zim-pa-PKm.normalTitle" = "";
