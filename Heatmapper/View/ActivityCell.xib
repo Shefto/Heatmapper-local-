@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,44 +14,36 @@
             <rect key="frame" x="0.0" y="0.0" width="514" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3EF-a8-0kh">
-                    <rect key="frame" x="0.0" y="0.0" width="514" height="40"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddn-Hw-btL" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="363.5" height="40"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxd-cE-oHN" userLabel="Sport Label" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
-                            <rect key="frame" x="368.5" y="0.0" width="145.5" height="40"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKq-xX-MVF" userLabel="Sport Picker View">
-                            <rect key="frame" x="514" y="0.0" width="0.0" height="40"/>
-                        </pickerView>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="kxd-cE-oHN" firstAttribute="width" secondItem="ddn-Hw-btL" secondAttribute="width" multiplier="0.4" id="qvM-8A-HC1"/>
-                    </constraints>
-                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddn-Hw-btL" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
+                    <rect key="frame" x="10" y="0.0" width="315" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxd-cE-oHN" userLabel="Sport Label" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
+                    <rect key="frame" x="325" y="0.0" width="189" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="3EF-a8-0kh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JG0-bg-1St"/>
-                <constraint firstAttribute="bottom" secondItem="3EF-a8-0kh" secondAttribute="bottom" id="NvN-dl-dR8"/>
-                <constraint firstItem="3EF-a8-0kh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="XjG-VG-XTs"/>
-                <constraint firstAttribute="trailing" secondItem="3EF-a8-0kh" secondAttribute="trailing" id="pG0-Ca-RaR"/>
+                <constraint firstItem="ddn-Hw-btL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="BlB-qj-p8O"/>
+                <constraint firstItem="kxd-cE-oHN" firstAttribute="leading" secondItem="ddn-Hw-btL" secondAttribute="trailing" id="E6w-57-rFN"/>
+                <constraint firstItem="kxd-cE-oHN" firstAttribute="width" secondItem="ddn-Hw-btL" secondAttribute="width" multiplier="0.6" id="EG8-iQ-mNo"/>
+                <constraint firstAttribute="bottom" secondItem="kxd-cE-oHN" secondAttribute="bottom" id="FZm-ud-Zit"/>
+                <constraint firstAttribute="trailing" secondItem="kxd-cE-oHN" secondAttribute="trailing" id="UOI-yI-Zyw"/>
+                <constraint firstItem="kxd-cE-oHN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ank-6U-rSD"/>
+                <constraint firstItem="ddn-Hw-btL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qc2-4R-x0d"/>
+                <constraint firstAttribute="bottom" secondItem="ddn-Hw-btL" secondAttribute="bottom" id="sPY-v0-Xh2"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="activityLabel" destination="ddn-Hw-btL" id="isF-T3-pf4"/>
                 <outlet property="sportLabel" destination="kxd-cE-oHN" id="PEs-Gb-UH2"/>
-                <outlet property="sportPicker" destination="dKq-xX-MVF" id="m1d-EJ-eib"/>
             </connections>
-            <point key="canvasLocation" x="162" y="-22"/>
+            <point key="canvasLocation" x="160.86956521739131" y="-22.098214285714285"/>
         </view>
     </objects>
     <resources>

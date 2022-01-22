@@ -46,9 +46,6 @@
 /* Class = "UILabel"; text = "Pitch"; ObjectID = "1Ze-4i-L2A"; */
 "1Ze-4i-L2A.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Update Workout"; ObjectID = "2DM-st-7JY"; */
-"2DM-st-7JY.normalTitle" = "";
-
 /* Class = "UITextField"; text = "Pitch"; ObjectID = "2Hb-dc-c99"; */
 "2Hb-dc-c99.text" = "";
 
@@ -210,9 +207,6 @@
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "syd-FH-J8R"; */
 "syd-FH-J8R.title" = "";
-
-/* Class = "UIButton"; normalTitle = "View Heatmap"; ObjectID = "TfY-wi-FxC"; */
-"TfY-wi-FxC.normalTitle" = "";
 
 /* Class = "UIButton"; normalTitle = "Tester"; ObjectID = "tZd-9k-xak"; */
 "tZd-9k-xak.normalTitle" = "";

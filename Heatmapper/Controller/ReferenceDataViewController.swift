@@ -96,15 +96,15 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
 
     cell.activityLabel.text = activityArray[indexPath.row].name
     cell.sportLabel.text = activityArray[indexPath.row].sport.rawValue
-    cell.sportPicker.delegate = self
-
-    // set Picker value
-    let activitySportRow : Int = sportArray.firstIndex(where: { $0 == activityArray[indexPath.row].sport  }) ?? 0
-
-    cell.sportPicker.selectRow(activitySportRow, inComponent: 0, animated: true)
-    if #available(iOS 14.0, *) {
-      cell.sportPicker.subviews[1].backgroundColor = .clear
-    }
+//    cell.sportPicker.delegate = self
+//
+//    // set Picker value
+//    let activitySportRow : Int = sportArray.firstIndex(where: { $0 == activityArray[indexPath.row].sport  }) ?? 0
+//
+//    cell.sportPicker.selectRow(activitySportRow, inComponent: 0, animated: true)
+//    if #available(iOS 14.0, *) {
+//      cell.sportPicker.subviews[1].backgroundColor = .clear
+//    }
     return cell
   }
 

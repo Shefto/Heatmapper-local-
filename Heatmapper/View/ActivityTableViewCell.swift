@@ -14,12 +14,12 @@ protocol ActivityTableViewCellDelegate: AnyObject {
 
 }
 
-class ActivityTableViewCell: ThemeTableViewCellNoBackground, UIPickerViewDelegate, UIPickerViewDataSource {
+class ActivityTableViewCell: ThemeTableViewCellNoBackground {
 
   weak var delegate : ActivityTableViewCellDelegate?
 
   @IBOutlet weak var activityLabel: TableRowNameUILabel!
-  @IBOutlet weak var sportPicker: UIPickerView!
+
   @IBOutlet weak var sportLabel: TableRowNameUILabel!
 
 
@@ -35,32 +35,5 @@ class ActivityTableViewCell: ThemeTableViewCellNoBackground, UIPickerViewDelegat
 
   override func awakeFromNib() {
     super.awakeFromNib()
-
-    loadSportItems()
-    sportPicker.delegate = self
-    sportPicker.dataSource = self
   }
-
-  func numberOfComponents(in pickerView: UIPickerView) -> Int {
-    return 1
-  }
-
-  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-      return sportArray.count
-  }
-
-  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-      return sportArray[row]
-  }
-
-  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    MyFunc.logMessage(.debug, "ActivityTableViewCell.didSelectRow: \(row)")
-  }
-
-  func loadSportItems() {
-    sportArray = ["Football - 11-a-side", "Football - 5-a-side", "Rugby", "Kabbaddi"]
-
-  }
-
-
 }

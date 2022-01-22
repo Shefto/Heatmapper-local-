@@ -93,16 +93,16 @@ extension TeamsViewController: UITableViewDelegate, UITableViewDataSource {
 
     cell.activityLabel.text = teamArray[indexPath.row].name
     cell.sportLabel.text = teamArray[indexPath.row].sport.rawValue
-    cell.sportPicker.delegate = self
+//    cell.sportPicker.delegate = self
 
 
     // set Picker value
-    let activitySportRow : Int = sportArray.firstIndex(where: { $0 == teamArray[indexPath.row].sport  }) ?? 0
+//    let activitySportRow : Int = sportArray.firstIndex(where: { $0 == teamArray[indexPath.row].sport  }) ?? 0
 
-    cell.sportPicker.selectRow(activitySportRow, inComponent: 0, animated: true)
-    if #available(iOS 14.0, *) {
-      cell.sportPicker.subviews[1].backgroundColor = .clear
-    }
+//    cell.sportPicker.selectRow(activitySportRow, inComponent: 0, animated: true)
+//    if #available(iOS 14.0, *) {
+//      cell.sportPicker.subviews[1].backgroundColor = .clear
+//    }
     return cell
   }
 
