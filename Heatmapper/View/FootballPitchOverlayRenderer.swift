@@ -11,16 +11,17 @@
 import MapKit
 
 class FootballPitchOverlayRenderer: MKOverlayRenderer {
-  let overlayImage: UIImage
-  let angle : CGFloat
-//  let pointsDistance : CGFloat
+  let overlayImage      : UIImage
+  let angle             : CGFloat
+  var workoutId         : UUID?
 
-  init(overlay: MKOverlay, overlayImage: UIImage, angle: CGFloat) {
-//    init(overlay: MKOverlay, overlayImage: UIImage, angle: CGFloat, pointsDistance: CGFloat) {
+  init(overlay: MKOverlay, overlayImage: UIImage, angle: CGFloat, workoutId: UUID) {
 
     self.overlayImage = overlayImage
-    self.angle = angle
+    self.angle        = angle
+    self.workoutId    = workoutId
     super.init(overlay: overlay)
+
   }
 
 
@@ -32,6 +33,31 @@ class FootballPitchOverlayRenderer: MKOverlayRenderer {
     context.rotate(by: angle)
     context.draw(imageReference, in: rect)
 
+    guard let internalWorkoutId = workoutId else {
+      MyFunc.logMessage(.error, "No workoutID received by FootballPitchOverlayRenderer")
+      return
+
+    }
+
+    let workoutIDString = String(describing: internalWorkoutId)
+
+    let fileName = "Heatmap_" + workoutIDString + ".png"
+
+    let uiImage = UIImage(cgImage: imageReference)
+
+    if let data = uiImage.pngData() {
+      let fileURL = getDocumentsDirectory().appendingPathComponent(fileName)
+      try? data.write(to: fileURL)
+      MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
+    }
+
   }
+
+  func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let documentsDirectory = paths[0]
+    return documentsDirectory
+  }
+
 }
 

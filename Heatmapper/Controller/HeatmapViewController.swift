@@ -1008,8 +1008,13 @@ extension HeatmapViewController: MKMapViewDelegate {
         
         // get the rotation of the pitchView
         let angleIncMapRotation = getMapRotation()
-        
-        let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation)
+
+//        guard let workoutId = heatmapWorkoutId else {
+//          MyFunc.logMessage(.error, "No workoutId passed to func mapView in HeatmapViewController")
+//          return
+//        }
+
+        let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation, workoutId: heatmapWorkoutId!)
         
         footballPitchOverlayRenderer.alpha = 0.5
         

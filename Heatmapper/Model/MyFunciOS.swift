@@ -28,7 +28,7 @@ class MyFunciOS {
     let documentsDirectoryStr = String(describing: documentsDirectory)
 
     let workoutIDString = String(describing: workoutID)
-    let heatmapImageString = "JDHeatmap_" + workoutIDString + ".png"
+    let heatmapImageString = "Heatmap_" + workoutIDString + ".png"
 
     let heatmapImageFileExists = MyFunc.checkFileExists(filename: heatmapImageString)
 
@@ -53,7 +53,7 @@ class MyFunciOS {
     let documentsDirectoryStr = String(describing: documentsDirectory)
 
     let currentIDString = String(describing: currentID)
-    let currentFilenameString = "JDHeatmap_" + currentIDString + ".png"
+    let currentFilenameString = "Heatmap_" + currentIDString + ".png"
 
     let heatmapImageFileExists = MyFunc.checkFileExists(filename: currentFilenameString)
 
@@ -63,7 +63,7 @@ class MyFunciOS {
       var currentFileURL = URL(string: documentLocationStr)!
 
       let newIDString = String(describing: newID)
-      let newFilenameString = "JDHeatmap_" + newIDString + ".png"
+      let newFilenameString = "Heatmap_" + newIDString + ".png"
 
       var newURV = URLResourceValues()
       newURV.name = newFilenameString

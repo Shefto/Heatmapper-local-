@@ -85,7 +85,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
       return
     }
     let workoutSelectedString = String(describing: workoutId)
-    let heatmapImageString = "JDHeatmap_" + workoutSelectedString + ".png"
+    let heatmapImageString = "Heatmap_" + workoutSelectedString + ".png"
 
     let heatmapImageFileExists = MyFunc.checkFileExists(filename: heatmapImageString)
 
@@ -234,7 +234,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
     for item in items {
       if item.hasSuffix("png") || item.hasSuffix("jpg") || item.hasSuffix("jpeg") {
-        if item.hasPrefix("JDHeatmap_") {
+        if item.hasPrefix("Heatmap_") {
           heatmapImagesArray.append(UIImage(named: item)!)
           heatmapImagesStringArray.append(item)
         }

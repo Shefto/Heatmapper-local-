@@ -1190,7 +1190,7 @@ extension TesterViewController: MKMapViewDelegate {
         // get the rotation of the pitchView
         let angleIncMapRotation = getMapRotation()
 
-        let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation)
+        let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation, workoutId: heatmapWorkoutId!)
 
         footballPitchOverlayRenderer.alpha = 0.5
 
