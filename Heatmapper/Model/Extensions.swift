@@ -453,3 +453,31 @@ extension CGAffineTransform {
     return self.d * cos(angle) + self.b * sin(angle)
   }
 }
+
+extension UIView {
+
+  /// Creates an image from the view's contents, using its layer.
+  ///
+  /// - Returns: An image, or nil if an image couldn't be created.
+  func image() -> UIImage? {
+    UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0)
+    guard let context = UIGraphicsGetCurrentContext() else { return nil }
+    context.saveGState()
+    layer.render(in: context)
+    context.restoreGState()
+    guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
+    UIGraphicsEndImageContext()
+    return image
+  }
+
+}
+
+extension UIImage {
+  convenience init(view: UIView) {
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
+    view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    self.init(cgImage: (image?.cgImage)!)
+  }
+}

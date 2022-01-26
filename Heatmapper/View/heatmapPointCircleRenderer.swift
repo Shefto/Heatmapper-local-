@@ -5,16 +5,13 @@
 //  Created by Richard English on 06/11/2021.
 //  Copyright © 2021 Richard English. All rights reserved.
 //
-//  This class
+
 
 import MapKit
 
 class HeatmapPointCircleRenderer: MKCircleRenderer {
 
-//  var innerColour       :     [CGFloat] = [1.0, 0.0, 0.0, 0.9]
-//  var middleColour      :     [CGFloat] = [1.0, 0.5, 0.0, 0.3]
-//  var outerColour       :     [CGFloat] = [1.0, 1.0, 0.0, 0.2]
-//  var gradientLocations :     [CGFloat] = [0.1, 0.4, 0.7]
+
     var innerColour       =     [CGFloat]()
     var middleColour      =     [CGFloat]()
     var outerColour       =     [CGFloat]()
@@ -40,16 +37,10 @@ class HeatmapPointCircleRenderer: MKCircleRenderer {
     context.setBlendMode(blendMode)
 
 
-//    let gradientColors: [CGFloat] = [1.0, 0.0, 0.0, 0.9,
-//                                     1.0, 0.5, 0.0, 0.2,
-//                                     1.0, 1.0, 0.0, 0.1]
+
     let colorSpace = CGColorSpaceCreateDeviceRGB()
 
     let gradientColours = innerColour + middleColour + outerColour
-
-//    consider using when other issues fixed
-//    let cgColorArray = [UIColor.systemRed.cgColor, UIColor.systemYellow.cgColor] as CFArray
-//    guard let gradient = CGGradient(colorsSpace: colorSpace, colors: cgColorArray, locations: gradientLocations) else { return    }
 
     guard let gradient = CGGradient(colorSpace: colorSpace, colorComponents: gradientColours, locations: gradientLocations, count: 3) else { return }
     let gradientCenter = CGPoint(x: rect.midX, y: rect.midY)

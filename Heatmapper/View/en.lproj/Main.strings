@@ -166,7 +166,7 @@
 /* Class = "UIViewController"; title = "Workout History"; ObjectID = "nCc-eF-wC1"; */
 "nCc-eF-wC1.title" = "";
 
-/* Class = "UIButton"; normalTitle = "Heatmap Info"; ObjectID = "Nea-AY-awa"; */
+/* Class = "UIButton"; normalTitle = "DTM"; ObjectID = "Nea-AY-awa"; */
 "Nea-AY-awa.normalTitle" = "";
 
 /* Class = "UILabel"; text = "Venue"; ObjectID = "OW8-RA-0px"; */

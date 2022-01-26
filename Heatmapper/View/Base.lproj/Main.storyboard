@@ -376,12 +376,12 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="mth-8C-ZAa"/>
                                                 </constraints>
-                                                <state key="normal" title="Heatmap Info">
+                                                <state key="normal" title="DTM">
                                                     <color key="titleColor" name="buttonPrimary"/>
                                                     <color key="titleShadowColor" name="textAlternate"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="btnCreatedHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="NcZ-eV-H3b"/>
+                                                    <action selector="btnDTMHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="xsi-Pu-s4m"/>
                                                 </connections>
                                             </button>
                                         </subviews>
