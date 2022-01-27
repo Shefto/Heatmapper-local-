@@ -491,7 +491,7 @@ class HeatmapViewController: UIViewController {
 
 
     // create image view here
-        createHeatmapView()
+    createHeatmapView()
 
   }
   
@@ -531,31 +531,43 @@ class HeatmapViewController: UIViewController {
 
 
     
-//    let mapViewImage = mapView.image()
-//
-//    let mapViewImage = UIImage(view: self.mapView)
-
-
-
+    //    let mapViewImage = mapView.image()
+    //
+    //    let mapViewImage = UIImage(view: self.mapView)
 
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    let mapViewImage = UIImage(view: self.mapView)
-    if let data = mapViewImage.pngData() {
-      if let workoutId = self.heatmapWorkoutId {
-        let workoutIDString = String(describing: workoutId)
-        let fileName = "Heatmap_" + workoutIDString + ".png"
-        let fileURL = self.getDocumentsDirectory().appendingPathComponent(fileName)
-        try? data.write(to: fileURL)
-        MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
+  func getImageFromView(inputView: UIView) -> UIImage {
 
-      }
+    UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, inputView.isOpaque, 0.0)
+    inputView.drawHierarchy(in: inputView.bounds, afterScreenUpdates: true)
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return image!
+
+  }
+
+
+
+
+
+override func viewDidAppear(_ animated: Bool) {
+  super.viewDidAppear(animated)
+//  let mapViewImage = UIImage(view: self.mapView)
+  let mapViewImage = getImageFromView(inputView: self.mapView)
+  if let data = mapViewImage.pngData() {
+    if let workoutId = self.heatmapWorkoutId {
+      let workoutIDString = String(describing: workoutId)
+      let fileName = "Heatmap_" + workoutIDString + ".png"
+      let fileURL = self.getDocumentsDirectory().appendingPathComponent(fileName)
+      try? data.write(to: fileURL)
+      MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
+
     }
-
-
   }
+
+
+}
 
 func getDocumentsDirectory() -> URL {
   let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
