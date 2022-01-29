@@ -460,6 +460,12 @@ class TesterViewController: UIViewController {
       self.touchView.isHidden = true
       savePitchCoordinates()
 
+      let pitchViewRotationStr = self.pitchView.transform.angle
+      print("pitchViewRotationStr: \(pitchViewRotationStr)")
+
+      let pitchViewRotationStrDegrees = self.pitchView.transform.angleInDegrees
+      print("pitchViewRotationStrDegrees: \(pitchViewRotationStrDegrees)")
+
       // size the mapView to the newly resized pitch
       if let overlays = mapView?.overlays {
         for overlay in overlays {
@@ -470,14 +476,24 @@ class TesterViewController: UIViewController {
             print ("overlayRect: \(overlayRectStr)")
 
             let mapRectThatFits = mapView.mapRectThatFits(overlayRect)
-            mapView.visibleMapRect = mapRectThatFits
+
+            mapView.visibleMapRect = overlayRect
+            mapView.setCenter(self.overlayCenter!, animated: false)
+            
+            var cameraHeading = mapView.camera.heading.debugDescription
+            print("camera heading: \(cameraHeading)")
+            mapView.camera.heading = pitchViewRotationStrDegrees
+            cameraHeading = mapView.camera.heading.debugDescription
+            print("camera heading: \(cameraHeading)")
+
+
 
           }
         }
       }
 
       // centre the mapView on the newly resized pitch
-      mapView.setCenter(self.overlayCenter!, animated: false)
+
 
     } else {
       // turn everything on (as it's off)
