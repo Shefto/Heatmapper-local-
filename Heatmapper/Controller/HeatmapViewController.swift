@@ -549,13 +549,15 @@ class HeatmapViewController: UIViewController {
 
 
 
-
-
 override func viewDidAppear(_ animated: Bool) {
   super.viewDidAppear(animated)
-//  let mapViewImage = UIImage(view: self.mapView)
-  let mapViewImage = getImageFromView(inputView: self.mapView)
-  if let data = mapViewImage.pngData() {
+
+//  let pitchViewCGRect = pitchView.frame
+
+  let mapSnapshot = mapView.snapshot()
+
+
+  if let data = mapSnapshot.pngData() {
     if let workoutId = self.heatmapWorkoutId {
       let workoutIDString = String(describing: workoutId)
       let fileName = "Heatmap_" + workoutIDString + ".png"

@@ -460,6 +460,25 @@ class TesterViewController: UIViewController {
       self.touchView.isHidden = true
       savePitchCoordinates()
 
+      // size the mapView to the newly resized pitch
+      if let overlays = mapView?.overlays {
+        for overlay in overlays {
+          // remove all MKPolyline-Overlays
+          if overlay is FootballPitchOverlay {
+            let overlayRect = overlay.boundingMapRect
+            let overlayRectStr = String(describing: overlayRect)
+            print ("overlayRect: \(overlayRectStr)")
+
+            let mapRectThatFits = mapView.mapRectThatFits(overlayRect)
+            mapView.visibleMapRect = mapRectThatFits
+
+          }
+        }
+      }
+
+      // centre the mapView on the newly resized pitch
+      mapView.setCenter(self.overlayCenter!, animated: false)
+
     } else {
       // turn everything on (as it's off)
 
@@ -735,6 +754,12 @@ class TesterViewController: UIViewController {
     let pitchMapBottomLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
     let pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
 
+    // update the overlayCenter as we will centre the map Zoom on this
+    let midpointLatitude = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
+    let midpointLongitude = (pitchMapTopLeftCoordinate.longitude + pitchMapBottomRightCoordinate.longitude) / 2
+    self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+
+
     createPitchOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
 
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == heatmapWorkoutId}) {
@@ -745,7 +770,7 @@ class TesterViewController: UIViewController {
 
     // save the pitch here
     // we need the co-ordinates of 3 of the 4 points and the rotation to successfully recreate it
-
+    // convert the CLLCoordinates to a subclass which allows us to code them ready for saving
     let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopLeftCoordinate.latitude, longitude: pitchMapTopLeftCoordinate.longitude)
     let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
     let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
