@@ -523,10 +523,7 @@ class TesterViewController: UIViewController {
           MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
           let playingAreaStr = String(describing: playingArea)
           MyFunc.logMessage(.debug, playingAreaStr)
-//
-//          let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomLeft.latitude) / 2
-//          let midpointLongitude = (playingArea.bottomLeft.longitude + playingArea.bottomRight.longitude) / 2
-//          self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+
 
           let topLeftCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
           let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
@@ -535,33 +532,6 @@ class TesterViewController: UIViewController {
           self.bottomLeftCoord = bottomLeftCoord
           self.bottomRightCoord = bottomRightCoord
           self.topLeftCoord = topLeftCoord
-//
-//
-//          // now get the CGPoints for these Coordinates
-//          let bottomLeftCGPoint = self.mapView.convert(bottomLeftCoord, toPointTo: self.mapView)
-//          let bottomLeftCGPointStr = String(describing: bottomLeftCGPoint)
-//          print("bottomLeftCGPoint: \(bottomLeftCGPointStr)")
-//
-//          let topLeftCGPoint = self.mapView.convert(topLeftCoord, toPointTo: self.mapView)
-//          let topLeftCGPointStr = String(describing: topLeftCGPoint)
-//          print("topLeftCGPoint: \(topLeftCGPointStr)")
-//
-//          let bottomRightCGPoint = self.mapView.convert(bottomRightCoord, toPointTo: self.mapView)
-//          let bottomRightCGPointStr = String(describing: bottomRightCGPoint)
-//          print("bottomRightCGPoint: \(bottomRightCGPointStr)")
-//
-//
-//          // the rotation is straightforward - rotate the pitchView by the same angle as the saved PlayingArea
-//          let savedPitchViewRotationStr = self.pitchView.transform.angle
-//          print("savedPitchViewRotationStr: \(savedPitchViewRotationStr)")
-//
-//          self.pitchView.transform = self.pitchView.transform.rotated(by: playingArea.rotation)
-//
-//          let pitchViewRotationStr = self.pitchView.transform.angle
-//          print("pitchViewRotationStr: \(pitchViewRotationStr)")
-//
-//          self.createPitchOverlay(topLeft: topLeftCoord, bottomLeft: bottomLeftCoord, bottomRight: bottomRightCoord)
-
 
         }
       })
@@ -615,15 +585,12 @@ class TesterViewController: UIViewController {
       newPitchView.addGestureRecognizer(pincher)
 
 
-
       let pitchViewBottomLefttStr = String(describing: pitchViewBottomLeft)
       print("pitchViewBottomLeft: \(pitchViewBottomLefttStr)")
       let pitchViewTopLeftStr = String(describing: pitchViewTopLeft)
       print("pitchViewTopLeft: \(pitchViewTopLeftStr)")
       let pitchViewBottomRightStr = String(describing: pitchViewBottomRight)
       print("pitchViewBottomRight: \(pitchViewBottomRightStr)")
-
-
 
       let viewRotation = rotation(from: pitchView.transform)
       let mapViewHeading = mapView.camera.heading
@@ -633,10 +600,10 @@ class TesterViewController: UIViewController {
       let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
       let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
 
-            let angleIncMapRotationStr = String(describing: angleIncMapRotation)
-            print("angleIncMapRotationStr: \(angleIncMapRotationStr)")
+      let angleIncMapRotationStr = String(describing: angleIncMapRotation)
+      print("angleIncMapRotationStr: \(angleIncMapRotationStr)")
 
-      pitchView.transform = pitchView.transform.rotated(by: angleIncMapRotation)
+//      pitchView.transform = pitchView.transform.rotated(by: angleIncMapRotation)
 
       //remove the pitch overlay
 
