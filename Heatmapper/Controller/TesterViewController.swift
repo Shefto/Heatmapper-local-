@@ -556,6 +556,7 @@ class TesterViewController: UIViewController {
       let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
       newPitchView.transform = pitchView.transform.rotated(by: pitchAngle)
       mapView.addSubview(newPitchView)
+      newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
 
       let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
       let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
@@ -888,7 +889,14 @@ class TesterViewController: UIViewController {
 
   func getMapRotation() -> CGFloat {
 
-    let viewRotation = rotation(from: pitchView.transform.inverted())
+    var rotationToApply : CGFloat = 0.0
+    if let newPitchView = self.view.viewWithTag(200) {
+      rotationToApply = rotation(from: newPitchView.transform.inverted())
+    } else {
+      rotationToApply = rotation(from: pitchView.transform.inverted())
+    }
+
+    let viewRotation = rotationToApply
     let mapViewHeading = mapView.camera.heading
     let viewRotationAsCGFloat = CGFloat(viewRotation)
 
