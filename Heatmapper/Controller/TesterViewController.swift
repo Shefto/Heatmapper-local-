@@ -98,7 +98,7 @@ class TesterViewController: UIViewController {
   var pitchView                   : UIImageView!
 
   var pitchViewRotation           : CGFloat = 0.0
-  var pitchViewRotationFromTrueNorth  : CGFloat = 0.0
+  var pitchAngleToApply           : CGFloat = 0.0
 
   var bottomLeftCoord             : CLLocationCoordinate2D?
   var topLeftCoord                : CLLocationCoordinate2D?
@@ -298,7 +298,7 @@ class TesterViewController: UIViewController {
 
     let annotations = mapView.annotations
     mapView.removeAnnotations(annotations)
-    savePitchCoordinates()
+
 
   }
 
@@ -457,18 +457,19 @@ class TesterViewController: UIViewController {
       resizeButton.tintColor = UIColor.systemGreen
 
       self.touchView.isHidden = true
-
+      let allAnnotations = self.mapView.annotations
+      self.mapView.removeAnnotations(allAnnotations)
       // remove the pins
+      savePitchCoordinates()
 
       removeViewWithTag(tag: 101)
       removeViewWithTag(tag: 102)
       removeViewWithTag(tag: 103)
       removeViewWithTag(tag: 200)
 
-      let allAnnotations = self.mapView.annotations
-      self.mapView.removeAnnotations(allAnnotations)
 
-      savePitchCoordinates()
+
+
 
 
 
@@ -476,7 +477,7 @@ class TesterViewController: UIViewController {
       // size the mapView to the newly resized pitch
       if let overlays = mapView?.overlays {
         for overlay in overlays {
-          // remove all MKPolyline-Overlays
+
           if overlay is FootballPitchOverlay {
             let overlayRect = overlay.boundingMapRect
             let overlayRectStr = String(describing: overlayRect)
@@ -530,7 +531,6 @@ class TesterViewController: UIViewController {
       setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
 
       // this code pins the points onto the map - this should prove the conversion is the same
-
       addPinImage(point: pitchViewBottomLeft, colour: .systemPurple, tag: 101)
       addPinImage(point: pitchViewBottomRight, colour: .systemBlue, tag: 102)
       addPinImage(point: pitchViewTopLeft, colour: .systemRed, tag: 103)
@@ -824,7 +824,11 @@ class TesterViewController: UIViewController {
     // adding code to save pitch corner points as coordinates
 
     // first need to get the pitch corners on the touch view
-    let corners = ViewCorners(view: pitchView)
+    guard let viewToSave = self.view.viewWithTag(200) else {
+      MyFunc.logMessage(.debug, "Cannot find pitchView to save")
+      return
+    }
+    let corners = ViewCorners(view: viewToSave)
 
     let pitchMapTopLeftCGPoint : CGPoint = corners.topLeft
     let pitchMapBottomLeftCGPoint : CGPoint  = corners.bottomLeft
@@ -834,6 +838,21 @@ class TesterViewController: UIViewController {
     let pitchMapTopLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
     let pitchMapBottomLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
     let pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
+
+
+    // this code pins the coordinates onto the map
+    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "bl")
+    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "tl")
+    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
+
+    // this code pins the points onto the map - this should prove the conversion is the same
+
+    addPinImage(point: pitchMapBottomLeftCGPoint, colour: .orange, tag: 301)
+    addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
+    addPinImage(point: pitchMapTopLeftCGPoint, colour: .white, tag: 303)
+
+    let pitchAngle = angleInRadians(between: pitchMapBottomRightCGPoint, ending: pitchMapBottomLeftCGPoint)
+
 
     // update the overlayCenter as we will centre the map Zoom on this
     let midpointLatitude = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
@@ -855,7 +874,7 @@ class TesterViewController: UIViewController {
     let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopLeftCoordinate.latitude, longitude: pitchMapTopLeftCoordinate.longitude)
     let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
     let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
-    let viewRotation = rotation(from: pitchView.transform)
+    let viewRotation = rotation(from: viewToSave.transform)
 
     let playingAreaToSave = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, rotation: viewRotation)
 
@@ -1432,7 +1451,7 @@ extension TesterViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     pinImageView.image = UIImage(systemName: "mappin")
     pinImageView.tintColor = colour
     pinImageView.tag = tag
-    touchView.addSubview(pinImageView)
+    mapView.addSubview(pinImageView)
 
   }
 
