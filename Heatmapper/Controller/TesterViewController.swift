@@ -298,7 +298,9 @@ class TesterViewController: UIViewController {
 
     let annotations = mapView.annotations
     mapView.removeAnnotations(annotations)
-
+    removeViewWithTag(tag: 301)
+    removeViewWithTag(tag: 302)
+    removeViewWithTag(tag: 303)
 
   }
 
@@ -444,8 +446,6 @@ class TesterViewController: UIViewController {
   // this is where the fun begins... resize mode
   @IBAction func btnResize(_ sender: Any) {
 
-
-
     if resizeOn == true {
       // turn everything off (as it's on)
 
@@ -466,12 +466,6 @@ class TesterViewController: UIViewController {
       removeViewWithTag(tag: 102)
       removeViewWithTag(tag: 103)
       removeViewWithTag(tag: 200)
-
-
-
-
-
-
 
 
       // size the mapView to the newly resized pitch
@@ -516,6 +510,61 @@ class TesterViewController: UIViewController {
       resizeButton.tintColor = UIColor.systemRed
 //      self.touchView.isHidden = false
 
+      // get the saved playing area coordinates
+      MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
+
+        switch result {
+        case .failure(let error):
+          // no playing area retrieved so create a default area
+          MyFunc.logMessage(.error, "No playing area retrieved: \(error.localizedDescription) despite default being created")
+
+
+        case .success(let playingArea):
+          MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
+          let playingAreaStr = String(describing: playingArea)
+          MyFunc.logMessage(.debug, playingAreaStr)
+//
+//          let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomLeft.latitude) / 2
+//          let midpointLongitude = (playingArea.bottomLeft.longitude + playingArea.bottomRight.longitude) / 2
+//          self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+
+          let topLeftCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
+          let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
+          let bottomRightCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
+
+          self.bottomLeftCoord = bottomLeftCoord
+          self.bottomRightCoord = bottomRightCoord
+          self.topLeftCoord = topLeftCoord
+//
+//
+//          // now get the CGPoints for these Coordinates
+//          let bottomLeftCGPoint = self.mapView.convert(bottomLeftCoord, toPointTo: self.mapView)
+//          let bottomLeftCGPointStr = String(describing: bottomLeftCGPoint)
+//          print("bottomLeftCGPoint: \(bottomLeftCGPointStr)")
+//
+//          let topLeftCGPoint = self.mapView.convert(topLeftCoord, toPointTo: self.mapView)
+//          let topLeftCGPointStr = String(describing: topLeftCGPoint)
+//          print("topLeftCGPoint: \(topLeftCGPointStr)")
+//
+//          let bottomRightCGPoint = self.mapView.convert(bottomRightCoord, toPointTo: self.mapView)
+//          let bottomRightCGPointStr = String(describing: bottomRightCGPoint)
+//          print("bottomRightCGPoint: \(bottomRightCGPointStr)")
+//
+//
+//          // the rotation is straightforward - rotate the pitchView by the same angle as the saved PlayingArea
+//          let savedPitchViewRotationStr = self.pitchView.transform.angle
+//          print("savedPitchViewRotationStr: \(savedPitchViewRotationStr)")
+//
+//          self.pitchView.transform = self.pitchView.transform.rotated(by: playingArea.rotation)
+//
+//          let pitchViewRotationStr = self.pitchView.transform.angle
+//          print("pitchViewRotationStr: \(pitchViewRotationStr)")
+//
+//          self.createPitchOverlay(topLeft: topLeftCoord, bottomLeft: bottomLeftCoord, bottomRight: bottomRightCoord)
+
+
+        }
+      })
 
       // now need to size the pitchView from the MapView information
       // we have the mapView rect from the overlay and the coordinates
@@ -711,7 +760,7 @@ class TesterViewController: UIViewController {
     let overlays = mapView.overlays
     mapView.removeOverlays(overlays)
 
-    self.createDefaultPitchOverlay()
+    self.getSavedPitchOverlay()
     self.createREHeatmap()
   }
 
@@ -948,7 +997,7 @@ class TesterViewController: UIViewController {
   }
 
 
-  func createDefaultPitchOverlay() {
+  func getSavedPitchOverlay() {
 
     MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
 
@@ -1220,7 +1269,7 @@ class TesterViewController: UIViewController {
             self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
           }
 
-          self.createDefaultPitchOverlay()
+          self.getSavedPitchOverlay()
           self.createREHeatmap()
 
         }

@@ -115,7 +115,7 @@
 /* Class = "UILabel"; text = "Venue"; ObjectID = "Fgr-lP-daT"; */
 "Fgr-lP-daT.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Mark Corners"; ObjectID = "FJL-2d-ixe"; */
+/* Class = "UIButton"; normalTitle = "Clear Pins"; ObjectID = "FJL-2d-ixe"; */
 "FJL-2d-ixe.normalTitle" = "";
 
 /* Class = "UILabel"; text = "Sport"; ObjectID = "fUb-WJ-pCB"; */
