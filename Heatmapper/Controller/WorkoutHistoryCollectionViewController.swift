@@ -115,8 +115,8 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
         MyFunc.logMessage(.debug, "No workouts returned")
         return
       }
-      MyFunc.logMessage(.debug, "loadWorkouts returned workouts:")
-      MyFunc.logMessage(.debug, String(describing: workoutsReturned))
+//      MyFunc.logMessage(.debug, "loadWorkouts returned workouts:")
+//      MyFunc.logMessage(.debug, String(describing: workoutsReturned))
 
       self.workoutArray = workoutsReturned
 
@@ -287,7 +287,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
           return
         }
         guard let routeReturned = samples?.first as? HKWorkoutRoute else {
-          MyFunc.logMessage(.debug, "No Route returned for workout \(String(describing: workout.startDate))")
+//          MyFunc.logMessage(.debug, "No Route returned for workout \(String(describing: workout.startDate))")
 
           return
         }
@@ -397,7 +397,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
     // calling this with the workoutId for now
     // currently retrieving the whole array but will tighten this up once working
     workoutMetadataArray = MyFunc.getWorkoutMetadata()
-    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
+//    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
   }
 
 }

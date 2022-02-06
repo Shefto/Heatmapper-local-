@@ -50,17 +50,13 @@ struct ViewCorners {
   }
 }
 
-
-
 class TesterViewController: UIViewController {
 
-//  var dtmHeatmap                  = DTMHeatmap()
   var heatmapperCoordinatesArray  = [CLLocationCoordinate2D]()
   var heatmapperLocationsArray    = [CLLocation]()
   var heatmapWorkoutId            : UUID?
   var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
   var workoutMetadataArray        =  [WorkoutMetadata]()
-
 
   var pointCount                  : Int = 0
   var angle                       : CGFloat = 0.0
@@ -102,6 +98,7 @@ class TesterViewController: UIViewController {
   var pitchView                   : UIImageView!
 
   var pitchViewRotation           : CGFloat = 0.0
+  var pitchViewRotationFromTrueNorth  : CGFloat = 0.0
 
   var bottomLeftCoord             : CLLocationCoordinate2D?
   var topLeftCoord                : CLLocationCoordinate2D?
@@ -109,8 +106,8 @@ class TesterViewController: UIViewController {
 
   var blendModeArray = [BlendMode]()
   var overlayCenter               : CLLocationCoordinate2D?
-  // tester outlets
 
+  // tester outlets
   @IBOutlet weak var innerRed: UITextField!
   @IBOutlet weak var innerGreen: UITextField!
   @IBOutlet weak var innerBlue: UITextField!
@@ -167,7 +164,6 @@ class TesterViewController: UIViewController {
     refreshHeatmap()
   }
 
-
   @IBAction func segPanel(_ sender: UISegmentedControl) {
     switch sender.selectedSegmentIndex {
     case 0:
@@ -180,9 +176,7 @@ class TesterViewController: UIViewController {
       coloursStackView.isHidden = false
       lowerControlsStackView.isHidden = false
     }
-
   }
-
 
   @IBAction func segMap(_ sender: UISegmentedControl) {
     switch sender.selectedSegmentIndex {
@@ -193,7 +187,6 @@ class TesterViewController: UIViewController {
     default:
       self.mapView.mapType = .standard
     }
-
   }
 
   @IBAction func segPitch(_ sender: UISegmentedControl) {
@@ -387,7 +380,7 @@ class TesterViewController: UIViewController {
     )
     gesture.scale = 1
 
-    print("gestureView frame: \(gestureView.frame.debugDescription)")
+//    print("gestureView frame: \(gestureView.frame.debugDescription)")
 
   }
 
@@ -430,7 +423,7 @@ class TesterViewController: UIViewController {
     finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
     finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
 
-    print("gestureView frame: \(gestureView.frame.debugDescription)")
+//    print("gestureView frame: \(gestureView.frame.debugDescription)")
 
     //    // 8
     //    UIView.animate(
@@ -451,20 +444,34 @@ class TesterViewController: UIViewController {
   // this is where the fun begins... resize mode
   @IBAction func btnResize(_ sender: Any) {
 
+
+
     if resizeOn == true {
       // turn everything off (as it's on)
+
+      print("Resize OFF logic : headings at start")
+      printHeadings()
+
       resizeOn = false
       resizeButton.setTitle("Adjust Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemGreen
 
       self.touchView.isHidden = true
+
+      // remove the pins
+
+      removeViewWithTag(tag: 101)
+      removeViewWithTag(tag: 102)
+      removeViewWithTag(tag: 103)
+      removeViewWithTag(tag: 200)
+
+      let allAnnotations = self.mapView.annotations
+      self.mapView.removeAnnotations(allAnnotations)
+
       savePitchCoordinates()
 
-      let pitchViewRotationStr = self.pitchView.transform.angle
-      print("pitchViewRotationStr: \(pitchViewRotationStr)")
 
-      let pitchViewRotationStrDegrees = self.pitchView.transform.angleInDegrees
-      print("pitchViewRotationStrDegrees: \(pitchViewRotationStrDegrees)")
+
 
       // size the mapView to the newly resized pitch
       if let overlays = mapView?.overlays {
@@ -479,18 +486,19 @@ class TesterViewController: UIViewController {
 
             mapView.visibleMapRect = overlayRect
             mapView.setCenter(self.overlayCenter!, animated: false)
-            
-            var cameraHeading = mapView.camera.heading.debugDescription
-            print("camera heading: \(cameraHeading)")
-            mapView.camera.heading = pitchViewRotationStrDegrees
-            cameraHeading = mapView.camera.heading.debugDescription
-            print("camera heading: \(cameraHeading)")
 
-
+            print("Headings before resetting map camera heading")
+            printHeadings()
+            mapView.camera.heading = pitchViewRotation.radiansToDegrees
+            print("Headings after resetting map camera heading")
+            printHeadings()
 
           }
         }
       }
+
+      print("Resize OFF logic : headings at end")
+      printHeadings()
 
       // centre the mapView on the newly resized pitch
 
@@ -498,21 +506,65 @@ class TesterViewController: UIViewController {
     } else {
       // turn everything on (as it's off)
 
+      print("Resize ON logic : headings at start")
+      printHeadings()
+
       resizeOn = true
       startResize = true
       resizeButton.setTitle("Save Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemRed
-      self.touchView.isHidden = false
+//      self.touchView.isHidden = false
 
 
       // now need to size the pitchView from the MapView information
-
       // we have the mapView rect from the overlay and the coordinates
       // let's try the coordinates first as MapView has better conversion functions
 
       let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
       let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
       let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
+
+      // this code pins the coordinates onto the map
+      setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
+      setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
+      setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
+
+      // this code pins the points onto the map - this should prove the conversion is the same
+
+      addPinImage(point: pitchViewBottomLeft, colour: .systemPurple, tag: 101)
+      addPinImage(point: pitchViewBottomRight, colour: .systemBlue, tag: 102)
+      addPinImage(point: pitchViewTopLeft, colour: .systemRed, tag: 103)
+
+      let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
+      let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
+
+      // now add the view - never mind transforms, just add it
+      let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
+
+      // need to add the rotation
+      // issue : MKMapView has origin in bottom left so rotation starts from there
+      // UIView origin is top left - KIV when coding this
+      // first attempt - get angle from TL to BL
+      let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
+      newPitchView.image = pitchImageGreen
+      newPitchView.layer.opacity = 1
+//      newPitchView.translatesAutoresizingMaskIntoConstraints = false
+      newPitchView.isUserInteractionEnabled = true
+      newPitchView.tag = 200
+
+      newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
+      let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
+      newPitchView.transform = pitchView.transform.rotated(by: pitchAngle)
+      mapView.addSubview(newPitchView)
+
+      let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
+      let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
+      let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
+      newPitchView.addGestureRecognizer(panner)
+      newPitchView.addGestureRecognizer(rotator)
+      newPitchView.addGestureRecognizer(pincher)
+
+
 
       let pitchViewBottomLefttStr = String(describing: pitchViewBottomLeft)
       print("pitchViewBottomLeft: \(pitchViewBottomLefttStr)")
@@ -522,15 +574,19 @@ class TesterViewController: UIViewController {
       print("pitchViewBottomRight: \(pitchViewBottomRightStr)")
 
 
-//      let pitchViewHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
-//      let pitchViewWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
 
-//      pitchView.frame = CGRect(x: pitchViewBottomLeft.x, y: pitchViewBottomLeft.y, width: pitchViewWidth, height: pitchViewHeight)
+      let viewRotation = rotation(from: pitchView.transform)
+      let mapViewHeading = mapView.camera.heading
+      let viewRotationAsCGFloat = CGFloat(viewRotation)
 
-      print("pitchView frame from Region: \(self.pitchView.frame.debugDescription)")
+      let mapViewHeadingInt = Int(mapViewHeading)
+      let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
+      let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
 
+            let angleIncMapRotationStr = String(describing: angleIncMapRotation)
+            print("angleIncMapRotationStr: \(angleIncMapRotationStr)")
 
-
+      pitchView.transform = pitchView.transform.rotated(by: angleIncMapRotation)
 
       //remove the pitch overlay
 
@@ -546,11 +602,25 @@ class TesterViewController: UIViewController {
           }
         }
       }
+
+      print("Resize ON logic : headings at end")
+      printHeadings()
+
     }
 
 
   }
 
+  func printHeadings() {
+
+    let pitchViewRotationStr = String(describing: pitchViewRotation.radiansToDegrees)
+    print("pitchViewRotation: \(pitchViewRotationStr)")
+    let pitchViewTransformAngleStr = String(describing: self.pitchView.transform.angle.radiansToDegrees)
+    print("pitchView.transform.angle: \(pitchViewTransformAngleStr)")
+    let cameraHeading = mapView.camera.heading.debugDescription
+    print("mapView heading: \(cameraHeading)")
+
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -583,20 +653,15 @@ class TesterViewController: UIViewController {
     let pitchImageBlue = UIImage(named: "Figma Pitch 11 Blue")
     pitchView = UIImageView(image: pitchImageBlue)
     pitchView.layer.opacity = 0.5
-    pitchView.translatesAutoresizingMaskIntoConstraints = false
+//    pitchView.translatesAutoresizingMaskIntoConstraints = false
     pitchView.isUserInteractionEnabled = true
     pitchView.addGestureRecognizer(panner)
     pitchView.addGestureRecognizer(rotator)
     pitchView.addGestureRecognizer(pincher)
 
-    self.touchView.addSubview(pitchView)
+//    self.touchView.addSubview(pitchView)
 
-//    NSLayoutConstraint.activate([
-//      pitchView.topAnchor.constraint(greaterThanOrEqualTo: touchView.topAnchor, constant: 20),
-//      pitchView.leftAnchor.constraint(greaterThanOrEqualTo: touchView.leftAnchor, constant: 20),
-//      pitchView.bottomAnchor.constraint(greaterThanOrEqualTo: touchView.bottomAnchor, constant: -20),
-//      pitchView.rightAnchor.constraint(greaterThanOrEqualTo: touchView.rightAnchor, constant: -20)
-//    ])
+
 
     coloursStackView.isHidden = true
     lowerControlsStackView.isHidden = true
@@ -823,7 +888,6 @@ class TesterViewController: UIViewController {
     return sqrt(CGPointDistanceSquared(from: from, to: to))
   }
 
-
   func MKMapPointDistanceSquared(from: MKMapPoint, to: MKMapPoint) -> Double {
     return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)
   }
@@ -979,9 +1043,9 @@ class TesterViewController: UIViewController {
     // set up the rectangle
     let pitchMKMapRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
 
-    let pitchRectStr = String(describing: pitchMKMapRect)
+//    let pitchRectStr = String(describing: pitchMKMapRect)
 
-    MyFunc.logMessage(.debug, "pitch MKMapRect: \(pitchRectStr)")
+//    MyFunc.logMessage(.debug, "pitch MKMapRect: \(pitchRectStr)")
 
     //  create an overlay of the pitch based upon the rectangle
     let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
@@ -1359,6 +1423,46 @@ extension TesterViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     annotation.title = title
     mapView.addAnnotation(annotation)
 
+  }
+
+  func addPinImage(point: CGPoint, colour: UIColor, tag: Int) {
+
+    let pinImageView = UIImageView()
+    pinImageView.frame = CGRect(x: point.x, y: point.y, width: 20, height: 20)
+    pinImageView.image = UIImage(systemName: "mappin")
+    pinImageView.tintColor = colour
+    pinImageView.tag = tag
+    touchView.addSubview(pinImageView)
+
+  }
+
+  func removeViewWithTag(tag: Int) {
+    if let viewToRemove = self.view.viewWithTag(tag) {
+      viewToRemove.removeFromSuperview()
+    }
+  }
+
+  func angleInDegrees(between starting: CGPoint, ending: CGPoint) -> CGFloat {
+    let center = CGPoint(x: ending.x - starting.x, y: ending.y - starting.y)
+    let radians = atan2(center.y, center.x)
+    let degrees = radians * 180 / .pi
+    return degrees > 0 ? degrees : degrees + degrees
+
+  }
+
+  func angleInRadians(between starting: CGPoint, ending: CGPoint) -> CGFloat {
+    let center = CGPoint(x: ending.x - starting.x, y: ending.y - starting.y)
+    let radians = atan2(center.y, center.x)
+    let radiansStr = String(describing: radians)
+    let startingStr = String(describing: starting)
+    let endingStr = String(describing: ending)
+    print("Angle between \(startingStr) and \(endingStr) = \(radiansStr) radians")
+
+    let degrees = radians * 180 / .pi
+    let degreesStr = String(describing: degrees)
+    print("Angle between \(startingStr) and \(endingStr) = \(radiansStr) degrees")
+
+    return radians
   }
 
 

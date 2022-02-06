@@ -14,7 +14,7 @@ class FootballPitchOverlay: NSObject, MKOverlay {
 
   init(pitchRect: MKMapRect) {
     boundingMapRect = pitchRect
-    MyFunc.logMessage(.debug, "FootballPitchOverlay initialised with boundingMapRect = \(boundingMapRect)")
+//    MyFunc.logMessage(.debug, "FootballPitchOverlay initialised with boundingMapRect = \(boundingMapRect)")
   }
 
   // centre of Overlay

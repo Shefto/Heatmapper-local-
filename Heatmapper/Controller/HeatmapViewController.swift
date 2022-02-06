@@ -128,7 +128,7 @@ class HeatmapViewController: UIViewController {
     )
     gesture.scale = 1
     
-    print("gestureView frame: \(gestureView.frame.debugDescription)")
+//    print("gestureView frame: \(gestureView.frame.debugDescription)")
     
   }
   
@@ -171,7 +171,7 @@ class HeatmapViewController: UIViewController {
     finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
     finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
     
-    print("gestureView frame: \(gestureView.frame.debugDescription)")
+//    print("gestureView frame: \(gestureView.frame.debugDescription)")
     
     //    // 8
     //    UIView.animate(
@@ -702,7 +702,7 @@ func createPitchOverlay(topLeft: CLLocationCoordinate2D, bottomLeft: CLLocationC
 
   let pitchRectStr = String(describing: pitchMKMapRect)
 
-  MyFunc.logMessage(.debug, "pitch MKMapRect: \(pitchRectStr)")
+//  MyFunc.logMessage(.debug, "pitch MKMapRect: \(pitchRectStr)")
 
   //  create an overlay of the pitch based upon the rectangle
   let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
@@ -1085,7 +1085,7 @@ extension HeatmapViewController: MKMapViewDelegate {
     let pitch = pitchField.text ?? ""
 
     let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, venue: venue, pitch: pitch)
-    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
+//    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
       workoutMetadataArray[row] = workoutMetadataToSave
     } else {

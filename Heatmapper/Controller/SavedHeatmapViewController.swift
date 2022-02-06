@@ -138,7 +138,7 @@ class SavedHeatmapViewController: UIViewController {
     // calling this with the workoutId for now
     // currently retrieving the whole array but will tighten this up once working
     workoutMetadataArray = MyFunc.getWorkoutMetadata()
-    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
+//    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
     
     if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == heatmapWorkoutId}) {
       workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
@@ -297,7 +297,7 @@ class SavedHeatmapViewController: UIViewController {
     let pitch = pitchField.text ?? ""
 
     let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, venue: venue, pitch: pitch)
-    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
+//    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
       workoutMetadataArray[row] = workoutMetadataToSave
     } else {

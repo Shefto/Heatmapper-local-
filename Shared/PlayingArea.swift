@@ -23,9 +23,7 @@ struct CodableCLLCoordinate2D: Codable {
 
 
 struct PlayingArea: Codable {
-//  static func == (lhs: PlayingArea, rhs: PlayingArea) -> Bool {
-//    return true
-//  }
+
 
   var workoutID : UUID
   var bottomLeft  : CodableCLLCoordinate2D
@@ -40,16 +38,6 @@ struct PlayingArea: Codable {
     case topLeft = "TopLeft"
     case rotation = "Rotation"
   }
-
-//  init() {
-//    var coord = CodableCLLCoordinate2D(
-//    self.workoutID    = UUID.init()
-//    self.bottomLeft   = CodableCLLCoordinate2D
-//    self.bottomRight  = CodableCLLCoordinate2D()
-//    self.topLeft      = CodableCLLCoordinate2D()
-//    self.rotation     = 0.0
-//  }
-
 
   init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, rotation: CGFloat) {
     self.workoutID  = workoutID
