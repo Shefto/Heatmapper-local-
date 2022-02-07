@@ -269,7 +269,7 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
   }
 
   func getHeartRateSample(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) -> HKSample {
-    MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
+//    MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
 
     let quantityPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
     var quantityResult: Double = 0.0

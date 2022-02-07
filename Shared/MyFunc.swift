@@ -267,10 +267,10 @@ class MyFunc {
     // split the resulting string into the distance (i.e. length) and unit
     let speedStringArray = speedString.components(separatedBy: .whitespaces)
     let speedStr = speedStringArray.first ?? ""
-    let unitStr = speedStringArray.last ?? ""
-
-    MyFunc.logMessage(.debug, "speedStr: \(speedStr)")
-    MyFunc.logMessage(.debug, "unitStr: \(unitStr)")
+//    let unitStr = speedStringArray.last ?? ""
+//
+////    MyFunc.logMessage(.debug, "speedStr: \(speedStr)")
+//    MyFunc.logMessage(.debug, "unitStr: \(unitStr)")
     return speedStr
 
   }

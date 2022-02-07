@@ -784,7 +784,7 @@ func getWorkout(workoutId: UUID, completion:
 
 
 func loadAverageHeartRateLabel(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) {
-  MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
+//  MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
 
   let quantityPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
   let heartRateQuery = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: quantityPredicate, options: .discreteAverage) { (query, statisticsOrNil, errorOrNil) in
@@ -803,7 +803,7 @@ func loadAverageHeartRateLabel(startDate: Date, endDate: Date, quantityType: HKQ
 }
 
 func loadAverageSpeedLabel(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) {
-  MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
+//  MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
 
   let quantityPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
   let heartRateQuery = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: quantityPredicate, options: .discreteAverage) { (query, statisticsOrNil, errorOrNil) in
@@ -840,12 +840,12 @@ func getDistanceSampleObject(workout: HKWorkout) {
       // Perform proper error handling here.
       return
     }
-    let distanceSamplesStr = String(describing: distanceSamplesArray)
-    print("Distance Samples: \(distanceSamplesStr)")
-    // Use the workout's distance samples here.
-    let distanceSum = distanceSamplesArray.reduce(0, {$0 + $1.quantity.doubleValue(for: HKUnit.meter())})
-    let distanceSumStr = String(describing: distanceSum)
-    print("Distance total: \(distanceSumStr)")
+//    let distanceSamplesStr = String(describing: distanceSamplesArray)
+//    print("Distance Samples: \(distanceSamplesStr)")
+//    // Use the workout's distance samples here.
+//    let distanceSum = distanceSamplesArray.reduce(0, {$0 + $1.quantity.doubleValue(for: HKUnit.meter())})
+//    let distanceSumStr = String(describing: distanceSum)
+//    print("Distance total: \(distanceSumStr)")
   }
 
   healthStore.execute(sampleQuery)

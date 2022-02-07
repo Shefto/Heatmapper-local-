@@ -301,6 +301,9 @@ class TesterViewController: UIViewController {
     removeViewWithTag(tag: 301)
     removeViewWithTag(tag: 302)
     removeViewWithTag(tag: 303)
+    removeViewWithTag(tag: 101)
+    removeViewWithTag(tag: 102)
+    removeViewWithTag(tag: 103)
 
   }
 
@@ -850,11 +853,29 @@ class TesterViewController: UIViewController {
     let pitchMapTopLeftCGPoint : CGPoint = corners.topLeft
     let pitchMapBottomLeftCGPoint : CGPoint  = corners.bottomLeft
     let pitchMapBottomRightCGPoint : CGPoint  =  corners.bottomRight
+    let pitchMapTopRightCGPoint : CGPoint  = corners.topRight
 
     // then workout out the corresponding co-ordinates at these points on the map view
-    let pitchMapTopLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
-    let pitchMapBottomLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
-    let pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
+    var pitchMapTopLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
+    var pitchMapBottomLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
+    var pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
+    var pitchMapTopRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
+
+
+    //this logic compares the TopLeft and BottomRight
+    //if the TopLeft is south of the BottomRight swap them round
+    let topLeftLatitude = pitchMapTopLeftCoordinate.latitude
+    let bottomRightLatitude = pitchMapBottomRightCoordinate.latitude
+    if bottomRightLatitude < topLeftLatitude {
+      let coordinateToSwap = pitchMapTopLeftCoordinate
+      pitchMapTopLeftCoordinate = pitchMapBottomRightCoordinate
+      pitchMapBottomRightCoordinate = coordinateToSwap
+      pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
+
+    } else {
+
+
+    }
 
 
     // this code pins the coordinates onto the map
@@ -868,7 +889,7 @@ class TesterViewController: UIViewController {
     addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
     addPinImage(point: pitchMapTopLeftCGPoint, colour: .white, tag: 303)
 
-    let pitchAngle = angleInRadians(between: pitchMapBottomRightCGPoint, ending: pitchMapBottomLeftCGPoint)
+//    let pitchAngle = angleInRadians(between: pitchMapBottomRightCGPoint, ending: pitchMapBottomLeftCGPoint)
 
 
     // update the overlayCenter as we will centre the map Zoom on this
@@ -910,15 +931,17 @@ class TesterViewController: UIViewController {
       rotationToApply = rotation(from: newPitchView.transform.inverted())
     } else {
       rotationToApply = rotation(from: pitchView.transform.inverted())
-    }
 
-    let viewRotation = rotationToApply
+    }
+    rotationToApply = rotationToApply + .pi
+    let rotationToApplyStr = String(describing: rotationToApply)
+    print("rotationToApplyStr \(rotationToApplyStr)")
     let mapViewHeading = mapView.camera.heading
-    let viewRotationAsCGFloat = CGFloat(viewRotation)
+
 
     let mapViewHeadingInt = Int(mapViewHeading)
     let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
-    let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
+    let angleIncMapRotation = rotationToApply - mapViewHeadingRadians
     return angleIncMapRotation
   }
 
@@ -1028,7 +1051,6 @@ class TesterViewController: UIViewController {
         let midpointLongitude = (playingArea.bottomLeft.longitude + playingArea.bottomRight.longitude) / 2
         self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
         let topLeftCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
-
         let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
         let bottomRightCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
 
@@ -1052,13 +1074,13 @@ class TesterViewController: UIViewController {
 
 
         // the rotation is straightforward - rotate the pitchView by the same angle as the saved PlayingArea
-        let savedPitchViewRotationStr = self.pitchView.transform.angle
-        print("savedPitchViewRotationStr: \(savedPitchViewRotationStr)")
-
-        self.pitchView.transform = self.pitchView.transform.rotated(by: playingArea.rotation)
-
-        let pitchViewRotationStr = self.pitchView.transform.angle
-        print("pitchViewRotationStr: \(pitchViewRotationStr)")
+//        let savedPitchViewRotationStr = self.pitchView.transform.angle
+//        print("savedPitchViewRotationStr: \(savedPitchViewRotationStr)")
+//
+////        self.pitchView.transform = self.pitchView.transform.rotated(by: playingArea.rotation)
+//
+//        let pitchViewRotationStr = self.pitchView.transform.angle
+//        print("pitchViewRotationStr: \(pitchViewRotationStr)")
 
         self.createPitchOverlay(topLeft: topLeftCoord, bottomLeft: bottomLeftCoord, bottomRight: bottomRightCoord)
 
@@ -1072,7 +1094,6 @@ class TesterViewController: UIViewController {
 
     // get the max and min X and Y points from the above coordinates as MKMapPoints
     let topLeftMapPoint = MKMapPoint(topLeft)
-    //    let topRightMapPoint = MKMapPoint(pitchMapTopRightCoordinate)
     let bottomLeftMapPoint = MKMapPoint(bottomLeft)
     let bottomRightMapPoint = MKMapPoint(bottomRight)
 
@@ -1086,9 +1107,6 @@ class TesterViewController: UIViewController {
     // set up the rectangle
     let pitchMKMapRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
 
-//    let pitchRectStr = String(describing: pitchMKMapRect)
-
-//    MyFunc.logMessage(.debug, "pitch MKMapRect: \(pitchRectStr)")
 
     //  create an overlay of the pitch based upon the rectangle
     let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
