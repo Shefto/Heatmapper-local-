@@ -12,43 +12,42 @@ import UIKit
 import MapKit
 import HealthKit
 import CoreLocation
-//import DTMHeatmap
 
-// this struct manages the conversion of the rotated view to create a rotated MKMapRect
-struct ViewCorners {
-  private(set) var topLeft:     CGPoint!
-  private(set) var topRight:    CGPoint!
-  private(set) var bottomLeft:  CGPoint!
-  private(set) var bottomRight: CGPoint!
-
-  private let originalCenter: CGPoint
-  private let transformedView: UIView
-
-  private func pointWith(multipliedWidth: CGFloat, multipliedHeight: CGFloat) -> CGPoint {
-    var x = originalCenter.x
-    x += transformedView.bounds.width  / 2 * multipliedWidth
-
-    var y = originalCenter.y
-    y += transformedView.bounds.height / 2 * multipliedHeight
-
-    var result = CGPoint(x: x, y: y).applying(transformedView.transform)
-    result.x += transformedView.transform.tx
-    result.y += transformedView.transform.ty
-
-    return result
-  }
-
-  init(view: UIView) {
-    transformedView = view
-    originalCenter = view.center.applying(view.transform.inverted())
-
-    topLeft =     pointWith(multipliedWidth:-1, multipliedHeight:-1)
-    topRight =    pointWith(multipliedWidth: 1, multipliedHeight:-1)
-    bottomLeft =  pointWith(multipliedWidth:-1, multipliedHeight: 1)
-    bottomRight = pointWith(multipliedWidth: 1, multipliedHeight: 1)
-
-  }
-}
+//// this struct manages the conversion of the rotated view to create a rotated MKMapRect
+//struct ViewCorners {
+//  private(set) var topLeft:     CGPoint!
+//  private(set) var topRight:    CGPoint!
+//  private(set) var bottomLeft:  CGPoint!
+//  private(set) var bottomRight: CGPoint!
+//
+//  private let originalCenter: CGPoint
+//  private let transformedView: UIView
+//
+//  private func pointWith(multipliedWidth: CGFloat, multipliedHeight: CGFloat) -> CGPoint {
+//    var x = originalCenter.x
+//    x += transformedView.bounds.width  / 2 * multipliedWidth
+//
+//    var y = originalCenter.y
+//    y += transformedView.bounds.height / 2 * multipliedHeight
+//
+//    var result = CGPoint(x: x, y: y).applying(transformedView.transform)
+//    result.x += transformedView.transform.tx
+//    result.y += transformedView.transform.ty
+//
+//    return result
+//  }
+//
+//  init(view: UIView) {
+//    transformedView = view
+//    originalCenter = view.center.applying(view.transform.inverted())
+//
+//    topLeft =     pointWith(multipliedWidth:-1, multipliedHeight:-1)
+//    topRight =    pointWith(multipliedWidth: 1, multipliedHeight:-1)
+//    bottomLeft =  pointWith(multipliedWidth:-1, multipliedHeight: 1)
+//    bottomRight = pointWith(multipliedWidth: 1, multipliedHeight: 1)
+//
+//  }
+//}
 
 class TesterViewController: UIViewController {
 
@@ -859,7 +858,7 @@ class TesterViewController: UIViewController {
     var pitchMapTopLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
     var pitchMapBottomLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
     var pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
-    var pitchMapTopRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
+    let pitchMapTopRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
 
 
     //this logic compares the TopLeft and BottomRight
@@ -884,7 +883,6 @@ class TesterViewController: UIViewController {
     setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
 
     // this code pins the points onto the map - this should prove the conversion is the same
-
     addPinImage(point: pitchMapBottomLeftCGPoint, colour: .orange, tag: 301)
     addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
     addPinImage(point: pitchMapTopLeftCGPoint, colour: .white, tag: 303)
@@ -1342,7 +1340,6 @@ extension TesterViewController: MKMapViewDelegate {
       gradientLocationsArray.append(gradientLocationCG2Float)
       gradientLocationsArray.append(gradientLocationCG3Float)
 
-      //      let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle)
       let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle,
                                                       innerColourArray: innerColourArray, middleColourArray: middleColourArray, outerColourArray: outerColourArray, gradientLocationsArray: gradientLocationsArray, blendMode: blendMode)
 
@@ -1479,21 +1476,21 @@ extension TesterViewController: UIPickerViewDelegate, UIPickerViewDataSource {
   }
 
   func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
-    let annotation = MKPointAnnotation()
-    annotation.coordinate = coordinate
-    annotation.title = title
-    mapView.addAnnotation(annotation)
+//    let annotation = MKPointAnnotation()
+//    annotation.coordinate = coordinate
+//    annotation.title = title
+//    mapView.addAnnotation(annotation)
 
   }
 
   func addPinImage(point: CGPoint, colour: UIColor, tag: Int) {
 
-    let pinImageView = UIImageView()
-    pinImageView.frame = CGRect(x: point.x, y: point.y, width: 20, height: 20)
-    pinImageView.image = UIImage(systemName: "mappin")
-    pinImageView.tintColor = colour
-    pinImageView.tag = tag
-    mapView.addSubview(pinImageView)
+//    let pinImageView = UIImageView()
+//    pinImageView.frame = CGRect(x: point.x, y: point.y, width: 20, height: 20)
+//    pinImageView.image = UIImage(systemName: "mappin")
+//    pinImageView.tintColor = colour
+//    pinImageView.tag = tag
+//    mapView.addSubview(pinImageView)
 
   }
 
@@ -1521,7 +1518,7 @@ extension TesterViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
     let degrees = radians * 180 / .pi
     let degreesStr = String(describing: degrees)
-    print("Angle between \(startingStr) and \(endingStr) = \(radiansStr) degrees")
+    print("Angle between \(startingStr) and \(endingStr) = \(degreesStr) degrees")
 
     return radians
   }

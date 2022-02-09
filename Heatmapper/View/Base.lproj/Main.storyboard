@@ -371,7 +371,7 @@
                                                     <action selector="btnREHeatmap:" destination="nCc-eF-wC1" eventType="touchUpInside" id="CI0-uh-NSh"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nea-AY-awa" userLabel="Created Heatmap Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nea-AY-awa" userLabel="DTM Heatmap Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="270.66666666666669" y="0.0" width="133.33333333333331" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="mth-8C-ZAa"/>
@@ -1551,7 +1551,7 @@ DQoNCg
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lQG-2T-c3p">
-                                <rect key="frame" x="0.0" y="88" width="414" height="554"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="524"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="fJF-dn-msC"/>
@@ -1731,34 +1731,54 @@ DQoNCg
                                     <constraint firstItem="6QP-pY-Zhr" firstAttribute="top" secondItem="Qfd-ml-kHE" secondAttribute="top" id="xMW-Cf-0sV"/>
                                 </constraints>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="gX6-Du-D22" userLabel="Activity Stack View">
+                                <rect key="frame" x="5" y="612" width="404" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cep-ee-waR" userLabel="Resize">
+                                        <rect key="frame" x="0.0" y="0.0" width="199.66666666666666" height="40"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                        <color key="tintColor" systemColor="systemGreenColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Adjust Pitch Size"/>
+                                        <connections>
+                                            <action selector="btnResize:" destination="Pbk-vr-61V" eventType="touchUpInside" id="HYp-7E-3gj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBn-1T-1Yh" userLabel="Reset">
+                                        <rect key="frame" x="204.66666666666663" y="0.0" width="199.33333333333337" height="40"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                        <color key="tintColor" systemColor="systemGreenColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Reset Pitch Sizes"/>
+                                        <connections>
+                                            <action selector="resetPitches:" destination="vbg-Le-o0h" eventType="touchUpInside" id="9tZ-6M-W3j"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="8xt-A1-4CQ"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dWO-9w-WBa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="dWO-9w-WBa" firstAttribute="trailing" secondItem="gX6-Du-D22" secondAttribute="trailing" constant="5" id="0Z0-Ef-O9F"/>
                             <constraint firstItem="lQG-2T-c3p" firstAttribute="leading" secondItem="dWO-9w-WBa" secondAttribute="leading" id="0yf-Ar-ruo"/>
                             <constraint firstItem="lQG-2T-c3p" firstAttribute="trailing" secondItem="dWO-9w-WBa" secondAttribute="trailing" id="49H-nD-evY"/>
-                            <constraint firstItem="Qfd-ml-kHE" firstAttribute="top" secondItem="lQG-2T-c3p" secondAttribute="bottom" constant="10" id="7ff-zI-rdm"/>
+                            <constraint firstItem="Qfd-ml-kHE" firstAttribute="top" secondItem="gX6-Du-D22" secondAttribute="bottom" id="AKQ-2j-HbX"/>
                             <constraint firstItem="lQG-2T-c3p" firstAttribute="top" secondItem="dWO-9w-WBa" secondAttribute="top" id="ZdR-z9-CSs"/>
                             <constraint firstItem="dWO-9w-WBa" firstAttribute="trailing" secondItem="Qfd-ml-kHE" secondAttribute="trailing" id="cqv-rZ-BLN"/>
+                            <constraint firstItem="gX6-Du-D22" firstAttribute="top" secondItem="lQG-2T-c3p" secondAttribute="bottom" id="k1d-Tj-eVu"/>
+                            <constraint firstItem="gX6-Du-D22" firstAttribute="leading" secondItem="dWO-9w-WBa" secondAttribute="leading" constant="5" id="scs-Ss-6cq"/>
                             <constraint firstItem="Qfd-ml-kHE" firstAttribute="leading" secondItem="dWO-9w-WBa" secondAttribute="leading" id="tkE-Qf-QLj"/>
                             <constraint firstItem="dWO-9w-WBa" firstAttribute="bottom" secondItem="Qfd-ml-kHE" secondAttribute="bottom" constant="10" id="vXw-cg-B4q"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Heatmap" id="yQa-XH-y2d"/>
                     <connections>
-                        <outlet property="activityField" destination="4NC-ab-YSz" id="NAl-CC-0sb"/>
-                        <outlet property="caloriesImageView" destination="NUS-eY-InW" id="yhc-13-siW"/>
-                        <outlet property="caloriesLabel" destination="SsR-z7-NTJ" id="G7G-0K-mgg"/>
-                        <outlet property="distanceImageView" destination="LOa-ak-VMN" id="HDC-it-4FO"/>
-                        <outlet property="distanceLabel" destination="CTV-Fu-jHN" id="PNi-eo-7dD"/>
-                        <outlet property="heartRateImageView" destination="Y9q-X2-028" id="kGx-cM-4AB"/>
-                        <outlet property="heartRateLabel" destination="ay0-XU-veN" id="Hul-o5-vVB"/>
                         <outlet property="mapView" destination="lQG-2T-c3p" id="miF-qq-zXX"/>
-                        <outlet property="paceImageView" destination="G2E-Dn-slr" id="RXx-aY-4ta"/>
-                        <outlet property="paceLabel" destination="rdq-3I-zId" id="bXX-CT-BFQ"/>
-                        <outlet property="pitchField" destination="2Hb-dc-c99" id="LgZ-aN-OuT"/>
-                        <outlet property="sportField" destination="F5h-cl-Tm7" id="Su1-78-35A"/>
-                        <outlet property="venueField" destination="9nK-7l-9X9" id="sfm-yc-2Ts"/>
+                        <outlet property="resizeButton" destination="Cep-ee-waR" id="Xag-ms-d0r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xws-kf-RrH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -79,6 +79,9 @@
 /* Class = "UILabel"; text = "Date"; ObjectID = "cdu-fT-Y48"; */
 "cdu-fT-Y48.text" = "";
 
+/* Class = "UIButton"; normalTitle = "Adjust Pitch Size"; ObjectID = "Cep-ee-waR"; */
+"Cep-ee-waR.normalTitle" = "";
+
 /* Class = "UILabel"; text = "Distance"; ObjectID = "CTV-Fu-jHN"; */
 "CTV-Fu-jHN.text" = "";
 
@@ -102,6 +105,9 @@
 
 /* Class = "UISegmentedControl"; dhi-ac-byn.segmentTitles[2] = "Best for accuracy"; ObjectID = "dhi-ac-byn"; */
 "dhi-ac-byn.segmentTitles[2]" = "";
+
+/* Class = "UIButton"; normalTitle = "Reset Pitch Sizes"; ObjectID = "eBn-1T-1Yh"; */
+"eBn-1T-1Yh.normalTitle" = "";
 
 /* Class = "UINavigationItem"; title = "Edit Activity"; ObjectID = "EbZ-Kt-ugg"; */
 "EbZ-Kt-ugg.title" = "";
