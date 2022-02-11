@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2EE295532C1014AD977F7320 /* Pods_Heatmapper_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD737BEA64E3BE7D0518A1C /* Pods_Heatmapper_WatchKit_App.framework */; };
-		384D9018913D4580B74DF159 /* Pods_Heatmapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7C686E6162AA0C13B46EE51 /* Pods_Heatmapper.framework */; };
-		60D839383B8316A436969BE9 /* Pods_Heatmapper_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7D041EEB0CCEFFE81DC061 /* Pods_Heatmapper_WatchKit_Extension.framework */; };
+		0C369A9B4F9BCC82D7526232 /* Pods_Heatmapper_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB61EAD1EA202DA9686813D /* Pods_Heatmapper_WatchKit_Extension.framework */; };
 		7905990025ED876200316CEF /* FIT_minute_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 790598FE25ED876100316CEF /* FIT_minute_beep.aif */; };
 		7905990125ED876200316CEF /* FIT_minute_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 790598FE25ED876100316CEF /* FIT_minute_beep.aif */; };
 		7905990225ED876200316CEF /* FiT_second_beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = 790598FF25ED876200316CEF /* FiT_second_beep.aif */; };
@@ -133,6 +131,8 @@
 		79FDDFCD26C98BD900526FB9 /* CornerpointClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FDDFCC26C98BD900526FB9 /* CornerpointClientProtocol.swift */; };
 		79FDDFCF26C98C3500526FB9 /* CornerpointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FDDFCE26C98C3500526FB9 /* CornerpointView.swift */; };
 		79FDDFD126C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FDDFD026C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift */; };
+		B0648CD728BD864ED41AE7A4 /* Pods_Heatmapper_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97EFEBF24EA46116E4A5CC1B /* Pods_Heatmapper_WatchKit_App.framework */; };
+		E8FE2752C24DDB17A001150A /* Pods_Heatmapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 956C3CA2B7F893F80868494A /* Pods_Heatmapper.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,12 +178,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1830827DAEAAB4B3D6277D54 /* Pods-Heatmapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper.release.xcconfig"; path = "Target Support Files/Pods-Heatmapper/Pods-Heatmapper.release.xcconfig"; sourceTree = "<group>"; };
-		187D45E80A179DA5A02CD63D /* Pods-Heatmapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper/Pods-Heatmapper.debug.xcconfig"; sourceTree = "<group>"; };
-		1BDF6FB1C01EFB76B2623593 /* Pods-Heatmapper WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit App.release.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit App/Pods-Heatmapper WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
-		232E6F3FA7C2DD084C934359 /* Pods-Heatmapper WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit App.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit App/Pods-Heatmapper WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
-		2CD737BEA64E3BE7D0518A1C /* Pods_Heatmapper_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		33B1692C80732809149CA7B0 /* Pods-Heatmapper WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit Extension/Pods-Heatmapper WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
+		13E244B8A69CFEB739BD72A8 /* Pods-Heatmapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper/Pods-Heatmapper.debug.xcconfig"; sourceTree = "<group>"; };
+		28493F1041BD8CD4994605B4 /* Pods-Heatmapper WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit Extension/Pods-Heatmapper WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
+		44F91C31033ED5C5EE4AF750 /* Pods-Heatmapper WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit Extension.release.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit Extension/Pods-Heatmapper WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 		790598FE25ED876100316CEF /* FIT_minute_beep.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = FIT_minute_beep.aif; sourceTree = "<group>"; };
 		790598FF25ED876200316CEF /* FiT_second_beep.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = FiT_second_beep.aif; sourceTree = "<group>"; };
 		7907E8C024E1468500F3DE0D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -322,9 +319,12 @@
 		79FDDFCC26C98BD900526FB9 /* CornerpointClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerpointClientProtocol.swift; sourceTree = "<group>"; };
 		79FDDFCE26C98C3500526FB9 /* CornerpointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerpointView.swift; sourceTree = "<group>"; };
 		79FDDFD026C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CroppableImageViewDelegateProtocol.swift; sourceTree = "<group>"; };
-		A7C686E6162AA0C13B46EE51 /* Pods_Heatmapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB7D041EEB0CCEFFE81DC061 /* Pods_Heatmapper_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FBEF0AF94C19754D8FE4543B /* Pods-Heatmapper WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit Extension/Pods-Heatmapper WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
+		956C3CA2B7F893F80868494A /* Pods_Heatmapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		97EFEBF24EA46116E4A5CC1B /* Pods_Heatmapper_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AB61EAD1EA202DA9686813D /* Pods_Heatmapper_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heatmapper_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1A5B535621D82ABEAAD96F1 /* Pods-Heatmapper WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit App.debug.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit App/Pods-Heatmapper WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
+		D8A98AEF2622028CD707459B /* Pods-Heatmapper WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper WatchKit App.release.xcconfig"; path = "Target Support Files/Pods-Heatmapper WatchKit App/Pods-Heatmapper WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
+		F565089CAF55E5235FB9504B /* Pods-Heatmapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heatmapper.release.xcconfig"; path = "Target Support Files/Pods-Heatmapper/Pods-Heatmapper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,7 +332,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EE295532C1014AD977F7320 /* Pods_Heatmapper_WatchKit_App.framework in Frameworks */,
+				B0648CD728BD864ED41AE7A4 /* Pods_Heatmapper_WatchKit_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +343,7 @@
 				79445D4F25A3292D001D3AC6 /* StoreKit.framework in Frameworks */,
 				7978EE57271E0DC3004AEC91 /* IQKeyboardManagerSwift in Frameworks */,
 				79ADB48926264078007BF946 /* MapKit.framework in Frameworks */,
-				384D9018913D4580B74DF159 /* Pods_Heatmapper.framework in Frameworks */,
+				E8FE2752C24DDB17A001150A /* Pods_Heatmapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,7 +351,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60D839383B8316A436969BE9 /* Pods_Heatmapper_WatchKit_Extension.framework in Frameworks */,
+				0C369A9B4F9BCC82D7526232 /* Pods_Heatmapper_WatchKit_Extension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,12 +361,12 @@
 		074579CCD3A6BD9A5C2841B8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				187D45E80A179DA5A02CD63D /* Pods-Heatmapper.debug.xcconfig */,
-				1830827DAEAAB4B3D6277D54 /* Pods-Heatmapper.release.xcconfig */,
-				232E6F3FA7C2DD084C934359 /* Pods-Heatmapper WatchKit App.debug.xcconfig */,
-				1BDF6FB1C01EFB76B2623593 /* Pods-Heatmapper WatchKit App.release.xcconfig */,
-				FBEF0AF94C19754D8FE4543B /* Pods-Heatmapper WatchKit Extension.debug.xcconfig */,
-				33B1692C80732809149CA7B0 /* Pods-Heatmapper WatchKit Extension.release.xcconfig */,
+				13E244B8A69CFEB739BD72A8 /* Pods-Heatmapper.debug.xcconfig */,
+				F565089CAF55E5235FB9504B /* Pods-Heatmapper.release.xcconfig */,
+				C1A5B535621D82ABEAAD96F1 /* Pods-Heatmapper WatchKit App.debug.xcconfig */,
+				D8A98AEF2622028CD707459B /* Pods-Heatmapper WatchKit App.release.xcconfig */,
+				28493F1041BD8CD4994605B4 /* Pods-Heatmapper WatchKit Extension.debug.xcconfig */,
+				44F91C31033ED5C5EE4AF750 /* Pods-Heatmapper WatchKit Extension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -552,9 +552,9 @@
 			children = (
 				79ADB48826264078007BF946 /* MapKit.framework */,
 				79445D4E25A3292C001D3AC6 /* StoreKit.framework */,
-				A7C686E6162AA0C13B46EE51 /* Pods_Heatmapper.framework */,
-				2CD737BEA64E3BE7D0518A1C /* Pods_Heatmapper_WatchKit_App.framework */,
-				AB7D041EEB0CCEFFE81DC061 /* Pods_Heatmapper_WatchKit_Extension.framework */,
+				956C3CA2B7F893F80868494A /* Pods_Heatmapper.framework */,
+				97EFEBF24EA46116E4A5CC1B /* Pods_Heatmapper_WatchKit_App.framework */,
+				9AB61EAD1EA202DA9686813D /* Pods_Heatmapper_WatchKit_Extension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -578,13 +578,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 79A4EFE224A0AF4C002A7870 /* Build configuration list for PBXNativeTarget "Heatmapper" */;
 			buildPhases = (
-				DD8ECB3B233922A748B3FB19 /* [CP] Check Pods Manifest.lock */,
+				EB927828A59D989FD895A512 /* [CP] Check Pods Manifest.lock */,
 				7935628D25B30CAC006BBC54 /* BartyCrouch */,
 				79A4EFA524A0AF45002A7870 /* Sources */,
 				79A4EFA624A0AF45002A7870 /* Frameworks */,
 				79A4EFA724A0AF45002A7870 /* Resources */,
 				79A4EFE124A0AF4C002A7870 /* Embed Watch Content */,
-				209FF26B197E0288BACCEF10 /* [CP] Embed Pods Frameworks */,
+				C6E048416ED2930296C74B77 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -603,7 +603,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 79A4EFDE24A0AF4C002A7870 /* Build configuration list for PBXNativeTarget "Heatmapper WatchKit App" */;
 			buildPhases = (
-				21EFCD4668AD12C4ECB5B2C3 /* [CP] Check Pods Manifest.lock */,
+				7F090791DA101D7A5491F238 /* [CP] Check Pods Manifest.lock */,
 				79A4EFBB24A0AF4A002A7870 /* Resources */,
 				79A4EFDD24A0AF4C002A7870 /* Embed App Extensions */,
 				288EB29836F1E9001E6E014C /* Frameworks */,
@@ -622,7 +622,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 79A4EFDA24A0AF4C002A7870 /* Build configuration list for PBXNativeTarget "Heatmapper WatchKit Extension" */;
 			buildPhases = (
-				A54FE1A2B9BE2C3DFB92A038 /* [CP] Check Pods Manifest.lock */,
+				24F28C760AB1F9ADA945B37B /* [CP] Check Pods Manifest.lock */,
 				79A4EFC824A0AF4B002A7870 /* Sources */,
 				79A4EFC924A0AF4B002A7870 /* Frameworks */,
 				79A4EFCA24A0AF4B002A7870 /* Resources */,
@@ -734,24 +734,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		209FF26B197E0288BACCEF10 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Heatmapper/Pods-Heatmapper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Heatmapper/Pods-Heatmapper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Heatmapper/Pods-Heatmapper-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		21EFCD4668AD12C4ECB5B2C3 /* [CP] Check Pods Manifest.lock */ = {
+		24F28C760AB1F9ADA945B37B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -766,7 +749,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Heatmapper WatchKit App-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Heatmapper WatchKit Extension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -791,7 +774,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which bartycrouch > /dev/null; then\n    bartycrouch update -x\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
 		};
-		A54FE1A2B9BE2C3DFB92A038 /* [CP] Check Pods Manifest.lock */ = {
+		7F090791DA101D7A5491F238 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -806,14 +789,31 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Heatmapper WatchKit Extension-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Heatmapper WatchKit App-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DD8ECB3B233922A748B3FB19 /* [CP] Check Pods Manifest.lock */ = {
+		C6E048416ED2930296C74B77 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Heatmapper/Pods-Heatmapper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Heatmapper/Pods-Heatmapper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Heatmapper/Pods-Heatmapper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB927828A59D989FD895A512 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1169,7 +1169,7 @@
 		};
 		79A4EFDB24A0AF4C002A7870 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FBEF0AF94C19754D8FE4543B /* Pods-Heatmapper WatchKit Extension.debug.xcconfig */;
+			baseConfigurationReference = 28493F1041BD8CD4994605B4 /* Pods-Heatmapper WatchKit Extension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Heatmapper WatchKit Extension/Heatmapper WatchKit Extension.entitlements";
@@ -1196,7 +1196,7 @@
 		};
 		79A4EFDC24A0AF4C002A7870 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33B1692C80732809149CA7B0 /* Pods-Heatmapper WatchKit Extension.release.xcconfig */;
+			baseConfigurationReference = 44F91C31033ED5C5EE4AF750 /* Pods-Heatmapper WatchKit Extension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Heatmapper WatchKit Extension/Heatmapper WatchKit Extension.entitlements";
@@ -1223,7 +1223,7 @@
 		};
 		79A4EFDF24A0AF4C002A7870 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 232E6F3FA7C2DD084C934359 /* Pods-Heatmapper WatchKit App.debug.xcconfig */;
+			baseConfigurationReference = C1A5B535621D82ABEAAD96F1 /* Pods-Heatmapper WatchKit App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1255,7 +1255,7 @@
 		};
 		79A4EFE024A0AF4C002A7870 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BDF6FB1C01EFB76B2623593 /* Pods-Heatmapper WatchKit App.release.xcconfig */;
+			baseConfigurationReference = D8A98AEF2622028CD707459B /* Pods-Heatmapper WatchKit App.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1286,7 +1286,7 @@
 		};
 		79A4EFE324A0AF4C002A7870 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 187D45E80A179DA5A02CD63D /* Pods-Heatmapper.debug.xcconfig */;
+			baseConfigurationReference = 13E244B8A69CFEB739BD72A8 /* Pods-Heatmapper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Heatmapper/Heatmapper.entitlements;
@@ -1310,7 +1310,7 @@
 		};
 		79A4EFE424A0AF4C002A7870 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1830827DAEAAB4B3D6277D54 /* Pods-Heatmapper.release.xcconfig */;
+			baseConfigurationReference = F565089CAF55E5235FB9504B /* Pods-Heatmapper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Heatmapper/Heatmapper.entitlements;

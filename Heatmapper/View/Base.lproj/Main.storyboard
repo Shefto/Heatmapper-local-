@@ -1777,8 +1777,20 @@ DQoNCg
                     </view>
                     <navigationItem key="navigationItem" title="Heatmap" id="yQa-XH-y2d"/>
                     <connections>
+                        <outlet property="activityField" destination="4NC-ab-YSz" id="YPw-gj-shM"/>
+                        <outlet property="caloriesImageView" destination="NUS-eY-InW" id="UFN-Mc-MBt"/>
+                        <outlet property="caloriesLabel" destination="SsR-z7-NTJ" id="W3S-c3-XY0"/>
+                        <outlet property="distanceImageView" destination="LOa-ak-VMN" id="oq0-J4-1bo"/>
+                        <outlet property="distanceLabel" destination="CTV-Fu-jHN" id="WCP-uY-yBq"/>
+                        <outlet property="heartRateImageView" destination="Y9q-X2-028" id="MMS-Nk-EX4"/>
+                        <outlet property="heartRateLabel" destination="ay0-XU-veN" id="kGG-8D-X9u"/>
                         <outlet property="mapView" destination="lQG-2T-c3p" id="miF-qq-zXX"/>
+                        <outlet property="paceImageView" destination="G2E-Dn-slr" id="Oba-Ad-ENh"/>
+                        <outlet property="paceLabel" destination="rdq-3I-zId" id="A66-Vm-OcL"/>
+                        <outlet property="pitchField" destination="2Hb-dc-c99" id="ocX-DG-Fhh"/>
                         <outlet property="resizeButton" destination="Cep-ee-waR" id="Xag-ms-d0r"/>
+                        <outlet property="sportField" destination="F5h-cl-Tm7" id="DPZ-aT-ca7"/>
+                        <outlet property="venueField" destination="9nK-7l-9X9" id="Bcb-UM-IMq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xws-kf-RrH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -57,6 +57,17 @@ class HeatmapViewController: UIViewController {
   var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
   var workoutMetadataArray        =  [WorkoutMetadata]()
 
+  var heatmapImage                : UIImage?
+  var retrievedWorkout            : HKWorkout?
+  var routeCoordinatesArray       = [CLLocation]()
+
+  let workoutDateFormatter        = DateFormatter()
+  var measurementFormatter        = MeasurementFormatter()
+  var units                       : String = ""
+  var unitLength                  : UnitLength = .meters
+  var unitSpeed                   : UnitSpeed  = .metersPerSecond
+  let defaults                    = UserDefaults.standard
+
   var pointCount                  : Int = 0
   var angle                       : CGFloat = 0.0
   var pointsDistance              : CGFloat = 0.0
@@ -103,7 +114,10 @@ class HeatmapViewController: UIViewController {
   var topLeftCoord                : CLLocationCoordinate2D?
   var bottomRightCoord            : CLLocationCoordinate2D?
 
-  var blendModeArray = [BlendMode]()
+  var blendModeArray              = [BlendMode]()
+  var activityArray               = [Activity]()
+  var sportArray                  = [Sport]()
+
   var overlayCenter               : CLLocationCoordinate2D?
 
   // tester outlets
@@ -713,7 +727,7 @@ class HeatmapViewController: UIViewController {
 
     self.loadUI()
     self.loadTesterData()
-//    self.loadTesterUI()
+    getStaticData()
 
     // get workout data
     // Note: all UI work is called within this function as the data retrieval works asynchronously
@@ -722,27 +736,13 @@ class HeatmapViewController: UIViewController {
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    var testerArray = [String]()
+    updateWorkout()
+  }
 
-    testerArray.append(innerColourRed)
-    testerArray.append(innerColourGreen)
-    testerArray.append(innerColourBlue)
-    testerArray.append(innerColourAlpha)
-    testerArray.append(innerColourGradient)
+  func getStaticData() {
 
-    testerArray.append(middleColourRed)
-    testerArray.append(middleColourGreen)
-    testerArray.append(middleColourBlue)
-    testerArray.append(middleColourAlpha)
-    testerArray.append(middleColourGradient)
-
-    testerArray.append(outerColourRed)
-    testerArray.append(outerColourGreen)
-    testerArray.append(outerColourBlue)
-    testerArray.append(outerColourAlpha)
-    testerArray.append(outerColourGradient)
-
-    MyFunc.saveTesterData(testerArray)
+    activityArray = MyFunc.getHeatmapperActivityDefaults()
+    sportArray = Sport.allCases.map { $0 }
   }
 
   func refreshHeatmap() {
@@ -780,7 +780,113 @@ class HeatmapViewController: UIViewController {
   }
 
   func loadUI() {
+
+    activityPicker.delegate = self
+    activityPicker.dataSource = self
+    activityField.inputView = activityPicker
+
+    sportPicker.delegate = self
+    sportPicker.dataSource = self
+    sportField.inputView = sportPicker
+
+    // this code cancels the keyboard and profile picker when field editing finishes
+    let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+    tapGesture.cancelsTouchesInView = false
+    self.view.addGestureRecognizer(tapGesture)
+
+    //    guard let heatmapWorkout = retrievedWorkout else {
+    //      MyFunc.logMessage(.error, "SavedHeatmapViewController : no workout returned")
+    //      return
+    //    }
+    //    let colouredheatmapImage = heatmapImage?.withBackground(color: UIColor.systemGreen)
+    //    heatmapImageView.image = colouredheatmapImage
+
+
+    let workoutActivity = workoutMetadata.activity
+    let workoutVenue = workoutMetadata.venue
+    let workoutPitch = workoutMetadata.pitch
+    let workoutSport = workoutMetadata.sport
+
+    activityField.text = workoutActivity
+    venueField.text = workoutVenue
+    pitchField.text = workoutPitch
+    sportField.text = workoutSport
+
+    // colour icons
+    heartRateImageView.image = heartRateImageView.image?.withRenderingMode(.alwaysTemplate)
+    heartRateImageView.tintColor = UIColor.systemRed
+
+    caloriesImageView.image = caloriesImageView.image?.withRenderingMode(.alwaysTemplate)
+    caloriesImageView.tintColor = UIColor.systemOrange
+
+    paceImageView.image = paceImageView.image?.withRenderingMode(.alwaysTemplate)
+    paceImageView.tintColor = UIColor.systemBlue
+
+    distanceImageView.image = distanceImageView.image?.withRenderingMode(.alwaysTemplate)
+    distanceImageView.tintColor = UIColor.systemGreen
     blendModeArray = BlendMode.allCases.map { $0 }
+
+
+    guard let heatmapWorkout = retrievedWorkout else {
+      MyFunc.logMessage(.error, "SavedHeatmapViewController : no workout returned")
+      return
+    }
+
+
+
+    // start and end date
+    //    var workoutStartDateAsString = ""
+    //    var workoutEndDateAsString = ""
+    //
+    //    workoutDateFormatter.dateFormat = "E, d MMM yyyy HH:mm"
+    //    workoutStartDateAsString = workoutDateFormatter.string(from: heatmapWorkout.startDate)
+    //
+    //    workoutDateFormatter.dateFormat = "d MMM yyy HH:mm"
+    //    self.title = workoutDateFormatter.string(from: heatmapWorkout.startDate)
+    //
+    //    workoutDateFormatter.dateFormat = "HH:mm"
+    //    workoutEndDateAsString = workoutDateFormatter.string(from: heatmapWorkout.endDate)
+
+    //    let workoutDateString = workoutStartDateAsString + " - " + workoutEndDateAsString
+    //    dateLabel.text = workoutDateString
+
+    // duration
+    //    let workoutIntervalFormatter = DateComponentsFormatter()
+    //    durationLabel.text = workoutIntervalFormatter.string(from: heatmapWorkout.duration)
+
+    // total distance
+    if let workoutDistance = heatmapWorkout.totalDistance?.doubleValue(for: .meter()) {
+      let formattedDistance = String(format: "%.2f m", workoutDistance)
+      distanceLabel.text = formattedDistance
+
+      let pace = workoutDistance / heatmapWorkout.duration
+
+      let paceString = MyFunc.getUnitSpeedAsString(value: pace, unitSpeed: unitSpeed, formatter: measurementFormatter)
+      let paceUnitString = unitSpeed.symbol
+
+      paceLabel.text = paceString + " " + paceUnitString
+
+    } else {
+      distanceLabel.text = nil
+    }
+
+
+    // total calories
+    if let caloriesBurned =
+        heatmapWorkout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) {
+      let formattedCalories = String(format: "%.2f kCal", caloriesBurned)
+      caloriesLabel.text = formattedCalories
+    } else {
+      caloriesLabel.text = nil
+    }
+
+    // run query and update label for average Heart Rate
+    loadAverageHeartRateLabel(startDate: heatmapWorkout.startDate, endDate: heatmapWorkout.endDate, quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, option: [])
+
+
+
+
+
 
 //    innerRedStepper.transform = innerRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
 //    innerGreenStepper.transform = innerGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
@@ -1004,7 +1110,43 @@ class HeatmapViewController: UIViewController {
     }
 
   }
+  func loadAverageHeartRateLabel(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) {
+    //  MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
 
+    let quantityPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
+    let heartRateQuery = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: quantityPredicate, options: .discreteAverage) { (query, statisticsOrNil, errorOrNil) in
+
+      guard let statistics = statisticsOrNil else {
+        return
+      }
+      let average : HKQuantity? = statistics.averageQuantity()
+      let heartRateBPM  = average?.doubleValue(for: HKUnit.count().unitDivided(by: HKUnit.minute())) ?? 0.0
+
+      DispatchQueue.main.async {
+        self.heartRateLabel.text = String(format: "%.2f", heartRateBPM) + " bpm"
+      }
+    }
+    healthStore.execute(heartRateQuery)
+  }
+
+  func loadAverageSpeedLabel(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) {
+    //  MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
+
+    let quantityPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
+    let heartRateQuery = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: quantityPredicate, options: .discreteAverage) { (query, statisticsOrNil, errorOrNil) in
+
+      guard let statistics = statisticsOrNil else {
+        return
+      }
+      let average : HKQuantity? = statistics.averageQuantity()
+      let pace  = average?.doubleValue(for: HKUnit.count().unitDivided(by: HKUnit.minute())) ?? 0.0
+
+      DispatchQueue.main.async {
+        self.paceLabel.text = String(format: "%.2f", pace) + " bpm"
+      }
+    }
+    healthStore.execute(heartRateQuery)
+  }
 
   func getSavedPitchOverlay() {
 
@@ -1405,96 +1547,162 @@ extension HeatmapViewController: MKMapViewDelegate {
     }
   }
 
+  func setPinUsingMKPlacemark(coordinate: CLLocationCoordinate2D) {
+    let pin = MKPlacemark(coordinate: coordinate)
+
+    mapView.addAnnotation(pin)
+  }
+//
+//  func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
+//    let annotation = MKPointAnnotation()
+//    annotation.coordinate = coordinate
+//    annotation.title = title
+//    mapView.addAnnotation(annotation)
+//
+//  }
+
+  func updateWorkout()  {
+
+    guard let workoutId = heatmapWorkoutId else {
+      MyFunc.logMessage(.error, "Invalid heatmapWorkoutId passed to SavedHeatmapViewController: \(String(describing: heatmapWorkoutId))")
+      return
+    }
+
+    let activity = activityField.text ?? ""
+    let venue = venueField.text ?? ""
+    let sport = sportField.text ?? ""
+    let pitch = pitchField.text ?? ""
+
+    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, venue: venue, pitch: pitch)
+//    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
+    if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
+      workoutMetadataArray[row] = workoutMetadataToSave
+    } else {
+      workoutMetadataArray.append(workoutMetadataToSave)
+    }
+    MyFunc.saveWorkoutMetadata(workoutMetadataArray)
+    MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadataToSave))")
+
+
+  }
+
 }
 
 extension HeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    //    MyFunc.logMessage(.debug, "REHeatmapViewController.didSelectRow: \(row)")
-
-    let blendModeSelected = blendModeArray[row]
-
-    switch blendModeSelected {
-    case .normal:
-      blendMode = .normal
-    case .multiply:
-      blendMode = .multiply
-    case .screen:
-      blendMode = .screen
-    case .overlay:
-      blendMode = .overlay
-    case .darken:
-      blendMode = .darken
-    case .lighten:
-      blendMode = .lighten
-    case .colorDodge:
-      blendMode = .colorDodge
-    case .colorBurn:
-      blendMode = .colorBurn
-    case .softLight:
-      blendMode = .softLight
-    case .hardLight:
-      blendMode = .hardLight
-    case .difference:
-      blendMode = .difference
-    case .exclusion:
-      blendMode = .exclusion
-    case .hue:
-      blendMode = .hue
-    case .saturation:
-      blendMode = .saturation
-    case .color:
-      blendMode = .color
-    case .luminosity:
-      blendMode = .luminosity
-    case .clear:
-      blendMode = .clear
-    case .copy:
-      blendMode = .copy
-    case .sourceIn:
-      blendMode = .sourceIn
-    case .sourceOut:
-      blendMode = .sourceOut
-    case .sourceAtop:
-      blendMode = .sourceAtop
-    case .destinationOver:
-      blendMode = .destinationOver
-    case .destinationIn:
-      blendMode = .destinationIn
-    case .destinationOut:
-      blendMode = .destinationOut
-    case .destinationAtop:
-      blendMode = .destinationAtop
-    case .xor:
-      blendMode = .xor
-    case .plusDarker:
-      blendMode = .plusDarker
-    case .plusLighter:
-      blendMode = .plusLighter
-      //    default:
-      //      blendMode = .normal
-    }
-
-    refreshHeatmap()
-
-  }
+//  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//    //    MyFunc.logMessage(.debug, "REHeatmapViewController.didSelectRow: \(row)")
+//
+//    let blendModeSelected = blendModeArray[row]
+//
+//    switch blendModeSelected {
+//    case .normal:
+//      blendMode = .normal
+//    case .multiply:
+//      blendMode = .multiply
+//    case .screen:
+//      blendMode = .screen
+//    case .overlay:
+//      blendMode = .overlay
+//    case .darken:
+//      blendMode = .darken
+//    case .lighten:
+//      blendMode = .lighten
+//    case .colorDodge:
+//      blendMode = .colorDodge
+//    case .colorBurn:
+//      blendMode = .colorBurn
+//    case .softLight:
+//      blendMode = .softLight
+//    case .hardLight:
+//      blendMode = .hardLight
+//    case .difference:
+//      blendMode = .difference
+//    case .exclusion:
+//      blendMode = .exclusion
+//    case .hue:
+//      blendMode = .hue
+//    case .saturation:
+//      blendMode = .saturation
+//    case .color:
+//      blendMode = .color
+//    case .luminosity:
+//      blendMode = .luminosity
+//    case .clear:
+//      blendMode = .clear
+//    case .copy:
+//      blendMode = .copy
+//    case .sourceIn:
+//      blendMode = .sourceIn
+//    case .sourceOut:
+//      blendMode = .sourceOut
+//    case .sourceAtop:
+//      blendMode = .sourceAtop
+//    case .destinationOver:
+//      blendMode = .destinationOver
+//    case .destinationIn:
+//      blendMode = .destinationIn
+//    case .destinationOut:
+//      blendMode = .destinationOut
+//    case .destinationAtop:
+//      blendMode = .destinationAtop
+//    case .xor:
+//      blendMode = .xor
+//    case .plusDarker:
+//      blendMode = .plusDarker
+//    case .plusLighter:
+//      blendMode = .plusLighter
+//      //    default:
+//      //      blendMode = .normal
+//    }
+//
+//    refreshHeatmap()
+//
+//  }
 
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
 
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return blendModeArray.count
+
+    if pickerView == activityPicker {
+      return activityArray.count
+    } else {
+      return sportArray.count
+    }
+
   }
 
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return blendModeArray[row].rawValue
+
+    if pickerView == activityPicker {
+      return activityArray[row].name
+    } else {
+      return sportArray[row].rawValue
+    }
+
   }
 
-  func setPinUsingMKPlacemark(coordinate: CLLocationCoordinate2D) {
-    let pin = MKPlacemark(coordinate: coordinate)
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
-    mapView.addAnnotation(pin)
+    if pickerView == activityPicker {
+      activityField.text = activityArray[row].name
+      //      if sportField.text == "" {
+      sportField.text = activityArray[row].sport.rawValue
+      //      }
+    } else {
+      sportField.text = sportArray[row].rawValue
+    }
+    updateWorkout()
+
+    self.view.endEditing(true)
   }
+//
+//  func setPinUsingMKPlacemark(coordinate: CLLocationCoordinate2D) {
+//    let pin = MKPlacemark(coordinate: coordinate)
+//
+//    mapView.addAnnotation(pin)
+//  }
 
   func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
     //    let annotation = MKPointAnnotation()
