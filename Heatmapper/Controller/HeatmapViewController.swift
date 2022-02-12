@@ -678,7 +678,7 @@ class HeatmapViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
     // set up the tester picker
 //    blendModePicker.delegate = self
 //    blendModePicker.dataSource = self
@@ -725,7 +725,7 @@ class HeatmapViewController: UIViewController {
     resizeButton.tintColor = UIColor.systemGreen
     self.touchView.isHidden = true
 
-    self.loadUI()
+//    self.loadUI()
     self.loadTesterData()
     getStaticData()
 
@@ -1417,6 +1417,7 @@ class HeatmapViewController: UIViewController {
 
           self.getSavedPitchOverlay()
           self.createREHeatmap()
+          self.loadUI()
 
         }
 
