@@ -681,7 +681,7 @@ class HeatmapViewController: UIViewController {
     self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
     if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == self.heatmapWorkoutId}) {
       self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
-      self.loadUI()
+      self.loadMetadataUI()
     }
     // set up the tester picker
 //    blendModePicker.delegate = self
@@ -783,8 +783,7 @@ class HeatmapViewController: UIViewController {
     }
   }
 
-  func loadUI() {
-
+  func loadMetadataUI() {
     activityPicker.delegate = self
     activityPicker.dataSource = self
     activityField.inputView = activityPicker
@@ -815,6 +814,12 @@ class HeatmapViewController: UIViewController {
     venueField.text = workoutVenue
     pitchField.text = workoutPitch
     sportField.text = workoutSport
+
+  }
+
+  func loadSamplesUI() {
+
+
 
     // colour icons
     heartRateImageView.image = heartRateImageView.image?.withRenderingMode(.alwaysTemplate)
@@ -1314,7 +1319,7 @@ class HeatmapViewController: UIViewController {
         MyFunc.logMessage(.error, "workoutReturned invalid: \(String(describing: workoutReturned))")
         return
       }
-
+      self.retrievedWorkout = workout
       self.getRouteSampleObject(workout: workout)
     }
 
@@ -1419,7 +1424,7 @@ class HeatmapViewController: UIViewController {
 //            self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
 //            self.loadUI()
 //          }
-
+          self.loadSamplesUI()
           self.getSavedPitchOverlay()
           self.createREHeatmap()
 
