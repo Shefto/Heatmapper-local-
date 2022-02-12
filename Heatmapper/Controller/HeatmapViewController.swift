@@ -679,6 +679,10 @@ class HeatmapViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
+    if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == self.heatmapWorkoutId}) {
+      self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
+      self.loadUI()
+    }
     // set up the tester picker
 //    blendModePicker.delegate = self
 //    blendModePicker.dataSource = self
@@ -1410,14 +1414,15 @@ class HeatmapViewController: UIViewController {
         DispatchQueue.main.async {
 
           // get the workout's metadata
-          self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
-          if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == self.heatmapWorkoutId}) {
-            self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
-          }
+//          self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
+//          if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == self.heatmapWorkoutId}) {
+//            self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
+//            self.loadUI()
+//          }
 
           self.getSavedPitchOverlay()
           self.createREHeatmap()
-          self.loadUI()
+
 
         }
 
