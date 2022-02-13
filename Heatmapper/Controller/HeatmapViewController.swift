@@ -104,7 +104,6 @@ class HeatmapViewController: UIViewController {
   var outerColourGradient         : String = "0.5"
   var radius                      : Int = 2
 
-  //  var touchView                   : UIView!
   var pitchView                   : UIImageView!
 
   var pitchViewRotation           : CGFloat = 0.0
@@ -222,7 +221,6 @@ class HeatmapViewController: UIViewController {
       x: gestureView.center.x + (velocity.x * slideFactor),
       y: gestureView.center.y + (velocity.y * slideFactor)
     )
-
     finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
     finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
 
