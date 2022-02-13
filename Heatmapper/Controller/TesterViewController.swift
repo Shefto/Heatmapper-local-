@@ -494,16 +494,23 @@ class TesterViewController: UIViewController {
         }
       }
 
+      print("Resize OFF logic : headings at end")
+      printHeadings()
+
       // centre the mapView on the newly resized pitch
 
 
     } else {
       // turn everything on (as it's off)
 
+      print("Resize ON logic : headings at start")
+      printHeadings()
+
       resizeOn = true
       startResize = true
       resizeButton.setTitle("Save Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemRed
+//      self.touchView.isHidden = false
 
       // get the saved playing area coordinates
       MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
@@ -572,12 +579,13 @@ class TesterViewController: UIViewController {
       newPitchView.addGestureRecognizer(rotator)
       newPitchView.addGestureRecognizer(pincher)
 
-//      let pitchViewBottomLefttStr = String(describing: pitchViewBottomLeft)
-//      print("pitchViewBottomLeft: \(pitchViewBottomLefttStr)")
-//      let pitchViewTopLeftStr = String(describing: pitchViewTopLeft)
-//      print("pitchViewTopLeft: \(pitchViewTopLeftStr)")
-//      let pitchViewBottomRightStr = String(describing: pitchViewBottomRight)
-//      print("pitchViewBottomRight: \(pitchViewBottomRightStr)")
+
+      let pitchViewBottomLefttStr = String(describing: pitchViewBottomLeft)
+      print("pitchViewBottomLeft: \(pitchViewBottomLefttStr)")
+      let pitchViewTopLeftStr = String(describing: pitchViewTopLeft)
+      print("pitchViewTopLeft: \(pitchViewTopLeftStr)")
+      let pitchViewBottomRightStr = String(describing: pitchViewBottomRight)
+      print("pitchViewBottomRight: \(pitchViewBottomRightStr)")
 
       let viewRotation = rotation(from: pitchView.transform)
       let mapViewHeading = mapView.camera.heading
@@ -635,27 +643,27 @@ class TesterViewController: UIViewController {
 
     // add the touchView
     // doing this programmatically to avoid Storyboard complaining about overlap
-//    let mapViewFrame = mapView.globalFrame!
-//    touchView = UIView(frame: mapViewFrame)
-//    touchView.bounds = mapView.bounds
-//    touchView.translatesAutoresizingMaskIntoConstraints = false
-//
-//    self.mapView.addSubview(touchView)
-//
-//    // this code ensures the touchView is completely aligned with the mapView
-//    let attributes: [NSLayoutConstraint.Attribute] = [.top, .bottom, .right, .left]
-//    NSLayoutConstraint.activate(attributes.map {
-//      NSLayoutConstraint(item: touchView as Any, attribute: $0, relatedBy: .equal, toItem: touchView.superview, attribute: $0, multiplier: 1, constant: 0)
-//    })
-//
-//    let pitchImageBlue = UIImage(named: "Figma Pitch 11 Blue")
-//    pitchView = UIImageView(image: pitchImageBlue)
-//    pitchView.layer.opacity = 0.5
+    let mapViewFrame = mapView.globalFrame!
+    touchView = UIView(frame: mapViewFrame)
+    touchView.bounds = mapView.bounds
+    touchView.translatesAutoresizingMaskIntoConstraints = false
+
+    self.mapView.addSubview(touchView)
+
+    // this code ensures the touchView is completely aligned with the mapView
+    let attributes: [NSLayoutConstraint.Attribute] = [.top, .bottom, .right, .left]
+    NSLayoutConstraint.activate(attributes.map {
+      NSLayoutConstraint(item: touchView as Any, attribute: $0, relatedBy: .equal, toItem: touchView.superview, attribute: $0, multiplier: 1, constant: 0)
+    })
+
+    let pitchImageBlue = UIImage(named: "Figma Pitch 11 Blue")
+    pitchView = UIImageView(image: pitchImageBlue)
+    pitchView.layer.opacity = 0.5
 //    pitchView.translatesAutoresizingMaskIntoConstraints = false
-//    pitchView.isUserInteractionEnabled = true
-//    pitchView.addGestureRecognizer(panner)
-//    pitchView.addGestureRecognizer(rotator)
-//    pitchView.addGestureRecognizer(pincher)
+    pitchView.isUserInteractionEnabled = true
+    pitchView.addGestureRecognizer(panner)
+    pitchView.addGestureRecognizer(rotator)
+    pitchView.addGestureRecognizer(pincher)
 
 //    self.touchView.addSubview(pitchView)
 
