@@ -676,6 +676,36 @@ class HeatmapViewController: UIViewController {
 
   }
 
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+
+    //  let pitchViewCGRect = pitchView.frame
+
+    let mapSnapshot = mapView.snapshot()
+
+
+    if let data = mapSnapshot.pngData() {
+      if let workoutId = self.heatmapWorkoutId {
+        let workoutIDString = String(describing: workoutId)
+        let fileName = "Heatmap_" + workoutIDString + ".png"
+        let fileURL = self.getDocumentsDirectory().appendingPathComponent(fileName)
+        try? data.write(to: fileURL)
+        MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
+
+      }
+    }
+
+
+  }
+
+  func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let documentsDirectory = paths[0]
+    return documentsDirectory
+  }
+
+
   override func viewDidLoad() {
     super.viewDidLoad()
     self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
