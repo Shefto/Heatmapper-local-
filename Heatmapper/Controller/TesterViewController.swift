@@ -494,23 +494,16 @@ class TesterViewController: UIViewController {
         }
       }
 
-      print("Resize OFF logic : headings at end")
-      printHeadings()
-
       // centre the mapView on the newly resized pitch
 
 
     } else {
       // turn everything on (as it's off)
 
-      print("Resize ON logic : headings at start")
-      printHeadings()
-
       resizeOn = true
       startResize = true
       resizeButton.setTitle("Save Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemRed
-//      self.touchView.isHidden = false
 
       // get the saved playing area coordinates
       MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
@@ -520,12 +513,10 @@ class TesterViewController: UIViewController {
           // no playing area retrieved so create a default area
           MyFunc.logMessage(.error, "No playing area retrieved: \(error.localizedDescription) despite default being created")
 
-
         case .success(let playingArea):
           MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
           let playingAreaStr = String(describing: playingArea)
           MyFunc.logMessage(.debug, playingAreaStr)
-
 
           let topLeftCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
           let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
@@ -534,14 +525,11 @@ class TesterViewController: UIViewController {
           self.bottomLeftCoord = bottomLeftCoord
           self.bottomRightCoord = bottomRightCoord
           self.topLeftCoord = topLeftCoord
-
         }
       })
 
       // now need to size the pitchView from the MapView information
       // we have the mapView rect from the overlay and the coordinates
-      // let's try the coordinates first as MapView has better conversion functions
-
       let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
       let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
       let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
@@ -565,11 +553,9 @@ class TesterViewController: UIViewController {
       // need to add the rotation
       // issue : MKMapView has origin in bottom left so rotation starts from there
       // UIView origin is top left - KIV when coding this
-      // first attempt - get angle from TL to BL
       let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
       newPitchView.image = pitchImageGreen
       newPitchView.layer.opacity = 1
-//      newPitchView.translatesAutoresizingMaskIntoConstraints = false
       newPitchView.isUserInteractionEnabled = true
       newPitchView.tag = 200
 
@@ -586,13 +572,12 @@ class TesterViewController: UIViewController {
       newPitchView.addGestureRecognizer(rotator)
       newPitchView.addGestureRecognizer(pincher)
 
-
-      let pitchViewBottomLefttStr = String(describing: pitchViewBottomLeft)
-      print("pitchViewBottomLeft: \(pitchViewBottomLefttStr)")
-      let pitchViewTopLeftStr = String(describing: pitchViewTopLeft)
-      print("pitchViewTopLeft: \(pitchViewTopLeftStr)")
-      let pitchViewBottomRightStr = String(describing: pitchViewBottomRight)
-      print("pitchViewBottomRight: \(pitchViewBottomRightStr)")
+//      let pitchViewBottomLefttStr = String(describing: pitchViewBottomLeft)
+//      print("pitchViewBottomLeft: \(pitchViewBottomLefttStr)")
+//      let pitchViewTopLeftStr = String(describing: pitchViewTopLeft)
+//      print("pitchViewTopLeft: \(pitchViewTopLeftStr)")
+//      let pitchViewBottomRightStr = String(describing: pitchViewBottomRight)
+//      print("pitchViewBottomRight: \(pitchViewBottomRightStr)")
 
       let viewRotation = rotation(from: pitchView.transform)
       let mapViewHeading = mapView.camera.heading
@@ -608,10 +593,8 @@ class TesterViewController: UIViewController {
 //      pitchView.transform = pitchView.transform.rotated(by: angleIncMapRotation)
 
       //remove the pitch overlay
-
       if let overlays = mapView?.overlays {
         for overlay in overlays {
-          // remove all MKPolyline-Overlays
           if overlay is FootballPitchOverlay {
             let overlayRect = overlay.boundingMapRect
             let overlayRectStr = String(describing: overlayRect)
@@ -621,13 +604,9 @@ class TesterViewController: UIViewController {
           }
         }
       }
-
       print("Resize ON logic : headings at end")
       printHeadings()
-
     }
-
-
   }
 
   func printHeadings() {
@@ -656,31 +635,29 @@ class TesterViewController: UIViewController {
 
     // add the touchView
     // doing this programmatically to avoid Storyboard complaining about overlap
-    let mapViewFrame = mapView.globalFrame!
-    touchView = UIView(frame: mapViewFrame)
-    touchView.bounds = mapView.bounds
-    touchView.translatesAutoresizingMaskIntoConstraints = false
-
-    self.mapView.addSubview(touchView)
-
-    // this code ensures the touchView is completely aligned with the mapView
-    let attributes: [NSLayoutConstraint.Attribute] = [.top, .bottom, .right, .left]
-    NSLayoutConstraint.activate(attributes.map {
-      NSLayoutConstraint(item: touchView as Any, attribute: $0, relatedBy: .equal, toItem: touchView.superview, attribute: $0, multiplier: 1, constant: 0)
-    })
-
-    let pitchImageBlue = UIImage(named: "Figma Pitch 11 Blue")
-    pitchView = UIImageView(image: pitchImageBlue)
-    pitchView.layer.opacity = 0.5
+//    let mapViewFrame = mapView.globalFrame!
+//    touchView = UIView(frame: mapViewFrame)
+//    touchView.bounds = mapView.bounds
+//    touchView.translatesAutoresizingMaskIntoConstraints = false
+//
+//    self.mapView.addSubview(touchView)
+//
+//    // this code ensures the touchView is completely aligned with the mapView
+//    let attributes: [NSLayoutConstraint.Attribute] = [.top, .bottom, .right, .left]
+//    NSLayoutConstraint.activate(attributes.map {
+//      NSLayoutConstraint(item: touchView as Any, attribute: $0, relatedBy: .equal, toItem: touchView.superview, attribute: $0, multiplier: 1, constant: 0)
+//    })
+//
+//    let pitchImageBlue = UIImage(named: "Figma Pitch 11 Blue")
+//    pitchView = UIImageView(image: pitchImageBlue)
+//    pitchView.layer.opacity = 0.5
 //    pitchView.translatesAutoresizingMaskIntoConstraints = false
-    pitchView.isUserInteractionEnabled = true
-    pitchView.addGestureRecognizer(panner)
-    pitchView.addGestureRecognizer(rotator)
-    pitchView.addGestureRecognizer(pincher)
+//    pitchView.isUserInteractionEnabled = true
+//    pitchView.addGestureRecognizer(panner)
+//    pitchView.addGestureRecognizer(rotator)
+//    pitchView.addGestureRecognizer(pincher)
 
 //    self.touchView.addSubview(pitchView)
-
-
 
     coloursStackView.isHidden = true
     lowerControlsStackView.isHidden = true

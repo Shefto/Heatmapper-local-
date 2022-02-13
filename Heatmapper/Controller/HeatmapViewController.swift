@@ -104,7 +104,7 @@ class HeatmapViewController: UIViewController {
   var outerColourGradient         : String = "0.5"
   var radius                      : Int = 2
 
-  var touchView                   : UIView!
+  //  var touchView                   : UIView!
   var pitchView                   : UIImageView!
 
   var pitchViewRotation           : CGFloat = 0.0
@@ -120,205 +120,7 @@ class HeatmapViewController: UIViewController {
 
   var overlayCenter               : CLLocationCoordinate2D?
 
-  // tester outlets
-//  @IBOutlet weak var innerRed: UITextField!
-//  @IBOutlet weak var innerGreen: UITextField!
-//  @IBOutlet weak var innerBlue: UITextField!
-//  @IBOutlet weak var innerAlpha: UITextField!
-//  @IBOutlet weak var innerGradient: UITextField!
-//
-//  @IBOutlet weak var middleRed: UITextField!
-//  @IBOutlet weak var middleGreen: UITextField!
-//  @IBOutlet weak var middleBlue: UITextField!
-//  @IBOutlet weak var middleAlpha: UITextField!
-//  @IBOutlet weak var middleGradient: UITextField!
-//
-//  @IBOutlet weak var outerRed: UITextField!
-//  @IBOutlet weak var outerGreen: UITextField!
-//  @IBOutlet weak var outerBlue: UITextField!
-//  @IBOutlet weak var outerAlpha: UITextField!
-//
-//  @IBOutlet weak var blendModePicker: UIPickerView!
-//  @IBOutlet weak var outerGradient: UITextField!
-//
-//  @IBOutlet weak var innerRedStepper: UIStepper!
-//  @IBOutlet weak var innerGreenStepper: UIStepper!
-//  @IBOutlet weak var innerBlueStepper: UIStepper!
-//  @IBOutlet weak var innerAlphaStepper: UIStepper!
-//  @IBOutlet weak var innerGradientStepper: UIStepper!
-//
-//  @IBOutlet weak var middleRedStepper: UIStepper!
-//  @IBOutlet weak var middleGreenStepper: UIStepper!
-//  @IBOutlet weak var middleBlueStepper: UIStepper!
-//  @IBOutlet weak var middleAlphaStepper: UIStepper!
-//  @IBOutlet weak var middleGradientStepper: UIStepper!
-//
-//  @IBOutlet weak var outerRedStepper: UIStepper!
-//  @IBOutlet weak var outerGreenStepper: UIStepper!
-//  @IBOutlet weak var outerBlueStepper: UIStepper!
-//  @IBOutlet weak var outerAlphaStepper: UIStepper!
-//  @IBOutlet weak var outerGradientStepper: UIStepper!
-//
-//  @IBOutlet weak var radiusField: UITextField!
-//  @IBOutlet weak var radiusStepper: UIStepper!
-//
-//  @IBOutlet weak var pitchSegmentedControl: UISegmentedControl!
-//  @IBOutlet weak var mapSegmentedControl: UISegmentedControl!
-//  @IBOutlet weak var panelSegmentedControl: UISegmentedControl!
-//
-//  @IBOutlet weak var coloursStackView: UIStackView!
-//  @IBOutlet weak var lowerControlsStackView: UIStackView!
-
   @IBOutlet weak var resizeButton: UIButton!
-
-//  @IBAction func stepperRadius(_ sender: UIStepper) {
-//    radius = Int(sender.value)
-//    radiusField.text = String(describing: radius)
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func segPanel(_ sender: UISegmentedControl) {
-//    switch sender.selectedSegmentIndex {
-//    case 0:
-//      coloursStackView.isHidden = false
-//      lowerControlsStackView.isHidden = false
-//    case 1:
-//      coloursStackView.isHidden = true
-//      lowerControlsStackView.isHidden = true
-//    default:
-//      coloursStackView.isHidden = false
-//      lowerControlsStackView.isHidden = false
-//    }
-//  }
-//
-//  @IBAction func segMap(_ sender: UISegmentedControl) {
-//    switch sender.selectedSegmentIndex {
-//    case 0:
-//      self.mapView.mapType = .standard
-//    case 1:
-//      self.mapView.mapType = .satellite
-//    default:
-//      self.mapView.mapType = .standard
-//    }
-//  }
-
-//  @IBAction func segPitch(_ sender: UISegmentedControl) {
-//
-//    switch sender.selectedSegmentIndex {
-//    case 0:
-//      pitchOn = true
-//    case 1:
-//      pitchOn = false
-//    default:
-//      pitchOn = true
-//    }
-//
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperInnerRed(_ sender: UIStepper) {
-//    innerColourRed = String(format:"%.1f", sender.value)
-//    innerRed.text = innerColourRed
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperInnerGreen(_ sender: UIStepper) {
-//    innerColourGreen = String(format:"%.1f", sender.value)
-//    innerGreen.text = innerColourGreen
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperInnerBlue(_ sender: UIStepper) {
-//    innerColourBlue = String(format:"%.1f", sender.value)
-//    innerBlue.text = innerColourBlue
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperInnerAlpha(_ sender: UIStepper) {
-//    innerColourAlpha = String(format:"%.1f", sender.value)
-//    innerAlpha.text = innerColourAlpha
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperInnerGradient(_ sender: UIStepper) {
-//    innerColourGradient = String(format:"%.1f", sender.value)
-//    innerGradient.text = innerColourGradient
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperMiddleRed(_ sender: UIStepper) {
-//    middleColourRed = String(format:"%.1f", sender.value)
-//    middleRed.text = middleColourRed
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperMiddleGreen(_ sender: UIStepper) {
-//    middleColourGreen = String(format:"%.1f", sender.value)
-//    middleGreen.text = middleColourGreen
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperMiddleBlue(_ sender: UIStepper) {
-//    middleColourBlue = String(format:"%.1f", sender.value)
-//    middleBlue.text = middleColourBlue
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperMiddleAlpha(_ sender: UIStepper) {
-//    middleColourAlpha = String(format:"%.1f", sender.value)
-//    middleAlpha.text = middleColourAlpha
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperMiddleGradient(_ sender: UIStepper) {
-//    middleColourGradient = String(format:"%.1f", sender.value)
-//    middleGradient.text = middleColourGradient
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperOuterRed(_ sender: UIStepper) {
-//    outerColourRed =  String(format:"%.1f", sender.value)
-//    outerRed.text = outerColourRed
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperOuterGreen(_ sender: UIStepper) {
-//    outerColourGreen = String(format:"%.1f", sender.value)
-//    outerGreen.text = outerColourGreen
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperOuterBlue(_ sender: UIStepper) {
-//    outerColourBlue = String(format:"%.1f", sender.value)
-//    outerBlue.text = outerColourBlue
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperOuterAlpha(_ sender: UIStepper) {
-//    outerColourAlpha = String(format:"%.1f", sender.value)
-//    outerAlpha.text = outerColourAlpha
-//    refreshHeatmap()
-//  }
-//
-//  @IBAction func stepperOuterGradient(_ sender: UIStepper) {
-//    outerColourGradient = String(format:"%.1f", sender.value)
-//    outerGradient.text = outerColourGradient
-//    refreshHeatmap()
-//  }
-//
-//
-//  @IBAction func btnPoints(_ sender: Any) {
-//
-//    let annotations = mapView.annotations
-//    mapView.removeAnnotations(annotations)
-//    removeViewWithTag(tag: 301)
-//    removeViewWithTag(tag: 302)
-//    removeViewWithTag(tag: 303)
-//    removeViewWithTag(tag: 101)
-//    removeViewWithTag(tag: 102)
-//    removeViewWithTag(tag: 103)
-//
-//  }
 
   @IBAction func btnReset(_ sender: Any) {
 
@@ -343,10 +145,8 @@ class HeatmapViewController: UIViewController {
     radius = 2
 
     blendMode                   = CGBlendMode.colorBurn
-//    loadTesterUI()
     refreshHeatmap()
   }
-
 
   @IBOutlet weak var activityField      : ThemeMediumFontTextField!
   @IBOutlet weak var sportField         : ThemeMediumFontTextField!
@@ -363,35 +163,8 @@ class HeatmapViewController: UIViewController {
   @IBOutlet weak var heartRateImageView : UIImageView!
   @IBOutlet weak var distanceImageView  : UIImageView!
 
-
   let activityPicker              = UIPickerView()
   let sportPicker                 = UIPickerView()
-
-
-//  @IBAction func textfieldEditingDidEnd(_ sender: Any) {
-//
-//    // update fields from UI values
-//    innerColourGradient =  innerGradient.text ?? ""
-//    middleColourGradient = middleGradient.text ?? ""
-//    outerColourGradient = outerGradient.text ?? ""
-//
-//    innerColourRed = innerRed.text ?? ""
-//    innerColourBlue = innerBlue.text ?? ""
-//    innerColourGreen = innerGreen.text ?? ""
-//    innerColourAlpha = innerAlpha.text ?? ""
-//
-//    middleColourRed = middleRed.text ?? ""
-//    middleColourBlue = middleBlue.text ?? ""
-//    middleColourGreen = middleGreen.text ?? ""
-//    middleColourAlpha = middleAlpha.text ?? ""
-//
-//    outerColourRed = outerRed.text ?? ""
-//    outerColourBlue = outerBlue.text ?? ""
-//    outerColourGreen = outerGreen.text ?? ""
-//    outerColourAlpha = outerAlpha.text ?? ""
-//
-//    refreshHeatmap()
-//  }
 
   @IBOutlet weak var mapView: MKMapView!
 
@@ -419,16 +192,13 @@ class HeatmapViewController: UIViewController {
     )
     gesture.scale = 1
 
-    //    print("gestureView frame: \(gestureView.frame.debugDescription)")
 
   }
 
   @objc func handlePan(_ sender: UIPanGestureRecognizer) {
 
-    // 1
     let translation = sender.translation(in: view)
 
-    // 2
     guard let gestureView = sender.view else {
       return
     }
@@ -438,72 +208,48 @@ class HeatmapViewController: UIViewController {
       y: gestureView.center.y + translation.y
     )
 
-    // 3
     sender.setTranslation(.zero, in: view)
-
     guard sender.state == .ended else {
       return
     }
 
-    // 4
     let velocity = sender.velocity(in: view)
     let magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y))
     let slideMultiplier = magnitude / 200
 
-    // 5
     let slideFactor = 0.1 * slideMultiplier
-    // 6
     var finalPoint = CGPoint(
       x: gestureView.center.x + (velocity.x * slideFactor),
       y: gestureView.center.y + (velocity.y * slideFactor)
     )
 
-    // 7
     finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
     finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
 
-    //    print("gestureView frame: \(gestureView.frame.debugDescription)")
-
-    //    // 8
-    //    UIView.animate(
-    //      withDuration: Double(slideFactor * 2),
-    //      delay: 0,
-    //      // 9
-    //      options: .curveEaseOut,
-    //      animations: {
-    //        gestureView.center = finalPoint
-    //      })
-
   }
 
-  @IBAction func resetPitches(_ sender: Any) {
-    MyFunc.deletePlayingAreas()
-  }
-
-  // this is where the fun begins... resize mode
   @IBAction func btnResize(_ sender: Any) {
 
     if resizeOn == true {
       // turn everything off (as it's on)
 
-      print("Resize OFF logic : headings at start")
-      printHeadings()
-
       resizeOn = false
       resizeButton.setTitle("Adjust Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemGreen
 
-      self.touchView.isHidden = true
+      //      self.touchView.isHidden = true
       let allAnnotations = self.mapView.annotations
       self.mapView.removeAnnotations(allAnnotations)
-      // remove the pins
+
       savePitchCoordinates()
 
-      removeViewWithTag(tag: 101)
-      removeViewWithTag(tag: 102)
-      removeViewWithTag(tag: 103)
+      // remove the pins
+      // these lines remove the validation pins
+      //      removeViewWithTag(tag: 101)
+      //      removeViewWithTag(tag: 102)
+      //      removeViewWithTag(tag: 103)
+      // this removes the pitchView
       removeViewWithTag(tag: 200)
-
 
       // size the mapView to the newly resized pitch
       if let overlays = mapView?.overlays {
@@ -511,41 +257,21 @@ class HeatmapViewController: UIViewController {
 
           if overlay is FootballPitchOverlay {
             let overlayRect = overlay.boundingMapRect
-            let overlayRectStr = String(describing: overlayRect)
-            print ("overlayRect: \(overlayRectStr)")
-
-//            let mapRectThatFits = mapView.mapRectThatFits(overlayRect)
-
             mapView.visibleMapRect = overlayRect
             mapView.setCenter(self.overlayCenter!, animated: false)
-
-            print("Headings before resetting map camera heading")
-            printHeadings()
             mapView.camera.heading = pitchViewRotation.radiansToDegrees
-            print("Headings after resetting map camera heading")
-            printHeadings()
 
           }
         }
       }
 
-      print("Resize OFF logic : headings at end")
-      printHeadings()
-
-      // centre the mapView on the newly resized pitch
-
-
     } else {
       // turn everything on (as it's off)
-
-      print("Resize ON logic : headings at start")
-      printHeadings()
 
       resizeOn = true
       startResize = true
       resizeButton.setTitle("Save Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemRed
-      //      self.touchView.isHidden = false
 
       // get the saved playing area coordinates
       MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
@@ -561,7 +287,6 @@ class HeatmapViewController: UIViewController {
           let playingAreaStr = String(describing: playingArea)
           MyFunc.logMessage(.debug, playingAreaStr)
 
-
           let topLeftCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
           let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
           let bottomRightCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
@@ -575,21 +300,10 @@ class HeatmapViewController: UIViewController {
 
       // now need to size the pitchView from the MapView information
       // we have the mapView rect from the overlay and the coordinates
-      // let's try the coordinates first as MapView has better conversion functions
 
       let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
       let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
       let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
-
-      // this code pins the coordinates onto the map
-      setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
-      setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
-      setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
-
-      // this code pins the points onto the map - this should prove the conversion is the same
-      addPinImage(point: pitchViewBottomLeft, colour: .systemPurple, tag: 101)
-      addPinImage(point: pitchViewBottomRight, colour: .systemBlue, tag: 102)
-      addPinImage(point: pitchViewTopLeft, colour: .systemRed, tag: 103)
 
       let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
       let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
@@ -599,12 +313,10 @@ class HeatmapViewController: UIViewController {
 
       // need to add the rotation
       // issue : MKMapView has origin in bottom left so rotation starts from there
-      // UIView origin is top left - KIV when coding this
-      // first attempt - get angle from TL to BL
+      // UIView origin is top left
       let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
       newPitchView.image = pitchImageGreen
       newPitchView.layer.opacity = 1
-      //      newPitchView.translatesAutoresizingMaskIntoConstraints = false
       newPitchView.isUserInteractionEnabled = true
       newPitchView.tag = 200
 
@@ -621,14 +333,6 @@ class HeatmapViewController: UIViewController {
       newPitchView.addGestureRecognizer(rotator)
       newPitchView.addGestureRecognizer(pincher)
 
-
-      let pitchViewBottomLefttStr = String(describing: pitchViewBottomLeft)
-      print("pitchViewBottomLeft: \(pitchViewBottomLefttStr)")
-      let pitchViewTopLeftStr = String(describing: pitchViewTopLeft)
-      print("pitchViewTopLeft: \(pitchViewTopLeftStr)")
-      let pitchViewBottomRightStr = String(describing: pitchViewBottomRight)
-      print("pitchViewBottomRight: \(pitchViewBottomRightStr)")
-
       let viewRotation = rotation(from: pitchView.transform)
       let mapViewHeading = mapView.camera.heading
       let viewRotationAsCGFloat = CGFloat(viewRotation)
@@ -637,74 +341,18 @@ class HeatmapViewController: UIViewController {
       let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
       let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
 
-      let angleIncMapRotationStr = String(describing: angleIncMapRotation)
-      print("angleIncMapRotationStr: \(angleIncMapRotationStr)")
-
-      //      pitchView.transform = pitchView.transform.rotated(by: angleIncMapRotation)
-
       //remove the pitch overlay
-
       if let overlays = mapView?.overlays {
         for overlay in overlays {
-          // remove all MKPolyline-Overlays
           if overlay is FootballPitchOverlay {
-            let overlayRect = overlay.boundingMapRect
-            let overlayRectStr = String(describing: overlayRect)
-            print ("overlayRect: \(overlayRectStr)")
-
             mapView?.removeOverlay(overlay)
           }
         }
       }
 
-      print("Resize ON logic : headings at end")
-      printHeadings()
-
     }
 
-
   }
-
-  func printHeadings() {
-
-    let pitchViewRotationStr = String(describing: pitchViewRotation.radiansToDegrees)
-    print("pitchViewRotation: \(pitchViewRotationStr)")
-    let pitchViewTransformAngleStr = String(describing: self.pitchView.transform.angle.radiansToDegrees)
-    print("pitchView.transform.angle: \(pitchViewTransformAngleStr)")
-    let cameraHeading = mapView.camera.heading.debugDescription
-    print("mapView heading: \(cameraHeading)")
-
-  }
-
-
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-
-    //  let pitchViewCGRect = pitchView.frame
-
-    let mapSnapshot = mapView.snapshot()
-
-
-    if let data = mapSnapshot.pngData() {
-      if let workoutId = self.heatmapWorkoutId {
-        let workoutIDString = String(describing: workoutId)
-        let fileName = "Heatmap_" + workoutIDString + ".png"
-        let fileURL = self.getDocumentsDirectory().appendingPathComponent(fileName)
-        try? data.write(to: fileURL)
-        MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
-
-      }
-    }
-
-
-  }
-
-  func getDocumentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    let documentsDirectory = paths[0]
-    return documentsDirectory
-  }
-
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -713,9 +361,6 @@ class HeatmapViewController: UIViewController {
       self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
       self.loadMetadataUI()
     }
-    // set up the tester picker
-//    blendModePicker.delegate = self
-//    blendModePicker.dataSource = self
 
     mapView.delegate = self
 
@@ -725,18 +370,18 @@ class HeatmapViewController: UIViewController {
 
     // add the touchView
     // doing this programmatically to avoid Storyboard complaining about overlap
-    let mapViewFrame = mapView.globalFrame!
-    touchView = UIView(frame: mapViewFrame)
-    touchView.bounds = mapView.bounds
-    touchView.translatesAutoresizingMaskIntoConstraints = false
-
-    self.mapView.addSubview(touchView)
-
-    // this code ensures the touchView is completely aligned with the mapView
-    let attributes: [NSLayoutConstraint.Attribute] = [.top, .bottom, .right, .left]
-    NSLayoutConstraint.activate(attributes.map {
-      NSLayoutConstraint(item: touchView as Any, attribute: $0, relatedBy: .equal, toItem: touchView.superview, attribute: $0, multiplier: 1, constant: 0)
-    })
+    //    let mapViewFrame = mapView.globalFrame!
+    //    touchView = UIView(frame: mapViewFrame)
+    //    touchView.bounds = mapView.bounds
+    //    touchView.translatesAutoresizingMaskIntoConstraints = false
+    //
+    //    self.mapView.addSubview(touchView)
+    //
+    //    // this code ensures the touchView is completely aligned with the mapView
+    //    let attributes: [NSLayoutConstraint.Attribute] = [.top, .bottom, .right, .left]
+    //    NSLayoutConstraint.activate(attributes.map {
+    //      NSLayoutConstraint(item: touchView as Any, attribute: $0, relatedBy: .equal, toItem: touchView.superview, attribute: $0, multiplier: 1, constant: 0)
+    //    })
 
     let pitchImageBlue = UIImage(named: "Figma Pitch 11 Blue")
     pitchView = UIImageView(image: pitchImageBlue)
@@ -750,16 +395,16 @@ class HeatmapViewController: UIViewController {
     //    self.touchView.addSubview(pitchView)
 
 
-//
-//    coloursStackView.isHidden = true
-//    lowerControlsStackView.isHidden = true
+    //
+    //    coloursStackView.isHidden = true
+    //    lowerControlsStackView.isHidden = true
 
     resizeOn = false
     resizeButton.setTitle("Adjust Pitch Size", for: .normal)
     resizeButton.tintColor = UIColor.systemGreen
-    self.touchView.isHidden = true
+    //    self.touchView.isHidden = true
 
-//    self.loadUI()
+    //    self.loadUI()
     self.loadTesterData()
     getStaticData()
 
@@ -849,8 +494,6 @@ class HeatmapViewController: UIViewController {
 
   func loadSamplesUI() {
 
-
-
     // colour icons
     heartRateImageView.image = heartRateImageView.image?.withRenderingMode(.alwaysTemplate)
     heartRateImageView.tintColor = UIColor.systemRed
@@ -871,38 +514,14 @@ class HeatmapViewController: UIViewController {
       return
     }
 
-
-
-    // start and end date
-    //    var workoutStartDateAsString = ""
-    //    var workoutEndDateAsString = ""
-    //
-    //    workoutDateFormatter.dateFormat = "E, d MMM yyyy HH:mm"
-    //    workoutStartDateAsString = workoutDateFormatter.string(from: heatmapWorkout.startDate)
-    //
-    //    workoutDateFormatter.dateFormat = "d MMM yyy HH:mm"
-    //    self.title = workoutDateFormatter.string(from: heatmapWorkout.startDate)
-    //
-    //    workoutDateFormatter.dateFormat = "HH:mm"
-    //    workoutEndDateAsString = workoutDateFormatter.string(from: heatmapWorkout.endDate)
-
-    //    let workoutDateString = workoutStartDateAsString + " - " + workoutEndDateAsString
-    //    dateLabel.text = workoutDateString
-
-    // duration
-    //    let workoutIntervalFormatter = DateComponentsFormatter()
-    //    durationLabel.text = workoutIntervalFormatter.string(from: heatmapWorkout.duration)
-
     // total distance
     if let workoutDistance = heatmapWorkout.totalDistance?.doubleValue(for: .meter()) {
       let formattedDistance = String(format: "%.2f m", workoutDistance)
       distanceLabel.text = formattedDistance
 
       let pace = workoutDistance / heatmapWorkout.duration
-
       let paceString = MyFunc.getUnitSpeedAsString(value: pace, unitSpeed: unitSpeed, formatter: measurementFormatter)
       let paceUnitString = unitSpeed.symbol
-
       paceLabel.text = paceString + " " + paceUnitString
 
     } else {
@@ -922,93 +541,16 @@ class HeatmapViewController: UIViewController {
     // run query and update label for average Heart Rate
     loadAverageHeartRateLabel(startDate: heatmapWorkout.startDate, endDate: heatmapWorkout.endDate, quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!, option: [])
 
-
-
-
-
-
-//    innerRedStepper.transform = innerRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    innerGreenStepper.transform = innerGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    innerBlueStepper.transform = innerBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    innerAlphaStepper.transform = innerAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    innerGradientStepper.transform = innerGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//
-//    middleRedStepper.transform = middleRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    middleGreenStepper.transform = middleGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    middleBlueStepper.transform = middleBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    middleAlphaStepper.transform = middleAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    middleGradientStepper.transform = middleGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//
-//    outerRedStepper.transform = outerRedStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    outerGreenStepper.transform = outerGreenStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    outerBlueStepper.transform = outerBlueStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    outerAlphaStepper.transform = outerAlphaStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    outerGradientStepper.transform = outerGradientStepper.transform.scaledBy(x: 0.75, y: 1.0)
-//    radiusStepper.transform = radiusStepper.transform.scaledBy(x: 0.75, y: 1.0)
   }
-
-//  func loadTesterUI() {
-//
-//    innerGradient.text = innerColourGradient
-//    middleGradient.text = middleColourGradient
-//    outerGradient.text = outerColourGradient
-//
-//    innerRed.text = innerColourRed
-//    innerBlue.text = innerColourBlue
-//    innerGreen.text = innerColourGreen
-//    innerAlpha.text = innerColourAlpha
-//
-//    middleRed.text = middleColourRed
-//    middleBlue.text = middleColourBlue
-//    middleGreen.text = middleColourGreen
-//    middleAlpha.text = middleColourAlpha
-//
-//    outerRed.text = outerColourRed
-//    outerBlue.text = outerColourBlue
-//    outerGreen.text = outerColourGreen
-//    outerAlpha.text = outerColourAlpha
-//
-//    innerRedStepper.value = Double(innerColourRed)!
-//    innerGreenStepper.value = Double(innerColourGreen)!
-//    innerBlueStepper.value = Double(innerColourBlue)!
-//    innerAlphaStepper.value = Double(innerColourAlpha)!
-//    innerGradientStepper.value = Double(innerColourGradient)!
-//
-//    middleRedStepper.value = Double(middleColourRed)!
-//    middleGreenStepper.value = Double(middleColourGreen)!
-//    middleBlueStepper.value = Double(middleColourBlue)!
-//    middleAlphaStepper.value = Double(middleColourAlpha)!
-//    middleGradientStepper.value = Double(middleColourGradient)!
-//
-//    outerRedStepper.value = Double(outerColourRed)!
-//    outerGreenStepper.value = Double(outerColourGreen)!
-//    outerBlueStepper.value = Double(outerColourBlue)!
-//    outerAlphaStepper.value = Double(outerColourAlpha)!
-//    outerGradientStepper.value = Double(outerColourGradient)!
-//    radiusStepper.value = Double(radius)
-//
-//    radiusField.text = String(radius)
-//
-//    switch pitchOn {
-//    case true:
-//      pitchSegmentedControl.selectedSegmentIndex = 0
-//    case false:
-//      pitchSegmentedControl.selectedSegmentIndex = 1
-//
-//    }
-//
-//  }
 
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
     return true
   }
 
-
   func savePitchCoordinates() {
 
     // adding code to save pitch corner points as coordinates
-
-    // first need to get the pitch corners on the touch view
+    // first need to get the corners on the pitch view
     guard let viewToSave = self.view.viewWithTag(200) else {
       MyFunc.logMessage(.debug, "Cannot find pitchView to save")
       return
@@ -1026,7 +568,6 @@ class HeatmapViewController: UIViewController {
     var pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
     let pitchMapTopRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
 
-
     //this logic compares the TopLeft and BottomRight
     //if the TopLeft is south of the BottomRight swap them round
     let topLeftLatitude = pitchMapTopLeftCoordinate.latitude
@@ -1037,30 +578,22 @@ class HeatmapViewController: UIViewController {
       pitchMapBottomRightCoordinate = coordinateToSwap
       pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
 
-    } else {
-
-
     }
 
-
-    // this code pins the coordinates onto the map
-    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "bl")
-    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "tl")
-    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
-
-    // this code pins the points onto the map - this should prove the conversion is the same
-    addPinImage(point: pitchMapBottomLeftCGPoint, colour: .orange, tag: 301)
-    addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
-    addPinImage(point: pitchMapTopLeftCGPoint, colour: .white, tag: 303)
-
-    //    let pitchAngle = angleInRadians(between: pitchMapBottomRightCGPoint, ending: pitchMapBottomLeftCGPoint)
-
+    //    // this code pins the coordinates onto the map
+    //    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "bl")
+    //    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "tl")
+    //    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
+    //
+    //    // this code pins the points onto the map - this should prove the conversion is the same
+    //    addPinImage(point: pitchMapBottomLeftCGPoint, colour: .orange, tag: 301)
+    //    addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
+    //    addPinImage(point: pitchMapTopLeftCGPoint, colour: .white, tag: 303)
 
     // update the overlayCenter as we will centre the map Zoom on this
     let midpointLatitude = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
     let midpointLongitude = (pitchMapTopLeftCoordinate.longitude + pitchMapBottomRightCoordinate.longitude) / 2
     self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-
 
     createPitchOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
 
@@ -1131,15 +664,11 @@ class HeatmapViewController: UIViewController {
     return atan2(Double(transform.b), Double(transform.a))
   }
 
-
-
   func setMapViewZoom(rect: MKMapRect) {
     let insets = UIEdgeInsets(top: 0, left: 5, bottom: 5, right: 5)
-    //    let insets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
 
     mapView.setVisibleMapRect(rect, edgePadding: insets, animated: false)
     mapView.setCenter(self.overlayCenter!, animated: false)
-
   }
 
   func createREHeatmap() {
@@ -1150,8 +679,6 @@ class HeatmapViewController: UIViewController {
 
   }
   func loadAverageHeartRateLabel(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) {
-    //  MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
-
     let quantityPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
     let heartRateQuery = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: quantityPredicate, options: .discreteAverage) { (query, statisticsOrNil, errorOrNil) in
 
@@ -1169,8 +696,6 @@ class HeatmapViewController: UIViewController {
   }
 
   func loadAverageSpeedLabel(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) {
-    //  MyFunc.logMessage(.debug, "getHeartRateSample: \(String(describing: startDate)) to \(String(describing: endDate))")
-
     let quantityPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
     let heartRateQuery = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: quantityPredicate, options: .discreteAverage) { (query, statisticsOrNil, errorOrNil) in
 
@@ -1188,9 +713,7 @@ class HeatmapViewController: UIViewController {
   }
 
   func getSavedPitchOverlay() {
-
     MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
-
       switch result {
       case .failure(let error):
         // no playing area retrieved so create a default area
@@ -1208,7 +731,6 @@ class HeatmapViewController: UIViewController {
         self.bottomLeftCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
         self.bottomRightCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: maxLong!)
         self.topLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: minLong!)
-
 
         let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
         let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
@@ -1258,7 +780,6 @@ class HeatmapViewController: UIViewController {
         self.bottomRightCoord = bottomRightCoord
         self.topLeftCoord = topLeftCoord
 
-
         // now get the CGPoints for these Coordinates
         let bottomLeftCGPoint = self.mapView.convert(bottomLeftCoord, toPointTo: self.mapView)
         let bottomLeftCGPointStr = String(describing: bottomLeftCGPoint)
@@ -1272,22 +793,10 @@ class HeatmapViewController: UIViewController {
         let bottomRightCGPointStr = String(describing: bottomRightCGPoint)
         print("bottomRightCGPoint: \(bottomRightCGPointStr)")
 
-
-        // the rotation is straightforward - rotate the pitchView by the same angle as the saved PlayingArea
-        //        let savedPitchViewRotationStr = self.pitchView.transform.angle
-        //        print("savedPitchViewRotationStr: \(savedPitchViewRotationStr)")
-        //
-        ////        self.pitchView.transform = self.pitchView.transform.rotated(by: playingArea.rotation)
-        //
-        //        let pitchViewRotationStr = self.pitchView.transform.angle
-        //        print("pitchViewRotationStr: \(pitchViewRotationStr)")
-
         self.createPitchOverlay(topLeft: topLeftCoord, bottomLeft: bottomLeftCoord, bottomRight: bottomRightCoord)
-
 
       }
     })
-
   }
 
   func createPitchOverlay(topLeft: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) {
@@ -1300,20 +809,17 @@ class HeatmapViewController: UIViewController {
     let pitchRectHeight = MKMapPointDistance(from: bottomLeftMapPoint, to: topLeftMapPoint)
     let pitchRectWidth = MKMapPointDistance(from: bottomLeftMapPoint, to: bottomRightMapPoint)
 
-    //    // using the bottom left as the origin of the rectangle (currently)
+    // using the bottom left as the origin of the rectangle (currently)
     let pitchMapOriginX = bottomLeftMapPoint.x
     let pitchMapOriginY = bottomLeftMapPoint.y
 
     // set up the rectangle
     let pitchMKMapRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
 
-
     //  create an overlay of the pitch based upon the rectangle
     let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
     self.mapView.addOverlay(adjustedPitchOverlay)
     self.setMapViewZoom(rect: pitchMKMapRect)
-
-
 
   }
 
@@ -1335,7 +841,6 @@ class HeatmapViewController: UIViewController {
   func getWorkoutData() {
     MyFunc.logMessage(.debug, "worko«utId: \(String(describing: heatmapWorkoutId))")
 
-    // check Workout Id passed in is valid
     guard let workoutId = heatmapWorkoutId else {
       MyFunc.logMessage(.error, "heatmapWorkoutId is invalid: \(String(describing: heatmapWorkoutId))")
       return
@@ -1368,10 +873,8 @@ class HeatmapViewController: UIViewController {
     )
     { (query, results, error) in
       DispatchQueue.main.async {
-        //4. Cast the samples as HKWorkout
         guard
-          let samples = results as? [HKWorkout],
-          error == nil
+          let samples = results as? [HKWorkout], error == nil
         else {
           completion(nil, error)
           return
@@ -1384,11 +887,9 @@ class HeatmapViewController: UIViewController {
 
   }
 
-
   func getRouteSampleObject(workout: HKWorkout) {
 
     let runningObjectQuery = HKQuery.predicateForObjects(from: workout)
-
     let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
 
       guard error == nil else {
@@ -1419,26 +920,18 @@ class HeatmapViewController: UIViewController {
 
   func getRouteLocationData(route: HKWorkoutRoute) {
 
-    //    let samplesCount = route.count
-
-    // Create the route query.
     let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNil, done, errorOrNil) in
-
       // This block may be called multiple times.
-
       if errorOrNil != nil {
         MyFunc.logMessage(.error, "Error retrieving workout locations")
         return
       }
-
       guard let locations = locationsOrNil else {
         MyFunc.logMessage(.error, "Error retrieving workout locations")
-
-        fatalError("*** Invalid State: This can only fail if there was an error. ***")
+        return
       }
 
       let locationsAsCoordinates = locations.map {$0.coordinate}
-
       self.heatmapperCoordinatesArray.append(contentsOf: locationsAsCoordinates)
 
       // if done = all data retrieved
@@ -1447,30 +940,57 @@ class HeatmapViewController: UIViewController {
 
         // dispatch to the main queue as we are making UI updates
         DispatchQueue.main.async {
-
-          // get the workout's metadata
-//          self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
-//          if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == self.heatmapWorkoutId}) {
-//            self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
-//            self.loadUI()
-//          }
           self.loadSamplesUI()
           self.getSavedPitchOverlay()
           self.createREHeatmap()
-
-
         }
-
       }
-
-      // You can stop the query by calling:
-      // store.stop(query)
-
     }
     healthStore.execute(query)
   }
 
+  func angleInDegrees(between starting: CGPoint, ending: CGPoint) -> CGFloat {
+    let center = CGPoint(x: ending.x - starting.x, y: ending.y - starting.y)
+    let radians = atan2(center.y, center.x)
+    let degrees = radians * 180 / .pi
+    return degrees > 0 ? degrees : degrees + degrees
+  }
 
+  func angleInRadians(between starting: CGPoint, ending: CGPoint) -> CGFloat {
+    let center = CGPoint(x: ending.x - starting.x, y: ending.y - starting.y)
+    let radians = atan2(center.y, center.x)
+    //    let radiansStr = String(describing: radians)
+    //    let startingStr = String(describing: starting)
+    //    let endingStr = String(describing: ending)
+    //    print("Angle between \(startingStr) and \(endingStr) = \(radiansStr) radians")
+    //    let degrees = radians * 180 / .pi
+    //    let degreesStr = String(describing: degrees)
+    //    print("Angle between \(startingStr) and \(endingStr) = \(degreesStr) degrees")
+    return radians
+  }
+
+
+  //  func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
+  //        let annotation = MKPointAnnotation()
+  //        annotation.coordinate = coordinate
+  //        annotation.title = title
+  //        mapView.addAnnotation(annotation)
+  //  }
+  //
+  //  func addPinImage(point: CGPoint, colour: UIColor, tag: Int) {
+  //        let pinImageView = UIImageView()
+  //        pinImageView.frame = CGRect(x: point.x, y: point.y, width: 20, height: 20)
+  //        pinImageView.image = UIImage(systemName: "mappin")
+  //        pinImageView.tintColor = colour
+  //        pinImageView.tag = tag
+  //        mapView.addSubview(pinImageView)
+  //  }
+  //
+  func removeViewWithTag(tag: Int) {
+    if let viewToRemove = self.view.viewWithTag(tag) {
+      viewToRemove.removeFromSuperview()
+    }
+  }
 }
 
 extension HeatmapViewController: MKMapViewDelegate {
@@ -1590,17 +1110,9 @@ extension HeatmapViewController: MKMapViewDelegate {
 
   func setPinUsingMKPlacemark(coordinate: CLLocationCoordinate2D) {
     let pin = MKPlacemark(coordinate: coordinate)
-
     mapView.addAnnotation(pin)
   }
-//
-//  func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
-//    let annotation = MKPointAnnotation()
-//    annotation.coordinate = coordinate
-//    annotation.title = title
-//    mapView.addAnnotation(annotation)
-//
-//  }
+
 
   func updateWorkout()  {
 
@@ -1615,7 +1127,6 @@ extension HeatmapViewController: MKMapViewDelegate {
     let pitch = pitchField.text ?? ""
 
     let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, venue: venue, pitch: pitch)
-//    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
       workoutMetadataArray[row] = workoutMetadataToSave
     } else {
@@ -1624,113 +1135,37 @@ extension HeatmapViewController: MKMapViewDelegate {
     MyFunc.saveWorkoutMetadata(workoutMetadataArray)
     MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadataToSave))")
 
-
   }
 
 }
 
 extension HeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-//  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//    //    MyFunc.logMessage(.debug, "REHeatmapViewController.didSelectRow: \(row)")
-//
-//    let blendModeSelected = blendModeArray[row]
-//
-//    switch blendModeSelected {
-//    case .normal:
-//      blendMode = .normal
-//    case .multiply:
-//      blendMode = .multiply
-//    case .screen:
-//      blendMode = .screen
-//    case .overlay:
-//      blendMode = .overlay
-//    case .darken:
-//      blendMode = .darken
-//    case .lighten:
-//      blendMode = .lighten
-//    case .colorDodge:
-//      blendMode = .colorDodge
-//    case .colorBurn:
-//      blendMode = .colorBurn
-//    case .softLight:
-//      blendMode = .softLight
-//    case .hardLight:
-//      blendMode = .hardLight
-//    case .difference:
-//      blendMode = .difference
-//    case .exclusion:
-//      blendMode = .exclusion
-//    case .hue:
-//      blendMode = .hue
-//    case .saturation:
-//      blendMode = .saturation
-//    case .color:
-//      blendMode = .color
-//    case .luminosity:
-//      blendMode = .luminosity
-//    case .clear:
-//      blendMode = .clear
-//    case .copy:
-//      blendMode = .copy
-//    case .sourceIn:
-//      blendMode = .sourceIn
-//    case .sourceOut:
-//      blendMode = .sourceOut
-//    case .sourceAtop:
-//      blendMode = .sourceAtop
-//    case .destinationOver:
-//      blendMode = .destinationOver
-//    case .destinationIn:
-//      blendMode = .destinationIn
-//    case .destinationOut:
-//      blendMode = .destinationOut
-//    case .destinationAtop:
-//      blendMode = .destinationAtop
-//    case .xor:
-//      blendMode = .xor
-//    case .plusDarker:
-//      blendMode = .plusDarker
-//    case .plusLighter:
-//      blendMode = .plusLighter
-//      //    default:
-//      //      blendMode = .normal
-//    }
-//
-//    refreshHeatmap()
-//
-//  }
 
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
 
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-
     if pickerView == activityPicker {
       return activityArray.count
     } else {
       return sportArray.count
     }
-
   }
 
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-
     if pickerView == activityPicker {
       return activityArray[row].name
     } else {
       return sportArray[row].rawValue
     }
-
   }
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
     if pickerView == activityPicker {
       activityField.text = activityArray[row].name
-      //      if sportField.text == "" {
       sportField.text = activityArray[row].sport.rawValue
-      //      }
     } else {
       sportField.text = sportArray[row].rawValue
     }
@@ -1738,60 +1173,5 @@ extension HeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
     self.view.endEditing(true)
   }
-//
-//  func setPinUsingMKPlacemark(coordinate: CLLocationCoordinate2D) {
-//    let pin = MKPlacemark(coordinate: coordinate)
-//
-//    mapView.addAnnotation(pin)
-//  }
-
-  func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
-    //    let annotation = MKPointAnnotation()
-    //    annotation.coordinate = coordinate
-    //    annotation.title = title
-    //    mapView.addAnnotation(annotation)
-
-  }
-
-  func addPinImage(point: CGPoint, colour: UIColor, tag: Int) {
-
-    //    let pinImageView = UIImageView()
-    //    pinImageView.frame = CGRect(x: point.x, y: point.y, width: 20, height: 20)
-    //    pinImageView.image = UIImage(systemName: "mappin")
-    //    pinImageView.tintColor = colour
-    //    pinImageView.tag = tag
-    //    mapView.addSubview(pinImageView)
-
-  }
-
-  func removeViewWithTag(tag: Int) {
-    if let viewToRemove = self.view.viewWithTag(tag) {
-      viewToRemove.removeFromSuperview()
-    }
-  }
-
-  func angleInDegrees(between starting: CGPoint, ending: CGPoint) -> CGFloat {
-    let center = CGPoint(x: ending.x - starting.x, y: ending.y - starting.y)
-    let radians = atan2(center.y, center.x)
-    let degrees = radians * 180 / .pi
-    return degrees > 0 ? degrees : degrees + degrees
-
-  }
-
-  func angleInRadians(between starting: CGPoint, ending: CGPoint) -> CGFloat {
-    let center = CGPoint(x: ending.x - starting.x, y: ending.y - starting.y)
-    let radians = atan2(center.y, center.x)
-    let radiansStr = String(describing: radians)
-    let startingStr = String(describing: starting)
-    let endingStr = String(describing: ending)
-    print("Angle between \(startingStr) and \(endingStr) = \(radiansStr) radians")
-
-    let degrees = radians * 180 / .pi
-    let degreesStr = String(describing: degrees)
-    print("Angle between \(startingStr) and \(endingStr) = \(degreesStr) degrees")
-
-    return radians
-  }
-
 
 }
