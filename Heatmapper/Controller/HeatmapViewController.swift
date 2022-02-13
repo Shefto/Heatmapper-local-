@@ -235,12 +235,12 @@ class HeatmapViewController: UIViewController {
       resizeButton.setTitle("Adjust Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemGreen
 
-      //      self.touchView.isHidden = true
+
       let allAnnotations = self.mapView.annotations
       self.mapView.removeAnnotations(allAnnotations)
 
       savePitchCoordinates()
-
+      saveHeatmapPNG()
       // remove the pins
       // these lines remove the validation pins
       //      removeViewWithTag(tag: 101)
@@ -262,6 +262,9 @@ class HeatmapViewController: UIViewController {
           }
         }
       }
+
+
+
 
     } else {
       // turn everything on (as it's off)
@@ -314,7 +317,7 @@ class HeatmapViewController: UIViewController {
       // UIView origin is top left
       let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
       newPitchView.image = pitchImageGreen
-      newPitchView.layer.opacity = 1
+      newPitchView.layer.opacity = 0.5
       newPitchView.isUserInteractionEnabled = true
       newPitchView.tag = 200
 
@@ -350,6 +353,38 @@ class HeatmapViewController: UIViewController {
 
     }
 
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+
+   saveHeatmapPNG()
+
+
+  }
+
+  func saveHeatmapPNG() {
+
+
+    let mapSnapshot = mapView.snapshot()
+    if let data = mapSnapshot.pngData() {
+      if let workoutId = self.heatmapWorkoutId {
+        let workoutIDString = String(describing: workoutId)
+        let fileName = "Heatmap_" + workoutIDString + ".png"
+        let fileURL = self.getDocumentsDirectory().appendingPathComponent(fileName)
+        try? data.write(to: fileURL)
+        MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
+
+      }
+    }
+
+  }
+
+
+  func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let documentsDirectory = paths[0]
+    return documentsDirectory
   }
 
   override func viewDidLoad() {
