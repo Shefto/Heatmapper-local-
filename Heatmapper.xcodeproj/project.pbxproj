@@ -43,6 +43,7 @@
 		7944476F255A9B3B004708E3 /* DurationPickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7944476E255A9B3B004708E3 /* DurationPickerInterfaceController.swift */; };
 		79445D4F25A3292D001D3AC6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79445D4E25A3292C001D3AC6 /* StoreKit.framework */; };
 		7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */; };
+		7960FD7B27B97EB400EF4886 /* ViewCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7960FD7A27B97EB400EF4886 /* ViewCorners.swift */; };
 		7961D6BF25B74B4900204968 /* MyWKInterfaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */; };
 		7965F9C226AC1E27008B130D /* JDHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */; };
 		797026C0252DB4A500A86A05 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
@@ -219,6 +220,7 @@
 		7953B58825BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/IntervalTableViewFooter.strings"; sourceTree = "<group>"; };
 		7953B58925BAD7D100F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Interface.strings"; sourceTree = "<group>"; };
 		7953B58A25BAD7D200F35EBD /* cy-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "cy-GB"; path = "cy-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7960FD7A27B97EB400EF4886 /* ViewCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCorners.swift; sourceTree = "<group>"; };
 		7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWKInterfaceButton.swift; sourceTree = "<group>"; };
 		7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapViewController.swift; sourceTree = "<group>"; };
 		797026BF252DB4A500A86A05 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 		79A4EFA024A0AF45002A7870 = {
 			isa = PBXGroup;
 			children = (
+				7960FD7A27B97EB400EF4886 /* ViewCorners.swift */,
 				79A7E15025ACE48000D1A952 /* Localizable.strings */,
 				79F3480D25A3364100762724 /* Heatmapper.storekit */,
 				793D1ADE24B86BC90039441B /* Shared */,
@@ -877,6 +880,7 @@
 				79B80BD3253DDB8300BEA10F /* SceneDelegate.swift in Sources */,
 				79F3A2B0269796C100667B1B /* RE_DTMDiffColorProvider.swift in Sources */,
 				79FB27872561984000E1C9AD /* Objects.swift in Sources */,
+				7960FD7B27B97EB400EF4886 /* ViewCorners.swift in Sources */,
 				79913133263414B600811731 /* JDColorMixer.swift in Sources */,
 				798007F426F3DF8C00FFC294 /* EditActivityTableViewCell.swift in Sources */,
 				7935622825AF53C5006BBC54 /* HelpViewController.swift in Sources */,

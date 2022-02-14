@@ -230,7 +230,9 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   func loadHeatmapImages() {
     let fm = FileManager.default
     let path = Bundle.main.resourcePath!
+//    let path = getDocumentsDirectory().absoluteString
     let items = try! fm.contentsOfDirectory(atPath: path)
+
 
     for item in items {
       if item.hasSuffix("png") || item.hasSuffix("jpg") || item.hasSuffix("jpeg") {
@@ -241,6 +243,15 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
       }
     }
   }
+
+  func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let documentsDirectory = paths[0]
+    return documentsDirectory
+  }
+
+
+
 
   // retrieve all Heatmapper workouts
   func loadWorkouts(completion: @escaping ([HKWorkout]?, Error?) -> Void) {

@@ -1752,6 +1752,7 @@ DQoNCg
                                         <state key="normal" title="Reset Pitch Sizes"/>
                                         <connections>
                                             <action selector="resetPitches:" destination="vbg-Le-o0h" eventType="touchUpInside" id="9tZ-6M-W3j"/>
+                                            <action selector="resetPitches:" destination="Pbk-vr-61V" eventType="touchUpInside" id="AX0-Rv-NHu"/>
                                         </connections>
                                     </button>
                                 </subviews>
