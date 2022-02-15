@@ -285,8 +285,9 @@ class HeatmapViewController: UIViewController {
 
             newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
             let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
-            newPitchView.transform = oldPitchView.transform.rotated(by: pitchAngle)
-            mapView.addSubview(newPitchView)
+//            newPitchView.transform = oldPitchView.transform.rotated(by: pitchAngle)
+      newPitchView.transform = newPitchView.transform.rotated(by: pitchAngle)
+      mapView.addSubview(newPitchView)
             newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
 
             let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
@@ -296,7 +297,8 @@ class HeatmapViewController: UIViewController {
             newPitchView.addGestureRecognizer(rotator)
             newPitchView.addGestureRecognizer(pincher)
 
-            let viewRotation = rotation(from: oldPitchView.transform)
+//      let viewRotation = rotation(from: oldPitchView.transform)
+            let viewRotation = rotation(from: newPitchView.transform)
             let mapViewHeading = mapView.camera.heading
             let viewRotationAsCGFloat = CGFloat(viewRotation)
 
@@ -353,7 +355,8 @@ class HeatmapViewController: UIViewController {
 
     newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
     let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
-    newPitchView.transform = oldPitchView.transform.rotated(by: pitchAngle)
+//    newPitchView.transform = oldPitchView.transform.rotated(by: pitchAngle)
+    newPitchView.transform = newPitchView.transform.rotated(by: pitchAngle)
     mapView.addSubview(newPitchView)
     newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
 
@@ -364,7 +367,9 @@ class HeatmapViewController: UIViewController {
     newPitchView.addGestureRecognizer(rotator)
     newPitchView.addGestureRecognizer(pincher)
 
-    let viewRotation = rotation(from: oldPitchView.transform)
+//    let viewRotation = rotation(from: oldPitchView.transform)
+
+    let viewRotation = rotation(from: newPitchView.transform)
     let mapViewHeading = mapView.camera.heading
     let viewRotationAsCGFloat = CGFloat(viewRotation)
 
@@ -686,18 +691,18 @@ class HeatmapViewController: UIViewController {
 
     mapView.delegate = self
 
-    let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
-    let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
-    let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
-
-    let pitchImageBlue = UIImage(named: "Figma Pitch 11 Blue")
-    oldPitchView = UIImageView(image: pitchImageBlue)
-    oldPitchView.layer.opacity = 0.5
-    //    pitchView.translatesAutoresizingMaskIntoConstraints = false
-    oldPitchView.isUserInteractionEnabled = true
-    oldPitchView.addGestureRecognizer(panner)
-    oldPitchView.addGestureRecognizer(rotator)
-    oldPitchView.addGestureRecognizer(pincher)
+//    let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
+//    let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
+//    let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
+//
+//    let pitchImageBlue = UIImage(named: "Figma Pitch 11 Blue")
+//    oldPitchView = UIImageView(image: pitchImageBlue)
+//    oldPitchView.layer.opacity = 0.5
+//    //    pitchView.translatesAutoresizingMaskIntoConstraints = false
+//    oldPitchView.isUserInteractionEnabled = true
+//    oldPitchView.addGestureRecognizer(panner)
+//    oldPitchView.addGestureRecognizer(rotator)
+//    oldPitchView.addGestureRecognizer(pincher)
 
     resizeOn = false
     resizeButton.setTitle("Adjust Pitch Size", for: .normal)
@@ -1207,7 +1212,7 @@ extension HeatmapViewController: MKMapViewDelegate {
         let pitchViewCGRectStr = String(describing: pitchViewCGRect)
         print("pitchViewCGRect:")
         print(pitchViewCGRectStr)
-        oldPitchView.frame = pitchViewCGRect
+//        oldPitchView.frame = pitchViewCGRect
         return footballPitchOverlayRenderer
       }
     }
