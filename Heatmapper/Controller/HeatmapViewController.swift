@@ -978,19 +978,19 @@ class HeatmapViewController: UIViewController {
 
 
   func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
-    let annotation = MKPointAnnotation()
-    annotation.coordinate = coordinate
-    annotation.title = title
-    mapView.addAnnotation(annotation)
+//    let annotation = MKPointAnnotation()
+//    annotation.coordinate = coordinate
+//    annotation.title = title
+//    mapView.addAnnotation(annotation)
   }
 
   func addPinImage(point: CGPoint, colour: UIColor, tag: Int) {
-    let pinImageView = UIImageView()
-    pinImageView.frame = CGRect(x: point.x, y: point.y, width: 20, height: 20)
-    pinImageView.image = UIImage(systemName: "mappin")
-    pinImageView.tintColor = colour
-    pinImageView.tag = tag
-    mapView.addSubview(pinImageView)
+//    let pinImageView = UIImageView()
+//    pinImageView.frame = CGRect(x: point.x, y: point.y, width: 20, height: 20)
+//    pinImageView.image = UIImage(systemName: "mappin")
+//    pinImageView.tintColor = colour
+//    pinImageView.tag = tag
+//    mapView.addSubview(pinImageView)
   }
 
   func removeViewWithTag(tag: Int) {
@@ -1000,10 +1000,6 @@ class HeatmapViewController: UIViewController {
   }
 
 
-  func setPinUsingMKPlacemark(coordinate: CLLocationCoordinate2D) {
-    let pin = MKPlacemark(coordinate: coordinate)
-    mapView.addAnnotation(pin)
-  }
 
 
   func updateWorkout()  {
