@@ -13,41 +13,6 @@ import MapKit
 import HealthKit
 import CoreLocation
 
-//struct ViewCorners {
-//  private(set) var topLeft:     CGPoint!
-//  private(set) var topRight:    CGPoint!
-//  private(set) var bottomLeft:  CGPoint!
-//  private(set) var bottomRight: CGPoint!
-//
-//  private let originalCenter: CGPoint
-//  private let transformedView: UIView
-//
-//  private func pointWith(multipliedWidth: CGFloat, multipliedHeight: CGFloat) -> CGPoint {
-//    var x = originalCenter.x
-//    x += transformedView.bounds.width  / 2 * multipliedWidth
-//
-//    var y = originalCenter.y
-//    y += transformedView.bounds.height / 2 * multipliedHeight
-//
-//    var result = CGPoint(x: x, y: y).applying(transformedView.transform)
-//    result.x += transformedView.transform.tx
-//    result.y += transformedView.transform.ty
-//
-//    return result
-//  }
-//
-//  init(view: UIView) {
-//    transformedView = view
-//    originalCenter = view.center.applying(view.transform.inverted())
-//
-//    topLeft =     pointWith(multipliedWidth:-1, multipliedHeight:-1)
-//    topRight =    pointWith(multipliedWidth: 1, multipliedHeight:-1)
-//    bottomLeft =  pointWith(multipliedWidth:-1, multipliedHeight: 1)
-//    bottomRight = pointWith(multipliedWidth: 1, multipliedHeight: 1)
-//
-//  }
-//}
-
 
 class HeatmapViewController: UIViewController {
 
@@ -104,7 +69,7 @@ class HeatmapViewController: UIViewController {
   var outerColourGradient         : String = "0.5"
   var radius                      : Int = 2
 
-  var pitchView                   : UIImageView!
+  var oldPitchView                   : UIImageView!
 
   var pitchViewRotation           : CGFloat = 0.0
   var pitchAngleToApply           : CGFloat = 0.0
@@ -288,65 +253,65 @@ class HeatmapViewController: UIViewController {
 
       // now need to size the pitchView from the MapView information
       // we have the mapView rect from the overlay and the coordinates
-      createPitchView()
-      //      let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
-      //      let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
-      //      let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
-      //
-      //      // this code pins the coordinates onto the map
-      //      setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
-      //      setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
-      //      setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
-      //
-      //      // this code pins the points onto the map - this should prove the conversion is the same
-      //      addPinImage(point: pitchViewBottomLeft, colour: .systemPurple, tag: 101)
-      //      addPinImage(point: pitchViewBottomRight, colour: .systemBlue, tag: 102)
-      //      addPinImage(point: pitchViewTopLeft, colour: .systemRed, tag: 103)
-      //
-      //      let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
-      //      let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
-      //
-      //      // now add the view - never mind transforms, just add it
-      //      let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
-      //
-      //      // need to add the rotation
-      //      // issue : MKMapView has origin in bottom left so rotation starts from there
-      //      // UIView origin is top left
-      //      let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
-      //      newPitchView.image = pitchImageGreen
-      //      newPitchView.layer.opacity = 0.5
-      //      newPitchView.isUserInteractionEnabled = true
-      //      newPitchView.tag = 200
-      //
-      //      newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
-      //      let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
-      //      newPitchView.transform = pitchView.transform.rotated(by: pitchAngle)
-      //      mapView.addSubview(newPitchView)
-      //      newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
-      //
-      //      let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
-      //      let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
-      //      let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
-      //      newPitchView.addGestureRecognizer(panner)
-      //      newPitchView.addGestureRecognizer(rotator)
-      //      newPitchView.addGestureRecognizer(pincher)
-      //
-      //      let viewRotation = rotation(from: pitchView.transform)
-      //      let mapViewHeading = mapView.camera.heading
-      //      let viewRotationAsCGFloat = CGFloat(viewRotation)
-      //
-      //      let mapViewHeadingInt = Int(mapViewHeading)
-      //      let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
-      //      let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
-      //
-      //      //remove the pitch overlay
-      //      if let overlays = mapView?.overlays {
-      //        for overlay in overlays {
-      //          if overlay is FootballPitchOverlay {
-      //            mapView?.removeOverlay(overlay)
-      //          }
-      //        }
-      //      }
+//      createPitchView()
+            let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
+            let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
+            let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
+
+            // this code pins the coordinates onto the map
+            setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
+            setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
+            setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
+
+            // this code pins the points onto the map - this should prove the conversion is the same
+            addPinImage(point: pitchViewBottomLeft, colour: .systemPurple, tag: 101)
+            addPinImage(point: pitchViewBottomRight, colour: .systemBlue, tag: 102)
+            addPinImage(point: pitchViewTopLeft, colour: .systemRed, tag: 103)
+
+            let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
+            let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
+
+            // now add the view - never mind transforms, just add it
+            let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
+
+            // need to add the rotation
+            // issue : MKMapView has origin in bottom left so rotation starts from there
+            // UIView origin is top left
+            let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
+            newPitchView.image = pitchImageGreen
+            newPitchView.layer.opacity = 0.5
+            newPitchView.isUserInteractionEnabled = true
+            newPitchView.tag = 200
+
+            newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
+            let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
+            newPitchView.transform = oldPitchView.transform.rotated(by: pitchAngle)
+            mapView.addSubview(newPitchView)
+            newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
+
+            let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
+            let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
+            let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
+            newPitchView.addGestureRecognizer(panner)
+            newPitchView.addGestureRecognizer(rotator)
+            newPitchView.addGestureRecognizer(pincher)
+
+            let viewRotation = rotation(from: oldPitchView.transform)
+            let mapViewHeading = mapView.camera.heading
+            let viewRotationAsCGFloat = CGFloat(viewRotation)
+
+            let mapViewHeadingInt = Int(mapViewHeading)
+            let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
+            let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
+
+            //remove the pitch overlay
+            if let overlays = mapView?.overlays {
+              for overlay in overlays {
+                if overlay is FootballPitchOverlay {
+                  mapView?.removeOverlay(overlay)
+                }
+              }
+            }
 
     }
 
@@ -361,15 +326,15 @@ class HeatmapViewController: UIViewController {
     let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
     let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
 
-    // this code pins the coordinates onto the map
-    setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
-    setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
-    setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
-
-    // this code pins the points onto the map - this should prove the conversion is the same
-    addPinImage(point: pitchViewBottomLeft, colour: .systemPurple, tag: 101)
-    addPinImage(point: pitchViewBottomRight, colour: .systemBlue, tag: 102)
-    addPinImage(point: pitchViewTopLeft, colour: .systemRed, tag: 103)
+//    // this code pins the coordinates onto the map
+//    setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
+//    setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
+//    setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
+//
+//    // this code pins the points onto the map - this should prove the conversion is the same
+//    addPinImage(point: pitchViewBottomLeft, colour: .systemPurple, tag: 101)
+//    addPinImage(point: pitchViewBottomRight, colour: .systemBlue, tag: 102)
+//    addPinImage(point: pitchViewTopLeft, colour: .systemRed, tag: 103)
 
     let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
     let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
@@ -388,7 +353,7 @@ class HeatmapViewController: UIViewController {
 
     newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
     let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
-    newPitchView.transform = pitchView.transform.rotated(by: pitchAngle)
+    newPitchView.transform = oldPitchView.transform.rotated(by: pitchAngle)
     mapView.addSubview(newPitchView)
     newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
 
@@ -399,7 +364,7 @@ class HeatmapViewController: UIViewController {
     newPitchView.addGestureRecognizer(rotator)
     newPitchView.addGestureRecognizer(pincher)
 
-    let viewRotation = rotation(from: pitchView.transform)
+    let viewRotation = rotation(from: oldPitchView.transform)
     let mapViewHeading = mapView.camera.heading
     let viewRotationAsCGFloat = CGFloat(viewRotation)
 
@@ -493,6 +458,20 @@ class HeatmapViewController: UIViewController {
         self.mapView.addOverlay(footballPitch11Overlay)
         self.setMapViewZoom(rect: pitchMKMapRect)
 
+        // save the coordinates
+        let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
+        let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
+        let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
+
+        let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, rotation: 0.0)
+
+        MyFunc.savePlayingArea(playingAreaToSave)
+
+        MyFunc.saveWorkoutMetadata(self.workoutMetadataArray)
+        MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: self.workoutMetadata))")
+
+
+
       case .success(let playingArea):
         MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
         let playingAreaStr = String(describing: playingArea)
@@ -514,67 +493,25 @@ class HeatmapViewController: UIViewController {
 
         // now get the CGPoints for these Coordinates
         let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord, toPointTo: self.mapView)
-        let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord, toPointTo: self.mapView)
+//        let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord, toPointTo: self.mapView)
         let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord, toPointTo: self.mapView)
 
-        // this code pins the coordinates onto the map
-        self.setPinUsingMKAnnotation(coordinate: bottomLeftCoord, title: "BL")
-        self.setPinUsingMKAnnotation(coordinate: topLeftCoord, title: "TL")
-        self.setPinUsingMKAnnotation(coordinate: bottomRightCoord, title: "BR")
+//        // this code pins the coordinates onto the map
+//        self.setPinUsingMKAnnotation(coordinate: bottomLeftCoord, title: "BL")
+//        self.setPinUsingMKAnnotation(coordinate: topLeftCoord, title: "TL")
+//        self.setPinUsingMKAnnotation(coordinate: bottomRightCoord, title: "BR")
+//
+//        // this code pins the points onto the map - this should prove the conversion is the same
+//        self.addPinImage(point: pitchViewBottomLeft, colour: .systemPurple, tag: 101)
+//        self.addPinImage(point: pitchViewBottomRight, colour: .systemBlue, tag: 102)
+//        self.addPinImage(point: pitchViewTopLeft, colour: .systemRed, tag: 103)
 
-        // this code pins the points onto the map - this should prove the conversion is the same
-        self.addPinImage(point: pitchViewBottomLeft, colour: .systemPurple, tag: 101)
-        self.addPinImage(point: pitchViewBottomRight, colour: .systemBlue, tag: 102)
-        self.addPinImage(point: pitchViewTopLeft, colour: .systemRed, tag: 103)
-
-        // borrowed these lines from btnResize but here we are converting coords to an overlay not a View - so don't think this is needed
-        let newWidth = self.CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
-        let newHeight = self.CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
-        let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
 
         // need to add the rotation
-        // issue : MKMapView has origin in bottom left so rotation starts from there
-        // UIView origin is top left
-
-        newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
-//        let pitchAngle = self.angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
+//        newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
         let pitchAngle = self.angleInRadians(between: pitchViewBottomLeft, ending: pitchViewBottomRight)
-//        let pitchAngle = self.angleInRadians(between: pitchViewBottomRight, ending: pitchViewTopLeft) /* close but not 100% */
-//        let pitchAngle = self.angleInRadians(between: pitchViewTopLeft, ending: pitchViewBottomRight)
-//        let pitchAngle = self.angleInRadians(between: pitchViewTopLeft, ending: pitchViewBottomLeft)
-//        let pitchAngle = self.angleInRadians(between: pitchViewBottomLeft, ending: pitchViewTopLeft)
-
-//        let coordinateAngle = self.getBearingBetweenTwoPoints1(point1: topLeftCoord, point2: bottomRightCoord)
-
-//        let pitchAngleInverted = .pi * 0.5 - pitchAngle
         let pitchAngleInverted = 2 * .pi - pitchAngle
 
-//        newPitchView.transform = self.pitchView.transform.rotated(by: pitchAngle)
-//        // and here we're not adding a pitchView but an Overlay
-//        //        mapView.addSubview(newPitchView)
-//        newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
-
-        // more UIView related code we don't need
-        //        let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
-        //        let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
-        //        let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
-        //        newPitchView.addGestureRecognizer(panner)
-        //        newPitchView.addGestureRecognizer(rotator)
-        //        newPitchView.addGestureRecognizer(pincher)
-        //        guard let viewToSave = self.view.viewWithTag(200) else {
-        //          MyFunc.logMessage(.debug, "Cannot find pitchView to save")
-        //          return
-        //        }
-        //        let viewRotation = self.rotation(from: viewToSave.transform)
-//        let viewRotation = pitchAngle
-//        let viewRotationAsCGFloat = CGFloat(viewRotation)
-
-        // these lines get the map's camera heading in radians
-        // may not be needed here as we will come in with due north - but keep anyway
-//        let mapViewHeading = self.mapView.camera.heading
-//        let mapViewHeadingInt = Int(mapViewHeading)
-//        let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
-//        let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
         self.pitchAngleToApply = pitchAngleInverted
 
         self.createPitchOverlay(topLeft: topLeftCoord, bottomLeft: bottomLeftCoord, bottomRight: bottomRightCoord)
@@ -640,16 +577,16 @@ class HeatmapViewController: UIViewController {
       pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
 
     }
-
-    // this code pins the coordinates onto the map
-    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "bl")
-    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "tl")
-    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
-
-    // this code pins the points onto the map - this should prove the conversion is the same
-    addPinImage(point: pitchMapBottomLeftCGPoint, colour: .orange, tag: 301)
-    addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
-    addPinImage(point: pitchMapTopLeftCGPoint, colour: .white, tag: 303)
+//
+//    // this code pins the coordinates onto the map
+//    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "bl")
+//    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "tl")
+//    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
+//
+//    // this code pins the points onto the map - this should prove the conversion is the same
+//    addPinImage(point: pitchMapBottomLeftCGPoint, colour: .orange, tag: 301)
+//    addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
+//    addPinImage(point: pitchMapTopLeftCGPoint, colour: .white, tag: 303)
 
     // update the overlayCenter as we will centre the map Zoom on this
     let midpointLatitude = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
@@ -754,13 +691,13 @@ class HeatmapViewController: UIViewController {
     let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
 
     let pitchImageBlue = UIImage(named: "Figma Pitch 11 Blue")
-    pitchView = UIImageView(image: pitchImageBlue)
-    pitchView.layer.opacity = 0.5
+    oldPitchView = UIImageView(image: pitchImageBlue)
+    oldPitchView.layer.opacity = 0.5
     //    pitchView.translatesAutoresizingMaskIntoConstraints = false
-    pitchView.isUserInteractionEnabled = true
-    pitchView.addGestureRecognizer(panner)
-    pitchView.addGestureRecognizer(rotator)
-    pitchView.addGestureRecognizer(pincher)
+    oldPitchView.isUserInteractionEnabled = true
+    oldPitchView.addGestureRecognizer(panner)
+    oldPitchView.addGestureRecognizer(rotator)
+    oldPitchView.addGestureRecognizer(pincher)
 
     resizeOn = false
     resizeButton.setTitle("Adjust Pitch Size", for: .normal)
@@ -1270,7 +1207,7 @@ extension HeatmapViewController: MKMapViewDelegate {
         let pitchViewCGRectStr = String(describing: pitchViewCGRect)
         print("pitchViewCGRect:")
         print(pitchViewCGRectStr)
-        pitchView.frame = pitchViewCGRect
+        oldPitchView.frame = pitchViewCGRect
         return footballPitchOverlayRenderer
       }
     }
