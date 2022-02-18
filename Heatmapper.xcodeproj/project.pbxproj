@@ -46,6 +46,8 @@
 		7960FD7B27B97EB400EF4886 /* ViewCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7960FD7A27B97EB400EF4886 /* ViewCorners.swift */; };
 		7961D6BF25B74B4900204968 /* MyWKInterfaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */; };
 		7965F9C226AC1E27008B130D /* JDHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */; };
+		796BC39327BFBDE200628EB2 /* MyMKMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796BC39227BFBDE200628EB2 /* MyMKMapView.swift */; };
+		796BC39527BFBE7900628EB2 /* MyMapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796BC39427BFBE7900628EB2 /* MyMapDelegate.swift */; };
 		797026C0252DB4A500A86A05 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797026BF252DB4A500A86A05 /* Audio.swift */; };
 		797205152736A76500125BBD /* HeatmapPointCircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797205142736A76500125BBD /* HeatmapPointCircleRenderer.swift */; };
 		7972371927176687002F4548 /* FootballPitchOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972371827176687002F4548 /* FootballPitchOverlay.swift */; };
@@ -223,6 +225,8 @@
 		7960FD7A27B97EB400EF4886 /* ViewCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCorners.swift; sourceTree = "<group>"; };
 		7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWKInterfaceButton.swift; sourceTree = "<group>"; };
 		7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDHeatmapViewController.swift; sourceTree = "<group>"; };
+		796BC39227BFBDE200628EB2 /* MyMKMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMKMapView.swift; sourceTree = "<group>"; };
+		796BC39427BFBE7900628EB2 /* MyMapDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMapDelegate.swift; sourceTree = "<group>"; };
 		797026BF252DB4A500A86A05 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		797205142736A76500125BBD /* HeatmapPointCircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapPointCircleRenderer.swift; sourceTree = "<group>"; };
 		7972371827176687002F4548 /* FootballPitchOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPitchOverlay.swift; sourceTree = "<group>"; };
@@ -471,6 +475,8 @@
 		79A4EFA024A0AF45002A7870 = {
 			isa = PBXGroup;
 			children = (
+				796BC39227BFBDE200628EB2 /* MyMKMapView.swift */,
+				796BC39427BFBE7900628EB2 /* MyMapDelegate.swift */,
 				7960FD7A27B97EB400EF4886 /* ViewCorners.swift */,
 				79A7E15025ACE48000D1A952 /* Localizable.strings */,
 				79F3480D25A3364100762724 /* Heatmapper.storekit */,
@@ -888,6 +894,8 @@
 				79D083B82509255A00274F79 /* ThemeKit App Classes.swift in Sources */,
 				7991313D263414E800811731 /* JDHeatmapOverlayRenderer.swift in Sources */,
 				79A4EFF924A7F1AF002A7870 /* Interval.swift in Sources */,
+				796BC39527BFBE7900628EB2 /* MyMapDelegate.swift in Sources */,
+				796BC39327BFBDE200628EB2 /* MyMKMapView.swift in Sources */,
 				7935629525B31431006BBC54 /* BartyCrouch.swift in Sources */,
 				7972371B271768AB002F4548 /* FootballPitch.swift in Sources */,
 				79D083BA250925A800274F79 /* ThemeKit Themes.swift in Sources */,

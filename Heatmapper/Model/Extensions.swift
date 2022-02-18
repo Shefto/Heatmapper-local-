@@ -163,9 +163,21 @@ extension Int {
 
 }
 
+extension Double {
+  var radiansToDegrees: Double {
+    return Double(self) * 180 / .pi
+  }
+}
+
+extension Double {
+  var degreesToRadians: Double {
+    return Double(self) * .pi / 180
+  }
+}
+
+
 extension CGFloat {
   var radiansToDegrees: CGFloat {
-
     return CGFloat(self) * 180 / .pi
   }
 }

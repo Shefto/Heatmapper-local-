@@ -51,7 +51,7 @@ class TesterViewController: UIViewController {
   var outerColourBlue             : String = "0.0"
   var outerColourAlpha            : String = "0.3"
 
-  var blendMode                   = CGBlendMode.normal
+  var blendMode                   = CGBlendMode.colorBurn
   var innerColourGradient         : String = "0.1"
   var middleColourGradient        : String = "0.3"
   var outerColourGradient         : String = "0.5"
@@ -292,7 +292,7 @@ class TesterViewController: UIViewController {
     outerColourAlpha = "0.3"
     radius = 2
 
-    blendMode                   = CGBlendMode.normal
+
     loadTesterUI()
     refreshHeatmap()
   }
@@ -443,7 +443,7 @@ class TesterViewController: UIViewController {
             let overlayRectStr = String(describing: overlayRect)
             print ("overlayRect: \(overlayRectStr)")
 
-            let mapRectThatFits = mapView.mapRectThatFits(overlayRect)
+//            let mapRectThatFits = mapView.mapRectThatFits(overlayRect)
 
             mapView.visibleMapRect = overlayRect
             mapView.setCenter(self.overlayCenter!, animated: false)
@@ -589,6 +589,8 @@ class TesterViewController: UIViewController {
     print("pitchView.transform.angle: \(pitchViewTransformAngleStr)")
     let cameraHeading = mapView.camera.heading.debugDescription
     print("mapView heading: \(cameraHeading)")
+
+    
 
   }
 

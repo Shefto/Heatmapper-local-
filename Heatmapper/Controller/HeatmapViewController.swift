@@ -63,14 +63,18 @@ class HeatmapViewController: UIViewController {
   var outerColourBlue             : String = "0.0"
   var outerColourAlpha            : String = "0.3"
 
-  var blendMode                   = CGBlendMode.normal
+  let blendMode                   = CGBlendMode.colorBurn
   var innerColourGradient         : String = "0.1"
   var middleColourGradient        : String = "0.3"
   var outerColourGradient         : String = "0.5"
   var radius                      : Int = 2
 
-  var pitchViewRotation           : CGFloat = 0.0
+  var pitchRotationAtResizeOff      : CGFloat = 0.0
+  var pitchRotationAtResizeOn    : CGFloat = 0.0
   var pitchAngleToApply           : CGFloat = 0.0
+
+  var mapRotationAtResizeOn       : Double = 0.0
+  var mapRotationAtResizeOff      : Double = 0.0
 
   var bottomLeftCoord             : CLLocationCoordinate2D?
   var topLeftCoord                : CLLocationCoordinate2D?
@@ -81,6 +85,21 @@ class HeatmapViewController: UIViewController {
   var sportArray                  = [Sport]()
 
   var overlayCenter               : CLLocationCoordinate2D?
+
+
+  @IBOutlet weak var mapStartRadiansField: ThemeMediumFontTextField!
+  @IBOutlet weak var mapStartDegreesField: ThemeMediumFontTextField!
+  @IBOutlet weak var pitchStartRadiansField: ThemeMediumFontTextField!
+  @IBOutlet weak var pitchStartDegreesField: ThemeMediumFontTextField!
+  @IBOutlet weak var mapEndRadiansField: ThemeMediumFontTextField!
+  @IBOutlet weak var mapEndDegreesField: ThemeMediumFontTextField!
+  @IBOutlet weak var pitchEndRadiansField: ThemeMediumFontTextField!
+  @IBOutlet weak var pitchEndDegreesField: ThemeMediumFontTextField!
+
+  @IBOutlet weak var playingAreaAngleRadiansField: ThemeMediumFontTextField!
+  @IBOutlet weak var playingAreaAngleDegreesField: ThemeMediumFontTextField!
+
+
 
   @IBOutlet weak var resizeButton: UIButton!
 
@@ -111,7 +130,6 @@ class HeatmapViewController: UIViewController {
     outerColourAlpha = "0.3"
     radius = 2
 
-    blendMode                   = CGBlendMode.colorBurn
     refreshHeatmap()
   }
 
@@ -133,7 +151,7 @@ class HeatmapViewController: UIViewController {
   let activityPicker              = UIPickerView()
   let sportPicker                 = UIPickerView()
 
-  @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet weak var mapView: MyMKMapView!
 
   @objc func resizeTap(_ sender: UITapGestureRecognizer? = nil) {
   }
@@ -143,7 +161,7 @@ class HeatmapViewController: UIViewController {
       return
     }
     gestureView.transform = gestureView.transform.rotated(by: gesture.rotation)
-    pitchViewRotation += gesture.rotation
+    pitchRotationAtResizeOff += gesture.rotation
     gesture.rotation = 0
   }
 
@@ -189,6 +207,7 @@ class HeatmapViewController: UIViewController {
       resizeButton.setTitle("Adjust Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemGreen
 
+
       let allAnnotations = self.mapView.annotations
       self.mapView.removeAnnotations(allAnnotations)
 
@@ -199,6 +218,14 @@ class HeatmapViewController: UIViewController {
       removeViewWithTag(tag: 101)
       removeViewWithTag(tag: 102)
       removeViewWithTag(tag: 103)
+
+      guard let pitchView = self.view.viewWithTag(200) else {
+        MyFunc.logMessage(.debug, "Cannot find pitchView ")
+        return
+      }
+      		
+      mapRotationAtResizeOff = mapView.camera.heading
+      updateAngleUI()
       // this removes the newPitchView
       removeViewWithTag(tag: 200)
 
@@ -210,11 +237,13 @@ class HeatmapViewController: UIViewController {
             let overlayRect = overlay.boundingMapRect
             mapView.visibleMapRect = overlayRect
             mapView.setCenter(self.overlayCenter!, animated: false)
-            mapView.camera.heading = pitchViewRotation.radiansToDegrees
-
+            mapView.camera.heading = 0 - pitchRotationAtResizeOff.radiansToDegrees
+            //            mapView.camera.heading = pitchAngleToApply
           }
         }
       }
+
+
 
     } else {
       // turn everything on (as it's off)
@@ -223,6 +252,7 @@ class HeatmapViewController: UIViewController {
       startResize = true
       resizeButton.setTitle("Save Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemRed
+
 
       // get the saved playing area coordinates
       MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
@@ -295,12 +325,17 @@ class HeatmapViewController: UIViewController {
       newPitchView.addGestureRecognizer(pincher)
 
       let viewRotation = rotation(from: newPitchView.transform)
+
       let mapViewHeading = mapView.camera.heading
       let viewRotationAsCGFloat = CGFloat(viewRotation)
 
       let mapViewHeadingInt = Int(mapViewHeading)
       let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
       let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
+
+      mapRotationAtResizeOn = mapView.camera.heading
+      pitchRotationAtResizeOn = rotation(from: newPitchView.transform)
+      updateAngleUI()
 
       //remove the pitch overlay
       if let overlays = mapView?.overlays {
@@ -315,6 +350,9 @@ class HeatmapViewController: UIViewController {
 
   }
 
+  func mapView(_ mapView: MyMKMapView, rotationDidChange rotation: Double) {
+    // process new map rotation
+  }
 
   func getSavedPitchOverlay() {
     MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
@@ -332,9 +370,9 @@ class HeatmapViewController: UIViewController {
         let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
         let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
 
-//        self.bottomLeftCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
-//        self.bottomRightCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: maxLong!)
-//        self.topLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: minLong!)
+        //        self.bottomLeftCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
+        //        self.bottomRightCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: maxLong!)
+        //        self.topLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: minLong!)
 
         self.bottomLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
         self.topLeftCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: maxLong!)
@@ -384,9 +422,9 @@ class HeatmapViewController: UIViewController {
         MyFunc.savePlayingArea(playingAreaToSave)
 
         MyFunc.saveWorkoutMetadata(self.workoutMetadataArray)
-        MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: self.workoutMetadata))")
+//        MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: self.workoutMetadata))")
 
-//        self.pitchAngleToApply = self.pitchAngleToApply + .pi
+        //        self.pitchAngleToApply = self.pitchAngleToApply + .pi
 
       case .success(let playingArea):
         MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
@@ -407,19 +445,15 @@ class HeatmapViewController: UIViewController {
         self.bottomRightCoord = bottomRightCoord
         self.topLeftCoord = topLeftCoord
 
-//        let topLeftLatitude = topLeftCoord.latitude
-//        let bottomRightLatitude = bottomRightCoord.latitude
-//        if bottomRightLatitude < topLeftLatitude {
-//          let coordinateToSwap = topLeftCoord
-//          topLeftCoord = bottomRightCoord
-//          bottomRightCoord = coordinateToSwap
-//          pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
-//
-//        }
-
-
-
-
+        //        let topLeftLatitude = topLeftCoord.latitude
+        //        let bottomRightLatitude = bottomRightCoord.latitude
+        //        if bottomRightLatitude < topLeftLatitude {
+        //          let coordinateToSwap = topLeftCoord
+        //          topLeftCoord = bottomRightCoord
+        //          bottomRightCoord = coordinateToSwap
+        //          pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
+        //
+        //        }
 
         // now get the CGPoints for these Coordinates
         let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord, toPointTo: self.mapView)
@@ -507,15 +541,15 @@ class HeatmapViewController: UIViewController {
 
     }
 
-        // this code pins the coordinates onto the map
-        setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "bl")
-        setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "tl")
-        setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
+    // this code pins the coordinates onto the map
+    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "bl")
+    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "tl")
+    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
 
-        // this code pins the points onto the map - this should prove the conversion is the same
-        addPinImage(point: pitchMapBottomLeftCGPoint, colour: .orange, tag: 301)
-        addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
-        addPinImage(point: pitchMapTopLeftCGPoint, colour: .white, tag: 303)
+    // this code pins the points onto the map - this should prove the conversion is the same
+    addPinImage(point: pitchMapBottomLeftCGPoint, colour: .orange, tag: 301)
+    addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
+    addPinImage(point: pitchMapTopLeftCGPoint, colour: .white, tag: 303)
 
     // update the overlayCenter as we will centre the map Zoom on this
     let midpointLatitude = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
@@ -545,7 +579,7 @@ class HeatmapViewController: UIViewController {
     MyFunc.savePlayingArea(playingAreaToSave)
 
     MyFunc.saveWorkoutMetadata(workoutMetadataArray)
-    MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadata))")
+//    MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadata))")
 
   }
 
@@ -560,6 +594,7 @@ class HeatmapViewController: UIViewController {
     } else {
       //      rotationToApply = rotation(from: pitchView.transform.inverted())
       rotationToApply = pitchAngleToApply
+//      rotationToApply = rotationToApply + .pi
       print("Rotation from pitchAngleToApply")
 
     }
@@ -574,10 +609,10 @@ class HeatmapViewController: UIViewController {
     let angleIncMapRotation = rotationToApply - mapViewHeadingRadians
     let angleIncMapRotationStr = String(describing: angleIncMapRotation)
     print("angleIncMapRotation: \(angleIncMapRotationStr)")
+    updateAngleUI()
     return angleIncMapRotation
+
   }
-
-
 
 
 
@@ -590,15 +625,12 @@ class HeatmapViewController: UIViewController {
         let fileName = "Heatmap_" + workoutIDString + ".png"
         let fileURL = self.getDocumentsDirectory().appendingPathComponent(fileName)
         try? data.write(to: fileURL)
-        MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
+//        MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
 
       }
     }
 
   }
-
-
-
 
   func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -616,6 +648,7 @@ class HeatmapViewController: UIViewController {
 
     mapView.delegate = self
 
+
     resizeOn = false
     resizeButton.setTitle("Adjust Pitch Size", for: .normal)
     resizeButton.tintColor = UIColor.systemGreen
@@ -625,7 +658,8 @@ class HeatmapViewController: UIViewController {
     // get workout data
     // Note: all UI work is called within this function as the data retrieval works asynchronously
     getWorkoutData()
-  }
+    updateAngleUI()
+  } /* viewDidLoad */
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
@@ -646,6 +680,31 @@ class HeatmapViewController: UIViewController {
     self.getSavedPitchOverlay()
     self.createREHeatmap()
   }
+
+  func updateAngleUI () {
+
+    let mapStartRadiansStr = String(format: "%.2f", mapRotationAtResizeOn.degreesToRadians)
+    mapStartRadiansField.text = mapStartRadiansStr
+    let mapStartDegreesStr = String(format: "%.2f", mapRotationAtResizeOn)
+    mapStartDegreesField.text = mapStartDegreesStr
+
+    let mapEndRadiansStr = String(format: "%.2f", mapRotationAtResizeOff.degreesToRadians)
+    mapEndRadiansField.text = mapEndRadiansStr
+    let mapEndDegreesStr = String(format: "%.2f", mapRotationAtResizeOff)
+    mapEndDegreesField.text = mapEndDegreesStr
+
+    let pitchStartRadiansStr = String(format: "%.2f", pitchRotationAtResizeOn)
+    pitchStartRadiansField.text = pitchStartRadiansStr
+    let pitchStartDegreesStr = String(format: "%.2f", pitchRotationAtResizeOn.radiansToDegrees)
+    pitchStartDegreesField.text = pitchStartDegreesStr
+
+    let pitchEndRadiansStr = String(format: "%.2f", pitchRotationAtResizeOff)
+    pitchEndRadiansField.text = pitchEndRadiansStr
+    let pitchEndDegreesStr = String(format: "%.2f", pitchRotationAtResizeOff.radiansToDegrees)
+    pitchEndDegreesField.text = pitchEndDegreesStr
+
+  }
+
 
   func loadTesterData() {
     let loadedTesterArray = MyFunc.getTesterData()
@@ -841,7 +900,7 @@ class HeatmapViewController: UIViewController {
 
   //  //MARK: call to get workout data
   func getWorkoutData() {
-    MyFunc.logMessage(.debug, "worko«utId: \(String(describing: heatmapWorkoutId))")
+//    MyFunc.logMessage(.debug, "worko«utId: \(String(describing: heatmapWorkoutId))")
 
     guard let workoutId = heatmapWorkoutId else {
       MyFunc.logMessage(.error, "heatmapWorkoutId is invalid: \(String(describing: heatmapWorkoutId))")
@@ -966,31 +1025,24 @@ class HeatmapViewController: UIViewController {
   func angleInRadians(between starting: CGPoint, ending: CGPoint) -> CGFloat {
     let center = CGPoint(x: ending.x - starting.x, y: ending.y - starting.y)
     let radians = atan2(center.y, center.x)
-    //    let radiansStr = String(describing: radians)
-    //    let startingStr = String(describing: starting)
-    //    let endingStr = String(describing: ending)
-    //    print("Angle between \(startingStr) and \(endingStr) = \(radiansStr) radians")
-    //    let degrees = radians * 180 / .pi
-    //    let degreesStr = String(describing: degrees)
-    //    print("Angle between \(startingStr) and \(endingStr) = \(degreesStr) degrees")
     return radians
   }
 
 
   func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
-//    let annotation = MKPointAnnotation()
-//    annotation.coordinate = coordinate
-//    annotation.title = title
-//    mapView.addAnnotation(annotation)
+    let annotation = MKPointAnnotation()
+    annotation.coordinate = coordinate
+    annotation.title = title
+    mapView.addAnnotation(annotation)
   }
 
   func addPinImage(point: CGPoint, colour: UIColor, tag: Int) {
-//    let pinImageView = UIImageView()
-//    pinImageView.frame = CGRect(x: point.x, y: point.y, width: 20, height: 20)
-//    pinImageView.image = UIImage(systemName: "mappin")
-//    pinImageView.tintColor = colour
-//    pinImageView.tag = tag
-//    mapView.addSubview(pinImageView)
+    let pinImageView = UIImageView()
+    pinImageView.frame = CGRect(x: point.x, y: point.y, width: 20, height: 20)
+    pinImageView.image = UIImage(systemName: "mappin")
+    pinImageView.tintColor = colour
+    pinImageView.tag = tag
+    mapView.addSubview(pinImageView)
   }
 
   func removeViewWithTag(tag: Int) {
@@ -1021,7 +1073,7 @@ class HeatmapViewController: UIViewController {
       workoutMetadataArray.append(workoutMetadataToSave)
     }
     MyFunc.saveWorkoutMetadata(workoutMetadataArray)
-    MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadataToSave))")
+//    MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadataToSave))")
 
   }
 
@@ -1116,11 +1168,7 @@ extension HeatmapViewController: MKMapViewDelegate {
 
         footballPitchOverlayRenderer.alpha = 0.5
 
-        let pitchViewCGRect = footballPitchOverlayRenderer.rect(for: overlay.boundingMapRect)
-        let pitchViewCGRectStr = String(describing: pitchViewCGRect)
-        print("pitchViewCGRect:")
-        print(pitchViewCGRectStr)
-        //        oldPitchView.frame = pitchViewCGRect
+
         return footballPitchOverlayRenderer
       }
     }

@@ -37,6 +37,9 @@
 /* Class = "UIButton"; normalTitle = "Reset Pitch Sizes"; ObjectID = "0Rk-jk-rYb"; */
 "0Rk-jk-rYb.normalTitle" = "";
 
+/* Class = "UITextField"; text = "-"; ObjectID = "0yn-zN-nSm"; */
+"0yn-zN-nSm.text" = "";
+
 /* Class = "UIButton"; normalTitle = "Adjust Pitch Size"; ObjectID = "1LI-I1-lMj"; */
 "1LI-I1-lMj.normalTitle" = "";
 
@@ -49,8 +52,14 @@
 /* Class = "UITextField"; text = "Pitch"; ObjectID = "2Hb-dc-c99"; */
 "2Hb-dc-c99.text" = "";
 
+/* Class = "UITextField"; text = "r"; ObjectID = "32O-hZ-MFh"; */
+"32O-hZ-MFh.text" = "";
+
 /* Class = "UITextField"; text = "Activity"; ObjectID = "4NC-ab-YSz"; */
 "4NC-ab-YSz.text" = "";
+
+/* Class = "UILabel"; text = "Pitch resize start"; ObjectID = "5l1-a3-BUy"; */
+"5l1-a3-BUy.text" = "";
 
 /* Class = "UISegmentedControl"; 7U9-Pn-MJX.segmentTitles[0] = "Map"; ObjectID = "7U9-Pn-MJX"; */
 "7U9-Pn-MJX.segmentTitles[0]" = "";
@@ -60,6 +69,9 @@
 
 /* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "8fa-ka-EKP"; */
 "8fa-ka-EKP.normalTitle" = "";
+
+/* Class = "UILabel"; text = "Metric"; ObjectID = "8N4-wn-n3R"; */
+"8N4-wn-n3R.text" = "";
 
 /* Class = "UITextField"; text = "Venue"; ObjectID = "9nK-7l-9X9"; */
 "9nK-7l-9X9.text" = "";
@@ -106,6 +118,9 @@
 /* Class = "UISegmentedControl"; dhi-ac-byn.segmentTitles[2] = "Best for accuracy"; ObjectID = "dhi-ac-byn"; */
 "dhi-ac-byn.segmentTitles[2]" = "";
 
+/* Class = "UITextField"; text = "-"; ObjectID = "ebk-aA-s5G"; */
+"ebk-aA-s5G.text" = "";
+
 /* Class = "UIButton"; normalTitle = "Reset Pitch Sizes"; ObjectID = "eBn-1T-1Yh"; */
 "eBn-1T-1Yh.normalTitle" = "";
 
@@ -118,6 +133,9 @@
 /* Class = "UITextField"; text = "Sport"; ObjectID = "F5h-cl-Tm7"; */
 "F5h-cl-Tm7.text" = "";
 
+/* Class = "UILabel"; text = "Map resize start"; ObjectID = "fg1-ao-LPs"; */
+"fg1-ao-LPs.text" = "";
+
 /* Class = "UILabel"; text = "Venue"; ObjectID = "Fgr-lP-daT"; */
 "Fgr-lP-daT.text" = "";
 
@@ -126,6 +144,9 @@
 
 /* Class = "UILabel"; text = "Sport"; ObjectID = "fUb-WJ-pCB"; */
 "fUb-WJ-pCB.text" = "";
+
+/* Class = "UITextField"; text = "º"; ObjectID = "gLc-Hj-oOY"; */
+"gLc-Hj-oOY.text" = "";
 
 /* Class = "UINavigationItem"; title = "Workouts"; ObjectID = "gOK-0r-wdZ"; */
 "gOK-0r-wdZ.title" = "";
@@ -145,6 +166,12 @@
 /* Class = "UILabel"; text = "Activity"; ObjectID = "hV7-3h-Xdr"; */
 "hV7-3h-Xdr.text" = "";
 
+/* Class = "UITextField"; text = "-"; ObjectID = "IHC-Xx-ul9"; */
+"IHC-Xx-ul9.text" = "";
+
+/* Class = "UITextField"; text = "-"; ObjectID = "Joa-HF-yLG"; */
+"Joa-HF-yLG.text" = "";
+
 /* Class = "UILabel"; text = "Duration"; ObjectID = "K49-iB-Dre"; */
 "K49-iB-Dre.text" = "";
 
@@ -159,6 +186,9 @@
 
 /* Class = "UISegmentedControl"; KZh-Fy-Ydb.segmentTitles[3] = "mins/mi"; ObjectID = "KZh-Fy-Ydb"; */
 "KZh-Fy-Ydb.segmentTitles[3]" = "";
+
+/* Class = "UITextField"; text = "-"; ObjectID = "Mdv-eB-7zg"; */
+"Mdv-eB-7zg.text" = "";
 
 /* Class = "UIButton"; normalTitle = "Flat Distinct"; ObjectID = "mh4-Pn-ffs"; */
 "mh4-Pn-ffs.normalTitle" = "";
@@ -175,11 +205,20 @@
 /* Class = "UIButton"; normalTitle = "DTM"; ObjectID = "Nea-AY-awa"; */
 "Nea-AY-awa.normalTitle" = "";
 
+/* Class = "UILabel"; text = "Pitch resize end"; ObjectID = "O1j-3Y-Hld"; */
+"O1j-3Y-Hld.text" = "";
+
 /* Class = "UILabel"; text = "Venue"; ObjectID = "OW8-RA-0px"; */
 "OW8-RA-0px.text" = "";
 
+/* Class = "UITextField"; text = "-"; ObjectID = "pB5-KK-YTG"; */
+"pB5-KK-YTG.text" = "";
+
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "Pbk-vr-61V"; */
 "Pbk-vr-61V.title" = "";
+
+/* Class = "UILabel"; text = "Map resize end"; ObjectID = "pRt-qA-P0z"; */
+"pRt-qA-P0z.text" = "";
 
 /* Class = "UILabel"; text = "Sport or activity type"; ObjectID = "q8u-Nv-Fsn"; */
 "q8u-Nv-Fsn.text" = "";
@@ -213,6 +252,12 @@
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "syd-FH-J8R"; */
 "syd-FH-J8R.title" = "";
+
+/* Class = "UITextField"; text = "-"; ObjectID = "thV-iU-1Zc"; */
+"thV-iU-1Zc.text" = "";
+
+/* Class = "UITextField"; text = "-"; ObjectID = "TlJ-RE-HNI"; */
+"TlJ-RE-HNI.text" = "";
 
 /* Class = "UIButton"; normalTitle = "Tester"; ObjectID = "tZd-9k-xak"; */
 "tZd-9k-xak.normalTitle" = "";
