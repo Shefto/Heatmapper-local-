@@ -1933,7 +1933,7 @@ DQoNCg
                         <outlet property="mapEndRadiansField" destination="IHC-Xx-ul9" id="axP-LU-q6i"/>
                         <outlet property="mapStartDegreesField" destination="0yn-zN-nSm" id="9xw-zw-aKo"/>
                         <outlet property="mapStartRadiansField" destination="Mdv-eB-7zg" id="HJz-wN-ql0"/>
-                        <outlet property="mapView" destination="lQG-2T-c3p" id="wcJ-LV-M5O"/>
+                        <outlet property="mapView" destination="lQG-2T-c3p" id="d05-Bx-dNa"/>
                         <outlet property="paceImageView" destination="G2E-Dn-slr" id="Oba-Ad-ENh"/>
                         <outlet property="paceLabel" destination="rdq-3I-zId" id="A66-Vm-OcL"/>
                         <outlet property="pitchEndDegreesField" destination="thV-iU-1Zc" id="2E4-dH-aMc"/>

@@ -14,7 +14,7 @@ import HealthKit
 import CoreLocation
 
 
-class HeatmapViewController: UIViewController {
+class HeatmapViewController: UIViewController, MyMapListener {
 
   var heatmapperCoordinatesArray  = [CLLocationCoordinate2D]()
   var heatmapperLocationsArray    = [CLLocation]()
@@ -69,8 +69,8 @@ class HeatmapViewController: UIViewController {
   var outerColourGradient         : String = "0.5"
   var radius                      : Int = 2
 
-  var pitchRotationAtResizeOff      : CGFloat = 0.0
-  var pitchRotationAtResizeOn    : CGFloat = 0.0
+  var pitchRotationAtResizeOff    : CGFloat = 0.0
+  var pitchRotationAtResizeOn     : CGFloat = 0.0
   var pitchAngleToApply           : CGFloat = 0.0
 
   var mapRotationAtResizeOn       : Double = 0.0
@@ -162,6 +162,7 @@ class HeatmapViewController: UIViewController {
     }
     gestureView.transform = gestureView.transform.rotated(by: gesture.rotation)
     pitchRotationAtResizeOff += gesture.rotation
+    updateAngleUI()
     gesture.rotation = 0
   }
 
@@ -211,6 +212,8 @@ class HeatmapViewController: UIViewController {
       let allAnnotations = self.mapView.annotations
       self.mapView.removeAnnotations(allAnnotations)
 
+      mapRotationAtResizeOff = mapView.camera.heading
+      mapRotationAtResizeOff = mapView.getRotation() ?? 0
       savePitchCoordinates()
       saveHeatmapPNG()
       // remove the pins
@@ -219,12 +222,7 @@ class HeatmapViewController: UIViewController {
       removeViewWithTag(tag: 102)
       removeViewWithTag(tag: 103)
 
-      guard let pitchView = self.view.viewWithTag(200) else {
-        MyFunc.logMessage(.debug, "Cannot find pitchView ")
-        return
-      }
-      		
-      mapRotationAtResizeOff = mapView.camera.heading
+
       updateAngleUI()
       // this removes the newPitchView
       removeViewWithTag(tag: 200)
@@ -237,8 +235,9 @@ class HeatmapViewController: UIViewController {
             let overlayRect = overlay.boundingMapRect
             mapView.visibleMapRect = overlayRect
             mapView.setCenter(self.overlayCenter!, animated: false)
-            mapView.camera.heading = 0 - pitchRotationAtResizeOff.radiansToDegrees
-            //            mapView.camera.heading = pitchAngleToApply
+
+
+
           }
         }
       }
@@ -351,7 +350,8 @@ class HeatmapViewController: UIViewController {
   }
 
   func mapView(_ mapView: MyMKMapView, rotationDidChange rotation: Double) {
-    // process new map rotation
+    mapRotationAtResizeOff = rotation
+    updateAngleUI()
   }
 
   func getSavedPitchOverlay() {
@@ -647,6 +647,7 @@ class HeatmapViewController: UIViewController {
     }
 
     mapView.delegate = self
+    mapView.listener = self
 
 
     resizeOn = false

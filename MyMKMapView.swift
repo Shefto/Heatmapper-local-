@@ -7,9 +7,12 @@
 //  Based upon https://medium.com/@dmytrobabych/getting-actual-rotation-and-zoom-level-for-mapkit-mkmapview-e7f03f430aa9
 //
 
+
+import Foundation
 import MapKit
 
-public class MyMKMapView: MKMapView, MKMapViewDelegate {
+
+public class MyMKMapView : MKMapView, MKMapViewDelegate {
 
   private var mapContainerView : UIView? // MKScrollContainerView - map container that rotates and scales
 
@@ -27,9 +30,15 @@ public class MyMKMapView: MKMapView, MKMapViewDelegate {
     self.startTrackingChanges()
   }
 
-  required public init?(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+    self.mapContainerView = self.findViewOfType("MKScrollContainerView", inView: self)
+    self.startTrackingChanges()
   }
+
+
+  //    *****
+  //    GETTING MAP PROPERTIES
 
 
   public func getZoom() -> Double {
@@ -133,5 +142,6 @@ public class MyMKMapView: MKMapView, MKMapViewDelegate {
       return nil
     }
   }
+
 
 }
