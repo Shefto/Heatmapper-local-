@@ -71,10 +71,14 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   var pitchRotationAtResizeOff    : CGFloat = 0.0
   var pitchRotationAtResizeOn     : CGFloat = 0.0
+
+  var mapHeadingAtResizeOn        : Double = 0.0
+  var mapHeadingAtResizeOff       : Double = 0.0
+
+  var playingAreaAngleSaved             : CGFloat = 0.0
   var pitchAngleToApply           : CGFloat = 0.0
 
-  var mapRotationAtResizeOn       : Double = 0.0
-  var mapRotationAtResizeOff      : Double = 0.0
+
 
   var bottomLeftCoord             : CLLocationCoordinate2D?
   var topLeftCoord                : CLLocationCoordinate2D?
@@ -96,9 +100,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
   @IBOutlet weak var pitchEndRadiansField: ThemeMediumFontTextField!
   @IBOutlet weak var pitchEndDegreesField: ThemeMediumFontTextField!
 
-  @IBOutlet weak var playingAreaAngleRadiansField: ThemeMediumFontTextField!
-  @IBOutlet weak var playingAreaAngleDegreesField: ThemeMediumFontTextField!
+  @IBOutlet weak var playingAreaSavedAngleRadiansField: ThemeMediumFontTextField!
+  @IBOutlet weak var playingAreaSavedAngleDegreesField: ThemeMediumFontTextField!
 
+  @IBOutlet weak var playingAreaToSaveAngleRadiansField: ThemeMediumFontTextField!
+  @IBOutlet weak var playingAreaToSaveAngleDegreesField: ThemeMediumFontTextField!
 
 
   @IBOutlet weak var resizeButton: UIButton!
@@ -212,8 +218,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
       let allAnnotations = self.mapView.annotations
       self.mapView.removeAnnotations(allAnnotations)
 
-      mapRotationAtResizeOff = mapView.camera.heading
-      mapRotationAtResizeOff = mapView.getRotation() ?? 0
+      mapHeadingAtResizeOff = mapView.camera.heading
+      mapHeadingAtResizeOff = mapView.getRotation() ?? 0
       savePitchCoordinates()
       saveHeatmapPNG()
       // remove the pins
@@ -332,7 +338,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
       let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
 
-      mapRotationAtResizeOn = mapView.camera.heading
+      mapHeadingAtResizeOn = mapView.camera.heading
       pitchRotationAtResizeOn = rotation(from: newPitchView.transform)
       updateAngleUI()
 
@@ -350,11 +356,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
   }
 
   func mapView(_ mapView: MyMKMapView, rotationDidChange rotation: Double) {
-    mapRotationAtResizeOff = rotation
+    mapHeadingAtResizeOff = rotation
     updateAngleUI()
   }
 
-  func getSavedPitchOverlay() {
+  func getSavedPlayingArea() {
     MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
       switch result {
       case .failure(let error):
@@ -402,10 +408,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
         rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
         rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
 
-
         // this rectangle covers the area of all points
         let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
-
 
         //  create an overlay of the pitch based upon the rectangle
         let footballPitch11Overlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
@@ -417,14 +421,14 @@ class HeatmapViewController: UIViewController, MyMapListener {
         let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
         let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
 
+        // if no PlayingArea saved, just generate one that runs directly N-S i.e. angle = 0
+        self.playingAreaAngleSaved = 0.0
         let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, rotation: 0.0)
-
+        self.updateAngleUI()
         MyFunc.savePlayingArea(playingAreaToSave)
 
         MyFunc.saveWorkoutMetadata(self.workoutMetadataArray)
 //        MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: self.workoutMetadata))")
-
-        //        self.pitchAngleToApply = self.pitchAngleToApply + .pi
 
       case .success(let playingArea):
         MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
@@ -440,7 +444,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
         let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
         let bottomRightCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
 
-        self.pitchAngleToApply = playingArea.rotation
+//        self.pitchAngleToApply = playingArea.rotation
         self.bottomLeftCoord = bottomLeftCoord
         self.bottomRightCoord = bottomRightCoord
         self.topLeftCoord = topLeftCoord
@@ -474,9 +478,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
         // need to add the rotation
         //        newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
         let pitchAngle = self.angleInRadians(between: pitchViewBottomLeft, ending: pitchViewBottomRight)
-        let pitchAngleInverted = pitchAngle + .pi
-        self.pitchAngleToApply = pitchAngleInverted
+//        let pitchAngleInverted = pitchAngle + .pi
+//        self.pitchAngleToApply = pitchAngleInverted
         self.pitchAngleToApply = pitchAngle
+        self.playingAreaAngleSaved = pitchAngle
+        self.updateAngleUI()
         self.createPitchOverlay(topLeft: topLeftCoord, bottomLeft: bottomLeftCoord, bottomRight: bottomRightCoord)
 
       }
@@ -649,7 +655,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     mapView.delegate = self
     mapView.listener = self
 
-
     resizeOn = false
     resizeButton.setTitle("Adjust Pitch Size", for: .normal)
     resizeButton.tintColor = UIColor.systemGreen
@@ -678,20 +683,20 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let overlays = mapView.overlays
     mapView.removeOverlays(overlays)
 
-    self.getSavedPitchOverlay()
+    self.getSavedPlayingArea()
     self.createREHeatmap()
   }
 
   func updateAngleUI () {
 
-    let mapStartRadiansStr = String(format: "%.2f", mapRotationAtResizeOn.degreesToRadians)
+    let mapStartRadiansStr = String(format: "%.2f", mapHeadingAtResizeOn.degreesToRadians)
     mapStartRadiansField.text = mapStartRadiansStr
-    let mapStartDegreesStr = String(format: "%.2f", mapRotationAtResizeOn)
+    let mapStartDegreesStr = String(format: "%.2f", mapHeadingAtResizeOn)
     mapStartDegreesField.text = mapStartDegreesStr
 
-    let mapEndRadiansStr = String(format: "%.2f", mapRotationAtResizeOff.degreesToRadians)
+    let mapEndRadiansStr = String(format: "%.2f", mapHeadingAtResizeOff.degreesToRadians)
     mapEndRadiansField.text = mapEndRadiansStr
-    let mapEndDegreesStr = String(format: "%.2f", mapRotationAtResizeOff)
+    let mapEndDegreesStr = String(format: "%.2f", mapHeadingAtResizeOff)
     mapEndDegreesField.text = mapEndDegreesStr
 
     let pitchStartRadiansStr = String(format: "%.2f", pitchRotationAtResizeOn)
@@ -703,6 +708,12 @@ class HeatmapViewController: UIViewController, MyMapListener {
     pitchEndRadiansField.text = pitchEndRadiansStr
     let pitchEndDegreesStr = String(format: "%.2f", pitchRotationAtResizeOff.radiansToDegrees)
     pitchEndDegreesField.text = pitchEndDegreesStr
+
+    let playingAreaAngleSavedRadiansStr = String(format: "%.2f", playingAreaAngleSaved)
+    playingAreaSavedAngleRadiansField.text = playingAreaAngleSavedRadiansStr
+    let playingAreaAngleSavedDegreesStr = String(format: "%.2f", playingAreaAngleSaved.radiansToDegrees)
+    playingAreaSavedAngleDegreesField.text = playingAreaAngleSavedDegreesStr
+
 
   }
 
@@ -1003,7 +1014,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
         // dispatch to the main queue as we are making UI updates
         DispatchQueue.main.async {
           self.loadSamplesUI()
-          self.getSavedPitchOverlay()
+          self.getSavedPlayingArea()
           self.createREHeatmap()
         }
       }

@@ -76,8 +76,7 @@ public class MyMKMapView : MKMapView, MKMapViewDelegate {
           rotation = 360 - rotation
         }
       }
-      let rotationStr = String(describing: rotation)
-      print("rotation: \(rotationStr)")
+
       return rotation
     } else {
       return nil
