@@ -1924,8 +1924,7 @@ DQoNCg
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Reset Pitch Sizes"/>
                                         <connections>
-                                            <action selector="resetPitches:" destination="vbg-Le-o0h" eventType="touchUpInside" id="9tZ-6M-W3j"/>
-                                            <action selector="resetPitches:" destination="Pbk-vr-61V" eventType="touchUpInside" id="AX0-Rv-NHu"/>
+                                            <action selector="resetPitches:" destination="Pbk-vr-61V" eventType="touchUpInside" id="gaP-1e-h5I"/>
                                         </connections>
                                     </button>
                                 </subviews>

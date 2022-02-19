@@ -29,22 +29,25 @@ struct PlayingArea: Codable {
   var bottomLeft  : CodableCLLCoordinate2D
   var bottomRight  : CodableCLLCoordinate2D
   var topLeft  : CodableCLLCoordinate2D
-  var rotation : CGFloat
+  var topRight      : CodableCLLCoordinate2D
+//  var rotation : CGFloat
 
   enum CodingKeys: String, CodingKey {
     case workoutID = "WorkoutId"
     case bottomLeft = "BottomLeft"
     case bottomRight = "BottomRight"
     case topLeft = "TopLeft"
-    case rotation = "Rotation"
+    case topRight = "TopRight"
+//    case rotation = "Rotation"
   }
 
-  init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, rotation: CGFloat) {
+  init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D) {
     self.workoutID  = workoutID
     self.bottomLeft = bottomLeft
     self.bottomRight = bottomRight
     self.topLeft = topLeft
-    self.rotation = rotation
+    self.topRight = topRight
+//    self.rotation = rotation
 
   }
 

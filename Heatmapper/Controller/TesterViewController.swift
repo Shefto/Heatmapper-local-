@@ -822,9 +822,6 @@ class TesterViewController: UIViewController {
       pitchMapBottomRightCoordinate = coordinateToSwap
       pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
 
-    } else {
-
-
     }
 
 
@@ -832,20 +829,19 @@ class TesterViewController: UIViewController {
     setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "bl")
     setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "tl")
     setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
+    setPinUsingMKAnnotation(coordinate: pitchMapTopRightCoordinate, title: "tr")
 
     // this code pins the points onto the map - this should prove the conversion is the same
     addPinImage(point: pitchMapBottomLeftCGPoint, colour: .orange, tag: 301)
     addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
     addPinImage(point: pitchMapTopLeftCGPoint, colour: .white, tag: 303)
-
-//    let pitchAngle = angleInRadians(between: pitchMapBottomRightCGPoint, ending: pitchMapBottomLeftCGPoint)
+    addPinImage(point: pitchMapTopLeftCGPoint, colour: .yellow, tag: 304)
 
 
     // update the overlayCenter as we will centre the map Zoom on this
     let midpointLatitude = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
     let midpointLongitude = (pitchMapTopLeftCoordinate.longitude + pitchMapBottomRightCoordinate.longitude) / 2
     self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-
 
     createPitchOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
 
@@ -861,9 +857,10 @@ class TesterViewController: UIViewController {
     let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopLeftCoordinate.latitude, longitude: pitchMapTopLeftCoordinate.longitude)
     let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
     let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
-    let viewRotation = rotation(from: viewToSave.transform)
+    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
+//    let viewRotation = rotation(from: viewToSave.transform)
 
-    let playingAreaToSave = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, rotation: viewRotation)
+    let playingAreaToSave = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave)
 
     MyFunc.savePlayingArea(playingAreaToSave)
     

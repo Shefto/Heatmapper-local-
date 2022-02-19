@@ -33,14 +33,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
   var unitSpeed                   : UnitSpeed  = .metersPerSecond
   let defaults                    = UserDefaults.standard
 
-  var pointCount                  : Int = 0
-  var angle                       : CGFloat = 0.0
-  var pointsDistance              : CGFloat = 0.0
-  var dtmRect                     = MKMapRect()
-  var pitchOn                     : Bool = false
   var resizeOn                    : Bool = true
-  var startResize                 : Bool = false
-
+  var playingAreaMapRect          : MKMapRect?
   var heatmapPointCircle          : MKCircle?
   var reHeatmapPoint              : REHeatmapPoint?
   var reHeatmapPointImage         : UIImage?
@@ -75,14 +69,13 @@ class HeatmapViewController: UIViewController, MyMapListener {
   var mapHeadingAtResizeOn        : Double = 0.0
   var mapHeadingAtResizeOff       : Double = 0.0
 
-  var playingAreaAngleSaved             : CGFloat = 0.0
+  var playingAreaAngleSaved       : CGFloat = 0.0
   var pitchAngleToApply           : CGFloat = 0.0
-
-
 
   var bottomLeftCoord             : CLLocationCoordinate2D?
   var topLeftCoord                : CLLocationCoordinate2D?
   var bottomRightCoord            : CLLocationCoordinate2D?
+  var topRightCoord               : CLLocationCoordinate2D?
 
   var blendModeArray              = [BlendMode]()
   var activityArray               = [Activity]()
@@ -111,32 +104,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   @IBAction func resetPitches(_ sender: Any) {
     MyFunc.deletePlayingAreas()
-  }
-
-
-  @IBAction func btnReset(_ sender: Any) {
-
-    innerColourGradient = "0.1"
-    middleColourGradient = "0.3"
-    outerColourGradient = "0.5"
-
-    innerColourRed = "1.0"
-    innerColourGreen = "0.0"
-    innerColourBlue = "0.0"
-    innerColourAlpha = "0.9"
-
-    middleColourRed = "1.0"
-    middleColourBlue = "0.0"
-    middleColourGreen = "0.5"
-    middleColourAlpha = "0.5"
-
-    outerColourRed = "1.0"
-    outerColourBlue = "0.0"
-    outerColourGreen = "1.0"
-    outerColourAlpha = "0.3"
-    radius = 2
-
-    refreshHeatmap()
   }
 
   @IBOutlet weak var activityField      : ThemeMediumFontTextField!
@@ -215,49 +182,31 @@ class HeatmapViewController: UIViewController, MyMapListener {
       resizeButton.tintColor = UIColor.systemGreen
 
 
-      let allAnnotations = self.mapView.annotations
-      self.mapView.removeAnnotations(allAnnotations)
+      // remove the pins and annotations
+      removeAllPinsAndAnnotations()
 
-      mapHeadingAtResizeOff = mapView.camera.heading
+      // record the map heading at end of resizing
       mapHeadingAtResizeOff = mapView.getRotation() ?? 0
-      savePitchCoordinates()
+
+      saveResizedPlayingArea()
+
+      // get the image of the heatmap
       saveHeatmapPNG()
-      // remove the pins
-      // these lines remove the validation pins
-      removeViewWithTag(tag: 101)
-      removeViewWithTag(tag: 102)
-      removeViewWithTag(tag: 103)
 
-
-      updateAngleUI()
-      // this removes the newPitchView
+      // remove newPitchView
       removeViewWithTag(tag: 200)
+      // update the metrics
+      updateAngleUI()
 
-      // size the mapView to the newly resized pitch
-      if let overlays = mapView?.overlays {
-        for overlay in overlays {
-
-          if overlay is FootballPitchOverlay {
-            let overlayRect = overlay.boundingMapRect
-            mapView.visibleMapRect = overlayRect
-            mapView.setCenter(self.overlayCenter!, animated: false)
-
-
-
-          }
-        }
-      }
-
-
+      setMapViewZoom()
 
     } else {
       // turn everything on (as it's off)
 
       resizeOn = true
-      startResize = true
       resizeButton.setTitle("Save Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemRed
-
+      removeAllPinsAndAnnotations()
 
       // get the saved playing area coordinates
       MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
@@ -273,13 +222,16 @@ class HeatmapViewController: UIViewController, MyMapListener {
           let playingAreaStr = String(describing: playingArea)
           MyFunc.logMessage(.debug, playingAreaStr)
 
-          let topLeftCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
-          let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
-          let bottomRightCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
+          // convert the stored playingArea coordinates from the codable class to the base CLLCoordinate2D
+          let topLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
+          let bottomLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
+          let bottomRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
+          let topRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.topRight.latitude, longitude: playingArea.topRight.longitude)
 
-          self.bottomLeftCoord = bottomLeftCoord
-          self.bottomRightCoord = bottomRightCoord
-          self.topLeftCoord = topLeftCoord
+          self.bottomLeftCoord = bottomLeftAsCoord
+          self.bottomRightCoord = bottomRightAsCoord
+          self.topLeftCoord = topLeftAsCoord
+          self.topRightCoord = topRightAsCoord
 
         }
       })
@@ -287,41 +239,35 @@ class HeatmapViewController: UIViewController, MyMapListener {
       // now need to size the pitchView from the MapView information
       // we have the mapView rect from the overlay and the coordinates
 
-      let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
-      let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
-      let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
+      let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
+      let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
+      let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
+      let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
 
-      // this code pins the coordinates onto the map
+      // pin the coordinates onto the map
       setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
       setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
       setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
+      setPinUsingMKAnnotation(coordinate: topRightCoord!, title: "TR")
 
-      // this code pins the points onto the map - this should prove the conversion is the same
-      addPinImage(point: pitchViewBottomLeft, colour: .systemPurple, tag: 101)
-      addPinImage(point: pitchViewBottomRight, colour: .systemBlue, tag: 102)
-      addPinImage(point: pitchViewTopLeft, colour: .systemRed, tag: 103)
+      // pin the points onto the map - this should prove the conversion is the same
+      addPinImage(point: pitchViewBottomLeft, colour: .blue, tag: 101)
+      addPinImage(point: pitchViewBottomRight, colour: .white, tag: 102)
+      addPinImage(point: pitchViewTopLeft, colour: .white, tag: 103)
+      addPinImage(point: pitchViewTopRight, colour: .white, tag: 104)
 
       let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
       let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
 
-      // now add the view - never mind transforms, just add it
+      // now add the view
       let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
-
-      // need to add the rotation
-      // issue : MKMapView has origin in bottom left so rotation starts from there
-      // UIView origin is top left
       let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
       newPitchView.image = pitchImageGreen
       newPitchView.layer.opacity = 0.5
       newPitchView.isUserInteractionEnabled = true
       newPitchView.tag = 200
 
-      newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
-      let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
-      newPitchView.transform = newPitchView.transform.rotated(by: pitchAngle)
-      mapView.addSubview(newPitchView)
-      newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
-
+      // add the gesture recognizers
       let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
       let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
       let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
@@ -329,20 +275,20 @@ class HeatmapViewController: UIViewController, MyMapListener {
       newPitchView.addGestureRecognizer(rotator)
       newPitchView.addGestureRecognizer(pincher)
 
-      let viewRotation = rotation(from: newPitchView.transform)
-
-      let mapViewHeading = mapView.camera.heading
-      let viewRotationAsCGFloat = CGFloat(viewRotation)
-
-      let mapViewHeadingInt = Int(mapViewHeading)
-      let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
-      let angleIncMapRotation = viewRotationAsCGFloat - mapViewHeadingRadians
+      // rotate the view
+      // need to anchor this first by the origin in order to rotate around bottom left
+      newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
+      let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
+      newPitchView.transform = newPitchView.transform.rotated(by: pitchAngle)
+      mapView.addSubview(newPitchView)
+      newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
 
       mapHeadingAtResizeOn = mapView.camera.heading
       pitchRotationAtResizeOn = rotation(from: newPitchView.transform)
       updateAngleUI()
 
-      //remove the pitch overlay
+
+      //remove the pitch MKMapOverlay
       if let overlays = mapView?.overlays {
         for overlay in overlays {
           if overlay is FootballPitchOverlay {
@@ -355,12 +301,81 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   }
 
-  func mapView(_ mapView: MyMKMapView, rotationDidChange rotation: Double) {
-    mapHeadingAtResizeOff = rotation
-    updateAngleUI()
+
+
+  func saveResizedPlayingArea() {
+
+    // adding code to save pitch corner points as coordinates
+    // first need to get the corners on the pitch view
+    guard let viewToSave = self.view.viewWithTag(200) else {
+      MyFunc.logMessage(.debug, "Cannot find pitchView to save")
+      return
+    }
+    let corners = ViewCorners(view: viewToSave)
+
+    let pitchMapTopLeftCGPoint      : CGPoint = corners.topLeft
+    let pitchMapBottomLeftCGPoint   : CGPoint = corners.bottomLeft
+    let pitchMapBottomRightCGPoint  : CGPoint = corners.bottomRight
+    let pitchMapTopRightCGPoint     : CGPoint = corners.topRight
+
+    // this code pins the points onto the map - this should prove the conversion is the same
+    addPinImage(point: pitchMapBottomLeftCGPoint, colour: .red, tag: 301)
+    addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
+    addPinImage(point: pitchMapTopLeftCGPoint, colour: .yellow, tag: 303)
+    addPinImage(point: pitchMapTopRightCGPoint, colour: .yellow, tag: 304)
+
+
+    // then workout out the corresponding co-ordinates at these points on the map view
+    var pitchMapTopLeftCoordinate     : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
+    var pitchMapBottomLeftCoordinate  : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
+    var pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
+    var pitchMapTopRightCoordinate    : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
+
+    // this code pins the coordinates onto the map
+    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "bl")
+    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "tl")
+    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
+    setPinUsingMKAnnotation(coordinate: pitchMapTopRightCoordinate, title: "tr")
+
+
+    //this logic compares the TopLeft and BottomRight
+    //if the TopLeft is south of the BottomRight swap them round
+    let topLeftLatitude = pitchMapTopLeftCoordinate.latitude
+    let bottomRightLatitude = pitchMapBottomRightCoordinate.latitude
+    if bottomRightLatitude < topLeftLatitude {
+      print("Swapping TL and BR: SavePitchCoordinates")
+      let topLeftToSwap = pitchMapTopLeftCoordinate
+      pitchMapTopLeftCoordinate = pitchMapBottomRightCoordinate
+      pitchMapBottomRightCoordinate = topLeftToSwap
+      let bottomLeftToSwap = pitchMapBottomLeftCoordinate
+      pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
+      pitchMapTopRightCoordinate = bottomLeftToSwap
+
+    }
+
+    // update the overlayCenter as we will centre the map Zoom on this
+    let midpointLatitude = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
+    let midpointLongitude = (pitchMapTopLeftCoordinate.longitude + pitchMapBottomRightCoordinate.longitude) / 2
+    self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+
+    createPitchOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
+
+    // save the pitch here
+    // convert the CLLCoordinates to a subclass which allows us to code them ready for saving
+    let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopLeftCoordinate.latitude, longitude: pitchMapTopLeftCoordinate.longitude)
+    let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
+    let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
+    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
+
+    let playingAreaToSave = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave)
+    MyFunc.savePlayingArea(playingAreaToSave)
+
+
   }
 
+
   func getSavedPlayingArea() {
+
     MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
       switch result {
       case .failure(let error):
@@ -375,14 +390,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
         let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
         let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
-
-        //        self.bottomLeftCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
-        //        self.bottomRightCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: maxLong!)
-        //        self.topLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: minLong!)
-
-        self.bottomLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
-        self.topLeftCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: maxLong!)
-        self.bottomRightCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: minLong!)
 
         let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
         let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
@@ -408,27 +415,30 @@ class HeatmapViewController: UIViewController, MyMapListener {
         rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
         rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
 
-        // this rectangle covers the area of all points
         let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
+        self.playingAreaMapRect = pitchMKMapRect
 
         //  create an overlay of the pitch based upon the rectangle
         let footballPitch11Overlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
         self.mapView.addOverlay(footballPitch11Overlay)
-        self.setMapViewZoom(rect: pitchMKMapRect)
+        self.setMapViewZoom()
 
-        // save the coordinates
+        self.bottomLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
+        self.topLeftCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: maxLong!)
+        self.bottomRightCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: minLong!)
+        self.topRightCoord  = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
+
+        // convert the coordinates to a codable subclass for saving
         let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
         let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
         let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
+        let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
 
-        // if no PlayingArea saved, just generate one that runs directly N-S i.e. angle = 0
-        self.playingAreaAngleSaved = 0.0
-        let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, rotation: 0.0)
-        self.updateAngleUI()
+        let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave)
         MyFunc.savePlayingArea(playingAreaToSave)
 
-        MyFunc.saveWorkoutMetadata(self.workoutMetadataArray)
-//        MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: self.workoutMetadata))")
+        self.updateAngleUI()
+
 
       case .success(let playingArea):
         MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
@@ -440,53 +450,97 @@ class HeatmapViewController: UIViewController, MyMapListener {
         self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
 
         // PlayingArea coordinates stored as Codable sub-class of CLLocationCoordinate2D so convert to original class (may be able to remove this?)
-        let topLeftCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
-        let bottomLeftCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
-        let bottomRightCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
+        let topLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
+        let bottomLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
+        let bottomRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
+        let topRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.topRight.latitude, longitude: playingArea.topRight.longitude)
 
-//        self.pitchAngleToApply = playingArea.rotation
-        self.bottomLeftCoord = bottomLeftCoord
-        self.bottomRightCoord = bottomRightCoord
-        self.topLeftCoord = topLeftCoord
+        let topLeftLatitude = topLeftAsCoord.latitude
+        let bottomRightLatitude = bottomRightAsCoord.latitude
+        if bottomRightLatitude > topLeftLatitude {
+          self.bottomLeftCoord = bottomLeftAsCoord
+          self.bottomRightCoord = bottomRightAsCoord
+          self.topLeftCoord = topLeftAsCoord
+          self.topRightCoord = topRightAsCoord
+        } else {
+          print("Swapping TL and BR : getSavedPlayingArea")
+          self.bottomLeftCoord = topRightAsCoord
+          self.bottomRightCoord = topLeftAsCoord
+          self.topLeftCoord = bottomRightAsCoord
+          self.topRightCoord = bottomLeftAsCoord
 
-        //        let topLeftLatitude = topLeftCoord.latitude
-        //        let bottomRightLatitude = bottomRightCoord.latitude
-        //        if bottomRightLatitude < topLeftLatitude {
-        //          let coordinateToSwap = topLeftCoord
-        //          topLeftCoord = bottomRightCoord
-        //          bottomRightCoord = coordinateToSwap
-        //          pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
-        //
-        //        }
+        }
+
+
+        var playingAreaCoordArray = [CLLocationCoordinate2D]()
+        playingAreaCoordArray.removeAll()
+        playingAreaCoordArray.append(self.bottomLeftCoord!)
+        playingAreaCoordArray.append(self.bottomRightCoord!)
+        playingAreaCoordArray.append(self.topLeftCoord!)
+        playingAreaCoordArray.append(self.topRightCoord!)
+        // get the max and min latitude and longitudes from all the points to be displayed in the heatmap
+        let maxLat = playingAreaCoordArray.map {$0.latitude}.max()
+        let minLat = playingAreaCoordArray.map {$0.latitude}.min()
+        let maxLong = playingAreaCoordArray.map {$0.longitude}.max()
+        let minLong = playingAreaCoordArray.map {$0.longitude}.min()
+        self.playingAreaMapRect = self.getMapRectFromCoordinates(maxLat: maxLat!, minLat: minLat!, maxLong: maxLong!, minLong: minLong!)
+
 
         // now get the CGPoints for these Coordinates
-        let pitchViewBottomLeft : CGPoint = self.mapView.convert(bottomLeftCoord, toPointTo: self.mapView)
-        let pitchViewTopLeft : CGPoint = self.mapView.convert(topLeftCoord, toPointTo: self.mapView)
-        let pitchViewBottomRight : CGPoint = self.mapView.convert(bottomRightCoord, toPointTo: self.mapView)
+        let pitchViewBottomLeft : CGPoint = self.mapView.convert(self.bottomLeftCoord!, toPointTo: self.mapView)
+        let pitchViewTopLeft : CGPoint = self.mapView.convert(self.topLeftCoord!, toPointTo: self.mapView)
+        let pitchViewBottomRight : CGPoint = self.mapView.convert(self.bottomRightCoord!, toPointTo: self.mapView)
 
         // this code pins the coordinates onto the map
-        self.setPinUsingMKAnnotation(coordinate: bottomLeftCoord, title: "BL")
-        self.setPinUsingMKAnnotation(coordinate: topLeftCoord, title: "TL")
-        self.setPinUsingMKAnnotation(coordinate: bottomRightCoord, title: "BR")
+        self.setPinUsingMKAnnotation(coordinate: self.bottomLeftCoord!, title: "BL")
+        self.setPinUsingMKAnnotation(coordinate: self.topLeftCoord!, title: "TL")
+        self.setPinUsingMKAnnotation(coordinate: self.bottomRightCoord!, title: "BR")
 
         // this code pins the points onto the map - this should prove the conversion is the same
         self.addPinImage(point: pitchViewBottomLeft, colour: .systemPurple, tag: 101)
         self.addPinImage(point: pitchViewBottomRight, colour: .systemBlue, tag: 102)
         self.addPinImage(point: pitchViewTopLeft, colour: .systemRed, tag: 103)
 
+        let newWidth = self.CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
+        let newHeight = self.CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
+
+        // create the new PitchView
+        let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
+
+        let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
+        newPitchView.image = pitchImageGreen
+        newPitchView.layer.opacity = 0.5
+        newPitchView.isUserInteractionEnabled = true
+        newPitchView.tag = 200
 
         // need to add the rotation
-        //        newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
-        let pitchAngle = self.angleInRadians(between: pitchViewBottomLeft, ending: pitchViewBottomRight)
-//        let pitchAngleInverted = pitchAngle + .pi
-//        self.pitchAngleToApply = pitchAngleInverted
+        // issue : MKMapView has origin in bottom left so rotation starts from there
+        // UIView origin is top left
+        newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
+        let pitchAngle = self.angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
+        newPitchView.transform = newPitchView.transform.rotated(by: pitchAngle)
+        self.mapView.addSubview(newPitchView)
+        newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
+
+        let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
+        let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
+        let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
+        newPitchView.addGestureRecognizer(panner)
+        newPitchView.addGestureRecognizer(rotator)
+        newPitchView.addGestureRecognizer(pincher)
+
+
+        self.mapHeadingAtResizeOn = self.mapView.camera.heading
+        self.pitchRotationAtResizeOn = self.rotation(from: newPitchView.transform)
+
         self.pitchAngleToApply = pitchAngle
         self.playingAreaAngleSaved = pitchAngle
         self.updateAngleUI()
-        self.createPitchOverlay(topLeft: topLeftCoord, bottomLeft: bottomLeftCoord, bottomRight: bottomRightCoord)
-
+        self.createPitchOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
+        self.setMapViewZoom()
       }
     })
+
   }
 
   func createPitchOverlay(topLeft: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) {
@@ -509,85 +563,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
     //  create an overlay of the pitch based upon the rectangle
     let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
     self.mapView.addOverlay(adjustedPitchOverlay)
-    self.setMapViewZoom(rect: pitchMKMapRect)
+    self.playingAreaMapRect = pitchMKMapRect
 
   }
 
 
-  func savePitchCoordinates() {
-
-    // adding code to save pitch corner points as coordinates
-    // first need to get the corners on the pitch view
-    guard let viewToSave = self.view.viewWithTag(200) else {
-      MyFunc.logMessage(.debug, "Cannot find pitchView to save")
-      return
-    }
-    let corners = ViewCorners(view: viewToSave)
-
-    let pitchMapTopLeftCGPoint : CGPoint = corners.topLeft
-    let pitchMapBottomLeftCGPoint : CGPoint  = corners.bottomLeft
-    let pitchMapBottomRightCGPoint : CGPoint  =  corners.bottomRight
-    let pitchMapTopRightCGPoint : CGPoint  = corners.topRight
-
-    // then workout out the corresponding co-ordinates at these points on the map view
-    var pitchMapTopLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
-    var pitchMapBottomLeftCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
-    var pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
-    let pitchMapTopRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
-
-    //this logic compares the TopLeft and BottomRight
-    //if the TopLeft is south of the BottomRight swap them round
-    let topLeftLatitude = pitchMapTopLeftCoordinate.latitude
-    let bottomRightLatitude = pitchMapBottomRightCoordinate.latitude
-    if bottomRightLatitude < topLeftLatitude {
-      let coordinateToSwap = pitchMapTopLeftCoordinate
-      pitchMapTopLeftCoordinate = pitchMapBottomRightCoordinate
-      pitchMapBottomRightCoordinate = coordinateToSwap
-      pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
-
-    }
-
-    // this code pins the coordinates onto the map
-    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "bl")
-    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "tl")
-    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
-
-    // this code pins the points onto the map - this should prove the conversion is the same
-    addPinImage(point: pitchMapBottomLeftCGPoint, colour: .orange, tag: 301)
-    addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
-    addPinImage(point: pitchMapTopLeftCGPoint, colour: .white, tag: 303)
-
-    // update the overlayCenter as we will centre the map Zoom on this
-    let midpointLatitude = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
-    let midpointLongitude = (pitchMapTopLeftCoordinate.longitude + pitchMapBottomRightCoordinate.longitude) / 2
-    self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-
-    createPitchOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
-
-    if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == heatmapWorkoutId}) {
-      workoutMetadataArray[row] = workoutMetadata
-    } else {
-      MyFunc.logMessage(.error, "Error updating workoutMetadata with pitch area")
-    }
-
-    // save the pitch here
-    // we need the co-ordinates of 3 of the 4 points and the rotation to successfully recreate it
-    // convert the CLLCoordinates to a subclass which allows us to code them ready for saving
-    let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopLeftCoordinate.latitude, longitude: pitchMapTopLeftCoordinate.longitude)
-    let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
-    let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
-
-    // this is pretty worthless without knowing the map's rotation - consider removing and just recalculation the angle from the retrieved coordinates
-    let viewRotation = rotation(from: viewToSave.transform)
-
-    let playingAreaToSave = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, rotation: viewRotation)
-
-    MyFunc.savePlayingArea(playingAreaToSave)
-
-    MyFunc.saveWorkoutMetadata(workoutMetadataArray)
-//    MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadata))")
-
-  }
 
 
   func getMapRotation() -> CGFloat {
@@ -600,7 +580,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     } else {
       //      rotationToApply = rotation(from: pitchView.transform.inverted())
       rotationToApply = pitchAngleToApply
-//      rotationToApply = rotationToApply + .pi
+      //      rotationToApply = rotationToApply + .pi
       print("Rotation from pitchAngleToApply")
 
     }
@@ -620,30 +600,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   }
 
-
-
-  func saveHeatmapPNG() {
-
-    let mapSnapshot = mapView.snapshot()
-    if let data = mapSnapshot.pngData() {
-      if let workoutId = self.heatmapWorkoutId {
-        let workoutIDString = String(describing: workoutId)
-        let fileName = "Heatmap_" + workoutIDString + ".png"
-        let fileURL = self.getDocumentsDirectory().appendingPathComponent(fileName)
-        try? data.write(to: fileURL)
-//        MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
-
-      }
-    }
-
-  }
-
-  func getDocumentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    let documentsDirectory = paths[0]
-    return documentsDirectory
-  }
-
   override func viewDidLoad() {
     super.viewDidLoad()
     self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
@@ -658,7 +614,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     resizeOn = false
     resizeButton.setTitle("Adjust Pitch Size", for: .normal)
     resizeButton.tintColor = UIColor.systemGreen
-    self.loadTesterData()
+    loadTesterData()
     getStaticData()
 
     // get workout data
@@ -671,21 +627,39 @@ class HeatmapViewController: UIViewController, MyMapListener {
     super.viewWillDisappear(animated)
     updateWorkout()
   }
+  func mapView(_ mapView: MyMKMapView, rotationDidChange rotation: Double) {
+    // this function just tracks any rotation changes in the map and prints them out
+    mapHeadingAtResizeOff = rotation
+    updateAngleUI()
+  }
+
+  func saveHeatmapPNG() {
+    let mapSnapshot = mapView.snapshot()
+    if let data = mapSnapshot.pngData() {
+      if let workoutId = self.heatmapWorkoutId {
+        let workoutIDString = String(describing: workoutId)
+        let fileName = "Heatmap_" + workoutIDString + ".png"
+        let fileURL = self.getDocumentsDirectory().appendingPathComponent(fileName)
+        try? data.write(to: fileURL)
+        //        MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
+
+      }
+    }
+  }
+
+  func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let documentsDirectory = paths[0]
+    return documentsDirectory
+  }
+
+
 
   func getStaticData() {
-
     activityArray = MyFunc.getHeatmapperActivityDefaults()
     sportArray = Sport.allCases.map { $0 }
   }
 
-  func refreshHeatmap() {
-
-    let overlays = mapView.overlays
-    mapView.removeOverlays(overlays)
-
-    self.getSavedPlayingArea()
-    self.createREHeatmap()
-  }
 
   func updateAngleUI () {
 
@@ -847,10 +821,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
     return atan2(Double(transform.b), Double(transform.a))
   }
 
-  func setMapViewZoom(rect: MKMapRect) {
-    let insets = UIEdgeInsets(top: 0, left: 5, bottom: 5, right: 5)
-
-    mapView.setVisibleMapRect(rect, edgePadding: insets, animated: false)
+  func setMapViewZoom() {
+    let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    mapView.setVisibleMapRect(self.playingAreaMapRect!, edgePadding: insets, animated: false)
+    let playingAreaMapRectStr = String(describing: playingAreaMapRect)
+    print("playingAreaMapRect at setMapViewZoom: \(playingAreaMapRectStr)")
     mapView.setCenter(self.overlayCenter!, animated: false)
   }
 
@@ -910,9 +885,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
     mapView.addAnnotation(annotation)
   }
 
-  //  //MARK: call to get workout data
   func getWorkoutData() {
-//    MyFunc.logMessage(.debug, "worko«utId: \(String(describing: heatmapWorkoutId))")
+    //    MyFunc.logMessage(.debug, "worko«utId: \(String(describing: heatmapWorkoutId))")
 
     guard let workoutId = heatmapWorkoutId else {
       MyFunc.logMessage(.error, "heatmapWorkoutId is invalid: \(String(describing: heatmapWorkoutId))")
@@ -1016,6 +990,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
           self.loadSamplesUI()
           self.getSavedPlayingArea()
           self.createREHeatmap()
+//          self.setMapViewZoom()
         }
       }
     }
@@ -1063,7 +1038,19 @@ class HeatmapViewController: UIViewController, MyMapListener {
     }
   }
 
+  func removeAllPinsAndAnnotations () {
 
+    let allAnnotations = self.mapView.annotations
+    self.mapView.removeAnnotations(allAnnotations)
+
+    removeViewWithTag(tag: 101)
+    removeViewWithTag(tag: 102)
+    removeViewWithTag(tag: 103)
+    removeViewWithTag(tag: 301)
+    removeViewWithTag(tag: 302)
+    removeViewWithTag(tag: 303)
+    removeViewWithTag(tag: 304)
+  }
 
 
   func updateWorkout()  {
@@ -1085,159 +1072,191 @@ class HeatmapViewController: UIViewController, MyMapListener {
       workoutMetadataArray.append(workoutMetadataToSave)
     }
     MyFunc.saveWorkoutMetadata(workoutMetadataArray)
-//    MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadataToSave))")
+    //    MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadataToSave))")
 
   }
 
+  func getMapRectFromCoordinates(maxLat: Double, minLat: Double, maxLong: Double, minLong: Double) -> MKMapRect {
+
+
+    let minCoord = CLLocationCoordinate2D(latitude: minLat, longitude: minLong)
+    let maxCoord = CLLocationCoordinate2D(latitude: maxLat, longitude: maxLong)
+
+    let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
+    let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
+    self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+
+    // get the max and min X and Y points from the above coordinates as MKMapPoints
+    let minX = MKMapPoint(minCoord).x
+    let maxX = MKMapPoint(maxCoord).x
+    let minY = MKMapPoint(minCoord).y
+    let maxY = MKMapPoint(maxCoord).y
+
+    // this code ensures the pitch size is larger than the heatmap by adding a margin
+    // get the dimensions of the rectangle from the distance between the point extremes
+    var rectWidth = maxX - minX
+    var rectHeight = minY - maxY
+    // set the scale of the border
+    let rectMarginScale = 0.1
+    // set the rectangle origin as the plot dimensions plus the border
+    let rectX = minX - (rectWidth * rectMarginScale)
+    let rectY = minY + (rectHeight * rectMarginScale)
+
+    // increase the rectangle width and height by the border * 2
+    rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
+    rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
+
+    let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
+    return pitchMKMapRect
+  }
 
 }
+    extension HeatmapViewController: MKMapViewDelegate {
 
-extension HeatmapViewController: MKMapViewDelegate {
-
-  func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
-  }
-
-  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-
-    if overlay is MKCircle  {
-
-      // convert UI values to CGFloats for the Renderer
-      let innerColourRedFloat = Float(innerColourRed) ?? 0.0
-      let innerColourGreenFloat = Float(innerColourGreen) ?? 0.0
-      let innerColourBlueFloat = Float(innerColourBlue) ?? 0.0
-      let innerColourAlphaFloat = Float(innerColourAlpha) ?? 0.0
-
-      let innerColourRedCGFloat = CGFloat(innerColourRedFloat)
-      let innerColourGreenCGFloat = CGFloat(innerColourGreenFloat)
-      let innerColourBlueCGFloat = CGFloat(innerColourBlueFloat)
-      let innerColourAlphaCGFloat = CGFloat(innerColourAlphaFloat)
-
-      var innerColourArray = [CGFloat]()
-      innerColourArray.append(innerColourRedCGFloat)
-      innerColourArray.append(innerColourGreenCGFloat)
-      innerColourArray.append(innerColourBlueCGFloat)
-      innerColourArray.append(innerColourAlphaCGFloat)
-
-      let middleColourRedFloat = Float(middleColourRed) ?? 0.0
-      let middleColourGreenFloat = Float(middleColourGreen) ?? 0.0
-      let middleColourBlueFloat = Float(middleColourBlue) ?? 0.0
-      let middleColourAlphaFloat = Float(middleColourAlpha) ?? 0.0
-
-      let middleColourRedCGFloat = CGFloat(middleColourRedFloat)
-      let middleColourGreenCGFloat = CGFloat(middleColourGreenFloat)
-      let middleColourBlueCGFloat = CGFloat(middleColourBlueFloat)
-      let middleColourAlphaCGFloat = CGFloat(middleColourAlphaFloat)
-
-      var middleColourArray = [CGFloat]()
-      middleColourArray.append(middleColourRedCGFloat)
-      middleColourArray.append(middleColourGreenCGFloat)
-      middleColourArray.append(middleColourBlueCGFloat)
-      middleColourArray.append(middleColourAlphaCGFloat)
-
-      let outerColourRedFloat = Float(outerColourRed) ?? 0.0
-      let outerColourGreenFloat = Float(outerColourGreen) ?? 0.0
-      let outerColourBlueFloat = Float(outerColourBlue) ?? 0.0
-      let outerColourAlphaFloat = Float(outerColourAlpha) ?? 0.0
-
-      let outerColourRedCGFloat = CGFloat(outerColourRedFloat)
-      let outerColourGreenCGFloat = CGFloat(outerColourGreenFloat)
-      let outerColourBlueCGFloat = CGFloat(outerColourBlueFloat)
-      let outerColourAlphaCGFloat = CGFloat(outerColourAlphaFloat)
-
-      var outerColourArray = [CGFloat]()
-      outerColourArray.append(outerColourRedCGFloat)
-      outerColourArray.append(outerColourGreenCGFloat)
-      outerColourArray.append(outerColourBlueCGFloat)
-      outerColourArray.append(outerColourAlphaCGFloat)
-
-      let gradientLocation1Float = Float(innerColourGradient) ?? 0.0
-      let gradientLocation2Float = Float(middleColourGradient) ?? 0.0
-      let gradientLocation3Float = Float(outerColourGradient) ?? 0.0
-
-      let gradientLocationCG1Float = CGFloat(gradientLocation1Float)
-      let gradientLocationCG2Float = CGFloat(gradientLocation2Float)
-      let gradientLocationCG3Float = CGFloat(gradientLocation3Float)
-
-      var gradientLocationsArray = [CGFloat]()
-      gradientLocationsArray.append(gradientLocationCG1Float)
-      gradientLocationsArray.append(gradientLocationCG2Float)
-      gradientLocationsArray.append(gradientLocationCG3Float)
-
-      let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle,
-                                                      innerColourArray: innerColourArray, middleColourArray: middleColourArray, outerColourArray: outerColourArray, gradientLocationsArray: gradientLocationsArray, blendMode: blendMode)
-
-      return circleRenderer
-    }
-
-    if overlay is FootballPitchOverlay {
-      if let pitchImage = UIImage(named: "Figma Pitch 11 Green.png")
-      {
-
-        // get the rotation of the pitchView
-        let angleIncMapRotation = getMapRotation()
-
-        let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation, workoutId: heatmapWorkoutId!)
-
-        footballPitchOverlayRenderer.alpha = 0.5
-
-
-        return footballPitchOverlayRenderer
+      func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
       }
+
+      func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+
+        if overlay is MKCircle  {
+
+          // convert UI values to CGFloats for the Renderer
+          let innerColourRedFloat = Float(innerColourRed) ?? 0.0
+          let innerColourGreenFloat = Float(innerColourGreen) ?? 0.0
+          let innerColourBlueFloat = Float(innerColourBlue) ?? 0.0
+          let innerColourAlphaFloat = Float(innerColourAlpha) ?? 0.0
+
+          let innerColourRedCGFloat = CGFloat(innerColourRedFloat)
+          let innerColourGreenCGFloat = CGFloat(innerColourGreenFloat)
+          let innerColourBlueCGFloat = CGFloat(innerColourBlueFloat)
+          let innerColourAlphaCGFloat = CGFloat(innerColourAlphaFloat)
+
+          var innerColourArray = [CGFloat]()
+          innerColourArray.append(innerColourRedCGFloat)
+          innerColourArray.append(innerColourGreenCGFloat)
+          innerColourArray.append(innerColourBlueCGFloat)
+          innerColourArray.append(innerColourAlphaCGFloat)
+
+          let middleColourRedFloat = Float(middleColourRed) ?? 0.0
+          let middleColourGreenFloat = Float(middleColourGreen) ?? 0.0
+          let middleColourBlueFloat = Float(middleColourBlue) ?? 0.0
+          let middleColourAlphaFloat = Float(middleColourAlpha) ?? 0.0
+
+          let middleColourRedCGFloat = CGFloat(middleColourRedFloat)
+          let middleColourGreenCGFloat = CGFloat(middleColourGreenFloat)
+          let middleColourBlueCGFloat = CGFloat(middleColourBlueFloat)
+          let middleColourAlphaCGFloat = CGFloat(middleColourAlphaFloat)
+
+          var middleColourArray = [CGFloat]()
+          middleColourArray.append(middleColourRedCGFloat)
+          middleColourArray.append(middleColourGreenCGFloat)
+          middleColourArray.append(middleColourBlueCGFloat)
+          middleColourArray.append(middleColourAlphaCGFloat)
+
+          let outerColourRedFloat = Float(outerColourRed) ?? 0.0
+          let outerColourGreenFloat = Float(outerColourGreen) ?? 0.0
+          let outerColourBlueFloat = Float(outerColourBlue) ?? 0.0
+          let outerColourAlphaFloat = Float(outerColourAlpha) ?? 0.0
+
+          let outerColourRedCGFloat = CGFloat(outerColourRedFloat)
+          let outerColourGreenCGFloat = CGFloat(outerColourGreenFloat)
+          let outerColourBlueCGFloat = CGFloat(outerColourBlueFloat)
+          let outerColourAlphaCGFloat = CGFloat(outerColourAlphaFloat)
+
+          var outerColourArray = [CGFloat]()
+          outerColourArray.append(outerColourRedCGFloat)
+          outerColourArray.append(outerColourGreenCGFloat)
+          outerColourArray.append(outerColourBlueCGFloat)
+          outerColourArray.append(outerColourAlphaCGFloat)
+
+          let gradientLocation1Float = Float(innerColourGradient) ?? 0.0
+          let gradientLocation2Float = Float(middleColourGradient) ?? 0.0
+          let gradientLocation3Float = Float(outerColourGradient) ?? 0.0
+
+          let gradientLocationCG1Float = CGFloat(gradientLocation1Float)
+          let gradientLocationCG2Float = CGFloat(gradientLocation2Float)
+          let gradientLocationCG3Float = CGFloat(gradientLocation3Float)
+
+          var gradientLocationsArray = [CGFloat]()
+          gradientLocationsArray.append(gradientLocationCG1Float)
+          gradientLocationsArray.append(gradientLocationCG2Float)
+          gradientLocationsArray.append(gradientLocationCG3Float)
+
+          let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle,
+                                                          innerColourArray: innerColourArray, middleColourArray: middleColourArray, outerColourArray: outerColourArray, gradientLocationsArray: gradientLocationsArray, blendMode: blendMode)
+
+          return circleRenderer
+        }
+
+        if overlay is FootballPitchOverlay {
+          if let pitchImage = UIImage(named: "Figma Pitch 11 Green.png")
+          {
+
+            // get the rotation of the pitchView
+            let angleIncMapRotation = getMapRotation()
+
+            let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation, workoutId: heatmapWorkoutId!)
+
+            footballPitchOverlayRenderer.alpha = 0.5
+
+
+            return footballPitchOverlayRenderer
+          }
+        }
+
+        // should never call this... needs to be fixed
+        let defaultOverlayRenderer = MKOverlayRenderer()
+        return defaultOverlayRenderer
+
+      }
+
+
+      func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
+        switch newState {
+        case .starting:
+          view.dragState = .dragging
+        case .ending, .canceling:
+          view.dragState = .none
+        default: break
+        }
+      }
+
     }
 
-    // should never call this... needs to be fixed
-    let defaultOverlayRenderer = MKOverlayRenderer()
-    return defaultOverlayRenderer
+    extension HeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
-  }
+      func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+      }
 
+      func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == activityPicker {
+          return activityArray.count
+        } else {
+          return sportArray.count
+        }
+      }
 
-  func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
-    switch newState {
-    case .starting:
-      view.dragState = .dragging
+      func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == activityPicker {
+          return activityArray[row].name
+        } else {
+          return sportArray[row].rawValue
+        }
+      }
 
-    case .ending, .canceling:
-      view.dragState = .none
-    default: break
+      func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
+        if pickerView == activityPicker {
+          activityField.text = activityArray[row].name
+          sportField.text = activityArray[row].sport.rawValue
+        } else {
+          sportField.text = sportArray[row].rawValue
+        }
+        updateWorkout()
+
+        self.view.endEditing(true)
+      }
+
     }
-  }
 
-}
-
-extension HeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-
-  func numberOfComponents(in pickerView: UIPickerView) -> Int {
-    return 1
-  }
-
-  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    if pickerView == activityPicker {
-      return activityArray.count
-    } else {
-      return sportArray.count
-    }
-  }
-
-  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    if pickerView == activityPicker {
-      return activityArray[row].name
-    } else {
-      return sportArray[row].rawValue
-    }
-  }
-
-  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
-    if pickerView == activityPicker {
-      activityField.text = activityArray[row].name
-      sportField.text = activityArray[row].sport.rawValue
-    } else {
-      sportField.text = sportArray[row].rawValue
-    }
-    updateWorkout()
-
-    self.view.endEditing(true)
-  }
-
-}
