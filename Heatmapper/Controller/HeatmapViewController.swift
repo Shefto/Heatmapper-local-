@@ -251,7 +251,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     //if the TopLeft is south of the BottomRight swap them round
     let topLeftLatitude = pitchMapTopLeftCoordinate.latitude
     let bottomRightLatitude = pitchMapBottomRightCoordinate.latitude
-    if bottomRightLatitude < topLeftLatitude {
+//    if bottomRightLatitude < topLeftLatitude {
       print("Swapping TL and BR: SavePitchCoordinates")
       let topLeftToSwap = pitchMapTopLeftCoordinate
       pitchMapTopLeftCoordinate = pitchMapBottomRightCoordinate
@@ -260,7 +260,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
       pitchMapTopRightCoordinate = bottomLeftToSwap
 
-    }
+//    }
 
     // update the overlayCenter as we will centre the map Zoom on this
     let midpointLatitude = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
