@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 enum LogLevel: String {
   case debug
@@ -312,5 +313,8 @@ class MyFunc {
     let distance = hypotf(Float((point1.x - point2.x)), Float((point1.y - point2.y)))
     return CGFloat(distance)
   }
+
+
+
 
 }
