@@ -198,19 +198,23 @@ class HeatmapViewController: UIViewController, MyMapListener {
       let cameraHeadingAfterResizeStr = String(describing: mapView.camera.heading)
       print("camera heading after resize: \(cameraHeadingAfterResizeStr)")
 
+      setMapViewZoom()
+      let distanceToSet = mapView.camera.centerCoordinateDistance * 0.9
+      let distanceToSetStr = String(describing: distanceToSet)
+      print("Camera height: \(distanceToSetStr)")
+      let cameraToApply = MKMapCamera(lookingAtCenter: self.overlayCenter!, fromDistance: distanceToSet, pitch: 0, heading: playingAreaBearing)
 
-      let cameraToApply = MKMapCamera(lookingAtCenter: self.overlayCenter!, fromDistance: 200.0, pitch: 0, heading: playingAreaBearing)
-      mapView.setCamera(cameraToApply, animated: false)
-      // get the image of the heatmap
-      saveHeatmapPNG()
+      self.mapView.setCamera(cameraToApply, animated: false)
+      self.saveHeatmapPNG()
 
-      // remove newPitchView
-      removeViewWithTag(tag: 200)
       // update the metrics
       updateAngleUI()
 
-//      setMapViewZoom()
-      
+      // remove newPitchView
+      removeViewWithTag(tag: 200)
+
+//      getHeatmapCorners()
+
 
     } else {
       // turn everything on (as it's off)
@@ -223,6 +227,70 @@ class HeatmapViewController: UIViewController, MyMapListener {
     }
 
   }
+
+  func getHeatmapCorners() {
+
+    let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
+    let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
+    let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
+    let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
+
+    // pin the coordinates onto the map
+    setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
+    setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
+    setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
+    setPinUsingMKAnnotation(coordinate: topRightCoord!, title: "TR")
+
+    // pin the points onto the map - this should prove the conversion is the same
+    addPinImage(point: pitchViewBottomLeft, colour: .blue, tag: 101)
+    addPinImage(point: pitchViewBottomRight, colour: .white, tag: 102)
+    addPinImage(point: pitchViewTopLeft, colour: .white, tag: 103)
+    addPinImage(point: pitchViewTopRight, colour: .white, tag: 104)
+
+    let keyWindow = UIApplication.shared.getKeyWindow()
+    let pitchBottomLeftToWindow = keyWindow?.convert(pitchViewBottomLeft, from: mapView)
+    let pitchTopLeftToWindow = keyWindow?.convert(pitchViewTopLeft, from: mapView)
+    let pitchBottomRightToWindow = keyWindow?.convert(pitchViewBottomRight, from: mapView)
+    let pitchTopRightToWindow = keyWindow?.convert(pitchViewTopRight, from: mapView)
+    let pmTLStr = String(describing: pitchTopLeftToWindow)
+    let pmBLStr = String(describing: pitchBottomLeftToWindow)
+    let pmBRStr = String(describing: pitchBottomRightToWindow)
+    let pmTRStr = String(describing: pitchTopRightToWindow)
+    print("pitch corners in relation window:")
+    print ("Top Left: \(pmTLStr)")
+    print ("Bottom Left: \(pmBLStr)")
+    print ("Top Right: \(pmTRStr)")
+    print ("Bottom Right: \(pmBRStr)")
+
+    var originCGPoint = CGPoint()
+    var imageWidth : Double = 0.0
+    var imageHeight : Double = 0.0
+    if pitchBottomLeftToWindow!.x < pitchTopRightToWindow!.x {
+      originCGPoint.x = pitchBottomLeftToWindow!.x
+      originCGPoint.y = pitchBottomLeftToWindow!.y
+      imageWidth = pitchBottomLeftToWindow!.y - pitchTopRightToWindow!.y
+      imageHeight = pitchTopRightToWindow!.x - pitchBottomLeftToWindow!.x
+      print ("Bottom Left lowest")
+
+    } else {
+      originCGPoint.x = pitchTopRightToWindow!.x
+      originCGPoint.y = pitchTopRightToWindow!.y
+      imageWidth = pitchTopRightToWindow!.y - pitchBottomLeftToWindow!.y
+      imageHeight = pitchTopRightToWindow!.x - pitchBottomLeftToWindow!.x
+      print ("Top Right lowest")
+    }
+
+    let originCGPointStr = String(describing: originCGPoint)
+    print("originCGPoint \(originCGPointStr)")
+    let imageWidthStr = String(describing: imageWidth)
+    print("imageWidth \(imageWidthStr)")
+    let imageHeightStr = String(describing: imageHeight)
+    print("imageHeight \(imageHeightStr)")
+
+
+  }
+
+
 
   func saveResizedPlayingArea() {
 
@@ -237,12 +305,22 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let pitchMapBottomLeftCGPoint   : CGPoint = corners.bottomLeft
     let pitchMapBottomRightCGPoint  : CGPoint = corners.bottomRight
     let pitchMapTopRightCGPoint     : CGPoint = corners.topRight
+    let pmTLStr = String(describing: pitchMapTopLeftCGPoint)
+    let pmBLStr = String(describing: pitchMapBottomLeftCGPoint)
+    let pmBRStr = String(describing: pitchMapBottomRightCGPoint)
+    let pmTRStr = String(describing: pitchMapTopRightCGPoint)
+    print("pitch corners to save:")
+    print ("Top Left: \(pmTLStr)")
+    print ("Botton Left: \(pmBLStr)")
+    print ("Top Right: \(pmTRStr)")
+    print ("Bottom Right: \(pmBRStr)")
 
-    // this code pins the points onto the map - this should prove the conversion is the same
-    addPinImage(point: pitchMapBottomLeftCGPoint, colour: .red, tag: 301)
-    addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
-    addPinImage(point: pitchMapTopLeftCGPoint, colour: .yellow, tag: 303)
-    addPinImage(point: pitchMapTopRightCGPoint, colour: .yellow, tag: 304)
+
+//    // this code pins the points onto the map - this should prove the conversion is the same
+//    addPinImage(point: pitchMapBottomLeftCGPoint, colour: .red, tag: 301)
+//    addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
+//    addPinImage(point: pitchMapTopLeftCGPoint, colour: .yellow, tag: 303)
+//    addPinImage(point: pitchMapTopRightCGPoint, colour: .yellow, tag: 304)
 
     // then workout out the corresponding co-ordinates at these points on the map view
     var pitchMapTopLeftCoordinate     : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
@@ -250,11 +328,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
     var pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
     var pitchMapTopRightCoordinate    : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
 
-    // this code pins the coordinates onto the map
-    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "bl")
-    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "tl")
-    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
-    setPinUsingMKAnnotation(coordinate: pitchMapTopRightCoordinate, title: "tr")
+//    // this code pins the coordinates onto the map
+//    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "bl")
+//    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "tl")
+//    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
+//    setPinUsingMKAnnotation(coordinate: pitchMapTopRightCoordinate, title: "tr")
 
 
     //this logic compares the TopLeft and BottomRight
@@ -273,9 +351,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 //    }
 
     playingAreaAngleSavedAfterResize = angleInRadians(between: pitchMapBottomLeftCGPoint, ending: pitchMapBottomRightCGPoint)
-//    playingAreaAngleSavedAfterResize = MyFunc.getBearingBetweenTwoCoordinates(coordinate1: pitchMapBottomLeftCoordinate, coordinate2: pitchMapTopRightCoordinate)
-
-
 
     // update the overlayCenter as we will centre the map Zoom on this
     let midpointLatitude = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
@@ -299,6 +374,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     print("playingAreaBearing: \(playingAreaBearingStr)")
 
   }
+
 
 
   func resizeGetSavedPlayingArea() {
@@ -399,16 +475,16 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
 
     // pin the coordinates onto the map
-    setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
-    setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
-    setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
-    setPinUsingMKAnnotation(coordinate: topRightCoord!, title: "TR")
-
-    // pin the points onto the map - this should prove the conversion is the same
-    addPinImage(point: pitchViewBottomLeft, colour: .blue, tag: 101)
-    addPinImage(point: pitchViewBottomRight, colour: .white, tag: 102)
-    addPinImage(point: pitchViewTopLeft, colour: .white, tag: 103)
-    addPinImage(point: pitchViewTopRight, colour: .white, tag: 104)
+//    setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
+//    setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
+//    setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
+//    setPinUsingMKAnnotation(coordinate: topRightCoord!, title: "TR")
+//
+//    // pin the points onto the map - this should prove the conversion is the same
+//    addPinImage(point: pitchViewBottomLeft, colour: .blue, tag: 101)
+//    addPinImage(point: pitchViewBottomRight, colour: .white, tag: 102)
+//    addPinImage(point: pitchViewTopLeft, colour: .white, tag: 103)
+//    addPinImage(point: pitchViewTopRight, colour: .white, tag: 104)
 
     let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
     let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
@@ -545,6 +621,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       }
     })
 
+    removeAllPinsAndAnnotations()
 
     // getting the angle to rotate the overlay by from the CGPoints
     // simply doing this as it seems to work better than using coordinate angles
@@ -554,16 +631,16 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
 
     // pin the coordinates onto the map
-    setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
-    setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
-    setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
-    setPinUsingMKAnnotation(coordinate: topRightCoord!, title: "TR")
-
-    // pin the points onto the map - this should prove the conversion is the same
-    addPinImage(point: pitchViewBottomLeft, colour: .blue, tag: 101)
-    addPinImage(point: pitchViewBottomRight, colour: .white, tag: 102)
-    addPinImage(point: pitchViewTopLeft, colour: .white, tag: 103)
-    addPinImage(point: pitchViewTopRight, colour: .white, tag: 104)
+//    setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
+//    setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
+//    setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
+//    setPinUsingMKAnnotation(coordinate: topRightCoord!, title: "TR")
+//
+//    // pin the points onto the map - this should prove the conversion is the same
+//    addPinImage(point: pitchViewBottomLeft, colour: .blue, tag: 101)
+//    addPinImage(point: pitchViewBottomRight, colour: .white, tag: 102)
+//    addPinImage(point: pitchViewTopLeft, colour: .white, tag: 103)
+//    addPinImage(point: pitchViewTopRight, colour: .white, tag: 104)
 
     let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
     let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
@@ -698,6 +775,9 @@ class HeatmapViewController: UIViewController, MyMapListener {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     updateWorkout()
+    removeAllPinsAndAnnotations()
+
+
   }
 
   func mapView(_ mapView: MyMKMapView, rotationDidChange rotation: Double) {
@@ -706,8 +786,14 @@ class HeatmapViewController: UIViewController, MyMapListener {
     updateAngleUI()
   }
 
+
+
+
   func saveHeatmapPNG() {
     let mapSnapshot = mapView.snapshot()
+//    let mapSnapshot = UIApplication.shared.makeSnapshot()
+
+
     if let data = mapSnapshot.pngData() {
       if let workoutId = self.heatmapWorkoutId {
         let workoutIDString = String(describing: workoutId)
@@ -1081,19 +1167,19 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
 
   func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
-//    let annotation = MKPointAnnotation()
-//    annotation.coordinate = coordinate
-//    annotation.title = title
-//    mapView.addAnnotation(annotation)
+    let annotation = MKPointAnnotation()
+    annotation.coordinate = coordinate
+    annotation.title = title
+    mapView.addAnnotation(annotation)
   }
 
   func addPinImage(point: CGPoint, colour: UIColor, tag: Int) {
-//    let pinImageView = UIImageView()
-//    pinImageView.frame = CGRect(x: point.x, y: point.y, width: 20, height: 20)
-//    pinImageView.image = UIImage(systemName: "mappin")
-//    pinImageView.tintColor = colour
-//    pinImageView.tag = tag
-//    mapView.addSubview(pinImageView)
+    let pinImageView = UIImageView()
+    pinImageView.frame = CGRect(x: point.x, y: point.y, width: 20, height: 20)
+    pinImageView.image = UIImage(systemName: "mappin")
+    pinImageView.tintColor = colour
+    pinImageView.tag = tag
+    mapView.addSubview(pinImageView)
   }
 
   func removeViewWithTag(tag: Int) {
@@ -1102,17 +1188,26 @@ class HeatmapViewController: UIViewController, MyMapListener {
     }
   }
 
-  func removeAllPinsAndAnnotations () {
-    let allAnnotations = self.mapView.annotations
-    self.mapView.removeAnnotations(allAnnotations)
-
+  func removeAllPins() {
     removeViewWithTag(tag: 101)
     removeViewWithTag(tag: 102)
     removeViewWithTag(tag: 103)
+    removeViewWithTag(tag: 104)
     removeViewWithTag(tag: 301)
     removeViewWithTag(tag: 302)
     removeViewWithTag(tag: 303)
     removeViewWithTag(tag: 304)
+  }
+
+  func removeAllAnnotations() {
+    let allAnnotations = self.mapView.annotations
+    self.mapView.removeAnnotations(allAnnotations)
+
+  }
+
+  func removeAllPinsAndAnnotations () {
+    removeAllPins()
+    removeAllAnnotations()
   }
 
 

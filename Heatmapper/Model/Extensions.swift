@@ -82,7 +82,7 @@ extension TimeInterval {
     if minutes != 0 {
       minutesStr = String(format: "%2d", minutes)
     } else {
-    minutesStr =  String(format: "%1d", minutes)
+      minutesStr =  String(format: "%1d", minutes)
     }
 
     minutesStr = minutesStr.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -110,7 +110,7 @@ extension TimeInterval {
     if secondsStr == "5" {
       secondsStr = "05"
     }
-      return secondsStr
+    return secondsStr
   }
 
   func toReadableString() -> String {
@@ -408,7 +408,7 @@ extension HKWorkoutActivityType {
     case .wrestling:                    return "Wrestling"
     case .yoga:                         return "Yoga"
 
-    // iOS 10
+      // iOS 10
     case .barre:                        return "Barre"
     case .coreTraining:                 return "Core Training"
     case .crossCountrySkiing:           return "Cross Country Skiing"
@@ -424,16 +424,16 @@ extension HKWorkoutActivityType {
     case .wheelchairWalkPace:           return "Wheelchair Walk Pace"
     case .wheelchairRunPace:            return "Wheelchair Run Pace"
 
-    // iOS 11
+      // iOS 11
     case .taiChi:                       return "Tai Chi"
     case .mixedCardio:                  return "Mixed Cardio"
     case .handCycling:                  return "Hand Cycling"
 
-    // iOS 13
+      // iOS 13
     case .discSports:                   return "Disc Sports"
     case .fitnessGaming:                return "Fitness Gaming"
 
-    // Catch-all
+      // Catch-all
     default:                            return "Other"
     }
   }
@@ -560,5 +560,49 @@ extension CLLocationCoordinate2D {
     let radiansBearing = atan2(y, x);
 
     return radiansToDegrees(radiansBearing)
+  }
+}
+
+extension UIApplication {
+
+  func getKeyWindow() -> UIWindow? {
+    if #available(iOS 13, *) {
+      return windows.first { $0.isKeyWindow }
+    } else {
+      return keyWindow
+    }
+  }
+
+  func makeSnapshot() -> UIImage? { return getKeyWindow()?.layer.makeSnapshot() }
+}
+
+
+extension CALayer {
+  func makeSnapshot() -> UIImage? {
+    let scale = UIScreen.main.scale
+    UIGraphicsBeginImageContextWithOptions(frame.size, false, scale)
+    defer { UIGraphicsEndImageContext() }
+    guard let context = UIGraphicsGetCurrentContext() else { return nil }
+    render(in: context)
+    let screenshot = UIGraphicsGetImageFromCurrentImageContext()
+    return screenshot
+  }
+}
+
+extension UIView {
+  func makeSnapshot() -> UIImage? {
+    if #available(iOS 10.0, *) {
+      let renderer = UIGraphicsImageRenderer(size: frame.size)
+      return renderer.image { _ in drawHierarchy(in: bounds, afterScreenUpdates: true) }
+    } else {
+      return layer.makeSnapshot()
+    }
+  }
+}
+
+extension UIImage {
+  convenience init?(snapshotOf view: UIView) {
+    guard let image = view.makeSnapshot(), let cgImage = image.cgImage else { return nil }
+    self.init(cgImage: cgImage, scale: image.scale, orientation: image.imageOrientation)
   }
 }
