@@ -605,4 +605,20 @@ extension UIImage {
     guard let image = view.makeSnapshot(), let cgImage = image.cgImage else { return nil }
     self.init(cgImage: cgImage, scale: image.scale, orientation: image.imageOrientation)
   }
+
+  
+}
+
+extension UIImage {
+  func crop(rect: CGRect) -> UIImage? {
+    var scaledRect = rect
+    scaledRect.origin.x *= scale
+    scaledRect.origin.y *= scale
+    scaledRect.size.width *= scale
+    scaledRect.size.height *= scale
+    guard let imageRef: CGImage = cgImage?.cropping(to: scaledRect) else {
+      return nil
+    }
+    return UIImage(cgImage: imageRef, scale: scale, orientation: imageOrientation)
+  }
 }
