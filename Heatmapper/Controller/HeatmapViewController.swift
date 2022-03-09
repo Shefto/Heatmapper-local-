@@ -271,110 +271,16 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   func saveHeatmapImage() {
 
-    let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
     let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
     let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
     let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
-//
-//    // pin the coordinates onto the map
-//    setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
-//    setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
-//    setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
-//    setPinUsingMKAnnotation(coordinate: topRightCoord!, title: "TR")
-//
-//    // pin the points onto the map - this should prove the conversion is the same
-//    addPinImage(point: pitchViewBottomLeft, colour: .blue, tag: 101)
-//    addPinImage(point: pitchViewBottomRight, colour: .white, tag: 102)
-//    addPinImage(point: pitchViewTopLeft, colour: .white, tag: 103)
-//    addPinImage(point: pitchViewTopRight, colour: .white, tag: 104)
 
-
-//    let keyWindow = UIApplication.shared.getKeyWindow()
-//    // this code entirely to validate the corners are aligned vertically
-//    let pitchBottomLeftToWindow = keyWindow?.convert(pitchViewBottomLeft, from: mapView)
-//    let pitchTopLeftToWindow = keyWindow?.convert(pitchViewTopLeft, from: mapView)
-//    let pitchBottomRightToWindow = keyWindow?.convert(pitchViewBottomRight, from: mapView)
-//    let pitchTopRightToWindow = keyWindow?.convert(pitchViewTopRight, from: mapView)
-//    let pmTLStr = String(describing: pitchTopLeftToWindow)
-//    let pmBLStr = String(describing: pitchBottomLeftToWindow)
-//    let pmBRStr = String(describing: pitchBottomRightToWindow)
-//    let pmTRStr = String(describing: pitchTopRightToWindow)
-//    print("pitch corners in relation window:")
-//    print ("Top Left: \(pmTLStr)")
-//    print ("Bottom Left: \(pmBLStr)")
-//    print ("Top Right: \(pmTRStr)")
-//    print ("Bottom Right: \(pmBRStr)")
-
-//    var originCGPoint = CGPoint()
-    var imageWidth : Double = pitchViewTopRight.x - pitchViewTopLeft.x
-    var imageHeight : Double = pitchViewBottomRight.y - pitchViewTopLeft.y
-////    if pitchBottomLeftToWindow!.x < pitchTopRightToWindow!.x {
-//      originCGPoint.x = pitchBottomLeftToWindow!.x
-//      originCGPoint.y = pitchBottomLeftToWindow!.y
-//      imageWidth = pitchBottomLeftToWindow!.y - pitchTopRightToWindow!.y
-//      imageHeight = pitchTopRightToWindow!.x - pitchBottomLeftToWindow!.x
-//      print ("Bottom Left lowest")
-//
-//    } else {
-//      originCGPoint.x = pitchTopRightToWindow!.x
-//      originCGPoint.y = pitchTopRightToWindow!.y
-//      imageWidth = pitchTopRightToWindow!.y - pitchBottomLeftToWindow!.y
-//      imageHeight = pitchTopRightToWindow!.x - pitchBottomLeftToWindow!.x
-//      print ("Top Right lowest")
-//    }
-
-//    let originCGPointStr = String(describing: originCGPoint)
-//    print("originCGPoint \(originCGPointStr)")
-    let imageWidthStr = String(describing: imageWidth)
-    print("imageWidth \(imageWidthStr)")
-    let imageHeightStr = String(describing: imageHeight)
-    print("imageHeight \(imageHeightStr)")
+    let imageWidth : Double = pitchViewTopRight.x - pitchViewTopLeft.x
+    let imageHeight : Double = pitchViewBottomRight.y - pitchViewTopLeft.y
 
     let heatmapAreaToCrop = CGRect(x: pitchViewTopLeft.x, y: pitchViewTopLeft.y, width: imageWidth, height: imageHeight)
-
-
-
-
-    let screenAreaToCrop = CGRect(x: 0, y: 0, width: mapView.bounds.width, height: mapView.bounds.height)
-//    UIGraphicsBeginImageContextWithOptions(screenAreaToCrop.size, false, 0)
-//
-//    if let context = UIGraphicsGetCurrentContext() {
-//      mapView.layer.render(in: context)
-//    }
-//
-//    let image = UIGraphicsGetImageFromCurrentImageContext()
-//    UIGraphicsEndImageContext()
-//
-//    guard let croppedCGImage : CGImage = image?.cgImage!.cropping(to: heatmapAreaToCrop) else
-//    {
-//      MyFunc.logMessage(.error, "Error cropping heatmap CGImage")
-//      return
-//    }
-//
-//    let croppedUIImage = cropImage(image!, toRect: heatmapAreaToCrop, viewWidth: mapView.bounds.width, viewHeight: mapView.bounds.height)
-//    let croppedUIImage = UIImage(cgImage: croppedCGImage)
-
-//    let actualImageWidth = image?.size.width.description
-//    let actualImageHeight = String(describing: image?.size)
-//
-//    print ("image size: \(actualImageHeight)")
-
     let mapViewUIImage : UIImage = mapView.image()!
-//    let mapViewCGImage = mapViewUIImage.cgImage
-//    guard let croppedMapViewCGImage = mapViewCGImage?.cropping(to: heatmapAreaToCrop) else {
-//      MyFunc.logMessage(.error, "Error cropping heatmap CGImage")
-//      return
-//    }
-//    let croppedMapViewUIImage = UIImage(cgImage: croppedMapViewCGImage)
-
     let croppedUIImage = mapViewUIImage.crop(rect: heatmapAreaToCrop)
-//        let croppedUIImage = UIImage(cgImage: croppedCGImage)
-
-//        let actualImageWidth = image?.size.width.description
-//        let actualImageHeight = String(describing: image?.size)
-//
-//        print ("image size: \(actualImageHeight)")
-
 
     if let data = croppedUIImage?.pngData() {
       if let workoutId = self.heatmapWorkoutId {
@@ -382,14 +288,10 @@ class HeatmapViewController: UIViewController, MyMapListener {
         let fileName = "Heatmap_" + workoutIDString + ".png"
         let fileURL = self.getDocumentsDirectory().appendingPathComponent(fileName)
         try? data.write(to: fileURL)
-
       }
 
     }
   }
-
-
-
 
 
 
