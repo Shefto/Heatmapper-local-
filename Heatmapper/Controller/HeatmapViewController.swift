@@ -119,9 +119,9 @@ class HeatmapViewController: UIViewController, MyMapListener {
   @IBOutlet weak var heartRateImageView : UIImageView!
   @IBOutlet weak var distanceImageView  : UIImageView!
 
-
-
   @IBOutlet weak var mapView: MyMKMapView!
+
+  @IBOutlet weak var resetPlayingAreaButton: UIButton!
 
   @IBAction func resetPitches(_ sender: Any) {
     MyFunc.deletePlayingAreas()
@@ -182,9 +182,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
       resizeButton.setTitle("Adjust Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemGreen
 
-
-      //      removeAllPinsAndAnnotations()
-
       // record the map heading at end of resizing
       mapHeadingAtResizeOff = mapView.getRotation() ?? 0
 
@@ -211,17 +208,51 @@ class HeatmapViewController: UIViewController, MyMapListener {
       // removes the pitchView
       removeViewWithTag(tag: 200)
 
+      resetPlayingAreaButton.isHidden = true
+
     } else {
       // turn everything on (as it's off)
       resizeOn = true
-      resizeButton.setTitle("Save Pitch Size", for: .normal)
-      resizeButton.tintColor = UIColor.systemRed
+      resizeButton.setTitle("Save", for: .normal)
+//      resizeButton.tintColor = UIColor.systemRed
+      resetPlayingAreaButton.isHidden = false
       removeAllPinsAndAnnotations()
       resizeGetSavedPlayingArea()
-    }
 
+    }
   }
 
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
+    if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == self.heatmapWorkoutId}) {
+      self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
+      self.loadMetadataUI()
+    }
+
+    mapView.delegate = self
+    mapView.listener = self
+
+    resizeOn = false
+    resizeButton.setTitle("Adjust Pitch Size", for: .normal)
+    resetPlayingAreaButton.isHidden = true
+
+    loadTesterData()
+    getStaticData()
+
+    // get workout data
+    // Note: all UI work is called within this function as the data retrieval works asynchronously
+    getWorkoutData()
+    updateAngleUI()
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    updateWorkout()
+    saveHeatmapImage()
+    removeAllPinsAndAnnotations()
+
+  }
 
 
   func createHeatmapImageView() {
@@ -699,36 +730,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   }
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
-    if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == self.heatmapWorkoutId}) {
-      self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
-      self.loadMetadataUI()
-    }
-
-    mapView.delegate = self
-    mapView.listener = self
-
-    resizeOn = false
-    resizeButton.setTitle("Adjust Pitch Size", for: .normal)
-    resizeButton.tintColor = UIColor.systemGreen
-    loadTesterData()
-    getStaticData()
-
-    // get workout data
-    // Note: all UI work is called within this function as the data retrieval works asynchronously
-    getWorkoutData()
-    updateAngleUI()
-  }
-
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    updateWorkout()
-    saveHeatmapImage()
-    removeAllPinsAndAnnotations()
-
-  }
 
   func mapView(_ mapView: MyMKMapView, rotationDidChange rotation: Double) {
     // this function just tracks any rotation changes in the map and prints them out

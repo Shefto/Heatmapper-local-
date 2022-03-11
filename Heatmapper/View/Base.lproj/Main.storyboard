@@ -1908,7 +1908,7 @@ DQoNCg
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="gX6-Du-D22" userLabel="Activity Stack View">
                                 <rect key="frame" x="5" y="597" width="404" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cep-ee-waR" userLabel="Resize">
+                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cep-ee-waR" userLabel="Resize">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="40"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <color key="tintColor" name="buttonPrimary"/>
@@ -1920,10 +1920,10 @@ DQoNCg
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBn-1T-1Yh" userLabel="Reset">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                        <color key="tintColor" systemColor="systemGreenColor"/>
+                                        <color key="backgroundColor" name="buttonPrimary"/>
+                                        <color key="tintColor" name="buttonPrimary"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Reset Pitch Sizes"/>
+                                        <state key="normal" title="Reset"/>
                                         <connections>
                                             <action selector="resetPitches:" destination="Pbk-vr-61V" eventType="touchUpInside" id="gaP-1e-h5I"/>
                                         </connections>
@@ -1974,6 +1974,7 @@ DQoNCg
                         <outlet property="playingAreaSavedAngleRadiansField" destination="32O-hZ-MFh" id="dGQ-LL-3N2"/>
                         <outlet property="playingAreaToSaveAngleDegreesField" destination="hUP-TM-1gP" id="NPF-fi-M7d"/>
                         <outlet property="playingAreaToSaveAngleRadiansField" destination="bpE-9u-gc5" id="RwZ-XP-FJI"/>
+                        <outlet property="resetPlayingAreaButton" destination="eBn-1T-1Yh" id="zzZ-Xa-elH"/>
                         <outlet property="resizeButton" destination="Cep-ee-waR" id="Xag-ms-d0r"/>
                         <outlet property="sportField" destination="F5h-cl-Tm7" id="DPZ-aT-ca7"/>
                         <outlet property="venueField" destination="9nK-7l-9X9" id="Bcb-UM-IMq"/>
