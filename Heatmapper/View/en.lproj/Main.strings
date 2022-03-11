@@ -94,7 +94,7 @@
 /* Class = "UILabel"; text = "Date"; ObjectID = "cdu-fT-Y48"; */
 "cdu-fT-Y48.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Adjust Pitch Size"; ObjectID = "Cep-ee-waR"; */
+/* Class = "UIButton"; normalTitle = "Resize playing area"; ObjectID = "Cep-ee-waR"; */
 "Cep-ee-waR.normalTitle" = "";
 
 /* Class = "UILabel"; text = "Distance"; ObjectID = "CTV-Fu-jHN"; */

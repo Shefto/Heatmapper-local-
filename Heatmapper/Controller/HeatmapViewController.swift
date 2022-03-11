@@ -21,22 +21,22 @@ class HeatmapViewController: UIViewController, MyMapListener {
   var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
   var workoutMetadataArray        =  [WorkoutMetadata]()
 
-//  var heatmapImage                : UIImage?
+  //  var heatmapImage                : UIImage?
   var retrievedWorkout            : HKWorkout?
-//  var routeCoordinatesArray       = [CLLocation]()
+  //  var routeCoordinatesArray       = [CLLocation]()
 
-//  let workoutDateFormatter        = DateFormatter()
+  //  let workoutDateFormatter        = DateFormatter()
   var measurementFormatter        = MeasurementFormatter()
-//  var units                       : String = ""
-//  var unitLength                  : UnitLength = .meters
+  //  var units                       : String = ""
+  //  var unitLength                  : UnitLength = .meters
   var unitSpeed                   : UnitSpeed  = .metersPerSecond
-//  let defaults                    = UserDefaults.standard
+  //  let defaults                    = UserDefaults.standard
 
   var resizeOn                    : Bool = true
   var playingAreaMapRect          : MKMapRect?
   var heatmapPointCircle          : MKCircle?
-//  var reHeatmapPoint              : REHeatmapPoint?
-//  var reHeatmapPointImage         : UIImage?
+  //  var reHeatmapPoint              : REHeatmapPoint?
+  //  var reHeatmapPointImage         : UIImage?
 
   let healthStore                 = HKHealthStore()
   let theme                       = ColourTheme()
@@ -78,7 +78,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
   var topRightCoord               : CLLocationCoordinate2D?
   var playingAreaBearing          : Double = 0.0
 
-//  var blendModeArray              = [BlendMode]()
+  //  var blendModeArray              = [BlendMode]()
   var activityArray               = [Activity]()
   var sportArray                  = [Sport]()
 
@@ -127,8 +127,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
     MyFunc.deletePlayingAreas()
   }
 
-//  @objc func resizeTap(_ sender: UITapGestureRecognizer? = nil) {
-//  }
+  //  @objc func resizeTap(_ sender: UITapGestureRecognizer? = nil) {
+  //  }
 
   @objc func handleRotate(_ gesture: UIRotationGestureRecognizer) {
     guard let gestureView = gesture.view else {
@@ -183,7 +183,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       resizeButton.tintColor = UIColor.systemGreen
 
 
-//      removeAllPinsAndAnnotations()
+      //      removeAllPinsAndAnnotations()
 
       // record the map heading at end of resizing
       mapHeadingAtResizeOff = mapView.getRotation() ?? 0
@@ -192,16 +192,16 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
       playingAreaAngleSavedAfterResize = pitchRotationAtResizeOff
       let playingAreaAngleSavedAfterResizeDegrees = playingAreaAngleSavedAfterResize.radiansToDegrees
-//      let playingAreaAngleSavedAfterResizeDegreesStr = String(describing: playingAreaAngleSavedAfterResizeDegrees)
-//      print("playingAreaAngleSavedAfterResizeDegreesStr: \(playingAreaAngleSavedAfterResizeDegreesStr)")
+      //      let playingAreaAngleSavedAfterResizeDegreesStr = String(describing: playingAreaAngleSavedAfterResizeDegrees)
+      //      print("playingAreaAngleSavedAfterResizeDegreesStr: \(playingAreaAngleSavedAfterResizeDegreesStr)")
       mapView.camera.heading = playingAreaAngleSavedAfterResizeDegrees
-//      let cameraHeadingAfterResizeStr = String(describing: mapView.camera.heading)
-//      print("camera heading after resize: \(cameraHeadingAfterResizeStr)")
+      //      let cameraHeadingAfterResizeStr = String(describing: mapView.camera.heading)
+      //      print("camera heading after resize: \(cameraHeadingAfterResizeStr)")
 
       setMapViewZoom()
       let distanceToSet = mapView.camera.centerCoordinateDistance
-//      let distanceToSetStr = String(describing: distanceToSet)
-//      print("Camera height: \(distanceToSetStr)")
+      //      let distanceToSetStr = String(describing: distanceToSet)
+      //      print("Camera height: \(distanceToSetStr)")
       let cameraToApply = MKMapCamera(lookingAtCenter: self.overlayCenter!, fromDistance: distanceToSet, pitch: 0, heading: playingAreaBearing)
       self.mapView.setCamera(cameraToApply, animated: false)
 
@@ -312,13 +312,13 @@ class HeatmapViewController: UIViewController, MyMapListener {
     //this logic always swaps the TopLeft and BottomRight
     // was originally an if-then-else - consider refactoring to remove
 
-      print("Swapping TL and BR: SavePitchCoordinates")
-      let topLeftToSwap = pitchMapTopLeftCoordinate
-      pitchMapTopLeftCoordinate = pitchMapBottomRightCoordinate
-      pitchMapBottomRightCoordinate = topLeftToSwap
-      let bottomLeftToSwap = pitchMapBottomLeftCoordinate
-      pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
-      pitchMapTopRightCoordinate = bottomLeftToSwap
+    print("Swapping TL and BR: SavePitchCoordinates")
+    let topLeftToSwap = pitchMapTopLeftCoordinate
+    pitchMapTopLeftCoordinate = pitchMapBottomRightCoordinate
+    pitchMapBottomRightCoordinate = topLeftToSwap
+    let bottomLeftToSwap = pitchMapBottomLeftCoordinate
+    pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
+    pitchMapTopRightCoordinate = bottomLeftToSwap
 
 
     playingAreaAngleSavedAfterResize = angleInRadians(between: pitchMapBottomLeftCGPoint, ending: pitchMapBottomRightCGPoint)
@@ -542,7 +542,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
         self.setMapViewZoom()
 
-
         // get the PlayingArea corner coordinates from the size of heatmap
         self.bottomLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
         self.topLeftCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: maxLong!)
@@ -591,20 +590,9 @@ class HeatmapViewController: UIViewController, MyMapListener {
     // simply doing this as it seems to work better than using coordinate angles
     let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
     let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
-    let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
+    //    let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
     let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
 
-    // pin the coordinates onto the map
-//    setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
-//    setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
-//    setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
-//    setPinUsingMKAnnotation(coordinate: topRightCoord!, title: "TR")
-//
-//    // pin the points onto the map - this should prove the conversion is the same
-//    addPinImage(point: pitchViewBottomLeft, colour: .blue, tag: 101)
-//    addPinImage(point: pitchViewBottomRight, colour: .white, tag: 102)
-//    addPinImage(point: pitchViewTopLeft, colour: .white, tag: 103)
-//    addPinImage(point: pitchViewTopRight, colour: .white, tag: 104)
 
     let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
     let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
@@ -632,8 +620,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     playingAreaAngleSaved = pitchAngle
     newPitchView.transform = newPitchView.transform.rotated(by: pitchAngle)
     self.pitchAngleToApply = pitchAngle
-//    mapView.addSubview(newPitchView)
-//    newPitchView.isHidden = true
     newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
 
     mapHeadingAtResizeOn = mapView.camera.heading
@@ -688,7 +674,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
         print ("over 180 degree turn")
         rotationToApply = rotationToApply + .pi
       } else {
-      rotationToApply = rotationToApply + .pi
+        rotationToApply = rotationToApply + .pi
       }
       print("Rotation from newPitchView")
     } else {
@@ -734,12 +720,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
     // Note: all UI work is called within this function as the data retrieval works asynchronously
     getWorkoutData()
     updateAngleUI()
-  } /* viewDidLoad */
+  }
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     updateWorkout()
-
     saveHeatmapImage()
     removeAllPinsAndAnnotations()
 
@@ -750,23 +735,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     mapHeadingAtResizeOff = rotation
     updateAngleUI()
   }
-
-//  func saveHeatmapPNG() {
-//    let mapSnapshot = mapView.snapshot()
-////    let mapSnapshot = UIApplication.shared.makeSnapshot()
-//
-//
-//    if let data = mapSnapshot.pngData() {
-//      if let workoutId = self.heatmapWorkoutId {
-//        let workoutIDString = String(describing: workoutId)
-//        let fileName = "Heatmap_" + workoutIDString + ".png"
-//        let fileURL = self.getDocumentsDirectory().appendingPathComponent(fileName)
-//        try? data.write(to: fileURL)
-////                MyFunc.logMessage(.debug, "Heatmap image \(fileName) saved to \(fileURL)")
-//
-//      }
-//    }
-//  }
 
   func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -806,7 +774,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     playingAreaSavedAngleRadiansField.text = playingAreaAngleSavedRadiansStr
     let playingAreaAngleSavedDegreesStr = String(format: "%.2f", playingAreaAngleSaved.radiansToDegrees)
     playingAreaSavedAngleDegreesField.text = playingAreaAngleSavedDegreesStr
-
 
   }
 
@@ -876,8 +843,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     distanceImageView.image = distanceImageView.image?.withRenderingMode(.alwaysTemplate)
     distanceImageView.tintColor = UIColor.systemGreen
-//    blendModeArray = BlendMode.allCases.map { $0 }
-
 
     guard let heatmapWorkout = retrievedWorkout else {
       MyFunc.logMessage(.error, "SavedHeatmapViewController : no workout returned")
@@ -916,7 +881,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
     return true
   }
-
 
 
   func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
@@ -989,24 +953,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     healthStore.execute(heartRateQuery)
   }
 
-
-  func addHeatmapPoint(coordinate:CLLocationCoordinate2D){
-
-    // create MKCircle for each heatmap point
-    let heatmapPointCircle = MKCircle(center: coordinate, radius: CLLocationDistance(radius))
-    mapView.addOverlay(heatmapPointCircle)
-
-  }
-
-  func addAnnotation(coordinate:CLLocationCoordinate2D){
-    let annotation = MKPointAnnotation()
-    annotation.coordinate = coordinate
-    mapView.addAnnotation(annotation)
-  }
-
   func getWorkoutData() {
-    //    MyFunc.logMessage(.debug, "worko«utId: \(String(describing: heatmapWorkoutId))")
-
     guard let workoutId = heatmapWorkoutId else {
       MyFunc.logMessage(.error, "heatmapWorkoutId is invalid: \(String(describing: heatmapWorkoutId))")
       return
@@ -1099,10 +1046,10 @@ class HeatmapViewController: UIViewController, MyMapListener {
         // dispatch to the main queue as we are making UI updates
         DispatchQueue.main.async {
           self.loadSamplesUI()
-//          self.resizeGetSavedPlayingArea()
+          //          self.resizeGetSavedPlayingArea()
           self.getPlayingAreaOnLoad()
           self.createREHeatmap()
-//          self.setMapViewZoom()
+          //          self.setMapViewZoom()
         }
       }
     }
@@ -1127,6 +1074,17 @@ class HeatmapViewController: UIViewController, MyMapListener {
     return radians
   }
 
+  func addHeatmapPoint(coordinate:CLLocationCoordinate2D){
+    // create MKCircle for each heatmap point
+    let heatmapPointCircle = MKCircle(center: coordinate, radius: CLLocationDistance(radius))
+    mapView.addOverlay(heatmapPointCircle)
+  }
+
+  func addAnnotation(coordinate:CLLocationCoordinate2D){
+    let annotation = MKPointAnnotation()
+    annotation.coordinate = coordinate
+    mapView.addAnnotation(annotation)
+  }
 
   func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
     let annotation = MKPointAnnotation()
@@ -1164,14 +1122,12 @@ class HeatmapViewController: UIViewController, MyMapListener {
   func removeAllAnnotations() {
     let allAnnotations = self.mapView.annotations
     self.mapView.removeAnnotations(allAnnotations)
-
   }
 
   func removeAllPinsAndAnnotations () {
     removeAllPins()
     removeAllAnnotations()
   }
-
 
   func updateWorkout()  {
 
@@ -1230,150 +1186,152 @@ class HeatmapViewController: UIViewController, MyMapListener {
   }
 
 }
-    extension HeatmapViewController: MKMapViewDelegate {
 
-      func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
-      }
+extension HeatmapViewController: MKMapViewDelegate {
 
-      func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+  func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
+  }
 
-        if overlay is MKCircle  {
+  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
 
-          // convert UI values to CGFloats for the Renderer
-          let innerColourRedFloat = Float(innerColourRed) ?? 0.0
-          let innerColourGreenFloat = Float(innerColourGreen) ?? 0.0
-          let innerColourBlueFloat = Float(innerColourBlue) ?? 0.0
-          let innerColourAlphaFloat = Float(innerColourAlpha) ?? 0.0
+    if overlay is MKCircle  {
 
-          let innerColourRedCGFloat = CGFloat(innerColourRedFloat)
-          let innerColourGreenCGFloat = CGFloat(innerColourGreenFloat)
-          let innerColourBlueCGFloat = CGFloat(innerColourBlueFloat)
-          let innerColourAlphaCGFloat = CGFloat(innerColourAlphaFloat)
+      // convert UI values to CGFloats for the Renderer
+      let innerColourRedFloat = Float(innerColourRed) ?? 0.0
+      let innerColourGreenFloat = Float(innerColourGreen) ?? 0.0
+      let innerColourBlueFloat = Float(innerColourBlue) ?? 0.0
+      let innerColourAlphaFloat = Float(innerColourAlpha) ?? 0.0
 
-          var innerColourArray = [CGFloat]()
-          innerColourArray.append(innerColourRedCGFloat)
-          innerColourArray.append(innerColourGreenCGFloat)
-          innerColourArray.append(innerColourBlueCGFloat)
-          innerColourArray.append(innerColourAlphaCGFloat)
+      let innerColourRedCGFloat = CGFloat(innerColourRedFloat)
+      let innerColourGreenCGFloat = CGFloat(innerColourGreenFloat)
+      let innerColourBlueCGFloat = CGFloat(innerColourBlueFloat)
+      let innerColourAlphaCGFloat = CGFloat(innerColourAlphaFloat)
 
-          let middleColourRedFloat = Float(middleColourRed) ?? 0.0
-          let middleColourGreenFloat = Float(middleColourGreen) ?? 0.0
-          let middleColourBlueFloat = Float(middleColourBlue) ?? 0.0
-          let middleColourAlphaFloat = Float(middleColourAlpha) ?? 0.0
+      var innerColourArray = [CGFloat]()
+      innerColourArray.append(innerColourRedCGFloat)
+      innerColourArray.append(innerColourGreenCGFloat)
+      innerColourArray.append(innerColourBlueCGFloat)
+      innerColourArray.append(innerColourAlphaCGFloat)
 
-          let middleColourRedCGFloat = CGFloat(middleColourRedFloat)
-          let middleColourGreenCGFloat = CGFloat(middleColourGreenFloat)
-          let middleColourBlueCGFloat = CGFloat(middleColourBlueFloat)
-          let middleColourAlphaCGFloat = CGFloat(middleColourAlphaFloat)
+      let middleColourRedFloat = Float(middleColourRed) ?? 0.0
+      let middleColourGreenFloat = Float(middleColourGreen) ?? 0.0
+      let middleColourBlueFloat = Float(middleColourBlue) ?? 0.0
+      let middleColourAlphaFloat = Float(middleColourAlpha) ?? 0.0
 
-          var middleColourArray = [CGFloat]()
-          middleColourArray.append(middleColourRedCGFloat)
-          middleColourArray.append(middleColourGreenCGFloat)
-          middleColourArray.append(middleColourBlueCGFloat)
-          middleColourArray.append(middleColourAlphaCGFloat)
+      let middleColourRedCGFloat = CGFloat(middleColourRedFloat)
+      let middleColourGreenCGFloat = CGFloat(middleColourGreenFloat)
+      let middleColourBlueCGFloat = CGFloat(middleColourBlueFloat)
+      let middleColourAlphaCGFloat = CGFloat(middleColourAlphaFloat)
 
-          let outerColourRedFloat = Float(outerColourRed) ?? 0.0
-          let outerColourGreenFloat = Float(outerColourGreen) ?? 0.0
-          let outerColourBlueFloat = Float(outerColourBlue) ?? 0.0
-          let outerColourAlphaFloat = Float(outerColourAlpha) ?? 0.0
+      var middleColourArray = [CGFloat]()
+      middleColourArray.append(middleColourRedCGFloat)
+      middleColourArray.append(middleColourGreenCGFloat)
+      middleColourArray.append(middleColourBlueCGFloat)
+      middleColourArray.append(middleColourAlphaCGFloat)
 
-          let outerColourRedCGFloat = CGFloat(outerColourRedFloat)
-          let outerColourGreenCGFloat = CGFloat(outerColourGreenFloat)
-          let outerColourBlueCGFloat = CGFloat(outerColourBlueFloat)
-          let outerColourAlphaCGFloat = CGFloat(outerColourAlphaFloat)
+      let outerColourRedFloat = Float(outerColourRed) ?? 0.0
+      let outerColourGreenFloat = Float(outerColourGreen) ?? 0.0
+      let outerColourBlueFloat = Float(outerColourBlue) ?? 0.0
+      let outerColourAlphaFloat = Float(outerColourAlpha) ?? 0.0
 
-          var outerColourArray = [CGFloat]()
-          outerColourArray.append(outerColourRedCGFloat)
-          outerColourArray.append(outerColourGreenCGFloat)
-          outerColourArray.append(outerColourBlueCGFloat)
-          outerColourArray.append(outerColourAlphaCGFloat)
+      let outerColourRedCGFloat = CGFloat(outerColourRedFloat)
+      let outerColourGreenCGFloat = CGFloat(outerColourGreenFloat)
+      let outerColourBlueCGFloat = CGFloat(outerColourBlueFloat)
+      let outerColourAlphaCGFloat = CGFloat(outerColourAlphaFloat)
 
-          let gradientLocation1Float = Float(innerColourGradient) ?? 0.0
-          let gradientLocation2Float = Float(middleColourGradient) ?? 0.0
-          let gradientLocation3Float = Float(outerColourGradient) ?? 0.0
+      var outerColourArray = [CGFloat]()
+      outerColourArray.append(outerColourRedCGFloat)
+      outerColourArray.append(outerColourGreenCGFloat)
+      outerColourArray.append(outerColourBlueCGFloat)
+      outerColourArray.append(outerColourAlphaCGFloat)
 
-          let gradientLocationCG1Float = CGFloat(gradientLocation1Float)
-          let gradientLocationCG2Float = CGFloat(gradientLocation2Float)
-          let gradientLocationCG3Float = CGFloat(gradientLocation3Float)
+      let gradientLocation1Float = Float(innerColourGradient) ?? 0.0
+      let gradientLocation2Float = Float(middleColourGradient) ?? 0.0
+      let gradientLocation3Float = Float(outerColourGradient) ?? 0.0
 
-          var gradientLocationsArray = [CGFloat]()
-          gradientLocationsArray.append(gradientLocationCG1Float)
-          gradientLocationsArray.append(gradientLocationCG2Float)
-          gradientLocationsArray.append(gradientLocationCG3Float)
+      let gradientLocationCG1Float = CGFloat(gradientLocation1Float)
+      let gradientLocationCG2Float = CGFloat(gradientLocation2Float)
+      let gradientLocationCG3Float = CGFloat(gradientLocation3Float)
 
-          let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle,
-                                                          innerColourArray: innerColourArray, middleColourArray: middleColourArray, outerColourArray: outerColourArray, gradientLocationsArray: gradientLocationsArray, blendMode: blendMode)
+      var gradientLocationsArray = [CGFloat]()
+      gradientLocationsArray.append(gradientLocationCG1Float)
+      gradientLocationsArray.append(gradientLocationCG2Float)
+      gradientLocationsArray.append(gradientLocationCG3Float)
 
-          return circleRenderer
-        }
+      let circleRenderer = HeatmapPointCircleRenderer(circle: overlay as! MKCircle,
+                                                      innerColourArray: innerColourArray, middleColourArray: middleColourArray, outerColourArray: outerColourArray, gradientLocationsArray: gradientLocationsArray, blendMode: blendMode)
 
-        if overlay is FootballPitchOverlay {
-          if let pitchImage = UIImage(named: "Figma Pitch 11 Green.png")
-          {
-
-            // get the rotation of the pitchView
-            let angleIncMapRotation = getMapRotation()
-            let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation, workoutId: heatmapWorkoutId!)
-
-            footballPitchOverlayRenderer.alpha = 0.5
-
-            return footballPitchOverlayRenderer
-          }
-        }
-
-        // should never call this... needs to be fixed
-        let defaultOverlayRenderer = MKOverlayRenderer()
-        return defaultOverlayRenderer
-
-      }
-
-
-      func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
-        switch newState {
-        case .starting:
-          view.dragState = .dragging
-        case .ending, .canceling:
-          view.dragState = .none
-        default: break
-        }
-      }
-
+      return circleRenderer
     }
 
-    extension HeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    if overlay is FootballPitchOverlay {
+      if let pitchImage = UIImage(named: "Figma Pitch 11 Green.png")
+      {
 
-      func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        // get the rotation of the pitchView
+        let angleIncMapRotation = getMapRotation()
+        let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation, workoutId: heatmapWorkoutId!)
+
+        footballPitchOverlayRenderer.alpha = 0.5
+
+        return footballPitchOverlayRenderer
       }
-
-      func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == activityPicker {
-          return activityArray.count
-        } else {
-          return sportArray.count
-        }
-      }
-
-      func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == activityPicker {
-          return activityArray[row].name
-        } else {
-          return sportArray[row].rawValue
-        }
-      }
-
-      func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
-        if pickerView == activityPicker {
-          activityField.text = activityArray[row].name
-          sportField.text = activityArray[row].sport.rawValue
-        } else {
-          sportField.text = sportArray[row].rawValue
-        }
-        updateWorkout()
-
-        self.view.endEditing(true)
-      }
-
     }
+
+    // should never call this... needs to be fixed
+    MyFunc.logMessage(.error, "No MKOverlayRenderer returned")
+    let defaultOverlayRenderer = MKOverlayRenderer()
+    return defaultOverlayRenderer
+
+  }
+
+
+  func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
+    switch newState {
+    case .starting:
+      view.dragState = .dragging
+    case .ending, .canceling:
+      view.dragState = .none
+    default: break
+    }
+  }
+
+}
+
+extension HeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1
+  }
+
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    if pickerView == activityPicker {
+      return activityArray.count
+    } else {
+      return sportArray.count
+    }
+  }
+
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    if pickerView == activityPicker {
+      return activityArray[row].name
+    } else {
+      return sportArray[row].rawValue
+    }
+  }
+
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
+    if pickerView == activityPicker {
+      activityField.text = activityArray[row].name
+      sportField.text = activityArray[row].sport.rawValue
+    } else {
+      sportField.text = sportArray[row].rawValue
+    }
+    updateWorkout()
+
+    self.view.endEditing(true)
+  }
+
+}
 
