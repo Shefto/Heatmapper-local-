@@ -84,6 +84,9 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   var overlayCenter               : CLLocationCoordinate2D?
 
+  let activityPicker              = UIPickerView()
+  let sportPicker                 = UIPickerView()
+
   @IBOutlet weak var mapStartRadiansField: ThemeMediumFontTextField!
   @IBOutlet weak var mapStartDegreesField: ThemeMediumFontTextField!
   @IBOutlet weak var pitchStartRadiansField: ThemeMediumFontTextField!
@@ -99,10 +102,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
   @IBOutlet weak var playingAreaToSaveAngleRadiansField: ThemeMediumFontTextField!
   @IBOutlet weak var playingAreaToSaveAngleDegreesField: ThemeMediumFontTextField!
 
-
   @IBOutlet weak var resizeButton: UIButton!
-
-
 
   @IBOutlet weak var activityField      : ThemeMediumFontTextField!
   @IBOutlet weak var sportField         : ThemeMediumFontTextField!
@@ -119,8 +119,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
   @IBOutlet weak var heartRateImageView : UIImageView!
   @IBOutlet weak var distanceImageView  : UIImageView!
 
-  let activityPicker              = UIPickerView()
-  let sportPicker                 = UIPickerView()
+
 
   @IBOutlet weak var mapView: MyMKMapView!
 
@@ -128,8 +127,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
     MyFunc.deletePlayingAreas()
   }
 
-  @objc func resizeTap(_ sender: UITapGestureRecognizer? = nil) {
-  }
+//  @objc func resizeTap(_ sender: UITapGestureRecognizer? = nil) {
+//  }
 
   @objc func handleRotate(_ gesture: UIRotationGestureRecognizer) {
     guard let gestureView = gesture.view else {
