@@ -13,7 +13,6 @@ import MapKit
 import HealthKit
 import CoreLocation
 
-
 class HeatmapViewController: UIViewController, MyMapListener {
 
   var heatmapperCoordinatesArray  = [CLLocationCoordinate2D]()
@@ -22,25 +21,25 @@ class HeatmapViewController: UIViewController, MyMapListener {
   var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
   var workoutMetadataArray        =  [WorkoutMetadata]()
 
-  var heatmapImage                : UIImage?
+//  var heatmapImage                : UIImage?
   var retrievedWorkout            : HKWorkout?
-  var routeCoordinatesArray       = [CLLocation]()
+//  var routeCoordinatesArray       = [CLLocation]()
 
-  let workoutDateFormatter        = DateFormatter()
+//  let workoutDateFormatter        = DateFormatter()
   var measurementFormatter        = MeasurementFormatter()
-  var units                       : String = ""
-  var unitLength                  : UnitLength = .meters
+//  var units                       : String = ""
+//  var unitLength                  : UnitLength = .meters
   var unitSpeed                   : UnitSpeed  = .metersPerSecond
-  let defaults                    = UserDefaults.standard
+//  let defaults                    = UserDefaults.standard
 
   var resizeOn                    : Bool = true
   var playingAreaMapRect          : MKMapRect?
   var heatmapPointCircle          : MKCircle?
-  var reHeatmapPoint              : REHeatmapPoint?
-  var reHeatmapPointImage         : UIImage?
+//  var reHeatmapPoint              : REHeatmapPoint?
+//  var reHeatmapPointImage         : UIImage?
 
   let healthStore                 = HKHealthStore()
-  let theme = ColourTheme()
+  let theme                       = ColourTheme()
 
   var innerColourRed              : String = "1.0"
   var innerColourGreen            : String = "0.0"
@@ -79,7 +78,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
   var topRightCoord               : CLLocationCoordinate2D?
   var playingAreaBearing          : Double = 0.0
 
-  var blendModeArray              = [BlendMode]()
+//  var blendModeArray              = [BlendMode]()
   var activityArray               = [Activity]()
   var sportArray                  = [Sport]()
 
@@ -922,7 +921,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     distanceImageView.image = distanceImageView.image?.withRenderingMode(.alwaysTemplate)
     distanceImageView.tintColor = UIColor.systemGreen
-    blendModeArray = BlendMode.allCases.map { $0 }
+//    blendModeArray = BlendMode.allCases.map { $0 }
 
 
     guard let heatmapWorkout = retrievedWorkout else {
