@@ -182,7 +182,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       resizeButton.setTitle("Adjust Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemGreen
 
-      // remove the pins and annotations
+
 //      removeAllPinsAndAnnotations()
 
       // record the map heading at end of resizing
@@ -208,16 +208,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
       // update the metrics
       updateAngleUI()
 
-      // remove newPitchView
-
-//      createHeatmapImageView()
-//      getHeatmapCorners()
-//      saveHeatmapPNG()
+      // removes the pitchView
       removeViewWithTag(tag: 200)
 
     } else {
       // turn everything on (as it's off)
-
       resizeOn = true
       resizeButton.setTitle("Save Pitch Size", for: .normal)
       resizeButton.tintColor = UIColor.systemRed
@@ -306,41 +301,17 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let pitchMapBottomLeftCGPoint   : CGPoint = corners.bottomLeft
     let pitchMapBottomRightCGPoint  : CGPoint = corners.bottomRight
     let pitchMapTopRightCGPoint     : CGPoint = corners.topRight
-    let pmTLStr = String(describing: pitchMapTopLeftCGPoint)
-    let pmBLStr = String(describing: pitchMapBottomLeftCGPoint)
-    let pmBRStr = String(describing: pitchMapBottomRightCGPoint)
-    let pmTRStr = String(describing: pitchMapTopRightCGPoint)
-    print("pitch corners to save:")
-    print ("Top Left: \(pmTLStr)")
-    print ("Botton Left: \(pmBLStr)")
-    print ("Top Right: \(pmTRStr)")
-    print ("Bottom Right: \(pmBRStr)")
 
 
-//    // this code pins the points onto the map - this should prove the conversion is the same
-//    addPinImage(point: pitchMapBottomLeftCGPoint, colour: .red, tag: 301)
-//    addPinImage(point: pitchMapBottomRightCGPoint, colour: .yellow, tag: 302)
-//    addPinImage(point: pitchMapTopLeftCGPoint, colour: .yellow, tag: 303)
-//    addPinImage(point: pitchMapTopRightCGPoint, colour: .yellow, tag: 304)
-
-    // then workout out the corresponding co-ordinates at these points on the map view
+    // tworkout out the corresponding co-ordinates at these points on the map view
     var pitchMapTopLeftCoordinate     : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
     var pitchMapBottomLeftCoordinate  : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
     var pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
     var pitchMapTopRightCoordinate    : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
 
-//    // this code pins the coordinates onto the map
-//    setPinUsingMKAnnotation(coordinate: pitchMapBottomLeftCoordinate, title: "bl")
-//    setPinUsingMKAnnotation(coordinate: pitchMapTopLeftCoordinate, title: "tl")
-//    setPinUsingMKAnnotation(coordinate: pitchMapBottomRightCoordinate, title: "br")
-//    setPinUsingMKAnnotation(coordinate: pitchMapTopRightCoordinate, title: "tr")
+    //this logic always swaps the TopLeft and BottomRight
+    // was originally an if-then-else - consider refactoring to remove
 
-
-    //this logic compares the TopLeft and BottomRight
-    //if the TopLeft is south of the BottomRight swap them round
-//    let topLeftLatitude = pitchMapTopLeftCoordinate.latitude
-//    let bottomRightLatitude = pitchMapBottomRightCoordinate.latitude
-//    if bottomRightLatitude < topLeftLatitude {
       print("Swapping TL and BR: SavePitchCoordinates")
       let topLeftToSwap = pitchMapTopLeftCoordinate
       pitchMapTopLeftCoordinate = pitchMapBottomRightCoordinate
@@ -349,7 +320,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
       pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
       pitchMapTopRightCoordinate = bottomLeftToSwap
 
-//    }
 
     playingAreaAngleSavedAfterResize = angleInRadians(between: pitchMapBottomLeftCGPoint, ending: pitchMapBottomRightCGPoint)
 
@@ -382,7 +352,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     print("playingAreaBearing: \(playingAreaBearingStr)")
 
   }
-
 
 
   func resizeGetSavedPlayingArea() {
@@ -451,7 +420,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
         self.updateAngleUI()
 
-
       case .success(let playingArea):
         MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
         let playingAreaStr = String(describing: playingArea)
@@ -480,19 +448,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
     let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
     let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
-    let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
 
-    // pin the coordinates onto the map
-//    setPinUsingMKAnnotation(coordinate: bottomLeftCoord!, title: "BL")
-//    setPinUsingMKAnnotation(coordinate: topLeftCoord!, title: "TL")
-//    setPinUsingMKAnnotation(coordinate: bottomRightCoord!, title: "BR")
-//    setPinUsingMKAnnotation(coordinate: topRightCoord!, title: "TR")
-//
-//    // pin the points onto the map - this should prove the conversion is the same
-//    addPinImage(point: pitchViewBottomLeft, colour: .blue, tag: 101)
-//    addPinImage(point: pitchViewBottomRight, colour: .white, tag: 102)
-//    addPinImage(point: pitchViewTopLeft, colour: .white, tag: 103)
-//    addPinImage(point: pitchViewTopRight, colour: .white, tag: 104)
 
     let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
     let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
