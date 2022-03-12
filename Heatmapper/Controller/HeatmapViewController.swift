@@ -120,11 +120,15 @@ class HeatmapViewController: UIViewController, MyMapListener {
   @IBOutlet weak var distanceImageView  : UIImageView!
 
   @IBOutlet weak var mapView: MyMKMapView!
-
   @IBOutlet weak var resetPlayingAreaButton: UIButton!
+
+  @IBOutlet weak var widthStepper: UIStepper!
+  @IBOutlet weak var heightStepper: UIStepper!
+
 
   @IBAction func resetPitches(_ sender: Any) {
     MyFunc.deletePlayingAreas()
+    updateSteppers()
   }
 
   //  @objc func resizeTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -138,6 +142,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     pitchRotationAtResizeOff += gesture.rotation
     updateAngleUI()
     gesture.rotation = 0
+    updateSteppers()
   }
 
   @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
@@ -146,7 +151,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     }
     gestureView.transform = gestureView.transform.scaledBy(x: gesture.scale, y: gesture.scale)
     gesture.scale = 1
-
+    updateSteppers()
   }
 
   @objc func handlePan(_ sender: UIPanGestureRecognizer) {
@@ -171,7 +176,39 @@ class HeatmapViewController: UIViewController, MyMapListener {
     finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
     finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
 
+    updateSteppers()
   }
+
+
+  @IBAction func stepperWidth(_ sender: UIStepper) {
+
+    guard let playingAreaView = self.view.viewWithTag(200) else {
+      MyFunc.logMessage(.debug, "Cannot find pitchView to save")
+      return
+    }
+    print(sender.debugDescription)
+    let viewX = playingAreaView.frame.origin.x
+    let viewY = playingAreaView.frame.origin.y
+    let viewHeight = playingAreaView.frame.height
+    let viewWidth = sender.value
+    playingAreaView.frame = CGRect(x: viewX, y: viewY, width: viewWidth, height: viewHeight)
+  }
+
+  @IBAction func stepperHeight(_ sender: UIStepper) {
+
+    guard let playingAreaView = self.view.viewWithTag(200) else {
+      MyFunc.logMessage(.debug, "Cannot find pitchView to save")
+      return
+    }
+    print(sender.debugDescription)
+    let viewX = playingAreaView.frame.origin.x
+    let viewY = playingAreaView.frame.origin.y
+    let viewHeight = sender.value
+    let viewWidth = playingAreaView.frame.width
+    playingAreaView.frame = CGRect(x: viewX, y: viewY, width: viewWidth, height: viewHeight)
+  }
+
+  
 
   @IBAction func btnResize(_ sender: Any) {
 
@@ -218,7 +255,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       resetPlayingAreaButton.isHidden = false
       removeAllPinsAndAnnotations()
       resizeGetSavedPlayingArea()
-
+      updateSteppers()
     }
   }
 
@@ -254,6 +291,16 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   }
 
+  func updateSteppers() {
+    guard let playingAreaView = self.view.viewWithTag(200) else {
+      MyFunc.logMessage(.debug, "Cannot find pitchView to save")
+      return
+    }
+
+    heightStepper.value = playingAreaView.frame.height
+    widthStepper.value = playingAreaView.frame.width
+
+  }
 
   func createHeatmapImageView() {
     // this function will create an image view from the heatmap data plus the corners and the playing area
@@ -316,7 +363,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     }
   }
-
 
 
   func saveResizedPlayingArea() {
@@ -491,6 +537,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     newPitchView.layer.opacity = 0.5
     newPitchView.isUserInteractionEnabled = true
     newPitchView.tag = 200
+
 
     // add the gesture recognizers
     let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))

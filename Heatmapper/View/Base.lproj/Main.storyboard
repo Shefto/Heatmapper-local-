@@ -1551,20 +1551,49 @@ DQoNCg
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lQG-2T-c3p" customClass="MyMKMapView" customModule="Heatmapper" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="414" height="504"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="469"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="fJF-dn-msC"/>
                                 </constraints>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Qfd-ml-kHE">
-                                <rect key="frame" x="5" y="642" width="404" height="200"/>
+                                <rect key="frame" x="5" y="607" width="404" height="235"/>
                                 <subviews>
                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6QP-pY-Zhr">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="0.0"/>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CqU-Ja-0UF" userLabel="Activity Stack View">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Jrc-x1-VDp" userLabel="Resize Buttons Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="25"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WD-Y6-CkL" userLabel="Height" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="97.333333333333329" height="25"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1500" translatesAutoresizingMaskIntoConstraints="NO" id="Rno-UO-oaX" userLabel="Height Stepper">
+                                                <rect key="frame" x="102.33333333333334" y="0.0" width="97.333333333333343" height="25"/>
+                                                <connections>
+                                                    <action selector="stepperHeight:" destination="Pbk-vr-61V" eventType="valueChanged" id="KVN-He-KPm"/>
+                                                </connections>
+                                            </stepper>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Width" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J9N-RL-yLl" userLabel="Width" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                                <rect key="frame" x="204.66666666666666" y="0.0" width="96.999999999999972" height="25"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1500" translatesAutoresizingMaskIntoConstraints="NO" id="IIv-Ri-8qz" userLabel="Width Stepper">
+                                                <rect key="frame" x="306.66666666666669" y="0.0" width="97.333333333333314" height="25"/>
+                                                <connections>
+                                                    <action selector="stepperWidth:" destination="Pbk-vr-61V" eventType="valueChanged" id="vkV-Cg-zp3"/>
+                                                </connections>
+                                            </stepper>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CqU-Ja-0UF" userLabel="Activity Stack View">
+                                        <rect key="frame" x="0.0" y="35" width="404" height="25"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hV7-3h-Xdr" userLabel="Activity Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="202" height="25"/>
@@ -1584,7 +1613,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="z86-VQ-EfX" userLabel="Sport Stack View">
-                                        <rect key="frame" x="0.0" y="35" width="404" height="25"/>
+                                        <rect key="frame" x="0.0" y="70" width="404" height="25"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9N-6Z-FMe" userLabel="Sport Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="202" height="25"/>
@@ -1604,7 +1633,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="HWq-3y-8ck" userLabel="Venue Stack View">
-                                        <rect key="frame" x="0.0" y="70" width="404" height="25"/>
+                                        <rect key="frame" x="0.0" y="105" width="404" height="25"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OW8-RA-0px" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="202" height="25"/>
@@ -1624,7 +1653,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="W1R-tZ-EX0" userLabel="Pitch Stack View">
-                                        <rect key="frame" x="0.0" y="105" width="404" height="25"/>
+                                        <rect key="frame" x="0.0" y="140" width="404" height="25"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ze-4i-L2A" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="202" height="25"/>
@@ -1644,7 +1673,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="y2g-Bu-y8A" userLabel="Header">
-                                        <rect key="frame" x="0.0" y="135" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="170" width="404" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PlayingArea saved angle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8N4-wn-n3R" userLabel="Map Resize Radians Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
@@ -1671,7 +1700,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zJC-xC-Saa" userLabel="Map Resize Stack View">
-                                        <rect key="frame" x="0.0" y="135" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="170" width="404" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map heading resize start" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fg1-ao-LPs" userLabel="Map Resize Radians Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
@@ -1698,7 +1727,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ye0-dy-lsH" userLabel="Map Angle Stack View">
-                                        <rect key="frame" x="0.0" y="135" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="170" width="404" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map heading resize end" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRt-qA-P0z" userLabel="Map Radians Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
@@ -1725,7 +1754,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9J5-ta-Cb4" userLabel="Pitch Resize Start Stack View">
-                                        <rect key="frame" x="0.0" y="135" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="170" width="404" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pitch resize start" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5l1-a3-BUy" userLabel="Pitch Radians Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
@@ -1752,7 +1781,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="u6c-uj-UnH" userLabel="Pitch Resize End Stack View">
-                                        <rect key="frame" x="0.0" y="135" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="170" width="404" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pitch resize end" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1j-3Y-Hld" userLabel="PA Radians Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
@@ -1779,7 +1808,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="p74-D5-5KN" userLabel="PlayingArea End Stack View">
-                                        <rect key="frame" x="0.0" y="135" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="170" width="404" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PlayingArea angle to save" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MU5-8j-QsL" userLabel="PlayingArea End Radians Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
@@ -1806,7 +1835,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8ES-Ro-2vB" userLabel="Calories and Heart Rate Stack View">
-                                        <rect key="frame" x="0.0" y="140" width="404" height="25"/>
+                                        <rect key="frame" x="0.0" y="175" width="404" height="25"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flame.fill" translatesAutoresizingMaskIntoConstraints="NO" id="NUS-eY-InW">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
@@ -1841,7 +1870,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QL9-Yr-a6X" userLabel="Pace and Distance Stack View">
-                                        <rect key="frame" x="0.0" y="175" width="404" height="25"/>
+                                        <rect key="frame" x="0.0" y="210" width="404" height="25"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speedometer" translatesAutoresizingMaskIntoConstraints="NO" id="G2E-Dn-slr">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
@@ -1879,6 +1908,7 @@ DQoNCg
                                     <constraint firstItem="9J5-ta-Cb4" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="1cr-KD-6MA"/>
                                     <constraint firstAttribute="trailing" secondItem="zJC-xC-Saa" secondAttribute="trailing" id="1te-FE-4BW"/>
                                     <constraint firstItem="p74-D5-5KN" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="5UL-yW-ZeD"/>
+                                    <constraint firstItem="Jrc-x1-VDp" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="67f-du-zr8"/>
                                     <constraint firstAttribute="trailing" secondItem="z86-VQ-EfX" secondAttribute="trailing" id="7sG-qe-33O"/>
                                     <constraint firstAttribute="trailing" secondItem="QL9-Yr-a6X" secondAttribute="trailing" id="AsD-Ll-X4x"/>
                                     <constraint firstAttribute="trailing" secondItem="Ye0-dy-lsH" secondAttribute="trailing" id="BKp-Vs-VOC"/>
@@ -1893,6 +1923,7 @@ DQoNCg
                                     <constraint firstAttribute="trailing" secondItem="p74-D5-5KN" secondAttribute="trailing" id="W23-xb-Ble"/>
                                     <constraint firstItem="Ye0-dy-lsH" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="YW8-yg-Qt2"/>
                                     <constraint firstItem="HWq-3y-8ck" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="ZTj-xk-JjU"/>
+                                    <constraint firstAttribute="trailing" secondItem="Jrc-x1-VDp" secondAttribute="trailing" id="bQr-11-w97"/>
                                     <constraint firstAttribute="trailing" secondItem="6QP-pY-Zhr" secondAttribute="trailing" id="d0f-A9-2EG"/>
                                     <constraint firstItem="8ES-Ro-2vB" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="gwb-XC-msK"/>
                                     <constraint firstItem="y2g-Bu-y8A" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="i97-fO-acM"/>
@@ -1905,8 +1936,8 @@ DQoNCg
                                     <constraint firstItem="6QP-pY-Zhr" firstAttribute="top" secondItem="Qfd-ml-kHE" secondAttribute="top" id="xMW-Cf-0sV"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="gX6-Du-D22" userLabel="Activity Stack View">
-                                <rect key="frame" x="5" y="597" width="404" height="40"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="gX6-Du-D22" userLabel="Button Stack View">
+                                <rect key="frame" x="5" y="562" width="404" height="40"/>
                                 <subviews>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cep-ee-waR" userLabel="Resize">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="40"/>
@@ -1958,6 +1989,7 @@ DQoNCg
                         <outlet property="distanceLabel" destination="CTV-Fu-jHN" id="WCP-uY-yBq"/>
                         <outlet property="heartRateImageView" destination="Y9q-X2-028" id="MMS-Nk-EX4"/>
                         <outlet property="heartRateLabel" destination="ay0-XU-veN" id="kGG-8D-X9u"/>
+                        <outlet property="heightStepper" destination="Rno-UO-oaX" id="BZK-qI-JCi"/>
                         <outlet property="mapEndDegreesField" destination="Joa-HF-yLG" id="DBE-RD-Eig"/>
                         <outlet property="mapEndRadiansField" destination="IHC-Xx-ul9" id="axP-LU-q6i"/>
                         <outlet property="mapStartDegreesField" destination="0yn-zN-nSm" id="9xw-zw-aKo"/>
@@ -1978,6 +2010,7 @@ DQoNCg
                         <outlet property="resizeButton" destination="Cep-ee-waR" id="Xag-ms-d0r"/>
                         <outlet property="sportField" destination="F5h-cl-Tm7" id="DPZ-aT-ca7"/>
                         <outlet property="venueField" destination="9nK-7l-9X9" id="Bcb-UM-IMq"/>
+                        <outlet property="widthStepper" destination="IIv-Ri-8qz" id="b6E-ch-tZb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xws-kf-RrH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

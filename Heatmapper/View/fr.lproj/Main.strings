@@ -79,6 +79,9 @@
 /* Class = "UILabel"; text = "Pitch resize start"; ObjectID = "5l1-a3-BUy"; */
 "5l1-a3-BUy.text" = "";
 
+/* Class = "UILabel"; text = "Height"; ObjectID = "6WD-Y6-CkL"; */
+"6WD-Y6-CkL.text" = "";
+
 /* Class = "UISegmentedControl"; 7U9-Pn-MJX.segmentTitles[0] = "Map"; ObjectID = "7U9-Pn-MJX"; */
 "7U9-Pn-MJX.segmentTitles[0]" = "";
 
@@ -183,6 +186,9 @@
 
 /* Class = "UITextField"; text = "-"; ObjectID = "IHC-Xx-ul9"; */
 "IHC-Xx-ul9.text" = "";
+
+/* Class = "UILabel"; text = "Width"; ObjectID = "J9N-RL-yLl"; */
+"J9N-RL-yLl.text" = "";
 
 /* Class = "UITextField"; text = "-"; ObjectID = "Joa-HF-yLG"; */
 "Joa-HF-yLG.text" = "";
