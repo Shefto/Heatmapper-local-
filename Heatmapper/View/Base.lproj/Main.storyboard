@@ -1989,6 +1989,7 @@ DQoNCg
                         <outlet property="distanceLabel" destination="CTV-Fu-jHN" id="WCP-uY-yBq"/>
                         <outlet property="heartRateImageView" destination="Y9q-X2-028" id="MMS-Nk-EX4"/>
                         <outlet property="heartRateLabel" destination="ay0-XU-veN" id="kGG-8D-X9u"/>
+                        <outlet property="heightAndWeightStackView" destination="Jrc-x1-VDp" id="tfu-dY-aW6"/>
                         <outlet property="heightStepper" destination="Rno-UO-oaX" id="BZK-qI-JCi"/>
                         <outlet property="mapEndDegreesField" destination="Joa-HF-yLG" id="DBE-RD-Eig"/>
                         <outlet property="mapEndRadiansField" destination="IHC-Xx-ul9" id="axP-LU-q6i"/>

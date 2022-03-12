@@ -124,6 +124,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   @IBOutlet weak var widthStepper: UIStepper!
   @IBOutlet weak var heightStepper: UIStepper!
+  @IBOutlet weak var heightAndWeightStackView: UIStackView!
 
 
   @IBAction func resetPitches(_ sender: Any) {
@@ -208,7 +209,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     playingAreaView.frame = CGRect(x: viewX, y: viewY, width: viewWidth, height: viewHeight)
   }
 
-  
+
 
   @IBAction func btnResize(_ sender: Any) {
 
@@ -246,6 +247,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       removeViewWithTag(tag: 200)
 
       resetPlayingAreaButton.isHidden = true
+      heightAndWeightStackView.isHidden = true
 
     } else {
       // turn everything on (as it's off)
@@ -253,6 +255,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       resizeButton.setTitle("Save", for: .normal)
 //      resizeButton.tintColor = UIColor.systemRed
       resetPlayingAreaButton.isHidden = false
+      heightAndWeightStackView.isHidden = false
       removeAllPinsAndAnnotations()
       resizeGetSavedPlayingArea()
       updateSteppers()
