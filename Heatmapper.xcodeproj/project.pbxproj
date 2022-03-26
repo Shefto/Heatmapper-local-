@@ -16,6 +16,7 @@
 		79125ED127085DC0008E9872 /* PlayingArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79125ED027085DC0008E9872 /* PlayingArea.swift */; };
 		79125ED227085DC0008E9872 /* PlayingArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79125ED027085DC0008E9872 /* PlayingArea.swift */; };
 		791BD3C325A64E2600FD994A /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791BD3C225A64E2600FD994A /* WorkoutManager.swift */; };
+		791CA3C327EA6F840049FCB8 /* PlayingAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791CA3C227EA6F840049FCB8 /* PlayingAreaViewController.swift */; };
 		79201489254343BD00212051 /* MyFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083BB25092EBB00274F79 /* MyFunc.swift */; };
 		792CCCDD26AC32270024C5B3 /* DTMHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792CCCDC26AC32270024C5B3 /* DTMHeatmapViewController.swift */; };
 		793477A726DA55EC0004DF0A /* ReferenceDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */; };
@@ -189,6 +190,7 @@
 		7907E8C024E1468500F3DE0D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		79125ED027085DC0008E9872 /* PlayingArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingArea.swift; sourceTree = "<group>"; };
 		791BD3C225A64E2600FD994A /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
+		791CA3C227EA6F840049FCB8 /* PlayingAreaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingAreaViewController.swift; sourceTree = "<group>"; };
 		792CCCDC26AC32270024C5B3 /* DTMHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTMHeatmapViewController.swift; sourceTree = "<group>"; };
 		793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceDataViewController.swift; sourceTree = "<group>"; };
 		793477A826DD66BA0004DF0A /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 		79A4EFA024A0AF45002A7870 = {
 			isa = PBXGroup;
 			children = (
+				791CA3C227EA6F840049FCB8 /* PlayingAreaViewController.swift */,
 				796BC39227BFBDE200628EB2 /* MyMKMapView.swift */,
 				796BC39427BFBE7900628EB2 /* MyMapDelegate.swift */,
 				7960FD7A27B97EB400EF4886 /* ViewCorners.swift */,
@@ -857,6 +860,7 @@
 				7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */,
 				799131292634145F00811731 /* JDHeatMapView.swift in Sources */,
 				793D1AD624B855540039441B /* CommandStatus.swift in Sources */,
+				791CA3C327EA6F840049FCB8 /* PlayingAreaViewController.swift in Sources */,
 				7972371D2719E203002F4548 /* FootballPitchOverlayRenderer.swift in Sources */,
 				79F3A2B42697970700667B1B /* RE_DTMDiffHeatmap.swift in Sources */,
 				793D1AD424B854EB0039441B /* SessionDelegator.swift in Sources */,

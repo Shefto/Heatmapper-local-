@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="18122" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="m1S-hZ-N2T" pageOrientation="vertical">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="19529" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="m1S-hZ-N2T" pageOrientation="vertical">
     <device id="watch38"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="18022"/>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="19514"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
     </dependencies>
     <scenes>
@@ -121,20 +122,14 @@
             <objects>
                 <controller identifier="Main Menu Interface Controller" title="Heatmapper" id="m1S-hZ-N2T" userLabel="Main Menu" customClass="MainMenuInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
-                        <group width="1" height="1" alignment="left" layout="vertical" id="yWS-e6-NHC">
+                        <group width="1" height="1" alignment="left" verticalAlignment="center" layout="vertical" id="yWS-e6-NHC">
                             <items>
-                                <button alignment="center" verticalAlignment="bottom" id="S1g-jb-1Nv" userLabel="Start Match Button" customClass="MyWKInterfaceButton" customModule="FIT_WatchKit_Extension">
+                                <button alignment="center" verticalAlignment="center" id="S1g-jb-1Nv" userLabel="Start Match Button" customClass="MyWKInterfaceButton" customModule="FIT_WatchKit_Extension">
                                     <group key="contentGroup" width="1" height="0.32000000000000001" alignment="left" id="M22-Ye-n7w">
                                         <items>
-                                            <label width="1" alignment="center" verticalAlignment="center" text="Start Match" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.10000000000000001" id="r0f-cO-MJr">
+                                            <label width="1" alignment="center" verticalAlignment="center" text="Start" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.10000000000000001" id="r0f-cO-MJr">
                                                 <variation key="device=watch38mm">
-                                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
-                                                </variation>
-                                                <variation key="device=watch40mm">
-                                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                                </variation>
-                                                <variation key="device=watch42mm">
-                                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                    <fontDescription key="font" style="UICTFontTextStyleTitle2"/>
                                                 </variation>
                                             </label>
                                         </items>
@@ -144,7 +139,7 @@
                                         <action selector="btnStart" destination="m1S-hZ-N2T" id="2yb-Jt-JUF"/>
                                     </connections>
                                 </button>
-                                <button alignment="center" verticalAlignment="bottom" id="4Y5-k3-HLi" userLabel="Pitch Button">
+                                <button alignment="center" verticalAlignment="bottom" hidden="YES" id="4Y5-k3-HLi" userLabel="Pitch Button">
                                     <group key="contentGroup" width="1" height="0.32000000000000001" alignment="left" id="u0c-2h-IfS">
                                         <items>
                                             <label alignment="center" verticalAlignment="center" text="Set Pitch Boundaries" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="346-km-c9I">
@@ -165,7 +160,7 @@
                                         <segue destination="G9W-oD-vbU" kind="push" id="doM-eC-WiQ"/>
                                     </connections>
                                 </button>
-                                <button alignment="center" verticalAlignment="bottom" id="Vxa-ST-xpC" userLabel="Map Button" customClass="MyWKInterfaceButton" customModule="FIT_WatchKit_Extension">
+                                <button alignment="center" verticalAlignment="bottom" hidden="YES" id="Vxa-ST-xpC" userLabel="Map Button" customClass="MyWKInterfaceButton" customModule="FIT_WatchKit_Extension">
                                     <group key="contentGroup" width="1" height="0.32000000000000001" alignment="left" id="oBa-yR-o15">
                                         <items>
                                             <label width="1" alignment="center" verticalAlignment="center" text="Start Map" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.10000000000000001" id="BuH-w6-PIL">
@@ -240,7 +235,9 @@
                                                 <action selector="btnResume" destination="lNe-R1-skF" id="ERb-2v-peC"/>
                                             </connections>
                                         </button>
-                                        <label width="1" height="0.20000000000000001" alignment="center" text="Resume" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="NJY-vw-2Lk" userLabel="Start Label"/>
+                                        <label width="1" height="0.20000000000000001" alignment="center" text="Resume" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="NJY-vw-2Lk" userLabel="Start Label">
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
+                                        </label>
                                     </items>
                                 </group>
                                 <group width="0.5" height="0.5" alignment="left" layout="vertical" spacing="0.0" id="jyB-48-dFQ" userLabel="Lock Group">
@@ -252,7 +249,9 @@
                                                 <action selector="btnLock" destination="lNe-R1-skF" id="xla-ws-xk7"/>
                                             </connections>
                                         </button>
-                                        <label width="1" height="0.20000000000000001" alignment="center" text="Lock" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="d7e-a5-Ehw" userLabel="Lock Label"/>
+                                        <label width="1" height="0.20000000000000001" alignment="center" text="Lock" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="d7e-a5-Ehw" userLabel="Lock Label">
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
+                                        </label>
                                     </items>
                                 </group>
                                 <group width="0.5" height="0.5" alignment="left" verticalAlignment="bottom" layout="vertical" spacing="0.0" id="99S-Uh-ycX" userLabel="End Group">
@@ -264,7 +263,9 @@
                                                 <action selector="btnEnd" destination="lNe-R1-skF" id="g72-ig-EFu"/>
                                             </connections>
                                         </button>
-                                        <label width="1" height="0.20000000000000001" alignment="center" verticalAlignment="bottom" text="End" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="jqC-QP-JrC" userLabel="End Label"/>
+                                        <label width="1" height="0.20000000000000001" alignment="center" verticalAlignment="bottom" text="End" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="jqC-QP-JrC" userLabel="End Label">
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
+                                        </label>
                                     </items>
                                 </group>
                                 <group width="0.5" height="0.5" alignment="right" verticalAlignment="bottom" layout="vertical" spacing="0.0" id="nXs-ws-k8e" userLabel="Pause Group">
@@ -276,7 +277,9 @@
                                                 <action selector="btnPause" destination="lNe-R1-skF" id="sUV-T4-wMM"/>
                                             </connections>
                                         </button>
-                                        <label width="1" height="0.20000000000000001" alignment="center" verticalAlignment="bottom" text="Pause" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="QlM-yx-hEq" userLabel="Pause Label"/>
+                                        <label width="1" height="0.20000000000000001" alignment="center" verticalAlignment="bottom" text="Pause" textAlignment="center" minimumScaleFactor="0.69999999999999996" id="QlM-yx-hEq" userLabel="Pause Label">
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
+                                        </label>
                                     </items>
                                 </group>
                             </items>
@@ -297,7 +300,7 @@
             <objects>
                 <controller identifier="IntervalsTableController" title="Intervals Interface Controller" contentMode="center" id="rVq-WF-y7O" customClass="IntervalsInterfaceController" customModule="Heatmapper_WatchKit_Extension">
                     <items>
-                        <button width="1" height="0.20000000000000001" alignment="center" verticalAlignment="bottom" title="Main Menu" id="KxN-K1-Tzz">
+                        <button width="1" height="0.32000000000000001" alignment="center" verticalAlignment="center" title="Main Menu" id="KxN-K1-Tzz">
                             <color key="titleColor" name="navBarTitle"/>
                             <color key="backgroundColor" name="navBar"/>
                             <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
@@ -334,12 +337,12 @@
                                                                 </imageView>
                                                                 <label alignment="left" verticalAlignment="center" text="0" textAlignment="left" baselineAdjustment="alignCenters" id="AAh-6d-Zvu" userLabel="Heart Rate">
                                                                     <color key="textColor" name="navBarTitle"/>
-                                                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                                                 </label>
                                                             </items>
                                                         </group>
                                                         <label alignment="left" text="bpm" id="lQf-3x-diN" userLabel="BPM">
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                                         </label>
                                                     </items>
                                                 </group>
@@ -349,7 +352,7 @@
                                                             <items>
                                                                 <label alignment="right" verticalAlignment="center" text="0" textAlignment="left" baselineAdjustment="alignCenters" id="GW3-IV-ZxQ" userLabel="Active Energy">
                                                                     <color key="textColor" name="navBarTitle"/>
-                                                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                                                 </label>
                                                                 <imageView height="18" alignment="right" verticalAlignment="center" image="flame.fill" catalog="system" id="BRZ-na-Yja">
                                                                     <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -357,7 +360,7 @@
                                                             </items>
                                                         </group>
                                                         <label alignment="right" text="kcal" id="g88-lt-83u" userLabel="kcal">
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                                         </label>
                                                     </items>
                                                 </group>
@@ -369,14 +372,14 @@
                                                     <items>
                                                         <label alignment="left" verticalAlignment="bottom" text="km/h" textAlignment="left" id="C8l-vd-Q5H" userLabel="Pace Label">
                                                             <color key="textColor" name="navBarTitle"/>
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                                         </label>
                                                         <group width="1" alignment="left" verticalAlignment="bottom" id="bO9-UQ-ehO" userLabel="Pace Group">
                                                             <items>
                                                                 <imageView height="18" alignment="left" verticalAlignment="center" image="speedometer" catalog="system" id="P5q-aQ-5mP"/>
                                                                 <label alignment="left" verticalAlignment="bottom" text="0" textAlignment="center" id="yDY-jz-bfN" userLabel="Pace Field">
                                                                     <color key="textColor" name="navBarTitle"/>
-                                                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                                                 </label>
                                                             </items>
                                                         </group>
@@ -385,13 +388,13 @@
                                                 <group width="0.5" alignment="left" verticalAlignment="bottom" layout="vertical" spacing="0.0" id="qMp-uw-LBF" userLabel="Bottom Right Group">
                                                     <items>
                                                         <label alignment="right" text="m" id="REh-2f-xL5" userLabel="Distance Label">
-                                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                            <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                                         </label>
                                                         <group width="1" alignment="right" verticalAlignment="bottom" id="DaD-Rc-9Oe" userLabel="Distance Group">
                                                             <items>
                                                                 <label alignment="right" verticalAlignment="bottom" text="0" textAlignment="center" id="JsW-vp-zCs" userLabel="Distance Field">
                                                                     <color key="textColor" name="navBarTitle"/>
-                                                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                                                 </label>
                                                                 <imageView height="18" alignment="right" verticalAlignment="center" image="map.fill" catalog="system" id="HQa-AH-4Rf">
                                                                     <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -407,22 +410,10 @@
                                                 <label alignment="center" verticalAlignment="center" text="location" textAlignment="center" baselineAdjustment="alignCenters" id="Kv1-9H-zBN" userLabel="Location">
                                                     <color key="textColor" name="navBarTitle"/>
                                                     <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                                    <variation key="device=watch38mm">
-                                                        <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                                    </variation>
-                                                    <variation key="device=watch40mm">
-                                                        <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                                    </variation>
                                                 </label>
                                                 <label alignment="center" verticalAlignment="center" text="0:00.0" baselineAdjustment="alignCenters" id="Rqb-y0-lxW" userLabel="Overall Duration">
                                                     <color key="textColor" name="navBarTint"/>
                                                     <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
-                                                    <variation key="device=watch38mm">
-                                                        <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                                    </variation>
-                                                    <variation key="device=watch40mm">
-                                                        <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                                    </variation>
                                                 </label>
                                             </items>
                                         </group>

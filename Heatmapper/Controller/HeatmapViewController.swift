@@ -210,7 +210,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
   }
 
 
-
   @IBAction func btnResize(_ sender: Any) {
 
     if resizeOn == true {
@@ -276,6 +275,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     resizeOn = false
     resizeButton.setTitle("Adjust Pitch Size", for: .normal)
     resetPlayingAreaButton.isHidden = true
+    heightAndWeightStackView.isHidden = true
 
     loadTesterData()
     getStaticData()
@@ -382,8 +382,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let pitchMapBottomRightCGPoint  : CGPoint = corners.bottomRight
     let pitchMapTopRightCGPoint     : CGPoint = corners.topRight
 
-
-    // tworkout out the corresponding co-ordinates at these points on the map view
+    // workout out the corresponding co-ordinates at these points on the map view
     var pitchMapTopLeftCoordinate     : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
     var pitchMapBottomLeftCoordinate  : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
     var pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
@@ -535,7 +534,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     // now add the view
     let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
-    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Blue")
+    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
     newPitchView.image = pitchImageGreen
     newPitchView.layer.opacity = 0.5
     newPitchView.isUserInteractionEnabled = true
@@ -680,7 +679,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     // now add the view
     let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
-    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Blue")
+    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
     newPitchView.image = pitchImageGreen
     newPitchView.layer.opacity = 0.5
     newPitchView.isUserInteractionEnabled = true
@@ -734,7 +733,9 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     //  create an overlay of the pitch based upon the rectangle
     let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
-    self.mapView.addOverlay(adjustedPitchOverlay)
+    mapView.insertOverlay(adjustedPitchOverlay, at: 0)
+//    mapView.addOverlay(adjustedPitchOverlay)
+
     self.playingAreaMapRect = pitchMKMapRect
 
   }
@@ -1323,7 +1324,7 @@ extension HeatmapViewController: MKMapViewDelegate {
         let angleIncMapRotation = getMapRotation()
         let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation, workoutId: heatmapWorkoutId!)
 
-        footballPitchOverlayRenderer.alpha = 0.5
+        footballPitchOverlayRenderer.alpha = 1
 
         return footballPitchOverlayRenderer
       }

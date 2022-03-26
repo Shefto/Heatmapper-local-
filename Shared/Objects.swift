@@ -55,8 +55,8 @@ extension BlendMode {
 
 enum Sport: String, Codable, CaseIterable {
   case football    = "Football"
+  case fiveaside   = "5-a-side"
   case rugby       = "Rugby"
-  case basketball  = "Basketball"
   case tennis      = "Tennis"
   case none        = "None"
 }

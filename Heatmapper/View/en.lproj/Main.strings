@@ -70,6 +70,9 @@
 /* Class = "UISegmentedControl"; 7U9-Pn-MJX.segmentTitles[1] = "Sat"; ObjectID = "7U9-Pn-MJX"; */
 "7U9-Pn-MJX.segmentTitles[1]" = "";
 
+/* Class = "UILabel"; text = "Detail"; ObjectID = "7zg-e5-JR6"; */
+"7zg-e5-JR6.text" = "";
+
 /* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "8fa-ka-EKP"; */
 "8fa-ka-EKP.normalTitle" = "";
 
@@ -78,6 +81,9 @@
 
 /* Class = "UITextField"; text = "Venue"; ObjectID = "9nK-7l-9X9"; */
 "9nK-7l-9X9.text" = "";
+
+/* Class = "UINavigationItem"; title = "Playing Areas"; ObjectID = "AHb-Ja-JDa"; */
+"AHb-Ja-JDa.title" = "";
 
 /* Class = "UIButton"; normalTitle = "Workout History"; ObjectID = "ape-0k-33h"; */
 "ape-0k-33h.normalTitle" = "";
@@ -178,6 +184,9 @@
 /* Class = "UITextField"; text = "-"; ObjectID = "IHC-Xx-ul9"; */
 "IHC-Xx-ul9.text" = "";
 
+/* Class = "UIButton"; normalTitle = "Teams"; ObjectID = "Iwh-8D-hJU"; */
+"Iwh-8D-hJU.normalTitle" = "";
+
 /* Class = "UILabel"; text = "Width"; ObjectID = "J9N-RL-yLl"; */
 "J9N-RL-yLl.text" = "";
 
@@ -211,7 +220,7 @@
 /* Class = "UILabel"; text = "PlayingArea angle to save"; ObjectID = "MU5-8j-QsL"; */
 "MU5-8j-QsL.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Manage Activities"; ObjectID = "MUA-HA-gex"; */
+/* Class = "UIButton"; normalTitle = "Activity Types"; ObjectID = "MUA-HA-gex"; */
 "MUA-HA-gex.normalTitle" = "";
 
 /* Class = "UIViewController"; title = "Workout History"; ObjectID = "nCc-eF-wC1"; */
@@ -250,6 +259,9 @@
 /* Class = "UINavigationItem"; title = "Tester"; ObjectID = "qwT-l3-Wsm"; */
 "qwT-l3-Wsm.title" = "";
 
+/* Class = "UIButton"; normalTitle = "Playing Areas"; ObjectID = "rB9-Ym-Xrq"; */
+"rB9-Ym-Xrq.normalTitle" = "";
+
 /* Class = "UILabel"; text = "Pace"; ObjectID = "rdq-3I-zId"; */
 "rdq-3I-zId.text" = "";
 
@@ -286,6 +298,9 @@
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "VIb-fl-PFY"; */
 "VIb-fl-PFY.title" = "";
 
+/* Class = "UILabel"; text = "Title"; ObjectID = "vOC-oF-PJU"; */
+"vOC-oF-PJU.text" = "";
+
 /* Class = "UILabel"; text = "Calories"; ObjectID = "VUK-Or-FM5"; */
 "VUK-Or-FM5.text" = "";
 
@@ -321,3 +336,6 @@
 
 /* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "zim-pa-PKm"; */
 "zim-pa-PKm.normalTitle" = "";
+
+/* Class = "UIViewController"; title = "Events"; ObjectID = "zRo-zy-u5E"; */
+"zRo-zy-u5E.title" = "";

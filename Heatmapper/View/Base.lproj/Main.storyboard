@@ -20,10 +20,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lep-Yn-iYr">
-                                <rect key="frame" x="5" y="617" width="404" height="240"/>
+                                <rect key="frame" x="5" y="523" width="404" height="334"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ape-0k-33h" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="74.666666666666671"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="49"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -34,7 +34,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-uM-bXg" userLabel="Start Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="82.666666666666629" width="404" height="74.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="57" width="404" height="49"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -44,21 +44,49 @@
                                             <action selector="btnMatch:" destination="hJk-zi-pgB" eventType="touchUpInside" id="YdV-R2-M2g"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="MUA-HA-gex" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="165.33333333333337" width="404" height="74.666666666666686"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="rB9-Ym-Xrq" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="114" width="404" height="49"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
-                                        <state key="normal" title="Manage Activities"/>
+                                        <state key="normal" title="Playing Areas"/>
+                                        <connections>
+                                            <action selector="btnPlayingAreas:" destination="hJk-zi-pgB" eventType="touchUpInside" id="XrI-6j-IZE"/>
+                                            <action selector="btnReferenceData:" destination="hJk-zi-pgB" eventType="touchUpInside" id="a84-kw-2ZO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Iwh-8D-hJU" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="171" width="404" height="49"/>
+                                        <color key="backgroundColor" name="buttonPrimary"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                        <state key="normal" title="Teams"/>
+                                        <connections>
+                                            <action selector="btnReferenceData:" destination="hJk-zi-pgB" eventType="touchUpInside" id="A65-bs-tyt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="MUA-HA-gex" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="228" width="404" height="49"/>
+                                        <color key="backgroundColor" name="buttonPrimary"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                        <state key="normal" title="Activity Types"/>
                                         <connections>
                                             <action selector="btnReferenceData:" destination="hJk-zi-pgB" eventType="touchUpInside" id="f8a-a3-MYr"/>
                                         </connections>
                                     </button>
+                                    <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qMG-N3-fYS">
+                                        <rect key="frame" x="0.0" y="285" width="404" height="49"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <items>
+                                            <tabBarItem systemItem="favorites" id="M1W-VO-xW4"/>
+                                            <tabBarItem systemItem="more" id="3U3-I0-cif"/>
+                                        </items>
+                                    </tabBar>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="a8S-c8-xdU"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DhJ-cg-l3E"/>
@@ -75,6 +103,7 @@
                         <segue destination="nCc-eF-wC1" kind="show" identifier="mainMenuToHistory" id="jsl-Go-fze"/>
                         <segue destination="cbs-Dv-Qaf" kind="show" identifier="mainMenuToTracker" id="a4G-zq-cd0"/>
                         <segue destination="bKA-ac-svZ" kind="show" identifier="mainMenuToReferenceData" id="HXG-wh-XwM"/>
+                        <segue destination="zRo-zy-u5E" kind="show" identifier="mainMenuToPlayingAreas" id="UAF-i5-H2U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pbN-s5-nYY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -229,7 +258,67 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mmn-xT-TCv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2625" y="790"/>
+            <point key="canvasLocation" x="2330" y="790"/>
+        </scene>
+        <!--Playing Areas-->
+        <scene sceneID="DEE-g1-6RU">
+            <objects>
+                <viewController title="Events" id="zRo-zy-u5E" userLabel="Playing Areas" customClass="PlayingAreaViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="eOv-fC-PBZ" customClass="ThemeView" customModule="Heatmapper" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qfS-Qb-E8u" userLabel="Table View" customClass="ThemeTableViewNoBackground" customModule="Heatmapper" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="808"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="hEF-cJ-rvk"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="xPd-tR-6yg"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlayingAreaTableViewCell" textLabel="vOC-oF-PJU" detailTextLabel="7zg-e5-JR6" style="IBUITableViewCellStyleValue2" id="iUs-Na-WDf" userLabel="TableViewCell">
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="414" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="iUs-Na-WDf" id="gKr-jk-XMo">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vOC-oF-PJU">
+                                                    <rect key="frame" x="20" y="33" width="91" height="14.333333333333334"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7zg-e5-JR6">
+                                                    <rect key="frame" x="117.00000000000001" y="33" width="32.666666666666664" height="14.333333333333334"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="activityCell"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="119-Ah-Y1e"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Playing Areas" leftItemsSupplementBackButton="YES" id="AHb-Ja-JDa">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="kuC-lv-g17">
+                            <connections>
+                                <action selector="addButton:" destination="zRo-zy-u5E" id="EmA-U7-lEv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qZd-op-2Ue" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3883" y="790"/>
         </scene>
         <!--Activity View Controller-->
         <scene sceneID="e74-eg-4Yb">
@@ -299,7 +388,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wSd-D5-drI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3534.7826086956525" y="806.91964285714278"/>
+            <point key="canvasLocation" x="3123" y="790"/>
         </scene>
         <!--Workout History-->
         <scene sceneID="QA9-GD-v8L">
@@ -1572,7 +1661,7 @@ DQoNCg
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1500" translatesAutoresizingMaskIntoConstraints="NO" id="Rno-UO-oaX" userLabel="Height Stepper">
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1500" stepValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="Rno-UO-oaX" userLabel="Height Stepper">
                                                 <rect key="frame" x="102.33333333333334" y="0.0" width="97.333333333333343" height="25"/>
                                                 <connections>
                                                     <action selector="stepperHeight:" destination="Pbk-vr-61V" eventType="valueChanged" id="KVN-He-KPm"/>
@@ -1584,7 +1673,7 @@ DQoNCg
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1500" translatesAutoresizingMaskIntoConstraints="NO" id="IIv-Ri-8qz" userLabel="Width Stepper">
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1500" stepValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="IIv-Ri-8qz" userLabel="Width Stepper">
                                                 <rect key="frame" x="306.66666666666669" y="0.0" width="97.333333333333314" height="25"/>
                                                 <connections>
                                                     <action selector="stepperWidth:" destination="Pbk-vr-61V" eventType="valueChanged" id="vkV-Cg-zp3"/>
@@ -2028,10 +2117,10 @@ DQoNCg
             <color red="0.93333333333333335" green="0.43529411764705883" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="buttonPrimary">
-            <color red="0.12549019607843137" green="0.6705882352941176" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.18431372549019609" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navBar">
-            <color red="0.12549019607843137" green="0.6705882352941176" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.18431372549019609" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="textAlternate">
             <color red="0.0039215686274509803" green="0.27843137254901962" blue="0.47843137254901963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
