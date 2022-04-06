@@ -30,7 +30,7 @@ class PlayingAreaViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    MyFunc.getPlayingAreas()
+
 
     playingAreaTableView.dataSource = self
     playingAreaTableView.delegate = self
@@ -42,12 +42,13 @@ class PlayingAreaViewController: UIViewController {
     playingAreaTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: playingAreaTableView.frame.size.width, height: 1))
     playingAreaTableView.tableHeaderView?.backgroundColor = UIColor.clear
 
+
   }
 
   func getData() {
 
     playingAreaArray = MyFunc.getPlayingAreas()
-    MyFunc.logMessage(.debug, "activityArray: \(playingAreaArray)")
+    MyFunc.logMessage(.debug, "playingAreaArray: \(playingAreaArray)")
     playingAreaTableView.reloadData()
 
 
@@ -87,8 +88,8 @@ extension PlayingAreaViewController: UITableViewDelegate, UITableViewDataSource 
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    let cell = playingAreaTableView.dequeueReusableCell(withIdentifier: "playingAreaTableViewCell", for: indexPath)
-//    cell.textLabel!.text = playingAreaArray[indexPath.row].name
+    let cell = playingAreaTableView.dequeueReusableCell(withIdentifier: "PlayingAreaTableViewCell", for: indexPath)
+    cell.textLabel!.text = playingAreaArray[indexPath.row].topLeft.latitude.debugDescription
 
     return cell
   }
