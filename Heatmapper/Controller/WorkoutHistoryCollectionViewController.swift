@@ -57,44 +57,44 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   @IBOutlet weak var workoutCollectionView: UICollectionView!
   @IBOutlet weak var workoutCollectionViewCell: WorkoutCollectionViewCell!
 
-  @IBAction func btnDTMHeatmap(_ sender: Any) {
-    self.performSegue(withIdentifier: "historyToDTMHeatmap", sender: workoutSelectedId)
-  }
+//  @IBAction func btnDTMHeatmap(_ sender: Any) {
+//    self.performSegue(withIdentifier: "historyToDTMHeatmap", sender: workoutSelectedId)
+//  }
+//
+//  @IBAction func btnJDHeatmap(_ sender: Any) {
+//    self.performSegue(withIdentifier: "historyToJDHeatmap", sender: workoutSelectedId)
+//  }
+//
+//  @IBAction func btnREHeatmap(_ sender: Any) {
+//
+//    guard let workoutId = workoutSelectedId else {
+//      MyFunc.logMessage(.error, "No heatmapWorkoutId passed to btnCreatedHeatmap in WorkoutHistoryCollectionViewController")
+//      return
+//    }
+//    self.performSegue(withIdentifier: "historyToHeatmap", sender: workoutId)
+//  }
+//
+//  @IBAction func btnTester(_ sender: Any) {
+//    self.performSegue(withIdentifier: "historyToTester", sender: workoutSelectedId)
+//  }
 
-  @IBAction func btnJDHeatmap(_ sender: Any) {
-    self.performSegue(withIdentifier: "historyToJDHeatmap", sender: workoutSelectedId)
-  }
-
-  @IBAction func btnREHeatmap(_ sender: Any) {
-
-    guard let workoutId = workoutSelectedId else {
-      MyFunc.logMessage(.error, "No heatmapWorkoutId passed to btnCreatedHeatmap in WorkoutHistoryCollectionViewController")
-      return
-    }
-    self.performSegue(withIdentifier: "historyToHeatmap", sender: workoutId)
-  }
-
-  @IBAction func btnTester(_ sender: Any) {
-    self.performSegue(withIdentifier: "historyToTester", sender: workoutSelectedId)
-  }
-
-  @IBAction func btnCreatedHeatmap(_ sender: Any) {
-
-    guard let workoutId = workoutSelectedId else {
-      MyFunc.logMessage(.error, "No heatmapWorkoutId passed to btnCreatedHeatmap in WorkoutHistoryCollectionViewController")
-      return
-    }
-    let workoutSelectedString = String(describing: workoutId)
-    let heatmapImageString = "Heatmap_" + workoutSelectedString + ".png"
-
-    let heatmapImageFileExists = MyFunc.checkFileExists(filename: heatmapImageString)
-
-    if heatmapImageFileExists {
-      self.performSegue(withIdentifier: "historyToCreatedHeatmap", sender: workoutSelectedId)
-    } else {
-      self.performSegue(withIdentifier: "historyToJDHeatmap", sender: workoutSelectedId)
-    }
-  }
+//  @IBAction func btnCreatedHeatmap(_ sender: Any) {
+//
+//    guard let workoutId = workoutSelectedId else {
+//      MyFunc.logMessage(.error, "No heatmapWorkoutId passed to btnCreatedHeatmap in WorkoutHistoryCollectionViewController")
+//      return
+//    }
+//    let workoutSelectedString = String(describing: workoutId)
+//    let heatmapImageString = "Heatmap_" + workoutSelectedString + ".png"
+//
+//    let heatmapImageFileExists = MyFunc.checkFileExists(filename: heatmapImageString)
+//
+//    if heatmapImageFileExists {
+//      self.performSegue(withIdentifier: "historyToCreatedHeatmap", sender: workoutSelectedId)
+//    } else {
+//      self.performSegue(withIdentifier: "historyToJDHeatmap", sender: workoutSelectedId)
+//    }
+//  }
 
   @IBOutlet weak var heatmapButton: ThemeButton!
 
@@ -166,29 +166,17 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
     let heatmapImage = MyFunciOS.getHeatmapImageForWorkout(workoutID: workoutId)
 
-//    if let workoutInfoToDisplay : workoutInfo = workoutInfoArray.first(where: { $0.uuid == workoutId  }) {
-//      let samplesCount = workoutInfoToDisplay.sampleCount.description
-//      let samplesStr = "Samples: \(samplesCount)"
-//      cell.samples.text = samplesStr
-//      let locationsCount = workoutInfoToDisplay.locationsCount.description
-//      let locationsStr = "Locs: \(locationsCount)"
-//      cell.locations.text = locationsStr
-//    } else {
-//      cell.samples.text = "No info for"
-//      cell.locations.text = workoutId.description
-//    }
-
 
     cell.heatmapImageView.image = heatmapImage
     cell.workoutDateLabel.text = dateFormatter.string(from: workout.startDate)
     cell.venueLabel.text = workoutMetadata.venue
     cell.activityLabel.text = workoutMetadata.activity
 
-    if selectedIndexPath != nil && indexPath.row == selectedIndexPath {
-      cell.contentView.backgroundColor = theme.buttonPrimary
-    } else {
-      cell.contentView.backgroundColor = UIColor.clear
-    }
+//    if selectedIndexPath != nil && indexPath.row == selectedIndexPath {
+//      cell.contentView.backgroundColor = theme.buttonPrimary
+//    } else {
+//      cell.contentView.backgroundColor = UIColor.clear
+//    }
 
     cell.layer.cornerRadius = 6
     return cell
@@ -197,34 +185,36 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if (workoutCollectionView.cellForItem(at: indexPath) as? WorkoutCollectionViewCell) != nil {
       workoutSelectedId = workoutArray[indexPath.row].uuid
-      selectedIndexPath = indexPath.row
-      workoutCollectionView.reloadData()
-      heatmapButton.isEnabled = true
-      heatmapInfoButton.isEnabled = true
-      heatmapTesterButton.isEnabled = true
+//      selectedIndexPath = indexPath.row
+      self.performSegue(withIdentifier: "historyToHeatmap", sender: workoutSelectedId)
+
+//      workoutCollectionView.reloadData()
+//      heatmapButton.isEnabled = true
+//      heatmapInfoButton.isEnabled = true
+//      heatmapTesterButton.isEnabled = true
     }
   }
 
-  func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-    if (workoutCollectionView.cellForItem(at: indexPath) as? WorkoutCollectionViewCell) != nil {
-    }
-  }
+//  func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+//    if (workoutCollectionView.cellForItem(at: indexPath) as? WorkoutCollectionViewCell) != nil {
+//    }
+//  }
 
-  func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-    if (workoutCollectionView.cellForItem(at: indexPath) as? WorkoutCollectionViewCell) != nil {
-    }
-    workoutSelected = workoutArray[indexPath.row].description
-
-    selectedIndexPath = indexPath.row
-    print("workoutSelected: \(workoutSelected)")
-  }
-
-  func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-
-    if (workoutCollectionView.cellForItem(at: indexPath) as? WorkoutCollectionViewCell) != nil {
-    }
-
-  }
+//  func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+//    if (workoutCollectionView.cellForItem(at: indexPath) as? WorkoutCollectionViewCell) != nil {
+//    }
+//    workoutSelected = workoutArray[indexPath.row].description
+//
+//    selectedIndexPath = indexPath.row
+//    print("workoutSelected: \(workoutSelected)")
+//  }
+//
+//  func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+//
+//    if (workoutCollectionView.cellForItem(at: indexPath) as? WorkoutCollectionViewCell) != nil {
+//    }
+//
+//  }
 
   //MARK: Data load functions
   func loadHeatmapImages() {
@@ -375,30 +365,30 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
     let segueToUse = segue.identifier
 
-    if segueToUse == "historyToDTMHeatmap" {
-      let destinationVC = segue.destination as! DTMHeatmapViewController
-      destinationVC.heatmapWorkoutId = (sender as! UUID)
-    }
+//    if segueToUse == "historyToDTMHeatmap" {
+//      let destinationVC = segue.destination as! DTMHeatmapViewController
+//      destinationVC.heatmapWorkoutId = (sender as! UUID)
+//    }
 
     if segueToUse == "historyToHeatmap" {
       let destinationVC = segue.destination as! HeatmapViewController
       destinationVC.heatmapWorkoutId = (sender as! UUID)
     }
 
-    if segueToUse == "historyToTester" {
-      let destinationVC = segue.destination as! TesterViewController
-      destinationVC.heatmapWorkoutId = (sender as! UUID)
-    }
-
-    if segueToUse == "historyToJDHeatmap" {
-      let destinationVC = segue.destination as! JDHeatmapViewController
-      destinationVC.heatmapWorkoutId = (sender as! UUID)
-    }
-
-    if segueToUse == "historyToCreatedHeatmap" {
-      let destinationVC = segue.destination as! SavedHeatmapViewController
-      destinationVC.heatmapWorkoutId = (sender as! UUID)
-    }
+//    if segueToUse == "historyToTester" {
+//      let destinationVC = segue.destination as! TesterViewController
+//      destinationVC.heatmapWorkoutId = (sender as! UUID)
+//    }
+//
+//    if segueToUse == "historyToJDHeatmap" {
+//      let destinationVC = segue.destination as! JDHeatmapViewController
+//      destinationVC.heatmapWorkoutId = (sender as! UUID)
+//    }
+//
+//    if segueToUse == "historyToCreatedHeatmap" {
+//      let destinationVC = segue.destination as! SavedHeatmapViewController
+//      destinationVC.heatmapWorkoutId = (sender as! UUID)
+//    }
 
 
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)

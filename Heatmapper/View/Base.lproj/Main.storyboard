@@ -22,7 +22,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lep-Yn-iYr">
                                 <rect key="frame" x="5" y="523" width="404" height="334"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ape-0k-33h" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ape-0k-33h" userLabel="Workout History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="49"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
@@ -33,7 +33,7 @@
                                             <action selector="btnHistory:" destination="hJk-zi-pgB" eventType="touchUpInside" id="kdG-mH-Xe2"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-uM-bXg" userLabel="Start Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-uM-bXg" userLabel="Start Tracking Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="57" width="404" height="49"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
@@ -44,7 +44,7 @@
                                             <action selector="btnMatch:" destination="hJk-zi-pgB" eventType="touchUpInside" id="YdV-R2-M2g"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="rB9-Ym-Xrq" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="rB9-Ym-Xrq" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="114" width="404" height="49"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
@@ -53,10 +53,9 @@
                                         <state key="normal" title="Playing Areas"/>
                                         <connections>
                                             <action selector="btnPlayingAreas:" destination="hJk-zi-pgB" eventType="touchUpInside" id="XrI-6j-IZE"/>
-                                            <action selector="btnReferenceData:" destination="hJk-zi-pgB" eventType="touchUpInside" id="a84-kw-2ZO"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Iwh-8D-hJU" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Iwh-8D-hJU" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="171" width="404" height="49"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
@@ -67,7 +66,7 @@
                                             <action selector="btnReferenceData:" destination="hJk-zi-pgB" eventType="touchUpInside" id="A65-bs-tyt"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="MUA-HA-gex" userLabel="History Button" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="MUA-HA-gex" userLabel="Activity Types " customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="228" width="404" height="49"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
@@ -404,7 +403,7 @@
                                 <rect key="frame" x="5" y="98" width="404" height="758"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xdx-oz-NWw" userLabel="Workout Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="708"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="758"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="biu-CG-Ke5">
                                             <size key="itemSize" width="200" height="300"/>
@@ -436,8 +435,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionReusableView>
                                     </collectionView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="6jT-ZL-mzL" userLabel="Top Stack View">
-                                        <rect key="frame" x="0.0" y="718" width="404" height="40"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="6jT-ZL-mzL" userLabel="Top Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZd-9k-xak" userLabel="Tester" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="133.33333333333334" height="40"/>
@@ -2120,13 +2119,13 @@ DQoNCg
             <color red="0.93333333333333335" green="0.43529411764705883" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="buttonPrimary">
-            <color red="0.0" green="0.18431372549019609" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.91764705882352937" green="0.36078431372549019" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navBar">
-            <color red="0.0" green="0.18431372549019609" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.91764705882352937" green="0.36078431372549019" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="textAlternate">
-            <color red="0.0039215686274509803" green="0.27843137254901962" blue="0.47843137254901963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.49803921568627452" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

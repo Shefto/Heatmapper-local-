@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Heatmapper wants to access Camera Roll</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -40,6 +38,8 @@
 	<string>Heatmapper needs your location to record workout routes</string>
 	<key>NSMotionUsageDescription</key>
 	<string>In order to count steps I need access to your motion</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Heatmapper wants to access Camera Roll</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
@@ -68,7 +68,9 @@
 	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>fetch</string>
 		<string>location</string>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

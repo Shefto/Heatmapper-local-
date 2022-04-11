@@ -24,7 +24,6 @@ struct CodableCLLCoordinate2D: Codable {
 
 struct PlayingArea: Codable {
 
-
   var workoutID : UUID
   var bottomLeft  : CodableCLLCoordinate2D
   var bottomRight  : CodableCLLCoordinate2D
