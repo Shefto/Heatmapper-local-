@@ -7,8 +7,16 @@
 //
 
 import UIKit
+import CloudKit
 
 class ActivityViewController: UIViewController {
+
+  //CloudKit initialisations
+  let container = CKContainer(identifier: "iCloud.com.wimbledonappcompany.Heatmapper")
+  var privateDatabase: CKDatabase?
+  //  var sharedDatabase: CKDatabase?
+  var currentRecord: CKRecord?
+  var recordZone: CKRecordZone?
 
   let theme = ColourTheme()
   let defaults = UserDefaults.standard
@@ -20,7 +28,6 @@ class ActivityViewController: UIViewController {
   var sportSelected = Sport()
 
   @IBOutlet weak var saveButton: UIBarButtonItem!
-
   @IBOutlet weak var activityNameField: ThemeTextField!
   @IBOutlet weak var sportPicker: ThemePickerView!
 
@@ -35,6 +42,7 @@ class ActivityViewController: UIViewController {
     sportPicker.delegate = self
     getData()
     updateUI()
+    initialiseCloudKitDB()
   }
 
   func getData() {
@@ -75,8 +83,11 @@ class ActivityViewController: UIViewController {
       let newActivityName = activityNameField.text ?? ""
       let newSport = sportSelected
       let newActivity = Activity(name: newActivityName, sport: newSport)
-
       activityArray.append(newActivity)
+
+
+      // insert Activity into CloudKit database
+      insertActivityIntoCloudKit(activity: newActivity)
 
     } else {
 
@@ -107,6 +118,100 @@ class ActivityViewController: UIViewController {
   }
 
   @IBAction func activityNameDidEndOnExit(_ sender: Any) {
+  }
+
+  func insertActivityIntoCloudKit(activity: Activity) {
+
+    let activityToInsert = CKRecord(recordType: "Activity")
+    activityToInsert.setObject(activity.name as CKRecordValue?, forKey: "name")
+    let sportName = activity.sport.rawValue
+    activityToInsert.setObject(sportName as CKRecordValue?, forKey: "sport")
+
+    let modifyRecordsOperation = CKModifyRecordsOperation(
+      recordsToSave: [activityToInsert],
+      recordIDsToDelete: nil)
+
+    modifyRecordsOperation.timeoutIntervalForRequest = 10
+    modifyRecordsOperation.timeoutIntervalForResource = 10
+
+    modifyRecordsOperation.modifyRecordsCompletionBlock =
+    { records, recordIDs, error in
+      if let err = error {
+        DispatchQueue.main.async {
+
+        self.notifyUser("Save Error", message:
+                            err.localizedDescription)
+        }
+      } else {
+        DispatchQueue.main.async {
+          self.notifyUser("Success",
+                          message: "Record saved successfully")
+        }
+        self.currentRecord = activityToInsert
+      }
+    }
+    privateDatabase?.add(modifyRecordsOperation)
+  }
+
+  func notifyUser(_ title: String, message: String) -> Void
+  {
+    let alert = UIAlertController(title: title,
+                                  message: message,
+                                  preferredStyle: .alert)
+
+    let cancelAction = UIAlertAction(title: "OK",
+                                     style: .cancel, handler: nil)
+
+    alert.addAction(cancelAction)
+    self.present(alert, animated: true,
+                 completion: nil)
+  }
+
+  func initialiseCloudKitDB() {
+    privateDatabase = container.privateCloudDatabase
+    //    privateDatabase = container().sharedCloudDatabase
+    // recordZone = CKRecordZone(zoneName: "HouseZone")
+    recordZone = CKRecordZone.default()
+
+//    privateDatabase?.save(recordZone!,
+//                          completionHandler: {(recordzone, error) in
+//      if (error != nil) {
+//        DispatchQueue.main.async {
+//
+//          self.notifyUser("Record Zone Error : \(String(describing: error))",
+//                          message: "Failed to create custom record zone.")
+//        }
+//      } else {
+//        print("Saved record zone")
+//      }
+//    })
+
+
+    let predicate = NSPredicate(format: "TRUEPREDICATE")
+
+    let subscription = CKQuerySubscription(recordType: "Activity",
+                                           predicate: predicate,
+                                           options: .firesOnRecordCreation)
+
+    let notificationInfo = CKSubscription.NotificationInfo()
+
+    notificationInfo.alertBody = "A new Activity was added"
+    notificationInfo.shouldBadge = true
+
+    subscription.notificationInfo = notificationInfo
+
+    privateDatabase?.save(subscription,
+                          completionHandler: ({returnRecord, error in
+      if let err = error {
+        print("Subscription failed %@",
+              err.localizedDescription)
+      } else {
+        DispatchQueue.main.async() {
+          self.notifyUser("Success",
+                          message: "Subscription set up successfully")
+        }
+      }
+    }))
 
   }
 

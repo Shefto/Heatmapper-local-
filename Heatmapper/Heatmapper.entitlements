@@ -10,7 +10,6 @@
 	<array/>
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
-		<string>iCloud.com.wimbledonappcompany.CloudKitShare</string>
 		<string>iCloud.com.wimbledonappcompany.Heatmapper</string>
 	</array>
 	<key>com.apple.developer.icloud-services</key>

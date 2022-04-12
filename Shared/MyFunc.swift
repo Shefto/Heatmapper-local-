@@ -101,24 +101,7 @@ class MyFunc {
 
 
   }
-    //        let playingAreaRetrieved = defaults.object(forKey: key) as? Data
-    //
-    //        if let loadedTemplate = try? decoder.decode([PlayingArea].self, from: (playingAreaRetrieved!)) {
-    //          playingAreasToReturn.append(contentsOf: loadedTemplate)
-    //        }
-    //      }
 
-    //
-    //
-    //    let keyStr = String(describing: playingAreaKeys)
-    //            print("PlayingArea key: \(keyStr)")
-    //
-    //    if let savedPlayingAreas = playingAreaKeys as? Data {
-    //      let decoder = JSONDecoder()
-    //      if let loadedTemplate = try? decoder.decode([PlayingArea].self, from: savedPlayingAreas) {
-    //        playingAreasToReturn = loadedTemplate
-    //      }
-    //    }
 
 
     static func getPlayingArea(workoutId: UUID, successClosure: @escaping (Result<PlayingArea,dataRetrievalError>) -> Void) {

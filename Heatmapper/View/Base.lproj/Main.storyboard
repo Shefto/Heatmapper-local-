@@ -1663,7 +1663,7 @@ DQoNCg
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1500" stepValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="Rno-UO-oaX" userLabel="Height Stepper">
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1500" stepValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="Rno-UO-oaX" userLabel="Height Stepper">
                                                 <rect key="frame" x="102.33333333333334" y="0.0" width="97.333333333333343" height="25"/>
                                                 <connections>
                                                     <action selector="stepperHeight:" destination="Pbk-vr-61V" eventType="valueChanged" id="KVN-He-KPm"/>
@@ -1675,7 +1675,7 @@ DQoNCg
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1500" stepValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="IIv-Ri-8qz" userLabel="Width Stepper">
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1500" stepValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="IIv-Ri-8qz" userLabel="Width Stepper">
                                                 <rect key="frame" x="306.66666666666669" y="0.0" width="97.333333333333314" height="25"/>
                                                 <connections>
                                                     <action selector="stepperWidth:" destination="Pbk-vr-61V" eventType="valueChanged" id="vkV-Cg-zp3"/>
