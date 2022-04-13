@@ -34,6 +34,8 @@ class ActivityViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    initialiseCloudKitDB()
+
     if activityToUpdate == nil {
       newActivity = true
     }
@@ -42,7 +44,7 @@ class ActivityViewController: UIViewController {
     sportPicker.delegate = self
     getData()
     updateUI()
-    initialiseCloudKitDB()
+
   }
 
   func getData() {
@@ -87,7 +89,7 @@ class ActivityViewController: UIViewController {
 
 
       // insert Activity into CloudKit database
-      insertActivityIntoCloudKit(activity: newActivity)
+      insertActivityIntoCloud(activity: newActivity)
 
     } else {
 
@@ -120,7 +122,9 @@ class ActivityViewController: UIViewController {
   @IBAction func activityNameDidEndOnExit(_ sender: Any) {
   }
 
-  func insertActivityIntoCloudKit(activity: Activity) {
+
+  //MARK: CloudKit functions
+  func insertActivityIntoCloud(activity: Activity) {
 
     let activityToInsert = CKRecord(recordType: "Activity")
     activityToInsert.setObject(activity.name as CKRecordValue?, forKey: "name")
@@ -131,8 +135,8 @@ class ActivityViewController: UIViewController {
       recordsToSave: [activityToInsert],
       recordIDsToDelete: nil)
 
-    modifyRecordsOperation.timeoutIntervalForRequest = 10
-    modifyRecordsOperation.timeoutIntervalForResource = 10
+//    modifyRecordsOperation.timeoutIntervalForRequest = 10
+//    modifyRecordsOperation.timeoutIntervalForResource = 10
 
     modifyRecordsOperation.modifyRecordsCompletionBlock =
     { records, recordIDs, error in
@@ -152,6 +156,51 @@ class ActivityViewController: UIViewController {
     }
     privateDatabase?.add(modifyRecordsOperation)
   }
+
+  func getActivitiesFromCloud()  {
+
+//
+//    let predicate = NSPredicate(format: "name = %@",
+//                                addressField.text!)
+    let predicate = NSPredicate(value: true)
+
+    let query = CKQuery(recordType: "Activity", predicate: predicate)
+
+    privateDatabase?.perform(query, inZoneWith: recordZone?.zoneID,
+                             completionHandler: ({results, error in
+
+      if (error != nil) {
+        DispatchQueue.main.async() {
+          self.notifyUser("Cloud Access Error",
+                          message: error!.localizedDescription)
+        }
+      } else {
+        if results!.count > 0 {
+
+//          let record = results![0]
+//          self.currentRecord = record
+
+          DispatchQueue.main.async() {
+
+//            self.commentsField.text =
+//            record.object(forKey: "comment") as! String
+
+            let resultsStr = String(describing: results)
+            print("Activities retrieved: \(resultsStr)")
+
+          }
+        } else {
+          DispatchQueue.main.async() {
+            self.notifyUser("No Match Found",
+                            message: "No record matching the address was found")
+          }
+        }
+      }
+    }))
+
+
+  }
+
 
   func notifyUser(_ title: String, message: String) -> Void
   {

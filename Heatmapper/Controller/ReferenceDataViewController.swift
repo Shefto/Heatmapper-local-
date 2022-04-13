@@ -7,18 +7,21 @@
 //
 
 import UIKit
+import CloudKit
 
 class ReferenceDataViewController: UIViewController {
+
+  //CloudKit initialisations
+  let container = CKContainer(identifier: "iCloud.com.wimbledonappcompany.Heatmapper")
+  var privateDatabase: CKDatabase?
+  //  var sharedDatabase: CKDatabase?
+  var currentRecord: CKRecord?
+  var recordZone: CKRecordZone?
 
   let theme = ColourTheme()
   let defaults = UserDefaults.standard
   private var activityArray = [Activity]()
-//  {
-//    didSet {
-//
-//      activityTableView.reloadData()
-//    }
-//  }
+
   var sportArray = [Sport]()
 
   var selectedIndexPath : Int?
@@ -30,7 +33,8 @@ class ReferenceDataViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     getData()
-
+    initialiseCloudKitDB()
+    getActivitiesFromCloud()
 
   }
 
@@ -80,6 +84,116 @@ class ReferenceDataViewController: UIViewController {
     activityArray[indexPathRow].sport = newSport
     MyFunc.saveHeatmapActivityDefaults(activityArray)
   }
+
+
+  func getActivitiesFromCloud()  {
+
+    //
+    //    let predicate = NSPredicate(format: "name = %@",
+    //                                addressField.text!)
+    let predicate = NSPredicate(value: true)
+
+    let query = CKQuery(recordType: "Activity", predicate: predicate)
+
+    privateDatabase?.perform(query, inZoneWith: recordZone?.zoneID,
+                             completionHandler: ({results, error in
+
+      if (error != nil) {
+        DispatchQueue.main.async() {
+          self.notifyUser("Cloud Access Error",
+                          message: error!.localizedDescription)
+        }
+      } else {
+        if results!.count > 0 {
+
+          //          let record = results![0]
+          //          self.currentRecord = record
+
+          DispatchQueue.main.async() {
+
+            //            self.commentsField.text =
+            //            record.object(forKey: "comment") as! String
+
+            let resultsStr = String(describing: results)
+            print("Activities retrieved: \(resultsStr)")
+
+          }
+        } else {
+          DispatchQueue.main.async() {
+            self.notifyUser("No Match Found",
+                            message: "No record matching the address was found")
+          }
+        }
+      }
+    }))
+
+
+  }
+
+
+  func notifyUser(_ title: String, message: String) -> Void
+  {
+    let alert = UIAlertController(title: title,
+                                  message: message,
+                                  preferredStyle: .alert)
+
+    let cancelAction = UIAlertAction(title: "OK",
+                                     style: .cancel, handler: nil)
+
+    alert.addAction(cancelAction)
+    self.present(alert, animated: true,
+                 completion: nil)
+  }
+
+  func initialiseCloudKitDB() {
+    privateDatabase = container.privateCloudDatabase
+    //    privateDatabase = container().sharedCloudDatabase
+    // recordZone = CKRecordZone(zoneName: "HouseZone")
+    recordZone = CKRecordZone.default()
+
+    //    privateDatabase?.save(recordZone!,
+    //                          completionHandler: {(recordzone, error) in
+    //      if (error != nil) {
+    //        DispatchQueue.main.async {
+    //
+    //          self.notifyUser("Record Zone Error : \(String(describing: error))",
+    //                          message: "Failed to create custom record zone.")
+    //        }
+    //      } else {
+    //        print("Saved record zone")
+    //      }
+    //    })
+
+
+    let predicate = NSPredicate(format: "TRUEPREDICATE")
+
+    let subscription = CKQuerySubscription(recordType: "Activity",
+                                           predicate: predicate,
+                                           options: .firesOnRecordCreation)
+
+    let notificationInfo = CKSubscription.NotificationInfo()
+
+    notificationInfo.alertBody = "A new Activity was added"
+    notificationInfo.shouldBadge = true
+
+    subscription.notificationInfo = notificationInfo
+
+    privateDatabase?.save(subscription,
+                          completionHandler: ({returnRecord, error in
+      if let err = error {
+        print("Subscription failed %@",
+              err.localizedDescription)
+      } else {
+        DispatchQueue.main.async() {
+          self.notifyUser("Success",
+                          message: "Subscription set up successfully")
+        }
+      }
+    }))
+
+  }
+
+
 
 }
 
