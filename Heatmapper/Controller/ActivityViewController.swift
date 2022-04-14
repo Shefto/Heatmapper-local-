@@ -177,8 +177,7 @@ class ActivityViewController: UIViewController {
       } else {
         if results!.count > 0 {
 
-//          let record = results![0]
-//          self.currentRecord = record
+
 
           DispatchQueue.main.async() {
 

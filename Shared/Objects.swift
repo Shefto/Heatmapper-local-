@@ -138,6 +138,13 @@ struct Activity: Codable, Equatable {
     self.sport = sport
   }
 
+  init(Activity : Dictionary<String,Any>){
+    name = Activity["Name"] as? String ?? ""
+    let sportStr = Activity["Sport"] as? String ?? ""
+    let sportToSet : Sport = Sport(rawValue: sportStr) ?? .none
+    sport = sportToSet
+  }
+
 }
 
 enum TimeFormat: String, Codable {

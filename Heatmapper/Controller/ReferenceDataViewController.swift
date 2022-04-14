@@ -117,6 +117,14 @@ class ReferenceDataViewController: UIViewController {
             let resultsStr = String(describing: results)
             print("Activities retrieved: \(resultsStr)")
 
+            let record = results![0]
+            let recordName = record.object(forKey: "name") as? String ?? ""
+            let recordSport = record.object(forKey: "sport") as? String ?? ""
+            let activitySport : Sport = Sport(rawValue: recordSport) ?? .none
+            let activityFromRecord = Activity(name: recordName, sport: activitySport)
+            let activityFromRecordStr = String(describing: activityFromRecord)
+            print ("activityFromRecordStr: \(activityFromRecordStr)")
+
           }
         } else {
           DispatchQueue.main.async() {
