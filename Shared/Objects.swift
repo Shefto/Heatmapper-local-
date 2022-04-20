@@ -125,20 +125,26 @@ extension Team {
 
 
 struct Activity: Codable, Equatable {
+  var recordId : String
   var name  : String
   var sport : Sport
 
   enum CodingKeys: String, CodingKey {
+    case recordId = "RecordID"
     case name = "Name"
     case sport = "Sport"
   }
 
-  init (name: String, sport: Sport) {
+  init (recordId: String?, name: String, sport: Sport) {
+    let uuidString = UUID().uuidString
+    self.recordId = recordId ?? uuidString
+
     self.name = name
     self.sport = sport
   }
 
   init(Activity : Dictionary<String,Any>){
+    recordId = Activity["RecordId"] as? String ?? ""
     name = Activity["Name"] as? String ?? ""
     let sportStr = Activity["Sport"] as? String ?? ""
     let sportToSet : Sport = Sport(rawValue: sportStr) ?? .none
