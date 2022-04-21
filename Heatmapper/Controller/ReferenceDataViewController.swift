@@ -170,8 +170,10 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
     
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, complete in
 
-      let activityToDeleteID = self.activityArray[indexPath.row].recordId
-      privateDatabase?.delete(withRecordID: activityToDeleteID, completionHandler: {  recordID, error in
+      let activityId = self.activityArray[indexPath.row].recordId
+      let activityToDeleteID = CKRecord.ID.init(recordName: activityId)
+
+      self.privateDatabase?.delete(withRecordID: activityToDeleteID, completionHandler: {  recordID, error in
         if let err = error {
           DispatchQueue.main.async {
 
@@ -181,9 +183,9 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
         } else {
           DispatchQueue.main.async {
             self.notifyUser("Success",
-                            message: "Record saved successfully")
+                            message: "Record deleted successfully")
           }
-          self.currentRecord = activityToInsert
+
         }
       }
       )
