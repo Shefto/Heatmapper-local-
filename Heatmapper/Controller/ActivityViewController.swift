@@ -143,16 +143,11 @@ class ActivityViewController: UIViewController {
       if let err = error {
         DispatchQueue.main.async {
 
-          self.notifyUser("Save Error", message:
-                            err.localizedDescription)
+          self.notifyUser("Save Error", message: err.localizedDescription)
         }
-      } else {
-        DispatchQueue.main.async {
-          self.notifyUser("Success",
-                          message: "Record saved successfully")
-        }
-        self.currentRecord = activityToInsert
       }
+      self.currentRecord = activityToInsert
+      
     }
     privateDatabase?.add(modifyRecordsOperation)
   }

@@ -12,9 +12,11 @@ import WatchConnectivity
 import HealthKit
 import os
 import IQKeyboardManagerSwift
+import CloudKit
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
   let logger = Logger()
 
@@ -51,7 +53,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // apply colour theme
     theme.apply(for: application)
 
+    // enable IQKeyboardManager
     IQKeyboardManager.shared.enable = true
+
+
+    // handle user notifications
+    let notificationCenter = UNUserNotificationCenter.current()
+    notificationCenter.requestAuthorization(options: [.badge, .sound, .alert], completionHandler: { granted, error in
+
+      if let error = error {
+        MyFunc.logMessage(.error, "Error requesting authorization: \(error.localizedDescription)")
+      }
+    })
+
+    UNUserNotificationCenter.current().delegate = self
+
+    application.registerForRemoteNotifications()
+
     return true
 
   }
@@ -75,4 +93,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
   }
 
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+
+    print("didReceiveRemoteNotification called")
+    let notification: CKNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])!
+
+    if (notification.notificationType ==
+        CKNotification.NotificationType.query) {
+
+      let queryNotification =
+      notification as! CKQueryNotification
+
+      let recordID = queryNotification.recordID
+      MyFunc.logMessage(.debug, "record created with recordId: \(String(describing: recordID?.recordName))")
+
+//      let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
+//      let viewController = keyWindow?.rootViewController as! ViewController
+//
+//      //      let viewController: ViewController = self.window?.rootViewController as! ViewController
+//      viewController.fetchRecord(recordID!)
+    }
+  }
+
+//  func application(_ application: UIApplication, userDidAcceptCloudKitShareWith cloudKitShareMetadata: CKShare.Metadata) {
+//
+//    let acceptSharesOperation =
+//    CKAcceptSharesOperation(shareMetadatas: [cloudKitShareMetadata])
+//    acceptSharesOperation.perShareCompletionBlock = {
+//      metadata, share, error in
+//      if error != nil {
+//        print(error?.localizedDescription)
+//      } else {
+//        let viewController: ViewController =
+//        self.window?.rootViewController as! ViewController
+//        viewController.fetchShare(cloudKitShareMetadata)
+//      }
+//    }
+//    CKContainer(identifier:
+//                  cloudKitShareMetadata.containerIdentifier).add(
+//                    acceptSharesOperation)
+//  }
+
+  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    let userInfo = response.notification.request.content.userInfo
+    MyFunc.logMessage(.debug, "userInfo: \(userInfo.debugDescription)")
+  }
 }

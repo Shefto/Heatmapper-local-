@@ -6,7 +6,9 @@
 	<string>Heatmapper wants to save to your Camera Roll</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>processing</string>
 		<string>location</string>
+		<string>remote-notification</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string></string>

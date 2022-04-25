@@ -20,6 +20,7 @@ class ReferenceDataViewController: UIViewController {
   let theme = ColourTheme()
   let defaults = UserDefaults.standard
   private var activityArray = [Activity]()
+
   
   var sportArray = [Sport]()
   
@@ -53,6 +54,9 @@ class ReferenceDataViewController: UIViewController {
   func getData() {
 
     getActivitiesFromCloud()
+    activityArray = MyFunc.getHeatmapperActivityDefaults()
+    MyFunc.logMessage(.debug, "activityArray: \(activityArray)")
+
     sportArray = Sport.allCases.map { $0 }
     
   }
@@ -134,6 +138,32 @@ class ReferenceDataViewController: UIViewController {
   func initialiseCloudKitDB() {
     privateDatabase = container.privateCloudDatabase
     recordZone = CKRecordZone.default()
+
+    // create subscription
+    let predicate = NSPredicate(value: true)
+    let actvitySubscription = CKQuerySubscription(recordType: "Activity", predicate: predicate, subscriptionID: "Activity Create", options: .firesOnRecordCreation)
+
+    let notificationInfo = CKSubscription.NotificationInfo()
+
+    notificationInfo.alertBody = "Activity created in iCloud"
+    notificationInfo.shouldBadge = true
+    notificationInfo.shouldSendContentAvailable = true
+    
+
+    actvitySubscription.notificationInfo = notificationInfo
+
+    privateDatabase?.save(actvitySubscription,
+                          completionHandler: ({returnRecord, error in
+      if let err = error {
+        print("Failed to create Activity Subscription with error %@",
+              err.localizedDescription)
+      } else {
+        DispatchQueue.main.async() {
+          self.notifyUser("Success",
+                          message: "Activity Subscription set up successfully")
+        }
+      }
+    }))
   }
 }
 
@@ -177,13 +207,11 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
         if let err = error {
           DispatchQueue.main.async {
 
-            self.notifyUser("Save Error", message:
-                              err.localizedDescription)
+            self.notifyUser("Error deleting record", message: err.localizedDescription)
           }
         } else {
           DispatchQueue.main.async {
-            self.notifyUser("Success",
-                            message: "Record deleted successfully")
+            self.notifyUser("Success", message: "Record deleted successfully")
           }
 
         }
@@ -192,8 +220,6 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
       self.activityArray.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .fade)
       MyFunc.saveHeatmapActivityDefaults(self.activityArray)
-
-
 
       self.activityTableView.reloadData()
       complete(true)
