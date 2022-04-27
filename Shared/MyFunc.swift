@@ -208,6 +208,7 @@ class MyFunc {
       do {
         let encoded = try encoder.encode(activityArray)
         defaults.set(encoded, forKey: "Heatmapper Activity")
+        logMessage(.debug, "Activities saved to userDefaults")
       } catch {
         logMessage(.error, "Error in MyFunc.saveHeatmapActivityDefaults")
       }

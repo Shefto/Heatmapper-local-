@@ -54,8 +54,10 @@ class ReferenceDataViewController: UIViewController {
   func getData() {
 
     getActivitiesFromCloud()
-    activityArray = MyFunc.getHeatmapperActivityDefaults()
-    MyFunc.logMessage(.debug, "activityArray: \(activityArray)")
+
+
+//    MyFunc.saveHeatmapActivityDefaults(activityArray)
+
 
     sportArray = Sport.allCases.map { $0 }
     
@@ -110,7 +112,17 @@ class ReferenceDataViewController: UIViewController {
             let resultsStr = String(describing: results)
             print("Activities retrieved: \(resultsStr)")
 
-            MyFunc.logMessage(.debug, "activityArray: \(self.activityArray)")
+
+            MyFunc.logMessage(.debug, "activityArray from Cloud: \(self.activityArray)")
+
+            let defaultsActivityArray = MyFunc.getHeatmapperActivityDefaults()
+            MyFunc.logMessage(.debug, "activityArray from Defaults: \(defaultsActivityArray)")
+
+            if defaultsActivityArray.count > self.activityArray.count {
+              self.activityArray = defaultsActivityArray
+              MyFunc.logMessage(.debug, "More Activities in Defaults")
+            }
+
             self.activityTableView.reloadData()
             
           }

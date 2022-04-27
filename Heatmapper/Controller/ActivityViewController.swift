@@ -91,6 +91,8 @@ class ActivityViewController: UIViewController {
       // insert Activity into CloudKit database
       insertActivityIntoCloud(activity: newActivity)
 
+      // save into user defaults
+
     } else {
 
       guard let activityToUpdateRowUnwrapped = activityToUpdateRow else {
