@@ -91,7 +91,7 @@ class ActivityViewController: UIViewController {
       // insert Activity into CloudKit database
       insertActivityIntoCloud(activity: newActivity)
 
-      // save into user defaults
+
 
     } else {
 
@@ -103,6 +103,7 @@ class ActivityViewController: UIViewController {
       activityArray[activityToUpdateRowUnwrapped].sport = sportSelected
     }
 
+    //save into user Defaults
     MyFunc.saveHeatmapActivityDefaults(activityArray)
     MyFunc.logMessage(.debug, "updates Saved")
   }
@@ -144,10 +145,18 @@ class ActivityViewController: UIViewController {
     { records, recordIDs, error in
       if let err = error {
         DispatchQueue.main.async {
-
           self.notifyUser("Save Error", message: err.localizedDescription)
         }
-      }
+      } else {
+          DispatchQueue.main.async {
+            let resultsStr = String(describing: records)
+            print("Activities saved: \(resultsStr)")
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateID"), object: nil, userInfo: ["id" : "test"])
+
+          }
+        }
+
+
       self.currentRecord = activityToInsert
       
     }

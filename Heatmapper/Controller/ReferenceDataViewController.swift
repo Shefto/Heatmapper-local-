@@ -31,6 +31,7 @@ class ReferenceDataViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    MyFunc.logMessage(.debug, "ReferenceDataViewController viewWillAppear called")
     getData()
     activityTableView.reloadData()
     
@@ -48,6 +49,9 @@ class ReferenceDataViewController: UIViewController {
     
     activityTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: activityTableView.frame.size.width, height: 1))
     activityTableView.tableHeaderView?.backgroundColor = UIColor.clear
+
+    NotificationCenter.default.addObserver(self, selector: #selector(insertCloudActivityId), name: Notification.Name(rawValue: "updateID"), object: nil)
+//    NotificationCenter.default.addObserver(self, selector: #selector(updateMap(notification:)), name: Notification.Name(rawValue:"didUpdateLocation"), object: nil)
     
   }
   
@@ -83,14 +87,17 @@ class ReferenceDataViewController: UIViewController {
     MyFunc.saveHeatmapActivityDefaults(activityArray)
   }
   
-  
+  @objc func insertCloudActivityId() {
+    print("insertCloudActivityId called")
+  }
+
   func getActivitiesFromCloud()  {
 
     let predicate = NSPredicate(value: true)
     let query = CKQuery(recordType: "Activity", predicate: predicate)
-    
+
     privateDatabase?.perform(query, inZoneWith: recordZone?.zoneID, completionHandler: ({results, error in
-      
+
       if (error != nil) {
         DispatchQueue.main.async() {
           self.notifyUser("Cloud Access Error", message: error!.localizedDescription)
@@ -106,9 +113,9 @@ class ReferenceDataViewController: UIViewController {
             let activityFromRecord = Activity(recordId: recordId, name: recordName as! String, sport: activitySport)
             self.activityArray.append(activityFromRecord)
           })
-          
+
           DispatchQueue.main.async() {
-            
+
             let resultsStr = String(describing: results)
             print("Activities retrieved: \(resultsStr)")
 
@@ -124,7 +131,7 @@ class ReferenceDataViewController: UIViewController {
             }
 
             self.activityTableView.reloadData()
-            
+
           }
         } else {
           DispatchQueue.main.async() {
@@ -133,8 +140,48 @@ class ReferenceDataViewController: UIViewController {
         }
       }
     }))
+
+  }
+
+  func getActivityIdFromCloud(activity: Activity) -> Activity?  {
+
+    var activityToReturn : Activity?
+    let activityName = activity.name
+    let activitySport = activity.sport.rawValue
+//    let namePredicate = NSPredicate(format: "name = %@", activityName)
+    let sportPredicate = NSPredicate(format: "sport = %@", activitySport)
+
+//    let predicate = NSPredicate(format: "name = %@ AND sport = %@", activityName, activitySport)
+
+//    let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate,sportPredicate])
+    let namePredicate = NSPredicate(value: true)
+    let query = CKQuery(recordType: "Activity", predicate: namePredicate)
     
-    
+    privateDatabase?.perform(query, inZoneWith: recordZone?.zoneID, completionHandler: ({results, error in
+      
+      if (error != nil) {
+        DispatchQueue.main.async() {
+          self.notifyUser("Cloud Access Error", message: error!.localizedDescription)
+        }
+      } else {
+
+
+
+
+          DispatchQueue.main.async() {
+
+
+            if results!.count > 0 {
+              let resultsStr = String(describing: results)
+              print("Activities retrieved: \(resultsStr)")
+            }
+
+
+        }
+      }
+    }))
+
+    return activityToReturn
   }
   
   
@@ -151,7 +198,12 @@ class ReferenceDataViewController: UIViewController {
     privateDatabase = container.privateCloudDatabase
     recordZone = CKRecordZone.default()
 
-    // create subscription
+    createSubscription()
+
+  }
+
+  func createSubscription() {
+
     let predicate = NSPredicate(value: true)
     let actvitySubscription = CKQuerySubscription(recordType: "Activity", predicate: predicate, subscriptionID: "Activity Create", options: .firesOnRecordCreation)
 
@@ -160,7 +212,6 @@ class ReferenceDataViewController: UIViewController {
     notificationInfo.alertBody = "Activity created in iCloud"
     notificationInfo.shouldBadge = true
     notificationInfo.shouldSendContentAvailable = true
-    
 
     actvitySubscription.notificationInfo = notificationInfo
 
@@ -177,6 +228,7 @@ class ReferenceDataViewController: UIViewController {
       }
     }))
   }
+
 }
 
 extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSource {
@@ -212,7 +264,16 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
     
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, complete in
 
-      let activityId = self.activityArray[indexPath.row].recordId
+      let activityToDelete = self.activityArray[indexPath.row]
+      var activityId = activityToDelete.recordId
+
+      if activityId == "" {
+        // get a matching record
+        
+        let activityIdFromCloud = self.getActivityIdFromCloud(activity: activityToDelete)
+        
+      }
+
       let activityToDeleteID = CKRecord.ID.init(recordName: activityId)
 
       self.privateDatabase?.delete(withRecordID: activityToDeleteID, completionHandler: {  recordID, error in

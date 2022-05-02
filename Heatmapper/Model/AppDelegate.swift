@@ -59,16 +59,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     // handle user notifications
     let notificationCenter = UNUserNotificationCenter.current()
+    notificationCenter.delegate = self
     notificationCenter.requestAuthorization(options: [.badge, .sound, .alert], completionHandler: { granted, error in
 
       if let error = error {
         MyFunc.logMessage(.error, "Error requesting authorization: \(error.localizedDescription)")
+      } else {
+        DispatchQueue.main.async {
+          application.registerForRemoteNotifications()
+        }
       }
+
+
     })
 
-    UNUserNotificationCenter.current().delegate = self
 
-    application.registerForRemoteNotifications()
+
 
     return true
 
@@ -101,38 +107,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     if (notification.notificationType ==
         CKNotification.NotificationType.query) {
 
-      let queryNotification =
-      notification as! CKQueryNotification
+      let queryNotification = notification as! CKQueryNotification
 
       let recordID = queryNotification.recordID
       MyFunc.logMessage(.debug, "record created with recordId: \(String(describing: recordID?.recordName))")
 
-//      let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
-//      let viewController = keyWindow?.rootViewController as! ViewController
-//
-//      //      let viewController: ViewController = self.window?.rootViewController as! ViewController
-//      viewController.fetchRecord(recordID!)
     }
   }
 
-//  func application(_ application: UIApplication, userDidAcceptCloudKitShareWith cloudKitShareMetadata: CKShare.Metadata) {
-//
-//    let acceptSharesOperation =
-//    CKAcceptSharesOperation(shareMetadatas: [cloudKitShareMetadata])
-//    acceptSharesOperation.perShareCompletionBlock = {
-//      metadata, share, error in
-//      if error != nil {
-//        print(error?.localizedDescription)
-//      } else {
-//        let viewController: ViewController =
-//        self.window?.rootViewController as! ViewController
-//        viewController.fetchShare(cloudKitShareMetadata)
-//      }
-//    }
-//    CKContainer(identifier:
-//                  cloudKitShareMetadata.containerIdentifier).add(
-//                    acceptSharesOperation)
-//  }
+
+
+  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    completionHandler([.alert, .sound, .badge])
+  }
 
   func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
     let userInfo = response.notification.request.content.userInfo
