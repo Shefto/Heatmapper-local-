@@ -151,7 +151,9 @@ class ActivityViewController: UIViewController {
           DispatchQueue.main.async {
             let resultsStr = String(describing: records)
             print("Activities saved: \(resultsStr)")
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateID"), object: nil, userInfo: ["id" : "test"])
+            let activitySaved = records?.first
+            let activityID = activitySaved?.recordID.recordName
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateID"), object: nil, userInfo: ["id" : activityID] )
 
           }
         }

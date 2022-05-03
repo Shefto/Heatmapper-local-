@@ -32,8 +32,8 @@ class ReferenceDataViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     MyFunc.logMessage(.debug, "ReferenceDataViewController viewWillAppear called")
-    getData()
-    activityTableView.reloadData()
+    getActivitiesFromCloud()
+//    activityTableView.reloadData()
     
   }
   
@@ -42,7 +42,8 @@ class ReferenceDataViewController: UIViewController {
     initialiseCloudKitDB()
     activityTableView.dataSource = self
     activityTableView.delegate = self
-    
+    sportArray = Sport.allCases.map { $0 }
+
     activityTableView.allowsSelection = true
     activityTableView.register(UINib(nibName: "ActivityCell", bundle: nil), forCellReuseIdentifier: "ActivityTableViewCell")
     activityTableView.register(UINib(nibName: "EditActivityCell", bundle: nil), forCellReuseIdentifier: "EditActivityTableViewCell")
@@ -54,19 +55,7 @@ class ReferenceDataViewController: UIViewController {
 //    NotificationCenter.default.addObserver(self, selector: #selector(updateMap(notification:)), name: Notification.Name(rawValue:"didUpdateLocation"), object: nil)
     
   }
-  
-  func getData() {
 
-    getActivitiesFromCloud()
-
-
-//    MyFunc.saveHeatmapActivityDefaults(activityArray)
-
-
-    sportArray = Sport.allCases.map { $0 }
-    
-  }
-  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let segueToUse = segue.identifier
     if segueToUse == "referenceDataToActivity" {
@@ -87,9 +76,21 @@ class ReferenceDataViewController: UIViewController {
     MyFunc.saveHeatmapActivityDefaults(activityArray)
   }
   
-  @objc func insertCloudActivityId() {
+  @objc func insertCloudActivityId(_ notification: NSNotification) {
     print("insertCloudActivityId called")
+    if let activityId = notification.userInfo?["id"] as? String {
+
+      if let row = activityArray.firstIndex(where: {$0.recordId == ""}) {
+        activityArray[row].recordId = activityId
+      }
+      MyFunc.logMessage(.debug, "activityArray with Id inserted: \(self.activityArray)")
+
+      activityTableView.reloadData()
+    }
+
+
   }
+
 
   func getActivitiesFromCloud()  {
 
