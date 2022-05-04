@@ -94,9 +94,10 @@ class ActivitiesViewController: UIViewController {
 
       if (error != nil) {
         DispatchQueue.main.async() {
-          self.notifyUser("Cloud Access Error", message: error!.localizedDescription)
+          self.notifyUser("ActivitiesViewController.getActivitiesFromCloud: Cloud access error :", message: error!.localizedDescription)
         }
       } else {
+        // if Activities are returned, clear out and reload the array of Activities
         if results!.count > 0 {
           self.activityArray.removeAll()
           results?.forEach( {
@@ -110,27 +111,19 @@ class ActivitiesViewController: UIViewController {
 
           DispatchQueue.main.async() {
 
-            let resultsStr = String(describing: results)
-            print("Activities retrieved: \(resultsStr)")
-
-
-            MyFunc.logMessage(.debug, "activityArray from Cloud: \(self.activityArray)")
-
+            // Because CloudKit can be delayed in inserting new records, also get the Activities from userDefaults
             let defaultsActivityArray = MyFunc.getHeatmapperActivityDefaults()
-            MyFunc.logMessage(.debug, "activityArray from Defaults: \(defaultsActivityArray)")
 
+            // if there are more Activities in userDefaults than the CloudKit DB, use the userDefaults Activities
+            // we will then "stitch in" the CloudKit DB recordId for the extra Activity when the notification fires that it has been created in CloudKit
             if defaultsActivityArray.count > self.activityArray.count {
               self.activityArray = defaultsActivityArray
-              MyFunc.logMessage(.debug, "More Activities in Defaults")
             }
 
             self.activityTableView.reloadData()
-
           }
         } else {
-          DispatchQueue.main.async() {
-            self.notifyUser("No Match Found", message: "No record matching the address was found")
-          }
+          MyFunc.logMessage(.error, "No matching records found")
         }
       }
     }))
@@ -159,11 +152,7 @@ class ActivitiesViewController: UIViewController {
         }
       } else {
 
-
-
-
           DispatchQueue.main.async() {
-
 
             if results!.count > 0 {
               let resultsStr = String(describing: results)
@@ -259,7 +248,7 @@ extension ActivitiesViewController: UITableViewDelegate, UITableViewDataSource {
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, complete in
 
       let activityToDelete = self.activityArray[indexPath.row]
-      var activityId = activityToDelete.recordId
+      let activityId = activityToDelete.recordId
 
       if activityId == "" {
         // get a matching record
@@ -316,7 +305,7 @@ extension ActivitiesViewController: UITableViewDelegate, UITableViewDataSource {
 extension ActivitiesViewController: UIPickerViewDelegate, UIPickerViewDataSource {
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    MyFunc.logMessage(.debug, "ActivitiesViewController.didSelectRow: \(row)")
+
     let sportSelected = sportArray[row]
     
     let tableViewCell = pickerView.superview?.superview as! ActivityTableViewCell
@@ -325,7 +314,6 @@ extension ActivitiesViewController: UIPickerViewDelegate, UIPickerViewDataSource
       return
     }
     let tableIndexPathRow = tableIndexPath.row
-    MyFunc.logMessage(.debug, "tableIndexPathRow: \(tableIndexPathRow)")
     updateSportForActivity(newSport: sportSelected, indexPathRow: tableIndexPath.row)
     
     
