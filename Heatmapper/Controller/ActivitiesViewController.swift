@@ -1,5 +1,5 @@
 //
-//  ReferenceDataViewController
+//  ActivitiesViewController
 //  Heatmapper
 //
 //  Created by Richard English on 28/08/2021.
@@ -9,19 +9,17 @@
 import UIKit
 import CloudKit
 
-class ReferenceDataViewController: UIViewController {
+class ActivitiesViewController: UIViewController {
   
   //CloudKit initialisations
   let container = CKContainer(identifier: "iCloud.com.wimbledonappcompany.Heatmapper")
   var privateDatabase: CKDatabase?
-  var currentRecord: CKRecord?
   var recordZone: CKRecordZone?
   
   let theme = ColourTheme()
   let defaults = UserDefaults.standard
-  private var activityArray = [Activity]()
 
-  
+  private var activityArray = [Activity]()
   var sportArray = [Sport]()
   
   var selectedIndexPath : Int?
@@ -31,29 +29,26 @@ class ReferenceDataViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    MyFunc.logMessage(.debug, "ReferenceDataViewController viewWillAppear called")
     getActivitiesFromCloud()
-//    activityTableView.reloadData()
-    
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
+
     initialiseCloudKitDB()
-    activityTableView.dataSource = self
-    activityTableView.delegate = self
+    // add notification to observe when new Activity record is inserted into CloudKit DB
+    NotificationCenter.default.addObserver(self, selector: #selector(insertCloudActivityId), name: Notification.Name(rawValue: "updateID"), object: nil)
+
     sportArray = Sport.allCases.map { $0 }
 
+    activityTableView.dataSource = self
+    activityTableView.delegate = self
     activityTableView.allowsSelection = true
     activityTableView.register(UINib(nibName: "ActivityCell", bundle: nil), forCellReuseIdentifier: "ActivityTableViewCell")
     activityTableView.register(UINib(nibName: "EditActivityCell", bundle: nil), forCellReuseIdentifier: "EditActivityTableViewCell")
-    
     activityTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: activityTableView.frame.size.width, height: 1))
     activityTableView.tableHeaderView?.backgroundColor = UIColor.clear
 
-    NotificationCenter.default.addObserver(self, selector: #selector(insertCloudActivityId), name: Notification.Name(rawValue: "updateID"), object: nil)
-//    NotificationCenter.default.addObserver(self, selector: #selector(updateMap(notification:)), name: Notification.Name(rawValue:"didUpdateLocation"), object: nil)
-    
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -77,20 +72,18 @@ class ReferenceDataViewController: UIViewController {
   }
   
   @objc func insertCloudActivityId(_ notification: NSNotification) {
-    print("insertCloudActivityId called")
-    if let activityId = notification.userInfo?["id"] as? String {
 
+    if let activityId = notification.userInfo?["id"] as? String {
       if let row = activityArray.firstIndex(where: {$0.recordId == ""}) {
         activityArray[row].recordId = activityId
+      } else {
+        MyFunc.logMessage(.error, "ActivitiesViewController.insertCloudActivityId: no Activity in activityArray with null recordID")
       }
-      MyFunc.logMessage(.debug, "activityArray with Id inserted: \(self.activityArray)")
-
       activityTableView.reloadData()
+    } else {
+      MyFunc.logMessage(.error, "ActivitiesViewController.insertCloudActivityId: Invalid ActivityId returned")
     }
-
-
   }
-
 
   func getActivitiesFromCloud()  {
 
@@ -232,7 +225,7 @@ class ReferenceDataViewController: UIViewController {
 
 }
 
-extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSource {
+extension ActivitiesViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return activityArray.count
   }
@@ -320,10 +313,10 @@ extension ReferenceDataViewController: UITableViewDelegate, UITableViewDataSourc
   
 }
 
-extension ReferenceDataViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension ActivitiesViewController: UIPickerViewDelegate, UIPickerViewDataSource {
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    MyFunc.logMessage(.debug, "ReferenceDataViewController.didSelectRow: \(row)")
+    MyFunc.logMessage(.debug, "ActivitiesViewController.didSelectRow: \(row)")
     let sportSelected = sportArray[row]
     
     let tableViewCell = pickerView.superview?.superview as! ActivityTableViewCell

@@ -167,7 +167,7 @@ extension VenuesViewController: UITableViewDelegate, UITableViewDataSource {
 extension VenuesViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    MyFunc.logMessage(.debug, "ReferenceDataViewController.didSelectRow: \(row)")
+    MyFunc.logMessage(.debug, "ActivitiesViewController.didSelectRow: \(row)")
     let sportSelected = sportArray[row]
 
     let tableViewCell = pickerView.superview?.superview as! ActivityTableViewCell

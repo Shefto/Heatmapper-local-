@@ -21,7 +21,7 @@
 		791CA3C327EA6F840049FCB8 /* PlayingAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791CA3C227EA6F840049FCB8 /* PlayingAreaViewController.swift */; };
 		79201489254343BD00212051 /* MyFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083BB25092EBB00274F79 /* MyFunc.swift */; };
 		792CCCDD26AC32270024C5B3 /* DTMHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792CCCDC26AC32270024C5B3 /* DTMHeatmapViewController.swift */; };
-		793477A726DA55EC0004DF0A /* ReferenceDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */; };
+		793477A726DA55EC0004DF0A /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793477A626DA55EB0004DF0A /* ActivitiesViewController.swift */; };
 		793477AA26DD66BE0004DF0A /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793477A826DD66BA0004DF0A /* ActivityTableViewCell.swift */; };
 		793477AD26DFFFF10004DF0A /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 793477AC26DFFFF00004DF0A /* ActivityCell.xib */; };
 		7935622825AF53C5006BBC54 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7935622725AF53C5006BBC54 /* HelpViewController.swift */; };
@@ -192,7 +192,7 @@
 		791BD3C225A64E2600FD994A /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
 		791CA3C227EA6F840049FCB8 /* PlayingAreaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingAreaViewController.swift; sourceTree = "<group>"; };
 		792CCCDC26AC32270024C5B3 /* DTMHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTMHeatmapViewController.swift; sourceTree = "<group>"; };
-		793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceDataViewController.swift; sourceTree = "<group>"; };
+		793477A626DA55EB0004DF0A /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		793477A826DD66BA0004DF0A /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		793477AC26DFFFF00004DF0A /* ActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
 		7935622725AF53C5006BBC54 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -440,7 +440,7 @@
 				7935622725AF53C5006BBC54 /* HelpViewController.swift */,
 				7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */,
 				79D083B32508EF6400274F79 /* MainMenuViewController.swift */,
-				793477A626DA55EB0004DF0A /* ReferenceDataViewController.swift */,
+				793477A626DA55EB0004DF0A /* ActivitiesViewController.swift */,
 				79F3A2A6269078F900667B1B /* TesterViewController.swift */,
 				79439B7326C46357001E7CC4 /* SavedHeatmapViewController.swift */,
 				7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */,
@@ -845,7 +845,7 @@
 			files = (
 				79FDDFCD26C98BD900526FB9 /* CornerpointClientProtocol.swift in Sources */,
 				79D083BE250A0C0900274F79 /* Extensions.swift in Sources */,
-				793477A726DA55EC0004DF0A /* ReferenceDataViewController.swift in Sources */,
+				793477A726DA55EC0004DF0A /* ActivitiesViewController.swift in Sources */,
 				7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */,
 				799131292634145F00811731 /* JDHeatMapView.swift in Sources */,
 				793D1AD624B855540039441B /* CommandStatus.swift in Sources */,

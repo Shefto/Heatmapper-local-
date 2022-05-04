@@ -211,10 +211,10 @@
             </objects>
             <point key="canvasLocation" x="1577" y="790"/>
         </scene>
-        <!--Reference Data-->
+        <!--Activities-->
         <scene sceneID="TfZ-Kh-xiU">
             <objects>
-                <viewController title="Events" id="bKA-ac-svZ" userLabel="Reference Data" customClass="ReferenceDataViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Events" id="bKA-ac-svZ" userLabel="Activities" customClass="ActivitiesViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="aew-pt-qwn" customClass="ThemeView" customModule="Heatmapper" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
