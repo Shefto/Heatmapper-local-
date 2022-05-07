@@ -29,7 +29,13 @@ class ActivitiesViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    getActivitiesFromCloud()
+    activityArray.removeAll()
+
+    activityArray = MyFunc.getHeatmapperActivityDefaults()
+    if activityArray.isEmpty {
+      getActivitiesFromCloud()
+
+    }
   }
 
   override func viewDidLoad() {
@@ -76,6 +82,7 @@ class ActivitiesViewController: UIViewController {
     if let activityId = notification.userInfo?["id"] as? String {
       if let row = activityArray.firstIndex(where: {$0.recordId == ""}) {
         activityArray[row].recordId = activityId
+        MyFunc.saveHeatmapActivityDefaults(activityArray)
       } else {
         MyFunc.logMessage(.error, "ActivitiesViewController.insertCloudActivityId: no Activity in activityArray with null recordID")
       }
@@ -118,6 +125,8 @@ class ActivitiesViewController: UIViewController {
             // we will then "stitch in" the CloudKit DB recordId for the extra Activity when the notification fires that it has been created in CloudKit
             if defaultsActivityArray.count > self.activityArray.count {
               self.activityArray = defaultsActivityArray
+            } else {
+              MyFunc.saveHeatmapActivityDefaults(self.activityArray)
             }
 
             self.activityTableView.reloadData()
