@@ -79,17 +79,16 @@ class MyFunc {
 
     var playingAreasToReturn = [PlayingArea]()
     let defaults = UserDefaults.standard
-    let prefix = "Playing Area"
+//    let prefix = "Playing Area"
     let decoder = JSONDecoder()
-    let allKeys = defaults.dictionaryRepresentation()
-    let playingAreaKeys = allKeys.filter {$0.key.hasPrefix(prefix)}
+//    let allKeys = defaults.dictionaryRepresentation()
+//    let playingAreaKeys = allKeys.filter {$0.key.hasPrefix(prefix)}
 
     for key in defaults.dictionaryRepresentation().keys {
       if key.hasPrefix("Playing Area") {
 
-
         if let savedTemplate = defaults.object(forKey: key) as? Data {
-          let decoder = JSONDecoder()
+//          let decoder = JSONDecoder()
           if let loadedTemplate = try? decoder.decode(PlayingArea.self, from: savedTemplate) {
             let playingAreaToAppend = loadedTemplate
             playingAreasToReturn.append(playingAreaToAppend)

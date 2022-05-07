@@ -152,7 +152,7 @@ class ActivityViewController: UIViewController {
             let resultsStr = String(describing: records)
             print("Activities saved: \(resultsStr)")
             let activitySaved = records?.first
-            let activityID = activitySaved?.recordID.recordName
+            let activityID : String = activitySaved?.recordID.recordName.description ?? ""
             NotificationCenter.default.post(name: Notification.Name(rawValue: "updateID"), object: nil, userInfo: ["id" : activityID] )
 
           }

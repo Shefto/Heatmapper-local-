@@ -329,8 +329,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
 
     // create the playing area using the height and width
-    var heatmapImageView = UIImageView(frame: (CGRect(x: 0, y: 0, width: pitchWidthMeters, height: pitchHeightMeters)))
-    let heatmapPitchImage = UIImage(named: "Figma Pitch 11 Green")
+//    var heatmapImageView = UIImageView(frame: (CGRect(x: 0, y: 0, width: pitchWidthMeters, height: pitchHeightMeters)))
+//    let heatmapPitchImage = UIImage(named: "Figma Pitch 11 Green")
 
     // these should give a scale by which all other points' coordinates can be placed
 

@@ -31,10 +31,11 @@ class ActivitiesViewController: UIViewController {
     super.viewWillAppear(animated)
     activityArray.removeAll()
 
+    // first get the defaults
     activityArray = MyFunc.getHeatmapperActivityDefaults()
+    // if there are no defaults, get them from iCloud
     if activityArray.isEmpty {
       getActivitiesFromCloud()
-
     }
   }
 
@@ -69,7 +70,6 @@ class ActivitiesViewController: UIViewController {
   
   @IBAction func addButton(_ sender: UIBarButtonItem) {
     self.performSegue(withIdentifier: "referenceDataToActivity", sender: nil)
-
   }
   
   func updateSportForActivity(newSport: Sport, indexPathRow: Int) {
@@ -126,6 +126,7 @@ class ActivitiesViewController: UIViewController {
             if defaultsActivityArray.count > self.activityArray.count {
               self.activityArray = defaultsActivityArray
             } else {
+              // if there are the same or more in iCloud then save them to userdefaults
               MyFunc.saveHeatmapActivityDefaults(self.activityArray)
             }
 
@@ -139,43 +140,6 @@ class ActivitiesViewController: UIViewController {
 
   }
 
-  func getActivityIdFromCloud(activity: Activity) -> Activity?  {
-
-    var activityToReturn : Activity?
-    let activityName = activity.name
-    let activitySport = activity.sport.rawValue
-//    let namePredicate = NSPredicate(format: "name = %@", activityName)
-    let sportPredicate = NSPredicate(format: "sport = %@", activitySport)
-
-//    let predicate = NSPredicate(format: "name = %@ AND sport = %@", activityName, activitySport)
-
-//    let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate,sportPredicate])
-    let namePredicate = NSPredicate(value: true)
-    let query = CKQuery(recordType: "Activity", predicate: namePredicate)
-    
-    privateDatabase?.perform(query, inZoneWith: recordZone?.zoneID, completionHandler: ({results, error in
-      
-      if (error != nil) {
-        DispatchQueue.main.async() {
-          self.notifyUser("Cloud Access Error", message: error!.localizedDescription)
-        }
-      } else {
-
-          DispatchQueue.main.async() {
-
-            if results!.count > 0 {
-              let resultsStr = String(describing: results)
-              print("Activities retrieved: \(resultsStr)")
-            }
-
-
-        }
-      }
-    }))
-
-    return activityToReturn
-  }
-  
   
   func notifyUser(_ title: String, message: String) -> Void
   {
@@ -261,9 +225,7 @@ extension ActivitiesViewController: UITableViewDelegate, UITableViewDataSource {
 
       if activityId == "" {
         // get a matching record
-        
-        let activityIdFromCloud = self.getActivityIdFromCloud(activity: activityToDelete)
-        
+        MyFunc.logMessage(.critical, "No Activity Id returned")
       }
 
       let activityToDeleteID = CKRecord.ID.init(recordName: activityId)
@@ -322,7 +284,7 @@ extension ActivitiesViewController: UIPickerViewDelegate, UIPickerViewDataSource
       MyFunc.logMessage(.error, "Invalid or missing indexPath for tableViewCell")
       return
     }
-    let tableIndexPathRow = tableIndexPath.row
+   
     updateSportForActivity(newSport: sportSelected, indexPathRow: tableIndexPath.row)
     
     
