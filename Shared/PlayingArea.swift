@@ -24,30 +24,50 @@ struct CodableCLLCoordinate2D: Codable {
 
 struct PlayingArea: Codable {
 
-  var workoutID : UUID
+  var workoutID   : UUID
+  var id          : UUID
+  var name        : String?
+  var venueId     : UUID?
+  var venueName   : String?
+  var comments    : String?
   var bottomLeft  : CodableCLLCoordinate2D
-  var bottomRight  : CodableCLLCoordinate2D
-  var topLeft  : CodableCLLCoordinate2D
-  var topRight      : CodableCLLCoordinate2D
-//  var rotation : CGFloat
+  var bottomRight : CodableCLLCoordinate2D
+  var topLeft     : CodableCLLCoordinate2D
+  var topRight    : CodableCLLCoordinate2D
 
   enum CodingKeys: String, CodingKey {
     case workoutID = "WorkoutId"
+    case id = "Id"
+    case name = "Name"
+    case venueId = "VenueId"
+    case venueName = "VenueName"
+    case comments = "Comments"
     case bottomLeft = "BottomLeft"
     case bottomRight = "BottomRight"
     case topLeft = "TopLeft"
     case topRight = "TopRight"
-//    case rotation = "Rotation"
+
   }
 
-  init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D) {
+  init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D, name: String?, venueId: UUID?, comments: String?) {
     self.workoutID  = workoutID
+    self.name = name
+    self.id = UUID()
+    self.venueId = venueId
+    self.comments = comments
     self.bottomLeft = bottomLeft
     self.bottomRight = bottomRight
     self.topLeft = topLeft
     self.topRight = topRight
-//    self.rotation = rotation
+  }
 
+  init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D) {
+    self.workoutID  = workoutID
+    self.id = UUID()
+    self.bottomLeft = bottomLeft
+    self.bottomRight = bottomRight
+    self.topLeft = topLeft
+    self.topRight = topRight
   }
 
 }

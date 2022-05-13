@@ -58,7 +58,7 @@
 /* Class = "UITextField"; text = "-"; ObjectID = "0yn-zN-nSm"; */
 "0yn-zN-nSm.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Adjust Pitch Size"; ObjectID = "1LI-I1-lMj"; */
+/* Class = "UIButton"; normalTitle = "Resize playing area"; ObjectID = "1LI-I1-lMj"; */
 "1LI-I1-lMj.normalTitle" = "";
 
 /* Class = "UILabel"; text = "Name of your activity"; ObjectID = "1Xq-LU-MWR"; */
@@ -79,6 +79,9 @@
 /* Class = "UILabel"; text = "Pitch resize start"; ObjectID = "5l1-a3-BUy"; */
 "5l1-a3-BUy.text" = "";
 
+/* Class = "UIViewController"; title = "Heatmap"; ObjectID = "61I-57-2bz"; */
+"61I-57-2bz.title" = "";
+
 /* Class = "UILabel"; text = "Height"; ObjectID = "6WD-Y6-CkL"; */
 "6WD-Y6-CkL.text" = "";
 
@@ -87,9 +90,6 @@
 
 /* Class = "UISegmentedControl"; 7U9-Pn-MJX.segmentTitles[1] = "Sat"; ObjectID = "7U9-Pn-MJX"; */
 "7U9-Pn-MJX.segmentTitles[1]" = "";
-
-/* Class = "UILabel"; text = "Detail"; ObjectID = "7zg-e5-JR6"; */
-"7zg-e5-JR6.text" = "";
 
 /* Class = "UIButton"; normalTitle = "Radius Distinct"; ObjectID = "8fa-ka-EKP"; */
 "8fa-ka-EKP.normalTitle" = "";
@@ -139,10 +139,13 @@
 /* Class = "UILabel"; text = "Sport"; ObjectID = "D9N-6Z-FMe"; */
 "D9N-6Z-FMe.text" = "";
 
+/* Class = "UILabel"; text = "Detail"; ObjectID = "Dc1-6G-lTu"; */
+"Dc1-6G-lTu.text" = "";
+
 /* Class = "UITextField"; text = "-"; ObjectID = "ebk-aA-s5G"; */
 "ebk-aA-s5G.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "eBn-1T-1Yh"; */
+/* Class = "UIButton"; normalTitle = "Save playing area"; ObjectID = "eBn-1T-1Yh"; */
 "eBn-1T-1Yh.normalTitle" = "";
 
 /* Class = "UINavigationItem"; title = "Edit Activity"; ObjectID = "EbZ-Kt-ugg"; */
@@ -165,6 +168,9 @@
 
 /* Class = "UILabel"; text = "Sport"; ObjectID = "fUb-WJ-pCB"; */
 "fUb-WJ-pCB.text" = "";
+
+/* Class = "UIButton"; normalTitle = "Reset playing area"; ObjectID = "G4g-1b-Xyh"; */
+"G4g-1b-Xyh.normalTitle" = "";
 
 /* Class = "UITextField"; text = "º"; ObjectID = "gLc-Hj-oOY"; */
 "gLc-Hj-oOY.text" = "";

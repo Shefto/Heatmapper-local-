@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PlayingAreasViewController.swift
 //  Heatmapper
 //
 //  Created by Richard English on 22/03/2022.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayingAreaViewController: UIViewController {
+class PlayingAreasViewController: UIViewController {
 
 
   let theme = ColourTheme()
@@ -25,7 +25,6 @@ class PlayingAreaViewController: UIViewController {
     super.viewWillAppear(animated)
     getData()
 
-
   }
 
   override func viewDidLoad() {
@@ -36,8 +35,6 @@ class PlayingAreaViewController: UIViewController {
     playingAreaTableView.delegate = self
 
     playingAreaTableView.allowsSelection = true
-//    playingAreaTableView.register(UINib(nibName: "ActivityCell", bundle: nil), forCellReuseIdentifier: "playingAreaTableViewCell")
-//    playingAreaTableView.register(UINib(nibName: "EditActivityCell", bundle: nil), forCellReuseIdentifier: "EditplayingAreaTableViewCell")
 
     playingAreaTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: playingAreaTableView.frame.size.width, height: 1))
     playingAreaTableView.tableHeaderView?.backgroundColor = UIColor.clear
@@ -51,15 +48,13 @@ class PlayingAreaViewController: UIViewController {
     MyFunc.logMessage(.debug, "playingAreaArray: \(playingAreaArray)")
     playingAreaTableView.reloadData()
 
-
-
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let segueToUse = segue.identifier
-    if segueToUse == "referenceDataToActivity" {
-      let activityVC = segue.destination as! ActivityViewController
-      activityVC.activityToUpdate = sender as? Activity
+    if segueToUse == "playingAreasToPlayingArea" {
+      let playingAreaVC = segue.destination as! PlayingAreaViewController
+      playingAreaVC.playingAreaToUpdate = sender as? PlayingArea
     }
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
@@ -79,7 +74,7 @@ class PlayingAreaViewController: UIViewController {
 
 }
 
-extension PlayingAreaViewController: UITableViewDelegate, UITableViewDataSource {
+extension PlayingAreasViewController: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return playingAreaArray.count
@@ -97,7 +92,9 @@ extension PlayingAreaViewController: UITableViewDelegate, UITableViewDataSource 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
     selectedIndexPath = indexPath.row
-    playingAreaTableView.reloadData()
+    let playingAreaToSend = self.playingAreaArray[indexPath.row]
+    self.performSegue(withIdentifier: "playingAreasToPlayingArea", sender: playingAreaToSend)
+    //    self.playingAreaTableView.reloadData()
 
   }
 
@@ -107,7 +104,7 @@ extension PlayingAreaViewController: UITableViewDelegate, UITableViewDataSource 
 
   func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
     selectedIndexPath = nil
-    self.playingAreaTableView.reloadData()
+
   }
 
 
@@ -129,8 +126,8 @@ extension PlayingAreaViewController: UITableViewDelegate, UITableViewDataSource 
 
     let editAction = UIContextualAction(style: .destructive, title: "Edit") { _, _, complete in
       // switch table into edit mode
-      let activityToSend = self.playingAreaArray[indexPath.row]
-      self.performSegue(withIdentifier: "referenceDataToActivity", sender: activityToSend)
+      let playingAreaToSend = self.playingAreaArray[indexPath.row]
+      self.performSegue(withIdentifier: "playingAreasToPlayingArea", sender: playingAreaToSend)
 
       complete(true)
     }

@@ -18,7 +18,7 @@
 		791405AC27FE0D0A006C7E35 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 791405AB27FE0D0A006C7E35 /* HealthKit.framework */; };
 		791405AE27FE0D16006C7E35 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 791405AD27FE0D16006C7E35 /* CloudKit.framework */; };
 		791BD3C325A64E2600FD994A /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791BD3C225A64E2600FD994A /* WorkoutManager.swift */; };
-		791CA3C327EA6F840049FCB8 /* PlayingAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791CA3C227EA6F840049FCB8 /* PlayingAreaViewController.swift */; };
+		791CA3C327EA6F840049FCB8 /* PlayingAreasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791CA3C227EA6F840049FCB8 /* PlayingAreasViewController.swift */; };
 		79201489254343BD00212051 /* MyFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D083BB25092EBB00274F79 /* MyFunc.swift */; };
 		792CCCDD26AC32270024C5B3 /* DTMHeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792CCCDC26AC32270024C5B3 /* DTMHeatmapViewController.swift */; };
 		793477A726DA55EC0004DF0A /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793477A626DA55EB0004DF0A /* ActivitiesViewController.swift */; };
@@ -111,6 +111,7 @@
 		79B6DC992598B13400F573BA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B6DC982598B13400F573BA /* SettingsViewController.swift */; };
 		79B80BD3253DDB8300BEA10F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B80BD2253DDB8300BEA10F /* SceneDelegate.swift */; };
 		79BB8FF02563DB4500019900 /* CountdownInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB8FEF2563DB4500019900 /* CountdownInterfaceController.swift */; };
+		79C63AD3282DA9CF009CD624 /* PlayingAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C63AD2282DA9CF009CD624 /* PlayingAreaViewController.swift */; };
 		79C657792559A6B900E6DBCE /* SetIntervalsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C657782559A6B900E6DBCE /* SetIntervalsInterfaceController.swift */; };
 		79C78CFD27308EBD00D395E1 /* REHeatmapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C78CFC27308EBD00D395E1 /* REHeatmapPoint.swift */; };
 		79CA514B25C2DC9F00415F84 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79CA514D25C2DC9F00415F84 /* InfoPlist.strings */; };
@@ -190,7 +191,7 @@
 		791405AB27FE0D0A006C7E35 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		791405AD27FE0D16006C7E35 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		791BD3C225A64E2600FD994A /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
-		791CA3C227EA6F840049FCB8 /* PlayingAreaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingAreaViewController.swift; sourceTree = "<group>"; };
+		791CA3C227EA6F840049FCB8 /* PlayingAreasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingAreasViewController.swift; sourceTree = "<group>"; };
 		792CCCDC26AC32270024C5B3 /* DTMHeatmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTMHeatmapViewController.swift; sourceTree = "<group>"; };
 		793477A626DA55EB0004DF0A /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		793477A826DD66BA0004DF0A /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
@@ -296,6 +297,7 @@
 		79B6DC982598B13400F573BA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		79B80BD2253DDB8300BEA10F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		79BB8FEF2563DB4500019900 /* CountdownInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownInterfaceController.swift; sourceTree = "<group>"; };
+		79C63AD2282DA9CF009CD624 /* PlayingAreaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingAreaViewController.swift; sourceTree = "<group>"; };
 		79C657782559A6B900E6DBCE /* SetIntervalsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetIntervalsInterfaceController.swift; sourceTree = "<group>"; usesTabs = 0; };
 		79C78CFC27308EBD00D395E1 /* REHeatmapPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REHeatmapPoint.swift; sourceTree = "<group>"; };
 		79CA514C25C2DC9F00415F84 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 		793D1AE024B86C1B0039441B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				793477A626DA55EB0004DF0A /* ActivitiesViewController.swift */,
 				798007F526F5F64700FFC294 /* ActivityViewController.swift */,
 				79FDDFD026C98D4000526FB9 /* CroppableImageViewDelegateProtocol.swift */,
 				792CCCDC26AC32270024C5B3 /* DTMHeatmapViewController.swift */,
@@ -440,12 +443,13 @@
 				7935622725AF53C5006BBC54 /* HelpViewController.swift */,
 				7965F9C126AC1E27008B130D /* JDHeatmapViewController.swift */,
 				79D083B32508EF6400274F79 /* MainMenuViewController.swift */,
-				793477A626DA55EB0004DF0A /* ActivitiesViewController.swift */,
-				79F3A2A6269078F900667B1B /* TesterViewController.swift */,
+				791CA3C227EA6F840049FCB8 /* PlayingAreasViewController.swift */,
+				79C63AD2282DA9CF009CD624 /* PlayingAreaViewController.swift */,
 				79439B7326C46357001E7CC4 /* SavedHeatmapViewController.swift */,
 				7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */,
 				79B6DC982598B13400F573BA /* SettingsViewController.swift */,
 				79D9BF8E270794180027D96F /* TeamsViewController.swift */,
+				79F3A2A6269078F900667B1B /* TesterViewController.swift */,
 				79ADB48A262640E3007BF946 /* TrackerViewController.swift */,
 				79D9BF8C27076E750027D96F /* VenuesViewController.swift */,
 				79A9DC6026B9D83F0063C3D0 /* WorkoutHistoryCollectionViewController.swift */,
@@ -475,7 +479,6 @@
 		79A4EFA024A0AF45002A7870 = {
 			isa = PBXGroup;
 			children = (
-				791CA3C227EA6F840049FCB8 /* PlayingAreaViewController.swift */,
 				796BC39227BFBDE200628EB2 /* MyMKMapView.swift */,
 				796BC39427BFBE7900628EB2 /* MyMapDelegate.swift */,
 				7960FD7A27B97EB400EF4886 /* ViewCorners.swift */,
@@ -849,7 +852,8 @@
 				7973BBE4258BCE0E0015785D /* IntervalTableViewFooter.swift in Sources */,
 				799131292634145F00811731 /* JDHeatMapView.swift in Sources */,
 				793D1AD624B855540039441B /* CommandStatus.swift in Sources */,
-				791CA3C327EA6F840049FCB8 /* PlayingAreaViewController.swift in Sources */,
+				79C63AD3282DA9CF009CD624 /* PlayingAreaViewController.swift in Sources */,
+				791CA3C327EA6F840049FCB8 /* PlayingAreasViewController.swift in Sources */,
 				7972371D2719E203002F4548 /* FootballPitchOverlayRenderer.swift in Sources */,
 				793D1AD424B854EB0039441B /* SessionDelegator.swift in Sources */,
 				79ADB49026264153007BF946 /* UserAnnotation.swift in Sources */,

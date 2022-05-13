@@ -20,23 +20,14 @@ class HeatmapViewController: UIViewController, MyMapListener {
   var heatmapWorkoutId            : UUID?
   var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
   var workoutMetadataArray        =  [WorkoutMetadata]()
-
-  //  var heatmapImage                : UIImage?
   var retrievedWorkout            : HKWorkout?
-  //  var routeCoordinatesArray       = [CLLocation]()
 
-  //  let workoutDateFormatter        = DateFormatter()
   var measurementFormatter        = MeasurementFormatter()
-  //  var units                       : String = ""
-  //  var unitLength                  : UnitLength = .meters
   var unitSpeed                   : UnitSpeed  = .metersPerSecond
-  //  let defaults                    = UserDefaults.standard
 
   var resizeOn                    : Bool = true
   var playingAreaMapRect          : MKMapRect?
   var heatmapPointCircle          : MKCircle?
-  //  var reHeatmapPoint              : REHeatmapPoint?
-  //  var reHeatmapPointImage         : UIImage?
 
   let healthStore                 = HKHealthStore()
   let theme                       = ColourTheme()
@@ -78,7 +69,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
   var topRightCoord               : CLLocationCoordinate2D?
   var playingAreaBearing          : Double = 0.0
 
-  //  var blendModeArray              = [BlendMode]()
   var activityArray               = [Activity]()
   var sportArray                  = [Sport]()
 
@@ -126,6 +116,18 @@ class HeatmapViewController: UIViewController, MyMapListener {
   @IBOutlet weak var heightStepper: UIStepper!
   @IBOutlet weak var heightAndWeightStackView: UIStackView!
 
+  @IBAction func savePlayingArea(_ sender: Any) {
+
+    // convert the coordinates to a codable subclass for saving
+    let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
+    let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
+    let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
+    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
+
+    let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: workoutMetadata.pitch , venueId: self.heatmapWorkoutId, comments: "")
+    MyFunc.saveSharedPlayingArea(playingAreaToSave)
+    
+  }
 
   @IBAction func resetPitches(_ sender: Any) {
     MyFunc.deletePlayingAreas()
@@ -216,7 +218,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       // turn everything off (as it's on)
 
       resizeOn = false
-      resizeButton.setTitle("Adjust Pitch Size", for: .normal)
+      resizeButton.setTitle("Resize playing area", for: .normal)
       resizeButton.tintColor = UIColor.systemGreen
 
       // record the map heading at end of resizing
@@ -273,7 +275,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     mapView.listener = self
 
     resizeOn = false
-    resizeButton.setTitle("Adjust Pitch Size", for: .normal)
+    resizeButton.setTitle("Resize playing area", for: .normal)
     resetPlayingAreaButton.isHidden = true
     heightAndWeightStackView.isHidden = true
 
@@ -619,7 +621,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
         let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
         self.playingAreaMapRect = pitchMKMapRect
 
-
         self.setMapViewZoom()
 
         // get the PlayingArea corner coordinates from the size of heatmap
@@ -705,7 +706,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     mapHeadingAtResizeOn = mapView.camera.heading
     pitchRotationAtResizeOn = rotation(from: newPitchView.transform)
     updateAngleUI()
-
 
     playingAreaAngleSaved = pitchAngle
     self.pitchAngleToApply = pitchAngle
@@ -971,6 +971,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     }
 
   }
+
   func loadAverageHeartRateLabel(startDate: Date, endDate: Date, quantityType: HKQuantityType, option: HKStatisticsOptions) {
     let quantityPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
     let heartRateQuery = HKStatisticsQuery(quantityType: quantityType, quantitySamplePredicate: quantityPredicate, options: .discreteAverage) { (query, statisticsOrNil, errorOrNil) in
@@ -1094,14 +1095,12 @@ class HeatmapViewController: UIViewController, MyMapListener {
       // if done = all data retrieved
       // only at this point can we start to build a heatmap overlay
       if done {
-
         // dispatch to the main queue as we are making UI updates
         DispatchQueue.main.async {
           self.loadSamplesUI()
-          //          self.resizeGetSavedPlayingArea()
           self.getPlayingAreaOnLoad()
           self.createREHeatmap()
-          //          self.setMapViewZoom()
+
         }
       }
     }

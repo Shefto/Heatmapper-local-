@@ -419,7 +419,7 @@ class TesterViewController: UIViewController {
       printHeadings()
 
       resizeOn = false
-      resizeButton.setTitle("Adjust Pitch Size", for: .normal)
+      resizeButton.setTitle("Resize playing area", for: .normal)
       resizeButton.tintColor = UIColor.systemGreen
 
       self.touchView.isHidden = true
@@ -637,7 +637,7 @@ class TesterViewController: UIViewController {
     lowerControlsStackView.isHidden = true
 
     resizeOn = false
-    resizeButton.setTitle("Adjust Pitch Size", for: .normal)
+    resizeButton.setTitle("Resize playing area", for: .normal)
     resizeButton.tintColor = UIColor.systemGreen
     self.touchView.isHidden = true
 

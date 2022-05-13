@@ -100,7 +100,6 @@ class SavedHeatmapViewController: UIViewController {
     updateWorkout()
   }
 
-
   func getWorkoutData() {
 
     // check valid workout ID received

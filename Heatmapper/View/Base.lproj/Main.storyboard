@@ -262,7 +262,7 @@
         <!--Playing Areas-->
         <scene sceneID="DEE-g1-6RU">
             <objects>
-                <viewController title="Events" id="zRo-zy-u5E" userLabel="Playing Areas" customClass="PlayingAreaViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Events" id="zRo-zy-u5E" userLabel="Playing Areas" customClass="PlayingAreasViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="eOv-fC-PBZ" customClass="ThemeView" customModule="Heatmapper" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -274,22 +274,22 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="hEF-cJ-rvk"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="xPd-tR-6yg"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlayingAreaTableViewCell" textLabel="vOC-oF-PJU" detailTextLabel="7zg-e5-JR6" style="IBUITableViewCellStyleValue2" id="iUs-Na-WDf" userLabel="TableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlayingAreaTableViewCell" textLabel="vOC-oF-PJU" detailTextLabel="Dc1-6G-lTu" style="IBUITableViewCellStyleValue1" id="iUs-Na-WDf" userLabel="TableViewCell">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="iUs-Na-WDf" id="gKr-jk-XMo">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vOC-oF-PJU">
-                                                    <rect key="frame" x="20" y="33" width="91" height="14.333333333333334"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vOC-oF-PJU">
+                                                    <rect key="frame" x="20" y="33" width="25" height="14.333333333333334"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7zg-e5-JR6">
-                                                    <rect key="frame" x="117.00000000000001" y="33" width="32.666666666666664" height="14.333333333333334"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dc1-6G-lTu">
+                                                    <rect key="frame" x="361.33333333333331" y="33" width="32.666666666666664" height="14.333333333333334"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>
@@ -316,6 +316,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="playingAreaTableView" destination="qfS-Qb-E8u" id="WSc-nI-DUn"/>
+                        <segue destination="61I-57-2bz" kind="show" identifier="playingAreasToPlayingArea" id="fGv-Ue-YY2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZd-op-2Ue" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -764,6 +765,36 @@ DQoNCg
             </objects>
             <point key="canvasLocation" x="-1145" y="-86"/>
         </scene>
+        <!--Playing Area-->
+        <scene sceneID="M3k-iJ-3FR">
+            <objects>
+                <viewController title="Heatmap" id="61I-57-2bz" userLabel="Playing Area" customClass="PlayingAreaViewController" customModule="Heatmapper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ab4-j3-Htl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MqN-LO-2e6" customClass="MyMKMapView" customModule="Heatmapper" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BLG-TG-RTY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="MqN-LO-2e6" firstAttribute="leading" secondItem="Ab4-j3-Htl" secondAttribute="leading" id="FKV-Do-s8u"/>
+                            <constraint firstItem="BLG-TG-RTY" firstAttribute="bottom" secondItem="MqN-LO-2e6" secondAttribute="bottom" id="cb9-OH-ygP"/>
+                            <constraint firstItem="MqN-LO-2e6" firstAttribute="top" secondItem="BLG-TG-RTY" secondAttribute="top" id="mXL-jw-b9z"/>
+                            <constraint firstAttribute="trailing" secondItem="MqN-LO-2e6" secondAttribute="trailing" id="rG0-Em-zEx"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ehU-yJ-ZWl"/>
+                    <connections>
+                        <outlet property="mapView" destination="MqN-LO-2e6" id="Wne-Uw-PqU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vkf-wD-klh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4664" y="790"/>
+        </scene>
         <!--Saved Heatmap-->
         <scene sceneID="L5h-Lo-kvG">
             <objects>
@@ -1004,7 +1035,7 @@ DQoNCg
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aQj-td-zHN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="112" y="1768"/>
+            <point key="canvasLocation" x="80" y="1779"/>
         </scene>
         <!--Heatmap Tester-->
         <scene sceneID="0BR-dV-Nhz">
@@ -1032,7 +1063,7 @@ DQoNCg
                                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <color key="tintColor" systemColor="systemGreenColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="Adjust Pitch Size"/>
+                                                <state key="normal" title="Resize playing area"/>
                                                 <connections>
                                                     <action selector="btnResize:" destination="vbg-Le-o0h" eventType="touchUpInside" id="GQM-bP-6qY"/>
                                                 </connections>
@@ -2031,7 +2062,7 @@ DQoNCg
                                 <rect key="frame" x="5" y="562" width="404" height="40"/>
                                 <subviews>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cep-ee-waR" userLabel="Resize">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="199.66666666666666" height="40"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <color key="tintColor" name="buttonPrimary"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -2040,14 +2071,24 @@ DQoNCg
                                             <action selector="btnResize:" destination="Pbk-vr-61V" eventType="touchUpInside" id="HYp-7E-3gj"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBn-1T-1Yh" userLabel="Reset">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4g-1b-Xyh" userLabel="Reset">
+                                        <rect key="frame" x="202" y="0.0" width="0.0" height="40"/>
                                         <color key="backgroundColor" name="buttonPrimary"/>
                                         <color key="tintColor" name="buttonPrimary"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Reset"/>
+                                        <state key="normal" title="Reset playing area"/>
                                         <connections>
-                                            <action selector="resetPitches:" destination="Pbk-vr-61V" eventType="touchUpInside" id="gaP-1e-h5I"/>
+                                            <action selector="resetPitches:" destination="Pbk-vr-61V" eventType="touchUpInside" id="Lm7-11-gCl"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBn-1T-1Yh" userLabel="Save">
+                                        <rect key="frame" x="204.66666666666663" y="0.0" width="199.33333333333337" height="40"/>
+                                        <color key="backgroundColor" name="buttonPrimary"/>
+                                        <color key="tintColor" name="buttonPrimary"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Save playing area"/>
+                                        <connections>
+                                            <action selector="savePlayingArea:" destination="Pbk-vr-61V" eventType="touchUpInside" id="vnY-ef-zYu"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2098,7 +2139,7 @@ DQoNCg
                         <outlet property="playingAreaSavedAngleRadiansField" destination="32O-hZ-MFh" id="dGQ-LL-3N2"/>
                         <outlet property="playingAreaToSaveAngleDegreesField" destination="hUP-TM-1gP" id="NPF-fi-M7d"/>
                         <outlet property="playingAreaToSaveAngleRadiansField" destination="bpE-9u-gc5" id="RwZ-XP-FJI"/>
-                        <outlet property="resetPlayingAreaButton" destination="eBn-1T-1Yh" id="zzZ-Xa-elH"/>
+                        <outlet property="resetPlayingAreaButton" destination="G4g-1b-Xyh" id="Sh6-b2-Tlc"/>
                         <outlet property="resizeButton" destination="Cep-ee-waR" id="Xag-ms-d0r"/>
                         <outlet property="sportField" destination="F5h-cl-Tm7" id="DPZ-aT-ca7"/>
                         <outlet property="venueField" destination="9nK-7l-9X9" id="Bcb-UM-IMq"/>
