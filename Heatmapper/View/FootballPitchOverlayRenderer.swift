@@ -23,6 +23,14 @@ class FootballPitchOverlayRenderer: MKOverlayRenderer {
     super.init(overlay: overlay)
   }
 
+  init(overlay: MKOverlay, overlayImage: UIImage, angle: CGFloat) {
+
+    self.overlayImage = overlayImage
+    self.angle        = angle
+    super.init(overlay: overlay)
+  }
+
+
   override func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
     guard let imageReference = overlayImage.cgImage else { return }
 

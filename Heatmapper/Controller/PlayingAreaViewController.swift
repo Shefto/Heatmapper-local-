@@ -280,7 +280,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
 //    loadTesterData()
     getStaticData()
-
+    self.getPlayingAreaOnLoad()
     // get workout data
     // Note: all UI work is called within this function as the data retrieval works asynchronously
 //    getWorkoutData()
@@ -1320,7 +1320,7 @@ extension PlayingAreaViewController: MKMapViewDelegate {
 
         // get the rotation of the pitchView
         let angleIncMapRotation = getMapRotation()
-        let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation, workoutId: heatmapWorkoutId!)
+        let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation)
 
         footballPitchOverlayRenderer.alpha = 1
 
