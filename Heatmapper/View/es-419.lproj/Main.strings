@@ -124,6 +124,9 @@
 /* Class = "UIButton"; normalTitle = "Resize playing area"; ObjectID = "Cep-ee-waR"; */
 "Cep-ee-waR.normalTitle" = "";
 
+/* Class = "UITextField"; placeholder = "Sport"; ObjectID = "Cgu-Ak-Ev2"; */
+"Cgu-Ak-Ev2.placeholder" = "";
+
 /* Class = "UILabel"; text = "Distance"; ObjectID = "CTV-Fu-jHN"; */
 "CTV-Fu-jHN.text" = "";
 

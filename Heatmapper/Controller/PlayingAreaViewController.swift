@@ -60,18 +60,10 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   @IBOutlet weak var vanueField: ThemeMediumFontTextField!
   @IBOutlet weak var nameField: ThemeMediumFontTextField!
   @IBOutlet weak var mapView: MyMKMapView!
-
+  @IBOutlet weak var sportField: ThemeMediumFontTextField!
+  
   @IBAction func savePlayingArea(_ sender: Any) {
 
-    // convert the coordinates to a codable subclass for saving
-    let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
-    let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
-    let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
-    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
-
-    let nameToSave = nameField.text ?? ""
-    let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave , venueId: self.heatmapWorkoutId, comments: "")
-    MyFunc.saveSharedPlayingArea(playingAreaToSave)
 
   }
 
@@ -87,9 +79,16 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     //    heightAndWeightStackView.isHidden = true
 
     getStaticData()
-    self.getPlayingAreaOnLoad()
-
+    getPlayingAreaOnLoad()
+    loadUI()
   }
+
+  func loadUI() {
+    sportPicker.delegate = self
+    sportPicker.dataSource = self
+    sportField.inputView = sportPicker
+  }
+
 
   override func viewWillDisappear(_ animated: Bool) {
     savePlayingArea()
@@ -104,8 +103,9 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
 
     let nameToSave = nameField.text ?? ""
+
     let workoutIdToSave = playingAreaToUpdate?.workoutID
-    let playingAreaToSave = PlayingArea(workoutID: workoutIdToSave!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave , venueId: self.heatmapWorkoutId, comments: "")
+    let playingAreaToSave = PlayingArea(workoutID: workoutIdToSave!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave , venueId: self.heatmapWorkoutId, sport: sportField.text, comments: "")
     MyFunc.saveSharedPlayingArea(playingAreaToSave)
   }
 
@@ -334,6 +334,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let playingArea : PlayingArea = playingAreaToUpdate!
 
     nameField.text = playingArea.name
+    sportField.text = playingArea.sport
     
 
 
@@ -725,31 +726,17 @@ extension PlayingAreaViewController: UIPickerViewDelegate, UIPickerViewDataSourc
   }
 
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    if pickerView == activityPicker {
-      return activityArray.count
-    } else {
       return sportArray.count
-    }
   }
 
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    if pickerView == activityPicker {
-      return activityArray[row].name
-    } else {
       return sportArray[row].rawValue
-    }
   }
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
-    if pickerView == activityPicker {
-      //      activityField.text = activityArray[row].name
-      //      sportField.text = activityArray[row].sport.rawValue
-    } else {
-      //      sportField.text = sportArray[row].rawValue
-    }
+        sportField.text = sportArray[row].rawValue
     //    updateWorkout()
-
     self.view.endEditing(true)
   }
 

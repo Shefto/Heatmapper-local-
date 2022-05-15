@@ -30,6 +30,7 @@ struct PlayingArea: Codable {
   var venueId     : UUID?
   var venueName   : String?
   var comments    : String?
+  var sport       : String?
   var bottomLeft  : CodableCLLCoordinate2D
   var bottomRight : CodableCLLCoordinate2D
   var topLeft     : CodableCLLCoordinate2D
@@ -42,6 +43,7 @@ struct PlayingArea: Codable {
     case venueId = "VenueId"
     case venueName = "VenueName"
     case comments = "Comments"
+    case sport = "Sport"
     case bottomLeft = "BottomLeft"
     case bottomRight = "BottomRight"
     case topLeft = "TopLeft"
@@ -49,11 +51,12 @@ struct PlayingArea: Codable {
 
   }
 
-  init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D, name: String?, venueId: UUID?, comments: String?) {
+  init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D, name: String?, venueId: UUID?, sport: String?, comments: String?) {
     self.workoutID  = workoutID
     self.name = name
     self.id = UUID()
     self.venueId = venueId
+    self.sport = sport
     self.comments = comments
     self.bottomLeft = bottomLeft
     self.bottomRight = bottomRight

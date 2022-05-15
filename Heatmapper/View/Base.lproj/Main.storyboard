@@ -777,16 +777,16 @@ DQoNCg
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Qdo-2r-2oN" userLabel="Pitch Name Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="17"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="18.666666666666668"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YB7-NT-VsI" userLabel="Pitch Name Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.666666666666668"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PFf-L3-Svd" userLabel="Pitch Name Field" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="17"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PFf-L3-Svd" userLabel="Pitch Name Field" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="18.666666666666668"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -794,30 +794,35 @@ DQoNCg
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ka-Cb-xwv" userLabel="Venue Stack View">
-                                        <rect key="frame" x="0.0" y="22" width="414" height="17"/>
+                                        <rect key="frame" x="0.0" y="23.666666666666671" width="414" height="18.666666666666671"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efC-I5-2d9" userLabel="Venue Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.666666666666668"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Venue" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wbt-Wh-gP2" userLabel="Venue Field" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="17"/>
+                                            <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Venue" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wbt-Wh-gP2" userLabel="Venue Field" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="18.666666666666668"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Sport" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cgu-Ak-Ev2" userLabel="Sport" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="47.333333333333343" width="414" height="30.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MqN-LO-2e6" customClass="MyMKMapView" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44" width="414" height="414"/>
+                                        <rect key="frame" x="0.0" y="83" width="414" height="414"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="MqN-LO-2e6" secondAttribute="height" id="MLY-l9-tvJ"/>
                                         </constraints>
                                     </mapView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLY-c9-DiG" customClass="ThemeActionButton" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="463" width="414" height="40"/>
+                                        <rect key="frame" x="0.0" y="502" width="414" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ODn-r1-ooG"/>
                                         </constraints>
@@ -825,7 +830,7 @@ DQoNCg
                                         <buttonConfiguration key="configuration" style="plain" title="Adjust playing area size"/>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="E17-zL-aUS" userLabel="Workout Table View" customClass="ThemeTableViewNoBackground" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="508" width="414" height="300"/>
+                                        <rect key="frame" x="0.0" y="547" width="414" height="261"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="7pz-KP-Ff7" userLabel="Workout Table View Cell">
@@ -858,6 +863,7 @@ DQoNCg
                     <connections>
                         <outlet property="mapView" destination="MqN-LO-2e6" id="Wne-Uw-PqU"/>
                         <outlet property="nameField" destination="PFf-L3-Svd" id="2hk-vN-bk6"/>
+                        <outlet property="sportField" destination="Cgu-Ak-Ev2" id="Z0U-A9-cms"/>
                         <outlet property="vanueField" destination="wbt-Wh-gP2" id="Vcm-EP-w7l"/>
                     </connections>
                 </viewController>
