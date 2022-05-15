@@ -145,9 +145,6 @@
 /* Class = "UINavigationItem"; title = "Edit Activity"; ObjectID = "EbZ-Kt-ugg"; */
 "EbZ-Kt-ugg.title" = "";
 
-/* Class = "UILabel"; text = "Venue"; ObjectID = "efC-I5-2d9"; */
-"efC-I5-2d9.text" = "";
-
 /* Class = "UITextField"; text = "Venue"; ObjectID = "eXy-MY-Yhq"; */
 "eXy-MY-Yhq.text" = "";
 
@@ -351,9 +348,6 @@
 
 /* Class = "UIButton"; normalTitle = "Radius Blurry"; ObjectID = "Y9X-XR-V0A"; */
 "Y9X-XR-V0A.normalTitle" = "";
-
-/* Class = "UILabel"; text = "Pitch"; ObjectID = "YB7-NT-VsI"; */
-"YB7-NT-VsI.text" = "";
 
 /* Class = "UINavigationItem"; title = "Heatmap"; ObjectID = "yQa-XH-y2d"; */
 "yQa-XH-y2d.title" = "";

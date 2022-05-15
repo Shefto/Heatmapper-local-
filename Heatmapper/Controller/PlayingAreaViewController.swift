@@ -56,11 +56,11 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   let activityPicker              = UIPickerView()
   let sportPicker                 = UIPickerView()
 
-
-  @IBOutlet weak var vanueField: ThemeMediumFontTextField!
+  @IBOutlet weak var sportField: ThemeMediumFontTextField!
+  @IBOutlet weak var venueField: ThemeMediumFontTextField!
   @IBOutlet weak var nameField: ThemeMediumFontTextField!
   @IBOutlet weak var mapView: MyMKMapView!
-  @IBOutlet weak var sportField: ThemeMediumFontTextField!
+
   
   @IBAction func savePlayingArea(_ sender: Any) {
 
@@ -103,9 +103,11 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
 
     let nameToSave = nameField.text ?? ""
+    let venueToSave = venueField.text ?? ""
+    let sportToSave = sportField.text ?? ""
 
     let workoutIdToSave = playingAreaToUpdate?.workoutID
-    let playingAreaToSave = PlayingArea(workoutID: workoutIdToSave!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave , venueId: self.heatmapWorkoutId, sport: sportField.text, comments: "")
+    let playingAreaToSave = PlayingArea(workoutID: workoutIdToSave!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "")
     MyFunc.saveSharedPlayingArea(playingAreaToSave)
   }
 
@@ -334,6 +336,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let playingArea : PlayingArea = playingAreaToUpdate!
 
     nameField.text = playingArea.name
+    venueField.text = playingArea.venue
     sportField.text = playingArea.sport
     
 
