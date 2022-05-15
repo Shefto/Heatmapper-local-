@@ -773,22 +773,92 @@ DQoNCg
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MqN-LO-2e6" customClass="MyMKMapView" customModule="Heatmapper" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                            </mapView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="C51-Uu-JXf">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Qdo-2r-2oN" userLabel="Pitch Name Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="17"/>
+                                        <subviews>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YB7-NT-VsI" userLabel="Pitch Name Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PFf-L3-Svd" userLabel="Pitch Name Field" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="17"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ka-Cb-xwv" userLabel="Venue Stack View">
+                                        <rect key="frame" x="0.0" y="22" width="414" height="17"/>
+                                        <subviews>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efC-I5-2d9" userLabel="Venue Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Venue" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wbt-Wh-gP2" userLabel="Venue Field" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="17"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MqN-LO-2e6" customClass="MyMKMapView" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44" width="414" height="414"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="MqN-LO-2e6" secondAttribute="height" id="MLY-l9-tvJ"/>
+                                        </constraints>
+                                    </mapView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLY-c9-DiG" customClass="ThemeActionButton" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="463" width="414" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="ODn-r1-ooG"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Adjust playing area size"/>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="E17-zL-aUS" userLabel="Workout Table View" customClass="ThemeTableViewNoBackground" customModule="Heatmapper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="508" width="414" height="300"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="7pz-KP-Ff7" userLabel="Workout Table View Cell">
+                                                <rect key="frame" x="0.0" y="44.666666030883789" width="414" height="43.666667938232422"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7pz-KP-Ff7" id="xyi-Cp-9DK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="E17-zL-aUS" firstAttribute="leading" secondItem="C51-Uu-JXf" secondAttribute="leading" id="dQB-ch-niU"/>
+                                    <constraint firstAttribute="trailing" secondItem="E17-zL-aUS" secondAttribute="trailing" id="u6E-oL-FDU"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BLG-TG-RTY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="MqN-LO-2e6" firstAttribute="leading" secondItem="Ab4-j3-Htl" secondAttribute="leading" id="FKV-Do-s8u"/>
-                            <constraint firstItem="BLG-TG-RTY" firstAttribute="bottom" secondItem="MqN-LO-2e6" secondAttribute="bottom" id="cb9-OH-ygP"/>
-                            <constraint firstItem="MqN-LO-2e6" firstAttribute="top" secondItem="BLG-TG-RTY" secondAttribute="top" id="mXL-jw-b9z"/>
-                            <constraint firstAttribute="trailing" secondItem="MqN-LO-2e6" secondAttribute="trailing" id="rG0-Em-zEx"/>
+                            <constraint firstItem="C51-Uu-JXf" firstAttribute="leading" secondItem="BLG-TG-RTY" secondAttribute="leading" id="MS8-PI-mZM"/>
+                            <constraint firstAttribute="bottom" secondItem="C51-Uu-JXf" secondAttribute="bottom" id="N82-Wc-OdS"/>
+                            <constraint firstItem="C51-Uu-JXf" firstAttribute="top" secondItem="BLG-TG-RTY" secondAttribute="top" id="kml-8d-ibf"/>
+                            <constraint firstItem="C51-Uu-JXf" firstAttribute="trailing" secondItem="BLG-TG-RTY" secondAttribute="trailing" id="vuQ-Hc-Ouk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ehU-yJ-ZWl"/>
                     <connections>
                         <outlet property="mapView" destination="MqN-LO-2e6" id="Wne-Uw-PqU"/>
+                        <outlet property="nameField" destination="PFf-L3-Svd" id="2hk-vN-bk6"/>
+                        <outlet property="vanueField" destination="wbt-Wh-gP2" id="Vcm-EP-w7l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vkf-wD-klh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

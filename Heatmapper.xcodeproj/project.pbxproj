@@ -405,6 +405,9 @@
 		793D1ADF24B86C020039441B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				796BC39227BFBDE200628EB2 /* MyMKMapView.swift */,
+				796BC39427BFBE7900628EB2 /* MyMapDelegate.swift */,
+				7960FD7A27B97EB400EF4886 /* ViewCorners.swift */,
 				793477A826DD66BA0004DF0A /* ActivityTableViewCell.swift */,
 				79FDDFCC26C98BD900526FB9 /* CornerpointClientProtocol.swift */,
 				79FDDFCE26C98C3500526FB9 /* CornerpointView.swift */,
@@ -479,9 +482,6 @@
 		79A4EFA024A0AF45002A7870 = {
 			isa = PBXGroup;
 			children = (
-				796BC39227BFBDE200628EB2 /* MyMKMapView.swift */,
-				796BC39427BFBE7900628EB2 /* MyMapDelegate.swift */,
-				7960FD7A27B97EB400EF4886 /* ViewCorners.swift */,
 				79A7E15025ACE48000D1A952 /* Localizable.strings */,
 				79F3480D25A3364100762724 /* Heatmapper.storekit */,
 				793D1ADE24B86BC90039441B /* Shared */,

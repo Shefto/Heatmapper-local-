@@ -84,7 +84,9 @@ extension PlayingAreasViewController: UITableViewDelegate, UITableViewDataSource
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
     let cell = playingAreaTableView.dequeueReusableCell(withIdentifier: "PlayingAreaTableViewCell", for: indexPath)
-    cell.textLabel!.text = playingAreaArray[indexPath.row].topLeft.latitude.debugDescription
+
+    cell.textLabel!.text = playingAreaArray[indexPath.row].name
+    cell.detailTextLabel!.text = playingAreaArray[indexPath.row].topLeft.latitude.debugDescription
 
     return cell
   }
