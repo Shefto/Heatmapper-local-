@@ -109,6 +109,9 @@
 /* Class = "UILabel"; text = "Heart Rate"; ObjectID = "ay0-XU-veN"; */
 "ay0-XU-veN.text" = "";
 
+/* Class = "UILabel"; text = "Height"; ObjectID = "BK0-fm-o2Q"; */
+"BK0-fm-o2Q.text" = "";
+
 /* Class = "UIViewController"; title = "Events"; ObjectID = "bKA-ac-svZ"; */
 "bKA-ac-svZ.title" = "";
 
@@ -298,6 +301,9 @@
 /* Class = "UILabel"; text = "Calories"; ObjectID = "SsR-z7-NTJ"; */
 "SsR-z7-NTJ.text" = "";
 
+/* Class = "UILabel"; text = "Width"; ObjectID = "sVS-7a-udY"; */
+"sVS-7a-udY.text" = "";
+
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "syd-FH-J8R"; */
 "syd-FH-J8R.title" = "";
 
@@ -351,6 +357,12 @@
 
 /* Class = "UINavigationItem"; title = "Heatmap"; ObjectID = "yQa-XH-y2d"; */
 "yQa-XH-y2d.title" = "";
+
+/* Class = "UIButton"; configuration.title = "Reset playing area size to default"; ObjectID = "YwZ-Av-AIb"; */
+"YwZ-Av-AIb.configuration.title" = "";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "YwZ-Av-AIb"; */
+"YwZ-Av-AIb.normalTitle" = "";
 
 /* Class = "UILabel"; text = "Pace"; ObjectID = "yYq-TM-45H"; */
 "yYq-TM-45H.text" = "";

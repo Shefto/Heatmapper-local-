@@ -56,11 +56,66 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   let activityPicker              = UIPickerView()
   let sportPicker                 = UIPickerView()
 
+  @IBOutlet weak var heightAndWeightStackView: UIStackView!
+  @IBOutlet weak var heightStepper: UIStepper!
+  @IBOutlet weak var widthStepper: UIStepper!
+
+  @IBOutlet weak var resetPlayingAreaButton: ThemeActionButton!
+  @IBOutlet weak var resizeButton: ThemeActionButton!
   @IBOutlet weak var sportField: ThemeMediumFontTextField!
   @IBOutlet weak var venueField: ThemeMediumFontTextField!
   @IBOutlet weak var nameField: ThemeMediumFontTextField!
   @IBOutlet weak var mapView: MyMKMapView!
 
+  @IBAction func btnResize(_ sender: Any) {
+    if resizeOn == true {
+      // turn everything off (as it's on)
+
+      resizeOn = false
+      resizeButton.setTitle("Resize playing area", for: .normal)
+      resizeButton.tintColor = UIColor.systemGreen
+
+      // record the map heading at end of resizing
+      mapHeadingAtResizeOff = mapView.getRotation() ?? 0
+
+      saveResizedPlayingArea()
+
+      playingAreaAngleSavedAfterResize = pitchRotationAtResizeOff
+      let playingAreaAngleSavedAfterResizeDegrees = playingAreaAngleSavedAfterResize.radiansToDegrees
+      //      let playingAreaAngleSavedAfterResizeDegreesStr = String(describing: playingAreaAngleSavedAfterResizeDegrees)
+      //      print("playingAreaAngleSavedAfterResizeDegreesStr: \(playingAreaAngleSavedAfterResizeDegreesStr)")
+      mapView.camera.heading = playingAreaAngleSavedAfterResizeDegrees
+      //      let cameraHeadingAfterResizeStr = String(describing: mapView.camera.heading)
+      //      print("camera heading after resize: \(cameraHeadingAfterResizeStr)")
+
+      setMapViewZoom()
+      let distanceToSet = mapView.camera.centerCoordinateDistance
+      //      let distanceToSetStr = String(describing: distanceToSet)
+      //      print("Camera height: \(distanceToSetStr)")
+      let cameraToApply = MKMapCamera(lookingAtCenter: self.overlayCenter!, fromDistance: distanceToSet, pitch: 0, heading: playingAreaBearing)
+      self.mapView.setCamera(cameraToApply, animated: false)
+
+      // update the metrics
+//      updateAngleUI()
+
+      // removes the pitchView
+      removeViewWithTag(tag: 200)
+
+      resetPlayingAreaButton.isHidden = true
+      heightAndWeightStackView.isHidden = true
+
+    } else {
+      // turn everything on (as it's off)
+      resizeOn = true
+      resizeButton.setTitle("Save", for: .normal)
+      //      resizeButton.tintColor = UIColor.systemRed
+      resetPlayingAreaButton.isHidden = false
+      heightAndWeightStackView.isHidden = false
+      removeAllPinsAndAnnotations()
+      resizeGetSavedPlayingArea()
+      updateSteppers()
+    }
+  }
   
   @IBAction func savePlayingArea(_ sender: Any) {
 
@@ -114,221 +169,150 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
 
 
-  //  func updateSteppers() {
-  //    guard let playingAreaView = self.view.viewWithTag(200) else {
-  //      MyFunc.logMessage(.debug, "Cannot find pitchView to save")
-  //      return
-  //    }
-  //
-  //    heightStepper.value = playingAreaView.frame.height
-  //    widthStepper.value = playingAreaView.frame.width
-  //
-  //  }
-  //
-  //  func saveResizedPlayingArea() {
-  //
-  //    // first get the corners on the pitch view
-  //    guard let viewToSave = self.view.viewWithTag(200) else {
-  //      MyFunc.logMessage(.debug, "Cannot find pitchView to save")
-  //      return
-  //    }
-  //    let corners = ViewCorners(view: viewToSave)
-  //
-  //    let pitchMapTopLeftCGPoint      : CGPoint = corners.topLeft
-  //    let pitchMapBottomLeftCGPoint   : CGPoint = corners.bottomLeft
-  //    let pitchMapBottomRightCGPoint  : CGPoint = corners.bottomRight
-  //    let pitchMapTopRightCGPoint     : CGPoint = corners.topRight
-  //
-  //    // workout out the corresponding co-ordinates at these points on the map view
-  //    var pitchMapTopLeftCoordinate     : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
-  //    var pitchMapBottomLeftCoordinate  : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
-  //    var pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
-  //    var pitchMapTopRightCoordinate    : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
-  //
-  //    //this logic always swaps the TopLeft and BottomRight
-  //    // was originally an if-then-else - consider refactoring to remove
-  //
-  //    print("Swapping TL and BR: SavePitchCoordinates")
-  //    let topLeftToSwap = pitchMapTopLeftCoordinate
-  //    pitchMapTopLeftCoordinate = pitchMapBottomRightCoordinate
-  //    pitchMapBottomRightCoordinate = topLeftToSwap
-  //    let bottomLeftToSwap = pitchMapBottomLeftCoordinate
-  //    pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
-  //    pitchMapTopRightCoordinate = bottomLeftToSwap
-  //
-  //
-  //    playingAreaAngleSavedAfterResize = angleInRadians(between: pitchMapBottomLeftCGPoint, ending: pitchMapBottomRightCGPoint)
-  //
-  //    // update the overlayCenter as we will centre the map Zoom on this
-  //    let midpointLatitude = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
-  //    let midpointLongitude = (pitchMapTopLeftCoordinate.longitude + pitchMapBottomRightCoordinate.longitude) / 2
-  //    self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-  //
-  //    createPitchOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
-  //
-  //    // save the pitch here
-  //    // convert the CLLCoordinates to a subclass which allows us to code them ready for saving
-  //    let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopLeftCoordinate.latitude, longitude: pitchMapTopLeftCoordinate.longitude)
-  //    let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
-  //    let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
-  //    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
-  //
-  //    let playingAreaToSave = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave)
-  //    MyFunc.savePlayingArea(playingAreaToSave)
-  //
-  //    // store the coordinate in the VC's corner variables
-  //    // consider revising above code to use these earlier and avoid having to create new variables for the TL/BR swap
-  //    self.topLeftCoord         = pitchMapTopLeftCoordinate
-  //    self.bottomLeftCoord      = pitchMapBottomLeftCoordinate
-  //    self.topRightCoord        = pitchMapTopRightCoordinate
-  //    self.bottomRightCoord     = pitchMapBottomRightCoordinate
-  //
-  //    playingAreaBearing = pitchMapBottomLeftCoordinate.bearing(to: pitchMapTopLeftCoordinate)
-  //    let playingAreaBearingStr = String(describing: playingAreaBearing)
-  //    print("playingAreaBearing: \(playingAreaBearingStr)")
-  //
-  //  }
+    func updateSteppers() {
+      guard let playingAreaView = self.view.viewWithTag(200) else {
+        MyFunc.logMessage(.debug, "Cannot find pitchView to save")
+        return
+      }
 
-  //
-  //  func resizeGetSavedPlayingArea() {
-  //
-  //    // get the saved playing area coordinates
-  //    MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
-  //
-  //      switch result {
-  //      case .failure(let error):
-  //        // no playing area retrieved so create a default area
-  //        MyFunc.logMessage(.debug, "No playing area retrieved: \(error.localizedDescription) so creating default")
-  //
-  //        // get the max and min latitude and longitudes from all the points to be displayed in the heatmap
-  //        let maxLat = self.heatmapperCoordinatesArray.map {$0.latitude}.max()
-  //        let minLat = self.heatmapperCoordinatesArray.map {$0.latitude}.min()
-  //        let maxLong = self.heatmapperCoordinatesArray.map {$0.longitude}.max()
-  //        let minLong = self.heatmapperCoordinatesArray.map {$0.longitude}.min()
-  //
-  //        let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
-  //        let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
-  //
-  //        let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
-  //        let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
-  //        self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-  //
-  //        // get the max and min X and Y points from the above coordinates as MKMapPoints
-  //        let minX = MKMapPoint(minCoord).x
-  //        let maxX = MKMapPoint(maxCoord).x
-  //        let minY = MKMapPoint(minCoord).y
-  //        let maxY = MKMapPoint(maxCoord).y
-  //
-  //        // this code ensures the pitch size is larger than the heatmap by adding a margin
-  //        // get the dimensions of the rectangle from the distance between the point extremes
-  //        var rectWidth = maxX - minX
-  //        var rectHeight = minY - maxY
-  //        // set the scale of the border
-  //        let rectMarginScale = 0.1
-  //        // set the rectangle origin as the plot dimensions plus the border
-  //        let rectX = minX - (rectWidth * rectMarginScale)
-  //        let rectY = minY + (rectHeight * rectMarginScale)
-  //        // increase the rectangle width and height by the border * 2
-  //        rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
-  //        rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
-  //
-  //        let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
-  //        self.playingAreaMapRect = pitchMKMapRect
-  //
-  //        //  create an overlay of the pitch based upon the rectangle
-  //        let footballPitch11Overlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
-  //        self.mapView.addOverlay(footballPitch11Overlay)
-  //        self.setMapViewZoom()
-  //
-  //        self.bottomLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
-  //        self.topLeftCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: maxLong!)
-  //        self.bottomRightCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: minLong!)
-  //        self.topRightCoord  = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
-  //
-  //        // convert the coordinates to a codable subclass for saving
-  //        let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
-  //        let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
-  //        let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
-  //        let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
-  //
-  //        let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave)
-  //        MyFunc.savePlayingArea(playingAreaToSave)
-  //
-  //        self.updateAngleUI()
-  //
-  //      case .success(let playingArea):
-  //        MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
-  //        let playingAreaStr = String(describing: playingArea)
-  //        MyFunc.logMessage(.debug, playingAreaStr)
-  //
-  //        let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomLeft.latitude) / 2
-  //        let midpointLongitude = (playingArea.bottomLeft.longitude + playingArea.bottomRight.longitude) / 2
-  //        self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-  //        // convert the stored playingArea coordinates from the codable class to the base CLLCoordinate2D
-  //        let topLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
-  //        let bottomLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
-  //        let bottomRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
-  //        let topRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.topRight.latitude, longitude: playingArea.topRight.longitude)
-  //
-  //        self.bottomLeftCoord = bottomLeftAsCoord
-  //        self.bottomRightCoord = bottomRightAsCoord
-  //        self.topLeftCoord = topLeftAsCoord
-  //        self.topRightCoord = topRightAsCoord
-  //
-  //      }
-  //    })
-  //
-  //    // now need to size the pitchView from the MapView information
-  //    // we have the mapView rect from the overlay and the coordinates
-  //
-  //    let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
-  //    let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
-  //    let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
-  //
-  //
-  //    let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
-  //    let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
-  //
-  //    // now add the view
-  //    let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
-  //    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
-  //    newPitchView.image = pitchImageGreen
-  //    newPitchView.layer.opacity = 0.5
-  //    newPitchView.isUserInteractionEnabled = true
-  //    newPitchView.tag = 200
-  //
-  ////
-  ////    // add the gesture recognizers
-  ////    let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
-  ////    let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
-  ////    let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
-  ////    newPitchView.addGestureRecognizer(panner)
-  ////    newPitchView.addGestureRecognizer(rotator)
-  ////    newPitchView.addGestureRecognizer(pincher)
-  //
-  //    // rotate the view
-  //    // need to anchor this first by the origin in order to rotate around bottom left
-  //    newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
-  //    let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
-  //    playingAreaAngleSaved = pitchAngle
-  //    newPitchView.transform = newPitchView.transform.rotated(by: pitchAngle)
-  //    mapView.addSubview(newPitchView)
-  //    newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
-  //
-  //    mapHeadingAtResizeOn = mapView.camera.heading
-  //    pitchRotationAtResizeOn = rotation(from: newPitchView.transform)
-  //    updateAngleUI()
-  //
-  //    //remove the pitch MKMapOverlay
-  //    if let overlays = mapView?.overlays {
-  //      for overlay in overlays {
-  //        if overlay is FootballPitchOverlay {
-  //          mapView?.removeOverlay(overlay)
-  //        }
-  //      }
-  //    }
-  //
-  //  }
+      heightStepper.value = playingAreaView.frame.height
+      widthStepper.value = playingAreaView.frame.width
+
+    }
+
+    func saveResizedPlayingArea() {
+
+      // first get the corners on the pitch view
+      guard let viewToSave = self.view.viewWithTag(200) else {
+        MyFunc.logMessage(.debug, "Cannot find pitchView to save")
+        return
+      }
+      let corners = ViewCorners(view: viewToSave)
+
+      let pitchMapTopLeftCGPoint      : CGPoint = corners.topLeft
+      let pitchMapBottomLeftCGPoint   : CGPoint = corners.bottomLeft
+      let pitchMapBottomRightCGPoint  : CGPoint = corners.bottomRight
+      let pitchMapTopRightCGPoint     : CGPoint = corners.topRight
+
+      // workout out the corresponding co-ordinates at these points on the map view
+      var pitchMapTopLeftCoordinate     : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
+      var pitchMapBottomLeftCoordinate  : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
+      var pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
+      var pitchMapTopRightCoordinate    : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
+
+      //this logic always swaps the TopLeft and BottomRight
+      // was originally an if-then-else - consider refactoring to remove
+
+      print("Swapping TL and BR: SavePitchCoordinates")
+      let topLeftToSwap = pitchMapTopLeftCoordinate
+      pitchMapTopLeftCoordinate = pitchMapBottomRightCoordinate
+      pitchMapBottomRightCoordinate = topLeftToSwap
+      let bottomLeftToSwap = pitchMapBottomLeftCoordinate
+      pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
+      pitchMapTopRightCoordinate = bottomLeftToSwap
+
+
+      playingAreaAngleSavedAfterResize = angleInRadians(between: pitchMapBottomLeftCGPoint, ending: pitchMapBottomRightCGPoint)
+
+      // update the overlayCenter as we will centre the map Zoom on this
+      let midpointLatitude = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
+      let midpointLongitude = (pitchMapTopLeftCoordinate.longitude + pitchMapBottomRightCoordinate.longitude) / 2
+      self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+
+      createPitchOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
+
+      // save the pitch here
+      // convert the CLLCoordinates to a subclass which allows us to code them ready for saving
+      let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopLeftCoordinate.latitude, longitude: pitchMapTopLeftCoordinate.longitude)
+      let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
+      let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
+      let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
+
+      let playingAreaToSave = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave)
+      MyFunc.savePlayingArea(playingAreaToSave)
+
+      // store the coordinate in the VC's corner variables
+      // consider revising above code to use these earlier and avoid having to create new variables for the TL/BR swap
+      self.topLeftCoord         = pitchMapTopLeftCoordinate
+      self.bottomLeftCoord      = pitchMapBottomLeftCoordinate
+      self.topRightCoord        = pitchMapTopRightCoordinate
+      self.bottomRightCoord     = pitchMapBottomRightCoordinate
+
+      playingAreaBearing = pitchMapBottomLeftCoordinate.bearing(to: pitchMapTopLeftCoordinate)
+      let playingAreaBearingStr = String(describing: playingAreaBearing)
+      print("playingAreaBearing: \(playingAreaBearingStr)")
+
+    }
+
+
+    func resizeGetSavedPlayingArea() {
+
+      let playingArea : PlayingArea = playingAreaToUpdate!
+      let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomLeft.latitude) / 2
+      let midpointLongitude = (playingArea.bottomLeft.longitude + playingArea.bottomRight.longitude) / 2
+      self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+      // convert the stored playingArea coordinates from the codable class to the base CLLCoordinate2D
+      let topLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
+      let bottomLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
+      let bottomRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
+      let topRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.topRight.latitude, longitude: playingArea.topRight.longitude)
+
+      self.bottomLeftCoord = bottomLeftAsCoord
+      self.bottomRightCoord = bottomRightAsCoord
+      self.topLeftCoord = topLeftAsCoord
+      self.topRightCoord = topRightAsCoord
+
+      // now need to size the pitchView from the MapView information
+      // we have the mapView rect from the overlay and the coordinates
+
+      let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
+      let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
+      let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
+
+
+      let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
+      let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
+
+      // now add the view
+      let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
+      let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
+      newPitchView.image = pitchImageGreen
+      newPitchView.layer.opacity = 0.5
+      newPitchView.isUserInteractionEnabled = true
+      newPitchView.tag = 200
+
+
+      // add the gesture recognizers
+      let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
+      let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
+      let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
+      newPitchView.addGestureRecognizer(panner)
+      newPitchView.addGestureRecognizer(rotator)
+      newPitchView.addGestureRecognizer(pincher)
+
+      // rotate the view
+      // need to anchor this first by the origin in order to rotate around bottom left
+      newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
+      let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
+      playingAreaAngleSaved = pitchAngle
+      newPitchView.transform = newPitchView.transform.rotated(by: pitchAngle)
+      mapView.addSubview(newPitchView)
+      newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
+
+      mapHeadingAtResizeOn = mapView.camera.heading
+      pitchRotationAtResizeOn = rotation(from: newPitchView.transform)
+//      updateAngleUI()
+
+      //remove the pitch MKMapOverlay
+      if let overlays = mapView?.overlays {
+        for overlay in overlays {
+          if overlay is FootballPitchOverlay {
+            mapView?.removeOverlay(overlay)
+          }
+        }
+      }
+
+    }
 
 
   func getPlayingAreaOnLoad() {
@@ -356,13 +340,13 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     self.topLeftCoord = topLeftAsCoord
     self.topRightCoord = topRightAsCoord
 
-    removeAllPinsAndAnnotations()
+//    removeAllPinsAndAnnotations()
 
     // getting the angle to rotate the overlay by from the CGPoints
     // simply doing this as it seems to work better than using coordinate angles
     let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
     let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
-    //    let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
+        let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
     let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
 
     let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
@@ -376,13 +360,13 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     newPitchView.isUserInteractionEnabled = true
     newPitchView.tag = 200
 
-    //    // add the gesture recognizers
-    //    let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
-    //    let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
-    //    let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
-    //    newPitchView.addGestureRecognizer(panner)
-    //    newPitchView.addGestureRecognizer(rotator)
-    //    newPitchView.addGestureRecognizer(pincher)
+        // add the gesture recognizers
+        let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
+        let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
+        let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
+        newPitchView.addGestureRecognizer(panner)
+        newPitchView.addGestureRecognizer(rotator)
+        newPitchView.addGestureRecognizer(pincher)
 
     // rotate the view
     // need to anchor this first by the origin in order to rotate around bottom left
@@ -677,6 +661,52 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
     return pitchMKMapRect
   }
+
+  @objc func handleRotate(_ gesture: UIRotationGestureRecognizer) {
+    guard let gestureView = gesture.view else {
+      return
+    }
+    gestureView.transform = gestureView.transform.rotated(by: gesture.rotation)
+    pitchRotationAtResizeOff += gesture.rotation
+//    updateAngleUI()
+    gesture.rotation = 0
+    updateSteppers()
+  }
+
+  @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+    guard let gestureView = gesture.view else {
+      return
+    }
+    gestureView.transform = gestureView.transform.scaledBy(x: gesture.scale, y: gesture.scale)
+    gesture.scale = 1
+    updateSteppers()
+  }
+
+  @objc func handlePan(_ sender: UIPanGestureRecognizer) {
+
+    let translation = sender.translation(in: view)
+    guard let gestureView = sender.view else {
+      return
+    }
+
+    gestureView.center = CGPoint(x: gestureView.center.x + translation.x, y: gestureView.center.y + translation.y)
+    sender.setTranslation(.zero, in: view)
+    guard sender.state == .ended else {
+      return
+    }
+
+    let velocity = sender.velocity(in: view)
+    let magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y))
+    let slideMultiplier = magnitude / 200
+
+    let slideFactor = 0.1 * slideMultiplier
+    var finalPoint = CGPoint(x: gestureView.center.x + (velocity.x * slideFactor), y: gestureView.center.y + (velocity.y * slideFactor))
+    finalPoint.x = min(max(finalPoint.x, 0), view.bounds.width)
+    finalPoint.y = min(max(finalPoint.y, 0), view.bounds.height)
+
+    updateSteppers()
+  }
+
 
 }
 
