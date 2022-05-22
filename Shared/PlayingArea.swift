@@ -24,8 +24,8 @@ struct CodableCLLCoordinate2D: Codable {
 
 struct PlayingArea: Codable {
 
-  var workoutID   : UUID
   var id          : UUID
+  var workoutID   : UUID?
   var name        : String?
   var venue       : String?
   var comments    : String?
@@ -36,8 +36,9 @@ struct PlayingArea: Codable {
   var topRight    : CodableCLLCoordinate2D
 
   enum CodingKeys: String, CodingKey {
-    case workoutID = "WorkoutId"
+
     case id = "Id"
+    case workoutID = "WorkoutId"
     case name = "Name"
     case venue = "Venue"
     case sport = "Sport"
@@ -70,6 +71,20 @@ struct PlayingArea: Codable {
     self.topLeft = topLeft
     self.topRight = topRight
   }
+
+  init (bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D, name: String?, venue: String?, sport: String?, comments: String?) {
+
+    self.id = UUID()
+    self.name = name
+    self.venue = venue
+    self.sport = sport
+    self.comments = comments
+    self.bottomLeft = bottomLeft
+    self.bottomRight = bottomRight
+    self.topLeft = topLeft
+    self.topRight = topRight
+  }
+
 
 }
 

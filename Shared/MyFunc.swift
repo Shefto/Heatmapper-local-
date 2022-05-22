@@ -136,7 +136,7 @@ class MyFunc {
     }
 
 
-    static func savePlayingArea(_ playingArea: PlayingArea) {
+    static func savePlayingArea(_ playingArea: PlayingArea)  {
       let defaults = UserDefaults.standard
       let encoder = JSONEncoder()
 
@@ -148,6 +148,7 @@ class MyFunc {
         let playingAreaStr = String(describing: playingArea)
         logMessage(.debug, "Playing Area saved:")
         logMessage(.debug, playingAreaStr)
+
       } catch {
         logMessage(.error, "Error in MyFunc.savePlayingArea")
       }

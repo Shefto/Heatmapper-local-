@@ -419,7 +419,12 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
 
     let playingAreaToSave = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave)
+
     MyFunc.savePlayingArea(playingAreaToSave)
+    // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
+    workoutMetadata.playingAreaId = playingAreaToSave.id.uuidString
+    updateWorkout()
+    
 
     // store the coordinate in the VC's corner variables
     // consider revising above code to use these earlier and avoid having to create new variables for the TL/BR swap
@@ -1191,15 +1196,17 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let venue = venueField.text ?? ""
     let sport = sportField.text ?? ""
     let pitch = pitchField.text ?? ""
+    let playingAreaId = workoutMetadata.playingAreaId ?? ""
 
-    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, venue: venue, pitch: pitch)
+    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, playingAreaId: playingAreaId, activity: activity, sport: sport, venue: venue, pitch: pitch)
+//    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, venue: venue, pitch: pitch)
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
       workoutMetadataArray[row] = workoutMetadataToSave
     } else {
       workoutMetadataArray.append(workoutMetadataToSave)
     }
     MyFunc.saveWorkoutMetadata(workoutMetadataArray)
-    //    MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadataToSave))")
+        MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadataToSave))")
 
   }
 
