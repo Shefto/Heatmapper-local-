@@ -66,7 +66,8 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   @IBOutlet weak var venueField: ThemeMediumFontTextField!
   @IBOutlet weak var nameField: ThemeMediumFontTextField!
   @IBOutlet weak var mapView: MyMKMapView!
-
+  @IBOutlet weak var mapTypeSegmentedControl: UISegmentedControl!
+  
   @IBAction func btnResize(_ sender: Any) {
     if resizeOn == true {
       // turn everything off (as it's on)
@@ -121,6 +122,27 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
 
   }
+
+
+  @IBAction func segMapType(_ sender: UISegmentedControl) {
+
+
+      switch sender.selectedSegmentIndex {
+      case 0:
+        self.mapView.mapType = .standard
+      case 1:
+        self.mapView.mapType = .hybrid
+      case 2:
+        self.mapView.mapType = .satellite
+      case 3:
+        self.mapView.mapType = .hybridFlyover
+      case 4:
+        self.mapView.mapType = .satelliteFlyover
+      default:
+        self.mapView.mapType = .standard
+      }
+  }
+
 
   override func viewDidLoad() {
     super.viewDidLoad()

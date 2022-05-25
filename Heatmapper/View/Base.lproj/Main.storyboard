@@ -777,23 +777,36 @@ DQoNCg
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <subviews>
                                     <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Venue" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wbt-Wh-gP2" userLabel="Venue Field" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="54.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="18.666666666666668"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PFf-L3-Svd" userLabel="Name Field" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="59.66666666666665" width="414" height="18.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="23.666666666666671" width="414" height="18.666666666666671"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Sport" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cgu-Ak-Ev2" userLabel="Sport Field" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="83.333333333333343" width="414" height="18.666666666666671"/>
+                                        <rect key="frame" x="0.0" y="47.333333333333343" width="414" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MqN-LO-2e6" customClass="MyMKMapView" customModule="Heatmapper" customModuleProvider="target">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="j5h-3x-Rxo">
+                                        <rect key="frame" x="0.0" y="71" width="414" height="32"/>
+                                        <segments>
+                                            <segment title="Normal"/>
+                                            <segment title="Hybrid"/>
+                                            <segment title="Satellite"/>
+                                            <segment title="HF"/>
+                                            <segment title="SF"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segMapType:" destination="61I-57-2bz" eventType="valueChanged" id="8t1-0q-ySH"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="hybrid" translatesAutoresizingMaskIntoConstraints="NO" id="MqN-LO-2e6" customClass="MyMKMapView" customModule="Heatmapper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="107" width="414" height="414"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="MqN-LO-2e6" secondAttribute="height" id="MLY-l9-tvJ"/>
@@ -860,8 +873,8 @@ DQoNCg
                                     </tableView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="E17-zL-aUS" firstAttribute="leading" secondItem="C51-Uu-JXf" secondAttribute="leading" id="dQB-ch-niU"/>
-                                    <constraint firstAttribute="trailing" secondItem="E17-zL-aUS" secondAttribute="trailing" id="u6E-oL-FDU"/>
+                                    <constraint firstItem="Cgu-Ak-Ev2" firstAttribute="height" secondItem="wbt-Wh-gP2" secondAttribute="height" id="Qt4-qx-xG0"/>
+                                    <constraint firstItem="PFf-L3-Svd" firstAttribute="height" secondItem="wbt-Wh-gP2" secondAttribute="height" id="ygM-r4-MBh"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -878,6 +891,7 @@ DQoNCg
                     <connections>
                         <outlet property="heightAndWeightStackView" destination="Qal-bK-TGv" id="R32-BJ-g3a"/>
                         <outlet property="heightStepper" destination="vJm-zq-aDQ" id="btg-Dq-y0f"/>
+                        <outlet property="mapTypeSegmentedControl" destination="j5h-3x-Rxo" id="o48-UP-Q41"/>
                         <outlet property="mapView" destination="MqN-LO-2e6" id="Wne-Uw-PqU"/>
                         <outlet property="nameField" destination="PFf-L3-Svd" id="TYs-bD-hLX"/>
                         <outlet property="resetPlayingAreaButton" destination="YwZ-Av-AIb" id="tOH-wC-o3K"/>
@@ -889,7 +903,7 @@ DQoNCg
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vkf-wD-klh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4664" y="790"/>
+            <point key="canvasLocation" x="4663.768115942029" y="789.50892857142856"/>
         </scene>
         <!--Heatmap-->
         <scene sceneID="JyV-B9-0oQ">

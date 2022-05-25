@@ -208,6 +208,21 @@
 /* Class = "UIButton"; normalTitle = "Teams"; ObjectID = "Iwh-8D-hJU"; */
 "Iwh-8D-hJU.normalTitle" = "";
 
+/* Class = "UISegmentedControl"; j5h-3x-Rxo.segmentTitles[0] = "Normal"; ObjectID = "j5h-3x-Rxo"; */
+"j5h-3x-Rxo.segmentTitles[0]" = "";
+
+/* Class = "UISegmentedControl"; j5h-3x-Rxo.segmentTitles[1] = "Hybrid"; ObjectID = "j5h-3x-Rxo"; */
+"j5h-3x-Rxo.segmentTitles[1]" = "";
+
+/* Class = "UISegmentedControl"; j5h-3x-Rxo.segmentTitles[2] = "Satellite"; ObjectID = "j5h-3x-Rxo"; */
+"j5h-3x-Rxo.segmentTitles[2]" = "";
+
+/* Class = "UISegmentedControl"; j5h-3x-Rxo.segmentTitles[3] = "HF"; ObjectID = "j5h-3x-Rxo"; */
+"j5h-3x-Rxo.segmentTitles[3]" = "";
+
+/* Class = "UISegmentedControl"; j5h-3x-Rxo.segmentTitles[4] = "SF"; ObjectID = "j5h-3x-Rxo"; */
+"j5h-3x-Rxo.segmentTitles[4]" = "";
+
 /* Class = "UILabel"; text = "Width"; ObjectID = "J9N-RL-yLl"; */
 "J9N-RL-yLl.text" = "";
 
