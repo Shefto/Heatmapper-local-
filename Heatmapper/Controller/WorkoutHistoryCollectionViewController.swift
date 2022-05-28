@@ -12,28 +12,28 @@ import CoreLocation
 
 class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
 
-  struct workoutInfo {
-    var uuid            : UUID
-    var samples         : Bool
-    var locations       : Bool
-    var sampleCount     : Int
-    var locationsCount  : Int
-
-    init(uuid: UUID, samples: Bool, locations: Bool, sampleCount: Int, locationsCount: Int) {
-      self.uuid           = uuid
-      self.samples        = samples
-      self.locations      = locations
-      self.sampleCount    = sampleCount
-      self.locationsCount = locationsCount
-    }
-  }
+//  struct WorkoutInfo {
+//    var uuid            : UUID
+//    var samples         : Bool
+//    var locations       : Bool
+//    var sampleCount     : Int
+//    var locationsCount  : Int
+//
+//    init(uuid: UUID, samples: Bool, locations: Bool, sampleCount: Int, locationsCount: Int) {
+//      self.uuid           = uuid
+//      self.samples        = samples
+//      self.locations      = locations
+//      self.sampleCount    = sampleCount
+//      self.locationsCount = locationsCount
+//    }
+//  }
 
   let theme = ColourTheme()
 
   var heatmapImagesArray          = [UIImage]()
   var heatmapImagesStringArray    = [String]()
   private var workoutArray        = [HKWorkout]()
-  private var workoutInfoArray    = [workoutInfo]()
+  private var workoutInfoArray    = [WorkoutInfo]()
   var workoutMetadataArray        = [WorkoutMetadata]()
 //  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
   var workoutMetadata             = WorkoutMetadata()
@@ -57,47 +57,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   @IBOutlet weak var workoutCollectionView: UICollectionView!
   @IBOutlet weak var workoutCollectionViewCell: WorkoutCollectionViewCell!
 
-//  @IBAction func btnDTMHeatmap(_ sender: Any) {
-//    self.performSegue(withIdentifier: "historyToDTMHeatmap", sender: workoutSelectedId)
-//  }
-//
-//  @IBAction func btnJDHeatmap(_ sender: Any) {
-//    self.performSegue(withIdentifier: "historyToJDHeatmap", sender: workoutSelectedId)
-//  }
-//
-//  @IBAction func btnREHeatmap(_ sender: Any) {
-//
-//    guard let workoutId = workoutSelectedId else {
-//      MyFunc.logMessage(.error, "No heatmapWorkoutId passed to btnCreatedHeatmap in WorkoutHistoryCollectionViewController")
-//      return
-//    }
-//    self.performSegue(withIdentifier: "historyToHeatmap", sender: workoutId)
-//  }
-//
-//  @IBAction func btnTester(_ sender: Any) {
-//    self.performSegue(withIdentifier: "historyToTester", sender: workoutSelectedId)
-//  }
-
-//  @IBAction func btnCreatedHeatmap(_ sender: Any) {
-//
-//    guard let workoutId = workoutSelectedId else {
-//      MyFunc.logMessage(.error, "No heatmapWorkoutId passed to btnCreatedHeatmap in WorkoutHistoryCollectionViewController")
-//      return
-//    }
-//    let workoutSelectedString = String(describing: workoutId)
-//    let heatmapImageString = "Heatmap_" + workoutSelectedString + ".png"
-//
-//    let heatmapImageFileExists = MyFunc.checkFileExists(filename: heatmapImageString)
-//
-//    if heatmapImageFileExists {
-//      self.performSegue(withIdentifier: "historyToCreatedHeatmap", sender: workoutSelectedId)
-//    } else {
-//      self.performSegue(withIdentifier: "historyToJDHeatmap", sender: workoutSelectedId)
-//    }
-//  }
-
   @IBOutlet weak var heatmapButton: ThemeButton!
-
   @IBOutlet weak var heatmapTesterButton: ThemeButton!
   @IBOutlet weak var heatmapInfoButton: ThemeButton!
 
@@ -121,7 +81,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
       self.workoutArray = workoutsReturned
 
       for workoutToProcess in workoutsReturned {
-        let workoutToAppend = workoutInfo(uuid: workoutToProcess.uuid, samples: false, locations: false, sampleCount: 0, locationsCount: 0)
+        let workoutToAppend = WorkoutInfo(uuid: workoutToProcess.uuid, samples: false, locations: false, sampleCount: 0, locationsCount: 0)
         self.workoutInfoArray.append(workoutToAppend)
         self.getRouteSampleObject(workout: workoutToProcess)
       }
@@ -395,7 +355,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
   }
 
   func getWorkoutMetadata() {
-    // calling this with the workoutId for now
+
     // currently retrieving the whole array but will tighten this up once working
     workoutMetadataArray = MyFunc.getWorkoutMetadata()
 //    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")

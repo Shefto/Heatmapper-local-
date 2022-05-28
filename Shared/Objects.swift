@@ -190,3 +190,19 @@ struct REHeatmapPoint {
     self.heatLevel  = heatLevel
   }
 }
+
+struct WorkoutInfo {
+  var uuid            : UUID
+  var samples         : Bool
+  var locations       : Bool
+  var sampleCount     : Int
+  var locationsCount  : Int
+
+  init(uuid: UUID, samples: Bool, locations: Bool, sampleCount: Int, locationsCount: Int) {
+    self.uuid           = uuid
+    self.samples        = samples
+    self.locations      = locations
+    self.sampleCount    = sampleCount
+    self.locationsCount = locationsCount
+  }
+  }

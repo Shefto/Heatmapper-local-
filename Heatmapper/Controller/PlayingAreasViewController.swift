@@ -20,17 +20,20 @@ class PlayingAreasViewController: UIViewController {
 
   @IBOutlet weak var playingAreaTableView: ThemeTableViewNoBackground!
 
-
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     getData()
-
+    playingAreaTableView.reloadData()
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    initialiseUI()
 
 
+  }
+
+  func initialiseUI() {
     playingAreaTableView.dataSource = self
     playingAreaTableView.delegate = self
 
@@ -39,14 +42,11 @@ class PlayingAreasViewController: UIViewController {
     playingAreaTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: playingAreaTableView.frame.size.width, height: 1))
     playingAreaTableView.tableHeaderView?.backgroundColor = UIColor.clear
 
-
   }
 
   func getData() {
-
     playingAreaArray = MyFunc.getPlayingAreas()
     MyFunc.logMessage(.debug, "playingAreaArray: \(playingAreaArray)")
-    playingAreaTableView.reloadData()
 
   }
 
