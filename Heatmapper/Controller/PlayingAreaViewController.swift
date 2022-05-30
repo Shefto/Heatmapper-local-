@@ -17,7 +17,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   var heatmapperCoordinatesArray  = [CLLocationCoordinate2D]()
   var heatmapperLocationsArray    = [CLLocation]()
   var heatmapWorkoutId            : UUID?
-  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
+  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", playingAreaVenue: "", playingAreaName: "")
   var workoutMetadataArray        =  [WorkoutMetadata]()
   var retrievedWorkout            : HKWorkout?
   private var workoutArray        = [HKWorkout]()
@@ -161,7 +161,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   }
 
   override func viewWillDisappear(_ animated: Bool) {
-    savePlayingArea()
+//    savePlayingArea()
   }
 
   func initialiseUI() {
@@ -277,16 +277,35 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
         self.workoutInfoArray.append(workoutToAppend)
       }
       self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
-      MyFunc.logMessage(.debug, "workoutInfoArray:")
-      MyFunc.logMessage(.debug, String(describing: self.workoutInfoArray))
-      MyFunc.logMessage(.debug, "workoutMetadataArray:")
-      MyFunc.logMessage(.debug, String(describing: self.workoutMetadataArray))
-      MyFunc.logMessage(.debug, "workoutArray:")
-      MyFunc.logMessage(.debug, String(describing: self.workoutArray))
+//      MyFunc.logMessage(.debug, "workoutInfoArray:")
+//      MyFunc.logMessage(.debug, String(describing: self.workoutInfoArray))
+//      MyFunc.logMessage(.debug, "workoutMetadataArray:")
+//      MyFunc.logMessage(.debug, String(describing: self.workoutMetadataArray))
+//      MyFunc.logMessage(.debug, "workoutArray:")
+//      MyFunc.logMessage(.debug, String(describing: self.workoutArray))
 
 
-      let workoutsForPlayingAreaArray = workoutMetadataArray.filter {$0.playingAreaId?.description == playingAreaToUpdate?.id }
+      let workoutMetadataForPlayingAreaArray = self.workoutMetadataArray.filter {$0.playingAreaId == self.playingAreaToUpdate?.id }
+      let workoutMetadataArrayIdsOnly = workoutMetadataForPlayingAreaArray.map { $0.workoutId}
 
+      MyFunc.logMessage(.debug, "workoutMetadataForPlayingAreaArray:")
+      MyFunc.logMessage(.debug, String(describing: workoutMetadataForPlayingAreaArray))
+
+      MyFunc.logMessage(.debug, "workoutMetadataArrayIdsOnly:")
+      MyFunc.logMessage(.debug, String(describing: workoutMetadataArrayIdsOnly))
+
+      let workoutForPlayingAreaArray = self.workoutArray.filter { !workoutMetadataArrayIdsOnly.contains($0.uuid) }
+
+      MyFunc.logMessage(.debug, "workoutForPlayingAreaArray:")
+      MyFunc.logMessage(.debug, String(describing: workoutForPlayingAreaArray))
+
+
+      self.workoutArray = workoutForPlayingAreaArray
+
+      let workoutMetaCount = self.workoutMetadataArray.count
+      let workoutPACount = workoutMetadataForPlayingAreaArray.count
+      MyFunc.logMessage(.debug, "All Count: \(workoutMetaCount)")
+      MyFunc.logMessage(.debug, "Filtered Count: \(workoutPACount)")
 
       self.workoutTableView.reloadData()
     }

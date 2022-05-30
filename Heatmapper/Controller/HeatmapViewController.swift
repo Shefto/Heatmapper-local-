@@ -18,9 +18,10 @@ class HeatmapViewController: UIViewController, MyMapListener {
   var heatmapperCoordinatesArray  = [CLLocationCoordinate2D]()
   var heatmapperLocationsArray    = [CLLocation]()
   var heatmapWorkoutId            : UUID?
-  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
+  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", playingAreaVenue: "", playingAreaName: "")
   var workoutMetadataArray        =  [WorkoutMetadata]()
   var retrievedWorkout            : HKWorkout?
+  private var geocoder            : CLGeocoder!
 
   var measurementFormatter        = MeasurementFormatter()
   var unitSpeed                   : UnitSpeed  = .metersPerSecond
@@ -98,6 +99,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
   @IBOutlet weak var sportField         : ThemeMediumFontTextField!
   @IBOutlet weak var venueField         : ThemeMediumFontTextField!
   @IBOutlet weak var pitchField         : ThemeMediumFontTextField!
+  @IBOutlet weak var placemarkField     : ThemeMediumFontTextField!
+
 
   @IBOutlet weak var distanceLabel      : ThemeMediumFontUILabel!
   @IBOutlet weak var caloriesLabel      : ThemeMediumFontUILabel!
@@ -124,7 +127,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
     let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
 
-    let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: workoutMetadata.pitch, venue: venueField.text, sport: sportField.text, comments: "")
+    let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: workoutMetadata.playingAreaName, venue: venueField.text, sport: sportField.text, comments: "")
     MyFunc.saveSharedPlayingArea(playingAreaToSave)
     
   }
@@ -134,8 +137,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     updateSteppers()
   }
 
-  //  @objc func resizeTap(_ sender: UITapGestureRecognizer? = nil) {
-  //  }
 
   @objc func handleRotate(_ gesture: UIRotationGestureRecognizer) {
     guard let gestureView = gesture.view else {
@@ -254,7 +255,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       // turn everything on (as it's off)
       resizeOn = true
       resizeButton.setTitle("Save", for: .normal)
-//      resizeButton.tintColor = UIColor.systemRed
+      //      resizeButton.tintColor = UIColor.systemRed
       resetPlayingAreaButton.isHidden = false
       heightAndWeightStackView.isHidden = false
       removeAllPinsAndAnnotations()
@@ -273,6 +274,9 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     mapView.delegate = self
     mapView.listener = self
+
+    // initialize the Geocoder
+    geocoder = CLGeocoder()
 
     resizeOn = false
     resizeButton.setTitle("Resize playing area", for: .normal)
@@ -331,8 +335,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
 
     // create the playing area using the height and width
-//    var heatmapImageView = UIImageView(frame: (CGRect(x: 0, y: 0, width: pitchWidthMeters, height: pitchHeightMeters)))
-//    let heatmapPitchImage = UIImage(named: "Figma Pitch 11 Green")
+    //    var heatmapImageView = UIImageView(frame: (CGRect(x: 0, y: 0, width: pitchWidthMeters, height: pitchHeightMeters)))
+    //    let heatmapPitchImage = UIImage(named: "Figma Pitch 11 Green")
 
     // these should give a scale by which all other points' coordinates can be placed
 
@@ -428,7 +432,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     MyFunc.savePlayingAreaWithId(playingAreaToSaveWithId)
 
     // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
-    workoutMetadata.playingAreaId = playingAreaToSave.id.uuidString
+    workoutMetadata.playingAreaId = playingAreaToSave.id
     updateWorkout()
     
 
@@ -745,7 +749,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     //  create an overlay of the pitch based upon the rectangle
     let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
     mapView.insertOverlay(adjustedPitchOverlay, at: 0)
-//    mapView.addOverlay(adjustedPitchOverlay)
+    //    mapView.addOverlay(adjustedPitchOverlay)
 
     self.playingAreaMapRect = pitchMKMapRect
 
@@ -881,8 +885,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
     self.view.addGestureRecognizer(tapGesture)
 
     let workoutActivity = workoutMetadata.activity
-    let workoutVenue = workoutMetadata.venue
-    let workoutPitch = workoutMetadata.pitch
+    let workoutVenue = workoutMetadata.playingAreaVenue
+    let workoutPitch = workoutMetadata.playingAreaName
     let workoutSport = workoutMetadata.sport
 
     activityField.text = workoutActivity
@@ -1111,11 +1115,33 @@ class HeatmapViewController: UIViewController, MyMapListener {
           self.loadSamplesUI()
           self.getPlayingAreaOnLoad()
           self.createREHeatmap()
-
+          if let firstCoordinate = self.heatmapperCoordinatesArray.first {
+            let placemarkName = self.getCLPlacemark(coordinate: firstCoordinate)
+            self.placemarkField.text = placemarkName
+          }
         }
       }
     }
     healthStore.execute(query)
+  }
+
+  func getCLPlacemark(coordinate: CLLocationCoordinate2D) -> String {
+
+    var placemarkStr : String = ""
+    let latitude = coordinate.latitude
+    let longitude = coordinate.longitude
+    let location = CLLocation(latitude: latitude, longitude: longitude)
+    geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+
+      placemarkStr = "No placemark found: \(error.debugDescription)"
+      if let returnedPlacemarks = placemarks {
+        let firstPlacemark = returnedPlacemarks.first
+        placemarkStr = firstPlacemark?.name ?? "No placemark found"
+        self.placemarkField.text = placemarkStr
+      }
+    }
+
+    return placemarkStr
   }
 
   func angleInDegrees(between starting: CGPoint, ending: CGPoint) -> CGFloat {
@@ -1202,17 +1228,17 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let venue = venueField.text ?? ""
     let sport = sportField.text ?? ""
     let pitch = pitchField.text ?? ""
-    let playingAreaId = workoutMetadata.playingAreaId ?? ""
+    let playingAreaId = workoutMetadata.playingAreaId
 
-    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, playingAreaId: playingAreaId, activity: activity, sport: sport, venue: venue, pitch: pitch)
-//    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, venue: venue, pitch: pitch)
+    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, playingAreaId: playingAreaId, activity: activity, sport: sport, playingAreaVenue: venue, playingAreaName: pitch)
+    //    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, venue: venue, pitch: pitch)
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
       workoutMetadataArray[row] = workoutMetadataToSave
     } else {
       workoutMetadataArray.append(workoutMetadataToSave)
     }
     MyFunc.saveWorkoutMetadata(workoutMetadataArray)
-        MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadataToSave))")
+    MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadataToSave))")
 
   }
 

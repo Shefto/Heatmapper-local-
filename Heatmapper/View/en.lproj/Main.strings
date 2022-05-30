@@ -49,14 +49,14 @@
 /* Class = "UILabel"; text = "Pitch"; ObjectID = "1Ze-4i-L2A"; */
 "1Ze-4i-L2A.text" = "";
 
-/* Class = "UITextField"; text = "Pitch"; ObjectID = "2Hb-dc-c99"; */
-"2Hb-dc-c99.text" = "";
+/* Class = "UITextField"; placeholder = "Playing Area"; ObjectID = "2Hb-dc-c99"; */
+"2Hb-dc-c99.placeholder" = "";
 
 /* Class = "UITextField"; text = "r"; ObjectID = "32O-hZ-MFh"; */
 "32O-hZ-MFh.text" = "";
 
-/* Class = "UITextField"; text = "Activity"; ObjectID = "4NC-ab-YSz"; */
-"4NC-ab-YSz.text" = "";
+/* Class = "UITextField"; placeholder = "Description"; ObjectID = "4NC-ab-YSz"; */
+"4NC-ab-YSz.placeholder" = "";
 
 /* Class = "UILabel"; text = "Pitch resize start"; ObjectID = "5l1-a3-BUy"; */
 "5l1-a3-BUy.text" = "";
@@ -79,8 +79,8 @@
 /* Class = "UILabel"; text = "PlayingArea saved angle"; ObjectID = "8N4-wn-n3R"; */
 "8N4-wn-n3R.text" = "";
 
-/* Class = "UITextField"; text = "Venue"; ObjectID = "9nK-7l-9X9"; */
-"9nK-7l-9X9.text" = "";
+/* Class = "UITextField"; placeholder = "Venue"; ObjectID = "9nK-7l-9X9"; */
+"9nK-7l-9X9.placeholder" = "";
 
 /* Class = "UINavigationItem"; title = "Playing Areas"; ObjectID = "AHb-Ja-JDa"; */
 "AHb-Ja-JDa.title" = "";
@@ -142,7 +142,7 @@
 /* Class = "UITextField"; text = "-"; ObjectID = "ebk-aA-s5G"; */
 "ebk-aA-s5G.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Save playing area"; ObjectID = "eBn-1T-1Yh"; */
+/* Class = "UIButton"; normalTitle = "Save to favourites"; ObjectID = "eBn-1T-1Yh"; */
 "eBn-1T-1Yh.normalTitle" = "";
 
 /* Class = "UINavigationItem"; title = "Edit Activity"; ObjectID = "EbZ-Kt-ugg"; */
@@ -151,8 +151,8 @@
 /* Class = "UITextField"; text = "Venue"; ObjectID = "eXy-MY-Yhq"; */
 "eXy-MY-Yhq.text" = "";
 
-/* Class = "UITextField"; text = "Sport"; ObjectID = "F5h-cl-Tm7"; */
-"F5h-cl-Tm7.text" = "";
+/* Class = "UITextField"; placeholder = "Sport"; ObjectID = "F5h-cl-Tm7"; */
+"F5h-cl-Tm7.placeholder" = "";
 
 /* Class = "UILabel"; text = "Map heading resize start"; ObjectID = "fg1-ao-LPs"; */
 "fg1-ao-LPs.text" = "";
@@ -255,6 +255,9 @@
 
 /* Class = "UILabel"; text = "Venue"; ObjectID = "OW8-RA-0px"; */
 "OW8-RA-0px.text" = "";
+
+/* Class = "UITextField"; placeholder = "Placemark"; ObjectID = "Oys-mr-PYC"; */
+"Oys-mr-PYC.placeholder" = "";
 
 /* Class = "UITextField"; text = "-"; ObjectID = "pB5-KK-YTG"; */
 "pB5-KK-YTG.text" = "";

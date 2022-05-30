@@ -23,7 +23,7 @@ class SavedHeatmapViewController: UIViewController {
   var routeBuilder                : HKWorkoutRouteBuilder!
 
   var workoutMetadataArray        =  [WorkoutMetadata]()
-  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
+  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", playingAreaVenue: "", playingAreaName: "")
 
   var heatmapWorkoutId  : UUID?
   var heatmapImage      : UIImage?
@@ -171,8 +171,8 @@ class SavedHeatmapViewController: UIViewController {
 
 
     let workoutActivity = workoutMetadata.activity
-    let workoutVenue = workoutMetadata.venue
-    let workoutPitch = workoutMetadata.pitch
+    let workoutVenue = workoutMetadata.playingAreaVenue
+    let workoutPitch = workoutMetadata.playingAreaName
     let workoutSport = workoutMetadata.sport
 
     activityField.text = workoutActivity
@@ -295,7 +295,7 @@ class SavedHeatmapViewController: UIViewController {
     let sport = sportField.text ?? ""
     let pitch = pitchField.text ?? ""
 
-    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, venue: venue, pitch: pitch)
+    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, playingAreaVenue: venue, playingAreaName: pitch)
 //    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
       workoutMetadataArray[row] = workoutMetadataToSave
