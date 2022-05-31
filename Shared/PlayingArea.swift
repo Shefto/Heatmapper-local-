@@ -28,8 +28,9 @@ struct PlayingArea: Codable {
   var workoutID   : UUID?
   var name        : String?
   var venue       : String?
-  var comments    : String?
   var sport       : String?
+  var comments    : String?
+  var isFavourite : Bool
   var bottomLeft  : CodableCLLCoordinate2D
   var bottomRight : CodableCLLCoordinate2D
   var topLeft     : CodableCLLCoordinate2D
@@ -42,6 +43,7 @@ struct PlayingArea: Codable {
     case name = "Name"
     case venue = "Venue"
     case sport = "Sport"
+    case isFavourite = "IsFavourite"
     case comments = "Comments"
     case bottomLeft = "BottomLeft"
     case bottomRight = "BottomRight"
@@ -50,7 +52,7 @@ struct PlayingArea: Codable {
 
   }
 
-  init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D, name: String?, venue: String?, sport: String?, comments: String?) {
+  init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D, name: String?, venue: String?, sport: String?, comments: String?, isFavourite: Bool) {
     self.workoutID  = workoutID
     self.id = UUID()
     self.name = name
@@ -61,6 +63,7 @@ struct PlayingArea: Codable {
     self.bottomRight = bottomRight
     self.topLeft = topLeft
     self.topRight = topRight
+    self.isFavourite = isFavourite
   }
 
   init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D) {
@@ -70,9 +73,10 @@ struct PlayingArea: Codable {
     self.bottomRight = bottomRight
     self.topLeft = topLeft
     self.topRight = topRight
+    self.isFavourite = true
   }
 
-  init (bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D, name: String?, venue: String?, sport: String?, comments: String?) {
+  init (bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D, name: String?, venue: String?, sport: String?, comments: String?, isFavourite: Bool) {
 
     self.id = UUID()
     self.name = name
@@ -83,6 +87,7 @@ struct PlayingArea: Codable {
     self.bottomRight = bottomRight
     self.topLeft = topLeft
     self.topRight = topRight
+    self.isFavourite = isFavourite
   }
 
 

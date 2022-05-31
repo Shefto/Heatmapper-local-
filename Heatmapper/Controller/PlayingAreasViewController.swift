@@ -47,6 +47,9 @@ class PlayingAreasViewController: UIViewController {
   func getData() {
     playingAreaArray = MyFunc.getPlayingAreas()
     MyFunc.logMessage(.debug, "playingAreaArray: \(playingAreaArray)")
+    let favouritesPlayingAreaArray = playingAreaArray.filter { $0.isFavourite == true }
+    MyFunc.logMessage(.debug, "favouritesPlayingAreaArray: \(favouritesPlayingAreaArray)")
+    playingAreaArray = favouritesPlayingAreaArray
 
   }
 

@@ -52,7 +52,7 @@
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "wkZ-fm-ijo"; */
 "wkZ-fm-ijo.title" = "Configuraciones";
 
-/* Class = "UIButton"; normalTitle = "Reset Pitch Sizes"; ObjectID = "0Rk-jk-rYb"; */
+/* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "0Rk-jk-rYb"; */
 "0Rk-jk-rYb.normalTitle" = "";
 
 /* Class = "UITextField"; text = "-"; ObjectID = "0yn-zN-nSm"; */
@@ -124,7 +124,7 @@
 /* Class = "UILabel"; text = "Date"; ObjectID = "cdu-fT-Y48"; */
 "cdu-fT-Y48.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Resize playing area"; ObjectID = "Cep-ee-waR"; */
+/* Class = "UIButton"; normalTitle = "Resize "; ObjectID = "Cep-ee-waR"; */
 "Cep-ee-waR.normalTitle" = "";
 
 /* Class = "UITextField"; placeholder = "Sport"; ObjectID = "Cgu-Ak-Ev2"; */
@@ -151,7 +151,7 @@
 /* Class = "UITextField"; text = "-"; ObjectID = "ebk-aA-s5G"; */
 "ebk-aA-s5G.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Save to favourites"; ObjectID = "eBn-1T-1Yh"; */
+/* Class = "UIButton"; normalTitle = "Add as Favourite"; ObjectID = "eBn-1T-1Yh"; */
 "eBn-1T-1Yh.normalTitle" = "";
 
 /* Class = "UINavigationItem"; title = "Edit Activity"; ObjectID = "EbZ-Kt-ugg"; */
@@ -175,7 +175,7 @@
 /* Class = "UILabel"; text = "Sport"; ObjectID = "fUb-WJ-pCB"; */
 "fUb-WJ-pCB.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Reset playing area"; ObjectID = "G4g-1b-Xyh"; */
+/* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "G4g-1b-Xyh"; */
 "G4g-1b-Xyh.normalTitle" = "";
 
 /* Class = "UITextField"; text = "º"; ObjectID = "gLc-Hj-oOY"; */

@@ -93,31 +93,32 @@ class HeatmapViewController: UIViewController, MyMapListener {
   @IBOutlet weak var playingAreaToSaveAngleRadiansField: ThemeMediumFontTextField!
   @IBOutlet weak var playingAreaToSaveAngleDegreesField: ThemeMediumFontTextField!
 
-  @IBOutlet weak var resizeButton: UIButton!
-
-  @IBOutlet weak var activityField      : ThemeMediumFontTextField!
-  @IBOutlet weak var sportField         : ThemeMediumFontTextField!
-  @IBOutlet weak var venueField         : ThemeMediumFontTextField!
-  @IBOutlet weak var pitchField         : ThemeMediumFontTextField!
-  @IBOutlet weak var placemarkField     : ThemeMediumFontTextField!
 
 
-  @IBOutlet weak var distanceLabel      : ThemeMediumFontUILabel!
-  @IBOutlet weak var caloriesLabel      : ThemeMediumFontUILabel!
-  @IBOutlet weak var heartRateLabel     : ThemeMediumFontUILabel!
-  @IBOutlet weak var paceLabel          : ThemeMediumFontUILabel!
+  @IBOutlet weak var activityField                      : ThemeMediumFontTextField!
+  @IBOutlet weak var sportField                         : ThemeMediumFontTextField!
+  @IBOutlet weak var venueField                         : ThemeMediumFontTextField!
+  @IBOutlet weak var pitchField                         : ThemeMediumFontTextField!
+  @IBOutlet weak var placemarkField                     : ThemeMediumFontTextField!
 
-  @IBOutlet weak var caloriesImageView  : UIImageView!
-  @IBOutlet weak var paceImageView      : UIImageView!
-  @IBOutlet weak var heartRateImageView : UIImageView!
-  @IBOutlet weak var distanceImageView  : UIImageView!
 
-  @IBOutlet weak var mapView: MyMKMapView!
-  @IBOutlet weak var resetPlayingAreaButton: UIButton!
+  @IBOutlet weak var distanceLabel                      : ThemeMediumFontUILabel!
+  @IBOutlet weak var caloriesLabel                      : ThemeMediumFontUILabel!
+  @IBOutlet weak var heartRateLabel                     : ThemeMediumFontUILabel!
+  @IBOutlet weak var paceLabel                          : ThemeMediumFontUILabel!
 
-  @IBOutlet weak var widthStepper: UIStepper!
-  @IBOutlet weak var heightStepper: UIStepper!
-  @IBOutlet weak var heightAndWeightStackView: UIStackView!
+  @IBOutlet weak var caloriesImageView                  : UIImageView!
+  @IBOutlet weak var paceImageView                      : UIImageView!
+  @IBOutlet weak var heartRateImageView                 : UIImageView!
+  @IBOutlet weak var distanceImageView                  : UIImageView!
+
+  @IBOutlet weak var mapView                            : MyMKMapView!
+  @IBOutlet weak var resetPlayingAreaButton             : UIButton!
+  @IBOutlet weak var resizeButton                       : UIButton!
+
+  @IBOutlet weak var widthStepper                       : UIStepper!
+  @IBOutlet weak var heightStepper                      : UIStepper!
+  @IBOutlet weak var heightAndWeightStackView           : UIStackView!
 
   @IBAction func savePlayingArea(_ sender: Any) {
 
@@ -127,9 +128,27 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
     let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
 
-    let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: workoutMetadata.playingAreaName, venue: venueField.text, sport: sportField.text, comments: "")
+    let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: workoutMetadata.playingAreaName, venue: venueField.text, sport: sportField.text, comments: "", isFavourite: false)
     MyFunc.saveSharedPlayingArea(playingAreaToSave)
     
+  }
+
+  // add the Playing Area to the list of Favourites
+  @IBAction func addAsFavourite(_ sender: Any) {
+
+    // need to check that we have a Playing Area name
+    // and also set the Favourites flag to true
+
+    // convert the coordinates to a codable subclass for saving
+    let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
+    let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
+    let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
+    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
+
+    let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: workoutMetadata.playingAreaName, venue: venueField.text, sport: sportField.text, comments: "", isFavourite: true)
+    MyFunc.saveSharedPlayingArea(playingAreaToSave)
+
+
   }
 
   @IBAction func resetPitches(_ sender: Any) {
@@ -219,7 +238,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       // turn everything off (as it's on)
 
       resizeOn = false
-      resizeButton.setTitle("Resize playing area", for: .normal)
+      resizeButton.setTitle("Resize", for: .normal)
       resizeButton.tintColor = UIColor.systemGreen
 
       // record the map heading at end of resizing
@@ -428,7 +447,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     // the new way - saving with playingArea Id
 
-    let playingAreaToSaveWithId = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: activityField.text ?? "" , venue: venueField.text ?? "", sport: sportField.text ?? "", comments: "Saved!")
+    let playingAreaToSaveWithId = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: activityField.text ?? "" , venue: venueField.text ?? "", sport: sportField.text ?? "", comments: "Saved!", isFavourite: false)
     MyFunc.savePlayingAreaWithId(playingAreaToSaveWithId)
 
     // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
@@ -1136,7 +1155,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       placemarkStr = "No placemark found: \(error.debugDescription)"
       if let returnedPlacemarks = placemarks {
         let firstPlacemark = returnedPlacemarks.first
-        placemarkStr = firstPlacemark?.name ?? "No placemark found"
+        placemarkStr = firstPlacemark?.postalCode ?? "No placemark found"
         self.placemarkField.text = placemarkStr
       }
     }

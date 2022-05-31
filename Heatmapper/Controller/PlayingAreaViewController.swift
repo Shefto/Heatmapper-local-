@@ -349,7 +349,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let sportToSave = sportField.text ?? ""
     
     let workoutIdToSave = playingAreaToUpdate?.workoutID
-    let playingAreaToSave = PlayingArea(workoutID: workoutIdToSave!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "")
+    let playingAreaToSave = PlayingArea(workoutID: workoutIdToSave!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "", isFavourite: true)
     MyFunc.saveSharedPlayingArea(playingAreaToSave)
   }
   
@@ -421,7 +421,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let venueToSave = venueField.text
     let sportToSave = sportField.text
     
-    let playingAreaToSave = PlayingArea(bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave, sport: sportToSave, comments: "Testing comments")
+    let playingAreaToSave = PlayingArea(bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave, sport: sportToSave, comments: "Testing comments", isFavourite: true)
     
     MyFunc.savePlayingArea(playingAreaToSave)
     
