@@ -47,9 +47,7 @@ class PlayingAreasViewController: UIViewController {
   func getData() {
     playingAreaArray = MyFunc.getPlayingAreas()
     MyFunc.logMessage(.debug, "playingAreaArray: \(playingAreaArray)")
-    let favouritesPlayingAreaArray = playingAreaArray.filter { $0.isFavourite == true }
-    MyFunc.logMessage(.debug, "favouritesPlayingAreaArray: \(favouritesPlayingAreaArray)")
-    playingAreaArray = favouritesPlayingAreaArray
+    playingAreaArray.removeAll(where: { $0.isFavourite == false })
 
   }
 
@@ -64,7 +62,6 @@ class PlayingAreasViewController: UIViewController {
 
 
   @IBAction func addButton(_ sender: UIBarButtonItem) {
-
 
     self.performSegue(withIdentifier: "referenceDataToActivity", sender: nil)
 
@@ -119,7 +116,10 @@ extension PlayingAreasViewController: UITableViewDelegate, UITableViewDataSource
 
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, complete in
 
+      let playingAreaToDeleteId = self.playingAreaArray[indexPath.row].id
+      MyFunc.deletePlayingArea(playingAreaId: playingAreaToDeleteId)
       self.playingAreaArray.remove(at: indexPath.row)
+
       tableView.deleteRows(at: [indexPath], with: .fade)
 //      MyFunc.saveHeatmapActivityDefaults(self.playingAreaArray)
       self.playingAreaTableView.reloadData()

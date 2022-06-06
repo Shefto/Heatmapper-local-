@@ -26,6 +26,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
   var measurementFormatter        = MeasurementFormatter()
   var unitSpeed                   : UnitSpeed  = .metersPerSecond
 
+  var isFavourite                 : Bool = false
   var resizeOn                    : Bool = true
   var playingAreaMapRect          : MKMapRect?
   var heatmapPointCircle          : MKCircle?
@@ -64,6 +65,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
   var playingAreaAngleSaved       : CGFloat = 0.0
   var pitchAngleToApply           : CGFloat = 0.0
 
+  var playingArea                 : PlayingArea?
   var bottomLeftCoord             : CLLocationCoordinate2D?
   var topLeftCoord                : CLLocationCoordinate2D?
   var bottomRightCoord            : CLLocationCoordinate2D?
@@ -78,29 +80,26 @@ class HeatmapViewController: UIViewController, MyMapListener {
   let activityPicker              = UIPickerView()
   let sportPicker                 = UIPickerView()
 
-  @IBOutlet weak var mapStartRadiansField: ThemeMediumFontTextField!
-  @IBOutlet weak var mapStartDegreesField: ThemeMediumFontTextField!
-  @IBOutlet weak var pitchStartRadiansField: ThemeMediumFontTextField!
-  @IBOutlet weak var pitchStartDegreesField: ThemeMediumFontTextField!
-  @IBOutlet weak var mapEndRadiansField: ThemeMediumFontTextField!
-  @IBOutlet weak var mapEndDegreesField: ThemeMediumFontTextField!
-  @IBOutlet weak var pitchEndRadiansField: ThemeMediumFontTextField!
-  @IBOutlet weak var pitchEndDegreesField: ThemeMediumFontTextField!
+  @IBOutlet weak var mapStartRadiansField               : ThemeMediumFontTextField!
+  @IBOutlet weak var mapStartDegreesField               : ThemeMediumFontTextField!
+  @IBOutlet weak var pitchStartRadiansField             : ThemeMediumFontTextField!
+  @IBOutlet weak var pitchStartDegreesField             : ThemeMediumFontTextField!
+  @IBOutlet weak var mapEndRadiansField                 : ThemeMediumFontTextField!
+  @IBOutlet weak var mapEndDegreesField                 : ThemeMediumFontTextField!
+  @IBOutlet weak var pitchEndRadiansField               : ThemeMediumFontTextField!
+  @IBOutlet weak var pitchEndDegreesField               : ThemeMediumFontTextField!
 
-  @IBOutlet weak var playingAreaSavedAngleRadiansField: ThemeMediumFontTextField!
-  @IBOutlet weak var playingAreaSavedAngleDegreesField: ThemeMediumFontTextField!
+  @IBOutlet weak var playingAreaSavedAngleRadiansField  : ThemeMediumFontTextField!
+  @IBOutlet weak var playingAreaSavedAngleDegreesField  : ThemeMediumFontTextField!
 
-  @IBOutlet weak var playingAreaToSaveAngleRadiansField: ThemeMediumFontTextField!
-  @IBOutlet weak var playingAreaToSaveAngleDegreesField: ThemeMediumFontTextField!
-
-
+  @IBOutlet weak var playingAreaToSaveAngleRadiansField : ThemeMediumFontTextField!
+  @IBOutlet weak var playingAreaToSaveAngleDegreesField : ThemeMediumFontTextField!
 
   @IBOutlet weak var activityField                      : ThemeMediumFontTextField!
   @IBOutlet weak var sportField                         : ThemeMediumFontTextField!
   @IBOutlet weak var venueField                         : ThemeMediumFontTextField!
   @IBOutlet weak var pitchField                         : ThemeMediumFontTextField!
   @IBOutlet weak var placemarkField                     : ThemeMediumFontTextField!
-
 
   @IBOutlet weak var distanceLabel                      : ThemeMediumFontUILabel!
   @IBOutlet weak var caloriesLabel                      : ThemeMediumFontUILabel!
@@ -115,47 +114,65 @@ class HeatmapViewController: UIViewController, MyMapListener {
   @IBOutlet weak var mapView                            : MyMKMapView!
   @IBOutlet weak var resetPlayingAreaButton             : UIButton!
   @IBOutlet weak var resizeButton                       : UIButton!
+  @IBOutlet weak var favouritesButton                   : ThemeActionButton!
 
   @IBOutlet weak var widthStepper                       : UIStepper!
   @IBOutlet weak var heightStepper                      : UIStepper!
   @IBOutlet weak var heightAndWeightStackView           : UIStackView!
 
-  @IBAction func savePlayingArea(_ sender: Any) {
-
-    // convert the coordinates to a codable subclass for saving
-    let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
-    let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
-    let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
-    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
-
-    let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: workoutMetadata.playingAreaName, venue: venueField.text, sport: sportField.text, comments: "", isFavourite: false)
-    MyFunc.saveSharedPlayingArea(playingAreaToSave)
-    
-  }
+//  @IBAction func savePlayingArea(_ sender: Any) {
+//
+//    // convert the coordinates to a codable subclass for saving
+//    let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
+//    let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
+//    let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
+//    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
+//
+//    let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: workoutMetadata.playingAreaName, venue: venueField.text, sport: sportField.text, comments: "", isFavourite: false)
+//    MyFunc.saveSharedPlayingArea(playingAreaToSave)
+//
+//  }
 
   // add the Playing Area to the list of Favourites
   @IBAction func addAsFavourite(_ sender: Any) {
 
-    // need to check that we have a Playing Area name
-    // and also set the Favourites flag to true
+    var messageTitle  : String = ""
+    var messageText   : String = ""
+    // reverse the Favourite flag
+    if playingArea?.isFavourite == false {
+      playingArea?.isFavourite = true
+      messageTitle = "Added to Favourites"
+      messageText = "Playing Area added to Favourites"
+    } else {
+      playingArea?.isFavourite = false
+      messageTitle = "Removed from Favourites"
+      messageText = "Playing Area removed from Favourites"
+    }
 
-    // convert the coordinates to a codable subclass for saving
-    let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
-    let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
-    let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
-    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
-
-    let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: workoutMetadata.playingAreaName, venue: venueField.text, sport: sportField.text, comments: "", isFavourite: true)
+    guard let playingAreaToSave = self.playingArea else {
+      MyFunc.logMessage(.error, "HeatmapViewController: addAsFavourite: no Playing Area to save")
+      return
+    }
     MyFunc.saveSharedPlayingArea(playingAreaToSave)
-
-
+    self.notifyUser(messageTitle, message: messageText)
+    setFavouritesButtonTitle()
   }
+
+
 
   @IBAction func resetPitches(_ sender: Any) {
     MyFunc.deletePlayingAreas()
     updateSteppers()
   }
 
+  func notifyUser(_ title: String, message: String) -> Void
+  {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+
+    alert.addAction(cancelAction)
+    self.present(alert, animated: true, completion: nil)
+  }
 
   @objc func handleRotate(_ gesture: UIRotationGestureRecognizer) {
     guard let gestureView = gesture.view else {
@@ -297,8 +314,12 @@ class HeatmapViewController: UIViewController, MyMapListener {
     // initialize the Geocoder
     geocoder = CLGeocoder()
 
+    // load buttons
     resizeOn = false
     resizeButton.setTitle("Resize playing area", for: .normal)
+    isFavourite = false
+    favouritesButton.setTitle("Add to Favourites", for: .normal)
+
     resetPlayingAreaButton.isHidden = true
     heightAndWeightStackView.isHidden = true
 
@@ -350,20 +371,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let pitchWidthMetersStr = NSString(format: "%.3f", pitchWidthMeters)
     let pitchHeightMetersStr = NSString(format: "%.3f", pitchHeightMeters)
     print("Pitch height: \(pitchHeightMetersStr), width \(pitchWidthMetersStr)")
-
-
-
-    // create the playing area using the height and width
-    //    var heatmapImageView = UIImageView(frame: (CGRect(x: 0, y: 0, width: pitchWidthMeters, height: pitchHeightMeters)))
-    //    let heatmapPitchImage = UIImage(named: "Figma Pitch 11 Green")
-
-    // these should give a scale by which all other points' coordinates can be placed
-
-    // then a subroutine for each coordinate
-    // 1. work out where to place it on the view by comparing to the corner points
-    // 2. create a CGPoint circle for the coordinate
-
-
 
   }
 
@@ -441,17 +448,12 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
     let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
 
-    // the old way - saving with workout Id
-    let playingAreaToSave = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave)
-    MyFunc.savePlayingArea(playingAreaToSave)
-
     // the new way - saving with playingArea Id
-
     let playingAreaToSaveWithId = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: activityField.text ?? "" , venue: venueField.text ?? "", sport: sportField.text ?? "", comments: "Saved!", isFavourite: false)
     MyFunc.savePlayingAreaWithId(playingAreaToSaveWithId)
 
     // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
-    workoutMetadata.playingAreaId = playingAreaToSave.id
+    workoutMetadata.playingAreaId = playingAreaToSaveWithId.id
     updateWorkout()
     
 
@@ -530,8 +532,15 @@ class HeatmapViewController: UIViewController, MyMapListener {
         let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
         let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
 
-        let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave)
-        MyFunc.savePlayingArea(playingAreaToSave)
+
+        // the new way - saving with playingArea Id
+        let playingAreaToSaveWithId = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: self.activityField.text ?? "" , venue: self.venueField.text ?? "", sport: self.sportField.text ?? "", comments: "Saved!", isFavourite: false)
+        MyFunc.savePlayingAreaWithId(playingAreaToSaveWithId)
+
+        // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
+        self.workoutMetadata.playingAreaId = playingAreaToSaveWithId.id
+        self.updateWorkout()
+
 
         self.updateAngleUI()
 
@@ -669,32 +678,37 @@ class HeatmapViewController: UIViewController, MyMapListener {
         let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
         let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
 
+
         // now save the auto-generated PlayingArea coordinates for future use
-        let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave)
+        let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: "", venue: "", sport: "", comments: "", isFavourite: false)
+
         MyFunc.savePlayingArea(playingAreaToSave)
+        self.playingArea = playingAreaToSave
 
         self.updateAngleUI()
 
 
-      case .success(let playingArea):
+      case .success(let playingAreaRetrieved):
         MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
-        let playingAreaStr = String(describing: playingArea)
+        let playingAreaStr = String(describing: playingAreaRetrieved)
         MyFunc.logMessage(.debug, playingAreaStr)
 
-        let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomLeft.latitude) / 2
-        let midpointLongitude = (playingArea.bottomLeft.longitude + playingArea.bottomRight.longitude) / 2
+        let midpointLatitude = (playingAreaRetrieved.topLeft.latitude + playingAreaRetrieved.bottomLeft.latitude) / 2
+        let midpointLongitude = (playingAreaRetrieved.bottomLeft.longitude + playingAreaRetrieved.bottomRight.longitude) / 2
         self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
 
         // PlayingArea coordinates stored as Codable sub-class of CLLocationCoordinate2D so convert to original class (may be able to remove this?)
-        let topLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
-        let bottomLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
-        let bottomRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
-        let topRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.topRight.latitude, longitude: playingArea.topRight.longitude)
+        let topLeftAsCoord = CLLocationCoordinate2D(latitude: playingAreaRetrieved.topLeft.latitude, longitude: playingAreaRetrieved.topLeft.longitude)
+        let bottomLeftAsCoord = CLLocationCoordinate2D(latitude: playingAreaRetrieved.bottomLeft.latitude, longitude: playingAreaRetrieved.bottomLeft.longitude)
+        let bottomRightAsCoord = CLLocationCoordinate2D(latitude: playingAreaRetrieved.bottomRight.latitude, longitude: playingAreaRetrieved.bottomRight.longitude)
+        let topRightAsCoord = CLLocationCoordinate2D(latitude: playingAreaRetrieved.topRight.latitude, longitude: playingAreaRetrieved.topRight.longitude)
 
         self.bottomLeftCoord = bottomLeftAsCoord
         self.bottomRightCoord = bottomRightAsCoord
         self.topLeftCoord = topLeftAsCoord
         self.topRightCoord = topRightAsCoord
+
+        self.playingArea = playingAreaRetrieved
 
       }
     })
@@ -707,7 +721,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
     //    let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
     let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
-
 
     let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
     let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
@@ -744,7 +757,17 @@ class HeatmapViewController: UIViewController, MyMapListener {
     playingAreaAngleSaved = pitchAngle
     self.pitchAngleToApply = pitchAngle
     self.createPitchOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
-    self.setMapViewZoom()
+    setMapViewZoom()
+    setFavouritesButtonTitle()
+
+  }
+
+  func setFavouritesButtonTitle() {
+    if playingArea?.isFavourite == true {
+      favouritesButton.setTitle("Remove Playing Area from Favourites", for: .normal)
+    } else {
+      favouritesButton.setTitle("Add Playing Area to Favourites", for: .normal)
+    }
 
   }
 
@@ -1380,7 +1403,6 @@ extension HeatmapViewController: MKMapViewDelegate {
         // get the rotation of the pitchView
         let angleIncMapRotation = getMapRotation()
         let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation, workoutId: heatmapWorkoutId!)
-
         footballPitchOverlayRenderer.alpha = 1
 
         return footballPitchOverlayRenderer

@@ -142,7 +142,7 @@
 /* Class = "UITextField"; text = "-"; ObjectID = "ebk-aA-s5G"; */
 "ebk-aA-s5G.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Add as Favourite"; ObjectID = "eBn-1T-1Yh"; */
+/* Class = "UIButton"; normalTitle = "Add to Favourites"; ObjectID = "eBn-1T-1Yh"; */
 "eBn-1T-1Yh.normalTitle" = "";
 
 /* Class = "UINavigationItem"; title = "Edit Activity"; ObjectID = "EbZ-Kt-ugg"; */

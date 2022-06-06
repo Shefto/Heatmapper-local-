@@ -36,7 +36,7 @@ Copyright 2022 Google
 
 ## GoogleAppMeasurement
 
-Copyright 2021 Google
+Copyright 2022 Google
 
 ## GoogleUserMessagingPlatform
 
