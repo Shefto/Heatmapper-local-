@@ -621,8 +621,10 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   func getPlayingAreaOnLoad() {
 
+    let playingAreaToRetrieveId : UUID = workoutMetadata.playingAreaId ?? UUID()
     // original below - used in
-    MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
+//    MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
+    MyFunc.getPlayingAreaFromId(playingAreaId: playingAreaToRetrieveId, successClosure: { result in
       switch result {
       case .failure(let error):
         // no playing area retrieved so create a default area
