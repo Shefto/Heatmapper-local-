@@ -151,7 +151,7 @@
 /* Class = "UITextField"; text = "-"; ObjectID = "ebk-aA-s5G"; */
 "ebk-aA-s5G.text" = "";
 
-/* Class = "UIButton"; normalTitle = "Add to Favourites"; ObjectID = "eBn-1T-1Yh"; */
+/* Class = "UIButton"; normalTitle = "Favourites"; ObjectID = "eBn-1T-1Yh"; */
 "eBn-1T-1Yh.normalTitle" = "";
 
 /* Class = "UINavigationItem"; title = "Edit Activity"; ObjectID = "EbZ-Kt-ugg"; */
@@ -268,7 +268,7 @@
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "Pbk-vr-61V"; */
 "Pbk-vr-61V.title" = "";
 
-/* Class = "UITextField"; placeholder = "Name"; ObjectID = "PFf-L3-Svd"; */
+/* Class = "UITextField"; placeholder = "Playing Area"; ObjectID = "PFf-L3-Svd"; */
 "PFf-L3-Svd.placeholder" = "";
 
 /* Class = "UILabel"; text = "Map heading resize end"; ObjectID = "pRt-qA-P0z"; */

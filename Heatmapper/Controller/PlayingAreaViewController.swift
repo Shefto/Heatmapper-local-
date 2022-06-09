@@ -59,12 +59,25 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
   var selectedIndexPath           : Int?
 
+
   lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.timeStyle = .short
     formatter.dateStyle = .short
     return formatter
   } ()
+
+//  @IBAction func barButtonEdit(_ sender: Any) {
+//
+//    if isEditing == false {
+//      isEditing = true
+//    } else {
+//      isEditing = false
+//    }
+//
+//    print("isEditing set to: \(isEditing)")
+//    self.reloadInputViews()
+//  }
 
   @IBOutlet weak var heightAndWeightStackView: UIStackView!
   @IBOutlet weak var heightStepper: UIStepper!
@@ -95,21 +108,13 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       
       playingAreaAngleSavedAfterResize = pitchRotationAtResizeOff
       let playingAreaAngleSavedAfterResizeDegrees = playingAreaAngleSavedAfterResize.radiansToDegrees
-      //      let playingAreaAngleSavedAfterResizeDegreesStr = String(describing: playingAreaAngleSavedAfterResizeDegrees)
-      //      print("playingAreaAngleSavedAfterResizeDegreesStr: \(playingAreaAngleSavedAfterResizeDegreesStr)")
+
       mapView.camera.heading = playingAreaAngleSavedAfterResizeDegrees
-      //      let cameraHeadingAfterResizeStr = String(describing: mapView.camera.heading)
-      //      print("camera heading after resize: \(cameraHeadingAfterResizeStr)")
-      
+
       setMapViewZoom()
       let distanceToSet = mapView.camera.centerCoordinateDistance
-      //      let distanceToSetStr = String(describing: distanceToSet)
-      //      print("Camera height: \(distanceToSetStr)")
       let cameraToApply = MKMapCamera(lookingAtCenter: self.overlayCenter!, fromDistance: distanceToSet, pitch: 0, heading: playingAreaBearing)
       self.mapView.setCamera(cameraToApply, animated: false)
-      
-      // update the metrics
-      //      updateAngleUI()
       
       // removes the pitchView
       removeViewWithTag(tag: 200)
@@ -150,6 +155,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.navigationItem.rightBarButtonItem = editButtonItem
     initialiseUI()
   }
 
@@ -157,7 +163,20 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     super.viewWillAppear(animated)
     getStaticData()
     getData()
+  }
 
+  override func setEditing(_ editing: Bool, animated: Bool) {
+    super.setEditing(editing, animated: true)
+    if editing {
+      print("Are we editing NOW: \(isEditing)")
+      venueField.isEnabled = true
+
+    } else {
+      print("Are we editing: \(isEditing)")
+      venueField.isEnabled = false
+
+
+    }
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -176,6 +195,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     sportPicker.delegate = self
     sportPicker.dataSource = self
     sportField.inputView = sportPicker
+    self.isEditing = false
   }
 
   func getStaticData() {
