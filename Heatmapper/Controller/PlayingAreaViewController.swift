@@ -67,18 +67,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     return formatter
   } ()
 
-//  @IBAction func barButtonEdit(_ sender: Any) {
-//
-//    if isEditing == false {
-//      isEditing = true
-//    } else {
-//      isEditing = false
-//    }
-//
-//    print("isEditing set to: \(isEditing)")
-//    self.reloadInputViews()
-//  }
-
   @IBOutlet weak var heightAndWeightStackView: UIStackView!
   @IBOutlet weak var heightStepper: UIStepper!
   @IBOutlet weak var widthStepper: UIStepper!
@@ -155,26 +143,32 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.navigationItem.rightBarButtonItem = editButtonItem
-    initialiseUI()
-  }
-
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
     getStaticData()
     getData()
+    initialiseUI()
+    self.navigationItem.rightBarButtonItem = editButtonItem
   }
+
+//  override func viewWillAppear(_ animated: Bool) {
+//    super.viewWillAppear(animated)
+//
+//  }
 
   override func setEditing(_ editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: true)
     if editing {
-      print("Are we editing NOW: \(isEditing)")
+      print("Edit mode on")
       venueField.isEnabled = true
+      sportField.isEnabled = true
+      nameField.isEnabled = true
 
     } else {
-      print("Are we editing: \(isEditing)")
+      print("Edit mode off")
       venueField.isEnabled = false
+      sportField.isEnabled = false
+      nameField.isEnabled = false
 
+      savePlayingArea()
 
     }
   }
@@ -210,7 +204,10 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
   func getPlayingAreaOnLoad() {
 
-    let playingArea : PlayingArea = playingAreaToUpdate!
+    guard let playingArea : PlayingArea = playingAreaToUpdate else {
+      MyFunc.logMessage(.error, "No PlayingArea passed in to PlayingAreasViewController")
+      return
+    }
 
     nameField.text = playingArea.name
     venueField.text = playingArea.venue
@@ -230,8 +227,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     self.bottomRightCoord = bottomRightAsCoord
     self.topLeftCoord = topLeftAsCoord
     self.topRightCoord = topRightAsCoord
-
-    //    removeAllPinsAndAnnotations()
 
     // getting the angle to rotate the overlay by from the CGPoints
     // simply doing this as it seems to work better than using coordinate angles
@@ -371,6 +366,16 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let workoutIdToSave = playingAreaToUpdate?.workoutID
     let playingAreaToSave = PlayingArea(workoutID: workoutIdToSave!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "", isFavourite: true)
     MyFunc.saveSharedPlayingArea(playingAreaToSave)
+
+//    // the new way - saving with playingArea Id
+//    let playingAreaToSaveWithId = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: self.activityField.text ?? "" , venue: self.venueField.text ?? "", sport: self.sportField.text ?? "", comments: "Saved!", isFavourite: false)
+//    MyFunc.savePlayingAreaWithPlayingAreaId(playingAreaToSaveWithId)
+//
+//    // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
+//    self.workoutMetadata.playingAreaId = playingAreaToSaveWithId.id
+//    self.updateWorkout()
+
+
   }
   
   
@@ -443,7 +448,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     
     let playingAreaToSave = PlayingArea(bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave, sport: sportToSave, comments: "Testing comments", isFavourite: true)
     
-    MyFunc.savePlayingArea(playingAreaToSave)
+    MyFunc.savePlayingAreaWithWorkoutIdForDeprecation(playingAreaToSave)
     
     // store the coordinate in the VC's corner variables
     // consider revising above code to use these earlier and avoid having to create new variables for the TL/BR swap

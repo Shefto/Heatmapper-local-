@@ -862,7 +862,7 @@ class TesterViewController: UIViewController {
 
     let playingAreaToSave = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave)
 
-    MyFunc.savePlayingArea(playingAreaToSave)
+    MyFunc.savePlayingAreaWithWorkoutIdForDeprecation(playingAreaToSave)
     
     MyFunc.saveWorkoutMetadata(workoutMetadataArray)
     MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadata))")

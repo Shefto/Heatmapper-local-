@@ -153,7 +153,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
       MyFunc.logMessage(.error, "HeatmapViewController: addAsFavourite: no Playing Area to save")
       return
     }
-    MyFunc.saveSharedPlayingArea(playingAreaToSave)
+    MyFunc.savePlayingAreaWithPlayingAreaId(playingAreaToSave)
+//    MyFunc.saveSharedPlayingArea(playingAreaToSave)
     self.notifyUser(messageTitle, message: messageText)
     setFavouritesButtonTitle()
   }
@@ -450,7 +451,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     // the new way - saving with playingArea Id
     let playingAreaToSaveWithId = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: activityField.text ?? "" , venue: venueField.text ?? "", sport: sportField.text ?? "", comments: "Saved!", isFavourite: false)
-    MyFunc.savePlayingAreaWithId(playingAreaToSaveWithId)
+    MyFunc.savePlayingAreaWithPlayingAreaId(playingAreaToSaveWithId)
 
     // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
     workoutMetadata.playingAreaId = playingAreaToSaveWithId.id
@@ -535,7 +536,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
         // the new way - saving with playingArea Id
         let playingAreaToSaveWithId = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: self.activityField.text ?? "" , venue: self.venueField.text ?? "", sport: self.sportField.text ?? "", comments: "Saved!", isFavourite: false)
-        MyFunc.savePlayingAreaWithId(playingAreaToSaveWithId)
+        MyFunc.savePlayingAreaWithPlayingAreaId(playingAreaToSaveWithId)
 
         // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
         self.workoutMetadata.playingAreaId = playingAreaToSaveWithId.id
@@ -684,7 +685,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
         // now save the auto-generated PlayingArea coordinates for future use
         let playingAreaToSave = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: "", venue: "", sport: "", comments: "", isFavourite: false)
 
-        MyFunc.savePlayingArea(playingAreaToSave)
+        MyFunc.savePlayingAreaWithWorkoutIdForDeprecation(playingAreaToSave)
         self.playingArea = playingAreaToSave
 
         self.updateAngleUI()

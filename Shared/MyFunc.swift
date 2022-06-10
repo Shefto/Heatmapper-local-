@@ -162,7 +162,7 @@ class MyFunc {
 
   }
 
-  static func savePlayingAreaWithId(_ playingArea: PlayingArea)  {
+  static func savePlayingAreaWithPlayingAreaId(_ playingArea: PlayingArea)  {
     let defaults = UserDefaults.standard
     let encoder = JSONEncoder()
 
@@ -181,7 +181,26 @@ class MyFunc {
 
   }
 
-  static func savePlayingArea(_ playingArea: PlayingArea)  {
+  static func saveSharedPlayingArea(_ playingArea: PlayingArea) {
+    let defaults = UserDefaults.standard
+    let encoder = JSONEncoder()
+
+    let idStr = String(describing: playingArea.id)
+    let keyStr : String = "Playing Area: " + idStr
+    do {
+      let encoded = try encoder.encode(playingArea)
+      defaults.set(encoded, forKey: keyStr)
+      let playingAreaStr = String(describing: playingArea)
+      logMessage(.debug, "Playing Area saved:")
+      logMessage(.debug, playingAreaStr)
+    } catch {
+      logMessage(.error, "Error in MyFunc.savePlayingArea")
+    }
+
+  }
+
+
+  static func savePlayingAreaWithWorkoutIdForDeprecation(_ playingArea: PlayingArea)  {
     let defaults = UserDefaults.standard
     let encoder = JSONEncoder()
 
@@ -201,23 +220,7 @@ class MyFunc {
   }
 
 
-  static func saveSharedPlayingArea(_ playingArea: PlayingArea) {
-    let defaults = UserDefaults.standard
-    let encoder = JSONEncoder()
 
-    let idStr = String(describing: playingArea.id)
-    let keyStr : String = "Playing Area: " + idStr
-    do {
-      let encoded = try encoder.encode(playingArea)
-      defaults.set(encoded, forKey: keyStr)
-      let playingAreaStr = String(describing: playingArea)
-      logMessage(.debug, "Playing Area saved:")
-      logMessage(.debug, playingAreaStr)
-    } catch {
-      logMessage(.error, "Error in MyFunc.savePlayingArea")
-    }
-
-  }
 
 
   static func getWorkoutMetadata() -> [WorkoutMetadata] {
