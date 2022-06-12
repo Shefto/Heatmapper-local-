@@ -362,25 +362,16 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let nameToSave = nameField.text ?? ""
     let venueToSave = venueField.text ?? ""
     let sportToSave = sportField.text ?? ""
-    
-    let workoutIdToSave = playingAreaToUpdate?.workoutID
-    let playingAreaToSave = PlayingArea(workoutID: workoutIdToSave!, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "", isFavourite: true)
-    MyFunc.saveSharedPlayingArea(playingAreaToSave)
 
-//    // the new way - saving with playingArea Id
-//    let playingAreaToSaveWithId = PlayingArea(workoutID: self.heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: self.activityField.text ?? "" , venue: self.venueField.text ?? "", sport: self.sportField.text ?? "", comments: "Saved!", isFavourite: false)
-//    MyFunc.savePlayingAreaWithPlayingAreaId(playingAreaToSaveWithId)
-//
-//    // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
-//    self.workoutMetadata.playingAreaId = playingAreaToSaveWithId.id
-//    self.updateWorkout()
 
+    let playingAreaToSave = PlayingArea(playingAreaId: playingAreaToUpdate!.id, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "", isFavourite: true)
+
+
+    MyFunc.savePlayingAreaWithPlayingAreaId(playingAreaToSave)
 
   }
   
-  
-  
-  
+
   func updateSteppers() {
     guard let playingAreaView = self.view.viewWithTag(200) else {
       MyFunc.logMessage(.debug, "Cannot find pitchView to save")
@@ -440,15 +431,15 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
     let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
     
-    //      let playingAreaToSave = PlayingArea(workoutID: heatmapWorkoutId!, bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave)
+
     
     let nameToSave = nameField.text
     let venueToSave = venueField.text
     let sportToSave = sportField.text
     
-    let playingAreaToSave = PlayingArea(bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave, sport: sportToSave, comments: "Testing comments", isFavourite: true)
+    let playingAreaToSave = PlayingArea(playingAreaId: playingAreaToUpdate!.id, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "Resizing", isFavourite: true)
     
-    MyFunc.savePlayingAreaWithWorkoutIdForDeprecation(playingAreaToSave)
+    MyFunc.savePlayingAreaWithPlayingAreaId(playingAreaToSave)
     
     // store the coordinate in the VC's corner variables
     // consider revising above code to use these earlier and avoid having to create new variables for the TL/BR swap

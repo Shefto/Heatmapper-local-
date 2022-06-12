@@ -200,24 +200,24 @@ class MyFunc {
   }
 
 
-  static func savePlayingAreaWithWorkoutIdForDeprecation(_ playingArea: PlayingArea)  {
-    let defaults = UserDefaults.standard
-    let encoder = JSONEncoder()
-
-    let workoutIdStr = String(describing: playingArea.workoutID)
-    let keyStr : String = "Playing Area: " + workoutIdStr
-    do {
-      let encoded = try encoder.encode(playingArea)
-      defaults.set(encoded, forKey: keyStr)
-      let playingAreaStr = String(describing: playingArea)
-      logMessage(.debug, "Playing Area saved:")
-      logMessage(.debug, playingAreaStr)
-
-    } catch {
-      logMessage(.error, "Error in MyFunc.savePlayingArea")
-    }
-
-  }
+//  static func savePlayingAreaWithWorkoutIdForDeprecation(_ playingArea: PlayingArea)  {
+//    let defaults = UserDefaults.standard
+//    let encoder = JSONEncoder()
+//
+//    let workoutIdStr = String(describing: playingArea.workoutID)
+//    let keyStr : String = "Playing Area: " + workoutIdStr
+//    do {
+//      let encoded = try encoder.encode(playingArea)
+//      defaults.set(encoded, forKey: keyStr)
+//      let playingAreaStr = String(describing: playingArea)
+//      logMessage(.debug, "Playing Area saved:")
+//      logMessage(.debug, playingAreaStr)
+//
+//    } catch {
+//      logMessage(.error, "Error in MyFunc.savePlayingArea")
+//    }
+//
+//  }
 
 
 
