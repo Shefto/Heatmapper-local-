@@ -913,14 +913,14 @@ DQoNCg
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lQG-2T-c3p" customClass="MyMKMapView" customModule="Heatmapper" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="414" height="264"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="314"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="fJF-dn-msC"/>
                                 </constraints>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Qfd-ml-kHE">
-                                <rect key="frame" x="5" y="402" width="404" height="440"/>
+                                <rect key="frame" x="5" y="452" width="404" height="390"/>
                                 <subviews>
                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6QP-pY-Zhr">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="0.0"/>
@@ -987,6 +987,9 @@ DQoNCg
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="textFieldEditingDidEnd:" destination="Pbk-vr-61V" eventType="editingDidEnd" id="JG4-sC-cfQ"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -1013,23 +1016,8 @@ DQoNCg
                                             <constraint firstItem="9nK-7l-9X9" firstAttribute="width" secondItem="OW8-RA-0px" secondAttribute="width" multiplier="2" id="5Vo-2e-VBq"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROI-D4-wMa" userLabel="Playing Area Venue Stack View">
-                                        <rect key="frame" x="0.0" y="200" width="404" height="40"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Placemark" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oys-mr-PYC" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="404" height="40"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="Oys-mr-PYC" secondAttribute="trailing" id="hPT-mw-1TJ"/>
-                                            <constraint firstItem="Oys-mr-PYC" firstAttribute="leading" secondItem="ROI-D4-wMa" secondAttribute="leading" id="xJL-Ed-JVt"/>
-                                        </constraints>
-                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CqU-Ja-0UF" userLabel="Activity Stack View">
-                                        <rect key="frame" x="0.0" y="250" width="404" height="40"/>
+                                        <rect key="frame" x="0.0" y="200" width="404" height="40"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hV7-3h-Xdr" userLabel="Activity Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="202" height="40"/>
@@ -1049,7 +1037,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="z86-VQ-EfX" userLabel="Sport Stack View">
-                                        <rect key="frame" x="0.0" y="300" width="404" height="40"/>
+                                        <rect key="frame" x="0.0" y="250" width="404" height="40"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9N-6Z-FMe" userLabel="Sport Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="202" height="40"/>
@@ -1069,7 +1057,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="y2g-Bu-y8A" userLabel="Header">
-                                        <rect key="frame" x="0.0" y="345" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="295" width="404" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PlayingArea saved angle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8N4-wn-n3R" userLabel="Map Resize Radians Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
@@ -1096,7 +1084,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zJC-xC-Saa" userLabel="Map Resize Stack View">
-                                        <rect key="frame" x="0.0" y="345" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="295" width="404" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map heading resize start" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fg1-ao-LPs" userLabel="Map Resize Radians Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
@@ -1123,7 +1111,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ye0-dy-lsH" userLabel="Map Angle Stack View">
-                                        <rect key="frame" x="0.0" y="345" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="295" width="404" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map heading resize end" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRt-qA-P0z" userLabel="Map Radians Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
@@ -1150,7 +1138,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9J5-ta-Cb4" userLabel="Pitch Resize Start Stack View">
-                                        <rect key="frame" x="0.0" y="345" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="295" width="404" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pitch resize start" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5l1-a3-BUy" userLabel="Pitch Radians Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
@@ -1177,7 +1165,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="u6c-uj-UnH" userLabel="Pitch Resize End Stack View">
-                                        <rect key="frame" x="0.0" y="345" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="295" width="404" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pitch resize end" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1j-3Y-Hld" userLabel="PA Radians Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
@@ -1204,7 +1192,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="p74-D5-5KN" userLabel="PlayingArea End Stack View">
-                                        <rect key="frame" x="0.0" y="345" width="404" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="295" width="404" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PlayingArea angle to save" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MU5-8j-QsL" userLabel="PlayingArea End Radians Label" customClass="ThemeMediumFontUILabel" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="0.0"/>
@@ -1231,7 +1219,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8ES-Ro-2vB" userLabel="Calories and Heart Rate Stack View">
-                                        <rect key="frame" x="0.0" y="350" width="404" height="40"/>
+                                        <rect key="frame" x="0.0" y="300" width="404" height="40"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flame.fill" translatesAutoresizingMaskIntoConstraints="NO" id="NUS-eY-InW">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -1266,7 +1254,7 @@ DQoNCg
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QL9-Yr-a6X" userLabel="Pace and Distance Stack View">
-                                        <rect key="frame" x="0.0" y="400" width="404" height="40"/>
+                                        <rect key="frame" x="0.0" y="350" width="404" height="40"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speedometer" translatesAutoresizingMaskIntoConstraints="NO" id="G2E-Dn-slr">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -1315,7 +1303,6 @@ DQoNCg
                                     <constraint firstAttribute="trailing" secondItem="CqU-Ja-0UF" secondAttribute="trailing" id="Dzq-vR-KaO"/>
                                     <constraint firstItem="zJC-xC-Saa" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="Guf-9W-wK3"/>
                                     <constraint firstAttribute="trailing" secondItem="y2g-Bu-y8A" secondAttribute="trailing" id="Gxe-HA-VTc"/>
-                                    <constraint firstItem="ROI-D4-wMa" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="IOy-sO-bv6"/>
                                     <constraint firstAttribute="trailing" secondItem="HWq-3y-8ck" secondAttribute="trailing" id="KbR-LV-OOD"/>
                                     <constraint firstItem="QL9-Yr-a6X" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="KfO-gV-tdh"/>
                                     <constraint firstAttribute="trailing" secondItem="p74-D5-5KN" secondAttribute="trailing" id="W23-xb-Ble"/>
@@ -1326,7 +1313,6 @@ DQoNCg
                                     <constraint firstItem="8ES-Ro-2vB" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="gwb-XC-msK"/>
                                     <constraint firstItem="y2g-Bu-y8A" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="i97-fO-acM"/>
                                     <constraint firstAttribute="trailing" secondItem="eBn-1T-1Yh" secondAttribute="trailing" id="iq5-l8-nlB"/>
-                                    <constraint firstAttribute="trailing" secondItem="ROI-D4-wMa" secondAttribute="trailing" id="mDP-St-WTI"/>
                                     <constraint firstAttribute="trailing" secondItem="u6c-uj-UnH" secondAttribute="trailing" id="mtM-yQ-4y3"/>
                                     <constraint firstItem="CqU-Ja-0UF" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="pnM-oy-Wbs"/>
                                     <constraint firstItem="6QP-pY-Zhr" firstAttribute="leading" secondItem="Qfd-ml-kHE" secondAttribute="leading" id="qHW-YY-uFk"/>
@@ -1337,7 +1323,7 @@ DQoNCg
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="gX6-Du-D22" userLabel="Button Stack View">
-                                <rect key="frame" x="5" y="357" width="404" height="40"/>
+                                <rect key="frame" x="5" y="407" width="404" height="40"/>
                                 <subviews>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cep-ee-waR" userLabel="Resize" customClass="ThemeButton" customModule="Heatmapper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="199.66666666666666" height="40"/>
@@ -1405,7 +1391,6 @@ DQoNCg
                         <outlet property="pitchField" destination="2Hb-dc-c99" id="ocX-DG-Fhh"/>
                         <outlet property="pitchStartDegreesField" destination="pB5-KK-YTG" id="jC5-F5-jPO"/>
                         <outlet property="pitchStartRadiansField" destination="TlJ-RE-HNI" id="qb3-Rc-R8m"/>
-                        <outlet property="placemarkField" destination="Oys-mr-PYC" id="QXb-Yr-mUp"/>
                         <outlet property="playingAreaSavedAngleDegreesField" destination="gLc-Hj-oOY" id="Rdh-3s-aHB"/>
                         <outlet property="playingAreaSavedAngleRadiansField" destination="32O-hZ-MFh" id="dGQ-LL-3N2"/>
                         <outlet property="playingAreaToSaveAngleDegreesField" destination="hUP-TM-1gP" id="NPF-fi-M7d"/>

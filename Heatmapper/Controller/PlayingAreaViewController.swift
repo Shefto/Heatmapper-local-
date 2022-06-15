@@ -367,7 +367,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let playingAreaToSave = PlayingArea(playingAreaId: playingAreaToUpdate!.id, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "", isFavourite: true)
 
 
-    MyFunc.savePlayingAreaWithPlayingAreaId(playingAreaToSave)
+    MyFunc.savePlayingArea(playingAreaToSave)
 
   }
   
@@ -439,7 +439,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     
     let playingAreaToSave = PlayingArea(playingAreaId: playingAreaToUpdate!.id, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "Resizing", isFavourite: true)
     
-    MyFunc.savePlayingAreaWithPlayingAreaId(playingAreaToSave)
+    MyFunc.savePlayingArea(playingAreaToSave)
     
     // store the coordinate in the VC's corner variables
     // consider revising above code to use these earlier and avoid having to create new variables for the TL/BR swap

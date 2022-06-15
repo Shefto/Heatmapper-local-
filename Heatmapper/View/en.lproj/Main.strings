@@ -256,9 +256,6 @@
 /* Class = "UILabel"; text = "Venue"; ObjectID = "OW8-RA-0px"; */
 "OW8-RA-0px.text" = "";
 
-/* Class = "UITextField"; placeholder = "Placemark"; ObjectID = "Oys-mr-PYC"; */
-"Oys-mr-PYC.placeholder" = "";
-
 /* Class = "UITextField"; text = "-"; ObjectID = "pB5-KK-YTG"; */
 "pB5-KK-YTG.text" = "";
 
