@@ -149,9 +149,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
     setFavouritesButtonTitle()
   }
 
+
   @IBAction func textFieldEditingDidEnd(_ sender: Any) {
-    playingArea?.name = pitchField.text
-    playingArea?.venue = venueField.text
+    playingArea?.name     = pitchField.text
+    playingArea?.venue    = venueField.text
+    playingArea?.sport    = sportField.text
     guard let playingAreaToSave = self.playingArea else {
       MyFunc.logMessage(.error, "HeatmapViewController: textFieldEditingDidEnd: no Playing Area to save")
       return
@@ -301,34 +303,48 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    // get workout metadata
+    // *** pending change: replace call of all workouts with just call for this workout's metadata
     self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
     if let workoutMetadataRow = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == self.heatmapWorkoutId}) {
       self.workoutMetadata = self.workoutMetadataArray[workoutMetadataRow]
       self.loadMetadataUI()
     }
 
-    mapView.delegate = self
-    mapView.listener = self
-
-    // initialize the Geocoder
+    // initialize the Geocoder - needed for CLPlacemark
     geocoder = CLGeocoder()
 
-    // load buttons
-    resizeOn = false
-    resizeButton.setTitle("Resize playing area", for: .normal)
-    isFavourite = false
-    favouritesButton.setTitle("Add to Favourites", for: .normal)
+    initialiseUI()
 
-    resetPlayingAreaButton.isHidden = true
-    heightAndWeightStackView.isHidden = true
+    // this function sets up the tester colours
+    // retaining but commenting out as may be needed for later work
+    //  loadTesterData()
 
-    loadTesterData()
     getStaticData()
 
     // get workout data
     // Note: all UI work is called within this function as the data retrieval works asynchronously
     getWorkoutData()
     updateAngleUI()
+
+  }
+
+  func initialiseUI() {
+    mapView.delegate = self
+    mapView.listener = self
+
+    // start in normal (not resize) mode
+    resizeOn = false
+    resizeButton.setTitle("Resize playing area", for: .normal)
+
+    // default Favourite button to assume PlayingArea not a Favourite
+    // *** pending change:  set this from the workout
+    isFavourite = false
+    favouritesButton.setTitle("Add to Favourites", for: .normal)
+
+    resetPlayingAreaButton.isHidden = true
+    heightAndWeightStackView.isHidden = true
+
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -540,7 +556,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
         self.workoutMetadata.playingAreaId = playingAreaToSaveWithId.id
         self.updateWorkout()
 
-
         self.updateAngleUI()
 
       case .success(let playingArea):
@@ -680,13 +695,10 @@ class HeatmapViewController: UIViewController, MyMapListener {
         let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
         let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
 
-
         // as we are creating a new playing area, default the name and venue to the placemark data
         if let firstCoordinate = self.heatmapperCoordinatesArray.first {
           self.getCLPlacemark(coordinate: firstCoordinate)
-
         }
-
 
         // now save the auto-generated PlayingArea coordinates for future use
         let playingAreaToSave = PlayingArea(bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: "", venue: "", sport: "", comments: "", isFavourite: false)
@@ -696,7 +708,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
         // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
         self.workoutMetadata.playingAreaId = playingAreaToSave.id
         self.updateWorkout()
-
         self.updateAngleUI()
 
 
@@ -704,6 +715,10 @@ class HeatmapViewController: UIViewController, MyMapListener {
         MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
         let playingAreaStr = String(describing: playingAreaRetrieved)
         MyFunc.logMessage(.debug, playingAreaStr)
+
+        self.pitchField.text = playingAreaRetrieved.name
+        self.venueField.text = playingAreaRetrieved.venue
+        self.sportField.text = playingAreaRetrieved.sport
 
         let midpointLatitude = (playingAreaRetrieved.topLeft.latitude + playingAreaRetrieved.bottomLeft.latitude) / 2
         let midpointLongitude = (playingAreaRetrieved.bottomLeft.longitude + playingAreaRetrieved.bottomRight.longitude) / 2
@@ -899,30 +914,30 @@ class HeatmapViewController: UIViewController, MyMapListener {
   }
 
 
-  func loadTesterData() {
-    let loadedTesterArray = MyFunc.getTesterData()
-    if loadedTesterArray.isEmpty == false {
-
-      innerColourRed = loadedTesterArray[0]
-      innerColourGreen = loadedTesterArray[1]
-      innerColourBlue = loadedTesterArray[2]
-      innerColourAlpha = loadedTesterArray[3]
-      innerColourGradient = loadedTesterArray[4]
-
-      middleColourRed = loadedTesterArray[5]
-      middleColourGreen = loadedTesterArray[6]
-      middleColourBlue = loadedTesterArray[7]
-      middleColourAlpha = loadedTesterArray[8]
-      middleColourGradient = loadedTesterArray[9]
-
-      outerColourRed = loadedTesterArray[10]
-      outerColourGreen = loadedTesterArray[11]
-      outerColourBlue = loadedTesterArray[12]
-      outerColourAlpha = loadedTesterArray[13]
-      outerColourGradient = loadedTesterArray[14]
-
-    }
-  }
+//  func loadTesterData() {
+//    let loadedTesterArray = MyFunc.getTesterData()
+//    if loadedTesterArray.isEmpty == false {
+//
+//      innerColourRed = loadedTesterArray[0]
+//      innerColourGreen = loadedTesterArray[1]
+//      innerColourBlue = loadedTesterArray[2]
+//      innerColourAlpha = loadedTesterArray[3]
+//      innerColourGradient = loadedTesterArray[4]
+//
+//      middleColourRed = loadedTesterArray[5]
+//      middleColourGreen = loadedTesterArray[6]
+//      middleColourBlue = loadedTesterArray[7]
+//      middleColourAlpha = loadedTesterArray[8]
+//      middleColourGradient = loadedTesterArray[9]
+//
+//      outerColourRed = loadedTesterArray[10]
+//      outerColourGreen = loadedTesterArray[11]
+//      outerColourBlue = loadedTesterArray[12]
+//      outerColourAlpha = loadedTesterArray[13]
+//      outerColourGradient = loadedTesterArray[14]
+//
+//    }
+//  }
 
   func loadMetadataUI() {
     activityPicker.delegate = self
@@ -1095,8 +1110,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   }
 
-  func getWorkout(workoutId: UUID, completion:
-                  @escaping ([HKWorkout]?, Error?) -> Void) {
+  func getWorkout(workoutId: UUID, completion: @escaping ([HKWorkout]?, Error?) -> Void) {
 
     let predicate = HKQuery.predicateForObject(with: workoutId)
 
@@ -1121,11 +1135,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
       guard error == nil else {
         // Handle any errors here.
-        fatalError("The initial query failed.")
+        MyFunc.logMessage(.error, "Error getting route sample object : \(error.debugDescription)")
+        return
       }
 
       DispatchQueue.main.async {
-
         guard let routeReturned = samples?.first as? HKWorkoutRoute else {
           MyFunc.logMessage(.error, "Could not convert routeSamples to HKWorkoutRoute")
           return
@@ -1301,7 +1315,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let playingAreaId = workoutMetadata.playingAreaId
 
     let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, playingAreaId: playingAreaId, activity: activity, sport: sport, playingAreaVenue: venue, playingAreaName: pitch)
-    //    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, venue: venue, pitch: pitch)
+
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
       workoutMetadataArray[row] = workoutMetadataToSave
     } else {
@@ -1482,8 +1496,10 @@ extension HeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
     if pickerView == activityPicker {
-      activityField.text = activityArray[row].name
-      sportField.text = activityArray[row].sport.rawValue
+      if activityArray.isEmpty == false {
+        activityField.text = activityArray[row].name
+        sportField.text = activityArray[row].sport.rawValue
+      }
     } else {
       sportField.text = sportArray[row].rawValue
     }

@@ -988,7 +988,7 @@ DQoNCg
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
-                                                    <action selector="textFieldEditingDidEnd:" destination="Pbk-vr-61V" eventType="editingDidEnd" id="JG4-sC-cfQ"/>
+                                                    <action selector="textFieldEditingDidEnd:" destination="Pbk-vr-61V" eventType="editingDidEnd" id="64E-3B-OHr"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
@@ -1005,11 +1005,14 @@ DQoNCg
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Venue" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9nK-7l-9X9" userLabel="Venue" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Venue" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9nK-7l-9X9" userLabel="Venue Field" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="404" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="textFieldEditingDidEnd:" destination="Pbk-vr-61V" eventType="editingDidEnd" id="Dod-Ku-sDx"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -1030,6 +1033,9 @@ DQoNCg
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="textFieldEditingDidEnd:" destination="Pbk-vr-61V" eventType="editingDidEnd" id="OrX-fy-k2u"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -1045,11 +1051,14 @@ DQoNCg
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Sport" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F5h-cl-Tm7" userLabel="Sport" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Sport" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F5h-cl-Tm7" userLabel="Sport Field" customClass="ThemeMediumFontTextField" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="404" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="textFieldEditingDidEnd:" destination="Pbk-vr-61V" eventType="editingDidEnd" id="6zo-yp-FAb"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <constraints>
