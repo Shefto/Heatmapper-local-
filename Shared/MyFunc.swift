@@ -90,6 +90,9 @@ class MyFunc {
         if let savedTemplate = defaults.object(forKey: key) as? Data {
           if let loadedTemplate = try? decoder.decode(PlayingArea.self, from: savedTemplate) {
             let playingAreaToAppend = loadedTemplate
+            print("playingArea:")
+            let playingAreaStr = String(describing: playingAreaToAppend)
+            print(playingAreaStr)
             playingAreasToReturn.append(playingAreaToAppend)
           }
         }
