@@ -149,11 +149,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     self.navigationItem.rightBarButtonItem = editButtonItem
   }
 
-//  override func viewWillAppear(_ animated: Bool) {
-//    super.viewWillAppear(animated)
-//
-//  }
-
   override func setEditing(_ editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: true)
     if editing {
@@ -167,7 +162,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       venueField.isEnabled = false
       sportField.isEnabled = false
       nameField.isEnabled = false
-
       savePlayingArea()
 
     }
@@ -309,7 +303,8 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       MyFunc.logMessage(.debug, "workoutMetadataArrayIdsOnly:")
       MyFunc.logMessage(.debug, String(describing: workoutMetadataArrayIdsOnly))
 
-      let workoutForPlayingAreaArray = self.workoutArray.filter { !workoutMetadataArrayIdsOnly.contains($0.uuid) }
+      let workoutForPlayingAreaArray = self.workoutArray.filter { workoutMetadataArrayIdsOnly.contains($0.uuid) }
+//      let workoutForPlayingAreaArray = self.workoutArray.filter {$0.uuid == workoutMetadataArrayIdsOnly }
 
       MyFunc.logMessage(.debug, "workoutForPlayingAreaArray:")
       MyFunc.logMessage(.debug, String(describing: workoutForPlayingAreaArray))
@@ -430,7 +425,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
     let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
     let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
-    
 
     
     let nameToSave = nameField.text
@@ -606,10 +600,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let documentsDirectory = paths[0]
     return documentsDirectory
   }
-  
-  
 
-  
   
   //  func updateAngleUI () {
   //    let mapStartRadiansStr = String(format: "%.2f", mapHeadingAtResizeOn.degreesToRadians)
