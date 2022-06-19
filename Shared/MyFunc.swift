@@ -412,47 +412,47 @@ class MyFunc {
     return CGFloat(distance)
   }
 
-
-  static func getCLPlacemark(coordinate: CLLocationCoordinate2D) -> String {
-
-    let latitude = coordinate.latitude
-    let longitude = coordinate.longitude
-    let location = CLLocation(latitude: latitude, longitude: longitude)
-    var geocoder            : CLGeocoder!
-    var placemarkStr : String = ""
-
-    geocoder = CLGeocoder()
-    geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-
-      if error != nil {
-        MyFunc.logMessage(.debug, "No placemark found: \(error.debugDescription)")
-      } else {
-        guard let returnedPlacemarks = placemarks else {
-          MyFunc.logMessage(.debug, "No placemark found: \(error.debugDescription)")
-          return
-
-        }
-        let placemark =  returnedPlacemarks.first!
-        print ("Placemark returned: ")
-        print (String(describing: placemark.locality))
-        print (String(describing: placemark.thoroughfare))
-
-        let thoroughfare = placemark.thoroughfare ?? ""
-        let locality = placemark.locality ?? ""
-        if thoroughfare != "" && locality != "" {
-          placemarkStr = (thoroughfare + ", " + locality)
-        } else {
-          placemarkStr =  "No placemark found"
-        }
-
-
-
-      }
-
-    }
-
-    return placemarkStr
-  }
+//
+//  static func getCLPlacemark(coordinate: CLLocationCoordinate2D) -> String {
+//
+//    let latitude = coordinate.latitude
+//    let longitude = coordinate.longitude
+//    let location = CLLocation(latitude: latitude, longitude: longitude)
+//    var geocoder            : CLGeocoder!
+//    var placemarkStr : String = ""
+//
+//    geocoder = CLGeocoder()
+//    geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+//
+//      if error != nil {
+//        MyFunc.logMessage(.debug, "No placemark found: \(error.debugDescription)")
+//      } else {
+//        guard let returnedPlacemarks = placemarks else {
+//          MyFunc.logMessage(.debug, "No placemark found: \(error.debugDescription)")
+//          return
+//
+//        }
+//        let placemark =  returnedPlacemarks.first!
+//        print ("Placemark returned: ")
+//        print (String(describing: placemark.locality))
+//        print (String(describing: placemark.thoroughfare))
+//
+//        let thoroughfare = placemark.thoroughfare ?? ""
+//        let locality = placemark.locality ?? ""
+//        if thoroughfare != "" && locality != "" {
+//          placemarkStr = (thoroughfare + ", " + locality)
+//        } else {
+//          placemarkStr =  "No placemark found"
+//        }
+//
+//
+//
+//      }
+//
+//    }
+//
+//    return placemarkStr
+//  }
 
 }
 

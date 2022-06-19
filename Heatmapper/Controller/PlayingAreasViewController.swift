@@ -129,18 +129,7 @@ extension PlayingAreasViewController: UITableViewDelegate, UITableViewDataSource
     deleteAction.backgroundColor = .red
     deleteAction.image = UIImage(systemName: "trash")
 
-    let editAction = UIContextualAction(style: .destructive, title: "Edit") { _, _, complete in
-      // switch table into edit mode
-      let playingAreaToSend = self.playingAreaArray[indexPath.row]
-      self.performSegue(withIdentifier: "playingAreasToPlayingArea", sender: playingAreaToSend)
-
-      complete(true)
-    }
-
-    editAction.backgroundColor = .systemGray
-    editAction.image = UIImage(systemName: "pencil")
-
-    let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+    let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
     configuration.performsFirstActionWithFullSwipe = false
     return configuration
   }

@@ -366,28 +366,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   }
 
-  //  func createHeatmapImageView() {
-  //    // this function will create an image view from the heatmap data plus the corners and the playing area
-  //
-  //    // get the playing area type
-  //    // add logic in here when additional pitch types added - for now just use 11 a side
-  //
-  //
-  //    // get the four corners as coordinates - these stored at VC level
-  //    // derive the height and width from the corners
-  //
-  //    let bottomLeftMapPoint = MKMapPoint(bottomLeftCoord!)
-  //    let bottomRightMapPoint = MKMapPoint(bottomRightCoord!)
-  //    let topLeftMapPoint = MKMapPoint(topLeftCoord!)
-  //
-  //    let pitchWidthMeters = bottomLeftMapPoint.distance(to: bottomRightMapPoint)/1000
-  //    let pitchHeightMeters = bottomLeftMapPoint.distance(to: topLeftMapPoint)/1000
-  //
-  //    let pitchWidthMetersStr = NSString(format: "%.3f", pitchWidthMeters)
-  //    let pitchHeightMetersStr = NSString(format: "%.3f", pitchHeightMeters)
-  //    print("Pitch height: \(pitchHeightMetersStr), width \(pitchWidthMetersStr)")
-  //
-  //  }
 
 
   func saveHeatmapImage() {
@@ -547,12 +525,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
         let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
         let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
 
-
         // save playing area
         let playingAreaToSaveWithId = PlayingArea(bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: self.activityField.text ?? "" , venue: self.venueField.text ?? "", sport: self.sportField.text ?? "", comments: "Saved!", isFavourite: false)
         MyFunc.savePlayingArea(playingAreaToSaveWithId)
 
-        // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
+        // save the Playing Area Id to the Workout
         self.workoutMetadata.playingAreaId = playingAreaToSaveWithId.id
         self.updateWorkout()
 
