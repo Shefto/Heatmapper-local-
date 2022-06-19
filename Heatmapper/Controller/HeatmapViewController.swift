@@ -366,28 +366,28 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   }
 
-//  func createHeatmapImageView() {
-//    // this function will create an image view from the heatmap data plus the corners and the playing area
-//
-//    // get the playing area type
-//    // add logic in here when additional pitch types added - for now just use 11 a side
-//
-//
-//    // get the four corners as coordinates - these stored at VC level
-//    // derive the height and width from the corners
-//
-//    let bottomLeftMapPoint = MKMapPoint(bottomLeftCoord!)
-//    let bottomRightMapPoint = MKMapPoint(bottomRightCoord!)
-//    let topLeftMapPoint = MKMapPoint(topLeftCoord!)
-//
-//    let pitchWidthMeters = bottomLeftMapPoint.distance(to: bottomRightMapPoint)/1000
-//    let pitchHeightMeters = bottomLeftMapPoint.distance(to: topLeftMapPoint)/1000
-//
-//    let pitchWidthMetersStr = NSString(format: "%.3f", pitchWidthMeters)
-//    let pitchHeightMetersStr = NSString(format: "%.3f", pitchHeightMeters)
-//    print("Pitch height: \(pitchHeightMetersStr), width \(pitchWidthMetersStr)")
-//
-//  }
+  //  func createHeatmapImageView() {
+  //    // this function will create an image view from the heatmap data plus the corners and the playing area
+  //
+  //    // get the playing area type
+  //    // add logic in here when additional pitch types added - for now just use 11 a side
+  //
+  //
+  //    // get the four corners as coordinates - these stored at VC level
+  //    // derive the height and width from the corners
+  //
+  //    let bottomLeftMapPoint = MKMapPoint(bottomLeftCoord!)
+  //    let bottomRightMapPoint = MKMapPoint(bottomRightCoord!)
+  //    let topLeftMapPoint = MKMapPoint(topLeftCoord!)
+  //
+  //    let pitchWidthMeters = bottomLeftMapPoint.distance(to: bottomRightMapPoint)/1000
+  //    let pitchHeightMeters = bottomLeftMapPoint.distance(to: topLeftMapPoint)/1000
+  //
+  //    let pitchWidthMetersStr = NSString(format: "%.3f", pitchWidthMeters)
+  //    let pitchHeightMetersStr = NSString(format: "%.3f", pitchHeightMeters)
+  //    print("Pitch height: \(pitchHeightMetersStr), width \(pitchWidthMetersStr)")
+  //
+  //  }
 
 
   func saveHeatmapImage() {
@@ -635,9 +635,9 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   func getPlayingAreaOnLoad() {
 
-  // get the Playing Area Id associated to the workout - if none, default to non-initialized UUID
-  // null results will be handled by the failure case in the closure
-  let playingAreaToRetrieveId : UUID = workoutMetadata.playingAreaId ?? UUID()
+    // get the Playing Area Id associated to the workout - if none, default to non-initialized UUID
+    // null results will be handled by the failure case in the closure
+    let playingAreaToRetrieveId : UUID = workoutMetadata.playingAreaId ?? UUID()
 
     MyFunc.getPlayingAreaFromId(playingAreaId: playingAreaToRetrieveId, successClosure: { result in
       switch result {
@@ -914,30 +914,30 @@ class HeatmapViewController: UIViewController, MyMapListener {
   }
 
 
-//  func loadTesterData() {
-//    let loadedTesterArray = MyFunc.getTesterData()
-//    if loadedTesterArray.isEmpty == false {
-//
-//      innerColourRed = loadedTesterArray[0]
-//      innerColourGreen = loadedTesterArray[1]
-//      innerColourBlue = loadedTesterArray[2]
-//      innerColourAlpha = loadedTesterArray[3]
-//      innerColourGradient = loadedTesterArray[4]
-//
-//      middleColourRed = loadedTesterArray[5]
-//      middleColourGreen = loadedTesterArray[6]
-//      middleColourBlue = loadedTesterArray[7]
-//      middleColourAlpha = loadedTesterArray[8]
-//      middleColourGradient = loadedTesterArray[9]
-//
-//      outerColourRed = loadedTesterArray[10]
-//      outerColourGreen = loadedTesterArray[11]
-//      outerColourBlue = loadedTesterArray[12]
-//      outerColourAlpha = loadedTesterArray[13]
-//      outerColourGradient = loadedTesterArray[14]
-//
-//    }
-//  }
+  //  func loadTesterData() {
+  //    let loadedTesterArray = MyFunc.getTesterData()
+  //    if loadedTesterArray.isEmpty == false {
+  //
+  //      innerColourRed = loadedTesterArray[0]
+  //      innerColourGreen = loadedTesterArray[1]
+  //      innerColourBlue = loadedTesterArray[2]
+  //      innerColourAlpha = loadedTesterArray[3]
+  //      innerColourGradient = loadedTesterArray[4]
+  //
+  //      middleColourRed = loadedTesterArray[5]
+  //      middleColourGreen = loadedTesterArray[6]
+  //      middleColourBlue = loadedTesterArray[7]
+  //      middleColourAlpha = loadedTesterArray[8]
+  //      middleColourGradient = loadedTesterArray[9]
+  //
+  //      outerColourRed = loadedTesterArray[10]
+  //      outerColourGreen = loadedTesterArray[11]
+  //      outerColourBlue = loadedTesterArray[12]
+  //      outerColourAlpha = loadedTesterArray[13]
+  //      outerColourGradient = loadedTesterArray[14]
+  //
+  //    }
+  //  }
 
   func loadMetadataUI() {
     activityPicker.delegate = self
@@ -1224,7 +1224,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
       }
 
     }
-
 
   }
 

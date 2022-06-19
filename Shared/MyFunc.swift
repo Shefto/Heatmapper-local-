@@ -184,43 +184,43 @@ class MyFunc {
 
   }
 
-//  static func saveSharedPlayingArea(_ playingArea: PlayingArea) {
-//    let defaults = UserDefaults.standard
-//    let encoder = JSONEncoder()
-//
-//    let idStr = String(describing: playingArea.id)
-//    let keyStr : String = "Playing Area: " + idStr
-//    do {
-//      let encoded = try encoder.encode(playingArea)
-//      defaults.set(encoded, forKey: keyStr)
-//      let playingAreaStr = String(describing: playingArea)
-//      logMessage(.debug, "Playing Area saved:")
-//      logMessage(.debug, playingAreaStr)
-//    } catch {
-//      logMessage(.error, "Error in MyFunc.savePlayingArea")
-//    }
-//
-//  }
+  //  static func saveSharedPlayingArea(_ playingArea: PlayingArea) {
+  //    let defaults = UserDefaults.standard
+  //    let encoder = JSONEncoder()
+  //
+  //    let idStr = String(describing: playingArea.id)
+  //    let keyStr : String = "Playing Area: " + idStr
+  //    do {
+  //      let encoded = try encoder.encode(playingArea)
+  //      defaults.set(encoded, forKey: keyStr)
+  //      let playingAreaStr = String(describing: playingArea)
+  //      logMessage(.debug, "Playing Area saved:")
+  //      logMessage(.debug, playingAreaStr)
+  //    } catch {
+  //      logMessage(.error, "Error in MyFunc.savePlayingArea")
+  //    }
+  //
+  //  }
 
 
-//  static func savePlayingAreaWithWorkoutIdForDeprecation(_ playingArea: PlayingArea)  {
-//    let defaults = UserDefaults.standard
-//    let encoder = JSONEncoder()
-//
-//    let workoutIdStr = String(describing: playingArea.workoutID)
-//    let keyStr : String = "Playing Area: " + workoutIdStr
-//    do {
-//      let encoded = try encoder.encode(playingArea)
-//      defaults.set(encoded, forKey: keyStr)
-//      let playingAreaStr = String(describing: playingArea)
-//      logMessage(.debug, "Playing Area saved:")
-//      logMessage(.debug, playingAreaStr)
-//
-//    } catch {
-//      logMessage(.error, "Error in MyFunc.savePlayingArea")
-//    }
-//
-//  }
+  //  static func savePlayingAreaWithWorkoutIdForDeprecation(_ playingArea: PlayingArea)  {
+  //    let defaults = UserDefaults.standard
+  //    let encoder = JSONEncoder()
+  //
+  //    let workoutIdStr = String(describing: playingArea.workoutID)
+  //    let keyStr : String = "Playing Area: " + workoutIdStr
+  //    do {
+  //      let encoded = try encoder.encode(playingArea)
+  //      defaults.set(encoded, forKey: keyStr)
+  //      let playingAreaStr = String(describing: playingArea)
+  //      logMessage(.debug, "Playing Area saved:")
+  //      logMessage(.debug, playingAreaStr)
+  //
+  //    } catch {
+  //      logMessage(.error, "Error in MyFunc.savePlayingArea")
+  //    }
+  //
+  //  }
 
 
 
@@ -413,4 +413,47 @@ class MyFunc {
   }
 
 
+  static func getCLPlacemark(coordinate: CLLocationCoordinate2D) -> String {
+
+    let latitude = coordinate.latitude
+    let longitude = coordinate.longitude
+    let location = CLLocation(latitude: latitude, longitude: longitude)
+    var geocoder            : CLGeocoder!
+    var placemarkStr : String = ""
+
+    geocoder = CLGeocoder()
+    geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+
+      if error != nil {
+        MyFunc.logMessage(.debug, "No placemark found: \(error.debugDescription)")
+      } else {
+        guard let returnedPlacemarks = placemarks else {
+          MyFunc.logMessage(.debug, "No placemark found: \(error.debugDescription)")
+          return
+
+        }
+        let placemark =  returnedPlacemarks.first!
+        print ("Placemark returned: ")
+        print (String(describing: placemark.locality))
+        print (String(describing: placemark.thoroughfare))
+
+        let thoroughfare = placemark.thoroughfare ?? ""
+        let locality = placemark.locality ?? ""
+        if thoroughfare != "" && locality != "" {
+          placemarkStr = (thoroughfare + ", " + locality)
+        } else {
+          placemarkStr =  "No placemark found"
+        }
+
+
+
+      }
+
+    }
+
+    return placemarkStr
+  }
+
 }
+
+

@@ -162,7 +162,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       venueField.isEnabled = false
       sportField.isEnabled = false
       nameField.isEnabled = false
-      savePlayingArea()
+//      savePlayingArea()
 
     }
   }
@@ -198,10 +198,14 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
   func getPlayingAreaOnLoad() {
 
-    guard let playingArea : PlayingArea = playingAreaToUpdate else {
-      MyFunc.logMessage(.error, "No PlayingArea passed in to PlayingAreasViewController")
-      return
-    }
+
+    if let playingArea  = playingAreaToUpdate  {
+
+//    guard let playingArea : PlayingArea = playingAreaToUpdate else {
+//      MyFunc.logMessage(.error, "No PlayingArea passed in to PlayingAreasViewController")
+//      return
+//    }
+
 
     nameField.text = playingArea.name
     venueField.text = playingArea.venue
@@ -221,6 +225,175 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     self.bottomRightCoord = bottomRightAsCoord
     self.topLeftCoord = topLeftAsCoord
     self.topRightCoord = topRightAsCoord
+
+//    // getting the angle to rotate the overlay by from the CGPoints
+//    // simply doing this as it seems to work better than using coordinate angles
+//    let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
+//    let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
+//    //        let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
+//    let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
+//
+//    let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
+//    let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
+//
+//    // now add the view
+//    let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
+//    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
+//    newPitchView.image = pitchImageGreen
+//    newPitchView.layer.opacity = 0.5
+//    newPitchView.isUserInteractionEnabled = true
+//    newPitchView.tag = 200
+//
+//    // add the gesture recognizers
+//    let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
+//    let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
+//    let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
+//    newPitchView.addGestureRecognizer(panner)
+//    newPitchView.addGestureRecognizer(rotator)
+//    newPitchView.addGestureRecognizer(pincher)
+//
+//    // rotate the view
+//    // need to anchor this first by the origin in order to rotate around bottom left
+//    newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
+//    let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
+//    playingAreaAngleSaved = pitchAngle
+//    newPitchView.transform = newPitchView.transform.rotated(by: pitchAngle)
+//    self.pitchAngleToApply = pitchAngle
+//    newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
+//
+//    mapHeadingAtResizeOn = mapView.camera.heading
+//    pitchRotationAtResizeOn = rotation(from: newPitchView.transform)
+//    //    updateAngleUI()
+//
+//    playingAreaAngleSaved = pitchAngle
+//    self.pitchAngleToApply = pitchAngle
+//    self.createPitchOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
+//    self.setMapViewZoom()
+
+    } else {
+
+      // no Playing Area passed in so we will create new one
+
+      MyFunc.logMessage(.debug, "No PlayingArea passed in to PlayingAreasViewController")
+
+      // get the user's location
+      let userLocation = LocationManager.sharedInstance.currentLocation
+      let userCoordinate = userLocation.coordinate
+
+
+      let topLeftLocation = userLocation.movedBy(latitudinalMeters: 52.5, longitudinalMeters: 34)
+      let bottomRightLocation = userLocation.movedBy(latitudinalMeters: -52.5, longitudinalMeters: -34)
+
+      let minCoord = topLeftLocation.coordinate
+      let maxCoord = bottomRightLocation.coordinate
+
+      let maxLat = maxCoord.latitude
+      let minLat = minCoord.latitude
+      let maxLong = maxCoord.longitude
+      let minLong = minCoord.longitude
+
+      // set the map region
+      self.overlayCenter = CLLocationCoordinate2D(latitude: userCoordinate.latitude, longitude: userCoordinate.longitude)
+
+      // get the max and min X and Y points from the above coordinates as MKMapPoints
+      let minX = MKMapPoint(minCoord).x
+      let maxX = MKMapPoint(maxCoord).x
+      let minY = MKMapPoint(minCoord).y
+      let maxY = MKMapPoint(maxCoord).y
+
+      // this code ensures the pitch size is larger than the heatmap by adding a margin
+      // get the dimensions of the rectangle from the distance between the point extremes
+//      var rectWidth = maxX - minX
+//      var rectHeight = minY - maxY
+//      // set the scale of the border
+
+      // setting default pitch size to football pitch width and height
+      var rectWidth : Double = 68.0
+      var rectHeight  : Double = 105.0
+      let rectMarginScale = 0.1
+
+      // set the rectangle origin as the plot dimensions plus the border
+      let rectX = minX - (rectWidth * rectMarginScale)
+      let rectY = minY + (rectHeight * rectMarginScale)
+
+      // increase the rectangle width and height by the border * 2
+      rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
+      rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
+
+      let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
+      self.playingAreaMapRect = pitchMKMapRect
+
+
+
+      // get the PlayingArea corner coordinates from the size of heatmap
+      self.bottomLeftCoord = CLLocationCoordinate2D(latitude: maxLat, longitude: maxLong)
+      self.topLeftCoord = CLLocationCoordinate2D(latitude: minLat, longitude: maxLong)
+      self.bottomRightCoord = CLLocationCoordinate2D(latitude: maxLat, longitude: minLong)
+      self.topRightCoord  = CLLocationCoordinate2D(latitude: minLat, longitude: minLong)
+
+      // convert the coordinates to a codable subclass for saving
+      let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
+      let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
+      let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
+      let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
+
+      // as we are creating a new playing area, default the name and venue to the placemark data
+      MyFunc.getCLPlacemark(coordinate: userCoordinate)
+
+      // now save the auto-generated PlayingArea coordinates for future use
+      let playingAreaToSave = PlayingArea(bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: "", venue: "", sport: "", comments: "", isFavourite: false)
+      MyFunc.savePlayingArea(playingAreaToSave)
+
+      self.playingAreaToUpdate = playingAreaToSave
+//      // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
+////      self.workoutMetadata.playingAreaId = playingAreaToSave.id
+////      self.updateWorkout()
+//
+//      // getting the angle to rotate the overlay by from the CGPoints
+//      // simply doing this as it seems to work better than using coordinate angles
+//      let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
+//      let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
+//      //        let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
+//      let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
+//
+//      let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
+//      let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
+//
+//      // now add the view
+//      let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
+//      let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
+//      newPitchView.image = pitchImageGreen
+//      newPitchView.layer.opacity = 0.5
+//      newPitchView.isUserInteractionEnabled = true
+//      newPitchView.tag = 200
+//
+//      // add the gesture recognizers
+//      let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
+//      let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
+//      let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
+//      newPitchView.addGestureRecognizer(panner)
+//      newPitchView.addGestureRecognizer(rotator)
+//      newPitchView.addGestureRecognizer(pincher)
+//
+//      // rotate the view
+//      // need to anchor this first by the origin in order to rotate around bottom left
+//      newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
+//      let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
+//      playingAreaAngleSaved = pitchAngle
+//      newPitchView.transform = newPitchView.transform.rotated(by: pitchAngle)
+//      self.pitchAngleToApply = pitchAngle
+//      newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
+//
+//      mapHeadingAtResizeOn = mapView.camera.heading
+//      pitchRotationAtResizeOn = rotation(from: newPitchView.transform)
+//      //    updateAngleUI()
+//
+//      playingAreaAngleSaved = pitchAngle
+//      self.pitchAngleToApply = pitchAngle
+//      self.createPitchOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
+//      self.setMapViewZoom()
+
+    }
 
     // getting the angle to rotate the overlay by from the CGPoints
     // simply doing this as it seems to work better than using coordinate angles
@@ -266,6 +439,14 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     self.createPitchOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
     self.setMapViewZoom()
 
+
+  }
+
+  func setMapViewCentre() {
+    let currentLocationCoordinate = LocationManager.sharedInstance.currentLocation.coordinate
+    let region = MKCoordinateRegion(center: currentLocationCoordinate, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
+    self.mapView.setRegion(region, animated: true)
+
   }
 
   func getWorkoutsForPlayingArea() {
@@ -286,36 +467,12 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
         self.workoutInfoArray.append(workoutToAppend)
       }
       self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
-//      MyFunc.logMessage(.debug, "workoutInfoArray:")
-//      MyFunc.logMessage(.debug, String(describing: self.workoutInfoArray))
-//      MyFunc.logMessage(.debug, "workoutMetadataArray:")
-//      MyFunc.logMessage(.debug, String(describing: self.workoutMetadataArray))
-//      MyFunc.logMessage(.debug, "workoutArray:")
-//      MyFunc.logMessage(.debug, String(describing: self.workoutArray))
-
 
       let workoutMetadataForPlayingAreaArray = self.workoutMetadataArray.filter {$0.playingAreaId == self.playingAreaToUpdate?.id }
       let workoutMetadataArrayIdsOnly = workoutMetadataForPlayingAreaArray.map { $0.workoutId}
 
-      MyFunc.logMessage(.debug, "workoutMetadataForPlayingAreaArray:")
-      MyFunc.logMessage(.debug, String(describing: workoutMetadataForPlayingAreaArray))
-
-      MyFunc.logMessage(.debug, "workoutMetadataArrayIdsOnly:")
-      MyFunc.logMessage(.debug, String(describing: workoutMetadataArrayIdsOnly))
-
       let workoutForPlayingAreaArray = self.workoutArray.filter { workoutMetadataArrayIdsOnly.contains($0.uuid) }
-//      let workoutForPlayingAreaArray = self.workoutArray.filter {$0.uuid == workoutMetadataArrayIdsOnly }
-
-      MyFunc.logMessage(.debug, "workoutForPlayingAreaArray:")
-      MyFunc.logMessage(.debug, String(describing: workoutForPlayingAreaArray))
-
-
       self.workoutArray = workoutForPlayingAreaArray
-
-      let workoutMetaCount = self.workoutMetadataArray.count
-      let workoutPACount = workoutMetadataForPlayingAreaArray.count
-      MyFunc.logMessage(.debug, "All Count: \(workoutMetaCount)")
-      MyFunc.logMessage(.debug, "Filtered Count: \(workoutPACount)")
 
       self.workoutTableView.reloadData()
     }
@@ -601,58 +758,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     return documentsDirectory
   }
 
-  
-  //  func updateAngleUI () {
-  //    let mapStartRadiansStr = String(format: "%.2f", mapHeadingAtResizeOn.degreesToRadians)
-  //    mapStartRadiansField.text = mapStartRadiansStr
-  //    let mapStartDegreesStr = String(format: "%.2f", mapHeadingAtResizeOn)
-  //    mapStartDegreesField.text = mapStartDegreesStr
-  //
-  //    let mapEndRadiansStr = String(format: "%.2f", mapHeadingAtResizeOff.degreesToRadians)
-  //    mapEndRadiansField.text = mapEndRadiansStr
-  //    let mapEndDegreesStr = String(format: "%.2f", mapHeadingAtResizeOff)
-  //    mapEndDegreesField.text = mapEndDegreesStr
-  //
-  //    let pitchStartRadiansStr = String(format: "%.2f", pitchRotationAtResizeOn)
-  //    pitchStartRadiansField.text = pitchStartRadiansStr
-  //    let pitchStartDegreesStr = String(format: "%.2f", pitchRotationAtResizeOn.radiansToDegrees)
-  //    pitchStartDegreesField.text = pitchStartDegreesStr
-  //
-  //    let pitchEndRadiansStr = String(format: "%.2f", pitchRotationAtResizeOff)
-  //    pitchEndRadiansField.text = pitchEndRadiansStr
-  //    let pitchEndDegreesStr = String(format: "%.2f", pitchRotationAtResizeOff.radiansToDegrees)
-  //    pitchEndDegreesField.text = pitchEndDegreesStr
-  //
-  //    let playingAreaAngleSavedRadiansStr = String(format: "%.2f", playingAreaAngleSaved)
-  //    playingAreaSavedAngleRadiansField.text = playingAreaAngleSavedRadiansStr
-  //    let playingAreaAngleSavedDegreesStr = String(format: "%.2f", playingAreaAngleSaved.radiansToDegrees)
-  //    playingAreaSavedAngleDegreesField.text = playingAreaAngleSavedDegreesStr
-  //
-  //  }
-  
-  //  func loadMetadataUI() {
-  //
-  //    sportPicker.delegate = self
-  //    sportPicker.dataSource = self
-  //    sportField.inputView = sportPicker
-  //
-  //    // this code cancels the keyboard and profile picker when field editing finishes
-  //    let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-  //    tapGesture.cancelsTouchesInView = false
-  //    self.view.addGestureRecognizer(tapGesture)
-  //
-  //    let workoutActivity = workoutMetadata.activity
-  //    let workoutVenue = workoutMetadata.venue
-  //    let workoutPitch = workoutMetadata.pitch
-  //    let workoutSport = workoutMetadata.sport
-  //
-  //    activityField.text = workoutActivity
-  //    venueField.text = workoutVenue
-  //    pitchField.text = workoutPitch
-  //    sportField.text = workoutSport
-  //
-  //  }
-  
   
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
     return true

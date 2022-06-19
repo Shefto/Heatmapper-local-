@@ -63,7 +63,7 @@ class PlayingAreasViewController: UIViewController {
 
   @IBAction func addButton(_ sender: UIBarButtonItem) {
 
-    self.performSegue(withIdentifier: "referenceDataToActivity", sender: nil)
+    self.performSegue(withIdentifier: "playingAreasToPlayingArea", sender: nil)
 
   }
 
