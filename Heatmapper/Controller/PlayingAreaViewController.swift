@@ -91,7 +91,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       
       // record the map heading at end of resizing
       mapHeadingAtResizeOff = mapView.getRotation() ?? 0
-      
       saveResizedPlayingArea()
       
       playingAreaAngleSavedAfterResize = pitchRotationAtResizeOff
@@ -107,7 +106,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       // removes the pitchView
       removeViewWithTag(tag: 200)
       
-      //      resetPlayingAreaButton.isHidden = true
+      // resetPlayingAreaButton.isHidden = true
       heightAndWeightStackView.isHidden = true
       
     } else {
@@ -150,6 +149,17 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     self.navigationItem.rightBarButtonItem = editButtonItem
   }
 
+  @IBAction func sportEditingDidEnd(_ sender: Any) {
+
+    playingAreaToUpdate?.sport = sportField.text
+    guard let topLeft = self.topLeftCoord, let bottomLeft = self.bottomLeftCoord, let bottomRight = self.bottomRightCoord else {
+      MyFunc.logMessage(.error, "Missing co-ordinates for overlay")
+      return
+    }
+    removeViewWithTag(tag: 200)
+    createPitchOverlay(topLeft: topLeft, bottomLeft: bottomLeft, bottomRight: bottomRight)
+  }
+
   override func setEditing(_ editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: true)
     if editing {
@@ -168,7 +178,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
     }
   }
-
 
 
   func initialiseUI() {
@@ -198,7 +207,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
   func getPlayingAreaOnLoad() {
 
-
     if let playingArea  = playingAreaToUpdate  {
 
     nameField.text = playingArea.name
@@ -219,7 +227,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     self.bottomRightCoord = bottomRightAsCoord
     self.topLeftCoord = topLeftAsCoord
     self.topRightCoord = topRightAsCoord
-      self.isEditing = false
+    self.isEditing = false
 
     } else {
 
@@ -290,7 +298,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
       // as we are creating a new playing area, default the name and venue to the placemark data
       var geocoder            : CLGeocoder!
-      geocoder = CLGeocoder()
+      geocoder                = CLGeocoder()
       geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
 
         if error != nil {
@@ -374,8 +382,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
   }
 
-
-
   func getWorkoutsForPlayingArea() {
 
     workoutInfoArray.removeAll()
@@ -442,9 +448,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let venueToSave = venueField.text ?? ""
     let sportToSave = sportField.text ?? ""
 
-
     let playingAreaToSave = PlayingArea(playingAreaId: playingAreaToUpdate!.id, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "", isFavourite: true)
-
 
     MyFunc.savePlayingArea(playingAreaToSave)
 
