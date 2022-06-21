@@ -113,8 +113,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       // turn everything on (as it's off)
       resizeOn = true
       resizeButton.setTitle("Save", for: .normal)
-      //      resizeButton.tintColor = UIColor.systemRed
-      //      resetPlayingAreaButton.isHidden = false
       heightAndWeightStackView.isHidden = false
       removeAllPinsAndAnnotations()
       enterResizeMode()
@@ -152,13 +150,28 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   @IBAction func sportEditingDidEnd(_ sender: Any) {
 
     playingAreaToUpdate?.sport = sportField.text
-    guard let topLeft = self.topLeftCoord, let bottomLeft = self.bottomLeftCoord, let bottomRight = self.bottomRightCoord else {
-      MyFunc.logMessage(.error, "Missing co-ordinates for overlay")
-      return
-    }
-    removeViewWithTag(tag: 200)
-    createPitchOverlay(topLeft: topLeft, bottomLeft: bottomLeft, bottomRight: bottomRight)
+//    guard let topLeft = self.topLeftCoord, let bottomLeft = self.bottomLeftCoord, let bottomRight = self.bottomRightCoord else {
+//      MyFunc.logMessage(.error, "Missing co-ordinates for overlay")
+//      return
+//    }
+    updateOverlay()
   }
+
+  func updateOverlay() {
+
+    if let overlays = mapView?.overlays {
+      for overlay in overlays {
+        if overlay is PlayingAreaOverlay {
+          let rectForNewOverlay = overlay.boundingMapRect
+          mapView?.removeOverlay(overlay)
+          let newOverlay = PlayingAreaOverlay(pitchRect: rectForNewOverlay)
+          mapView.insertOverlay(newOverlay, at: 0)
+        }
+      }
+    }
+
+  }
+
 
   override func setEditing(_ editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: true)
@@ -209,25 +222,25 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
     if let playingArea  = playingAreaToUpdate  {
 
-    nameField.text = playingArea.name
-    venueField.text = playingArea.venue
-    sportField.text = playingArea.sport
+      nameField.text = playingArea.name
+      venueField.text = playingArea.venue
+      sportField.text = playingArea.sport
 
-    let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomLeft.latitude) / 2
-    let midpointLongitude = (playingArea.bottomLeft.longitude + playingArea.bottomRight.longitude) / 2
-    self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+      let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomLeft.latitude) / 2
+      let midpointLongitude = (playingArea.bottomLeft.longitude + playingArea.bottomRight.longitude) / 2
+      self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
 
-    // PlayingArea coordinates stored as Codable sub-class of CLLocationCoordinate2D so convert to original class (may be able to remove this?)
-    let topLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
-    let bottomLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
-    let bottomRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
-    let topRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.topRight.latitude, longitude: playingArea.topRight.longitude)
+      // PlayingArea coordinates stored as Codable sub-class of CLLocationCoordinate2D so convert to original class (may be able to remove this?)
+      let topLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
+      let bottomLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
+      let bottomRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
+      let topRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.topRight.latitude, longitude: playingArea.topRight.longitude)
 
-    self.bottomLeftCoord = bottomLeftAsCoord
-    self.bottomRightCoord = bottomRightAsCoord
-    self.topLeftCoord = topLeftAsCoord
-    self.topRightCoord = topRightAsCoord
-    self.isEditing = false
+      self.bottomLeftCoord = bottomLeftAsCoord
+      self.bottomRightCoord = bottomRightAsCoord
+      self.topLeftCoord = topLeftAsCoord
+      self.topRightCoord = topRightAsCoord
+      self.isEditing = false
 
     } else {
 
@@ -261,9 +274,9 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
       // this code ensures the pitch size is larger than the heatmap by adding a margin
       // get the dimensions of the rectangle from the distance between the point extremes
-//      var rectWidth = maxX - minX
-//      var rectHeight = minY - maxY
-//      // set the scale of the border
+      //      var rectWidth = maxX - minX
+      //      var rectHeight = minY - maxY
+      //      // set the scale of the border
 
       // setting default pitch size to football pitch width and height
       var rectWidth : Double = 68.0
@@ -599,7 +612,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     //remove the pitch MKMapOverlay
     if let overlays = mapView?.overlays {
       for overlay in overlays {
-        if overlay is FootballPitchOverlay {
+        if overlay is PlayingAreaOverlay {
           mapView?.removeOverlay(overlay)
         }
       }
@@ -627,7 +640,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let pitchMKMapRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
     
     //  create an overlay of the pitch based upon the rectangle
-    let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
+    let adjustedPitchOverlay = PlayingAreaOverlay(pitchRect: pitchMKMapRect)
     mapView.insertOverlay(adjustedPitchOverlay, at: 0)
     //    mapView.addOverlay(adjustedPitchOverlay)
     
@@ -879,26 +892,38 @@ extension PlayingAreaViewController: MKMapViewDelegate {
   }
   
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    
-    
-    if overlay is FootballPitchOverlay {
-      if let pitchImage = UIImage(named: "Figma Pitch 11 Green.png")
-      {
-        
-        // get the rotation of the pitchView
-        let angleIncMapRotation = getMapRotation()
-        let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation)
-        
-        footballPitchOverlayRenderer.alpha = 1
-        
-        return footballPitchOverlayRenderer
+
+//    if overlay is PlayingAreaOverlay {
+
+      var pitchImage = UIImage()
+      switch playingAreaToUpdate?.sport {
+      case "Football":
+        pitchImage = UIImage(named: "Football pitch.png")!
+      case "5-a-side":
+        pitchImage = UIImage(named: "5-a-side pitch.png")!
+      case "Rugby":
+        pitchImage = UIImage(named: "Rugby Union pitch.png")!
+      case "Tennis":
+        pitchImage = UIImage(named: "Tennis court.png")!
+      case "None":
+        pitchImage = UIImage(named: "Figma Pitch 11 Green.png")!
+      default:
+        pitchImage = UIImage(named: "Figma Pitch 11 Green.png")!
       }
-    }
-    
-    // should never call this... needs to be fixed
-    MyFunc.logMessage(.error, "No MKOverlayRenderer returned")
-    let defaultOverlayRenderer = MKOverlayRenderer()
-    return defaultOverlayRenderer
+
+      // get the rotation of the pitchView
+      let angleIncMapRotation = getMapRotation()
+      let footballPitchOverlayRenderer = PlayingAreaOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation)
+
+      footballPitchOverlayRenderer.alpha = 1
+
+      return footballPitchOverlayRenderer
+//    }
+//
+//    // should never call this... needs to be fixed
+//    MyFunc.logMessage(.error, "No MKOverlayRenderer returned")
+//    let defaultOverlayRenderer = MKOverlayRenderer()
+//    return defaultOverlayRenderer
     
   }
   
@@ -953,7 +978,7 @@ extension PlayingAreaViewController: UITableViewDelegate, UITableViewDataSource 
     let workoutStartDate = workoutArray[indexPath.row].startDate
     cell.textLabel!.text = dateFormatter.string(from: workoutStartDate)
 
-//    cell.detailTextLabel!.text = playingAreaArray[indexPath.row].venue
+    //    cell.detailTextLabel!.text = playingAreaArray[indexPath.row].venue
 
     return cell
   }

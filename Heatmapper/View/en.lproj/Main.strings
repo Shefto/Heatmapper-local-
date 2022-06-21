@@ -292,7 +292,7 @@
 /* Class = "UILabel"; text = "Distance"; ObjectID = "rJh-q3-eQC"; */
 "rJh-q3-eQC.text" = "";
 
-/* Class = "UIButton"; configuration.title = "Adjust playing area size"; ObjectID = "RLY-c9-DiG"; */
+/* Class = "UIButton"; configuration.title = "Resize playing area"; ObjectID = "RLY-c9-DiG"; */
 "RLY-c9-DiG.configuration.title" = "";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "RLY-c9-DiG"; */

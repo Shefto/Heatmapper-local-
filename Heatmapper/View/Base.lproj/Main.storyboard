@@ -828,7 +828,7 @@ DQoNCg
                                             <constraint firstAttribute="height" constant="40" id="ODn-r1-ooG"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Adjust playing area size"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Resize playing area"/>
                                         <connections>
                                             <action selector="btnResize:" destination="61I-57-2bz" eventType="touchUpInside" id="tlg-19-B8h"/>
                                         </connections>

@@ -10,7 +10,7 @@
 
 import MapKit
 
-class FootballPitchOverlayRenderer: MKOverlayRenderer {
+class PlayingAreaOverlayRenderer: MKOverlayRenderer {
   let overlayImage      : UIImage
   let angle             : CGFloat
   var workoutId         : UUID?

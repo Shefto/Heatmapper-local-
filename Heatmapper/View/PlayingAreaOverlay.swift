@@ -1,5 +1,5 @@
 //
-//  FootballPitchOverlay.swift
+//  PlayingAreaOverlay.swift
 //  Heatmapper
 //
 //  Created by Richard English on 13/10/2021.
@@ -8,20 +8,18 @@
 
 import MapKit
 
-class FootballPitchOverlay: NSObject, MKOverlay {
+class PlayingAreaOverlay: NSObject, MKOverlay {
 
   let boundingMapRect: MKMapRect
 
   init(pitchRect: MKMapRect) {
     boundingMapRect = pitchRect
-//    MyFunc.logMessage(.debug, "FootballPitchOverlay initialised with boundingMapRect = \(boundingMapRect)")
   }
 
   // centre of Overlay
   var coordinate : CLLocationCoordinate2D
   {
     let midMKPoint = MKMapPoint(x: boundingMapRect.midX, y: boundingMapRect.midY)
-
     return midMKPoint.coordinate
   }
 

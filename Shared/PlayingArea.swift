@@ -52,30 +52,6 @@ struct PlayingArea: Codable {
 
   }
 
-//  init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D, name: String?, venue: String?, sport: String?, comments: String?, isFavourite: Bool) {
-////    self.workoutID  = workoutID
-//    self.id = UUID()
-//    self.name = name
-//    self.venue = venue
-//    self.sport = sport
-//    self.comments = comments
-//    self.bottomLeft = bottomLeft
-//    self.bottomRight = bottomRight
-//    self.topLeft = topLeft
-//    self.topRight = topRight
-//    self.isFavourite = isFavourite
-//  }
-
-//  init (workoutID: UUID, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D) {
-////    self.workoutID  = workoutID
-//    self.id = UUID()
-//    self.bottomLeft = bottomLeft
-//    self.bottomRight = bottomRight
-//    self.topLeft = topLeft
-//    self.topRight = topRight
-//    self.isFavourite = true
-//  }
-
   init (playingAreaId: UUID?, bottomLeft: CodableCLLCoordinate2D, bottomRight: CodableCLLCoordinate2D, topLeft: CodableCLLCoordinate2D, topRight: CodableCLLCoordinate2D, name: String?, venue: String?, sport: String?, comments: String?, isFavourite: Bool) {
 
     if playingAreaId != nil {

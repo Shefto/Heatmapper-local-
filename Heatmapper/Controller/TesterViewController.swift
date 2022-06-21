@@ -438,7 +438,7 @@ class TesterViewController: UIViewController {
       if let overlays = mapView?.overlays {
         for overlay in overlays {
 
-          if overlay is FootballPitchOverlay {
+          if overlay is PlayingAreaOverlay {
             let overlayRect = overlay.boundingMapRect
             let overlayRectStr = String(describing: overlayRect)
             print ("overlayRect: \(overlayRectStr)")
@@ -567,7 +567,7 @@ class TesterViewController: UIViewController {
       //remove the pitch overlay
       if let overlays = mapView?.overlays {
         for overlay in overlays {
-          if overlay is FootballPitchOverlay {
+          if overlay is PlayingAreaOverlay {
             let overlayRect = overlay.boundingMapRect
             let overlayRectStr = String(describing: overlayRect)
             print ("overlayRect: \(overlayRectStr)")
@@ -984,7 +984,7 @@ class TesterViewController: UIViewController {
         let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
 
         //  create an overlay of the pitch based upon the rectangle
-        let footballPitch11Overlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
+        let footballPitch11Overlay = PlayingAreaOverlay(pitchRect: pitchMKMapRect)
         self.mapView.addOverlay(footballPitch11Overlay)
         self.setMapViewZoom(rect: pitchMKMapRect)
 
@@ -1055,7 +1055,7 @@ class TesterViewController: UIViewController {
 
 
     //  create an overlay of the pitch based upon the rectangle
-    let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
+    let adjustedPitchOverlay = PlayingAreaOverlay(pitchRect: pitchMKMapRect)
     self.mapView.addOverlay(adjustedPitchOverlay)
     self.setMapViewZoom(rect: pitchMKMapRect)
 
@@ -1294,14 +1294,14 @@ extension TesterViewController: MKMapViewDelegate {
       return circleRenderer
     }
 
-    if overlay is FootballPitchOverlay {
+    if overlay is PlayingAreaOverlay {
       if let pitchImage = UIImage(named: "Figma Pitch 11 Green.png")
       {
 
         // get the rotation of the pitchView
         let angleIncMapRotation = getMapRotation()
 
-        let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation, workoutId: heatmapWorkoutId!)
+        let footballPitchOverlayRenderer = PlayingAreaOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation, workoutId: heatmapWorkoutId!)
 
         footballPitchOverlayRenderer.alpha = 0.5
 

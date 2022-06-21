@@ -143,8 +143,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     }
     MyFunc.savePlayingArea(playingAreaToSave)
 
-
-
     self.notifyUser(messageTitle, message: messageText)
     setFavouritesButtonTitle()
   }
@@ -159,6 +157,25 @@ class HeatmapViewController: UIViewController, MyMapListener {
       return
     }
     MyFunc.savePlayingArea(playingAreaToSave)
+    updateOverlay()
+
+  }
+
+  func updateOverlay() {
+
+    if let overlays = mapView?.overlays {
+      for overlay in overlays {
+        if overlay is PlayingAreaOverlay {
+          let rectForNewOverlay = overlay.boundingMapRect
+          mapView?.removeOverlay(overlay)
+          let newOverlay = PlayingAreaOverlay(pitchRect: rectForNewOverlay)
+          mapView.insertOverlay(newOverlay, at: 0)
+        }
+      }
+    }
+
+
+
   }
 
   @IBAction func resetPitches(_ sender: Any) {
@@ -284,7 +301,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
       // removes the pitchView
       removeViewWithTag(tag: 200)
-
       resetPlayingAreaButton.isHidden = true
       heightAndWeightStackView.isHidden = true
 
@@ -424,7 +440,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
     pitchMapTopRightCoordinate = bottomLeftToSwap
 
-
     playingAreaAngleSavedAfterResize = angleInRadians(between: pitchMapBottomLeftCGPoint, ending: pitchMapBottomRightCGPoint)
 
     // update the overlayCenter as we will centre the map Zoom on this
@@ -432,7 +447,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let midpointLongitude = (pitchMapTopLeftCoordinate.longitude + pitchMapBottomRightCoordinate.longitude) / 2
     self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
 
-    createPitchOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
+    createPlayingAreaOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
 
     // save the pitch here
     // convert the CLLCoordinates to a subclass which allows us to code them ready for saving
@@ -510,7 +525,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
         self.playingAreaMapRect = pitchMKMapRect
 
         //  create an overlay of the pitch based upon the rectangle
-        let footballPitch11Overlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
+        let footballPitch11Overlay = PlayingAreaOverlay(pitchRect: pitchMKMapRect)
         self.mapView.addOverlay(footballPitch11Overlay)
         self.setMapViewZoom()
 
@@ -564,7 +579,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
     let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
 
-
     let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
     let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
 
@@ -601,7 +615,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     //remove the pitch MKMapOverlay
     if let overlays = mapView?.overlays {
       for overlay in overlays {
-        if overlay is FootballPitchOverlay {
+        if overlay is PlayingAreaOverlay {
           mapView?.removeOverlay(overlay)
         }
       }
@@ -760,7 +774,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     playingAreaAngleSaved = pitchAngle
     self.pitchAngleToApply = pitchAngle
-    self.createPitchOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
+    self.createPlayingAreaOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
     setMapViewZoom()
     setFavouritesButtonTitle()
 
@@ -775,7 +789,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   }
 
-  func createPitchOverlay(topLeft: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) {
+  func createPlayingAreaOverlay(topLeft: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) {
 
     // get the max and min X and Y points from the above coordinates as MKMapPoints
     let topLeftMapPoint = MKMapPoint(topLeft)
@@ -793,7 +807,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let pitchMKMapRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
 
     //  create an overlay of the pitch based upon the rectangle
-    let adjustedPitchOverlay = FootballPitchOverlay(pitchRect: pitchMKMapRect)
+    let adjustedPitchOverlay = PlayingAreaOverlay(pitchRect: pitchMKMapRect)
     mapView.insertOverlay(adjustedPitchOverlay, at: 0)
     //    mapView.addOverlay(adjustedPitchOverlay)
 
@@ -1414,18 +1428,35 @@ extension HeatmapViewController: MKMapViewDelegate {
       return circleRenderer
     }
 
-    if overlay is FootballPitchOverlay {
-      if let pitchImage = UIImage(named: "Figma Pitch 11 Green.png")
-      {
+    if overlay is PlayingAreaOverlay {
+//      if let pitchImage = UIImage(named: "Figma Pitch 11 Green.png")
+//      {
+
+        var pitchImage = UIImage()
+        switch playingArea?.sport {
+        case "Football":
+          pitchImage = UIImage(named: "Football pitch.png")!
+        case "5-a-side":
+          pitchImage = UIImage(named: "5-a-side pitch.png")!
+        case "Rugby":
+          pitchImage = UIImage(named: "Rugby Union pitch.png")!
+        case "Tennis":
+          pitchImage = UIImage(named: "Tennis court.png")!
+        case "None":
+          pitchImage = UIImage(named: "Figma Pitch 11 Green.png")!
+        default:
+          pitchImage = UIImage(named: "Figma Pitch 11 Green.png")!
+        }
+
 
         // get the rotation of the pitchView
         let angleIncMapRotation = getMapRotation()
-        let footballPitchOverlayRenderer = FootballPitchOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation, workoutId: heatmapWorkoutId!)
+        let footballPitchOverlayRenderer = PlayingAreaOverlayRenderer(overlay: overlay, overlayImage: pitchImage, angle: angleIncMapRotation, workoutId: heatmapWorkoutId!)
         footballPitchOverlayRenderer.alpha = 1
 
         return footballPitchOverlayRenderer
       }
-    }
+//    }
 
     // should never call this... needs to be fixed
     MyFunc.logMessage(.error, "No MKOverlayRenderer returned")
