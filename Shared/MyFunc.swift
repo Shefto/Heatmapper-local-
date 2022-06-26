@@ -102,7 +102,7 @@ class MyFunc {
 
   }
 
-  static func getPlayingArea(workoutId: UUID, successClosure: @escaping (Result<PlayingArea,dataRetrievalError>) -> Void) {
+  static func getPlayingAreaFromWorkoutId(workoutId: UUID, successClosure: @escaping (Result<PlayingArea,dataRetrievalError>) -> Void) {
 
     let defaults = UserDefaults.standard
 

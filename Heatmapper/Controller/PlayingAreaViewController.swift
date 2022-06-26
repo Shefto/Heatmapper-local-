@@ -617,7 +617,8 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
         }
       }
     }
-    
+
+    playingAreaToUpdate = playingArea
   }
   
 

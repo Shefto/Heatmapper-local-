@@ -46,9 +46,6 @@
 /* Class = "UILabel"; text = "Name of your activity"; ObjectID = "1Xq-LU-MWR"; */
 "1Xq-LU-MWR.text" = "";
 
-/* Class = "UILabel"; text = "Pitch"; ObjectID = "1Ze-4i-L2A"; */
-"1Ze-4i-L2A.text" = "";
-
 /* Class = "UITextField"; placeholder = "Playing Area"; ObjectID = "2Hb-dc-c99"; */
 "2Hb-dc-c99.placeholder" = "";
 
@@ -124,9 +121,6 @@
 /* Class = "UILabel"; text = "Radius"; ObjectID = "cYn-Xg-gyd"; */
 "cYn-Xg-gyd.text" = "";
 
-/* Class = "UILabel"; text = "Sport"; ObjectID = "D9N-6Z-FMe"; */
-"D9N-6Z-FMe.text" = "";
-
 /* Class = "UILabel"; text = "Detail"; ObjectID = "Dc1-6G-lTu"; */
 "Dc1-6G-lTu.text" = "";
 
@@ -190,9 +184,6 @@
 /* Class = "UITextField"; text = "º"; ObjectID = "hUP-TM-1gP"; */
 "hUP-TM-1gP.text" = "";
 
-/* Class = "UILabel"; text = "Activity"; ObjectID = "hV7-3h-Xdr"; */
-"hV7-3h-Xdr.text" = "";
-
 /* Class = "UITextField"; text = "-"; ObjectID = "IHC-Xx-ul9"; */
 "IHC-Xx-ul9.text" = "";
 
@@ -252,9 +243,6 @@
 
 /* Class = "UILabel"; text = "Pitch resize end"; ObjectID = "O1j-3Y-Hld"; */
 "O1j-3Y-Hld.text" = "";
-
-/* Class = "UILabel"; text = "Venue"; ObjectID = "OW8-RA-0px"; */
-"OW8-RA-0px.text" = "";
 
 /* Class = "UITextField"; text = "-"; ObjectID = "pB5-KK-YTG"; */
 "pB5-KK-YTG.text" = "";

@@ -477,7 +477,7 @@ class TesterViewController: UIViewController {
 //      self.touchView.isHidden = false
 
       // get the saved playing area coordinates
-      MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
+      MyFunc.getPlayingAreaFromWorkoutId(workoutId: heatmapWorkoutId!, successClosure: { result in
 
         switch result {
         case .failure(let error):
@@ -935,7 +935,7 @@ class TesterViewController: UIViewController {
 
   func getSavedPitchOverlay() {
 
-    MyFunc.getPlayingArea(workoutId: heatmapWorkoutId!, successClosure: { result in
+    MyFunc.getPlayingAreaFromWorkoutId(workoutId: heatmapWorkoutId!, successClosure: { result in
 
       switch result {
       case .failure(let error):
