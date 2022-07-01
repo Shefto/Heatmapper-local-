@@ -80,6 +80,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
   let activityPicker              = UIPickerView()
   let sportPicker                 = UIPickerView()
 
+  var pitchImage = UIImage()
+
   @IBOutlet weak var mapStartRadiansField               : ThemeMediumFontTextField!
   @IBOutlet weak var mapStartDegreesField               : ThemeMediumFontTextField!
   @IBOutlet weak var pitchStartRadiansField             : ThemeMediumFontTextField!
@@ -147,22 +149,51 @@ class HeatmapViewController: UIViewController, MyMapListener {
     setFavouritesButtonTitle()
   }
 
-
   @IBAction func textFieldEditingDidEnd(_ sender: Any) {
+    // save name and venue - sport handled by different function as needs to also update the overlay
     playingArea?.name     = pitchField.text
     playingArea?.venue    = venueField.text
-    playingArea?.sport    = sportField.text
+    guard let playingAreaToSave = self.playingArea else {
+      MyFunc.logMessage(.error, "HeatmapViewController: textFieldEditingDidEnd: no Playing Area to save")
+      return
+    }
+    MyFunc.savePlayingArea(playingAreaToSave)
+  }
+
+  @IBAction func sportFieldEditingDidEnd(_ sender: Any) {
+
+    let sportStr = sportField.text ?? ""
+    updatePitchImage(sport: sportStr)
+
+    playingArea?.sport = sportStr
     guard let playingAreaToSave = self.playingArea else {
       MyFunc.logMessage(.error, "HeatmapViewController: textFieldEditingDidEnd: no Playing Area to save")
       return
     }
     MyFunc.savePlayingArea(playingAreaToSave)
     updateOverlay()
+  }
 
+  func updatePitchImage(sport: String)  {
+    switch sport {
+    case "Football":
+      pitchImage = UIImage(named: "Football pitch.png")!
+    case "5-a-side":
+      pitchImage = UIImage(named: "5-a-side pitch.png")!
+    case "Rugby":
+      pitchImage = UIImage(named: "Rugby Union pitch.png")!
+    case "Tennis":
+      pitchImage = UIImage(named: "Tennis court.png")!
+    case "None":
+      pitchImage = UIImage(named: "Figma Pitch 11 Green.png")!
+    default:
+      pitchImage = UIImage(named: "Figma Pitch 11 Green.png")!
+    }
   }
 
   func updateOverlay() {
 
+    // remove the old PlayingAreaOverlay and insert the new one
     if let overlays = mapView?.overlays {
       for overlay in overlays {
         if overlay is PlayingAreaOverlay {
@@ -173,9 +204,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
         }
       }
     }
-
-
-
   }
 
   @IBAction func resetPitches(_ sender: Any) {
@@ -281,11 +309,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
       saveResizedPlayingArea()
 
-      playingAreaAngleSavedAfterResize = pitchRotationAtResizeOff
-      let playingAreaAngleSavedAfterResizeDegrees = playingAreaAngleSavedAfterResize.radiansToDegrees
+//      playingAreaAngleSavedAfterResize = pitchRotationAtResizeOff
+      let pitchRotationAtResizeOffDegrees = pitchRotationAtResizeOff.radiansToDegrees
       //      let playingAreaAngleSavedAfterResizeDegreesStr = String(describing: playingAreaAngleSavedAfterResizeDegrees)
       //      print("playingAreaAngleSavedAfterResizeDegreesStr: \(playingAreaAngleSavedAfterResizeDegreesStr)")
-      mapView.camera.heading = playingAreaAngleSavedAfterResizeDegrees
+      mapView.camera.heading = pitchRotationAtResizeOffDegrees
       //      let cameraHeadingAfterResizeStr = String(describing: mapView.camera.heading)
       //      print("camera heading after resize: \(cameraHeadingAfterResizeStr)")
 
@@ -304,9 +332,9 @@ class HeatmapViewController: UIViewController, MyMapListener {
       resetPlayingAreaButton.isHidden = true
       heightAndWeightStackView.isHidden = true
       sportField.isHidden = false
-      venueField.isHidden = false
-      activityField.isHidden = false
-      pitchField.isHidden = false
+//      venueField.isHidden = false
+//      activityField.isHidden = false
+//      pitchField.isHidden = false
 
 
     } else {
@@ -323,9 +351,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
       activityField.isHidden = true
       pitchField.isHidden = true
 
-
       removeAllPinsAndAnnotations()
-//      resizeGetSavedPlayingArea()
+
       getPlayingArea()
       enterResizeMode()
 
@@ -345,17 +372,14 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     // initialize the Geocoder - needed for CLPlacemark
     geocoder = CLGeocoder()
-
     initialiseUI()
 
     // this function sets up the tester colours
     // retaining but commenting out as may be needed for later work
     //  loadTesterData()
-
     getStaticData()
 
-    // get workout data
-    // Note: all UI work is called within this function as the data retrieval works asynchronously
+    // Note: all UI work is called within getWorkoutData as the data retrieval works asynchronously
     getWorkoutData()
     updateAngleUI()
 
@@ -370,7 +394,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     resizeButton.setTitle("Resize playing area", for: .normal)
 
     // default Favourite button to assume PlayingArea not a Favourite
-    // *** pending change:  set this from the workout
+    // *** pending change: set this from the workout
     isFavourite = false
     favouritesButton.setTitle("Add to Favourites", for: .normal)
 
@@ -395,10 +419,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     heightStepper.value = playingAreaView.frame.height
     widthStepper.value = playingAreaView.frame.width
-
   }
-
-
 
   func saveHeatmapImage() {
 
@@ -456,7 +477,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
     pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
     pitchMapTopRightCoordinate = bottomLeftToSwap
 
-    playingAreaAngleSavedAfterResize = angleInRadians(between: pitchMapBottomLeftCGPoint, ending: pitchMapBottomRightCGPoint)
+    // commenting out as this line doesn't appear to do anything
+//    playingAreaAngleSavedAfterResize = angleInRadians(between: pitchMapBottomLeftCGPoint, ending: pitchMapBottomRightCGPoint)
 
     // update the overlayCenter as we will centre the map Zoom on this
     let midpointLatitude = (pitchMapTopLeftCoordinate.latitude + pitchMapBottomRightCoordinate.latitude) / 2
@@ -472,12 +494,12 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
     let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
 
-    // the new way - saving with playingArea Id
-    let playingAreaToSaveWithId = PlayingArea(bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: activityField.text ?? "" , venue: venueField.text ?? "", sport: sportField.text ?? "", comments: "Saved!", isFavourite: false)
-    MyFunc.savePlayingArea(playingAreaToSaveWithId)
+    // save playing Areaa
+    let playingAreaToSave = PlayingArea(bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: activityField.text ?? "" , venue: venueField.text ?? "", sport: sportField.text ?? "", comments: "Saved!", isFavourite: false)
+    MyFunc.savePlayingArea(playingAreaToSave)
 
-    // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
-    workoutMetadata.playingAreaId = playingAreaToSaveWithId.id
+    // update the Playing Area ID on the workout
+    workoutMetadata.playingAreaId = playingAreaToSave.id
     updateWorkout()
     
 
@@ -488,110 +510,26 @@ class HeatmapViewController: UIViewController, MyMapListener {
     self.topRightCoord        = pitchMapTopRightCoordinate
     self.bottomRightCoord     = pitchMapBottomRightCoordinate
 
-    playingAreaBearing = pitchMapBottomLeftCoordinate.bearing(to: pitchMapTopLeftCoordinate)
-    let playingAreaBearingStr = String(describing: playingAreaBearing)
-    print("playingAreaBearing: \(playingAreaBearingStr)")
+    setBearing()
 
   }
 
+  func setBearing() {
+
+    // this sets the bearing of the pitch so that the pitch is always upright
+//    playingAreaBearing = pitchMapBottomLeftCoordinate.bearing(to: pitchMapTopLeftCoordinate)
+    playingAreaBearing = bottomLeftCoord!.bearing(to: topLeftCoord!)
+    let playingAreaBearingStr = String(describing: playingAreaBearing)
+    print("playingAreaBearing: \(playingAreaBearingStr)")
+
+
+  }
+
+
+
   func enterResizeMode() {
 
-//    getPlayingArea()
-    //    // get the saved playing area coordinates
-//
-//      let playingAreaToRetrieveId : UUID = workoutMetadata.playingAreaId ?? UUID()
-//
-//      MyFunc.getPlayingAreaFromId(playingAreaId: playingAreaToRetrieveId, successClosure: { result in
-//      switch result {
-//      case .failure(let error):
-//        // no playing area retrieved
-//        // should never go in here
-//        MyFunc.logMessage(.debug, "No playing area retrieved: \(error.localizedDescription) so creating default")
-//
-//        // get the max and min latitude and longitudes from all the points to be displayed in the heatmap
-//        let maxLat = self.heatmapperCoordinatesArray.map {$0.latitude}.max()
-//        let minLat = self.heatmapperCoordinatesArray.map {$0.latitude}.min()
-//        let maxLong = self.heatmapperCoordinatesArray.map {$0.longitude}.max()
-//        let minLong = self.heatmapperCoordinatesArray.map {$0.longitude}.min()
-//
-//        let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
-//        let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
-//
-//        let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
-//        let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
-//        self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-//
-//        // get the max and min X and Y points from the above coordinates as MKMapPoints
-//        let minX = MKMapPoint(minCoord).x
-//        let maxX = MKMapPoint(maxCoord).x
-//        let minY = MKMapPoint(minCoord).y
-//        let maxY = MKMapPoint(maxCoord).y
-//
-//        // this code ensures the pitch size is larger than the heatmap by adding a margin
-//        // get the dimensions of the rectangle from the distance between the point extremes
-//        var rectWidth = maxX - minX
-//        var rectHeight = minY - maxY
-//        // set the scale of the border
-//        let rectMarginScale = 0.1
-//        // set the rectangle origin as the plot dimensions plus the border
-//        let rectX = minX - (rectWidth * rectMarginScale)
-//        let rectY = minY + (rectHeight * rectMarginScale)
-//        // increase the rectangle width and height by the border * 2
-//        rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
-//        rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
-//
-//        let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
-//        self.playingAreaMapRect = pitchMKMapRect
-//
-//        //  create an overlay of the pitch based upon the rectangle
-//        let footballPitch11Overlay = PlayingAreaOverlay(pitchRect: pitchMKMapRect)
-//        self.mapView.addOverlay(footballPitch11Overlay)
-//        self.setMapViewZoom()
-//
-//        self.bottomLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
-//        self.topLeftCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: maxLong!)
-//        self.bottomRightCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: minLong!)
-//        self.topRightCoord  = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
-//
-//        // convert the coordinates to a codable subclass for saving
-//        let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
-//        let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
-//        let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
-//        let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
-//
-//        // save playing area
-//        let playingAreaToSaveWithId = PlayingArea(bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: self.activityField.text ?? "" , venue: self.venueField.text ?? "", sport: self.sportField.text ?? "", comments: "Saved!", isFavourite: false)
-//        MyFunc.savePlayingArea(playingAreaToSaveWithId)
-//
-//        // save the Playing Area Id to the Workout
-//        self.workoutMetadata.playingAreaId = playingAreaToSaveWithId.id
-//        self.updateWorkout()
-//
-//        self.updateAngleUI()
-//
-//      case .success(let playingArea):
-//        MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
-//        let playingAreaStr = String(describing: playingArea)
-//        MyFunc.logMessage(.debug, playingAreaStr)
-//
-//        let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomLeft.latitude) / 2
-//        let midpointLongitude = (playingArea.bottomLeft.longitude + playingArea.bottomRight.longitude) / 2
-//        self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-//        // convert the stored playingArea coordinates from the codable class to the base CLLCoordinate2D
-//        let topLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
-//        let bottomLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
-//        let bottomRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
-//        let topRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.topRight.latitude, longitude: playingArea.topRight.longitude)
-//
-//        self.bottomLeftCoord = bottomLeftAsCoord
-//        self.bottomRightCoord = bottomRightAsCoord
-//        self.topLeftCoord = topLeftAsCoord
-//        self.topRightCoord = topRightAsCoord
-//
-//      }
-//    })
-
-    // now need to size the pitchView from the MapView information
+    // need to size the pitchView from the MapView information
     // we have the mapView rect from the overlay and the coordinates
 
     let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
@@ -601,10 +539,9 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
     let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
 
-    // now add the view
+    // add the view
     let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
-    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
-    newPitchView.image = pitchImageGreen
+    newPitchView.image = pitchImage
     newPitchView.layer.opacity = 0.5
     newPitchView.isUserInteractionEnabled = true
     newPitchView.tag = 200
@@ -641,7 +578,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   }
 
-  // single function to replace getPlayingAreaOnLoad and resizeGetPlayingArea
   func getPlayingArea() {
     // get the Playing Area Id associated to the workout - if none, default to non-initialized UUID
     // null results will be handled by the failure case in the closure
@@ -797,164 +733,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   }
 
-  func getPlayingAreaOnLoad() {
-
-    getPlayingArea()
-
-    // keeping the below code only for reference until the replacement function is complete
-//    // get the Playing Area Id associated to the workout - if none, default to non-initialized UUID
-//    // null results will be handled by the failure case in the closure
-//    let playingAreaToRetrieveId : UUID = workoutMetadata.playingAreaId ?? UUID()
-//
-//    MyFunc.getPlayingAreaFromId(playingAreaId: playingAreaToRetrieveId, successClosure: { result in
-//      switch result {
-//      case .failure(let error):
-//        // no playing area retrieved so create a default area
-//        MyFunc.logMessage(.debug, "No playing area retrieved: \(error.localizedDescription) so creating default")
-//
-//        // get the max and min latitude and longitudes from all the points to be displayed in the heatmap
-//        let maxLat = self.heatmapperCoordinatesArray.map {$0.latitude}.max()
-//        let minLat = self.heatmapperCoordinatesArray.map {$0.latitude}.min()
-//        let maxLong = self.heatmapperCoordinatesArray.map {$0.longitude}.max()
-//        let minLong = self.heatmapperCoordinatesArray.map {$0.longitude}.min()
-//
-//        let minCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
-//        let maxCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
-//
-//        let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
-//        let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
-//        self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-//
-//        // get the max and min X and Y points from the above coordinates as MKMapPoints
-//        let minX = MKMapPoint(minCoord).x
-//        let maxX = MKMapPoint(maxCoord).x
-//        let minY = MKMapPoint(minCoord).y
-//        let maxY = MKMapPoint(maxCoord).y
-//
-//        // this code ensures the pitch size is larger than the heatmap by adding a margin
-//        // get the dimensions of the rectangle from the distance between the point extremes
-//        var rectWidth = maxX - minX
-//        var rectHeight = minY - maxY
-//        // set the scale of the border
-//        let rectMarginScale = 0.1
-//        // set the rectangle origin as the plot dimensions plus the border
-//        let rectX = minX - (rectWidth * rectMarginScale)
-//        let rectY = minY + (rectHeight * rectMarginScale)
-//
-//        // increase the rectangle width and height by the border * 2
-//        rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
-//        rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
-//
-//        let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
-//        self.playingAreaMapRect = pitchMKMapRect
-//
-//        self.setMapViewZoom()
-//
-//        // get the PlayingArea corner coordinates from the size of heatmap
-//        self.bottomLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
-//        self.topLeftCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: maxLong!)
-//        self.bottomRightCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: minLong!)
-//        self.topRightCoord  = CLLocationCoordinate2D(latitude: minLat!, longitude: minLong!)
-//
-//        // convert the coordinates to a codable subclass for saving
-//        let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
-//        let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
-//        let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
-//        let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
-//
-//        // as we are creating a new playing area, default the name and venue to the placemark data
-//        if let firstCoordinate = self.heatmapperCoordinatesArray.first {
-//          self.getCLPlacemark(coordinate: firstCoordinate)
-//        }
-//
-//        // now save the auto-generated PlayingArea coordinates for future use
-//        let playingAreaToSave = PlayingArea(bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: "", venue: "", sport: "", comments: "", isFavourite: false)
-//        MyFunc.savePlayingArea(playingAreaToSave)
-//
-//        self.playingArea = playingAreaToSave
-//        // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
-//        self.workoutMetadata.playingAreaId = playingAreaToSave.id
-//        self.updateWorkout()
-//        self.updateAngleUI()
-//
-//
-//      case .success(let playingAreaRetrieved):
-//        MyFunc.logMessage(.debug, "Success retrieving PlayingArea! :")
-//        let playingAreaStr = String(describing: playingAreaRetrieved)
-//        MyFunc.logMessage(.debug, playingAreaStr)
-//
-//        self.pitchField.text = playingAreaRetrieved.name
-//        self.venueField.text = playingAreaRetrieved.venue
-//        self.sportField.text = playingAreaRetrieved.sport
-//
-//        let midpointLatitude = (playingAreaRetrieved.topLeft.latitude + playingAreaRetrieved.bottomLeft.latitude) / 2
-//        let midpointLongitude = (playingAreaRetrieved.bottomLeft.longitude + playingAreaRetrieved.bottomRight.longitude) / 2
-//        self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-//
-//        // PlayingArea coordinates stored as Codable sub-class of CLLocationCoordinate2D so convert to original class (may be able to remove this?)
-//        let topLeftAsCoord = CLLocationCoordinate2D(latitude: playingAreaRetrieved.topLeft.latitude, longitude: playingAreaRetrieved.topLeft.longitude)
-//        let bottomLeftAsCoord = CLLocationCoordinate2D(latitude: playingAreaRetrieved.bottomLeft.latitude, longitude: playingAreaRetrieved.bottomLeft.longitude)
-//        let bottomRightAsCoord = CLLocationCoordinate2D(latitude: playingAreaRetrieved.bottomRight.latitude, longitude: playingAreaRetrieved.bottomRight.longitude)
-//        let topRightAsCoord = CLLocationCoordinate2D(latitude: playingAreaRetrieved.topRight.latitude, longitude: playingAreaRetrieved.topRight.longitude)
-//
-//        self.bottomLeftCoord = bottomLeftAsCoord
-//        self.bottomRightCoord = bottomRightAsCoord
-//        self.topLeftCoord = topLeftAsCoord
-//        self.topRightCoord = topRightAsCoord
-//
-//        self.playingArea = playingAreaRetrieved
-//
-//      }
-//    })
-//
-//    removeAllPinsAndAnnotations()
-//
-//    // getting the angle to rotate the overlay by from the CGPoints
-//    // simply doing this as it seems to work better than using coordinate angles
-//    let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
-//    let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
-//    //    let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
-//    let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
-//
-//    let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
-//    let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
-//
-//    // now add the view
-//    let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
-//    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
-//    newPitchView.image = pitchImageGreen
-//    newPitchView.layer.opacity = 0.5
-//    newPitchView.isUserInteractionEnabled = true
-//    newPitchView.tag = 200
-//
-//    // add the gesture recognizers
-//    let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
-//    let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
-//    let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
-//    newPitchView.addGestureRecognizer(panner)
-//    newPitchView.addGestureRecognizer(rotator)
-//    newPitchView.addGestureRecognizer(pincher)
-//
-//    // rotate the view
-//    // need to anchor this first by the origin in order to rotate around bottom left
-//    newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
-//    let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
-//    playingAreaAngleSaved = pitchAngle
-//    newPitchView.transform = newPitchView.transform.rotated(by: pitchAngle)
-//    self.pitchAngleToApply = pitchAngle
-//    newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
-//
-//    mapHeadingAtResizeOn = mapView.camera.heading
-//    pitchRotationAtResizeOn = rotation(from: newPitchView.transform)
-//    updateAngleUI()
-//
-//    playingAreaAngleSaved = pitchAngle
-//    self.pitchAngleToApply = pitchAngle
-//    self.createPlayingAreaOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
-//    setMapViewZoom()
-//    setFavouritesButtonTitle()
-
-  }
 
   func setFavouritesButtonTitle() {
     if playingArea?.isFavourite == true {
@@ -992,7 +770,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
   }
 
 
-
   func getMapRotation() -> CGFloat {
 
     var rotationToApply : CGFloat = 0.0
@@ -1002,6 +779,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     if let newPitchView = self.view.viewWithTag(200) {
       rotationToApply = rotation(from: newPitchView.transform.inverted())
+
       let pitchRotationDuringResize = pitchRotationAtResizeOn - pitchRotationAtResizeOff
       if pitchRotationDuringResize > .pi / 2  {
         print ("over 180 degree turn")
@@ -1033,6 +811,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
   }
 
 
+
+
   func mapView(_ mapView: MyMKMapView, rotationDidChange rotation: Double) {
     // this function just tracks any rotation changes in the map and prints them out
     mapHeadingAtResizeOff = rotation
@@ -1044,7 +824,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let documentsDirectory = paths[0]
     return documentsDirectory
   }
-
 
   func getStaticData() {
     activityArray = MyFunc.getHeatmapperActivityDefaults()
@@ -1123,12 +902,14 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let workoutActivity = workoutMetadata.activity
     let workoutVenue = workoutMetadata.playingAreaVenue
     let workoutPitch = workoutMetadata.playingAreaName
-    let workoutSport = workoutMetadata.sport
+    let workoutSport : String = workoutMetadata.sport ?? ""
 
     activityField.text = workoutActivity
     venueField.text = workoutVenue
     pitchField.text = workoutPitch
     sportField.text = workoutSport
+
+    updatePitchImage(sport: workoutSport)
 
   }
 
@@ -1185,7 +966,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     return true
   }
 
-
   func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
     return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)
   }
@@ -1216,7 +996,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
   }
 
   func createREHeatmap() {
-
     for heatmapperCoordinate in heatmapperCoordinatesArray {
       addHeatmapPoint(coordinate: heatmapperCoordinate)
     }
@@ -1266,7 +1045,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     // get the workout
     getWorkout(workoutId: workoutId) { [self] (workouts, error) in
       let workoutReturned = workouts?.first
-
       guard let workout : HKWorkout = workoutReturned else {
         MyFunc.logMessage(.error, "workoutReturned invalid: \(String(describing: workoutReturned))")
         return
@@ -1278,9 +1056,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
   }
 
   func getWorkout(workoutId: UUID, completion: @escaping ([HKWorkout]?, Error?) -> Void) {
-
     let predicate = HKQuery.predicateForObject(with: workoutId)
-
     let query = HKSampleQuery(sampleType: .workoutType(), predicate: predicate, limit: 0,sortDescriptors: nil) { (query, results, error) in
       DispatchQueue.main.async {
         guard let samples = results as? [HKWorkout], error == nil
@@ -1301,7 +1077,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
 
       guard error == nil else {
-        // Handle any errors here.
         MyFunc.logMessage(.error, "Error getting route sample object : \(error.debugDescription)")
         return
       }
@@ -1319,10 +1094,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
       guard error == nil else {
         // Handle any errors here.
-        fatalError("The update failed.")
+//        fatalError("The update failed.")
+        MyFunc.logMessage(.error, "Update of routeQuery failed")
+        return
       }
     }
-
     healthStore.execute(routeQuery)
   }
 
@@ -1348,8 +1124,13 @@ class HeatmapViewController: UIViewController, MyMapListener {
         // dispatch to the main queue as we are making UI updates
         DispatchQueue.main.async {
           self.loadSamplesUI()
-          self.getPlayingAreaOnLoad()
+          self.getPlayingArea()
           self.createREHeatmap()
+          self.setBearing()
+          let distanceToSet = self.mapView.camera.centerCoordinateDistance
+          let cameraToApply = MKMapCamera(lookingAtCenter: self.overlayCenter!, fromDistance: distanceToSet, pitch: 0, heading: self.playingAreaBearing)
+          self.mapView.setCamera(cameraToApply, animated: false)
+
 
         }
       }
@@ -1605,25 +1386,6 @@ extension HeatmapViewController: MKMapViewDelegate {
     }
 
     if overlay is PlayingAreaOverlay {
-//      if let pitchImage = UIImage(named: "Figma Pitch 11 Green.png")
-//      {
-
-        var pitchImage = UIImage()
-        switch playingArea?.sport {
-        case "Football":
-          pitchImage = UIImage(named: "Football pitch.png")!
-        case "5-a-side":
-          pitchImage = UIImage(named: "5-a-side pitch.png")!
-        case "Rugby":
-          pitchImage = UIImage(named: "Rugby Union pitch.png")!
-        case "Tennis":
-          pitchImage = UIImage(named: "Tennis court.png")!
-        case "None":
-          pitchImage = UIImage(named: "Figma Pitch 11 Green.png")!
-        default:
-          pitchImage = UIImage(named: "Figma Pitch 11 Green.png")!
-        }
-
 
         // get the rotation of the pitchView
         let angleIncMapRotation = getMapRotation()
@@ -1640,7 +1402,6 @@ extension HeatmapViewController: MKMapViewDelegate {
     return defaultOverlayRenderer
 
   }
-
 
   func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
     switch newState {
@@ -1687,7 +1448,6 @@ extension HeatmapViewController: UIPickerViewDelegate, UIPickerViewDataSource {
       sportField.text = sportArray[row].rawValue
     }
     updateWorkout()
-
     self.view.endEditing(true)
   }
 
