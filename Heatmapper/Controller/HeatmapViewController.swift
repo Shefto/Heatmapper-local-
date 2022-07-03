@@ -80,6 +80,10 @@ class HeatmapViewController: UIViewController, MyMapListener {
   let activityPicker              = UIPickerView()
   let sportPicker                 = UIPickerView()
 
+
+  var pitchImage                   = UIImage()
+
+
   @IBOutlet weak var mapStartRadiansField               : ThemeMediumFontTextField!
   @IBOutlet weak var mapStartDegreesField               : ThemeMediumFontTextField!
   @IBOutlet weak var pitchStartRadiansField             : ThemeMediumFontTextField!
@@ -161,18 +165,92 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   }
 
+
+  @IBAction func sportFieldEditingDidEnd(_ sender: Any) {
+
+    let sportStr = sportField.text ?? ""
+    updatePitchImage(sport: sportStr)
+
+    playingArea?.sport = sportStr
+    guard let playingAreaToSave = self.playingArea else {
+      MyFunc.logMessage(.error, "HeatmapViewController: textFieldEditingDidEnd: no Playing Area to save")
+      return
+    }
+    MyFunc.savePlayingArea(playingAreaToSave)
+    updateOverlay()
+  }
+
+  func updatePitchImage(sport: String)  {
+    switch sport {
+    case "Football":
+      pitchImage = UIImage(named: "Football pitch.png")!
+    case "5-a-side":
+      pitchImage = UIImage(named: "5-a-side pitch.png")!
+    case "Rugby":
+      pitchImage = UIImage(named: "Rugby Union pitch.png")!
+    case "Tennis":
+      pitchImage = UIImage(named: "Tennis court.png")!
+    case "None":
+      pitchImage = UIImage(named: "Figma Pitch 11 Green.png")!
+    default:
+      pitchImage = UIImage(named: "Figma Pitch 11 Green.png")!
+    }
+  }
+
   func updateOverlay() {
 
     if let overlays = mapView?.overlays {
       for overlay in overlays {
         if overlay is PlayingAreaOverlay {
-          let rectForNewOverlay = overlay.boundingMapRect
+//          let rectForNewOverlay = overlay.boundingMapRect
           mapView?.removeOverlay(overlay)
-          let newOverlay = PlayingAreaOverlay(pitchRect: rectForNewOverlay)
-          mapView.insertOverlay(newOverlay, at: 0)
+//          createPlayingAreaOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
         }
       }
     }
+
+    // getting the angle to rotate the overlay by from the CGPoints
+    // simply doing this as it seems to work better than using coordinate angles
+    let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
+    let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
+    //    let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
+    let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
+
+//    let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
+//    let newHeight = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewTopLeft)
+
+//    // now add the view
+//    let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
+//    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
+//    newPitchView.image = pitchImageGreen
+//    newPitchView.layer.opacity = 0.5
+//    newPitchView.isUserInteractionEnabled = true
+//    newPitchView.tag = 200
+//
+//    // add the gesture recognizers
+//    let rotator = UIRotationGestureRecognizer(target: self,action: #selector(self.handleRotate(_:)))
+//    let panner = UIPanGestureRecognizer(target: self,action: #selector(self.handlePan(_:)))
+//    let pincher = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
+//    newPitchView.addGestureRecognizer(panner)
+//    newPitchView.addGestureRecognizer(rotator)
+//    newPitchView.addGestureRecognizer(pincher)
+
+    // rotate the view
+    // need to anchor this first by the origin in order to rotate around bottom left
+//    newPitchView.setAnchorPoint(CGPoint(x: 0, y: 0))
+    let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
+    playingAreaAngleSaved = pitchAngle
+//    newPitchView.transform = newPitchView.transform.rotated(by: pitchAngle)
+    self.pitchAngleToApply = pitchAngle
+//    newPitchView.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
+
+    mapHeadingAtResizeOn = mapView.camera.heading
+//    pitchRotationAtResizeOn = rotation(from: newPitchView.transform)
+    updateAngleUI()
+
+    playingAreaAngleSaved = pitchAngle
+    self.pitchAngleToApply = pitchAngle
+    self.createPlayingAreaOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
 
   }
 
@@ -281,11 +359,9 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
       playingAreaAngleSavedAfterResize = pitchRotationAtResizeOff
       let playingAreaAngleSavedAfterResizeDegrees = playingAreaAngleSavedAfterResize.radiansToDegrees
-      //      let playingAreaAngleSavedAfterResizeDegreesStr = String(describing: playingAreaAngleSavedAfterResizeDegrees)
-      //      print("playingAreaAngleSavedAfterResizeDegreesStr: \(playingAreaAngleSavedAfterResizeDegreesStr)")
+
       mapView.camera.heading = playingAreaAngleSavedAfterResizeDegrees
-      //      let cameraHeadingAfterResizeStr = String(describing: mapView.camera.heading)
-      //      print("camera heading after resize: \(cameraHeadingAfterResizeStr)")
+
 
       setMapViewZoom()
       let distanceToSet = mapView.camera.centerCoordinateDistance
@@ -320,7 +396,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
       venueField.isHidden = true
       activityField.isHidden = true
       pitchField.isHidden = true
-
 
       removeAllPinsAndAnnotations()
       getPlayingArea()
@@ -393,8 +468,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     widthStepper.value = playingAreaView.frame.width
 
   }
-
-
 
   func saveHeatmapImage() {
 
