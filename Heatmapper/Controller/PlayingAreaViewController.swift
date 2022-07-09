@@ -494,21 +494,21 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let pitchMapTopRightCGPoint     : CGPoint = corners.topRight
     
     // workout out the corresponding co-ordinates at these points on the map view
-    var pitchMapTopLeftCoordinate     : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
-    var pitchMapBottomLeftCoordinate  : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
-    var pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
-    var pitchMapTopRightCoordinate    : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
+    let pitchMapTopLeftCoordinate     : CLLocationCoordinate2D = mapView.convert(pitchMapTopLeftCGPoint, toCoordinateFrom: self.mapView)
+    let pitchMapBottomLeftCoordinate  : CLLocationCoordinate2D = mapView.convert(pitchMapBottomLeftCGPoint, toCoordinateFrom: self.mapView)
+    let pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
+    let pitchMapTopRightCoordinate    : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
     
-    //this logic always swaps the TopLeft and BottomRight
-    // was originally an if-then-else - consider refactoring to remove
-    
-    print("Swapping TL and BR: SavePitchCoordinates")
-    let topLeftToSwap = pitchMapTopLeftCoordinate
-    pitchMapTopLeftCoordinate = pitchMapBottomRightCoordinate
-    pitchMapBottomRightCoordinate = topLeftToSwap
-    let bottomLeftToSwap = pitchMapBottomLeftCoordinate
-    pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
-    pitchMapTopRightCoordinate = bottomLeftToSwap
+//    //this logic always swaps the TopLeft and BottomRight
+//    // was originally an if-then-else - consider refactoring to remove
+//    
+//    print("Swapping TL and BR: SavePitchCoordinates")
+//    let topLeftToSwap = pitchMapTopLeftCoordinate
+//    pitchMapTopLeftCoordinate = pitchMapBottomRightCoordinate
+//    pitchMapBottomRightCoordinate = topLeftToSwap
+//    let bottomLeftToSwap = pitchMapBottomLeftCoordinate
+//    pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
+//    pitchMapTopRightCoordinate = bottomLeftToSwap
     
     
     playingAreaAngleSavedAfterResize = angleInRadians(between: pitchMapBottomLeftCGPoint, ending: pitchMapBottomRightCGPoint)

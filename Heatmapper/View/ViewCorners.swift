@@ -36,10 +36,16 @@ struct ViewCorners {
     transformedView = view
     originalCenter = view.center.applying(view.transform.inverted())
 
-    topLeft =     pointWith(multipliedWidth:-1, multipliedHeight:-1)
-    topRight =    pointWith(multipliedWidth: 1, multipliedHeight:-1)
-    bottomLeft =  pointWith(multipliedWidth:-1, multipliedHeight: 1)
-    bottomRight = pointWith(multipliedWidth: 1, multipliedHeight: 1)
+//    topLeft =     pointWith(multipliedWidth:-1, multipliedHeight:-1)
+//    topRight =    pointWith(multipliedWidth: 1, multipliedHeight:-1)
+//    bottomLeft =  pointWith(multipliedWidth:-1, multipliedHeight: 1)
+//    bottomRight = pointWith(multipliedWidth: 1, multipliedHeight: 1)
+
+    bottomRight =     pointWith(multipliedWidth:-1, multipliedHeight:-1)
+    bottomLeft =    pointWith(multipliedWidth: 1, multipliedHeight:-1)
+    topRight =  pointWith(multipliedWidth:-1, multipliedHeight: 1)
+    topLeft = pointWith(multipliedWidth: 1, multipliedHeight: 1)
+
 
   }
 }
