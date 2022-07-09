@@ -740,7 +740,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
   }
 
 
-
   func setFavouritesButtonTitle() {
     if playingArea?.isFavourite == true {
       favouritesButton.setTitle("Remove Playing Area from Favourites", for: .normal)
@@ -787,34 +786,33 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     if let newPitchView = self.view.viewWithTag(200) {
       rotationToApply = rotation(from: newPitchView.transform.inverted())
-      let pitchRotationDuringResize = pitchRotationAtResizeOn - pitchRotationAtResizeOff
-      if pitchRotationDuringResize > .pi / 2  {
+//      let pitchRotationDuringResize = pitchRotationAtResizeOn - pitchRotationAtResizeOff
+//      if pitchRotationDuringResize > .pi / 2  {
 
         rotationToApply = rotationToApply + .pi
-      } else {
-        rotationToApply = rotationToApply + .pi
-      }
+//      } else {
+//        rotationToApply = rotationToApply + .pi
+//      }
     } else {
       rotationToApply = 0 - (pitchAngleToApply + .pi)
 
     }
-
-    let rotationToApplyStr = String(describing: rotationToApply.radiansToDegrees)
-    print("rotationToApplyStr \(rotationToApplyStr) º")
+//
+//    let rotationToApplyStr = String(describing: rotationToApply.radiansToDegrees)
+//    print("rotationToApplyStr \(rotationToApplyStr) º")
     let mapViewHeading = mapView.camera.heading
 
     let mapViewHeadingInt = Int(mapViewHeading)
     let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
-    let mapViewHeadingStr = String(describing: mapViewHeadingInt)
-    print("mapViewHeadingStr: \(mapViewHeadingStr)")
+//    let mapViewHeadingStr = String(describing: mapViewHeadingInt)
+//    print("mapViewHeadingStr: \(mapViewHeadingStr)")
     let angleIncMapRotation = rotationToApply - mapViewHeadingRadians
-    let angleIncMapRotationStr = String(describing: angleIncMapRotation)
-    print("angleIncMapRotation: \(angleIncMapRotationStr)")
+//    let angleIncMapRotationStr = String(describing: angleIncMapRotation)
+//    print("angleIncMapRotation: \(angleIncMapRotationStr)")
     updateAngleUI()
     return angleIncMapRotation
 
   }
-
 
   func mapView(_ mapView: MyMKMapView, rotationDidChange rotation: Double) {
     // this function just tracks any rotation changes in the map and prints them out
@@ -833,7 +831,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     activityArray = MyFunc.getHeatmapperActivityDefaults()
     sportArray = Sport.allCases.map { $0 }
   }
-
 
   func updateAngleUI () {
     let mapStartRadiansStr = String(format: "%.2f", mapHeadingAtResizeOn.degreesToRadians)
@@ -1277,39 +1274,39 @@ class HeatmapViewController: UIViewController, MyMapListener {
     MyFunc.logMessage(.debug, "WorkoutMetadata saved in SavedHeatmapViewController \(String(describing: workoutMetadataToSave))")
 
   }
-
-  func getMapRectFromCoordinates(maxLat: Double, minLat: Double, maxLong: Double, minLong: Double) -> MKMapRect {
-
-    let minCoord = CLLocationCoordinate2D(latitude: minLat, longitude: minLong)
-    let maxCoord = CLLocationCoordinate2D(latitude: maxLat, longitude: maxLong)
-
-    let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
-    let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
-    self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-
-    // get the max and min X and Y points from the above coordinates as MKMapPoints
-    let minX = MKMapPoint(minCoord).x
-    let maxX = MKMapPoint(maxCoord).x
-    let minY = MKMapPoint(minCoord).y
-    let maxY = MKMapPoint(maxCoord).y
-
-    // this code ensures the pitch size is larger than the heatmap by adding a margin
-    // get the dimensions of the rectangle from the distance between the point extremes
-    var rectWidth = maxX - minX
-    var rectHeight = minY - maxY
-    // set the scale of the border
-    let rectMarginScale = 0.1
-    // set the rectangle origin as the plot dimensions plus the border
-    let rectX = minX - (rectWidth * rectMarginScale)
-    let rectY = minY + (rectHeight * rectMarginScale)
-
-    // increase the rectangle width and height by the border * 2
-    rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
-    rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
-
-    let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
-    return pitchMKMapRect
-  }
+//
+//  func getMapRectFromCoordinates(maxLat: Double, minLat: Double, maxLong: Double, minLong: Double) -> MKMapRect {
+//
+//    let minCoord = CLLocationCoordinate2D(latitude: minLat, longitude: minLong)
+//    let maxCoord = CLLocationCoordinate2D(latitude: maxLat, longitude: maxLong)
+//
+//    let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
+//    let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
+//    self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+//
+//    // get the max and min X and Y points from the above coordinates as MKMapPoints
+//    let minX = MKMapPoint(minCoord).x
+//    let maxX = MKMapPoint(maxCoord).x
+//    let minY = MKMapPoint(minCoord).y
+//    let maxY = MKMapPoint(maxCoord).y
+//
+//    // this code ensures the pitch size is larger than the heatmap by adding a margin
+//    // get the dimensions of the rectangle from the distance between the point extremes
+//    var rectWidth = maxX - minX
+//    var rectHeight = minY - maxY
+//    // set the scale of the border
+//    let rectMarginScale = 0.1
+//    // set the rectangle origin as the plot dimensions plus the border
+//    let rectX = minX - (rectWidth * rectMarginScale)
+//    let rectY = minY + (rectHeight * rectMarginScale)
+//
+//    // increase the rectangle width and height by the border * 2
+//    rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
+//    rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
+//
+//    let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
+//    return pitchMKMapRect
+//  }
 
 }
 

@@ -520,21 +520,21 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     
     createPitchOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
     
-//    // save the pitch here
-//    // convert the CLLCoordinates to a subclass which allows us to code them ready for saving
-//    let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopLeftCoordinate.latitude, longitude: pitchMapTopLeftCoordinate.longitude)
-//    let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
-//    let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
-//    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
-//
-//
-//    let nameToSave = nameField.text
-//    let venueToSave = venueField.text
-//    let sportToSave = sportField.text
-//
-//    let playingAreaToSave = PlayingArea(playingAreaId: playingAreaToUpdate!.id, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "Resizing", isFavourite: true)
-//
-//    MyFunc.savePlayingArea(playingAreaToSave)
+    // save the pitch here
+    // convert the CLLCoordinates to a subclass which allows us to code them ready for saving
+    let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopLeftCoordinate.latitude, longitude: pitchMapTopLeftCoordinate.longitude)
+    let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
+    let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
+    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
+
+    
+    let nameToSave = nameField.text
+    let venueToSave = venueField.text
+    let sportToSave = sportField.text
+    
+    let playingAreaToSave = PlayingArea(playingAreaId: playingAreaToUpdate!.id, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "Resizing", isFavourite: true)
+    
+    MyFunc.savePlayingArea(playingAreaToSave)
     
     // store the coordinate in the VC's corner variables
     // consider revising above code to use these earlier and avoid having to create new variables for the TL/BR swap
@@ -542,9 +542,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     self.bottomLeftCoord      = pitchMapBottomLeftCoordinate
     self.topRightCoord        = pitchMapTopRightCoordinate
     self.bottomRightCoord     = pitchMapBottomRightCoordinate
-
-    savePlayingArea()
-
+    
     playingAreaBearing = pitchMapBottomLeftCoordinate.bearing(to: pitchMapTopLeftCoordinate)
     let playingAreaBearingStr = String(describing: playingAreaBearing)
     print("playingAreaBearing: \(playingAreaBearingStr)")
