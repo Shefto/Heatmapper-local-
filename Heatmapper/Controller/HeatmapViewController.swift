@@ -703,8 +703,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
         self.venueField.text = playingAreaRetrieved.venue
         self.sportField.text = playingAreaRetrieved.sport
 
-        let midpointLatitude = (playingAreaRetrieved.topLeft.latitude + playingAreaRetrieved.bottomLeft.latitude) / 2
-        let midpointLongitude = (playingAreaRetrieved.bottomLeft.longitude + playingAreaRetrieved.bottomRight.longitude) / 2
+        let midpointLatitude = (playingAreaRetrieved.topLeft.latitude + playingAreaRetrieved.bottomRight.latitude) / 2
+        let midpointLongitude = (playingAreaRetrieved.topLeft.longitude + playingAreaRetrieved.bottomRight.longitude) / 2
         self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
 
         // PlayingArea coordinates stored as Codable sub-class of CLLocationCoordinate2D so convert to original class (may be able to remove this?)
