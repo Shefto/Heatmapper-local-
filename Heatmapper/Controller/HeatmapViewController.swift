@@ -326,7 +326,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
       // record the map heading at end of resizing
       mapHeadingAtResizeOff = mapView.getRotation() ?? 0
-
       saveResizedPlayingArea()
 
       playingAreaAngleSavedAfterResize = pitchRotationAtResizeOff
@@ -482,17 +481,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
     let pitchMapTopRightCoordinate    : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
 
-//    //this logic always swaps the TopLeft and BottomRight
-//    // was originally an if-then-else - consider refactoring to remove
-//
-//    print("Swapping TL and BR: SavePitchCoordinates")
-//    let topLeftToSwap = pitchMapTopLeftCoordinate
-//    pitchMapTopLeftCoordinate = pitchMapBottomRightCoordinate
-//    pitchMapBottomRightCoordinate = topLeftToSwap
-//    let bottomLeftToSwap = pitchMapBottomLeftCoordinate
-//    pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
-//    pitchMapTopRightCoordinate = bottomLeftToSwap
-
     playingAreaAngleSavedAfterResize = angleInRadians(between: pitchMapBottomLeftCGPoint, ending: pitchMapBottomRightCGPoint)
 
     // update the overlayCenter as we will centre the map Zoom on this
@@ -509,7 +497,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
     let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
 
-    // the new way - saving with playingArea Id
     let playingAreaToSaveWithId = PlayingArea(bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: activityField.text ?? "" , venue: venueField.text ?? "", sport: sportField.text ?? "", comments: "Saved!", isFavourite: false)
     MyFunc.savePlayingArea(playingAreaToSaveWithId)
 
@@ -533,7 +520,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   func enterResizeMode() {
 
-    // now need to size the pitchView from the MapView information
+    // need to size the pitchView from the MapView information
     // we have the mapView rect from the overlay and the coordinates
 
     let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
@@ -630,7 +617,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
         let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
         self.playingAreaMapRect = pitchMKMapRect
-
 
         // get the PlayingArea corner coordinates from the size of heatmap
         self.bottomLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)

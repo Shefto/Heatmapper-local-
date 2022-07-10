@@ -99,9 +99,9 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       mapView.camera.heading = playingAreaAngleSavedAfterResizeDegrees
 
       setMapViewZoom()
-      let distanceToSet = mapView.camera.centerCoordinateDistance
-      let cameraToApply = MKMapCamera(lookingAtCenter: self.overlayCenter!, fromDistance: distanceToSet, pitch: 0, heading: playingAreaBearing)
-      self.mapView.setCamera(cameraToApply, animated: false)
+//      let distanceToSet = mapView.camera.centerCoordinateDistance
+//      let cameraToApply = MKMapCamera(lookingAtCenter: self.overlayCenter!, fromDistance: distanceToSet, pitch: 0, heading: playingAreaBearing)
+//      self.mapView.setCamera(cameraToApply, animated: false)
       
       // removes the pitchView
       removeViewWithTag(tag: 200)
@@ -114,7 +114,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       resizeOn = true
       resizeButton.setTitle("Save", for: .normal)
       heightAndWeightStackView.isHidden = false
-      removeAllPinsAndAnnotations()
+//      removeAllPinsAndAnnotations()
       enterResizeMode()
       updateSteppers()
     }
@@ -159,16 +159,46 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
   func updateOverlay() {
 
+//    if let overlays = mapView?.overlays {
+//      for overlay in overlays {
+//        if overlay is PlayingAreaOverlay {
+//          let rectForNewOverlay = overlay.boundingMapRect
+//          mapView?.removeOverlay(overlay)
+//          let newOverlay = PlayingAreaOverlay(pitchRect: rectForNewOverlay)
+//          mapView.insertOverlay(newOverlay, at: 0)
+//        }
+//      }
+//    }
+
+
+    // first remove the old overlay
     if let overlays = mapView?.overlays {
       for overlay in overlays {
         if overlay is PlayingAreaOverlay {
-          let rectForNewOverlay = overlay.boundingMapRect
           mapView?.removeOverlay(overlay)
-          let newOverlay = PlayingAreaOverlay(pitchRect: rectForNewOverlay)
-          mapView.insertOverlay(newOverlay, at: 0)
+
         }
       }
     }
+
+    // getting the angle to rotate the overlay by from the CGPoints of the corners of one side
+    let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
+    let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
+
+    // rotate the view
+    // need to anchor this first by the origin in order to rotate around bottom left
+
+    let pitchAngle = angleInRadians(between: pitchViewBottomRight, ending: pitchViewBottomLeft)
+    playingAreaAngleSaved = pitchAngle
+    self.pitchAngleToApply = pitchAngle
+
+    mapHeadingAtResizeOn = mapView.camera.heading
+
+
+    //    playingAreaAngleSaved = pitchAngle
+    //    self.pitchAngleToApply = pitchAngle
+    self.createPlayingAreaOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
+
 
   }
 
@@ -226,8 +256,8 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       venueField.text = playingArea.venue
       sportField.text = playingArea.sport
 
-      let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomLeft.latitude) / 2
-      let midpointLongitude = (playingArea.bottomLeft.longitude + playingArea.bottomRight.longitude) / 2
+      let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomRight.latitude) / 2
+      let midpointLongitude = (playingArea.topLeft.longitude + playingArea.bottomRight.longitude) / 2
       self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
 
       // PlayingArea coordinates stored as Codable sub-class of CLLocationCoordinate2D so convert to original class (may be able to remove this?)
@@ -246,114 +276,110 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
       // no Playing Area passed in so we will create new one
 
-      MyFunc.logMessage(.debug, "No PlayingArea passed in to PlayingAreasViewController")
+      MyFunc.logMessage(.critical, "No PlayingArea passed in to PlayingAreasViewController")
 
-      // get the user's location
-      let userLocation = LocationManager.sharedInstance.currentLocation
-      let userCoordinate = userLocation.coordinate
+//      // get the user's location
+//      let userLocation = LocationManager.sharedInstance.currentLocation
+//      let userCoordinate = userLocation.coordinate
+//
+//      let topLeftLocation = userLocation.movedBy(latitudinalMeters: 52.5, longitudinalMeters: 34)
+//      let bottomRightLocation = userLocation.movedBy(latitudinalMeters: -52.5, longitudinalMeters: -34)
+//
+//      let minCoord = topLeftLocation.coordinate
+//      let maxCoord = bottomRightLocation.coordinate
+//
+//      let maxLat = maxCoord.latitude
+//      let minLat = minCoord.latitude
+//      let maxLong = maxCoord.longitude
+//      let minLong = minCoord.longitude
+//
+//      // set the map region
+//      self.overlayCenter = CLLocationCoordinate2D(latitude: userCoordinate.latitude, longitude: userCoordinate.longitude)
+//
+//      // get the max and min X and Y points from the above coordinates as MKMapPoints
+//      let minX = MKMapPoint(minCoord).x
+////      let maxX = MKMapPoint(maxCoord).x
+//      let minY = MKMapPoint(minCoord).y
+////      let maxY = MKMapPoint(maxCoord).y
+//
+//
+//
+//      // setting default pitch size to football pitch width and height
+//      var rectWidth : Double = 68.0
+//      var rectHeight  : Double = 105.0
+//      let rectMarginScale = 0.1
+//
+//      // set the rectangle origin as the plot dimensions plus the border
+//      let rectX = minX - (rectWidth * rectMarginScale)
+//      let rectY = minY + (rectHeight * rectMarginScale)
+//
+//      // increase the rectangle width and height by the border * 2
+//      rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
+//      rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
+//
+//      let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
+//      self.playingAreaMapRect = pitchMKMapRect
+//
+//
+//      // get the PlayingArea corner coordinates from the size of heatmap
+//      self.bottomLeftCoord = CLLocationCoordinate2D(latitude: maxLat, longitude: maxLong)
+//      self.topLeftCoord = CLLocationCoordinate2D(latitude: minLat, longitude: maxLong)
+//      self.bottomRightCoord = CLLocationCoordinate2D(latitude: maxLat, longitude: minLong)
+//      self.topRightCoord  = CLLocationCoordinate2D(latitude: minLat, longitude: minLong)
+//
+//      // convert the coordinates to a codable subclass for saving
+//      let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
+//      let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
+//      let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
+//      let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
+//
+//      self.isEditing = true
+//
+//      // as we are creating a new playing area, default the name and venue to the placemark data
+//      var geocoder            : CLGeocoder!
+//      geocoder                = CLGeocoder()
+//      geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
+//
+//        if error != nil {
+//          MyFunc.logMessage(.debug, "No placemark found: \(error.debugDescription)")
+//        } else {
+//          guard let returnedPlacemarks = placemarks else {
+//            MyFunc.logMessage(.debug, "No placemark found: \(error.debugDescription)")
+//            return
+//
+//          }
+//          let placemark =  returnedPlacemarks.first!
+//          var placemarkStr : String = ""
+//          print ("Placemark returned: ")
+//          print (String(describing: placemark.locality))
+//          print (String(describing: placemark.thoroughfare))
+//
+//          let thoroughfare = placemark.thoroughfare ?? ""
+//          let locality = placemark.locality ?? ""
+//          if thoroughfare != "" && locality != "" {
+//            placemarkStr = (thoroughfare + ", " + locality)
+//          } else {
+//            placemarkStr =  "No placemark found"
+//          }
+//
+//          self.nameField.text = placemarkStr
+//          // now save the auto-generated PlayingArea coordinates for future use
+//          let playingAreaToSave = PlayingArea(bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: placemarkStr, venue: "", sport: "", comments: "", isFavourite: true)
+//          MyFunc.savePlayingArea(playingAreaToSave)
+//
+//          self.playingAreaToUpdate = playingAreaToSave
+//        }
 
-      let topLeftLocation = userLocation.movedBy(latitudinalMeters: 52.5, longitudinalMeters: 34)
-      let bottomRightLocation = userLocation.movedBy(latitudinalMeters: -52.5, longitudinalMeters: -34)
-
-      let minCoord = topLeftLocation.coordinate
-      let maxCoord = bottomRightLocation.coordinate
-
-      let maxLat = maxCoord.latitude
-      let minLat = minCoord.latitude
-      let maxLong = maxCoord.longitude
-      let minLong = minCoord.longitude
-
-      // set the map region
-      self.overlayCenter = CLLocationCoordinate2D(latitude: userCoordinate.latitude, longitude: userCoordinate.longitude)
-
-      // get the max and min X and Y points from the above coordinates as MKMapPoints
-      let minX = MKMapPoint(minCoord).x
-//      let maxX = MKMapPoint(maxCoord).x
-      let minY = MKMapPoint(minCoord).y
-//      let maxY = MKMapPoint(maxCoord).y
-
-      // this code ensures the pitch size is larger than the heatmap by adding a margin
-      // get the dimensions of the rectangle from the distance between the point extremes
-      //      var rectWidth = maxX - minX
-      //      var rectHeight = minY - maxY
-      //      // set the scale of the border
-
-      // setting default pitch size to football pitch width and height
-      var rectWidth : Double = 68.0
-      var rectHeight  : Double = 105.0
-      let rectMarginScale = 0.1
-
-      // set the rectangle origin as the plot dimensions plus the border
-      let rectX = minX - (rectWidth * rectMarginScale)
-      let rectY = minY + (rectHeight * rectMarginScale)
-
-      // increase the rectangle width and height by the border * 2
-      rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
-      rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
-
-      let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
-      self.playingAreaMapRect = pitchMKMapRect
-
-
-      // get the PlayingArea corner coordinates from the size of heatmap
-      self.bottomLeftCoord = CLLocationCoordinate2D(latitude: maxLat, longitude: maxLong)
-      self.topLeftCoord = CLLocationCoordinate2D(latitude: minLat, longitude: maxLong)
-      self.bottomRightCoord = CLLocationCoordinate2D(latitude: maxLat, longitude: minLong)
-      self.topRightCoord  = CLLocationCoordinate2D(latitude: minLat, longitude: minLong)
-
-      // convert the coordinates to a codable subclass for saving
-      let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
-      let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
-      let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
-      let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
-
-      self.isEditing = true
-
-      // as we are creating a new playing area, default the name and venue to the placemark data
-      var geocoder            : CLGeocoder!
-      geocoder                = CLGeocoder()
-      geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
-
-        if error != nil {
-          MyFunc.logMessage(.debug, "No placemark found: \(error.debugDescription)")
-        } else {
-          guard let returnedPlacemarks = placemarks else {
-            MyFunc.logMessage(.debug, "No placemark found: \(error.debugDescription)")
-            return
-
-          }
-          let placemark =  returnedPlacemarks.first!
-          var placemarkStr : String = ""
-          print ("Placemark returned: ")
-          print (String(describing: placemark.locality))
-          print (String(describing: placemark.thoroughfare))
-
-          let thoroughfare = placemark.thoroughfare ?? ""
-          let locality = placemark.locality ?? ""
-          if thoroughfare != "" && locality != "" {
-            placemarkStr = (thoroughfare + ", " + locality)
-          } else {
-            placemarkStr =  "No placemark found"
-          }
-
-          self.nameField.text = placemarkStr
-          // now save the auto-generated PlayingArea coordinates for future use
-          let playingAreaToSave = PlayingArea(bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: placemarkStr, venue: "", sport: "", comments: "", isFavourite: true)
-          MyFunc.savePlayingArea(playingAreaToSave)
-
-          self.playingAreaToUpdate = playingAreaToSave
-        }
-
-      }
+//      }
 
 
     }
 
     // getting the angle to rotate the overlay by from the CGPoints
-    // simply doing this as it seems to work better than using coordinate angles
+
     let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
     let pitchViewBottomRight  : CGPoint = self.mapView.convert(bottomRightCoord!, toPointTo: self.mapView)
-    //        let pitchViewTopRight     : CGPoint = self.mapView.convert(topRightCoord!, toPointTo: self.mapView)
+
     let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
 
     let newWidth = CGPointDistance(from: pitchViewBottomLeft, to: pitchViewBottomRight)
@@ -389,7 +415,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
     playingAreaAngleSaved = pitchAngle
     self.pitchAngleToApply = pitchAngle
-    self.createPitchOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
+    self.createPlayingAreaOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
     self.setMapViewZoom()
 
 
@@ -499,18 +525,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let pitchMapBottomRightCoordinate : CLLocationCoordinate2D = mapView.convert(pitchMapBottomRightCGPoint, toCoordinateFrom: self.mapView)
     let pitchMapTopRightCoordinate    : CLLocationCoordinate2D = mapView.convert(pitchMapTopRightCGPoint, toCoordinateFrom: self.mapView)
     
-//    //this logic always swaps the TopLeft and BottomRight
-//    // was originally an if-then-else - consider refactoring to remove
-//    
-//    print("Swapping TL and BR: SavePitchCoordinates")
-//    let topLeftToSwap = pitchMapTopLeftCoordinate
-//    pitchMapTopLeftCoordinate = pitchMapBottomRightCoordinate
-//    pitchMapBottomRightCoordinate = topLeftToSwap
-//    let bottomLeftToSwap = pitchMapBottomLeftCoordinate
-//    pitchMapBottomLeftCoordinate = pitchMapTopRightCoordinate
-//    pitchMapTopRightCoordinate = bottomLeftToSwap
-    
-    
     playingAreaAngleSavedAfterResize = angleInRadians(between: pitchMapBottomLeftCGPoint, ending: pitchMapBottomRightCGPoint)
     
     // update the overlayCenter as we will centre the map Zoom on this
@@ -518,7 +532,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let midpointLongitude = (pitchMapTopLeftCoordinate.longitude + pitchMapBottomRightCoordinate.longitude) / 2
     self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
     
-    createPitchOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
+    createPlayingAreaOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
     
     // save the pitch here
     // convert the CLLCoordinates to a subclass which allows us to code them ready for saving
@@ -553,8 +567,8 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   func enterResizeMode() {
     
     let playingArea : PlayingArea = playingAreaToUpdate!
-    let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomLeft.latitude) / 2
-    let midpointLongitude = (playingArea.bottomLeft.longitude + playingArea.bottomRight.longitude) / 2
+    let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomRight.latitude) / 2
+    let midpointLongitude = (playingArea.topLeft.longitude + playingArea.bottomRight.longitude) / 2
     self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
     
     // convert the stored playingArea coordinates from the codable class to the base CLLCoordinate2D
@@ -568,7 +582,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     self.topLeftCoord = topLeftAsCoord
     self.topRightCoord = topRightAsCoord
     
-    // now need to size the pitchView from the MapView information
+    //  need to size the pitchView from the MapView information
     // we have the mapView rect from the overlay and the coordinates
     
     let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
@@ -623,7 +637,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   
 
   
-  func createPitchOverlay(topLeft: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) {
+  func createPlayingAreaOverlay(topLeft: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) {
     
     // get the max and min X and Y points from the above coordinates as MKMapPoints
     let topLeftMapPoint = MKMapPoint(topLeft)
@@ -641,9 +655,9 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let pitchMKMapRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
     
     //  create an overlay of the pitch based upon the rectangle
-    let adjustedPitchOverlay = PlayingAreaOverlay(pitchRect: pitchMKMapRect)
-    mapView.insertOverlay(adjustedPitchOverlay, at: 0)
-    //    mapView.addOverlay(adjustedPitchOverlay)
+    let playingAreaOverlay = PlayingAreaOverlay(pitchRect: pitchMKMapRect)
+    mapView.insertOverlay(playingAreaOverlay, at: 0)
+
     
     self.playingAreaMapRect = pitchMKMapRect
     
@@ -655,22 +669,22 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     
     var rotationToApply : CGFloat = 0.0
     
-    let pitchAngleToApplyStr = String(describing: pitchAngleToApply.radiansToDegrees)
-    print("pitchAngleToApply in getMapRotation: \(pitchAngleToApplyStr)")
-    
+//    let pitchAngleToApplyStr = String(describing: pitchAngleToApply.radiansToDegrees)
+//    print("pitchAngleToApply in getMapRotation: \(pitchAngleToApplyStr)")
+//
     if let newPitchView = self.view.viewWithTag(200) {
       rotationToApply = rotation(from: newPitchView.transform.inverted())
-      let pitchRotationDuringResize = pitchRotationAtResizeOn - pitchRotationAtResizeOff
-      if pitchRotationDuringResize > .pi / 2  {
-        print ("over 180 degree turn")
+//      let pitchRotationDuringResize = pitchRotationAtResizeOn - pitchRotationAtResizeOff
+//      if pitchRotationDuringResize > .pi / 2  {
+//        print ("over 180 degree turn")
         rotationToApply = rotationToApply + .pi
-      } else {
-        rotationToApply = rotationToApply + .pi
-      }
-      print("Rotation from newPitchView")
+//      } else {
+//        rotationToApply = rotationToApply + .pi
+//      }
+//      print("Rotation from newPitchView")
     } else {
       rotationToApply = 0 - (pitchAngleToApply + .pi)
-      print("Rotation from pitchAngleToApply")
+//      print("Rotation from pitchAngleToApply")
       
     }
     
@@ -680,11 +694,11 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     
     let mapViewHeadingInt = Int(mapViewHeading)
     let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
-    let mapViewHeadingStr = String(describing: mapViewHeadingInt)
-    print("mapViewHeadingStr: \(mapViewHeadingStr)")
+//    let mapViewHeadingStr = String(describing: mapViewHeadingInt)
+//    print("mapViewHeadingStr: \(mapViewHeadingStr)")
     let angleIncMapRotation = rotationToApply - mapViewHeadingRadians
-    let angleIncMapRotationStr = String(describing: angleIncMapRotation)
-    print("angleIncMapRotation: \(angleIncMapRotationStr)")
+//    let angleIncMapRotationStr = String(describing: angleIncMapRotation)
+//    print("angleIncMapRotation: \(angleIncMapRotationStr)")
     //    updateAngleUI()
     return angleIncMapRotation
     
@@ -732,9 +746,14 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   func setMapViewZoom() {
     let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     mapView.setVisibleMapRect(self.playingAreaMapRect!, edgePadding: insets, animated: false)
-    let playingAreaMapRectStr = String(describing: playingAreaMapRect)
-    print("playingAreaMapRect at setMapViewZoom: \(playingAreaMapRectStr)")
+//    let playingAreaMapRectStr = String(describing: playingAreaMapRect)
+//    print("playingAreaMapRect at setMapViewZoom: \(playingAreaMapRectStr)")
     mapView.setCenter(self.overlayCenter!, animated: false)
+
+    playingAreaBearing = bottomLeftCoord!.bearing(to: topLeftCoord!)
+    let distanceToSet = mapView.camera.centerCoordinateDistance
+    let cameraToApply = MKMapCamera(lookingAtCenter: self.overlayCenter!, fromDistance: distanceToSet, pitch: 0, heading: playingAreaBearing)
+    self.mapView.setCamera(cameraToApply, animated: false)
   }
   
   
@@ -756,88 +775,88 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     return radians
   }
   
-  func addAnnotation(coordinate:CLLocationCoordinate2D){
-    let annotation = MKPointAnnotation()
-    annotation.coordinate = coordinate
-    mapView.addAnnotation(annotation)
-  }
-  
-  func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
-    let annotation = MKPointAnnotation()
-    annotation.coordinate = coordinate
-    annotation.title = title
-    mapView.addAnnotation(annotation)
-  }
-  
-  func addPinImage(point: CGPoint, colour: UIColor, tag: Int) {
-    let pinImageView = UIImageView()
-    pinImageView.frame = CGRect(x: point.x, y: point.y, width: 20, height: 20)
-    pinImageView.image = UIImage(systemName: "mappin")
-    pinImageView.tintColor = colour
-    pinImageView.tag = tag
-    mapView.addSubview(pinImageView)
-  }
-  
+//  func addAnnotation(coordinate:CLLocationCoordinate2D){
+//    let annotation = MKPointAnnotation()
+//    annotation.coordinate = coordinate
+//    mapView.addAnnotation(annotation)
+//  }
+//
+//  func setPinUsingMKAnnotation(coordinate: CLLocationCoordinate2D, title: String) {
+//    let annotation = MKPointAnnotation()
+//    annotation.coordinate = coordinate
+//    annotation.title = title
+//    mapView.addAnnotation(annotation)
+//  }
+//
+//  func addPinImage(point: CGPoint, colour: UIColor, tag: Int) {
+//    let pinImageView = UIImageView()
+//    pinImageView.frame = CGRect(x: point.x, y: point.y, width: 20, height: 20)
+//    pinImageView.image = UIImage(systemName: "mappin")
+//    pinImageView.tintColor = colour
+//    pinImageView.tag = tag
+//    mapView.addSubview(pinImageView)
+//  }
+//
   func removeViewWithTag(tag: Int) {
     if let viewToRemove = self.view.viewWithTag(tag) {
       viewToRemove.removeFromSuperview()
     }
   }
+//
+//  func removeAllPins() {
+//    removeViewWithTag(tag: 101)
+//    removeViewWithTag(tag: 102)
+//    removeViewWithTag(tag: 103)
+//    removeViewWithTag(tag: 104)
+//    removeViewWithTag(tag: 301)
+//    removeViewWithTag(tag: 302)
+//    removeViewWithTag(tag: 303)
+//    removeViewWithTag(tag: 304)
+//  }
+//
+//  func removeAllAnnotations() {
+//    let allAnnotations = self.mapView.annotations
+//    self.mapView.removeAnnotations(allAnnotations)
+//  }
+//
+//  func removeAllPinsAndAnnotations () {
+//    removeAllPins()
+//    removeAllAnnotations()
+//  }
   
-  func removeAllPins() {
-    removeViewWithTag(tag: 101)
-    removeViewWithTag(tag: 102)
-    removeViewWithTag(tag: 103)
-    removeViewWithTag(tag: 104)
-    removeViewWithTag(tag: 301)
-    removeViewWithTag(tag: 302)
-    removeViewWithTag(tag: 303)
-    removeViewWithTag(tag: 304)
-  }
   
-  func removeAllAnnotations() {
-    let allAnnotations = self.mapView.annotations
-    self.mapView.removeAnnotations(allAnnotations)
-  }
-  
-  func removeAllPinsAndAnnotations () {
-    removeAllPins()
-    removeAllAnnotations()
-  }
-  
-  
-  func getMapRectFromCoordinates(maxLat: Double, minLat: Double, maxLong: Double, minLong: Double) -> MKMapRect {
-    
-    let minCoord = CLLocationCoordinate2D(latitude: minLat, longitude: minLong)
-    let maxCoord = CLLocationCoordinate2D(latitude: maxLat, longitude: maxLong)
-    
-    let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
-    let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
-    self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-    
-    // get the max and min X and Y points from the above coordinates as MKMapPoints
-    let minX = MKMapPoint(minCoord).x
-    let maxX = MKMapPoint(maxCoord).x
-    let minY = MKMapPoint(minCoord).y
-    let maxY = MKMapPoint(maxCoord).y
-    
-    // this code ensures the pitch size is larger than the heatmap by adding a margin
-    // get the dimensions of the rectangle from the distance between the point extremes
-    var rectWidth = maxX - minX
-    var rectHeight = minY - maxY
-    // set the scale of the border
-    let rectMarginScale = 0.1
-    // set the rectangle origin as the plot dimensions plus the border
-    let rectX = minX - (rectWidth * rectMarginScale)
-    let rectY = minY + (rectHeight * rectMarginScale)
-    
-    // increase the rectangle width and height by the border * 2
-    rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
-    rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
-    
-    let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
-    return pitchMKMapRect
-  }
+//  func getMapRectFromCoordinates(maxLat: Double, minLat: Double, maxLong: Double, minLong: Double) -> MKMapRect {
+//
+//    let minCoord = CLLocationCoordinate2D(latitude: minLat, longitude: minLong)
+//    let maxCoord = CLLocationCoordinate2D(latitude: maxLat, longitude: maxLong)
+//
+//    let midpointLatitude = (minCoord.latitude + maxCoord.latitude) / 2
+//    let midpointLongitude = (minCoord.longitude + maxCoord.longitude) / 2
+//    self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+//
+//    // get the max and min X and Y points from the above coordinates as MKMapPoints
+//    let minX = MKMapPoint(minCoord).x
+//    let maxX = MKMapPoint(maxCoord).x
+//    let minY = MKMapPoint(minCoord).y
+//    let maxY = MKMapPoint(maxCoord).y
+//
+//    // this code ensures the pitch size is larger than the heatmap by adding a margin
+//    // get the dimensions of the rectangle from the distance between the point extremes
+//    var rectWidth = maxX - minX
+//    var rectHeight = minY - maxY
+//    // set the scale of the border
+//    let rectMarginScale = 0.1
+//    // set the rectangle origin as the plot dimensions plus the border
+//    let rectX = minX - (rectWidth * rectMarginScale)
+//    let rectY = minY + (rectHeight * rectMarginScale)
+//
+//    // increase the rectangle width and height by the border * 2
+//    rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
+//    rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
+//
+//    let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
+//    return pitchMKMapRect
+//  }
   
   @objc func handleRotate(_ gesture: UIRotationGestureRecognizer) {
     guard let gestureView = gesture.view else {
