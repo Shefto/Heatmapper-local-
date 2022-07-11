@@ -38,7 +38,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 //  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", venue: "", pitch: "")
   var workoutMetadata             = WorkoutMetadata()
 
-  private let workoutCellId = "workoutCell"
+//  private let workoutCellId = "workoutCell"
   var workoutSelectedId : UUID?
   var selectedIndexPath : Int?
   var workoutSelected : String = ""

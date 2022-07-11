@@ -121,7 +121,9 @@ class HeatmapViewController: UIViewController, MyMapListener {
   @IBOutlet weak var heightStepper                      : UIStepper!
   @IBOutlet weak var heightAndWeightStackView           : UIStackView!
 
-
+  @IBAction func btnSelectFromFavourites(_ sender: Any) {
+  }
+  
   // add the Playing Area to the list of Favourites
   @IBAction func addAsFavourite(_ sender: Any) {
 
@@ -292,7 +294,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       MyFunc.logMessage(.debug, "Cannot find pitchView to save")
       return
     }
-    print(sender.debugDescription)
+
     let viewX = playingAreaView.frame.origin.x
     let viewY = playingAreaView.frame.origin.y
     let viewHeight = playingAreaView.frame.height
@@ -306,7 +308,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       MyFunc.logMessage(.debug, "Cannot find pitchView to save")
       return
     }
-    print(sender.debugDescription)
+
     let viewX = playingAreaView.frame.origin.x
     let viewY = playingAreaView.frame.origin.y
     let viewHeight = sender.value
@@ -333,11 +335,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
       mapView.camera.heading = playingAreaAngleSavedAfterResizeDegrees
 
-
       setMapViewZoom()
-//      let distanceToSet = mapView.camera.centerCoordinateDistance
-//      let cameraToApply = MKMapCamera(lookingAtCenter: self.overlayCenter!, fromDistance: distanceToSet, pitch: 0, heading: playingAreaBearing)
-//      self.mapView.setCamera(cameraToApply, animated: false)
+
 
       // update the metrics
       updateAngleUI()
@@ -409,8 +408,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     // default Favourite button to assume PlayingArea not a Favourite
     // *** pending change:  set this from the workout
-    isFavourite = false
-    favouritesButton.setTitle("Add to Favourites", for: .normal)
+//    isFavourite = false
+//    favouritesButton.setTitle("Add to Favourites", for: .normal)
 
     resetPlayingAreaButton.isHidden = true
     heightAndWeightStackView.isHidden = true
@@ -421,7 +420,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     super.viewWillDisappear(animated)
     updateWorkout()
     saveHeatmapImage()
-//    removeAllPinsAndAnnotations()
+
 
   }
 
@@ -513,8 +512,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
     self.bottomRightCoord     = pitchMapBottomRightCoordinate
 
     playingAreaBearing = pitchMapBottomLeftCoordinate.bearing(to: pitchMapTopLeftCoordinate)
-    let playingAreaBearingStr = String(describing: playingAreaBearing)
-    print("playingAreaBearing: \(playingAreaBearingStr)")
 
   }
 
@@ -532,8 +529,12 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     // now add the view
     let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
-    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
-    newPitchView.image = pitchImageGreen
+//    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
+//    newPitchView.image = pitchImageGreen
+
+
+    let playingAreaImage : UIImage = pitchImage
+    newPitchView.image = playingAreaImage
     newPitchView.layer.opacity = 0.5
     newPitchView.isUserInteractionEnabled = true
     newPitchView.tag = 200
@@ -618,6 +619,25 @@ class HeatmapViewController: UIViewController, MyMapListener {
         let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
         self.playingAreaMapRect = pitchMKMapRect
 
+        // check for any overlapping playing areas
+//        let matchingPlayingAreasArray = self.getOverlappingPlayingAreas(playingAreaRect: pitchMKMapRect)
+//
+//        if matchingPlayingAreasArray.isEmpty == false {
+//
+//          if matchingPlayingAreasArray.count == 1 {
+//
+//            self.playingArea = matchingPlayingAreasArray.first!
+//            // only one matching playing area so use this
+//
+//          } else {
+//
+//            // multiple matching playing areas
+//          }
+//
+//
+//        } else {
+
+
         // get the PlayingArea corner coordinates from the size of heatmap
         self.bottomLeftCoord = CLLocationCoordinate2D(latitude: maxLat!, longitude: maxLong!)
         self.topLeftCoord = CLLocationCoordinate2D(latitude: minLat!, longitude: maxLong!)
@@ -642,8 +662,10 @@ class HeatmapViewController: UIViewController, MyMapListener {
         MyFunc.savePlayingArea(playingAreaToSave)
 
         self.playingArea = playingAreaToSave
-        // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
         self.workoutMetadata.playingAreaId = playingAreaToSave.id
+//        }
+
+
         self.updateWorkout()
         self.updateAngleUI()
 
@@ -689,8 +711,8 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     // now add the view
     let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
-    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
-    newPitchView.image = pitchImageGreen
+    let sportStr = sportField.text ?? ""
+    updatePitchImage(sport: sportStr)
     newPitchView.layer.opacity = 0.5
     newPitchView.isUserInteractionEnabled = true
     newPitchView.tag = 200
@@ -724,6 +746,31 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   }
 
+  func getOverlappingPlayingAreas(playingAreaRect: MKMapRect) -> [PlayingArea] {
+
+    var matchingPlayingAreas = [PlayingArea]()
+
+    let playingAreaArray = MyFunc.getPlayingAreas()
+
+    for playingAreaRetrieved in playingAreaArray {
+      // PlayingArea coordinates stored as Codable sub-class of CLLocationCoordinate2D so convert to original class (may be able to remove this?)
+      let topLeftAsCoord = CLLocationCoordinate2D(latitude: playingAreaRetrieved.topLeft.latitude, longitude: playingAreaRetrieved.topLeft.longitude)
+      let bottomLeftAsCoord = CLLocationCoordinate2D(latitude: playingAreaRetrieved.bottomLeft.latitude, longitude: playingAreaRetrieved.bottomLeft.longitude)
+      let bottomRightAsCoord = CLLocationCoordinate2D(latitude: playingAreaRetrieved.bottomRight.latitude, longitude: playingAreaRetrieved.bottomRight.longitude)
+
+      let playingAreaMapRect = createPlayingAreaMapRectFromCoordinates(topLeft: topLeftAsCoord, bottomLeft:bottomLeftAsCoord, bottomRight: bottomRightAsCoord)
+
+      if playingAreaRect.intersects(playingAreaMapRect) {
+        matchingPlayingAreas.append(playingAreaRetrieved)
+      }
+    }
+
+    if matchingPlayingAreas.isEmpty == false {
+      print("MatchingPlayingAreas!")
+      print(String(describing: matchingPlayingAreas))
+    }
+    return matchingPlayingAreas
+  }
 
   func setFavouritesButtonTitle() {
     if playingArea?.isFavourite == true {
@@ -759,41 +806,50 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   }
 
+  func createPlayingAreaMapRectFromCoordinates(topLeft: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) -> MKMapRect {
+
+    // get the max and min X and Y points from the above coordinates as MKMapPoints
+    let topLeftMapPoint = MKMapPoint(topLeft)
+    let bottomLeftMapPoint = MKMapPoint(bottomLeft)
+    let bottomRightMapPoint = MKMapPoint(bottomRight)
+
+    let pitchRectHeight = MKMapPointDistance(from: bottomLeftMapPoint, to: topLeftMapPoint)
+    let pitchRectWidth = MKMapPointDistance(from: bottomLeftMapPoint, to: bottomRightMapPoint)
+
+    // using the bottom left as the origin of the rectangle (currently)
+    let pitchMapOriginX = bottomLeftMapPoint.x
+    let pitchMapOriginY = bottomLeftMapPoint.y
+
+    // set up the rectangle
+    let pitchMKMapRect = MKMapRect.init(x: pitchMapOriginX, y: pitchMapOriginY, width: pitchRectWidth, height: pitchRectHeight)
+
+    return pitchMKMapRect
+
+  }
+
+
 
 
   func getMapRotation() -> CGFloat {
 
     // this function calculates the rotation of the map
     var rotationToApply : CGFloat = 0.0
-//
-//    let pitchAngleToApplyStr = String(describing: pitchAngleToApply.radiansToDegrees)
-//    print("pitchAngleToApply in getMapRotation: \(pitchAngleToApplyStr)")
 
+    // apply different rotations depending upon whether the view is displayed
+    // i.e. we are in resize mode
     if let newPitchView = self.view.viewWithTag(200) {
       rotationToApply = rotation(from: newPitchView.transform.inverted())
-//      let pitchRotationDuringResize = pitchRotationAtResizeOn - pitchRotationAtResizeOff
-//      if pitchRotationDuringResize > .pi / 2  {
-
         rotationToApply = rotationToApply + .pi
-//      } else {
-//        rotationToApply = rotationToApply + .pi
-//      }
     } else {
       rotationToApply = 0 - (pitchAngleToApply + .pi)
 
     }
-//
-//    let rotationToApplyStr = String(describing: rotationToApply.radiansToDegrees)
-//    print("rotationToApplyStr \(rotationToApplyStr) º")
+
     let mapViewHeading = mapView.camera.heading
 
     let mapViewHeadingInt = Int(mapViewHeading)
     let mapViewHeadingRadians = mapViewHeadingInt.degreesToRadians
-//    let mapViewHeadingStr = String(describing: mapViewHeadingInt)
-//    print("mapViewHeadingStr: \(mapViewHeadingStr)")
     let angleIncMapRotation = rotationToApply - mapViewHeadingRadians
-//    let angleIncMapRotationStr = String(describing: angleIncMapRotation)
-//    print("angleIncMapRotation: \(angleIncMapRotationStr)")
     updateAngleUI()
     return angleIncMapRotation
 
@@ -1142,9 +1198,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
         }
         let placemark =  returnedPlacemarks.first!
         var placemarkStr : String = ""
-        print ("Placemark returned: ")
-        print (String(describing: placemark.locality))
-        print (String(describing: placemark.thoroughfare))
 
         let thoroughfare = placemark.thoroughfare ?? ""
         let locality = placemark.locality ?? ""
@@ -1167,10 +1220,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let radians = atan2(center.y, center.x)
     var degrees = radians * 180 / .pi
     degrees = degrees > 0 ? degrees : degrees + degrees
-    let degreesStr = String(describing: degrees)
-    let startingStr = String(describing: starting)
-    let endingStr = String(describing: ending)
-    print("Angle between \(startingStr) and \(endingStr) = \(degreesStr) degrees")
+
     return degrees
   }
 

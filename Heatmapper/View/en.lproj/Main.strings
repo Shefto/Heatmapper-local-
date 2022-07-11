@@ -121,8 +121,8 @@
 /* Class = "UILabel"; text = "Radius"; ObjectID = "cYn-Xg-gyd"; */
 "cYn-Xg-gyd.text" = "";
 
-/* Class = "UILabel"; text = "Detail"; ObjectID = "Dc1-6G-lTu"; */
-"Dc1-6G-lTu.text" = "";
+/* Class = "UIButton"; normalTitle = "Select playing area from Favourites"; ObjectID = "Db0-nc-zrI"; */
+"Db0-nc-zrI.normalTitle" = "";
 
 /* Class = "UISegmentedControl"; dhi-ac-byn.segmentTitles[0] = "Best for battery"; ObjectID = "dhi-ac-byn"; */
 "dhi-ac-byn.segmentTitles[0]" = "";
@@ -318,9 +318,6 @@
 
 /* Class = "UIViewController"; title = "Heatmap"; ObjectID = "VIb-fl-PFY"; */
 "VIb-fl-PFY.title" = "";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "vOC-oF-PJU"; */
-"vOC-oF-PJU.text" = "";
 
 /* Class = "UILabel"; text = "Calories"; ObjectID = "VUK-Or-FM5"; */
 "VUK-Or-FM5.text" = "";

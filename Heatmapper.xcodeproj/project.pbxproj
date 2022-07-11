@@ -47,6 +47,8 @@
 		7944476F255A9B3B004708E3 /* DurationPickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7944476E255A9B3B004708E3 /* DurationPickerInterfaceController.swift */; };
 		79445D4F25A3292D001D3AC6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79445D4E25A3292C001D3AC6 /* StoreKit.framework */; };
 		7945FDFC25B97870008FFCC6 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */; };
+		7948FD03287CC09100862E03 /* PlayingAreaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7948FD02287CC09000862E03 /* PlayingAreaTableViewCell.xib */; };
+		7948FD05287CC58E00862E03 /* PlayingAreaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FD04287CC58E00862E03 /* PlayingAreaTableViewCell.swift */; };
 		795CF336281FF6E90085C40B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795CF335281FF6E90085C40B /* HealthKit.framework */; };
 		7960FD7B27B97EB400EF4886 /* ViewCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7960FD7A27B97EB400EF4886 /* ViewCorners.swift */; };
 		7961D6BF25B74B4900204968 /* MyWKInterfaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7961D6BE25B74B4900204968 /* MyWKInterfaceButton.swift */; };
@@ -210,6 +212,8 @@
 		7944476E255A9B3B004708E3 /* DurationPickerInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerInterfaceController.swift; sourceTree = "<group>"; };
 		79445D4E25A3292C001D3AC6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		7945FDFB25B97870008FFCC6 /* ScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
+		7948FD02287CC09000862E03 /* PlayingAreaTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayingAreaTableViewCell.xib; sourceTree = "<group>"; };
+		7948FD04287CC58E00862E03 /* PlayingAreaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingAreaTableViewCell.swift; sourceTree = "<group>"; };
 		7953B57625BACC0D00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		7953B57725BACC0D00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
 		7953B57925BACC0E00F35EBD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/IntervalTableViewFooter.strings"; sourceTree = "<group>"; };
@@ -409,6 +413,7 @@
 				796BC39427BFBE7900628EB2 /* MyMapDelegate.swift */,
 				7960FD7A27B97EB400EF4886 /* ViewCorners.swift */,
 				793477A826DD66BA0004DF0A /* ActivityTableViewCell.swift */,
+				7948FD04287CC58E00862E03 /* PlayingAreaTableViewCell.swift */,
 				79FDDFCC26C98BD900526FB9 /* CornerpointClientProtocol.swift */,
 				79FDDFCE26C98C3500526FB9 /* CornerpointView.swift */,
 				79FDDFCA26C98A8E00526FB9 /* CroppableImageView.swift */,
@@ -425,6 +430,7 @@
 				79ADB48F26264153007BF946 /* UserAnnotation.swift */,
 				79A9DC6226B9DD060063C3D0 /* WorkoutCollectionViewCell.swift */,
 				793477AC26DFFFF00004DF0A /* ActivityCell.xib */,
+				7948FD02287CC09000862E03 /* PlayingAreaTableViewCell.xib */,
 				798007F226F3DECC00FFC294 /* EditActivityCell.xib */,
 				7982B0C0264FEF64001335F3 /* WorkoutCell.xib */,
 				79A9DC6326B9DD060063C3D0 /* WorkoutCollectionViewCell.xib */,
@@ -701,6 +707,7 @@
 				79CA514B25C2DC9F00415F84 /* InfoPlist.strings in Resources */,
 				79AD9E96265074FC00928384 /* Assets.xcassets in Resources */,
 				79A7E15825AD9F5000D1A952 /* IntervalTableViewFooter.xib in Resources */,
+				7948FD03287CC09100862E03 /* PlayingAreaTableViewCell.xib in Resources */,
 				79A7E14C25ACE48000D1A952 /* Localizable.strings in Resources */,
 				79B274C12558055600752071 /* Colours 1.1.xcassets in Resources */,
 				7982B0C1264FEF64001335F3 /* WorkoutCell.xib in Resources */,
@@ -855,6 +862,7 @@
 				79C63AD3282DA9CF009CD624 /* PlayingAreaViewController.swift in Sources */,
 				791CA3C327EA6F840049FCB8 /* PlayingAreasViewController.swift in Sources */,
 				7972371D2719E203002F4548 /* PlayingAreaOverlayRenderer.swift in Sources */,
+				7948FD05287CC58E00862E03 /* PlayingAreaTableViewCell.swift in Sources */,
 				793D1AD424B854EB0039441B /* SessionDelegator.swift in Sources */,
 				79ADB49026264153007BF946 /* UserAnnotation.swift in Sources */,
 				7972371927176687002F4548 /* PlayingAreaOverlay.swift in Sources */,

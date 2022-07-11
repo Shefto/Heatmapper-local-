@@ -36,6 +36,7 @@ class PlayingAreasViewController: UIViewController {
   func initialiseUI() {
     playingAreaTableView.dataSource = self
     playingAreaTableView.delegate = self
+    playingAreaTableView.register(UINib(nibName: "PlayingAreaTableViewCell", bundle: nil), forCellReuseIdentifier: "PlayingAreaTableViewCell")
 
     playingAreaTableView.allowsSelection = true
 
@@ -83,10 +84,15 @@ extension PlayingAreasViewController: UITableViewDelegate, UITableViewDataSource
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    let cell = playingAreaTableView.dequeueReusableCell(withIdentifier: "PlayingAreaTableViewCell", for: indexPath)
+    let cell = playingAreaTableView.dequeueReusableCell(withIdentifier: "PlayingAreaTableViewCell", for: indexPath) as! PlayingAreaTableViewCell
 
-    cell.textLabel!.text = playingAreaArray[indexPath.row].name
-    cell.detailTextLabel!.text = playingAreaArray[indexPath.row].venue
+//    cell.textLabel!.text = playingAreaArray[indexPath.row].name
+//    cell.detailTextLabel!.text = playingAreaArray[indexPath.row].venue
+
+    cell.playingAreaNameLabel.text = playingAreaArray[indexPath.row].name
+    cell.venueLabel.text = playingAreaArray[indexPath.row].venue
+    cell.workoutCountLabel.text = "Workout Count"
+    cell.visibilityLabel.text = "Visibility"
 
     return cell
   }
