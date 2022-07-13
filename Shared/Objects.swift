@@ -70,7 +70,7 @@ extension Sport {
 
 struct WorkoutMetadata: Codable {
   var workoutId     = UUID()
-//  var playingAreaId : String?
+
   var playingAreaId : UUID?
   var teamId        : UUID?
   var activity      : String?

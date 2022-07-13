@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -25,15 +25,15 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Zxj-rA-b58" userLabel="Activity Type and Date Stack View">
                                     <rect key="frame" x="0.0" y="0.0" width="796" height="22"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRp-Ii-MLI" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="391.5" height="22"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRp-Ii-MLI">
+                                            <rect key="frame" x="0.0" y="0.0" width="505" height="22"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <color key="textColor" name="textPrimary"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time and Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9N-bl-zp9" customClass="TableRowNameUILabel" customModule="Heatmapper" customModuleProvider="target">
-                                            <rect key="frame" x="391.5" y="0.0" width="404.5" height="22"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9N-bl-zp9" userLabel="Date">
+                                            <rect key="frame" x="505" y="0.0" width="291" height="22"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="navBarTint"/>
                                             <nil key="highlightedColor"/>
@@ -136,7 +136,7 @@
                             </constraints>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" name="buttonPrimary"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="boy-Gn-HqB" firstAttribute="top" secondItem="uR8-aH-hbB" secondAttribute="top" constant="5" id="1yF-NB-c3S"/>
@@ -159,18 +159,12 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="activityDate" destination="x9N-bl-zp9" id="DCu-Gc-8IP"/>
-                <outlet property="activityType" destination="kRp-Ii-MLI" id="dcP-60-EGg"/>
-                <outlet property="caloriesImageView" destination="Y7D-pQ-YoY" id="ChI-T3-G1j"/>
-                <outlet property="caloriesLabel" destination="Sxr-tH-qwN" id="zyk-Fe-agF"/>
-                <outlet property="contentView" destination="uR8-aH-hbB" id="mGO-OH-txQ"/>
-                <outlet property="distanceImageView" destination="xeR-et-omh" id="OIO-n2-VKd"/>
-                <outlet property="distanceLabel" destination="Xfo-do-Ad5" id="Omp-TN-VdL"/>
-                <outlet property="heartImageView" destination="Xg3-eX-Gme" id="RzF-qI-Czf"/>
-                <outlet property="heartRateLabel" destination="kxG-Ae-P8F" id="U4Q-mJ-lxh"/>
-                <outlet property="speedLabel" destination="RkS-PU-cVA" id="5c4-rL-jBb"/>
-                <outlet property="speedometerImageView" destination="Ett-eS-YOG" id="Ea2-O7-Z73"/>
-                <outlet property="workoutView" destination="boy-Gn-HqB" id="nrI-1J-1an"/>
+                <outlet property="Date" destination="x9N-bl-zp9" id="pqA-KB-ctN"/>
+                <outlet property="activity" destination="kRp-Ii-MLI" id="hEu-zm-FeA"/>
+                <outlet property="calories" destination="Sxr-tH-qwN" id="cXz-km-5ja"/>
+                <outlet property="distance" destination="Xfo-do-Ad5" id="7Gc-KO-QKa"/>
+                <outlet property="heartRate" destination="kxG-Ae-P8F" id="TTv-Df-xSh"/>
+                <outlet property="speed" destination="RkS-PU-cVA" id="E2V-fU-qDF"/>
             </connections>
             <point key="canvasLocation" x="84.799999999999997" y="-141.22938530734635"/>
         </view>
@@ -180,17 +174,14 @@
         <image name="heart.fill" width="34" height="31"/>
         <image name="map.fill" width="41" height="41"/>
         <image name="speedometer" width="41" height="41"/>
-        <namedColor name="buttonPrimary">
-            <color red="0.12549019607843137" green="0.6705882352941176" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="navBarTint">
-            <color red="1" green="0.77647058823529413" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.96470588235294119" green="0.84705882352941175" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="textAlternate">
-            <color red="0.0039215686274509803" green="0.27843137254901962" blue="0.47843137254901963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.49803921568627452" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="textPrimary">
-            <color red="0.93333333333333335" green="0.43529411764705883" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.91764705882352937" green="0.36078431372549019" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

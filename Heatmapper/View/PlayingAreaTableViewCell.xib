@@ -15,11 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="534" height="36"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="VPJ-TT-954">
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="5" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VPJ-TT-954">
                     <rect key="frame" x="0.0" y="0.0" width="534" height="36"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="IGF-fm-6BO">
-                            <rect key="frame" x="0.0" y="0.0" width="266" height="34"/>
+                            <rect key="frame" x="0.0" y="0.0" width="264.5" height="34"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing Area Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhh-PW-HnI">
                                     <rect key="frame" x="0.0" y="0.0" width="122" height="17"/>
@@ -37,16 +37,16 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="9mu-I2-wum">
-                            <rect key="frame" x="268" y="0.0" width="266" height="34"/>
+                            <rect key="frame" x="269.5" y="0.0" width="264.5" height="34"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workout Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7F-H1-hMZ">
-                                    <rect key="frame" x="169" y="0.0" width="97" height="17"/>
+                                    <rect key="frame" x="167.5" y="0.0" width="97" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visibility" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SkC-wT-bLv">
-                                    <rect key="frame" x="212" y="17" width="54" height="17"/>
+                                    <rect key="frame" x="210.5" y="17" width="54" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="textColor"/>

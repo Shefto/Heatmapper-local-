@@ -78,7 +78,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   @IBOutlet weak var nameField: ThemeMediumFontTextField!
   @IBOutlet weak var mapView: MyMKMapView!
   @IBOutlet weak var mapTypeSegmentedControl: UISegmentedControl!
-  
+
   @IBOutlet weak var workoutTableView: ThemeTableViewNoBackground!
 
   @IBAction func btnResize(_ sender: Any) {
@@ -228,6 +228,9 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     workoutTableView.delegate = self
     workoutTableView.dataSource = self
     workoutTableView.allowsSelection = true
+    workoutTableView.register(UINib(nibName: "WorkoutTableViewCell", bundle: nil), forCellReuseIdentifier: "WorkoutTableViewCell")
+
+
     mapView.delegate = self
     mapView.listener = self
     resizeOn = false
@@ -277,100 +280,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       // no Playing Area passed in so we will create new one
 
       MyFunc.logMessage(.critical, "No PlayingArea passed in to PlayingAreasViewController")
-
-//      // get the user's location
-//      let userLocation = LocationManager.sharedInstance.currentLocation
-//      let userCoordinate = userLocation.coordinate
-//
-//      let topLeftLocation = userLocation.movedBy(latitudinalMeters: 52.5, longitudinalMeters: 34)
-//      let bottomRightLocation = userLocation.movedBy(latitudinalMeters: -52.5, longitudinalMeters: -34)
-//
-//      let minCoord = topLeftLocation.coordinate
-//      let maxCoord = bottomRightLocation.coordinate
-//
-//      let maxLat = maxCoord.latitude
-//      let minLat = minCoord.latitude
-//      let maxLong = maxCoord.longitude
-//      let minLong = minCoord.longitude
-//
-//      // set the map region
-//      self.overlayCenter = CLLocationCoordinate2D(latitude: userCoordinate.latitude, longitude: userCoordinate.longitude)
-//
-//      // get the max and min X and Y points from the above coordinates as MKMapPoints
-//      let minX = MKMapPoint(minCoord).x
-////      let maxX = MKMapPoint(maxCoord).x
-//      let minY = MKMapPoint(minCoord).y
-////      let maxY = MKMapPoint(maxCoord).y
-//
-//
-//
-//      // setting default pitch size to football pitch width and height
-//      var rectWidth : Double = 68.0
-//      var rectHeight  : Double = 105.0
-//      let rectMarginScale = 0.1
-//
-//      // set the rectangle origin as the plot dimensions plus the border
-//      let rectX = minX - (rectWidth * rectMarginScale)
-//      let rectY = minY + (rectHeight * rectMarginScale)
-//
-//      // increase the rectangle width and height by the border * 2
-//      rectWidth = rectWidth + (rectWidth * rectMarginScale * 2)
-//      rectHeight = rectHeight + (rectHeight * rectMarginScale * 2)
-//
-//      let pitchMKMapRect = MKMapRect.init(x: rectX, y: rectY, width: rectWidth, height: rectHeight)
-//      self.playingAreaMapRect = pitchMKMapRect
-//
-//
-//      // get the PlayingArea corner coordinates from the size of heatmap
-//      self.bottomLeftCoord = CLLocationCoordinate2D(latitude: maxLat, longitude: maxLong)
-//      self.topLeftCoord = CLLocationCoordinate2D(latitude: minLat, longitude: maxLong)
-//      self.bottomRightCoord = CLLocationCoordinate2D(latitude: maxLat, longitude: minLong)
-//      self.topRightCoord  = CLLocationCoordinate2D(latitude: minLat, longitude: minLong)
-//
-//      // convert the coordinates to a codable subclass for saving
-//      let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.topLeftCoord!.latitude, longitude: self.topLeftCoord!.longitude)
-//      let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomLeftCoord!.latitude, longitude: self.bottomLeftCoord!.longitude)
-//      let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: self.bottomRightCoord!.latitude, longitude: self.bottomRightCoord!.longitude)
-//      let topRightCoordToSave = CodableCLLCoordinate2D(latitude: self.topRightCoord!.latitude, longitude: self.topRightCoord!.longitude)
-//
-//      self.isEditing = true
-//
-//      // as we are creating a new playing area, default the name and venue to the placemark data
-//      var geocoder            : CLGeocoder!
-//      geocoder                = CLGeocoder()
-//      geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
-//
-//        if error != nil {
-//          MyFunc.logMessage(.debug, "No placemark found: \(error.debugDescription)")
-//        } else {
-//          guard let returnedPlacemarks = placemarks else {
-//            MyFunc.logMessage(.debug, "No placemark found: \(error.debugDescription)")
-//            return
-//
-//          }
-//          let placemark =  returnedPlacemarks.first!
-//          var placemarkStr : String = ""
-//          print ("Placemark returned: ")
-//          print (String(describing: placemark.locality))
-//          print (String(describing: placemark.thoroughfare))
-//
-//          let thoroughfare = placemark.thoroughfare ?? ""
-//          let locality = placemark.locality ?? ""
-//          if thoroughfare != "" && locality != "" {
-//            placemarkStr = (thoroughfare + ", " + locality)
-//          } else {
-//            placemarkStr =  "No placemark found"
-//          }
-//
-//          self.nameField.text = placemarkStr
-//          // now save the auto-generated PlayingArea coordinates for future use
-//          let playingAreaToSave = PlayingArea(bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: placemarkStr, venue: "", sport: "", comments: "", isFavourite: true)
-//          MyFunc.savePlayingArea(playingAreaToSave)
-//
-//          self.playingAreaToUpdate = playingAreaToSave
-//        }
-
-//      }
 
 
     }
@@ -993,12 +902,16 @@ extension PlayingAreaViewController: UITableViewDelegate, UITableViewDataSource 
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    let cell = workoutTableView.dequeueReusableCell(withIdentifier: "WorkoutTableViewCell", for: indexPath)
+    let workoutId = workoutArray[indexPath.row].uuid
+    let workoutMetadata = workoutMetadataArray.first(where: {$0.workoutId == workoutId})
+    let workoutDescription = workoutMetadata?.activity ?? ""
 
     let workoutStartDate = workoutArray[indexPath.row].startDate
-    cell.textLabel!.text = dateFormatter.string(from: workoutStartDate)
 
-    //    cell.detailTextLabel!.text = playingAreaArray[indexPath.row].venue
+    let cell = workoutTableView.dequeueReusableCell(withIdentifier: "WorkoutTableViewCell", for: indexPath) as! WorkoutTableViewCell
+
+    cell.activity.text = workoutDescription
+    cell.Date.text =  dateFormatter.string(from: workoutStartDate)
 
     return cell
   }

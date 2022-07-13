@@ -846,7 +846,7 @@ DQoNCg
                                         <rect key="frame" x="0.0" y="608" width="414" height="200"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WorkoutTableViewCell" id="7pz-KP-Ff7" userLabel="Workout Table View Cell">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WorkoutTableViewCell" id="7pz-KP-Ff7" userLabel="Workout Table View Cell" customClass="WorkoutTableViewCell" customModule="Heatmapper" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="44.666666030883789" width="414" height="43.666667938232422"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7pz-KP-Ff7" id="xyi-Cp-9DK">
@@ -884,7 +884,7 @@ DQoNCg
                         <outlet property="sportField" destination="Cgu-Ak-Ev2" id="hGJ-Fa-RP3"/>
                         <outlet property="venueField" destination="wbt-Wh-gP2" id="l8i-Hc-Hwc"/>
                         <outlet property="widthStepper" destination="Jxy-Lb-dX1" id="UaS-sp-ZA7"/>
-                        <outlet property="workoutTableView" destination="E17-zL-aUS" id="nhm-th-3yh"/>
+                        <outlet property="workoutTableView" destination="E17-zL-aUS" id="XR1-f5-IiX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vkf-wD-klh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

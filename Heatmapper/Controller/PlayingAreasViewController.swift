@@ -86,12 +86,12 @@ extension PlayingAreasViewController: UITableViewDelegate, UITableViewDataSource
 
     let cell = playingAreaTableView.dequeueReusableCell(withIdentifier: "PlayingAreaTableViewCell", for: indexPath) as! PlayingAreaTableViewCell
 
-//    cell.textLabel!.text = playingAreaArray[indexPath.row].name
-//    cell.detailTextLabel!.text = playingAreaArray[indexPath.row].venue
+
 
     cell.playingAreaNameLabel.text = playingAreaArray[indexPath.row].name
     cell.venueLabel.text = playingAreaArray[indexPath.row].venue
-    cell.workoutCountLabel.text = "Workout Count"
+    // placeholder for counting workouts
+    cell.workoutCountLabel.text = ""
     cell.visibilityLabel.text = "Visibility"
 
     return cell
