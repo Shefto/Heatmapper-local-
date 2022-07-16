@@ -507,29 +507,24 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     createPlayingAreaOverlay(topLeft: pitchMapTopLeftCoordinate, bottomLeft: pitchMapBottomLeftCoordinate, bottomRight: pitchMapBottomRightCoordinate)
 
-    // save the pitch here
-    // convert the CLLCoordinates to a subclass which allows us to code them ready for saving
-    let topLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopLeftCoordinate.latitude, longitude: pitchMapTopLeftCoordinate.longitude)
-    let bottomLeftCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
-    let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
-    let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
-
-    let playingAreaToSaveWithId = PlayingArea(bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: activityField.text ?? "" , venue: venueField.text ?? "", sport: sportField.text ?? "", comments: "Saved!", isFavourite: self.playingArea!.isFavourite)
-    MyFunc.savePlayingArea(playingAreaToSaveWithId)
-
-    // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
-    workoutMetadata.playingAreaId = playingAreaToSaveWithId.id
-    updateWorkout()
-
 
     // store the coordinate in the VC's corner variables
     // consider revising above code to use these earlier and avoid having to create new variables for the TL/BR swap
-    self.topLeftCoord         = pitchMapTopLeftCoordinate
-    self.bottomLeftCoord      = pitchMapBottomLeftCoordinate
-    self.topRightCoord        = pitchMapTopRightCoordinate
-    self.bottomRightCoord     = pitchMapBottomRightCoordinate
+    topLeftCoord         = pitchMapTopLeftCoordinate
+    bottomLeftCoord      = pitchMapBottomLeftCoordinate
+    topRightCoord        = pitchMapTopRightCoordinate
+    bottomRightCoord     = pitchMapBottomRightCoordinate
 
-    playingAreaBearing = pitchMapBottomLeftCoordinate.bearing(to: pitchMapTopLeftCoordinate)
+    playingArea?.topLeft = CodableCLLCoordinate2D(latitude: pitchMapTopLeftCoordinate.latitude, longitude: pitchMapTopLeftCoordinate.longitude)
+    playingArea?.bottomLeft = CodableCLLCoordinate2D(latitude: pitchMapBottomLeftCoordinate.latitude, longitude: pitchMapBottomLeftCoordinate.longitude)
+    playingArea?.bottomRight = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
+    playingArea?.topRight = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
+
+    guard let playingAreaToSave = self.playingArea else {
+      MyFunc.logMessage(.error, "HeatmapViewController: addAsFavourite: no Playing Area to save")
+      return
+    }
+    MyFunc.savePlayingArea(playingAreaToSave)
 
   }
 
