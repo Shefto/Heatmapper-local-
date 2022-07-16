@@ -56,6 +56,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   
   let activityPicker              = UIPickerView()
   let sportPicker                 = UIPickerView()
+  var pitchImage                  = UIImage()
 
   var selectedIndexPath           : Int?
 
@@ -149,27 +150,32 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
   @IBAction func sportEditingDidEnd(_ sender: Any) {
 
-    playingAreaToUpdate?.sport = sportField.text
-//    guard let topLeft = self.topLeftCoord, let bottomLeft = self.bottomLeftCoord, let bottomRight = self.bottomRightCoord else {
-//      MyFunc.logMessage(.error, "Missing co-ordinates for overlay")
-//      return
-//    }
+    let sportStr = sportField.text ?? ""
+    playingAreaToUpdate?.sport = sportStr
+    updatePitchImage(sport: sportStr)
     updateOverlay()
   }
 
+  func updatePitchImage(sport: String)  {
+    switch sport {
+    case "Football":
+      pitchImage = UIImage(named: "Football pitch.png")!
+    case "5-a-side":
+      pitchImage = UIImage(named: "5-a-side pitch.png")!
+    case "Rugby":
+      pitchImage = UIImage(named: "Rugby Union pitch.png")!
+    case "Tennis":
+      pitchImage = UIImage(named: "Tennis court.png")!
+    case "None":
+      pitchImage = UIImage(named: "Figma Pitch 11 Green.png")!
+    default:
+      pitchImage = UIImage(named: "Figma Pitch 11 Green.png")!
+    }
+  }
+
+
+
   func updateOverlay() {
-
-//    if let overlays = mapView?.overlays {
-//      for overlay in overlays {
-//        if overlay is PlayingAreaOverlay {
-//          let rectForNewOverlay = overlay.boundingMapRect
-//          mapView?.removeOverlay(overlay)
-//          let newOverlay = PlayingAreaOverlay(pitchRect: rectForNewOverlay)
-//          mapView.insertOverlay(newOverlay, at: 0)
-//        }
-//      }
-//    }
-
 
     // first remove the old overlay
     if let overlays = mapView?.overlays {
@@ -194,9 +200,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
     mapHeadingAtResizeOn = mapView.camera.heading
 
-
-    //    playingAreaAngleSaved = pitchAngle
-    //    self.pitchAngleToApply = pitchAngle
     self.createPlayingAreaOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
 
 
@@ -296,8 +299,11 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
     // now add the view
     let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
-    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
-    newPitchView.image = pitchImageGreen
+
+    let sportStr = sportField.text ?? ""
+    updatePitchImage(sport: sportStr)
+
+    newPitchView.image = pitchImage
     newPitchView.layer.opacity = 0.5
     newPitchView.isUserInteractionEnabled = true
     newPitchView.tag = 200
@@ -504,8 +510,8 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     
     // now add the view
     let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
-    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
-    newPitchView.image = pitchImageGreen
+    let playingAreaImage : UIImage = pitchImage
+    newPitchView.image = playingAreaImage
     newPitchView.layer.opacity = 0.5
     newPitchView.isUserInteractionEnabled = true
     newPitchView.tag = 200

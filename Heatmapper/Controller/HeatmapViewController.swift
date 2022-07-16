@@ -187,7 +187,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     let sportStr = sportField.text ?? ""
     updatePitchImage(sport: sportStr)
-
     playingArea?.sport = sportStr
     guard let playingAreaToSave = self.playingArea else {
       MyFunc.logMessage(.error, "HeatmapViewController: textFieldEditingDidEnd: no Playing Area to save")
@@ -542,10 +541,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
     // now add the view
     let newPitchView = UIImageView(frame: (CGRect(x: pitchViewBottomRight.x, y: pitchViewBottomRight.y, width: newWidth, height: newHeight)))
-//    let pitchImageGreen = UIImage(named: "Figma Pitch 11 Green")
-//    newPitchView.image = pitchImageGreen
-
-
     let playingAreaImage : UIImage = pitchImage
     newPitchView.image = playingAreaImage
     newPitchView.layer.opacity = 0.5
