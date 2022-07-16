@@ -56,7 +56,7 @@ class PlayingAreasViewController: UIViewController {
     let segueToUse = segue.identifier
     if segueToUse == "playingAreasToPlayingArea" {
       let playingAreaVC = segue.destination as! PlayingAreaViewController
-      playingAreaVC.playingAreaToUpdate = sender as? PlayingArea
+      playingAreaVC.playingArea = sender as? PlayingArea
     }
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }

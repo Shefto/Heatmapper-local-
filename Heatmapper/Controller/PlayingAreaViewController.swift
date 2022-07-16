@@ -13,7 +13,7 @@ import CoreLocation
 
 class PlayingAreaViewController: UIViewController, MyMapListener {
   
-  var playingAreaToUpdate         : PlayingArea?
+
   var heatmapperCoordinatesArray  = [CLLocationCoordinate2D]()
   var heatmapperLocationsArray    = [CLLocation]()
   var heatmapWorkoutId            : UUID?
@@ -28,7 +28,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   
   var resizeOn                    : Bool = true
   var playingAreaMapRect          : MKMapRect?
-  //  var heatmapPointCircle          : MKCircle?
+
   
   let healthStore                 = HKHealthStore()
   let theme                       = ColourTheme()
@@ -42,18 +42,18 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   var playingAreaAngleSavedAfterResize       : CGFloat = 0.0
   var playingAreaAngleSaved       : CGFloat = 0.0
   var pitchAngleToApply           : CGFloat = 0.0
-  
+
+  var playingArea                 : PlayingArea?
   var bottomLeftCoord             : CLLocationCoordinate2D?
   var topLeftCoord                : CLLocationCoordinate2D?
   var bottomRightCoord            : CLLocationCoordinate2D?
   var topRightCoord               : CLLocationCoordinate2D?
   var playingAreaBearing          : Double = 0.0
-  
+  var overlayCenter               : CLLocationCoordinate2D?
+
   var activityArray               = [Activity]()
   var sportArray                  = [Sport]()
-  
-  var overlayCenter               : CLLocationCoordinate2D?
-  
+
   let activityPicker              = UIPickerView()
   let sportPicker                 = UIPickerView()
   var pitchImage                  = UIImage()
@@ -100,11 +100,8 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       mapView.camera.heading = playingAreaAngleSavedAfterResizeDegrees
 
       setMapViewZoom()
-//      let distanceToSet = mapView.camera.centerCoordinateDistance
-//      let cameraToApply = MKMapCamera(lookingAtCenter: self.overlayCenter!, fromDistance: distanceToSet, pitch: 0, heading: playingAreaBearing)
-//      self.mapView.setCamera(cameraToApply, animated: false)
-      
-      // removes the pitchView
+
+      // remove the pitchView
       removeViewWithTag(tag: 200)
       
       // resetPlayingAreaButton.isHidden = true
@@ -115,7 +112,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       resizeOn = true
       resizeButton.setTitle("Save", for: .normal)
       heightAndWeightStackView.isHidden = false
-//      removeAllPinsAndAnnotations()
+
       enterResizeMode()
       updateSteppers()
     }
@@ -151,7 +148,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   @IBAction func sportEditingDidEnd(_ sender: Any) {
 
     let sportStr = sportField.text ?? ""
-    playingAreaToUpdate?.sport = sportStr
+    playingArea?.sport = sportStr
     updatePitchImage(sport: sportStr)
     updateOverlay()
   }
@@ -256,7 +253,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
 
   func getPlayingAreaOnLoad() {
 
-    if let playingArea  = playingAreaToUpdate  {
+    if let playingArea  = playingArea  {
 
       nameField.text = playingArea.name
       venueField.text = playingArea.venue
@@ -355,7 +352,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       }
       self.workoutMetadataArray = MyFunc.getWorkoutMetadata()
 
-      let workoutMetadataForPlayingAreaArray = self.workoutMetadataArray.filter {$0.playingAreaId == self.playingAreaToUpdate?.id }
+      let workoutMetadataForPlayingAreaArray = self.workoutMetadataArray.filter {$0.playingAreaId == self.playingArea?.id }
       let workoutMetadataArrayIdsOnly = workoutMetadataForPlayingAreaArray.map { $0.workoutId}
 
       let workoutForPlayingAreaArray = self.workoutArray.filter { workoutMetadataArrayIdsOnly.contains($0.uuid) }
@@ -402,7 +399,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let venueToSave = venueField.text ?? ""
     let sportToSave = sportField.text ?? ""
 
-    let playingAreaToSave = PlayingArea(playingAreaId: playingAreaToUpdate!.id, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "", isFavourite: true)
+    let playingAreaToSave = PlayingArea(playingAreaId: playingArea!.id, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "", isFavourite: true)
 
     MyFunc.savePlayingArea(playingAreaToSave)
 
@@ -461,7 +458,7 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
     let venueToSave = venueField.text
     let sportToSave = sportField.text
     
-    let playingAreaToSave = PlayingArea(playingAreaId: playingAreaToUpdate!.id, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "Resizing", isFavourite: true)
+    let playingAreaToSave = PlayingArea(playingAreaId: playingArea!.id, bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: nameToSave, venue: venueToSave,  sport: sportToSave, comments: "Resizing", isFavourite: true)
     
     MyFunc.savePlayingArea(playingAreaToSave)
     
@@ -481,21 +478,21 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
   
   func enterResizeMode() {
     
-    let playingArea : PlayingArea = playingAreaToUpdate!
-    let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomRight.latitude) / 2
-    let midpointLongitude = (playingArea.topLeft.longitude + playingArea.bottomRight.longitude) / 2
-    self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-    
-    // convert the stored playingArea coordinates from the codable class to the base CLLCoordinate2D
-    let topLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
-    let bottomLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
-    let bottomRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
-    let topRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.topRight.latitude, longitude: playingArea.topRight.longitude)
-    
-    self.bottomLeftCoord = bottomLeftAsCoord
-    self.bottomRightCoord = bottomRightAsCoord
-    self.topLeftCoord = topLeftAsCoord
-    self.topRightCoord = topRightAsCoord
+//    let playingArea : PlayingArea = playingArea!
+//    let midpointLatitude = (playingArea.topLeft.latitude + playingArea.bottomRight.latitude) / 2
+//    let midpointLongitude = (playingArea.topLeft.longitude + playingArea.bottomRight.longitude) / 2
+//    self.overlayCenter = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+//
+//    // convert the stored playingArea coordinates from the codable class to the base CLLCoordinate2D
+//    let topLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.topLeft.latitude, longitude: playingArea.topLeft.longitude)
+//    let bottomLeftAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomLeft.latitude, longitude: playingArea.bottomLeft.longitude)
+//    let bottomRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.bottomRight.latitude, longitude: playingArea.bottomRight.longitude)
+//    let topRightAsCoord = CLLocationCoordinate2D(latitude: playingArea.topRight.latitude, longitude: playingArea.topRight.longitude)
+//
+//    self.bottomLeftCoord = bottomLeftAsCoord
+//    self.bottomRightCoord = bottomRightAsCoord
+//    self.topLeftCoord = topLeftAsCoord
+//    self.topRightCoord = topRightAsCoord
     
     //  need to size the pitchView from the MapView information
     // we have the mapView rect from the overlay and the coordinates
@@ -547,7 +544,6 @@ class PlayingAreaViewController: UIViewController, MyMapListener {
       }
     }
 
-    playingAreaToUpdate = playingArea
   }
   
 
@@ -831,7 +827,7 @@ extension PlayingAreaViewController: MKMapViewDelegate {
 //    if overlay is PlayingAreaOverlay {
 
       var pitchImage = UIImage()
-      switch playingAreaToUpdate?.sport {
+      switch playingArea?.sport {
       case "Football":
         pitchImage = UIImage(named: "Football pitch.png")!
       case "5-a-side":

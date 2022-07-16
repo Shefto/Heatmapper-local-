@@ -26,7 +26,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
   var measurementFormatter        = MeasurementFormatter()
   var unitSpeed                   : UnitSpeed  = .metersPerSecond
 
-  var isFavourite                 : Bool = false
+//  var isFavourite                 : Bool = false
   var resizeOn                    : Bool = true
   var playingAreaMapRect          : MKMapRect?
   var heatmapPointCircle          : MKCircle?
@@ -358,7 +358,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       // update the metrics
       updateAngleUI()
 
-      // removes the pitchView
+      // remove the pitchView
       removeViewWithTag(tag: 200)
       resetPlayingAreaButton.isHidden = true
       heightAndWeightStackView.isHidden = true
@@ -381,12 +381,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
       activityField.isHidden = true
       pitchField.isHidden = true
 
-
-//      print("playingArea at resize before getPlayingArea:")
-//      print(playingArea.debugDescription)
-//      getPlayingArea()
-//      print("playingArea at resize after getPlayingArea:")
-//      print(playingArea.debugDescription)
       enterResizeMode()
       updateSteppers()
     }
@@ -533,8 +527,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   func enterResizeMode() {
 
-    // need to size the pitchView from the MapView information
-    // we have the mapView rect from the overlay and the coordinates
 
     let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
     let pitchViewTopLeft      : CGPoint = self.mapView.convert(topLeftCoord!, toPointTo: self.mapView)
