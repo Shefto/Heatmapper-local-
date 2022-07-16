@@ -381,7 +381,12 @@ class HeatmapViewController: UIViewController, MyMapListener {
       activityField.isHidden = true
       pitchField.isHidden = true
 
-      getPlayingArea()
+
+//      print("playingArea at resize before getPlayingArea:")
+//      print(playingArea.debugDescription)
+//      getPlayingArea()
+//      print("playingArea at resize after getPlayingArea:")
+//      print(playingArea.debugDescription)
       enterResizeMode()
       updateSteppers()
     }
