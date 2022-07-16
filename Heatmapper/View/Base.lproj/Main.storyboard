@@ -899,8 +899,22 @@ DQoNCg
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lQv-M8-POj">
+                                <rect key="frame" x="0.0" y="88" width="414" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="ZVP-RU-ljH"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Normal"/>
+                                    <segment title="Hybrid"/>
+                                    <segment title="Satellite"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segMapType:" destination="Pbk-vr-61V" eventType="valueChanged" id="X6s-Pb-vJA"/>
+                                </connections>
+                            </segmentedControl>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lQG-2T-c3p" customClass="MyMKMapView" customModule="Heatmapper" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="414" height="410"/>
+                                <rect key="frame" x="0.0" y="119" width="414" height="379"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="fJF-dn-msC"/>
@@ -1322,10 +1336,13 @@ DQoNCg
                             <constraint firstItem="dWO-9w-WBa" firstAttribute="trailing" secondItem="gX6-Du-D22" secondAttribute="trailing" constant="5" id="0Z0-Ef-O9F"/>
                             <constraint firstItem="lQG-2T-c3p" firstAttribute="leading" secondItem="dWO-9w-WBa" secondAttribute="leading" id="0yf-Ar-ruo"/>
                             <constraint firstItem="lQG-2T-c3p" firstAttribute="trailing" secondItem="dWO-9w-WBa" secondAttribute="trailing" id="49H-nD-evY"/>
+                            <constraint firstItem="lQv-M8-POj" firstAttribute="top" secondItem="dWO-9w-WBa" secondAttribute="top" id="A9c-S9-DhH"/>
                             <constraint firstItem="Qfd-ml-kHE" firstAttribute="top" secondItem="gX6-Du-D22" secondAttribute="bottom" constant="5" id="AKQ-2j-HbX"/>
-                            <constraint firstItem="lQG-2T-c3p" firstAttribute="top" secondItem="dWO-9w-WBa" secondAttribute="top" id="ZdR-z9-CSs"/>
+                            <constraint firstItem="lQG-2T-c3p" firstAttribute="top" secondItem="lQv-M8-POj" secondAttribute="bottom" id="ZdR-z9-CSs"/>
                             <constraint firstItem="dWO-9w-WBa" firstAttribute="trailing" secondItem="Qfd-ml-kHE" secondAttribute="trailing" constant="5" id="cqv-rZ-BLN"/>
                             <constraint firstItem="gX6-Du-D22" firstAttribute="top" secondItem="lQG-2T-c3p" secondAttribute="bottom" constant="5" id="k1d-Tj-eVu"/>
+                            <constraint firstItem="dWO-9w-WBa" firstAttribute="trailing" secondItem="lQv-M8-POj" secondAttribute="trailing" id="kd4-Jl-mfp"/>
+                            <constraint firstItem="lQv-M8-POj" firstAttribute="leading" secondItem="kHH-B5-aZm" secondAttribute="leading" id="mdQ-YM-ubr"/>
                             <constraint firstItem="gX6-Du-D22" firstAttribute="leading" secondItem="dWO-9w-WBa" secondAttribute="leading" constant="5" id="scs-Ss-6cq"/>
                             <constraint firstItem="Qfd-ml-kHE" firstAttribute="leading" secondItem="dWO-9w-WBa" secondAttribute="leading" constant="5" id="tkE-Qf-QLj"/>
                             <constraint firstItem="Qfd-ml-kHE" firstAttribute="bottom" secondItem="dWO-9w-WBa" secondAttribute="bottom" constant="-20" id="vXw-cg-B4q"/>

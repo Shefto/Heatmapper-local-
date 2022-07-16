@@ -220,6 +220,15 @@
 /* Class = "UISegmentedControl"; KZh-Fy-Ydb.segmentTitles[3] = "mins/mi"; ObjectID = "KZh-Fy-Ydb"; */
 "KZh-Fy-Ydb.segmentTitles[3]" = "";
 
+/* Class = "UISegmentedControl"; lQv-M8-POj.segmentTitles[0] = "Normal"; ObjectID = "lQv-M8-POj"; */
+"lQv-M8-POj.segmentTitles[0]" = "";
+
+/* Class = "UISegmentedControl"; lQv-M8-POj.segmentTitles[1] = "Hybrid"; ObjectID = "lQv-M8-POj"; */
+"lQv-M8-POj.segmentTitles[1]" = "";
+
+/* Class = "UISegmentedControl"; lQv-M8-POj.segmentTitles[2] = "Satellite"; ObjectID = "lQv-M8-POj"; */
+"lQv-M8-POj.segmentTitles[2]" = "";
+
 /* Class = "UITextField"; text = "-"; ObjectID = "Mdv-eB-7zg"; */
 "Mdv-eB-7zg.text" = "";
 

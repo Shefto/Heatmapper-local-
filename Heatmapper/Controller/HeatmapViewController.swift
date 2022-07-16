@@ -123,6 +123,24 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
   @IBAction func btnSelectFromFavourites(_ sender: Any) {
   }
+
+  @IBAction func segMapType(_ sender: UISegmentedControl) {
+    switch sender.selectedSegmentIndex {
+    case 0:
+      self.mapView.mapType = .mutedStandard
+    case 1:
+      self.mapView.mapType = .hybrid
+    case 2:
+      self.mapView.mapType = .satellite
+    case 3:
+      self.mapView.mapType = .hybridFlyover
+    case 4:
+      self.mapView.mapType = .satelliteFlyover
+    default:
+      self.mapView.mapType = .standard
+    }
+  }
+
   
   // add the Playing Area to the list of Favourites
   @IBAction func addAsFavourite(_ sender: Any) {
@@ -496,7 +514,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     let bottomRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapBottomRightCoordinate.latitude, longitude: pitchMapBottomRightCoordinate.longitude)
     let topRightCoordToSave = CodableCLLCoordinate2D(latitude: pitchMapTopRightCoordinate.latitude, longitude: pitchMapTopRightCoordinate.longitude)
 
-    let playingAreaToSaveWithId = PlayingArea(bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: activityField.text ?? "" , venue: venueField.text ?? "", sport: sportField.text ?? "", comments: "Saved!", isFavourite: false)
+    let playingAreaToSaveWithId = PlayingArea(bottomLeft: bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: activityField.text ?? "" , venue: venueField.text ?? "", sport: sportField.text ?? "", comments: "Saved!", isFavourite: self.playingArea!.isFavourite)
     MyFunc.savePlayingArea(playingAreaToSaveWithId)
 
     // save the Playing Area Id to the Workout - now we are decoupling the Workout directly from the PlayingArea for a 1:M link
@@ -693,7 +711,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
         self.bottomRightCoord = bottomRightAsCoord
         self.topLeftCoord = topLeftAsCoord
         self.topRightCoord = topRightAsCoord
-
         self.playingArea = playingAreaRetrieved
 
       }
@@ -773,7 +790,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
   }
 
   func setFavouritesButtonTitle() {
-    if playingArea?.isFavourite == true {
+    if let isFavourite = playingArea?.isFavourite, isFavourite  {
       favouritesButton.setTitle("Remove Playing Area from Favourites", for: .normal)
     } else {
       favouritesButton.setTitle("Add Playing Area to Favourites", for: .normal)
