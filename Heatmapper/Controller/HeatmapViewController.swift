@@ -381,7 +381,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
       activityField.isHidden = true
       pitchField.isHidden = true
 
-//      removeAllPinsAndAnnotations()
       getPlayingArea()
       enterResizeMode()
       updateSteppers()
@@ -706,7 +705,6 @@ class HeatmapViewController: UIViewController, MyMapListener {
       }
     })
 
-//    removeAllPinsAndAnnotations()
 
     // getting the angle to rotate the overlay by from the CGPoints
     let pitchViewBottomLeft   : CGPoint = self.mapView.convert(bottomLeftCoord!, toPointTo: self.mapView)
@@ -748,7 +746,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
     playingAreaAngleSaved = pitchAngle
     self.pitchAngleToApply = pitchAngle
     self.createPlayingAreaOverlay(topLeft: self.topLeftCoord!, bottomLeft: self.bottomLeftCoord!, bottomRight: self.bottomRightCoord!)
-    setMapViewZoom()
+//    setMapViewZoom()
     setFavouritesButtonTitle()
 
   }
@@ -1180,6 +1178,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
         DispatchQueue.main.async {
           self.loadSamplesUI()
           self.getPlayingArea()
+          self.setMapViewZoom()
           self.createREHeatmap()
 
         }
