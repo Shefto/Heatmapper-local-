@@ -18,7 +18,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
   var heatmapperCoordinatesArray  = [CLLocationCoordinate2D]()
   var heatmapperLocationsArray    = [CLLocation]()
   var heatmapWorkoutId            : UUID?
-  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", playingAreaVenue: "", playingAreaName: "")
+  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "")
   var workoutMetadataArray        =  [WorkoutMetadata]()
   var retrievedWorkout            : HKWorkout?
   private var geocoder            : CLGeocoder!
@@ -99,7 +99,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
   @IBOutlet weak var activityField                      : ThemeMediumFontTextField!
   @IBOutlet weak var sportField                         : ThemeMediumFontTextField!
   @IBOutlet weak var venueField                         : ThemeMediumFontTextField!
-  @IBOutlet weak var pitchField                         : ThemeMediumFontTextField!
+  @IBOutlet weak var playingAreaNameField                         : ThemeMediumFontTextField!
   @IBOutlet weak var placemarkField                     : ThemeMediumFontTextField!
 
   @IBOutlet weak var distanceLabel                      : ThemeMediumFontUILabel!
@@ -170,7 +170,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
 
 
   @IBAction func textFieldEditingDidEnd(_ sender: Any) {
-    playingArea?.name     = pitchField.text
+    playingArea?.name     = playingAreaNameField.text
     playingArea?.venue    = venueField.text
     playingArea?.sport    = sportField.text
     guard let playingAreaToSave = self.playingArea else {
@@ -365,7 +365,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       sportField.isHidden = false
       venueField.isHidden = false
       activityField.isHidden = false
-      pitchField.isHidden = false
+      playingAreaNameField.isHidden = false
 
 
     } else {
@@ -379,7 +379,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
       sportField.isHidden = true
       venueField.isHidden = true
       activityField.isHidden = true
-      pitchField.isHidden = true
+      playingAreaNameField.isHidden = true
 
       enterResizeMode()
       updateSteppers()
@@ -668,11 +668,11 @@ class HeatmapViewController: UIViewController, MyMapListener {
           // as we are creating a new playing area, default the name and venue to the placemark data
           if let firstCoordinate = self.heatmapperCoordinatesArray.first {
             
-            placemarkName = self.getCLPlacemark(coordinate: firstCoordinate)
-            print("placemarkName: \(placemarkName)")
+          self.getCLPlacemark(coordinate: firstCoordinate)
+
           }
 
-          self.pitchField.text = placemarkName
+
           // now save the auto-generated PlayingArea coordinates for future use
           let playingAreaToSave = PlayingArea(bottomLeft:  bottomLeftCoordToSave, bottomRight: bottomRightCoordToSave, topLeft: topLeftCoordToSave, topRight: topRightCoordToSave, name: placemarkName, venue: "", sport: "", comments: "", isFavourite: false)
           MyFunc.savePlayingArea(playingAreaToSave)
@@ -694,7 +694,7 @@ class HeatmapViewController: UIViewController, MyMapListener {
         let playingAreaStr = String(describing: playingAreaRetrieved)
         MyFunc.logMessage(.debug, playingAreaStr)
 
-        self.pitchField.text = playingAreaRetrieved.name
+        self.playingAreaNameField.text = playingAreaRetrieved.name
         self.venueField.text = playingAreaRetrieved.venue
         self.sportField.text = playingAreaRetrieved.sport
 
@@ -955,13 +955,13 @@ class HeatmapViewController: UIViewController, MyMapListener {
     self.view.addGestureRecognizer(tapGesture)
 
     let workoutActivity = workoutMetadata.activity
-    let workoutVenue = workoutMetadata.playingAreaVenue
-    let workoutPitch = workoutMetadata.playingAreaName
+//    let workoutVenue = workoutMetadata.playingAreaVenue
+//    let workoutPitch = workoutMetadata.playingAreaName
     let workoutSport = workoutMetadata.sport
 
     activityField.text = workoutActivity
-    venueField.text = workoutVenue
-    pitchField.text = workoutPitch
+//    venueField.text = workoutVenue
+//    playingAreaNameField.text = workoutPitch
     sportField.text = workoutSport
 
   }
@@ -1195,9 +1195,9 @@ class HeatmapViewController: UIViewController, MyMapListener {
     healthStore.execute(query)
   }
 
-  func getCLPlacemark(coordinate: CLLocationCoordinate2D) -> String  {
-    var placemarkToReturn : String = ""
-
+  func getCLPlacemark(coordinate: CLLocationCoordinate2D) {
+    // this function gets the placemark name using the reverseGeocodeLocation method
+    // as this runs asynchronously have to update both the UI and the data here
     let latitude = coordinate.latitude
     let longitude = coordinate.longitude
     let location = CLLocation(latitude: latitude, longitude: longitude)
@@ -1222,13 +1222,16 @@ class HeatmapViewController: UIViewController, MyMapListener {
           placemarkStr =  "No placemark found"
         }
 
-        placemarkToReturn = placemarkStr
-
+        self.playingAreaNameField.text = placemarkStr
+        self.playingArea?.name = placemarkStr
+        if let playingAreaToSave = self.playingArea {
+        MyFunc.savePlayingArea(playingAreaToSave)
+        }
 
       }
 
     }
-    return placemarkToReturn
+
   }
 
   func angleInDegrees(between starting: CGPoint, ending: CGPoint) -> CGFloat {
@@ -1267,12 +1270,12 @@ class HeatmapViewController: UIViewController, MyMapListener {
     }
 
     let activity = activityField.text ?? ""
-    let venue = venueField.text ?? ""
+//    let venue = venueField.text ?? ""
     let sport = sportField.text ?? ""
-    let pitch = pitchField.text ?? ""
+//    let pitch = playingAreaNameField.text ?? ""
     let playingAreaId = workoutMetadata.playingAreaId
 
-    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, playingAreaId: playingAreaId, activity: activity, sport: sport, playingAreaVenue: venue, playingAreaName: pitch)
+    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, playingAreaId: playingAreaId, activity: activity, sport: sport)
 
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
       workoutMetadataArray[row] = workoutMetadataToSave

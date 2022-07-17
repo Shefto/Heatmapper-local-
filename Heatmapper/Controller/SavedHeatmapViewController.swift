@@ -23,7 +23,7 @@ class SavedHeatmapViewController: UIViewController {
   var routeBuilder                : HKWorkoutRouteBuilder!
 
   var workoutMetadataArray        =  [WorkoutMetadata]()
-  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "", playingAreaVenue: "", playingAreaName: "")
+  var workoutMetadata             = WorkoutMetadata(workoutId: UUID.init(), activity: "", sport: "")
 
   var heatmapWorkoutId  : UUID?
   var heatmapImage      : UIImage?
@@ -171,13 +171,13 @@ class SavedHeatmapViewController: UIViewController {
 
 
     let workoutActivity = workoutMetadata.activity
-    let workoutVenue = workoutMetadata.playingAreaVenue
-    let workoutPitch = workoutMetadata.playingAreaName
+//    let workoutVenue = workoutMetadata.playingAreaVenue
+//    let workoutPitch = workoutMetadata.playingAreaName
     let workoutSport = workoutMetadata.sport
 
     activityField.text = workoutActivity
-    venueField.text = workoutVenue
-    pitchField.text = workoutPitch
+//    venueField.text = workoutVenue
+//    playingAreaNameField.text = workoutPitch
     sportField.text = workoutSport
 
     // colour icons
@@ -291,12 +291,14 @@ class SavedHeatmapViewController: UIViewController {
     }
 
     let activity = activityField.text ?? ""
-    let venue = venueField.text ?? ""
+//    let venue = venueField.text ?? ""
     let sport = sportField.text ?? ""
-    let pitch = pitchField.text ?? ""
+//    let pitch = playingAreaNameField.text ?? ""
 
-    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport, playingAreaVenue: venue, playingAreaName: pitch)
-//    MyFunc.logMessage(.debug, "updateWorkout: workoutMetadataArray: \(String(describing: workoutMetadataArray))")
+    // need to update the PlayingArea when the venue / pitch is updated
+    
+    let workoutMetadataToSave = WorkoutMetadata(workoutId: workoutId, activity: activity, sport: sport)
+
     if let row = self.workoutMetadataArray.firstIndex(where: {$0.workoutId == workoutId}) {
       workoutMetadataArray[row] = workoutMetadataToSave
     } else {

@@ -1358,9 +1358,9 @@ DQoNCg
                         <outlet property="paceLabel" destination="rdq-3I-zId" id="A66-Vm-OcL"/>
                         <outlet property="pitchEndDegreesField" destination="thV-iU-1Zc" id="2E4-dH-aMc"/>
                         <outlet property="pitchEndRadiansField" destination="ebk-aA-s5G" id="UF2-60-Mm2"/>
-                        <outlet property="pitchField" destination="2Hb-dc-c99" id="ocX-DG-Fhh"/>
                         <outlet property="pitchStartDegreesField" destination="pB5-KK-YTG" id="jC5-F5-jPO"/>
                         <outlet property="pitchStartRadiansField" destination="TlJ-RE-HNI" id="qb3-Rc-R8m"/>
+                        <outlet property="playingAreaNameField" destination="2Hb-dc-c99" id="ocX-DG-Fhh"/>
                         <outlet property="playingAreaSavedAngleDegreesField" destination="gLc-Hj-oOY" id="Rdh-3s-aHB"/>
                         <outlet property="playingAreaSavedAngleRadiansField" destination="32O-hZ-MFh" id="dGQ-LL-3N2"/>
                         <outlet property="playingAreaToSaveAngleDegreesField" destination="hUP-TM-1gP" id="NPF-fi-M7d"/>

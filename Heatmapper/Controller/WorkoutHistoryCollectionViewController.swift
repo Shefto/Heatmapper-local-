@@ -129,7 +129,7 @@ class WorkoutHistoryCollectionViewController: UIViewController,  UICollectionVie
 
     cell.heatmapImageView.image = heatmapImage
     cell.workoutDateLabel.text = dateFormatter.string(from: workout.startDate)
-    cell.venueLabel.text = workoutMetadata.playingAreaVenue
+//    cell.venueLabel.text = workoutMetadata.playingAreaVenue
     cell.activityLabel.text = workoutMetadata.activity
 
 //    if selectedIndexPath != nil && indexPath.row == selectedIndexPath {
