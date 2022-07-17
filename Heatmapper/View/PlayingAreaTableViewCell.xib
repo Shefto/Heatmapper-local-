@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="5" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VPJ-TT-954">
-                    <rect key="frame" x="0.0" y="0.0" width="534" height="36"/>
+                    <rect key="frame" x="0.0" y="0.0" width="534" height="34"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="IGF-fm-6BO">
                             <rect key="frame" x="0.0" y="0.0" width="264.5" height="34"/>
@@ -56,7 +56,6 @@
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="IGF-fm-6BO" secondAttribute="bottom" id="8X9-ws-Niv"/>
                         <constraint firstItem="IGF-fm-6BO" firstAttribute="top" secondItem="VPJ-TT-954" secondAttribute="top" id="Ihr-1Y-V1L"/>
                         <constraint firstAttribute="bottom" secondItem="9mu-I2-wum" secondAttribute="bottom" id="WSG-tP-Do5"/>
                         <constraint firstItem="9mu-I2-wum" firstAttribute="top" secondItem="VPJ-TT-954" secondAttribute="top" id="o1O-Ol-ukR"/>
@@ -66,7 +65,6 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="VPJ-TT-954" secondAttribute="bottom" id="9hR-MN-Y6e"/>
                 <constraint firstItem="VPJ-TT-954" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="OjJ-SZ-yiW"/>
                 <constraint firstItem="VPJ-TT-954" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oTF-iY-cQu"/>
                 <constraint firstAttribute="trailing" secondItem="VPJ-TT-954" secondAttribute="trailing" id="rgB-za-sOW"/>

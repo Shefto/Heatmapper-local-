@@ -39,7 +39,6 @@ struct PlayingArea: Codable {
   enum CodingKeys: String, CodingKey {
 
     case id = "Id"
-//    case workoutID = "WorkoutId"
     case name = "Name"
     case venue = "Venue"
     case sport = "Sport"

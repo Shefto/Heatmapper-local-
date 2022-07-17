@@ -292,10 +292,7 @@
 /* Class = "UILabel"; text = "Distance"; ObjectID = "rJh-q3-eQC"; */
 "rJh-q3-eQC.text" = "";
 
-/* Class = "UIButton"; configuration.title = "Resize playing area"; ObjectID = "RLY-c9-DiG"; */
-"RLY-c9-DiG.configuration.title" = "";
-
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "RLY-c9-DiG"; */
+/* Class = "UIButton"; normalTitle = "Resize playing area"; ObjectID = "RLY-c9-DiG"; */
 "RLY-c9-DiG.normalTitle" = "";
 
 /* Class = "UISegmentedControl"; S3c-ue-W2b.segmentTitles[0] = "Pitch"; ObjectID = "S3c-ue-W2b"; */
@@ -361,10 +358,7 @@
 /* Class = "UINavigationItem"; title = "Heatmap"; ObjectID = "yQa-XH-y2d"; */
 "yQa-XH-y2d.title" = "";
 
-/* Class = "UIButton"; configuration.title = "Reset playing area size to default"; ObjectID = "YwZ-Av-AIb"; */
-"YwZ-Av-AIb.configuration.title" = "";
-
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "YwZ-Av-AIb"; */
+/* Class = "UIButton"; normalTitle = "Reset playing area size to default"; ObjectID = "YwZ-Av-AIb"; */
 "YwZ-Av-AIb.normalTitle" = "";
 
 /* Class = "UILabel"; text = "Pace"; ObjectID = "yYq-TM-45H"; */
